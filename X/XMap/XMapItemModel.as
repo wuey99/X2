@@ -1,0 +1,268 @@
+//------------------------------------------------------------------------------------------
+package X.XMap {
+
+// X classes		
+	import X.MVC.*;
+	
+	import flash.events.*;
+	import flash.geom.Rectangle;
+	import flash.utils.*;
+
+//------------------------------------------------------------------------------------------		
+	public class XMapItemModel extends XModelBase {
+		
+		private var m_layerModel:XMapLayerModel;
+		private var m_logicClassIndex:int;
+		private var m_name:String;
+		private var m_id:Number;
+		private var m_imageClassIndex:int;
+		private var m_frame:Number;
+		private var m_x:Number, m_y:Number;
+		private var m_rotation:Number, m_scale:Number, m_depth:Number;
+		private var m_collisionRect:Rectangle;
+		private var m_boundingRect:Rectangle;
+		private var m_params:String;
+
+		private var m_inuse:Number;
+		
+//------------------------------------------------------------------------------------------	
+		public function XMapItemModel () {
+			m_id = -1;
+			
+			m_inuse = 0;
+		}	
+
+//------------------------------------------------------------------------------------------	
+		public function init (
+			__layerModel:XMapLayerModel,
+			__logicClassName:String,
+			__name:String, __id:Number,
+			__imageClassName:String, __frame:Number,
+			__x:Number, __y:Number,
+			__scale:Number, __rotation:Number, __depth:Number,
+			__collisionRect:Rectangle,
+			__boundingRect:Rectangle,
+			__params:String,
+			...args
+			):void {
+				
+				m_layerModel = __layerModel;
+				m_logicClassIndex = m_layerModel.getIndexFromClassName (__logicClassName);
+				m_name = __name;
+				m_id = __id;
+				m_imageClassIndex = m_layerModel.getIndexFromClassName (__imageClassName);
+				m_frame = __frame;
+				m_x = __x;
+				m_y = __y;
+				m_scale = __scale;
+				m_rotation = __rotation;
+				m_depth = __depth;
+				m_collisionRect = __collisionRect;
+				m_boundingRect = __boundingRect;
+				m_params = __params;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function kill ():void {
+			m_layerModel.removeIndexFromClassNames (logicClassIndex);
+			m_layerModel.removeIndexFromClassNames (imageClassIndex);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function clone ():XMapItemModel {
+			var __item:XMapItemModel = new XMapItemModel ();
+
+			__item.init (
+				this.layerModel,
+// __logicClassName
+				this.layerModel.getClassNameFromIndex (m_logicClassIndex),
+// __name, __id
+				"", -1,
+// __imageClassName, __frame
+				this.layerModel.getClassNameFromIndex (m_imageClassIndex), 0,
+// __x, __y,
+				this.x, this.y,
+// __scale, __rotation, __depth
+				this.scale, this.rotation, this.depth,
+// __collisionRect,
+				this.collisionRect.clone (),
+// __boundingRect,
+				this.boundingRect.clone (),
+// __params
+				this.params
+				);
+			
+			return __item;
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function getID ():Number {
+			return m_id;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setID (__id:Number):void {
+			m_id = __id;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get layerModel ():XMapLayerModel {
+			return m_layerModel;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get inuse ():Number {
+			return m_inuse;
+		}
+		
+		public function set inuse (__inuse:Number):void {
+			m_inuse = __inuse;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get id ():Number {
+			return m_id;
+		}
+		
+		public function set id (__id:Number):void {
+			m_id = __id;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get name ():String {
+			return m_name;
+		}
+		
+		public function set name (__name:String):void {
+			m_name = __name;
+		}
+				
+//------------------------------------------------------------------------------------------
+		public function get logicClassIndex ():int {
+			return m_logicClassIndex;
+		}
+		
+		public function get logicClassName ():String {
+			return m_layerModel.getClassNameFromIndex (logicClassIndex);
+		}
+				
+//------------------------------------------------------------------------------------------
+		public function get imageClassIndex ():int {
+			return m_imageClassIndex;
+		}
+		
+		public function get imageClassName ():String {
+			return m_layerModel.getClassNameFromIndex (imageClassIndex);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get frame ():Number {
+			return m_frame;
+		}
+						
+//------------------------------------------------------------------------------------------
+		public function get x ():Number {
+			return m_x;
+		}
+
+		public function set x (__x:Number):void {
+			m_x = __x;
+		}
+				
+//------------------------------------------------------------------------------------------
+		public function get y ():Number {
+			return m_y;
+		}
+
+		public function set y (__y:Number):void {
+			m_y = __y;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get rotation ():Number {
+			return m_rotation;
+		}
+	
+		public function set rotation (__rotation:Number):void {
+			m_rotation = __rotation;
+		}
+			
+//------------------------------------------------------------------------------------------
+		public function get scale ():Number {
+			return m_scale;
+		}
+		
+		public function set scale (__scale:Number):void {
+			m_scale = __scale;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get depth ():Number {
+			return m_depth;
+		}
+
+		public function set depth (__depth:Number):void {
+			m_depth = __depth;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get boundingRect ():Rectangle {
+			return m_boundingRect;
+		}
+
+		public function set boundingRect (__rect:Rectangle):void {
+			m_boundingRect = __rect;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get collisionRect ():Rectangle {
+			return m_collisionRect;
+		}
+
+		public function set collisionRect (__rect:Rectangle):void {
+			m_collisionRect = __rect;
+		}
+
+//------------------------------------------------------------------------------------------	
+		public function get params ():String {
+			return m_params;
+		}
+		
+		public function set params (__params:String):void {
+			m_params = __params;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function serialize ():XML {
+			var xml:XML =
+				<XMapItem
+					logicClassIndex={logicClassIndex}
+					name={name}
+					id={id}
+					imageClassIndex={imageClassIndex}
+					frame={frame}
+					x={x}
+					y={y}
+					rotation={rotation}
+					scale={scale}
+					depth={depth}
+					cx={collisionRect.x}
+					cy={collisionRect.y}
+					cw={collisionRect.width}
+					ch={collisionRect.height}
+					bx={boundingRect.x}
+					by={boundingRect.y}
+					bw={boundingRect.width}
+					bh={boundingRect.height}
+				>
+					{new XML (params)}
+				</XMapItem>
+			
+			return xml;
+		}
+
+//------------------------------------------------------------------------------------------	
+	}
+	
+//------------------------------------------------------------------------------------------	
+}
