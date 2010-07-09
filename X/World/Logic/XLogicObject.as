@@ -958,11 +958,11 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function addEmptyTask ():XTask {
-			return addTask (getEmptyTask ());
+			return addTask (getEmptyTask$ ());
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getEmptyTask ():Array {
+		public function getEmptyTask$ ():Array {
 			return [
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,
