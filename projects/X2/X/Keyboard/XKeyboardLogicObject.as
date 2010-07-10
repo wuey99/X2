@@ -28,8 +28,8 @@ package X.Keyboard {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function init (__xxx:XWorld, ...args):void {
-			super.init (__xxx);
+		public override function init (__xxx:XWorld, args:Array):void {
+			super.init (__xxx, args);
 			
 			createSprites ();
 		}

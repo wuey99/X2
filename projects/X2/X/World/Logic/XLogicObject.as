@@ -91,7 +91,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function init (__xxx:XWorld, ...args):void {
+		public function init (__xxx:XWorld, args:Array):void {
 			xxx = __xxx;
 						
 			m_masterScaleX = m_masterScaleY = 1.0;
@@ -217,31 +217,60 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function findMovieClipByName (__movieClip:Sprite, __className:String):MovieClip {
+		public function findMovieClipByName (
+			__movieClip:MovieClip,
+			__className:String
+			):MovieClip {
+				
 			for (var i:uint = 0; i < __movieClip.numChildren; i++) {
-				var x$:MovieClip = __movieClip.getChildAt (i) as MovieClip;
-
-				if (x$ != null && x$.name == __className) {
-					return x$;
+				var m$:MovieClip = __movieClip.getChildAt (i) as MovieClip;
+				
+				if (m$ != null) {
+					if (m$.name == __className) {
+						return m$;
+					}
+					else
+					{
+						m$ = findMovieClipByName (m$, __className);
+					
+						if (m$ != null) {
+							return m$;
+						}
+					}
 				}
 			}
 			
 			return null;
 		}
-			
+		
 //------------------------------------------------------------------------------------------
-		public function findTextFieldByName (__movieClip:Sprite, __className:String):TextField {
+		public function findTextFieldByName (
+			__movieClip:MovieClip,
+			__className:String
+			):TextField {
+				
 			for (var i:uint = 0; i < __movieClip.numChildren; i++) {
-				var x$:TextField = __movieClip.getChildAt (i) as TextField;
-
-				if (x$ != null && x$.name == __className) {
-					return x$;
+				var m$:MovieClip = __movieClip.getChildAt (i) as MovieClip;
+				var t$:TextField = __movieClip.getChildAt (i) as TextField;
+				
+				if (m$ != null) {
+					t$ = findTextFieldByName (m$, __className);
+					
+					if (t$ != null) {
+						return t$;
+					}
+				}
+				
+				if (t$ != null) {
+					if (t$.name == __className) {
+						return t$;
+					}
 				}
 			}
 			
 			return null;
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function localToGlobalXX (__obj:XLogicObject, __pos:Point):Point {
 			var __x:Number;
@@ -515,7 +544,7 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function getArg(__args:Array, i:Number):* {
-			return __args[0][i];
+			return __args[i];
 		}
 		
 //------------------------------------------------------------------------------------------
