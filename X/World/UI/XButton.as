@@ -32,8 +32,8 @@ package X.World.UI {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function init (__xxx:XWorld, ...args):void {
-			super.init (__xxx);
+		public override function init (__xxx:XWorld, args:Array):void {
+			super.init (__xxx, args);
 			
 			m_buttonClassName = args[0];
 	

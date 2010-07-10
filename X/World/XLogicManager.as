@@ -47,7 +47,7 @@ package X.World {
 			
 			var __logicObject:XLogicObject = new (__class) () as XLogicObject;
 				
-			return initXLogicObject (
+			return __initXLogicObject (
 				__parent,
 				__logicObject,
 				__item, __layer, __depth,
@@ -55,7 +55,7 @@ package X.World {
 				__scale, __rotation,
 				args);
 		}
-				
+
 //------------------------------------------------------------------------------------------
 		public function initXLogicObject (
 			__parent:XLogicObject,
@@ -64,6 +64,46 @@ package X.World {
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
 			...args
+			):XLogicObject {
+
+			return __initXLogicObject (
+					__parent,
+					__logicObject,
+					__item, __layer, __depth,
+					__x, __y, __z,
+					__scale, __rotation,
+					args
+				);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function initXLogicObjectRel (
+			__parent:XLogicObject,
+			__logicObject:XLogicObject,
+			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
+			__x:Number, __y:Number, __z:Number, 
+			__scale:Number, __rotation:Number,
+			...args
+			):XLogicObject {
+				
+			return __initXLogicObjectRel (
+					__parent,
+					__logicObject,
+					__item, __layer, __depth, __relative,
+					__x, __y, __z,
+					__scale, __rotation,
+					args
+				);
+		}
+					
+//------------------------------------------------------------------------------------------
+		public function __initXLogicObject (
+			__parent:XLogicObject,
+			__logicObject:XLogicObject,
+			__item:XMapItemModel, __layer:Number, __depth:Number,
+			__x:Number, __y:Number, __z:Number, 
+			__scale:Number, __rotation:Number,
+			args:Array
 			):XLogicObject {
 
 			xxx.addChild (__logicObject);
@@ -98,7 +138,7 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function initXLogicObjectRel (
+		public function __initXLogicObjectRel (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,

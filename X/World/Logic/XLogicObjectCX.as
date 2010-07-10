@@ -42,7 +42,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function init (__xxx:XWorld, ...args):void {
+		public override function init (__xxx:XWorld, args:Array):void {
 			super.init (__xxx, args);
 		}
 
