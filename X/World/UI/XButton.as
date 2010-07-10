@@ -3,11 +3,11 @@ package X.World.UI {
 
 // X classes
 	import X.*;
+	import X.Task.*;
 	import X.World.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.XDepthSprite;
-	import X.Task.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -25,6 +25,7 @@ package X.World.UI {
 		public var DOWN_STATE:Number = 3;
 		public var SELECTED_STATE:Number = 4;
 		
+		public var m_label:Number;
 		public var m_currState:Number;
 		
 //------------------------------------------------------------------------------------------
@@ -55,7 +56,20 @@ package X.World.UI {
 				XTask.RETN,
 			]);
 			
+			goto (NORMAL_STATE);
+			
 			m_currState = NORMAL_STATE;
+			
+			addTask ([
+				XTask.LABEL, "__loop",
+					XTask.WAIT, 0x0100,
+					
+					function ():void {
+						m_sprite.gotoAndStop (m_label);
+					},
+									
+					XTask.GOTO, "__loop",
+			]);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -65,43 +79,21 @@ package X.World.UI {
 		
 //------------------------------------------------------------------------------------------		
 		public function onMouseOver (e:MouseEvent):void {
-//			if (m_currState == OVER_STATE) {
-//				return;
-//			}
-			
-			xxx.getXTaskManager ().addTask ([			
-				function  ():void {	
-					m_sprite.gotoAndStop (OVER_STATE);
-				},
-				
-				XTask.RETN,
-			]);
+			goto (OVER_STATE);
 			
 			m_currState = OVER_STATE;
 		}	
 
 //------------------------------------------------------------------------------------------		
-		public function onMouseDown (e:MouseEvent):void {				
-			xxx.getXTaskManager ().addTask ([
-				function ():void {
-					m_sprite.gotoAndStop (DOWN_STATE);	
-				},
-				
-				XTask.RETN,				
-			]);
+		public function onMouseDown (e:MouseEvent):void {
+			goto (DOWN_STATE);	
 
 			m_currState = DOWN_STATE;
 		}	
 
 //------------------------------------------------------------------------------------------		
 		public function onMouseUp (e:MouseEvent):void {				
-			xxx.getXTaskManager ().addTask ([
-				function ():void {
-					m_sprite.gotoAndStop (NORMAL_STATE);
-				},
-				
-				XTask.RETN,
-			]);
+			goto (NORMAL_STATE);
 			
 			m_currState = NORMAL_STATE;
 		}
@@ -112,13 +104,7 @@ package X.World.UI {
 									
 //------------------------------------------------------------------------------------------		
 		public function onMouseOut (e:MouseEvent):void {	
-			xxx.getXTaskManager ().addTask ([
-				function ():void {
-					m_sprite.gotoAndStop (NORMAL_STATE);
-				},
-				
-				XTask.RETN,
-			]);
+			goto (NORMAL_STATE);
 			
 			m_currState = NORMAL_STATE;
 		}
@@ -136,9 +122,14 @@ package X.World.UI {
 					
 			x_sprite = addSpriteToHud (m_sprite);
 			
-			m_sprite.gotoAndStop (NORMAL_STATE);
+			goto (NORMAL_STATE);
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		protected function goto (__label:Number):void {
+			m_label = __label;
+		}
+			
 //------------------------------------------------------------------------------------------	
 	}
 	

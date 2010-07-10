@@ -89,7 +89,7 @@ package X.Task {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function reset (__taskList:Array, __findLabelsFlag:Boolean = true) {
+		public function reset (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			m_taskList = __taskList;
 			m_taskIndex = 0;
 			m_labels = new Object ();
