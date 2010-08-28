@@ -12,15 +12,83 @@ package X.XMap {
 	public class XSubmapModel extends XModelBase {
 		private var m_XMapLayer:XMapLayerModel;
 			
+		private var m_submapWidth:Number;
+		private var m_columnsWide:Number;
+		
+		private var m_submapHeight:int;
+		private var m_rowsHigh:int;
+		
+		private var m_column:int;
+		private var m_row:int;
+		
+		private var m_tiles:Array;
+			
+// empty
+		public static var CX_EMPTY:Number = 0;
+		
+// solid solid
+		public static var CX_SOLID:Number = 1;
+		
+// soft
+		public static var CX_SOFT:Number = 2;	
+		
+// jump thru
+		public static var CX_JUMP_THRU:Number = 3;
+		
+// 45 degree diagonals
+		public static var CX_UL45:Number = 4;
+		public static var CX_UR45:Number = 5;
+		public static var CX_LL45:Number = 6;
+		public static var CX_LR45:Number = 7;
+		
+// 22.5 degree diagonals
+		public static var CX_UL225A:Number = 8;
+		public static var CX_UL225B:Number = 9;
+		public static var CX_UR225A:Number = 10;
+		public static var CX_UR225B:Number = 11;
+		public static var CX_LL225A:Number = 12;
+		public static var CX_LL225B:Number = 13;
+		public static var CX_LR225A:Number = 14;
+		public static var CX_LR225B:Number = 15;
+				
 		private var m_items:Dictionary;
 		
 //------------------------------------------------------------------------------------------	
-		public function XSubmapModel (__XMapLayer:XMapLayerModel) {
+		public function XSubmapModel (
+			__XMapLayer:XMapLayerModel,
+			__col:Number, __row:Number,
+			__width:Number, __height:Number
+			) {
+				
 			m_XMapLayer = __XMapLayer;
+			
+			m_column = __col;
+			m_row = __row;
+			
+			m_submapWidth = __width;
+			m_submapHeight = __height;
+			
+			m_columnsWide = m_submapWidth/16;
+			m_rowsHigh = m_submapHeight/16;
+
+			m_tiles = new Array (m_columnsWide * m_rowsHigh);
+			
+			for (var i:int = 0; i< m_tiles.length; i++) {
+				m_tiles[i] = CX_EMPTY;
+			}
 			
 			m_items = new Dictionary ();
 		}	
 
+//------------------------------------------------------------------------------------------
+		public function setCXTile (__type:Number, __col:Number, __row:Number):void {
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getCXTile (__col:Number, __row:Number):Number {
+			return m_tiles[__row * m_columnsWide + __col];
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function addItem (
 			__item:XMapItemModel

@@ -69,6 +69,7 @@ package X.World.Logic {
 		public var m_masterAlpha:Number;
 		public var m_XSignals:Dictionary;
 		public var self:XLogicObject;
+		public var m_killSignal:XSignal;
 		
 		private static var g_GUID:Number = 0;
 		
@@ -99,7 +100,7 @@ package X.World.Logic {
 			m_masterVisible = true;
 			m_masterDepth = 0;
 			m_masterAlpha = 1.0;
-			
+				
 			m_XLogicObjects = new Dictionary ();
 			m_worldSprites = new Dictionary ();
 			m_hudSprites = new Dictionary ();
@@ -108,6 +109,8 @@ package X.World.Logic {
 			m_XTasks = new Dictionary ();
 			m_XSignals = new Dictionary ();
 
+			m_killSignal = createXSignal ();
+			
 			setVisible (false);			
 			visible = false;
 			
@@ -122,6 +125,16 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function getXTaskManager ():XTaskManager {
 			return xxx.getXTaskManager ();
+		}
+
+//------------------------------------------------------------------------------------------
+		public function addKillListener (__listener:Function):void {
+			m_killSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function fireKillSignal (__item:XMapItemModel):void {
+			m_killSignal.fireSignal (__item);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -156,12 +169,12 @@ package X.World.Logic {
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
 // to a the "kill" event.
 			if (m_item != null) {
-				var x:XLogicObjectEvent = new XLogicObjectEvent ("kill");
-				
-				x.item = m_item;
-		
-				dispatchEvent (x);
-				
+//				var x:XLogicObjectEvent = new XLogicObjectEvent ("kill");
+//				x.item = m_item;
+//				dispatchEvent (x);
+	
+				fireKillSignal (m_item);
+							
 				m_item.inuse--;
 				
 				m_item = null;

@@ -241,7 +241,7 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function releaseFocu ():void {
+		public function releaseFocus():void {
 			m_XKeyboardManager.releaseFocus ();
 		}
 		

@@ -58,7 +58,7 @@ package X.XMap {
 				m_XSubmaps[__row] = new Array (__submapCols);
 
 				for (__col=0; __col<__submapCols; __col++) {
-					m_XSubmaps[__row][__col] = new XSubmapModel (this);
+					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col, __row, m_submapWidth, m_submapHeight);
 				}
 			}
 			
@@ -427,7 +427,7 @@ package X.XMap {
 				m_XSubmaps[__row] = new Array (m_submapCols);
 
 				for (__col=0; __col<m_submapCols; __col++) {
-					m_XSubmaps[__row][__col] = new XSubmapModel (this);
+					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
 				}
 			}
 			
