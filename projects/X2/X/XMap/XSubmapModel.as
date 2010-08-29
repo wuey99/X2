@@ -23,6 +23,8 @@ package X.XMap {
 		
 		private var m_tiles:Array;
 			
+		private var m_inuse:Number;
+		
 // empty
 		public static var CX_EMPTY:Number = 0;
 		
@@ -73,6 +75,8 @@ package X.XMap {
 
 			m_tiles = new Array (m_columnsWide * m_rowsHigh);
 			
+			m_inuse = 0;
+			
 			for (var i:int = 0; i< m_tiles.length; i++) {
 				m_tiles[i] = CX_EMPTY;
 			}
@@ -87,6 +91,25 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function getCXTile (__col:Number, __row:Number):Number {
 			return m_tiles[__row * m_columnsWide + __col];
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get inuse ():Number {
+			return m_inuse;
+		}
+		
+		public function set inuse (__inuse:Number):void {
+			m_inuse = __inuse;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get x ():Number {
+			return m_column * m_submapWidth;
+		}		
+		
+//------------------------------------------------------------------------------------------
+		public function get y ():Number {
+			return m_row * m_submapHeight;
 		}
 		
 //------------------------------------------------------------------------------------------
