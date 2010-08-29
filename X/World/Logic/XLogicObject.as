@@ -169,10 +169,6 @@ package X.World.Logic {
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
 // to a the "kill" event.
 			if (m_item != null) {
-//				var x:XLogicObjectEvent = new XLogicObjectEvent ("kill");
-//				x.item = m_item;
-//				dispatchEvent (x);
-	
 				fireKillSignal (m_item);
 							
 				m_item.inuse--;

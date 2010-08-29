@@ -19,6 +19,7 @@ package X.World {
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	import X.World.UI.XButton;
+	import X.World.Tiles.*;
 	import X.XMap.*;
 	
 	import flash.display.*;
@@ -64,6 +65,7 @@ package X.World {
 		public var m_XSignals:XSignal;
 		public var m_XBitmap:XBitmap;
 		public var m_XSignalManager:XSignalManager;
+		public var m_XSubmapTiles:XSubmapTiles;
 
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){

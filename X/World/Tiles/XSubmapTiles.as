@@ -1,12 +1,15 @@
 //------------------------------------------------------------------------------------------
-package {
+package X.World.Tiles {
 
 	import X.*;
 	import X.World.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
+	import X.World.Sprite.*;
+	import X.XMap.XSubmapModel;
 	
-	import flash.display.MovieClip;
+	import flash.display.*;
+	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
 	
@@ -14,6 +17,7 @@ package {
 	public class XSubmapTiles extends XLogicObject {
 		private var m_sprite:Sprite;
 		private var x_sprite:XDepthSprite;
+		private var m_XSubmapModel:XSubmapModel;
 
 //------------------------------------------------------------------------------------------	
 		public function XSubmapTiles () {
@@ -27,9 +31,16 @@ package {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function setModel (__model:XSubmapModel):void {
+			m_XSubmapModel = __model;
+			
+			m_boundingRect = m_XSubmapModel.boundingRect.clone ();
+		}
+		
+//------------------------------------------------------------------------------------------
 // cull this object if it strays outside the current viewPort
 //------------------------------------------------------------------------------------------	
-		public function cullObject ():void {
+		public override function cullObject ():void {
 
 // determine whether this object is outside the current viewPort
 			var v:Rectangle = xxx.getXMapModel ().getViewRect ();

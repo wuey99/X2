@@ -13,18 +13,18 @@ package X.XMap {
 		private var m_XMapLayer:XMapLayerModel;
 			
 		private var m_submapWidth:Number;
-		private var m_columnsWide:Number;
+		private var m_columnWidth:Number;
 		
 		private var m_submapHeight:int;
-		private var m_rowsHigh:int;
+		private var m_rowHeight:int;
 		
 		private var m_column:int;
 		private var m_row:int;
 		
 		private var m_tiles:Array;
-			
 		private var m_inuse:Number;
 		
+		private var m_boundingRect:Rectangle;
 // empty
 		public static var CX_EMPTY:Number = 0;
 		
@@ -70,10 +70,12 @@ package X.XMap {
 			m_submapWidth = __width;
 			m_submapHeight = __height;
 			
-			m_columnsWide = m_submapWidth/16;
-			m_rowsHigh = m_submapHeight/16;
+			m_columnWidth = m_submapWidth/16;
+			m_rowHeight = m_submapHeight/16;
 
-			m_tiles = new Array (m_columnsWide * m_rowsHigh);
+			m_boundingRect = new Rectangle (0, 0, m_submapWidth, m_submapHeight);
+			
+			m_tiles = new Array (m_columnWidth * m_rowHeight);
 			
 			m_inuse = 0;
 			
@@ -90,7 +92,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function getCXTile (__col:Number, __row:Number):Number {
-			return m_tiles[__row * m_columnsWide + __col];
+			return m_tiles[__row * m_columnWidth + __col];
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -102,6 +104,11 @@ package X.XMap {
 			m_inuse = __inuse;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function get boundingRect ():Rectangle {
+			return m_boundingRect;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function get x ():Number {
 			return m_column * m_submapWidth;
