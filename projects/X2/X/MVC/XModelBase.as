@@ -3,7 +3,6 @@ package X.MVC {
 	import X.Signals.XSignal;
 	
 // flash classes
-
 	import flash.events.*;
 
 //------------------------------------------------------------------------------------------	
