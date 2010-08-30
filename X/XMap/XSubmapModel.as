@@ -118,6 +118,16 @@ package X.XMap {
 		public function get y ():Number {
 			return m_row * m_submapHeight;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function get width ():Number {
+			return m_submapWidth;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get height ():Number {
+			return  m_submapHeight;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function addItem (

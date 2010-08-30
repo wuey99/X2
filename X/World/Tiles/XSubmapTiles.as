@@ -17,10 +17,11 @@ package X.World.Tiles {
 	public class XSubmapTiles extends XLogicObject {
 		private var m_sprite:Sprite;
 		private var x_sprite:XDepthSprite;
-		private var m_XSubmapModel:XSubmapModel;
+		private var m_submapModel:XSubmapModel;
 
 //------------------------------------------------------------------------------------------	
 		public function XSubmapTiles () {
+			m_submapModel = null;
 		}
 
 //------------------------------------------------------------------------------------------			
@@ -32,9 +33,33 @@ package X.World.Tiles {
 
 //------------------------------------------------------------------------------------------
 		public function setModel (__model:XSubmapModel):void {
-			m_XSubmapModel = __model;
+			m_submapModel = __model;
 			
-			m_boundingRect = m_XSubmapModel.boundingRect.clone ();
+			m_boundingRect = m_submapModel.boundingRect.clone ();
+	
+			m_sprite.graphics.lineStyle (2, 0xff00ff);		
+			m_sprite.graphics.moveTo (0, 0);
+			m_sprite.graphics.lineTo (0, m_submapModel.height-1);
+			m_sprite.graphics.lineTo (m_submapModel.width-1, m_submapModel.height-1);
+			m_sprite.graphics.lineTo (m_submapModel.width-1, 0);
+			m_sprite.graphics.lineTo (0, 0);
+		}
+		
+//------------------------------------------------------------------------------------------
+// kill this object and remove it from the World
+//------------------------------------------------------------------------------------------
+		public override function kill ():void {
+			
+// let the Object Manager handle the kill
+			xxx.getXLogicManager ().kill (this);
+
+			if (m_submapModel != null) {
+				fireKillSignal (m_submapModel);
+							
+				m_submapModel.inuse--;
+				
+				m_submapModel = null;
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -73,8 +98,6 @@ package X.World.Tiles {
 			addSpriteAt (m_sprite, 0, 0);
 			
 			m_sprite.graphics.clear ();
-			m_sprite.graphics.beginFill (0x303030);
-			m_sprite.graphics.drawRect (0, 0, 128, 128)
 				
 			show ();
 		}

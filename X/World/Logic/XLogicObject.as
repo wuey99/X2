@@ -12,6 +12,7 @@ package X.World.Logic {
 	import X.World.*;
 	import X.World.Sprite.*;
 	import X.XMap.*;
+	import X.MVC.*;
 	
 	import flash.display.*;
 	import flash.geom.*;
@@ -133,8 +134,8 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function fireKillSignal (__item:XMapItemModel):void {
-			m_killSignal.fireSignal (__item);
+		public function fireKillSignal (__model:XModelBase):void {
+			m_killSignal.fireSignal (__model);
 		}
 		
 //------------------------------------------------------------------------------------------
