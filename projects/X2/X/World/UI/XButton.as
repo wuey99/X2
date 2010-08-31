@@ -7,6 +7,7 @@ package X.World.UI {
 	import X.World.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
+	import X.Signals.*;
 	import X.World.Sprite.XDepthSprite;
 	
 	import flash.display.*;
@@ -16,9 +17,11 @@ package X.World.UI {
 
 //------------------------------------------------------------------------------------------
 	public class XButton extends XLogicObject {
-		private var m_sprite:MovieClip;
-		private var x_sprite:XDepthSprite;
-		private var m_buttonClassName:String;
+		protected var m_sprite:MovieClip;
+		protected var x_sprite:XDepthSprite;
+		protected var m_buttonClassName:String;
+		protected var m_mouseDownSignal:XSignal;
+		protected var m_mouseUpSignal:XSignal;
 		
 		public var NORMAL_STATE:Number = 1;
 		public var OVER_STATE:Number = 2;
@@ -37,8 +40,11 @@ package X.World.UI {
 			super.init (__xxx, args);
 			
 			m_buttonClassName = args[0];
-	
-			createSprite ();
+
+			m_mouseDownSignal = createXSignal ();	
+			m_mouseUpSignal = createXSignal ();
+			
+			createSprites ();
 			
 //			mouseEnabled = true;
 			
@@ -96,6 +102,8 @@ package X.World.UI {
 			goto (NORMAL_STATE);
 			
 			m_currState = NORMAL_STATE;
+			
+			fireMouseUpSignal ();
 		}
 
 //------------------------------------------------------------------------------------------		
@@ -115,19 +123,46 @@ package X.World.UI {
 		}
 		
 //------------------------------------------------------------------------------------------
-// create sprite
+// create sprites
 //------------------------------------------------------------------------------------------
-		public function createSprite ():void {			
+		public override function createSprites ():void {			
 			m_sprite = new (xxx.getClass (m_buttonClassName)) ();
 					
 			x_sprite = addSpriteToHud (m_sprite);
 			
 			goto (NORMAL_STATE);
+			
+			show ();
 		}
 
 //------------------------------------------------------------------------------------------
 		protected function goto (__label:Number):void {
 			m_label = __label;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function addMouseDownListener (__listener:Function):void {
+			m_mouseDownSignal.addListener (__listener);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function fireMouseDownSignal ():void {
+			m_mouseDownSignal.fireSignal ();
+		}
+						
+//------------------------------------------------------------------------------------------
+		public function addMouseUpListener (__listener:Function):void {
+			m_mouseUpSignal.addListener (__listener);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function fireMouseUpSignal ():void {
+			m_mouseUpSignal.fireSignal ();
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function removeAllListeners ():void {
+			m_mouseUpSignal.removeAllListeners ();
 		}
 			
 //------------------------------------------------------------------------------------------	

@@ -18,7 +18,8 @@ package X.World.Tiles {
 		private var m_sprite:Sprite;
 		private var x_sprite:XDepthSprite;
 		private var m_submapModel:XSubmapModel;
-
+		private var m_bitmap:XBitmap;
+		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapTiles () {
 			m_submapModel = null;
@@ -37,12 +38,43 @@ package X.World.Tiles {
 			
 			m_boundingRect = m_submapModel.boundingRect.clone ();
 	
-			m_sprite.graphics.lineStyle (2, 0xff00ff);		
-			m_sprite.graphics.moveTo (0, 0);
-			m_sprite.graphics.lineTo (0, m_submapModel.height-1);
-			m_sprite.graphics.lineTo (m_submapModel.width-1, m_submapModel.height-1);
-			m_sprite.graphics.lineTo (m_submapModel.width-1, 0);
-			m_sprite.graphics.lineTo (0, 0);
+//			m_sprite.graphics.lineStyle (2, 0xff00ff);		
+//			m_sprite.graphics.moveTo (0, 0);
+//			m_sprite.graphics.lineTo (0, m_submapModel.height-1);
+//			m_sprite.graphics.lineTo (m_submapModel.width-1, m_submapModel.height-1);
+//			m_sprite.graphics.lineTo (m_submapModel.width-1, 0);
+//			m_sprite.graphics.lineTo (0, 0);
+
+			var __width:Number = m_submapModel.width;
+			var __height:Number = m_submapModel.height;
+	
+			m_bitmap.createBitmap ("tiles", __width, __height);
+				
+			m_bitmap.bitmapData.fillRect (
+				new Rectangle (0, 0, m_submapModel.width, m_submapModel.height),
+				0xff000000
+			);
+			
+			__vline (0);
+			__vline (__width-1);
+			__hline (0);
+			__hline (__height-1);
+			
+			function __vline (x:Number):void {
+				var y:Number;
+				
+				for (y=0; y<__height; y++) {
+					m_bitmap.bitmapData.setPixel (x, y, 0xff00ff);
+				}
+			}
+			
+			function __hline (y:Number):void {
+				var x:Number;
+				
+				for (x=0; x<__width; x++) {
+					m_bitmap.bitmapData.setPixel (x, y, 0xff00ff);
+				}
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -93,12 +125,14 @@ package X.World.Tiles {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_sprite = new Sprite ();
+//			m_sprite = new Sprite ();
+//			addSpriteAt (m_sprite, 0, 0);			
+//			m_sprite.graphics.clear ();
+
+			m_bitmap = new XBitmap ();
+			x_sprite = addSpriteAt (m_bitmap, 0, 0);
+			x_sprite.setDepth (getDepth ());
 			
-			addSpriteAt (m_sprite, 0, 0);
-			
-			m_sprite.graphics.clear ();
-				
 			show ();
 		}
 

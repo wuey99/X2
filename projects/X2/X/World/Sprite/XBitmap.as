@@ -12,6 +12,7 @@ package X.World.Sprite {
 		public var m_scale:Number;
 		public var m_visible:Boolean;
 		public var m_bitmaps:Array;
+		public var m_bitmapsX:Object;
 		public var m_dx:Number;
 		public var m_dy:Number;
 		public var m_frame:Number;
@@ -29,6 +30,7 @@ package X.World.Sprite {
 			m_visible = true;
 			
 			m_bitmaps = new Array ();
+			m_bitmapsX = new Object ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -69,14 +71,28 @@ package X.World.Sprite {
 			
 			goto (m_frame);
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function goto (__frame:Number):void {
 			m_frame = __frame-1;
 			
 			bitmapData = m_bitmaps[m_frame];
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function createBitmap (__name:String, __width:Number, __height:Number):void {
+			var __bitmap:BitmapData = new BitmapData (__width, __height);
+			
+			m_bitmapsX[__name] = __bitmap;
+			
+			gotoX (__name);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function gotoX (__name:String):void {
+			bitmapData = m_bitmapsX[__name];
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function get dx ():Number {
 			return m_dx;
