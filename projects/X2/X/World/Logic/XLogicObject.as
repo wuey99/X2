@@ -7,12 +7,12 @@ package X.World.Logic {
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
 	
+	import X.MVC.*;
 	import X.Signals.XSignal;
 	import X.Task.*;
 	import X.World.*;
 	import X.World.Sprite.*;
 	import X.XMap.*;
-	import X.MVC.*;
 	
 	import flash.display.*;
 	import flash.geom.*;
@@ -252,7 +252,38 @@ package X.World.Logic {
 			
 			return null;
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function findClassByName (
+			__movieClip:MovieClip,
+			__className:String
+			):* {
+				
+			for (var i:uint = 0; i < __movieClip.numChildren; i++) {
+				var m$:* = __movieClip.getChildAt (i);
+				
+				if (m$ != null) {
+					if (m$.name == __className) {
+						return m$;
+					}
+					else
+					{
+						var m:MovieClip = m$ as MovieClip;
+						
+						if (m != null) {
+							m$ = findClassByName (m, __className);
+					
+							if (m$ != null) {
+								return m$;
+							}
+						}
+					}
+				}
+			}
+			
+			return null;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function findTextFieldByName (
 			__movieClip:MovieClip,
