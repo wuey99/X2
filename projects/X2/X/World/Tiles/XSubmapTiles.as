@@ -37,13 +37,6 @@ package X.World.Tiles {
 			m_submapModel = __model;
 			
 			m_boundingRect = m_submapModel.boundingRect.clone ();
-	
-//			m_sprite.graphics.lineStyle (2, 0xff00ff);		
-//			m_sprite.graphics.moveTo (0, 0);
-//			m_sprite.graphics.lineTo (0, m_submapModel.height-1);
-//			m_sprite.graphics.lineTo (m_submapModel.width-1, m_submapModel.height-1);
-//			m_sprite.graphics.lineTo (m_submapModel.width-1, 0);
-//			m_sprite.graphics.lineTo (0, 0);
 
 			var __width:Number = m_submapModel.width;
 			var __height:Number = m_submapModel.height;
@@ -52,7 +45,7 @@ package X.World.Tiles {
 				
 			m_bitmap.bitmapData.fillRect (
 				new Rectangle (0, 0, m_submapModel.width, m_submapModel.height),
-				0xff000000
+				0x00000000
 			);
 			
 			__vline (0);
@@ -64,7 +57,7 @@ package X.World.Tiles {
 				var y:Number;
 				
 				for (y=0; y<__height; y++) {
-					m_bitmap.bitmapData.setPixel (x, y, 0xff00ff);
+					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
 				}
 			}
 			
@@ -72,7 +65,7 @@ package X.World.Tiles {
 				var x:Number;
 				
 				for (x=0; x<__width; x++) {
-					m_bitmap.bitmapData.setPixel (x, y, 0xff00ff);
+					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
 				}
 			}
 		}
@@ -125,10 +118,6 @@ package X.World.Tiles {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-//			m_sprite = new Sprite ();
-//			addSpriteAt (m_sprite, 0, 0);			
-//			m_sprite.graphics.clear ();
-
 			m_bitmap = new XBitmap ();
 			x_sprite = addSpriteAt (m_bitmap, 0, 0);
 			x_sprite.setDepth (getDepth ());
