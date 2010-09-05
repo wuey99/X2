@@ -55,7 +55,35 @@ package X.World {
 				__scale, __rotation,
 				args);
 		}
-
+		
+//------------------------------------------------------------------------------------------
+		public function initXLogicObjectFromXML (
+			__parent:XLogicObject,
+			__logicObject:XLogicObject,
+			...args
+			):XLogicObject {
+				
+			if (__logicObject.iClassName != "") {
+				return __initXLogicObject (
+						__parent,
+						__logicObject,
+						__logicObject.iItem, __logicObject.iLayer, __logicObject.iDepth,
+						__logicObject.iX, __logicObject.iY, 0,
+						__logicObject.iScale, __logicObject.iRotation,
+						[__logicObject.iClassName]);				
+			}
+			else
+			{
+				return __initXLogicObject (
+						__parent,
+						__logicObject,
+						__logicObject.iItem, __logicObject.iLayer, __logicObject.iDepth,
+						__logicObject.iX, __logicObject.iY, 0,
+						__logicObject.iScale, __logicObject.iRotation,
+						args);
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function initXLogicObject (
 			__parent:XLogicObject,

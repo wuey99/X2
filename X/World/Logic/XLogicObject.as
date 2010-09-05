@@ -27,7 +27,7 @@ package X.World.Logic {
 // created level via a Level Manager.
 //
 // XLogicObjects that are craated from a Level Manager are responsible for handling their
-// own birth/death: XLogicObjectst that stray outside the current viewport are automatically
+// own birth/death: XLogicObjects that stray outside the current viewport are automatically
 // culled and returned back to the level.  Alternatively they can be "nuked": permanently
 // removed from Level, never to return.  This system is based on Mario-like level management:
 // when XLogicObjects in the Level enters the current viewPort, they are automatically spawned.
@@ -72,6 +72,16 @@ package X.World.Logic {
 		public var self:XLogicObject;
 		public var m_killSignal:XSignal;
 		
+		public var m_iX:Number;
+		public var m_iY:Number;
+		public var m_iScale:Number;
+		public var m_iRotation:Number;
+		public var m_iItem:XMapItemModel;
+		public var m_iLayer:Number;
+		public var m_iDepth:Number;
+		public var m_iRelativeDepth:Boolean;
+		public var m_iClassName:String;
+		
 		private static var g_GUID:Number = 0;
 		
 //------------------------------------------------------------------------------------------
@@ -90,6 +100,16 @@ package X.World.Logic {
 			m_GUID = g_GUID++;
 			
 			setRegistration ();
+			
+			iX = 0;
+			iY = 0;
+			iScale = 1.0;
+			iRotation = 0.0;
+			iItem = null;
+			iDepth = 0;
+			iRelativeDepth = false;
+			iLayer = 0;
+			iClassName = "";
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -1071,7 +1091,92 @@ package X.World.Logic {
 		public function hide ():void {
 			setVisible (false);
 		}		
-						
+
+//------------------------------------------------------------------------------------------
+// initializer setters
+//
+// for use by createXLogicObjectFromXML
+//------------------------------------------------------------------------------------------
+		public function set iX (__value:Number):void {
+			m_iX = __value;
+		}
+		
+		public function get iX ():Number {
+			return m_iX;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function set iY (__value:Number):void {
+			m_iY = __value;
+		}	
+		
+		public function get iY ():Number {
+			return m_iY;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function set iScale (__value:Number):void {
+			m_iScale = __value;
+		}
+
+		public function get iScale ():Number {
+			return m_iScale;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function set iRotation (__value:Number):void {
+			m_iRotation = __value;
+		}
+
+		public function get iRotation ():Number {
+			return m_iRotation;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function set iItem (__value:XMapItemModel):void {
+			m_iItem = __value;
+		}
+		
+		public function get iItem ():XMapItemModel {
+			return m_iItem;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function set iLayer (__value:Number):void {
+			m_iLayer = __value;
+		}
+
+		public function get iLayer ():Number {
+			return m_iLayer;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function set iDepth (__value:Number):void {
+			m_iDepth = __value;
+		}
+		
+		public function get iDepth ():Number {
+			return m_iDepth;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function set iRelativeDepth (__value:Boolean):void {
+			m_iRelativeDepth = __value;
+		}
+		
+		public function get iRelativeDepth ():Boolean {
+			return m_iRelativeDepth;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function set iClassName (__value:String):void {
+			m_iClassName = __value;
+		}
+		
+		public function get iClassName ():String {
+			return m_iClassName;
+		}
+				
 //------------------------------------------------------------------------------------------
 	}
 	

@@ -65,7 +65,12 @@ package X.World.UI {
 			goto (NORMAL_STATE);
 			
 			m_currState = NORMAL_STATE;
-			
+		
+			createHighlightTask ();	
+		}
+
+//------------------------------------------------------------------------------------------
+		public function createHighlightTask ():void {
 			addTask ([
 				XTask.LABEL, "__loop",
 					XTask.WAIT, 0x0100,
@@ -77,7 +82,7 @@ package X.World.UI {
 					XTask.GOTO, "__loop",
 			]);
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function addMouseUpEventListener (func:Function):void {
 			m_sprite.addEventListener (MouseEvent.MOUSE_UP, func, false, 0, true);
