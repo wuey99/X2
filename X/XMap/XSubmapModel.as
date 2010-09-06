@@ -13,18 +13,19 @@ package X.XMap {
 		private var m_XMapLayer:XMapLayerModel;
 			
 		private var m_submapWidth:Number;
-		private var m_columnWidth:Number;
+		private var m_cols:Number;
 		
 		private var m_submapHeight:int;
-		private var m_rowHeight:int;
+		private var m_rows:int;
 		
-		private var m_column:int;
+		private var m_col:int;
 		private var m_row:int;
 		
 		private var m_tiles:Array;
 		private var m_inuse:Number;
 		
 		private var m_boundingRect:Rectangle;
+		
 // empty
 		public static var CX_EMPTY:Number = 0;
 		
@@ -63,19 +64,19 @@ package X.XMap {
 			) {
 				
 			m_XMapLayer = __XMapLayer;
-			
-			m_column = __col;
-			m_row = __row;
-			
+				
 			m_submapWidth = __width;
 			m_submapHeight = __height;
-			
-			m_columnWidth = m_submapWidth/16;
-			m_rowHeight = m_submapHeight/16;
+		
+			m_col = __col;
+			m_row = __row;
+		
+			m_cols = m_submapWidth/16;
+			m_rows = m_submapHeight/16;
 
 			m_boundingRect = new Rectangle (0, 0, m_submapWidth, m_submapHeight);
 			
-			m_tiles = new Array (m_columnWidth * m_rowHeight);
+			m_tiles = new Array (m_cols * m_rows);
 			
 			m_inuse = 0;
 			
@@ -92,7 +93,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function getCXTile (__col:Number, __row:Number):Number {
-			return m_tiles[__row * m_columnWidth + __col];
+			return m_tiles[__row * m_cols + __col];
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -111,7 +112,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function get x ():Number {
-			return m_column * m_submapWidth;
+			return m_col * m_submapWidth;
 		}		
 		
 //------------------------------------------------------------------------------------------
