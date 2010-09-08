@@ -15,10 +15,11 @@ package X.World.Tiles {
 	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapTiles extends XLogicObject {
-		private var m_sprite:Sprite;
+		private var m_sprite:MovieClip;
 		private var x_sprite:XDepthSprite;
 		private var m_submapModel:XSubmapModel;
 		private var m_bitmap:XBitmap;
+		private var cx_bitmap:XBitmap;
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapTiles () {
@@ -36,8 +37,13 @@ package X.World.Tiles {
 		public function setModel (__model:XSubmapModel):void {
 			m_submapModel = __model;
 			
+			__generateTiledDisplay ();
+		}
+				
+//------------------------------------------------------------------------------------------
+		public function __generateTiledDisplay ():void {
 			m_boundingRect = m_submapModel.boundingRect.clone ();
-
+			
 			var __width:Number = m_submapModel.width;
 			var __height:Number = m_submapModel.height;
 	
@@ -52,6 +58,41 @@ package X.World.Tiles {
 			__vline (__width-1);
 			__hline (0);
 			__hline (__height-1);
+			
+			__tiles ();
+			
+			function __tiles ():void {
+				var __col:Number;
+				var __row:Number;
+				var __rect:Rectangle;
+				var __p:Point = new Point ();
+				var __index:Number = 1;
+				
+				__rect = new Rectangle (0, 0, 16, 16);
+				
+				trace (": submapModel: ", m_submapModel);
+		
+				for (__row=0; __row < m_submapModel.rows; __row++) {
+					for (__col=0; __col < m_submapModel.cols; __col++) {
+						cx_bitmap.goto (__index);
+						
+						__index += 1;
+						
+						if (__index > 16) {
+							__index = 1;
+						}
+						
+						__p.x = __col << 4;
+						__p.y = __row << 4;
+						
+						m_bitmap.bitmapData.copyPixels (
+							cx_bitmap.bitmapData,
+							__rect,
+							__p
+						);
+					}
+				}
+			}
 			
 			function __vline (x:Number):void {
 				var y:Number;
@@ -69,7 +110,7 @@ package X.World.Tiles {
 				}
 			}
 		}
-		
+
 //------------------------------------------------------------------------------------------
 // kill this object and remove it from the World
 //------------------------------------------------------------------------------------------
@@ -121,6 +162,10 @@ package X.World.Tiles {
 			m_bitmap = new XBitmap ();
 			x_sprite = addSpriteAt (m_bitmap, 0, 0);
 			x_sprite.setDepth (getDepth ());
+			
+			m_sprite = new (xxx.getClass ("CX:CXClass")) ();
+			cx_bitmap = new XBitmap ();
+			cx_bitmap.initWithScaling (m_sprite, 1.0);
 			
 			show ();
 		}

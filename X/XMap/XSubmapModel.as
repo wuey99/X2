@@ -106,6 +106,16 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function get cols ():Number {
+			return m_cols;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get rows ():Number {
+			return m_rows;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function get boundingRect ():Rectangle {
 			return m_boundingRect;
 		}
