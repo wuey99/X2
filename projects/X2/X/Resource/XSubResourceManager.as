@@ -23,8 +23,8 @@ package X.Resource {
 	public class XSubResourceManager extends IResourceManager {
 		private var m_manifestXML:XML;
 		private var m_projectManager:XProjectManager;
-		private var m_XResourceMap:Object;
-		private var m_XClassMap:Object;
+		private var m_resourceMap:Object;
+		private var m_classMap:Object;
 		private var m_parent:Sprite;
 		private var m_rootPath:String;
 		private var m_urlName:String;
@@ -37,8 +37,8 @@ package X.Resource {
 		public function XSubResourceManager () {
 			super ();
 			
-			m_XResourceMap = new Object ();
-			m_XClassMap = new Object ();
+			m_resourceMap = new Object ();
+			m_classMap = new Object ();
 			m_cachedClassName = new Object ();
 			
 			m_loaderContextFactory = null;
@@ -92,8 +92,8 @@ package X.Resource {
 		public function reset ():void {
 			
 // unload .swf's here?
-			m_XResourceMap = new Object ();
-			m_XClassMap = new Object ();
+			m_resourceMap = new Object ();
+			m_classMap = new Object ();
 		}
 		
 //------------------------------------------------------------------------------------------	
@@ -451,7 +451,7 @@ package X.Resource {
 		private function __resolveXClass (__className:String):XClass {
 			var	__XClass:XClass;
 			
-			var __c:* = m_XClassMap[__className];
+			var __c:* = m_classMap[__className];
 			
 			trace (": XResourceManager:__resolveXClass (): ", __className);
 			
@@ -462,7 +462,7 @@ package X.Resource {
 				
 				__XClass = new XClass (__className, __resourcePath);
 				__XClass.setClass (null);
-				m_XClassMap[__className] = __XClass;				
+				m_classMap[__className] = __XClass;				
 			}
 			else
 			{
@@ -481,7 +481,7 @@ package X.Resource {
 		private function __resolveClass (__XClass:XClass):Class {
 			var	__resourcePath:String = __XClass.getResourcePath ();
 				
-			var __r:* = m_XResourceMap[__resourcePath];
+			var __r:* = m_resourceMap[__resourcePath];
 				
 //			trace ("$ __resolveClass: ", __resourcePath);
 			
@@ -500,7 +500,7 @@ package X.Resource {
 						
 				__XResource.loadResource ();
 				
-				m_XResourceMap[__resourcePath] = __XResource;
+				m_resourceMap[__resourcePath] = __XResource;
 			}
 			else
 			{

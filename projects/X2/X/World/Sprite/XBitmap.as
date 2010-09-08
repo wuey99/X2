@@ -53,14 +53,18 @@ package X.World.Sprite {
 				__width = Math.max (__width, __bounds.width);
 				__height = Math.max (__height, __bounds.height);
 			}
-			
+	
+			__movieClip.gotoAndStop (1);
+			__movieClip.gotoAndStop (1);
+			__movieClip.gotoAndStop (1);
+									
 			for (i=0; i < __movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
 				__bounds = __movieClip.getBounds (__movieClip);
 				var __bitmap:BitmapData = new BitmapData (__width*__scaleX, __height*__scaleY, true, 0xffffff);
 				var __matrix:Matrix = new Matrix ();
 				__matrix.scale (__scaleX, __scaleY);
-				__matrix.translate (-__bounds.x*__scaleX, -__bounds.y*__scaleY)
+				__matrix.translate (__bounds.x*__scaleX, __bounds.y*__scaleY)
 				__bitmap.draw (__movieClip, __matrix);
 				m_bitmaps.push (__bitmap);
 				m_dx = -__bounds.x*__scaleX;
