@@ -86,9 +86,7 @@ package X.World.Tiles {
 						__p.y = __row << 4;
 						
 						m_bitmap.bitmapData.copyPixels (
-							cx_bitmap.bitmapData,
-							__rect,
-							__p
+							cx_bitmap.bitmapData, __rect, __p
 						);
 					}
 				}
