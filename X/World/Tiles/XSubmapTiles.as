@@ -53,12 +53,12 @@ package X.World.Tiles {
 				new Rectangle (0, 0, m_submapModel.width, m_submapModel.height),
 				0x00000000
 			);
-			
+		
 			__vline (0);
 			__vline (__width-1);
 			__hline (0);
 			__hline (__height-1);
-			
+		
 			__tiles ();
 			
 			function __tiles ():void {
@@ -66,27 +66,20 @@ package X.World.Tiles {
 				var __row:Number;
 				var __rect:Rectangle;
 				var __p:Point = new Point ();
-				var __index:Number = 1;
-				
+		
 				__rect = new Rectangle (0, 0, 16, 16);
 				
 				trace (": submapModel: ", m_submapModel);
 		
 				for (__row=0; __row < m_submapModel.rows; __row++) {
 					for (__col=0; __col < m_submapModel.cols; __col++) {
-						cx_bitmap.goto (__index);
-						
-						__index += 1;
-						
-						if (__index > 16) {
-							__index = 1;
-						}
-						
+						cx_bitmap.goto (m_submapModel.getCXTile (__col, __row)+1);
+											
 						__p.x = __col << 4;
 						__p.y = __row << 4;
 						
 						m_bitmap.bitmapData.copyPixels (
-							cx_bitmap.bitmapData, __rect, __p
+							cx_bitmap.bitmapData, __rect, __p, null, null, true
 						);
 					}
 				}
