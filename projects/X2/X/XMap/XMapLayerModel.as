@@ -81,6 +81,16 @@ package X.XMap {
 		public function get viewPort ():Rectangle {
 			return m_viewPort;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function getSubmapWidth ():Number {
+			return m_submapWidth;
+		}	
+		
+//------------------------------------------------------------------------------------------
+		public function getSubmapHeight ():Number {
+			return m_submapHeight;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function addItem (__item:XMapItemModel):XMapItemModel {
@@ -271,7 +281,54 @@ package X.XMap {
 			
 			return dst_items;		
 		}
+
+//------------------------------------------------------------------------------------------
+		public function getCXTiles (
+			c1:Number, r1:Number,
+			c2:Number, r2:Number
+		):Array {
 			
+// tile array to return
+			var tiles:Array;
+
+// col, row divisor
+			var row32:int = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
+
+// col, row mask for the submap
+			var rowMask:int = row32-1;
+			var colMask:int = col32-1;
+			
+// total columns wide, rows high
+			var cols:int = c2-c1+1;
+			var rows:int = r2-r1+1;
+
+			tiles = new Array (cols * rows);
+			
+			for (var row:int=r1; row <= r2; row++) {
+				var submapRow:int = row/row32;
+				
+				for (var col:int=c1; col <= c2; col++) {
+					var dstCol:int = c1-col, dstRow:int = r1-row;
+					
+					var submapCol:int = col/col32;
+				
+					tiles[dstRow * cols + dstCol] =
+						m_XSubmaps[submapRow][submapCol].getCXTile (col & colMask, row & rowMask);
+				}
+			}
+			
+			return tiles;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setCXTiles (
+			__tiles:Array,
+			__c1:Number, __r1:Number,
+			__cols:Number, __rows:Number
+		):void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function updateItem (__item:XMapItemModel):void {
 		}

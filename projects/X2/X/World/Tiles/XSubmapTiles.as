@@ -15,10 +15,12 @@ package X.World.Tiles {
 	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapTiles extends XLogicObject {
-		private var m_sprite:MovieClip;
-		private var x_sprite:XDepthSprite;
 		private var m_submapModel:XSubmapModel;
+		
 		private var m_bitmap:XBitmap;
+		private var x_sprite:XDepthSprite;
+		
+		private var cx_sprite:MovieClip;
 		private var cx_bitmap:XBitmap;
 		
 //------------------------------------------------------------------------------------------	
@@ -67,7 +69,7 @@ package X.World.Tiles {
 				var __rect:Rectangle;
 				var __p:Point = new Point ();
 		
-				__rect = new Rectangle (0, 0, 16, 16);
+				__rect = new Rectangle (0, 0, XSubmapModel.CX_TILE_WIDTH, XSubmapModel.CX_TILE_HEIGHT);
 				
 				trace (": submapModel: ", m_submapModel);
 		
@@ -154,9 +156,9 @@ package X.World.Tiles {
 			x_sprite = addSpriteAt (m_bitmap, 0, 0);
 			x_sprite.setDepth (getDepth ());
 			
-			m_sprite = new (xxx.getClass ("CX:CXClass")) ();
+			cx_sprite = new (xxx.getClass ("CX:CXClass")) ();
 			cx_bitmap = new XBitmap ();
-			cx_bitmap.initWithScaling (m_sprite, 1.0);
+			cx_bitmap.initWithScaling (cx_sprite, 1.0);
 			
 			show ();
 		}

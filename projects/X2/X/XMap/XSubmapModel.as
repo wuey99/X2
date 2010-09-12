@@ -54,6 +54,17 @@ package X.XMap {
 		public static var CX_LR225A:Number = 14;
 		public static var CX_LR225B:Number = 15;
 				
+				
+// tile width, height
+		public static var CX_TILE_WIDTH:Number = 16;
+		public static var CX_TILE_HEIGHT:Number = 16;
+		
+		public static var CX_TILE_WIDTH_MASK:Number = 15;
+		public static var CX_TILE_HEIGHT_MASK:Number = 15;
+		
+		public static var CX_TILE_WIDTH_UNMASK:Number = 0xfffffff0;
+		public static var CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
+		
 		private var m_items:Dictionary;
 		
 //------------------------------------------------------------------------------------------	
@@ -71,8 +82,8 @@ package X.XMap {
 			m_col = __col;
 			m_row = __row;
 		
-			m_cols = m_submapWidth/16;
-			m_rows = m_submapHeight/16;
+			m_cols = m_submapWidth/CX_TILE_WIDTH;
+			m_rows = m_submapHeight/CX_TILE_HEIGHT;
 
 			m_boundingRect = new Rectangle (0, 0, m_submapWidth, m_submapHeight);
 			

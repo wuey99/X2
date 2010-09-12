@@ -53,10 +53,6 @@ package X.World.Sprite {
 				__width = Math.max (__width, __bounds.width);
 				__height = Math.max (__height, __bounds.height);
 			}
-	
-			__movieClip.gotoAndStop (1);
-			__movieClip.gotoAndStop (1);
-			__movieClip.gotoAndStop (1);
 									
 			for (i=0; i < __movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
