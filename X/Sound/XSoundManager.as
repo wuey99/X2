@@ -1,86 +1,68 @@
 //------------------------------------------------------------------------------------------
-package X.Task {
-
-	import X.*;
-	import X.World.Logic.*;
+package X.Sound {
+	
+	import X.Task.XTaskSubManager;
 	
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
-	public class XTaskManager extends Object {
-		protected var m_XTasks:Dictionary;
-		protected var m_paused:Number;
+	public class XSoundManager extends Object {
+		public var m_XTaskSubManager:XTaskSubManager;
 		
 //------------------------------------------------------------------------------------------
-		public function XTaskManager () {
-			m_XTasks = new Dictionary ();
-			
-			m_paused = 0;
+		public function XSoundManager (__manager:XTaskManager) {
+			m_XTaskSubManager = new XTaskSubManager (__manager);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function pause ():void {
-			m_paused++;
+		public function addTask (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+
+			return m_XTaskSubManager.addTask (__taskList, __findLabelsFlag);
 		}
-		
+
 //------------------------------------------------------------------------------------------
-		public function unpause ():void {
-			m_paused--;
+		public function changeTask (
+			__task:XTask,
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+				
+			return m_XTaskSubManager.changeTask (__task, __taskList, __findLabelsFlag);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function isTask (__task:XTask):Boolean {
-			return __task in m_XTasks;
-		}	
-
+			return m_XTaskSubManager.isTask (__task);
+		}		
+		
 //------------------------------------------------------------------------------------------
-		public function getTasks ():Dictionary {
-			return m_XTasks;
+		public function removeTask (__task:XTask):void {
+			m_XTaskSubManager.removeTask (__task);	
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllTasks ():void {
-			var __task:*;
-			
-			for (__task in m_XTasks) {
-				delete m_XTasks[__task as XTask];
-			}
-		}		
-		
-//------------------------------------------------------------------------------------------
-		public function addTask (__taskList:Array, __findLabelsFlag:Boolean = true):XTask {
-			var __task:XTask = new XTask (__taskList, __findLabelsFlag);
-			
-			__task.setManager (this);
-			__task.setParent (this);
-			
-			m_XTasks[__task] = 0;
-			
-			return __task;
+			m_XTaskSubManager.removeAllTasks ();
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeTask (__task:XTask):void {
-			if (__task in m_XTasks) {
-				__task.kill ();
-				
-				delete m_XTasks[__task];
-			}
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function updateTasks ():void {
-			var x:*;
-			
-			if (m_paused) {
-				return;
-			}
-			
-			for (x in m_XTasks) {
-				x.run ();
-			}
+		public function addEmptyTask ():XTask {
+			return m_XTaskSubManager.addEmptyTask ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getEmptyTask$ ():Array {
+			return m_XTaskSubManager.getEmptyTask$ ();
+		}	
+			
+//------------------------------------------------------------------------------------------
+		public function gotoLogic (__logic:Function):void {
+			m_XTaskSubManager.gotoLogic (__logic);
+		}
+		
 //------------------------------------------------------------------------------------------
 	}
 	
