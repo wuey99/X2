@@ -64,13 +64,13 @@ package X.World.Logic {
 		public var m_hudSprites:Dictionary;
 		public var m_childSprites:Dictionary;
 		public var m_detachedSprites:Dictionary;
-		public var m_XTasks:Dictionary;
 		public var m_GUID:Number;
 		public var m_alpha:Number;
 		public var m_masterAlpha:Number;
 		public var m_XSignals:Dictionary;
 		public var self:XLogicObject;
 		public var m_killSignal:XSignal;
+		public var m_XTaskSubManager:XTaskSubManager;
 		
 		public var m_iX:Number;
 		public var m_iY:Number;
@@ -127,8 +127,8 @@ package X.World.Logic {
 			m_hudSprites = new Dictionary ();
 			m_childSprites = new Dictionary ();
 			m_detachedSprites = new Dictionary ();
-			m_XTasks = new Dictionary ();
 			m_XSignals = new Dictionary ();
+			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
 
 			m_killSignal = createXSignal ();
 			
@@ -141,11 +141,6 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function initX ():void {
-		}
-
-//------------------------------------------------------------------------------------------
-		public function getXTaskManager ():XTaskManager {
-			return xxx.getXTaskManager ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -991,16 +986,17 @@ package X.World.Logic {
 		}
 				
 //------------------------------------------------------------------------------------------
+		public function getXTaskManager ():XTaskManager {
+			return xxx.getXTaskManager ();
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function addTask (
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
-				
-			var __task:XTask = xxx.getXTaskManager ().addTask (__taskList, __findLabelsFlag);
-			
-			if (!(__task in m_XTasks)) {
-				m_XTasks[__task] = 0;
-			}
+
+			var __task:XTask = m_XTaskSubManager.addTask (__taskList, __findLabelsFlag);
 			
 			__task.setParent (this);
 			
@@ -1014,60 +1010,37 @@ package X.World.Logic {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			if (!(__task == null)) {
-				removeTask (__task);
-			}
-					
-			__task = addTask (__taskList, __findLabelsFlag);
-			
-			return __task;
+			return m_XTaskSubManager.changeTask (__task, __taskList, __findLabelsFlag);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function isTask (__task:XTask):Boolean {
-			return __task in m_XTasks;
+			return m_XTaskSubManager.isTask (__task);
 		}		
 		
 //------------------------------------------------------------------------------------------
-		public function removeTask (__task:XTask):void {	
-			if (__task in m_XTasks) {
-				delete m_XTasks[__task];
-					
-				xxx.getXTaskManager ().removeTask (__task);
-			}
+		public function removeTask (__task:XTask):void {
+			m_XTaskSubManager.removeTask (__task);	
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllTasks ():void {
-			var x:*;
-			
-			for (x in m_XTasks) {
-				removeTask (x as XTask);
-			}
+			m_XTaskSubManager.removeAllTasks ();
 		}
 
 //------------------------------------------------------------------------------------------
 		public function addEmptyTask ():XTask {
-			return addTask (getEmptyTask$ ());
+			return m_XTaskSubManager.addEmptyTask ();
 		}
 
 //------------------------------------------------------------------------------------------
 		public function getEmptyTask$ ():Array {
-			return [
-				XTask.LABEL, "loop",
-					XTask.WAIT, 0x0100,
-				
-					XTask.GOTO, "loop",
-				
-				XTask.RETN,
-			];
+			return m_XTaskSubManager.getEmptyTask$ ();
 		}	
 			
 //------------------------------------------------------------------------------------------
 		public function gotoLogic (__logic:Function):void {
-			removeAllTasks ();
-			
-			__logic ();
+			m_XTaskSubManager.gotoLogic (__logic);
 		}
 		
 //------------------------------------------------------------------------------------------

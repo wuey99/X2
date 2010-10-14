@@ -3,39 +3,42 @@ package X.Task {
 
 	import X.*;
 	import X.World.Logic.*;
+	import X.Task.*;
 	
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
-	public class XTaskSubManager extends XTaskManager {
-		private var m_XTaskManager:XTaskManager;
+	public class XTaskSubManager extends Object {
+		private var m_manager:XTaskManager;
+		
+		private var m_XTasks:Dictionary;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskSubManager (__manager:XTaskManager) {
 			super ();
 			
-			m_XTaskManager = __manager;
+			m_manager = __manager;
+			
+			m_XTasks = new Dictionary ();
 		}
-
+		
 //------------------------------------------------------------------------------------------
-		public override function addTask (
+		public function addTask (
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			var __task:XTask = m_XTaskManager.addTask (__taskList, __findLabelsFlag);
+			var __task:XTask = m_manager.addTask (__taskList, __findLabelsFlag);
 			
 			if (!(__task in m_XTasks)) {
 				m_XTasks[__task] = 0;
 			}
 			
-			__task.setParent (this);
-			
 			return __task;
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function changeTask (
+		public function changeTask (
 			__task:XTask,
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
@@ -51,16 +54,21 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function removeTask (__task:XTask):void {	
+		public function isTask (__task:XTask):Boolean {
+			return __task in m_XTasks;
+		}		
+
+//------------------------------------------------------------------------------------------
+		public function removeTask (__task:XTask):void {	
 			if (__task in m_XTasks) {
 				delete m_XTasks[__task];
 					
-				m_XTaskManager.removeTask (__task);
+				m_manager.removeTask (__task);
 			}
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function removeAllTasks ():void {
+		public function removeAllTasks ():void {
 			var x:*;
 			
 			for (x in m_XTasks) {
@@ -68,6 +76,30 @@ package X.Task {
 			}
 		}
 
+//------------------------------------------------------------------------------------------
+		public function addEmptyTask ():XTask {
+			return addTask (getEmptyTask$ ());
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getEmptyTask$ ():Array {
+			return [
+				XTask.LABEL, "loop",
+					XTask.WAIT, 0x0100,
+				
+					XTask.GOTO, "loop",
+				
+				XTask.RETN,
+			];
+		}	
+			
+//------------------------------------------------------------------------------------------
+		public function gotoLogic (__logic:Function):void {
+			removeAllTasks ();
+			
+			__logic ();
+		}
+		
 //------------------------------------------------------------------------------------------
 	}
 	

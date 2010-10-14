@@ -59,6 +59,7 @@ package X.Task {
 		private var m_stack:Array;
 		private var m_loop:Array;
 		private var m_stackPtr:Number;
+		private var m_manager:XTaskManager;
 		private var m_parent:*;
 		private var m_flags:Number;
 		private var m_subTask:XTask;
@@ -120,10 +121,18 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getManager ():XTaskManager {
+			return m_manager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setManager (__manager:XTaskManager):void {
+			m_manager = __manager;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function kill ():void {
-			if (m_parent != null) {
-				removeAllTasks ();
-			}
+			removeAllTasks ();
 		}	
 			
 //------------------------------------------------------------------------------------------
@@ -132,10 +141,8 @@ package X.Task {
 		public function run ():void {
 // done execution?
 			if (m_stackPtr < 0) {
-				if (m_parent != null) {
-					m_parent.removeTask (this);
-				}
-							
+				m_manager.removeTask (this);
+
 				return;
 			}
 // suspended?
@@ -388,7 +395,7 @@ package X.Task {
 	case EXEC:
 		if (m_subTask == null) {
 // get new XTask Array run it immediately
-			m_subTask = m_parent.addTask ((m_taskList[m_taskIndex] as Array), true);
+			m_subTask = m_manager.addTask ((m_taskList[m_taskIndex] as Array), true);
 			m_subTask.setParent (m_parent);
 			m_subTask.run ();
 			
@@ -398,7 +405,7 @@ package X.Task {
 		else
 		{
 // if the sub-task is still active, wait another tick and check again
-			if (m_parent.isTask (m_subTask)) {
+			if (m_manager.isTask (m_subTask)) {
 				m_ticks += 0x0100;
 				m_taskIndex--;
 				return false;
@@ -476,9 +483,9 @@ package X.Task {
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
-				
-			var __task:XTask = m_parent.getXTaskManager ().addTask (__taskList, __findLabelsFlag);
-			
+
+			var __task:XTask = m_manager.addTask (__taskList, __findLabelsFlag);
+					
 			if (!(__task in m_XTasks)) {
 				m_XTasks[__task] = 0;
 			}
@@ -521,7 +528,7 @@ package X.Task {
 			if (__task in m_XTasks) {
 				delete m_XTasks[__task];
 					
-				m_parent.getXTaskManager ().removeTask (__task);
+				m_manager.removeTask (__task);
 			}
 		}
 
