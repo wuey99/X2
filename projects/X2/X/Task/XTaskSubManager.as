@@ -23,6 +23,11 @@ package X.Task {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function setManager (__manager:XTaskManager):void {
+			m_manager = __manager;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function addTask (
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true

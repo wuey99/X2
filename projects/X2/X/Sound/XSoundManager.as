@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------
 package X.Sound {
 	
-	import X.Task.XTaskSubManager;
+	import X.Task.*;
 	
 	import flash.utils.*;
 	
@@ -14,6 +14,10 @@ package X.Sound {
 			m_XTaskSubManager = new XTaskSubManager (__manager);
 		}
 
+//------------------------------------------------------------------------------------------	
+		public function gogogo ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function addTask (
 			__taskList:Array,
