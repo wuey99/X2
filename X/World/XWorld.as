@@ -14,12 +14,13 @@ package X.World {
 	import X.MVC.*;
 	import X.Resource.*;
 	import X.Signals.*;
+	import X.Sound.*;
 	import X.Task.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
-	import X.World.UI.XButton;
 	import X.World.Tiles.*;
+	import X.World.UI.XButton;
 	import X.XMap.*;
 	
 	import flash.display.*;
@@ -66,6 +67,7 @@ package X.World {
 		public var m_XBitmap:XBitmap;
 		public var m_XSignalManager:XSignalManager;
 		public var m_XSubmapTiles:XSubmapTiles;
+		public var m_XSoundManager:XSoundManager;
 
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){

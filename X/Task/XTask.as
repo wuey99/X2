@@ -78,19 +78,19 @@ package X.Task {
 		
 		public static var FLAGS_EQ:Number = 1;
 		
-		public var m_XTasks:Dictionary;
-		
+		public var m_XTaskSubManager:XTaskSubManager;
+				
 //------------------------------------------------------------------------------------------
 		public function XTask (__taskList:Array, __findLabelsFlag:Boolean = true) {
 			super();
 			
-			reset (__taskList, __findLabelsFlag);
+			__reset (__taskList, __findLabelsFlag);
 			
 			m_parent = null;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function reset (__taskList:Array, __findLabelsFlag:Boolean = true):void {
+		private function __reset (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			m_taskList = __taskList;
 			m_taskIndex = 0;
 			m_labels = new Object ();
@@ -100,7 +100,7 @@ package X.Task {
 			m_ticks = 0x0100 + 0x0080;
 			m_flags = ~FLAGS_EQ;
 			m_subTask = null;
-			m_XTasks = new Dictionary ();
+			m_XTaskSubManager = new XTaskSubManager (null);
 			
 // locate forward referenced labels.  this is usually done by default, but
 // __findLabelsFlag can be set to false if it's known ahead of time that
@@ -128,6 +128,8 @@ package X.Task {
 //------------------------------------------------------------------------------------------
 		public function setManager (__manager:XTaskManager):void {
 			m_manager = __manager;
+			
+			m_XTaskSubManager.setManager (__manager);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -479,29 +481,23 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function gotoTask (__taskList:Array, __findLabelsFlag:Boolean = false):void {
+			kill ();
+			
+			__reset (__taskList, __findLabelsFlag);
+			
+			setManager (m_manager);
+		}
+
+//------------------------------------------------------------------------------------------
 		public function addTask (
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 
-			var __task:XTask = m_manager.addTask (__taskList, __findLabelsFlag);
-					
-			if (!(__task in m_XTasks)) {
-				m_XTasks[__task] = 0;
-			}
-			
-			__task.setParent (this);
-			
-			return __task;
+			return m_XTaskSubManager.addTask (__taskList, __findLabelsFlag);
 		}
 
-//------------------------------------------------------------------------------------------
-		public function gotoTask (__taskList:Array, __findLabelsFlag:Boolean = false):void {
-			kill ();
-			
-			reset (__taskList, __findLabelsFlag);
-		}
-		
 //------------------------------------------------------------------------------------------
 		public function changeTask (
 			__task:XTask,
@@ -509,38 +505,39 @@ package X.Task {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			if (!(__task == null)) {
-				removeTask (__task);
-			}
-					
-			__task = addTask (__taskList, __findLabelsFlag);
-			
-			return __task;
+			return m_XTaskSubManager.changeTask (__task, __taskList, __findLabelsFlag);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function isTask (__task:XTask):Boolean {
-			return __task in m_XTasks;
+			return m_XTaskSubManager.isTask (__task);
 		}		
 		
 //------------------------------------------------------------------------------------------
-		public function removeTask (__task:XTask):void {	
-			if (__task in m_XTasks) {
-				delete m_XTasks[__task];
-					
-				m_manager.removeTask (__task);
-			}
+		public function removeTask (__task:XTask):void {
+			m_XTaskSubManager.removeTask (__task);	
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllTasks ():void {
-			var x:*;
-			
-			for (x in m_XTasks) {
-				removeTask (x as XTask);
-			}
+			m_XTaskSubManager.removeAllTasks ();
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function addEmptyTask ():XTask {
+			return m_XTaskSubManager.addEmptyTask ();
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getEmptyTask$ ():Array {
+			return m_XTaskSubManager.getEmptyTask$ ();
+		}	
+			
+//------------------------------------------------------------------------------------------
+		public function gotoLogic (__logic:Function):void {
+			m_XTaskSubManager.gotoLogic (__logic);
+		}
+				
 //------------------------------------------------------------------------------------------
 // end class		
 //------------------------------------------------------------------------------------------
