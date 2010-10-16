@@ -3,7 +3,6 @@ package X.Task {
 
 	import X.*;
 	import X.World.Logic.*;
-	import X.Task.*;
 	
 	import flash.utils.*;
 	
@@ -41,7 +40,17 @@ package X.Task {
 			
 			return __task;
 		}
-
+//------------------------------------------------------------------------------------------
+		public function addXTask (__task:XTask):XTask {
+			var __task:XTask = m_manager.addXTask (__task);
+			
+			if (!(__task in m_XTasks)) {
+				m_XTasks[__task] = 0;
+			}
+			
+			return __task;			
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function changeTask (
 			__task:XTask,
@@ -53,11 +62,22 @@ package X.Task {
 				removeTask (__task);
 			}
 					
-			__task = addTask (__taskList, __findLabelsFlag);
-			
-			return __task;
+			return addTask (__taskList, __findLabelsFlag);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function changeXTask (
+			__oldTask:XTask,
+			__newTask:XTask
+			):XTask {
+				
+			if (!(__oldTask == null)) {
+				removeTask (__oldTask);
+			}
+					
+			return addXTask (__newTask);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function isTask (__task:XTask):Boolean {
 			return __task in m_XTasks;
