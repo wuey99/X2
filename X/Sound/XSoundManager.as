@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------------------
 package X.Sound {
 	
-	import X.XApp;
 	import X.Task.*;
+	import X.XApp;
 	
 	import flash.events.Event;
 	import flash.media.*;
@@ -25,18 +25,22 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function playSound (__sound:Sound):Number {
+		public function playSound (__sound:Sound, __completeListener:Function = null):Number {
 			var __soundChannel:SoundChannel = __sound.play ();
-			
 			var __guid:Number = g_GUID++;
-			
 			m_soundChannels[__guid] = __soundChannel;
 			
 			__soundChannel.addEventListener (
 				Event.SOUND_COMPLETE,
-				
+						
 				function (e:Event):void {
-					delete m_soundChannels[__guid];
+					if (__completeListener != null) {
+						__completeListener ();
+					}
+					
+					if (__guid in m_soundChannels) {
+						delete m_soundChannels[__guid];
+					}
 				}
 			);
 			
@@ -48,6 +52,30 @@ package X.Sound {
 			return 0;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function stopSound (__guid:Number):void {
+			removeSound (__guid);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function removeSound (__guid:Number):void {
+			if (__guid in m_soundChannels) {
+				var __soundChannel:SoundChannel = m_soundChannels[__guid];
+				__soundChannel.stop ();
+				
+				delete m_soundChannels[__guid];
+			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public function removeAllSounds ():void {
+			var __guid:*;			
+		
+			for (__guid in m_soundChannels) {
+				removeSound (__guid as Number);
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getSoundChannel (__guid:Number):SoundChannel {
 			if (__guid in m_soundChannels) {
@@ -65,7 +93,7 @@ package X.Sound {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 
-			return m_XTaskSubManager.addTask (__taskList, __findLabelsFlag);
+			return m_XTaskSubManager.addXTask (new XSoundTask (this, __taskList, __findLabelsFlag));
 		}
 
 //------------------------------------------------------------------------------------------
@@ -75,7 +103,7 @@ package X.Sound {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			return m_XTaskSubManager.changeTask (__task, __taskList, __findLabelsFlag);
+			return m_XTaskSubManager.changeXTask (__task, new XSoundTask (this, __taskList, __findLabelsFlag));
 		}
 
 //------------------------------------------------------------------------------------------
