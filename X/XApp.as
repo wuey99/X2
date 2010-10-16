@@ -11,6 +11,7 @@ package X {
 	import X.MVC.*;
 	import X.Resource.*;
 	import X.Signals.*;
+	import X.Sound.*;
 	import X.Task.*;
 	import X.World.*;
 	import X.XMap.*;
@@ -29,11 +30,13 @@ package X {
 		private var m_XDebug:XDebug;
 		private var m_projectManager:XProjectManager;
 		private var m_XSignalManager:XSignalManager;
+		private var m_XSoundManager:XSoundManager;
 
 //------------------------------------------------------------------------------------------
 		public function XApp () {
 			m_XTaskManager = new XTaskManager ();
 			m_XSignalManager = new XSignalManager ();
+			m_XSoundManager = new XSoundManager (this, m_XTaskManager);
 			
 			m_XDebug = new XDebug ();
 			m_XDebug.init (this);
@@ -70,14 +73,19 @@ package X {
 
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
-			return  m_XSignalManager.createXSignal ();
+			return m_XSignalManager.createXSignal ();
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getXSignalManager ():XSignalManager {
 			return m_XSignalManager;
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function getXSoundManager ():XSoundManager {
+			return m_XSoundManager;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function setProjectManager (__projectManager:XProjectManager):void {
 			m_projectManager = __projectManager;
