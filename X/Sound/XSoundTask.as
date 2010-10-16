@@ -61,11 +61,11 @@ package X.Sound {
 
 //------------------------------------------------------------------------------------------
 		public function removeSound (__guid:Number):void {
-			m_XSoundManager.removeSound (__guid);
-			
 			if (__guid in m_soundChannels) {
 				delete m_soundChannels[__guid];
 			}
+			
+			m_XSoundManager.removeSound (__guid);
 		}
 
 //------------------------------------------------------------------------------------------
