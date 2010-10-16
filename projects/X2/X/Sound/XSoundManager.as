@@ -1,23 +1,64 @@
 //------------------------------------------------------------------------------------------
 package X.Sound {
 	
+	import X.XApp;
 	import X.Task.*;
 	
+	import flash.events.Event;
+	import flash.media.*;
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSoundManager extends Object {
+		public var m_XApp:XApp;
 		public var m_XTaskSubManager:XTaskSubManager;
+		public var m_soundChannels:Dictionary;
+		private static var g_GUID:Number = 0;
 		
 //------------------------------------------------------------------------------------------
-		public function XSoundManager (__manager:XTaskManager) {
+		public function XSoundManager (__XApp:XApp, __manager:XTaskManager) {
+			m_XApp = __XApp;
+			
 			m_XTaskSubManager = new XTaskSubManager (__manager);
+			
+			m_soundChannels = new Dictionary ();
 		}
 
-//------------------------------------------------------------------------------------------	
-		public function gogogo ():void {
+//------------------------------------------------------------------------------------------
+		public function playSound (__sound:Sound):Number {
+			var __soundChannel:SoundChannel = __sound.play ();
+			
+			var __guid:Number = g_GUID++;
+			
+			m_soundChannels[__guid] = __soundChannel;
+			
+			__soundChannel.addEventListener (
+				Event.SOUND_COMPLETE,
+				
+				function (e:Event):void {
+					delete m_soundChannels[__guid];
+				}
+			);
+			
+			return __guid;
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function playSoundFromClassName (__className:String):Number {
+			return 0;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getSoundChannel (__guid:Number):SoundChannel {
+			if (__guid in m_soundChannels) {
+				return m_soundChannels[__guid];
+			}
+			else
+			{
+				return null;
+			}
+		}	
+					
 //------------------------------------------------------------------------------------------
 		public function addTask (
 			__taskList:Array,

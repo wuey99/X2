@@ -60,6 +60,16 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function addXTask (__task:XTask):XTask {
+			__task.setManager (this);
+			__task.setParent (this);
+			
+			m_XTasks[__task] = 0;
+			
+			return __task;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function removeTask (__task:XTask):void {
 			if (__task in m_XTasks) {
 				__task.kill ();

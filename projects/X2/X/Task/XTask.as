@@ -82,7 +82,7 @@ package X.Task {
 				
 //------------------------------------------------------------------------------------------
 		public function XTask (__taskList:Array, __findLabelsFlag:Boolean = true) {
-			super();
+			super ();
 			
 			__reset (__taskList, __findLabelsFlag);
 			
