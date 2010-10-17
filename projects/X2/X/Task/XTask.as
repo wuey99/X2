@@ -78,7 +78,7 @@ package X.Task {
 		
 		public static var FLAGS_EQ:Number = 1;
 		
-		public var m_XTaskSubManager:XTaskSubManager;
+		protected var m_XTaskSubManager:XTaskSubManager;
 				
 //------------------------------------------------------------------------------------------
 		public function XTask (__taskList:Array, __findLabelsFlag:Boolean = true) {
@@ -100,7 +100,8 @@ package X.Task {
 			m_ticks = 0x0100 + 0x0080;
 			m_flags = ~FLAGS_EQ;
 			m_subTask = null;
-			m_XTaskSubManager = new XTaskSubManager (null);
+
+			createXTaskSubManager ();
 			
 // locate forward referenced labels.  this is usually done by default, but
 // __findLabelsFlag can be set to false if it's known ahead of time that
@@ -108,6 +109,11 @@ package X.Task {
 			if (__findLabelsFlag) {
 				__findLabels ();
 			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public function createXTaskSubManager ():void {
+			m_XTaskSubManager = new XTaskSubManager (null);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -145,6 +151,8 @@ package X.Task {
 			if (m_stackPtr < 0) {
 				m_manager.removeTask (this);
 
+				kill ();
+				
 				return;
 			}
 // suspended?
