@@ -76,6 +76,7 @@ package X.Task {
 		public static var BNE:Number = 8;
 		public static var FLAGS:Number = 9;
 		public static var EXEC:Number = 10;
+		public static var FUNC:Number = 11;
 		
 		public static var FLAGS_EQ:Number = 1;
 		
@@ -249,6 +250,11 @@ package X.Task {
 						i++;
 						
 						break;
+						
+					case FUNC:
+						i++;
+						
+						break;
 				}
 			}
 		}
@@ -394,12 +400,20 @@ package X.Task {
 						
 //------------------------------------------------------------------------------------------
 	case FLAGS:
-		var __func:Function = m_taskList[m_taskIndex++] as Function;
+		var __funcFlags:Function = m_taskList[m_taskIndex++] as Function;
 		
-		__func (this);
+		__funcFlags (this);
 		
 		break;
 
+//------------------------------------------------------------------------------------------
+	case FUNC:
+		var __funcTask:Function = m_taskList[m_taskIndex++] as Function;
+		
+		__funcTask (this);
+		
+		break;
+		
 //------------------------------------------------------------------------------------------
 // launch a sub-task and wait for it to finish before proceeding
 //------------------------------------------------------------------------------------------
