@@ -40,6 +40,7 @@ package X.Task {
 			
 			return __task;
 		}
+		
 //------------------------------------------------------------------------------------------
 		public function addXTask (__task:XTask):XTask {
 			var __task:XTask = m_manager.addXTask (__task);
