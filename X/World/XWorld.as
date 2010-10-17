@@ -68,6 +68,8 @@ package X.World {
 		public var m_XSignalManager:XSignalManager;
 		public var m_XSubmapTiles:XSubmapTiles;
 		public var m_XSoundManager:XSoundManager;
+		public var m_XSoundTaskManager:XSoundTaskManager;
+		public var m_XSoundTask:XSoundTask;
 
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){

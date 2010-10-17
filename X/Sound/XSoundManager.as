@@ -22,7 +22,11 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function playSound (__sound:Sound, __completeListener:Function = null):Number {
+		public function playSound (
+			__sound:Sound,
+			__completeListener:Function = null
+			):Number {
+				
 			var __soundChannel:SoundChannel = __sound.play ();
 			var __guid:Number = g_GUID++;
 			m_soundChannels[__guid] = __soundChannel;
@@ -45,7 +49,11 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function playSoundFromClassName (__className:String):Number {
+		public function playSoundFromClassName (
+			__className:String,
+			__completeListener:Function = null
+			):Number {
+				
 			return 0;
 		}
 

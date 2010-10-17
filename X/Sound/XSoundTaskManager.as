@@ -1,10 +1,12 @@
 //------------------------------------------------------------------------------------------
-package X.Task {
+package X.Sound {
 
 	import X.*;
+	import X.Task.*;
 	import X.Sound.*;
 	
 	import flash.utils.*;
+	import flash.media.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSoundTaskManager extends XTaskSubManager {
@@ -19,7 +21,11 @@ package X.Task {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function playSound (__sound:Sound, __completeListener:Function = null):Number {
+		public function playSound (
+			__sound:Sound,
+			__completeListener:Function = null
+			):Number {
+				
 			var __guid:Number = m_soundManager.playSound (__sound, __complete);
 			
 			m_soundChannels[__guid] = 0;
@@ -36,7 +42,11 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function playSoundFromClassName (__className:String):Number {
+		public function playSoundFromClassName (
+			__className:String,
+			__completeListener:Function = null
+			):Number {
+				
 			return 0;
 		}
 		
@@ -64,7 +74,7 @@ package X.Task {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addTask (
+		public override function addTask (
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
@@ -73,7 +83,16 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function changeTask (
+		public function addSoundTask (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+
+			return addXTask (new XSoundTask (__taskList, __findLabelsFlag));
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function changeTask (
 			__task:XTask,
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
