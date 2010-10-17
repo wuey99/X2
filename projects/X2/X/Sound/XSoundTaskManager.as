@@ -25,7 +25,7 @@ package X.Sound {
 		public function setSoundManager (__soundManager:XSoundManager):void {
 			m_soundManager = __soundManager;
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function playSound (
 			__sound:Sound,
@@ -92,6 +92,17 @@ package X.Sound {
 			return __task;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function replaceAllSoundTasks (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+				
+			removeAllTasks ();
+			
+			return addSoundTask (__taskList, __findLabelsFlag);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function addSoundTask (
 			__taskList:Array,
