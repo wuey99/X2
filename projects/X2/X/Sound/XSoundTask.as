@@ -31,6 +31,39 @@ package X.Sound {
 		}	
 
 //------------------------------------------------------------------------------------------
+		public function playSound (
+			__sound:Sound,
+			__completeListener:Function = null
+			):Number {
+				
+			return m_XSoundTaskManager.playSound (__sound, __completeListener);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function playSoundFromClassName (
+			__className:String,
+			__completeListener:Function = null
+			):Number {
+				
+			return 0;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function stopSound (__guid:Number):void {
+			m_XSoundTaskManager.stopSound (__guid);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function removeSound (__guid:Number):void {
+			m_XSoundTaskManager.removeSound (__guid);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function removeAllSounds ():void {
+			m_XSoundTaskManager.removeAllSounds ();
+		}
+		
+//------------------------------------------------------------------------------------------
 	}
 
 //------------------------------------------------------------------------------------------

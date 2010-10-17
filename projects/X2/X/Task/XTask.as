@@ -59,11 +59,12 @@ package X.Task {
 		private var m_stack:Array;
 		private var m_loop:Array;
 		private var m_stackPtr:Number;
-		private var m_manager:XTaskManager;
 		private var m_parent:*;
 		private var m_flags:Number;
 		private var m_subTask:XTask;
 
+		protected var m_manager:XTaskManager;
+		
 		public static var CALL:Number = 0;
 		public static var RETN:Number = 1;
 		public static var LOOP:Number = 2;
