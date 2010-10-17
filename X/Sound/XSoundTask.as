@@ -18,9 +18,14 @@ package X.Sound {
 
 //------------------------------------------------------------------------------------------
 		public override function createXTaskSubManager ():XTaskSubManager {
-			m_XSoundTaskManager = new XSoundTaskManager (m_manager, null);
+			m_XSoundTaskManager = new XSoundTaskManager (null, null);
 			
 			return m_XSoundTaskManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setSoundManager (__soundManager:XSoundManager):void {
+			m_XSoundTaskManager.setSoundManager (__soundManager);
 		}
 		
 //------------------------------------------------------------------------------------------

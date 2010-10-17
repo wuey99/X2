@@ -3,10 +3,9 @@ package X.Sound {
 
 	import X.*;
 	import X.Task.*;
-	import X.Sound.*;
 	
-	import flash.utils.*;
 	import flash.media.*;
+	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSoundTaskManager extends XTaskSubManager {
@@ -18,6 +17,13 @@ package X.Sound {
 			m_soundManager = __soundManager;
 			
 			super (__manager);
+			
+			m_soundChannels = new Dictionary ();
+		}
+			
+//------------------------------------------------------------------------------------------
+		public function setSoundManager (__soundManager:XSoundManager):void {
+			m_soundManager = __soundManager;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -79,7 +85,11 @@ package X.Sound {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 
-			return addXTask (new XSoundTask (__taskList, __findLabelsFlag));
+			var __task:XSoundTask = addXTask (new XSoundTask (__taskList, __findLabelsFlag)) as XSoundTask;
+			
+			__task.setSoundManager (m_soundManager);
+			
+			return __task;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -87,18 +97,24 @@ package X.Sound {
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
-
-			return addXTask (new XSoundTask (__taskList, __findLabelsFlag));
+				
+			var __task:XSoundTask = addXTask (new XSoundTask (__taskList, __findLabelsFlag)) as XSoundTask;
+			
+			__task.setSoundManager (m_soundManager);
+			
+			return __task;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public override function changeTask (
-			__task:XTask,
+			__oldTask:XTask,
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			return changeXTask (__task, new XSoundTask (__taskList, __findLabelsFlag));
+			var __task:XSoundTask = changeXTask (__oldTask, new XSoundTask (__taskList, __findLabelsFlag)) as XSoundTask;
+			
+			return __task;
 		}
 		
 //------------------------------------------------------------------------------------------

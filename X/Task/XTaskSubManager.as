@@ -54,13 +54,13 @@ package X.Task {
 		
 //------------------------------------------------------------------------------------------
 		public function changeTask (
-			__task:XTask,
+			__oldTask:XTask,
 			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			if (!(__task == null)) {
-				removeTask (__task);
+			if (!(__oldTask == null)) {
+				removeTask (__oldTask);
 			}
 					
 			return addTask (__taskList, __findLabelsFlag);
