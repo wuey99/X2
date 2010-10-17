@@ -8,7 +8,7 @@ package X.Task {
 	
 //------------------------------------------------------------------------------------------	
 	public class XTaskSubManager extends Object {
-		private var m_manager:XTaskManager;
+		public var m_manager:XTaskManager;
 		
 		private var m_XTasks:Dictionary;
 		

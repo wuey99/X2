@@ -9,74 +9,29 @@ package X.Sound {
 	
 //------------------------------------------------------------------------------------------
 	public class XSoundTask extends XTask {
-		public var m_XSoundManager:XSoundManager;
-		public var m_soundChannels:Dictionary;
+		public var m_manager:XTaskManager;
+		
+		protected var m_XSoundTaskManager:XSoundTaskManager;
 		
 //------------------------------------------------------------------------------------------
-		public function XSoundTask (
-			__XSoundManager:XSoundManager,
-			__taskList:Array, __findLabelsFlag:Boolean = true
-			) {
-				
-			m_XSoundManager = __XSoundManager;
-			
-			m_soundChannels = new Dictionary ();
+		public function XSoundTask (__manager:XTaskManager, __taskList:Array, __findLabelsFlag:Boolean = true) {
+			m_manager = __taskManager;
 			
 			super (__taskList, __findLabelsFlag);
 		}
 
 //------------------------------------------------------------------------------------------
+		public override function createXTaskSubManager ():void {
+			m_XTaskSubManager = m_XSoundTaskManager = new XSoundTaskManager (m_manager, null);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public override function kill ():void {
-			removeAllSounds ();
+			m_XSoundTaskManager.removeAllSounds ();
 			
 			removeAllTasks ();
 		}	
 
-//------------------------------------------------------------------------------------------
-		public function playSound (__sound:Sound, __completeListener:Function = null):Number {
-			var __guid:Number = m_XSoundManager.playSound (__sound, __complete);
-			
-			m_soundChannels[__guid] = 0;
-			
-			function __complete ():void {
-				if (__completeListener != null) {
-					__completeListener ();
-				}
-				
-				delete m_soundChannels[__guid];
-			}
-			
-			return __guid;
-		}
-
-//------------------------------------------------------------------------------------------
-		public function playSoundFromClassName (__className:String):Number {
-			return 0;
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function stopSound (__guid:Number):void {
-			removeSound (__guid);
-		}
-
-//------------------------------------------------------------------------------------------
-		public function removeSound (__guid:Number):void {
-			if (__guid in m_soundChannels) {
-				delete m_soundChannels[__guid];
-			}
-			
-			m_XSoundManager.removeSound (__guid);
-		}
-
-//------------------------------------------------------------------------------------------
-		public function removeAllSounds ():void {
-			var __guid:*;
-			
-			for (__guid in m_soundChannels) {
-				removeSound (__guid as Number);
-			}	
-		}
-			
 //------------------------------------------------------------------------------------------
 	}
 
