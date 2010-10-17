@@ -43,7 +43,7 @@ package X.Sound {
 				
 			return m_XSoundTaskManager.playSound (__sound, __completeListener);
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClassName (
 			__className:String,
