@@ -101,7 +101,7 @@ package X.Task {
 			m_flags = ~FLAGS_EQ;
 			m_subTask = null;
 
-			createXTaskSubManager ();
+			m_XTaskSubManager = createXTaskSubManager ();
 			
 // locate forward referenced labels.  this is usually done by default, but
 // __findLabelsFlag can be set to false if it's known ahead of time that
@@ -112,8 +112,8 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function createXTaskSubManager ():void {
-			m_XTaskSubManager = new XTaskSubManager (null);
+		public function createXTaskSubManager ():XTaskSubManager {
+			return new XTaskSubManager (null);
 		}
 		
 //------------------------------------------------------------------------------------------

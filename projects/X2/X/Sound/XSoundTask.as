@@ -9,20 +9,18 @@ package X.Sound {
 	
 //------------------------------------------------------------------------------------------
 	public class XSoundTask extends XTask {
-		public var m_manager:XTaskManager;
-		
 		protected var m_XSoundTaskManager:XSoundTaskManager;
 		
 //------------------------------------------------------------------------------------------
-		public function XSoundTask (__manager:XTaskManager, __taskList:Array, __findLabelsFlag:Boolean = true) {
-			m_manager = __taskManager;
-			
+		public function XSoundTask (__taskList:Array, __findLabelsFlag:Boolean = true) {
 			super (__taskList, __findLabelsFlag);
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function createXTaskSubManager ():void {
-			m_XTaskSubManager = m_XSoundTaskManager = new XSoundTaskManager (m_manager, null);
+		public override function createXTaskSubManager ():XTaskSubManager {
+			m_XSoundTaskManager = new XSoundTaskManager (m_manager, null);
+			
+			return m_XSoundTaskManager;
 		}
 		
 //------------------------------------------------------------------------------------------

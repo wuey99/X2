@@ -69,7 +69,7 @@ package X.Task {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 
-			return addXTask (new XSoundTask (m_manager, __taskList, __findLabelsFlag));
+			return addXTask (new XSoundTask (__taskList, __findLabelsFlag));
 		}
 
 //------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ package X.Task {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			return changeXTask (__task, new XSoundTask (m_manager, __taskList, __findLabelsFlag));
+			return changeXTask (__task, new XSoundTask (__taskList, __findLabelsFlag));
 		}
 		
 //------------------------------------------------------------------------------------------
