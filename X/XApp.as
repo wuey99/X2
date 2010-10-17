@@ -36,7 +36,7 @@ package X {
 		public function XApp () {
 			m_XTaskManager = new XTaskManager ();
 			m_XSignalManager = new XSignalManager ();
-			m_XSoundManager = new XSoundManager (this, m_XTaskManager);
+			m_XSoundManager = new XSoundManager (this);
 			
 			m_XDebug = new XDebug ();
 			m_XDebug.init (this);
