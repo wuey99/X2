@@ -269,7 +269,7 @@ package X.Resource {
 			try {
 				var c:Class = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
 				
-//				trace (": oooooooo: ", getQualifiedClassName (c));
+				trace (": oooooooo: ", getQualifiedClassName (c));
 			}
 			catch (e:Error) {
 // how should we handle this error?
