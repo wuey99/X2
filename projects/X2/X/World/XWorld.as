@@ -76,6 +76,9 @@ package X.World {
 			m_parent = __parent;
 			m_XApp = __XApp;
 			
+			mouseEnabled = true;
+			mouseChildren = true;
+			
 			// Add event for main loop
 			addEventListener(Event.ENTER_FRAME, onEnterFrame, false, 0, true);
 			m_inuse_ENTER_FRAME = 0;
@@ -113,11 +116,15 @@ package X.World {
 				m_XWorldLayers[i] = new XSpriteLayer ();
 				m_XWorldLayers[i].init (this);
 				addChild (m_XWorldLayers[i]);
+				m_XWorldLayers[i].mouseEnabled = true;
+				m_XWorldLayers[i].mouseChildren = true;
 			}
 
 			m_XHudLayer = new XSpriteLayer ();
 			m_XHudLayer.init (this);
 			addChild (m_XHudLayer);
+			m_XHudLayer.mouseEnabled = true;
+			m_XHudLayer.mouseChildren = true;
 
 			m_XKeyboardManager = new XKeyboardManager (this);
 					
