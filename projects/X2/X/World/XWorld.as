@@ -22,6 +22,7 @@ package X.World {
 	import X.World.Tiles.*;
 	import X.World.UI.XButton;
 	import X.XMap.*;
+	import X.Debug.*;
 	
 	import flash.display.*;
 	import flash.events.Event;
@@ -70,6 +71,7 @@ package X.World {
 		public var m_XSoundManager:XSoundManager;
 		public var m_XSoundTaskManager:XSoundTaskManager;
 		public var m_XSoundTask:XSoundTask;
+		public var m_XDebugConsole:XDebugConsole;
 
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){
