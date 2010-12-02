@@ -17,6 +17,7 @@ package X.Debug  {
 		private var m_textFormat:TextFormat;
 		private var m_textArea:XTextSprite;
 		private var m_disableOutput:Number;
+		private var m_fontClass:Class;
 		
 //------------------------------------------------------------------------------------------
 		public function XDebugConsole () {
@@ -27,6 +28,8 @@ package X.Debug  {
 		public override function init (__xxx:XWorld, args:Array):void {
 			super.init (__xxx, args);
 
+			m_fontClass = getArg (args, 0);
+			
 			createSprites ();
 		}
 
@@ -43,7 +46,7 @@ package X.Debug  {
 			m_textArea = new XTextSprite ();
 			
 			xsprite = addSpriteAt (m_textArea, 0, 0, true);
-			xsprite.setDepth (2000);
+			xsprite.setDepth (999999);
 			
 			setTextProps ();
 			
@@ -62,7 +65,7 @@ package X.Debug  {
 			m_textArea.v.embedFonts = true;
 			m_textArea.v.width = 320;
 			m_textArea.v.height = 480;
-            m_textFormat = __TextFormat ();
+            m_textFormat = __TextFormat (m_fontClass);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -92,11 +95,11 @@ package X.Debug  {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function __TextFormat ():TextFormat {
-			var __font:Font = new Font ();
+		public function __TextFormat (__fontClass:Class):TextFormat {
+			var __font:Font = new __fontClass ();
 			
             var __format:TextFormat = new TextFormat();
-            __format.font = "Arial";
+            __format.font = __font.fontName;
             
             __format.bold = true;
             __format.color = 0x404040;
