@@ -25,8 +25,8 @@ package X.Debug  {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function init (__xxx:XWorld, args:Array):void {
-			super.init (__xxx, args);
+		public override function setup (__xxx:XWorld, args:Array):void {
+			super.setup (__xxx, args);
 
 			m_fontClass = getArg (args, 0);
 			
@@ -34,9 +34,13 @@ package X.Debug  {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function initX ():void {
+		public override function setupX ():void {
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 // create sprites
 //------------------------------------------------------------------------------------------

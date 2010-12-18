@@ -113,7 +113,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function init (__xxx:XWorld, args:Array):void {
+		public function setup (__xxx:XWorld, args:Array):void {
 			xxx = __xxx;
 						
 			m_masterScaleX = m_masterScaleY = 1.0;
@@ -140,7 +140,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function initX ():void {
+		public function setupX ():void {
 		}
 
 //------------------------------------------------------------------------------------------
@@ -151,6 +151,10 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function fireKillSignal (__model:XModelBase):void {
 			m_killSignal.fireSignal (__model);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
 		}
 		
 //------------------------------------------------------------------------------------------

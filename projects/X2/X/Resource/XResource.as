@@ -14,7 +14,7 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function init (
+		public function setup (
 			__resourcePath:String,
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
@@ -22,6 +22,10 @@ package X.Resource {
 			}
 			
 //------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
+//------------------------------------------------------------------------------------------		
 		public function loadResource ():void {		
 		}
 		

@@ -33,7 +33,7 @@ package X.XMap {
 		}	
 
 //------------------------------------------------------------------------------------------	
-		public function init (
+		public function setup (
 			__layerModel:XMapLayerModel,
 			__logicClassName:String,
 			__name:String, __id:Number,
@@ -63,6 +63,10 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function kill ():void {
 			m_layerModel.removeIndexFromClassNames (logicClassIndex);
 			m_layerModel.removeIndexFromClassNames (imageClassIndex);
@@ -72,7 +76,7 @@ package X.XMap {
 		public function clone ():XMapItemModel {
 			var __item:XMapItemModel = new XMapItemModel ();
 
-			__item.init (
+			__item.setup (
 				this.layerModel,
 // __logicClassName
 				this.layerModel.getClassNameFromIndex (m_logicClassIndex),

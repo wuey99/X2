@@ -35,7 +35,7 @@ package X.XMap {
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function init (
+		public function setup (
 			__layer:Number,
 			__submapCols:Number, __submapRows:Number,
 			__submapWidth:Number, __submapHeight:Number
@@ -67,6 +67,10 @@ package X.XMap {
 			m_viewPort = new Rectangle ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setParent (__XMap:XMapModel):void {
 			m_XMap = __XMap;

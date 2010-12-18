@@ -27,7 +27,7 @@ package X.World.Collision {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function init (
+		public function setup (
 			__x:Number, __y:Number,
 			__width:Number
 			):void {
@@ -38,6 +38,10 @@ package X.World.Collision {
 				m_width = __width;	
 			}
 			
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setWidth (__width:Number):void {
 			m_width = __width;

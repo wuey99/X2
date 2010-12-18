@@ -26,10 +26,14 @@ package X.Debug {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function init (__XApp:XApp):void {
+		public function setup (__XApp:XApp):void {
 			m_XApp = __XApp;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function disable (__flag:Boolean):void {
 			m_disabled = __flag;

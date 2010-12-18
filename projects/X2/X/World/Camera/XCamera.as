@@ -22,12 +22,16 @@ package World.Camera {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function init (__xxx:XWorld, ...args):void {
-			super.init (__xxx);
+		public override function setup (__xxx:XWorld, ...args):void {
+			super.setup (__xxx);
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function initX ():void {
+		public override function cleanup ():void {
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function setupX ():void {
 			super.initX ();
 		}
 

@@ -26,7 +26,7 @@ package X.XMap {
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function init (
+		public function setup (
 			__layers:Array
 			):void {
 			
@@ -40,6 +40,10 @@ package X.XMap {
 			}
 		}				
 
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array {
 			var i:Number, j:Number;

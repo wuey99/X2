@@ -217,7 +217,7 @@ package X.XMap {
 				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex));
 				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex));
 				
-				__item.init (
+				__item.setup (
 					m_XMapLayer,
 // __logicClassName
 					m_XMapLayer.getClassNameFromIndex (__logicClassIndex),

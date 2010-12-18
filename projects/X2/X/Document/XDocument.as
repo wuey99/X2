@@ -17,7 +17,7 @@ package X.Document {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function init (__XApp:XApp, __model:XModelBase, __xml:XML):void {
+		public function setup (__XApp:XApp, __model:XModelBase, __xml:XML):void {
 			m_XApp = __XApp;
 			model = __model;
 			xml = __xml;
@@ -25,6 +25,10 @@ package X.Document {
 			if (xml != null) {
 				model.deserializeAll (xml);
 			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
 		}
 		
 //------------------------------------------------------------------------------------------

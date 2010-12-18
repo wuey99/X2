@@ -22,7 +22,7 @@ package X.Resource {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function init (
+		public override function setup (
 			__resourcePath:String,
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
@@ -33,6 +33,10 @@ package X.Resource {
 			m_loader = null;
 			m_loadComplete = false;
 			m_resourceManager = __resourceManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
 		}
 		
 //------------------------------------------------------------------------------------------
