@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------
 package X.World.Sprite {
 
+	import X.Geom.*;
 	import X.World.*;
 	
 	import flash.display.*;
@@ -109,12 +110,12 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getPos ():Point {
-			return new Point (x2, y2);
+		public function getPos ():XPoint {
+			return new XPoint (x2, y2);
 		}
 
 //------------------------------------------------------------------------------------------		
-		public function setPos (__p:Point):void {
+		public function setPos (__p:XPoint):void {
 			x2 = __p.x;
 			y2 = __p.y;
 		}

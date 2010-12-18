@@ -11,6 +11,7 @@ package X.World {
 	import X.Datasource.XDatasource;
 	import X.Debug.*;
 	import X.Document.*;
+	import X.Geom.*;
 	import X.Keyboard.*;
 	import X.MVC.*;
 	import X.Resource.*;
@@ -23,7 +24,6 @@ package X.World {
 	import X.World.Tiles.*;
 	import X.World.UI.XButton;
 	import X.XMap.*;
-	import X.Keyboard.*;
 	
 	import flash.display.*;
 	import flash.events.Event;
@@ -286,18 +286,22 @@ package X.World {
 		public function getClass (__className:String):Class {
 			return m_XApp.getClass (__className);
 		}					
-		
+
 //------------------------------------------------------------------------------------------
-		public function globalToWorld (__layer:Number, __p:Point):Point {
+		public function globalToWorld (__layer:Number, __p:XPoint):XPoint {
+			var __x:Point;
+			
 			if (__layer < 0) {
-				__p = getXHudLayer ().globalToLocal (__p);
+// spoom
+				__x = getXHudLayer ().globalToLocal (__p);
 			}
 			else 
 			{
-				__p = getXWorldLayer (__layer).globalToLocal (__p);
+// spoom
+				__x = getXWorldLayer (__layer).globalToLocal (__p);
 			}
 			
-			return __p;
+			return new XPoint (__x.x, __x.y);
 		}
 				
 //------------------------------------------------------------------------------------------

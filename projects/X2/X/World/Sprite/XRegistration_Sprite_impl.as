@@ -1,45 +1,45 @@
 //------------------------------------------------------------------------------------------
-		public var rp:Point;
+		public var rp:XPoint;
 		
 //------------------------------------------------------------------------------------------
-		public function globalToParent():Point {
+		public function globalToParent():XPoint {
 			return parent.globalToLocal (localToGlobal (rp));
 		}
 
 //------------------------------------------------------------------------------------------
 		public function setRegistration(x:Number=0, y:Number=0):void {
-			rp = new Point(x, y);
+			rp = new XPoint(x, y);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getRegistration():Point {
+		public function getRegistration():XPoint {
 			return rp;
 		}
 				
 //------------------------------------------------------------------------------------------		
 		public function get x2():Number {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			return p.x;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function set x2(value:Number):void {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			this.x += value - p.x;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function get y2():Number {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			return p.y;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function set y2(value:Number):void {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			this.y += value - p.y;
 		}
@@ -86,11 +86,11 @@
 
 //------------------------------------------------------------------------------------------
 		public function setProperty2(prop:String, n:Number):void {			
-			var a:Point = globalToParent ();
+			var a:XPoint = globalToParent ();
 			
 			this[prop] = n;
 
-			var b:Point = globalToParent ();
+			var b:XPoint = globalToParent ();
 
 			this.x -= b.x - a.x;
 			this.y -= b.y - a.y;

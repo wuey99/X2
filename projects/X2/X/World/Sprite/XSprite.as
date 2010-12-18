@@ -1,8 +1,11 @@
 //------------------------------------------------------------------------------------------
 package X.World.Sprite {
 
+// X classes
+	import X.Geom.*;
 	import X.World.*;
 	
+// flash classes
 	import flash.display.Sprite;
 	import flash.geom.*;
 	import flash.utils.*;
@@ -26,17 +29,24 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function globalToLocalXPoint (__p:XPoint):XPoint {
+			var __x:Point = globalToLocal (__p.getPoint ());
+			
+			return new XPoint (__x.x, __x.y);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):Rectangle {
 			return new Rectangle (-x/m_scale, -y/m_scale, __canvasWidth/m_scale, __canvasHeight/m_scale);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getPos ():Point {
-			return new Point (x2, y2);
+		public function getPos ():XPoint {
+			return new XPoint (x2, y2);
 		}
 
 //------------------------------------------------------------------------------------------		
-		public function setPos (__p:Point):void {
+		public function setPos (__p:XPoint):void {
 			x2 = __p.x;
 			y2 = __p.y;
 		}

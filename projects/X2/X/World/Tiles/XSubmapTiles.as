@@ -2,6 +2,7 @@
 package X.World.Tiles {
 
 	import X.*;
+	import X.Geom.*;
 	import X.World.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
@@ -71,7 +72,7 @@ package X.World.Tiles {
 				var __col:Number;
 				var __row:Number;
 				var __rect:Rectangle;
-				var __p:Point = new Point ();
+				var __p:XPoint = new XPoint ();
 		
 				__rect = new Rectangle (0, 0, XSubmapModel.CX_TILE_WIDTH, XSubmapModel.CX_TILE_HEIGHT);
 				
