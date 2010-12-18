@@ -7,6 +7,7 @@ package X.World.Logic {
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
 	
+	import X.Geom.*;
 	import X.World.*;
 	import X.World.Collision.*;
 	import X.World.Sprite.*;
@@ -38,17 +39,17 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function setPos (__pos:Point):void {
+		public override function setPos (__pos:XPoint):void {
 			var __pos2:b2Vec2 = new b2Vec2 (__pos.x/30, __pos.y/30);
 			
 			m_body.SetXForm (__pos2, __getNativeAngle ());
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function getPos ():Point {
+		public override function getPos ():XPoint {
 			var __pos2:b2Vec2 = m_body.GetPosition ();
 			
-			var __pos:Point = new Point (__pos2.x*30, __pos2.y*30);
+			var __pos:XPoint = new XPoint (__pos2.x*30, __pos2.y*30);
 			
 			return __pos;
 		}

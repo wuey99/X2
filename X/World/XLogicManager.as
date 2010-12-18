@@ -9,6 +9,7 @@ package X.World {
 	
 // X classes
 	import X.*;
+	import X.Geom.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	import X.XMap.*;
@@ -145,7 +146,7 @@ package X.World {
 			__logicObject.setup (xxx, args);
 
 			__logicObject.setItem (__item);
-			__logicObject.setPos (new Point (__x, __y));			
+			__logicObject.setPos (new XPoint (__x, __y));			
 //			__logicObject.setLayer (__layer);
 //			__logicObject.setDepth (__depth);
 			__logicObject.setScale (__scale);
@@ -186,7 +187,7 @@ package X.World {
 			__logicObject.setup (xxx, args);
 
 			__logicObject.setItem (__item);
-			__logicObject.setPos (new Point (__x, __y));			
+			__logicObject.setPos (new XPoint (__x, __y));			
 //			__logicObject.setLayer (__layer);
 //			__logicObject.setDepth (__depth);
 			__logicObject.setScale (__scale);

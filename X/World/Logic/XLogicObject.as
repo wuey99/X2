@@ -7,6 +7,7 @@ package X.World.Logic {
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
 	
+	import X.Geom.*;
 	import X.MVC.*;
 	import X.Signals.XSignal;
 	import X.Task.*;
@@ -47,7 +48,7 @@ package X.World.Logic {
 		public var m_layer:Number;
 		public var m_depth:Number;
 		public var m_boundingRect:Rectangle;
-		public var m_pos:Point;
+		public var m_pos:XPoint;
 		public var m_visible:Boolean;
 		public var m_masterVisible:Boolean;
 		public var m_relativeDepthFlag:Boolean;
@@ -332,14 +333,14 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function localToGlobalXX (__obj:XLogicObject, __pos:Point):Point {
+		public function localToGlobalXX (__obj:XLogicObject, __pos:XPoint):XPoint {
 			var __x:Number;
 			var __y:Number;
 			
 			__x = __pos.x + __obj.getPos ().x;
 			__y = __pos.y + __obj.getPos ().y;
 			
-			__pos = new Point (__x, __y);
+			__pos = new XPoint (__x, __y);
 			
 			if (__obj.m_parent != null) {
 				__pos = localToGlobalXX (__obj.m_parent, __pos);
@@ -349,16 +350,16 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function localToGlobalX (__obj:XLogicObject, __pos:Point):Point {
+		public function localToGlobalX (__obj:XLogicObject, __pos:XPoint):XPoint {
 			var __x:Number;
 			var __y:Number;
-			var __newPos:Point;
+			var __newPos:XPoint;
 			
 			if (__obj.m_parent != null) {
 				__x = __pos.x + __obj.m_parent.getPos ().x;
 				__y = __pos.y + __obj.m_parent.getPos ().y;
 			
-				__newPos = localToGlobalX (__obj.m_parent, new Point (__x, __y));
+				__newPos = localToGlobalX (__obj.m_parent, new XPoint (__x, __y));
 			}
 			else
 			{
@@ -369,16 +370,16 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function globalToLocalX (__obj:XLogicObject, __pos:Point):Point {
+		public function globalToLocalX (__obj:XLogicObject, __pos:XPoint):XPoint {
 			var __x:Number;
 			var __y:Number;
-			var __newPos:Point;
+			var __newPos:XPoint;
 			
 			if (__obj.m_parent != null) {
 				__x = __obj.m_parent.getPos ().x - __pos.x;
 				__y = __obj.m_parent.getPos ().y - __pos.y;
 			
-				__newPos = localToGlobalX (__obj.m_parent, new Point (__x, __y));
+				__newPos = localToGlobalX (__obj.m_parent, new XPoint (__x, __y));
 			}
 			else
 			{
@@ -613,24 +614,24 @@ package X.World.Logic {
 		}	
 	
 //------------------------------------------------------------------------------------------
-		public function setPos (__pos:Point):void {
+		public function setPos (__pos:XPoint):void {
 			m_pos = __pos;
 		}
 		
 		public function set oX (__value:Number):void {
-			var __pos:Point = getPos ();
+			var __pos:XPoint = getPos ();
 			__pos.x = __value;
 			setPos (__pos);
 		}
 
 		public function set oY (__value:Number):void {
-			var __pos:Point = getPos ();
+			var __pos:XPoint = getPos ();
 			__pos.y = __value;
 			setPos (__pos);
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function getPos ():Point {
+		public function getPos ():XPoint {
 			return m_pos;
 		}
 		

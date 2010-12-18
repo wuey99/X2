@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------
 package X.World.Logic {
 
+	import X.Geom.*;
 	import X.Task.*;
 	import X.World.*;
 	import X.World.Sprite.*;
@@ -13,8 +14,8 @@ package X.World.Logic {
 	
 //------------------------------------------------------------------------------------------
 	public class XLogicObjectCX extends XLogicObject {
-		private var m_vel:Point;
-		private var m_oldPos:Point;
+		private var m_vel:XPoint;
+		private var m_oldPos:XPoint;
 		
 		protected var m_cx:Rectangle;
 		protected var m_namedCX:Dictionary;
@@ -52,8 +53,8 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public override function setupX ():void {
-			setVel (new Point (0, 0));
-			setOld (new Point (0, 0));
+			setVel (new XPoint (0, 0));
+			setOld (new XPoint (0, 0));
 			
 			m_cx = new Rectangle (0, 0, 0, 0);
 			m_namedCX = new Dictionary ();
@@ -95,24 +96,24 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setVel (__vel:Point):void {
+		public function setVel (__vel:XPoint):void {
 			m_vel = __vel;
 		}
 		
 		public function set oDX (__value:Number):void {
-			var __vel:Point = getVel ();
+			var __vel:XPoint = getVel ();
 			__vel.x = __value;
 			setVel (__vel);
 		}
 
 		public function set oDY (__value:Number):void {
-			var __vel:Point = getVel ();
+			var __vel:XPoint = getVel ();
 			__vel.y = __value;
 			setVel (__vel);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getVel ():Point {
+		public function getVel ():XPoint {
 			return m_vel;
 		}
 		
@@ -125,24 +126,24 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setOld (__pos:Point):void {
+		public function setOld (__pos:XPoint):void {
 			m_oldPos = __pos;
 		}
 		
 		public function set oldX (__value:Number):void {
-			var __pos:Point = getOld ();
+			var __pos:XPoint = getOld ();
 			__pos.x = __value;
 			setOld (__pos);
 		}
 
 		public function set oldY (__value:Number):void {
-			var __pos:Point = getOld ();
+			var __pos:XPoint = getOld ();
 			__pos.y = __value;
 			setOld (__pos);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getOld ():Point {
+		public function getOld ():XPoint {
 			return m_oldPos;
 		}
 		
