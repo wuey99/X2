@@ -20,10 +20,14 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function init (__xxx:XWorld):void {		
+		public function setup (__xxx:XWorld):void {		
 			xxx = __xxx;
 		}
 				
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function addSprite (__sprite:DisplayObject, __depth:Number, __visible:Boolean = false):XDepthSprite {
 			var __depthSprite:XDepthSprite =  new XDepthSprite ();

@@ -39,7 +39,7 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function init (
+		public function setup (
 			__parent:Sprite,
 			__rootPath:String,
 			__urlName:String,
@@ -69,6 +69,10 @@ package X.Resource {
 			loadProjectFromXML (__rootPath, __xml, __callback);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function kill ():void {
 			reset ();
@@ -188,7 +192,7 @@ package X.Resource {
 				}
 	
 				if (__manifest == null) {
-					__subResourceManager.init (
+					__subResourceManager.setup (
 						this,
 						m_parent,
 						getRootPath (),

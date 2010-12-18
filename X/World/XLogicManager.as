@@ -142,7 +142,7 @@ package X.World {
 									
 			trace (": XLogicManager:init: ", __logicObject, args.length, args);
 							
-			__logicObject.init (xxx, args);
+			__logicObject.setup (xxx, args);
 
 			__logicObject.setItem (__item);
 			__logicObject.setPos (new Point (__x, __y));			
@@ -152,7 +152,7 @@ package X.World {
 			__logicObject.setRotation (__rotation);
 			__logicObject.setParent (__parent);
 			
-			__logicObject.initX ();
+			__logicObject.setupX ();
 						
 //			xxx.addChild (__logicObject);
 			
@@ -183,7 +183,7 @@ package X.World {
 									
 			trace (": XLogicManager:init: ", __logicObject, args.length, args);
 							
-			__logicObject.init (xxx, args);
+			__logicObject.setup (xxx, args);
 
 			__logicObject.setItem (__item);
 			__logicObject.setPos (new Point (__x, __y));			
@@ -193,7 +193,7 @@ package X.World {
 			__logicObject.setRotation (__rotation);
 			__logicObject.setParent (__parent);
 			
-			__logicObject.initX ();
+			__logicObject.setupX ();
 						
 //			xxx.addChild (__logicObject);
 			

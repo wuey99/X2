@@ -26,13 +26,17 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function init (__xxx:XWorld, args:Array):void {			
-			super.init (__xxx, args);
+		public override function setup (__xxx:XWorld, args:Array):void {			
+			super.setup (__xxx, args);
 					
 			m_bodyDef = new b2BodyDef();
 			m_bodyDef.userData = this;
 		}
 	
+//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public override function setPos (__pos:Point):void {
 			var __pos2:b2Vec2 = new b2Vec2 (__pos.x/30, __pos.y/30);
@@ -92,7 +96,7 @@ package X.World.Logic {
 							
 						var __rectCollision:XShapeRect = new XShapeRect ();
 							
-						__rectCollision.init (
+						__rectCollision.setup  (
 							x$.x, x$.y, x$.width, x$.height, x$.rotation
 							);
 							
@@ -104,7 +108,7 @@ package X.World.Logic {
 		
 						var __circleCollision:XShapeCircle = new XShapeCircle ();
 							
-						__circleCollision.init (
+						__circleCollision.setup (
 							x$.x, x$.y, x$.width
 							);
 							

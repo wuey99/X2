@@ -29,12 +29,16 @@ package X.World.Tiles {
 		}
 
 //------------------------------------------------------------------------------------------			
-		public override function init (__xxx:XWorld, args:Array):void {
-			super.init (__xxx, args);
+		public override function setup (__xxx:XWorld, args:Array):void {
+			super.setup (__xxx, args);
 			
 			createSprites ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setModel (__model:XSubmapModel):void {
 			m_submapModel = __model;

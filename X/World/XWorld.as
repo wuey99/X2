@@ -9,6 +9,7 @@ package X.World {
 	
 	import X.*;
 	import X.Datasource.XDatasource;
+	import X.Debug.*;
 	import X.Document.*;
 	import X.Keyboard.*;
 	import X.MVC.*;
@@ -22,7 +23,7 @@ package X.World {
 	import X.World.Tiles.*;
 	import X.World.UI.XButton;
 	import X.XMap.*;
-	import X.Debug.*;
+	import X.Keyboard.*;
 	
 	import flash.display.*;
 	import flash.events.Event;
@@ -72,6 +73,7 @@ package X.World {
 		public var m_XSoundTaskManager:XSoundTaskManager;
 		public var m_XSoundTask:XSoundTask;
 		public var m_XDebugConsole:XDebugConsole;
+		public var m_XKeyboardLogicObject:XKeyboardLogicObject;
 
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){
@@ -116,14 +118,14 @@ package X.World {
 //			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
 			for (var i:Number = 0; i<MAX_LAYERS; i++) {
 				m_XWorldLayers[i] = new XSpriteLayer ();
-				m_XWorldLayers[i].init (this);
+				m_XWorldLayers[i].setup (this);
 				addChild (m_XWorldLayers[i]);
 				m_XWorldLayers[i].mouseEnabled = true;
 				m_XWorldLayers[i].mouseChildren = true;
 			}
 
 			m_XHudLayer = new XSpriteLayer ();
-			m_XHudLayer.init (this);
+			m_XHudLayer.setup (this);
 			addChild (m_XHudLayer);
 			m_XHudLayer.mouseEnabled = true;
 			m_XHudLayer.mouseChildren = true;

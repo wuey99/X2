@@ -26,8 +26,8 @@ package {
 		}
 
 //------------------------------------------------------------------------------------------			
-		public override function init (__xxx:XWorld, ...args):void {
-			super.init (__xxx, args);
+		public override function setup (__xxx:XWorld, ...args):void {
+			super.setup (__xxx, args);
 			
 			m_spriteClassName = args[0];
 			
@@ -36,6 +36,10 @@ package {
 			createCollision ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 // create sprites
 //------------------------------------------------------------------------------------------

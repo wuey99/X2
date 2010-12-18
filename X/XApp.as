@@ -39,7 +39,7 @@ package X {
 			m_XSoundManager = new XSoundManager (this);
 			
 			m_XDebug = new XDebug ();
-			m_XDebug.init (this);
+			m_XDebug.setup (this);
 			
 			m_timer = new Timer (16, 0);
 			m_timer.start ();
@@ -48,9 +48,13 @@ package X {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function init ():void {
+		public function setup ():void {
 		}
 
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function updateTimer (e:Event):void {
 			if (m_inuse_TIMER_FRAME) {

@@ -36,8 +36,8 @@ package X.World.UI {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function init (__xxx:XWorld, args:Array):void {
-			super.init (__xxx, args);
+		public override function setup (__xxx:XWorld, args:Array):void {
+			super.setup (__xxx, args);
 			
 			m_buttonClassName = args[0];
 
@@ -69,6 +69,10 @@ package X.World.UI {
 			createHighlightTask ();	
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function createHighlightTask ():void {
 			addTask ([

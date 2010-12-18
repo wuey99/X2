@@ -48,7 +48,7 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function init (
+		public function setup (
 			__projectManager:XProjectManager,
 			__parent:Sprite,
 			__rootPath:String,
@@ -81,6 +81,10 @@ package X.Resource {
 			m_loaderContextFactory = __loaderContextFactory;
 
 			loadManifestFromXML (__rootPath, __xml, __callback);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
 		}
 		
 //------------------------------------------------------------------------------------------	
@@ -490,12 +494,12 @@ package X.Resource {
 				
 				if (m_projectManager.findEmbeddedResource (__resourcePath) == null) {
 					__XResource = new XSWFResource ();
-					__XResource.init (m_rootDirectory + __resourcePath, m_parent, this);
+					__XResource.setup (m_rootDirectory + __resourcePath, m_parent, this);
 				}
 				else
 				{
 					__XResource = new XSWFEmbeddedResource ();
-					__XResource.init (__resourcePath, m_parent, this);					
+					__XResource.setup (__resourcePath, m_parent, this);					
 				}
 						
 				__XResource.loadResource ();
