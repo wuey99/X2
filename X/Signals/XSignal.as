@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------------------
 package X.Signals {
 
-	import flash.utils.*;
+	import X.Collections.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XSignal extends Object {
-		private var m_listeners:Dictionary;
+		private var m_listeners:XDict;
 		private var m_parent:*;
 		
 //------------------------------------------------------------------------------------------
 		public function XSignal () {
 			super();
 			
-			m_listeners = new Dictionary ();
+			m_listeners = new XDict ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -27,32 +27,36 @@ package X.Signals {
 		
 //------------------------------------------------------------------------------------------
 		public function addListener (__listener:Function):void {
-			m_listeners[__listener] = 0;
+			m_listeners.put (__listener, 0);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function fireSignal (...args):void {
-			var __listener:*;
-			
+		public function fireSignal (...args):void {	
 			switch (args.length) {
 				case 0:
-					for (__listener in m_listeners) {
-						__listener ();
-					}
+					m_listeners.forEach (
+						function (__listener:*):void {
+							__listener ();
+						}
+					);
 					
 					break;
 					
 				case 1:
-					for (__listener in m_listeners) {
-						__listener (args[0]);
-					}
+					m_listeners.forEach (
+						function (__listener:*):void {
+							__listener (args[0]);
+						}
+					);
 					
 					break;
 					
 				default:
-					for (__listener in m_listeners) {
-						__listener.apply (null, args);
-					}
+					m_listeners.forEach (
+						function (__listener:*):void {
+							__listener.apply (null, args);
+						}
+					);
 					
 					break;
 			}
@@ -60,18 +64,18 @@ package X.Signals {
 		
 //------------------------------------------------------------------------------------------
 		public function removeListener (__listener:Function):void {
-			if (__listener in m_listeners) {
-				delete m_listeners[__listener];
+			if (m_listeners.exists (__listener)) {
+				m_listeners.remove (__listener);
 			}
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllListeners ():void {
-			var __listener:*;
-			
-			for (__listener in m_listeners) {
-				delete m_listeners[__listener];
-			}
+			m_listeners.forEach (
+				function (__listener:*):void {
+					m_listeners.remove (__listener);
+				}
+			);
 		}
 				
 //------------------------------------------------------------------------------------------

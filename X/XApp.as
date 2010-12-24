@@ -151,18 +151,22 @@ package X {
 			
 			i = 0;
 			
-			for (x in xxx.getXSignalManager ().getXSignals ()) {
-				m_XApp.print (": signal: " + i + ": " + x + ", parent: " + x.getParent ());
-			}
+			getXSignalManager ().getXSignals ().forEach (
+				function (x:*):void {
+					m_XApp.print (": signal: " + i + ": " + x + ", parent: " + x.getParent ());
+				}
+			);
 			
 			m_XApp.print ("------------------------------");
 			m_XApp.print ("active XSignals XApp");
 			
 			i = 0;
 			
-			for (x in m_XApp.getXSignalManager ().getXSignals ()) {
-				m_XApp.print (": signal: " + i + ": " + x + ", parent: " + x.getParent ());
-			}
+			m_XApp.getXSignalManager ().getXSignals ().forEach (
+				function (x:*):void {
+					m_XApp.print (": signal: " + i + ": " + x + ", parent: " + x.getParent ());
+				}
+			);
 									
 			m_XApp.print ("------------------------------");
 			m_XApp.print ("active XLogicObjects");
@@ -180,18 +184,22 @@ package X {
 				
 			i = 0;
 				
-			for (x in xxx.getXTaskManager ().getTasks ()) {
-				m_XApp.print (": task: " + i + ": " + x + ", parent: " + x.getParent ());
+			xxx.getXTaskManager ().getTasks ().forEach (
+				function (x:*):void {
+					m_XApp.print (": task: " + i + ": " + x + ", parent: " + x.getParent ());
 					
-				i++;
-			}
+					i++;
+				}	
+			);
 
 			m_XApp.print ("------------------------------");
 			m_XApp.print ("active tasks XApp: ");
 												
-			for (x in m_XApp.getXTaskManager ().getTasks ()) {
-				m_XApp.print (": task: " + i + ": " + x + ", parent: " + x.getParent ());
-			}
+			m_XApp.getXTaskManager ().getTasks ().forEach (
+				function (x:*):void {
+					m_XApp.print (": task: " + i + ": " + x + ", parent: " + x.getParent ());
+				}
+			);
 		}
 			
 //------------------------------------------------------------------------------------------
