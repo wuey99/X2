@@ -16,18 +16,23 @@ package X.Collections {
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
+
+//------------------------------------------------------------------------------------------
+		public function isExists (__key:*):Boolean {
+			return False;
+		}
 		
 //------------------------------------------------------------------------------------------
-		public function get (__key:Object):Object {
+		public function get (__key:*):* {
 			return null;
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function put (__key:Object, __value:Object):void {
+		public function put (__key:*, __value:*):void {
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function remove (__key:Object):void {
+		public function remove (__key:*):void {
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -35,7 +40,7 @@ package X.Collections {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function iterate (__callback:Function):void {
+		public function forEach (__callback:Function):void {
 		}
 		
 //------------------------------------------------------------------------------------------

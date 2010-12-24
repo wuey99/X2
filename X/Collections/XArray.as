@@ -3,10 +3,13 @@ package X.Collections {
 
 //------------------------------------------------------------------------------------------
 	public class XArray extends Object {
+		private var m_array:Array;
 		
 //------------------------------------------------------------------------------------------
 		public function XArray () {
 			super();
+			
+			m_array = new Array ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -18,33 +21,37 @@ package X.Collections {
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function push (__obj:*):void {
+		public function push (__value:*):void {
+			m_array.push (__value);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function pop ():* {
+			return m_array.pop ();
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function get (__key:Object):* {
-			return null;
+		public function get (__key:int):* {
+			return m_array[__key];
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function put (__key:*, __value:*):void {
+		public function put (__key:int, __value:*):void {
+			m_array[__key] = __value;
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function remove (__key:*):void {
+		public function remove (__key:int):void {
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function length ():Number {
+			return m_array.length;
 		}
 			
 //------------------------------------------------------------------------------------------
-		public function indexOf (__ob:*):int {
-			return 0;
+		public function indexOf (__value:*):int {
+			return m_array.indexOf (__value);
 		}
 		
 //------------------------------------------------------------------------------------------
