@@ -173,11 +173,13 @@ package X {
 
 			i = 0;
 				
-			for (x in xxx.getXLogicManager ().getXLogicObjects()) {
-				m_XApp.print (": XLogicObject: " + i + ": " + x);
-					
-				i++;
-			}
+			xxx.getXLogicManager ().getXLogicObjects ().forEach (
+				function (x:*):void {
+					m_XApp.print (": XLogicObject: " + i + ": " + x);
+						
+					i++;
+				}
+			);
 							
 			m_XApp.print ("------------------------------");
 			m_XApp.print ("active tasks xxx: ");
