@@ -2,15 +2,14 @@
 package X.Task {
 
 	import X.*;
+	import X.Collections.*;
 	import X.World.Logic.*;
-	
-	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XTaskSubManager extends Object {
 		public var m_manager:XTaskManager;
 		
-		private var m_XTasks:Dictionary;
+		private var m_XTasks:XDict;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskSubManager (__manager:XTaskManager) {
@@ -18,7 +17,7 @@ package X.Task {
 			
 			m_manager = __manager;
 			
-			m_XTasks = new Dictionary ();
+			m_XTasks = new XDict ();
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -34,8 +33,8 @@ package X.Task {
 				
 			var __task:XTask = m_manager.addTask (__taskList, __findLabelsFlag);
 			
-			if (!(__task in m_XTasks)) {
-				m_XTasks[__task] = 0;
+			if (!(m_XTasks.exists (__task))) {
+				m_XTasks.put (__task, 0);
 			}
 			
 			return __task;
@@ -45,8 +44,8 @@ package X.Task {
 		public function addXTask (__task:XTask):XTask {
 			var __task:XTask = m_manager.addXTask (__task);
 			
-			if (!(__task in m_XTasks)) {
-				m_XTasks[__task] = 0;
+			if (!m_XTasks.exists (__task)) {
+				m_XTasks.put(__task, 0);
 			}
 			
 			return __task;			
@@ -81,25 +80,25 @@ package X.Task {
 		
 //------------------------------------------------------------------------------------------
 		public function isTask (__task:XTask):Boolean {
-			return __task in m_XTasks;
+			return m_XTasks.exists (__task);
 		}		
 
 //------------------------------------------------------------------------------------------
 		public function removeTask (__task:XTask):void {	
-			if (__task in m_XTasks) {
-				delete m_XTasks[__task];
+			if (m_XTasks.exists (__task)) {
+				m_XTasks.remove (__task);
 					
 				m_manager.removeTask (__task);
 			}
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeAllTasks ():void {
-			var x:*;
-			
-			for (x in m_XTasks) {
-				removeTask (x as XTask);
-			}
+		public function removeAllTasks ():void {	
+			m_XTasks.forEach (
+				function (x:*):void {
+					removeTask (x as XTask);
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------

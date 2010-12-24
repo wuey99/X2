@@ -1,42 +1,42 @@
 //------------------------------------------------------------------------------------------
 package X.Signals {
 	
-	import flash.utils.*;
+	import X.Collections.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSignalManager extends Object {
-		private var m_XSignals:Dictionary;
+		private var m_XSignals:XDict;
 		
 //------------------------------------------------------------------------------------------
 		public function XSignalManager () {
-			m_XSignals = new Dictionary ();
+			m_XSignals = new XDict ();
 		}
 
 //------------------------------------------------------------------------------------------
 		public function isXSignal (__signal:XSignal):Boolean {
-			return __signal in m_XSignals;
+			return m_XSignals.exists (__signal);
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function getXSignals ():Dictionary {
+		public function getXSignals ():XDict {
 			return m_XSignals;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllXSignals ():void {
-			var __signal:*;
-			
-			for (__signal in m_XSignals) {
-				removeXSignal (__signal as XSignal);
-			}
+			m_XSignals.forEach (
+				function (__signal:*):void {
+					removeXSignal (__signal as XSignal);
+				}
+			);
 		}		
 		
 //------------------------------------------------------------------------------------------
 		public function removeXSignal (__signal:XSignal):void {
-			if (__signal in m_XSignals) {
+			if (m_XSignals.exists (__signal)) {
 				__signal.removeAllListeners ();
 				
-				delete m_XSignals[__signal];
+				m_XSignals.remove (__signal);
 			}
 		}
 
@@ -46,7 +46,7 @@ package X.Signals {
 			
 			__signal.setParent (this);
 			
-			m_XSignals[__signal] = 0;
+			m_XSignals.put (__signal, 0);
 			
 			return __signal;	
 		}

@@ -18,7 +18,7 @@ package X.Collections {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function isExists (__key:*):Boolean {
+		public function exists (__key:*):Boolean {
 			return False;
 		}
 		
@@ -45,6 +45,7 @@ package X.Collections {
 		
 //------------------------------------------------------------------------------------------
 		public function __hash (__key:Object):String {
+			return "";
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -22,7 +22,7 @@ package X.Collections {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function isExists (__key:*):Boolean {
+		public function exists (__key:*):Boolean {
 			return __key in m_dict;
 		}
 				
@@ -57,6 +57,7 @@ package X.Collections {
 		
 //------------------------------------------------------------------------------------------
 		public function __hash (__key:Object):String {
+			return "";
 		}
 		
 //------------------------------------------------------------------------------------------
