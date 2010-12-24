@@ -1,35 +1,29 @@
 ﻿//------------------------------------------------------------------------------------------
 package X.World {
 
-// Box2D classes
-//	import Box2D.Collision.*;
-//	import Box2D.Collision.Shapes.*;
-//	import Box2D.Common.Math.*;
-//	import Box2D.Dynamics.*;
-	
 // X classes
 	import X.*;
+	import X.Collections.*;
 	import X.Geom.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	import X.XMap.*;
 	
 	import flash.geom.*;
-	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XLogicManager extends Object {
 		private var xxx:XWorld;
-		private var m_XLogicObjects:Dictionary;
-		private var m_XLogicObjectsTopLevel:Dictionary;
+		private var m_XLogicObjects:XDict;
+		private var m_XLogicObjectsTopLevel:XDict;
 		private var m_killList:Array;
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicManager (__xxx:XWorld) {
 			xxx = __xxx;
 			
-			m_XLogicObjects = new Dictionary ();
-			m_XLogicObjectsTopLevel = new Dictionary ();
+			m_XLogicObjects = new XDict ();
+			m_XLogicObjectsTopLevel = new XDict ();
 			
 			m_killList = new Array ();
 		}
@@ -157,10 +151,10 @@ package X.World {
 						
 //			xxx.addChild (__logicObject);
 			
-			m_XLogicObjects[__logicObject] = 0;
+			m_XLogicObjects.put (__logicObject, 0);
 			
 			if (__parent == null) {
-				m_XLogicObjectsTopLevel[__logicObject] = 0;
+				m_XLogicObjectsTopLevel.put (__logicObject, 0);
 			}
 			
 			return __logicObject;
@@ -198,10 +192,10 @@ package X.World {
 						
 //			xxx.addChild (__logicObject);
 			
-			m_XLogicObjects[__logicObject] = 0;
+			m_XLogicObjects.put (__logicObject, 0);
 			
 			if (__parent == null) {
-				m_XLogicObjectsTopLevel[__logicObject] = 0;
+				m_XLogicObjectsTopLevel.put (__logicObject, 0);
 			}
 			
 			return __logicObject;
@@ -225,10 +219,10 @@ package X.World {
 				
 				x.quit ();
 				
-				delete m_XLogicObjects[x];
+				m_XLogicObjects.remove (x);
 				
-				if (x in m_XLogicObjectsTopLevel) {
-					delete m_XLogicObjectsTopLevel[x];
+				if (m_XLogicObjectsTopLevel.exists (x)) {
+					m_XLogicObjectsTopLevel.remove (x);
 				}
 				
 				trace (": kill: ", x, x.m_GUID, x.xxx, xxx);
@@ -244,61 +238,63 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getXLogicObjects ():Dictionary {
+		public function getXLogicObjects ():XDict {
 			return m_XLogicObjects;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function updateLogic ():void {
-			var x:*;
-			
-			for (x in m_XLogicObjects) {
-				x.updateLogic ();
-			}
+			m_XLogicObjects.forEach (
+				function (x:*):void {
+					x.updateLogic ();
+				}
+			);		
 		}
 
 //------------------------------------------------------------------------------------------
 		public function updatePhysics ():void {
-			var x:*;
-			
-			for (x in m_XLogicObjects) {
-				x.updatePhysics ();
-			}
+			m_XLogicObjects.forEach (
+				function (x:*):void {
+					x.updatePhysics ();
+				}
+			);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function cullObjects ():void {
-			var x:*;
-			
-			for (x in m_XLogicObjects) {
-				x.cullObject ();
-			}
+			m_XLogicObjects.forEach (
+				function (x:*):void {
+					x.cullObject ();
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function setValues ():void {
-			var x:*;
-			
-			for (x in m_XLogicObjects) {
-				x.setValues ();
-			}
+			m_XLogicObjects.forEach (
+				function (x:*):void {
+					x.setValues ();
+				}
+			);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function updateDisplay ():void {			
-			var x:*;
+		public function updateDisplay ():void {					
+			m_XLogicObjectsTopLevel.forEach (
+				function (x:*):void {
+					var logicObject:XLogicObject = x as XLogicObject;
 					
-			for (x in m_XLogicObjectsTopLevel) {
-				x.x2 = x.y2 = 0;
-				x.setMasterAlpha (x.getAlpha ());
-				x.setMasterDepth (x.getDepth ());
-				x.setMasterVisible (x.getVisible ());
-				x.setMasterScaleX (x.getScaleX ());
-				x.setMasterScaleY (x.getScaleY ());
-				x.setMasterRotation (x.getRotation ());
-						
-				x.updateDisplay ();
-			}
+					logicObject.x2 = logicObject.y2 = 0;
+					logicObject.setMasterAlpha (logicObject.getAlpha ());
+					logicObject.setMasterDepth (logicObject.getDepth ());
+					logicObject.setMasterVisible (logicObject.getVisible ());
+					logicObject.setMasterScaleX (logicObject.getScaleX ());
+					logicObject.setMasterScaleY (logicObject.getScaleY ());
+					logicObject.setMasterRotation (logicObject.getRotation ());
+							
+					logicObject.updateDisplay ();
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------

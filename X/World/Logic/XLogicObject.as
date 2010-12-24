@@ -7,6 +7,7 @@ package X.World.Logic {
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
 	
+	import X.Collections.*;
 	import X.Geom.*;
 	import X.MVC.*;
 	import X.Signals.XSignal;
@@ -60,15 +61,15 @@ package X.World.Logic {
 		public var m_rotation:Number;
 		public var m_masterRotation:Number;
 		public var m_delayed:Number;
-		public var m_XLogicObjects:Dictionary;
-		public var m_worldSprites:Dictionary;
-		public var m_hudSprites:Dictionary;
-		public var m_childSprites:Dictionary;
-		public var m_detachedSprites:Dictionary;
+		public var m_XLogicObjects:XDict;
+		public var m_worldSprites:XDict;
+		public var m_hudSprites:XDict;
+		public var m_childSprites:XDict;
+		public var m_detachedSprites:XDict;
 		public var m_GUID:Number;
 		public var m_alpha:Number;
 		public var m_masterAlpha:Number;
-		public var m_XSignals:Dictionary;
+		public var m_XSignals:XDict;
 		public var self:XLogicObject;
 		public var m_killSignal:XSignal;
 		public var m_XTaskSubManager:XTaskSubManager;
@@ -123,12 +124,12 @@ package X.World.Logic {
 			m_masterDepth = 0;
 			m_masterAlpha = 1.0;
 				
-			m_XLogicObjects = new Dictionary ();
-			m_worldSprites = new Dictionary ();
-			m_hudSprites = new Dictionary ();
-			m_childSprites = new Dictionary ();
-			m_detachedSprites = new Dictionary ();
-			m_XSignals = new Dictionary ();
+			m_XLogicObjects = new XDict ();
+			m_worldSprites = new XDict ();
+			m_hudSprites = new XDict ();
+			m_childSprites = new XDict ();
+			m_detachedSprites = new XDict ();
+			m_XSignals = new XDict ();
 			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
 
 			m_killSignal = createXSignal ();
@@ -159,20 +160,24 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function quit ():void {
-			var x:*;
-			
-			for (x in m_worldSprites) {
-				removeSprite (x);
-			}
+		public function quit ():void {		
+			m_worldSprites.forEach (
+				function (x:*):void {
+					removeSprite (x);
+				}
+			);
 
-			for (x in m_hudSprites) {
-				removeSpriteFromHud (x);
-			}
+			m_hudSprites.forEach (
+				function (x:*):void {
+					removeSpriteFromHud (x);
+				}
+			);
 			
-			for (x in m_XLogicObjects) {
-				XLogicObject (x).kill ();
-			}
+			m_XLogicObjects.forEach (
+				function (x:*):void {
+					XLogicObject (x).kill ();
+				}
+			);
 			
 			removeAllXSignals ();
 			removeAllTasks ();
@@ -392,21 +397,26 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // get a map of all our child sprites that live in the World
 //------------------------------------------------------------------------------------------	
-		public function getSprites ():Dictionary {
+		public function getSprites ():XDict {
+			return m_worldSprites;
+		}
+		
+//------------------------------------------------------------------------------------------	
+		public function sprites ():XDict {
 			return m_worldSprites;
 		}
 		
 //------------------------------------------------------------------------------------------
 // get a map of all our child sprites that live in the HUD
 //------------------------------------------------------------------------------------------	
-		public function getHudSprites ():Dictionary {
+		public function getHudSprites ():XDict {
 			return m_hudSprites;
 		}
 		
 //------------------------------------------------------------------------------------------
 // get a map of all the our child XLogicObjects
 //------------------------------------------------------------------------------------------	
-		public function getXLogicObjects ():Dictionary {
+		public function getXLogicObjects ():XDict {
 			return m_XLogicObjects;
 		}
 
@@ -424,7 +434,7 @@ package X.World.Logic {
 			__sprite.x = -__dx;
 			__sprite.y = -__dy;
 			
-			m_detachedSprites[__sprite] = __sprite2;
+			m_detachedSprites.put (__sprite, __sprite2);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -441,7 +451,7 @@ package X.World.Logic {
 			__sprite.x = -__dx;
 			__sprite.y = -__dy;
 			
-			m_childSprites[__sprite] = __sprite2;
+			m_childSprites.put (__sprite, __sprite2);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -466,7 +476,7 @@ package X.World.Logic {
 				
 			__depthSprite.setRegistration (__dx, __dy);
 			
-			m_worldSprites[__depthSprite] = 0;
+			m_worldSprites.put (__depthSprite, 0);
 			
 			return __depthSprite;
 		}
@@ -475,8 +485,8 @@ package X.World.Logic {
 // remove a sprite from the World
 //------------------------------------------------------------------------------------------	
 		public function removeSprite (__sprite:Sprite):void {
-			if (__sprite in m_worldSprites) {
-				delete m_worldSprites[__sprite];
+			if (m_worldSprites.exists (__sprite)) {
+				m_worldSprites.remove (__sprite);
 				
 				xxx.getXWorldLayer (m_layer).removeSprite (__sprite);
 			}
@@ -484,11 +494,11 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function removeAllWorldSprites ():void {
-			var x:*;
-			
-			for (x in m_worldSprites) {
-				removeSprite (x);
-			}
+			m_worldSprites.forEach (
+				function (x:*):void {
+					removeSprite (x);
+				}
+			);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -513,7 +523,7 @@ package X.World.Logic {
 							
 			__depthSprite.setRegistration (__dx, __dy);
 			
-			m_hudSprites[__depthSprite] = 0;
+			m_hudSprites.put (__depthSprite, 0);
 			
 			return __depthSprite;
 		}
@@ -522,8 +532,8 @@ package X.World.Logic {
 // remove a sprite from the HUD
 //------------------------------------------------------------------------------------------	
 		public function removeSpriteFromHud (__sprite:Sprite):void {
-			if (__sprite in m_hudSprites) {
-				delete m_hudSprites[__sprite];
+			if (m_hudSprites.exists (__sprite)) {
+				m_hudSprites.remove (__sprite);
 				
 				xxx.getXHudLayer ().removeSprite (__sprite);
 			}
@@ -531,18 +541,18 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function removeAllHudSprites ():void {
-			var x:*;
-
-			for (x in m_hudSprites) {
-				removeSpriteFromHud (x);
-			}
+			m_hudSprites.forEach (
+				function (x:*):void {
+					removeSpriteFromHud (x);
+				}
+			);
 		}
 		
 //------------------------------------------------------------------------------------------
 // add an XLogicObject to the World
 //------------------------------------------------------------------------------------------	
 		public function addXLogicObject (__XLogicObject:XLogicObject):XLogicObject {
-			m_XLogicObjects[__XLogicObject] = 0;
+			m_XLogicObjects.put (__XLogicObject, 0);
 			
 			return __XLogicObject;
 		}
@@ -551,8 +561,8 @@ package X.World.Logic {
 // remove an XLogicObject from the World
 //------------------------------------------------------------------------------------------	
 		public function removeXLogicObject (__XLogicObject:XLogicObject):void {
-			if (__XLogicObject in m_XLogicObjects) {
-				delete m_XLogicObjects[__XLogicObject];
+			if (m_XLogicObjects.exists (__XLogicObject)) {
+				m_XLogicObjects.remove (__XLogicObject);
 				
 				__XLogicObject.kill ();
 			}
@@ -562,18 +572,18 @@ package X.World.Logic {
 // remove an XLogicObject from the World but don't kill it
 //------------------------------------------------------------------------------------------	
 		public function removeXLogicObject0 (__XLogicObject:XLogicObject):void {
-			if (__XLogicObject in m_XLogicObjects) {
-				delete m_XLogicObjects[__XLogicObject];
+			if (m_XLogicObjects.exists (__XLogicObject)) {
+				m_XLogicObjects.remove (__XLogicObject);
 			}
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllXLogicObjects ():void {
-			var x:*;
-			
-			for (x in m_XLogicObjects) {
-				XLogicObject (x).kill ();
-			}
+			m_XLogicObjects.forEach (
+				function (x:*):void {
+					XLogicObject (x).kill ();
+				}
+			);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -842,12 +852,7 @@ package X.World.Logic {
 		public function getRelativeDepthFlag ():Boolean {
 			return m_relativeDepthFlag;
 		}
-		
-//------------------------------------------------------------------------------------------	
-		public function sprites ():Dictionary {
-			return m_worldSprites;
-		}
-		
+
 //------------------------------------------------------------------------------------------
 // the function updates all the children that live inside the XLogicObject container
 //
@@ -877,94 +882,102 @@ package X.World.Logic {
 			var logicObject:XLogicObject;
 			
 // update children XLogicObjects
-			for (i in m_XLogicObjects) {
-				logicObject = i as XLogicObject;
+			m_XLogicObjects.forEach (
+				function (i:*):void {
+					logicObject = i as XLogicObject;
+							
+					if (logicObject != null) {	
+						logicObject.x2 = __x
+						logicObject.y2 = __y
+						logicObject.rotation2 = __rotation;
+						logicObject.visible = __visible;
+						logicObject.scaleX2 = __scaleX;
+						logicObject.scaleY2 = __scaleY;
+						logicObject.alpha = __alpha;
 						
-				if (logicObject != null) {	
-					logicObject.x2 = __x
-					logicObject.y2 = __y
-					logicObject.rotation2 = __rotation;
-					logicObject.visible = __visible;
-					logicObject.scaleX2 = __scaleX;
-					logicObject.scaleY2 = __scaleY;
-					logicObject.alpha = __alpha;
-					
-					// propagate rotation, scale, visibility, alpha
-					logicObject.setMasterRotation (logicObject.getRotation () + __rotation);
-					logicObject.setMasterScaleX (logicObject.getScaleX () * __scaleX);
-					logicObject.setMasterScaleY (logicObject.getScaleY () * __scaleY);
-					logicObject.setMasterVisible (logicObject.getVisible () && __visible);
-					if (logicObject.getRelativeDepthFlag ()) {
-						logicObject.setMasterDepth (logicObject.getDepth () + __depth);
+						// propagate rotation, scale, visibility, alpha
+						logicObject.setMasterRotation (logicObject.getRotation () + __rotation);
+						logicObject.setMasterScaleX (logicObject.getScaleX () * __scaleX);
+						logicObject.setMasterScaleY (logicObject.getScaleY () * __scaleY);
+						logicObject.setMasterVisible (logicObject.getVisible () && __visible);
+						if (logicObject.getRelativeDepthFlag ()) {
+							logicObject.setMasterDepth (logicObject.getDepth () + __depth);
+						}
+						else
+						{
+							logicObject.setMasterDepth (logicObject.getDepth ())
+						}
+						logicObject.setMasterAlpha (logicObject.getAlpha () * __alpha);
+						
+						logicObject.updateDisplay ();
 					}
-					else
-					{
-						logicObject.setMasterDepth (logicObject.getDepth ())
-					}
-					logicObject.setMasterAlpha (logicObject.getAlpha () * __alpha);
-					
-					logicObject.updateDisplay ();
 				}
-			}
+			);
 			
 //------------------------------------------------------------------------------------------
 			var sprite:XDepthSprite;
 
 // update child sprites that live as children of the Sprite
-			for (i in m_childSprites) {
-			}
-						
-// update child sprites that live in the World
-			for (i in m_worldSprites) {
-				sprite = i as XDepthSprite;
-				
-				if (sprite != null) {
-					sprite.x2 = __x;
-					sprite.y2 = __y;
-					sprite.rotation2 = __rotation;
-					sprite.visible = sprite.visible2 && __visible;
-					if (sprite.relativeDepthFlag) {
-						sprite.depth2 = sprite.depth + __depth;
-					}
-					else
-					{
-						sprite.depth2 = sprite.depth;
-					}
-					sprite.scaleX2 = __scaleX;
-					sprite.scaleY2 = __scaleY;
-					sprite.alpha = __alpha;
+			m_childSprites.forEach (
+				function (i:*):void {
 				}
-			}
+			);
+								
+// update child sprites that live in the World
+			m_worldSprites.forEach (
+				function (i:*):void {
+					sprite = i as XDepthSprite;
+					
+					if (sprite != null) {
+						sprite.x2 = __x;
+						sprite.y2 = __y;
+						sprite.rotation2 = __rotation;
+						sprite.visible = sprite.visible2 && __visible;
+						if (sprite.relativeDepthFlag) {
+							sprite.depth2 = sprite.depth + __depth;
+						}
+						else
+						{
+							sprite.depth2 = sprite.depth;
+						}
+						sprite.scaleX2 = __scaleX;
+						sprite.scaleY2 = __scaleY;
+						sprite.alpha = __alpha;
+					}
+				}
+			);
 			
 // update child sprites that live in the HUD
-			for (i in m_hudSprites) {
-				sprite = i as XDepthSprite;
-				
-				if (sprite != null) {
-					sprite.x2 = __x;
-					sprite.y2 = __y;
-					sprite.rotation2 = __rotation;
-					sprite.visible = sprite.visible2 && __visible;
-					if (sprite.relativeDepthFlag) {
-						sprite.depth2 = sprite.depth + __depth;
+			m_hudSprites.forEach (
+				function (i:*):void {
+					sprite = i as XDepthSprite;
+					
+					if (sprite != null) {
+						sprite.x2 = __x;
+						sprite.y2 = __y;
+						sprite.rotation2 = __rotation;
+						sprite.visible = sprite.visible2 && __visible;
+						if (sprite.relativeDepthFlag) {
+							sprite.depth2 = sprite.depth + __depth;
+						}
+						else
+						{
+							sprite.depth2 = sprite.depth;
+						}
+						sprite.scaleX2 = __scaleX;
+						sprite.scaleY2 = __scaleY;
+						sprite.alpha = __alpha;
 					}
-					else
-					{
-						sprite.depth2 = sprite.depth;
-					}
-					sprite.scaleX2 = __scaleX;
-					sprite.scaleY2 = __scaleY;
-					sprite.alpha = __alpha;
 				}
-			}
+			);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
 			var __signal:XSignal = xxx.getXSignalManager ().createXSignal ();
 		
-			if (!(__signal in m_XSignals)) {
-				m_XSignals[__signal] = 0;
+			if (!(m_XSignals.exists (__signal))) {
+				m_XSignals.put (__signal, 0);
 			}
 			
 			__signal.setParent (this);
@@ -974,8 +987,8 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function removeXSignal (__signal:XSignal):void {	
-			if (__signal in m_XSignals) {
-				delete m_XSignals[__signal];
+			if (m_XSignals.exists (__signal)) {
+				m_XSignals.remove (__signal);
 					
 				xxx.getXSignalManager ().removeXSignal (__signal);
 			}
@@ -983,11 +996,11 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function removeAllXSignals ():void {
-			var x:*;
-			
-			for (x in m_XSignals) {
-				removeXSignal (x as XSignal);
-			}
+			m_XSignals.forEach (
+				function (x:*):void {
+					removeXSignal (x as XSignal);
+				}
+			);
 		}
 				
 //------------------------------------------------------------------------------------------

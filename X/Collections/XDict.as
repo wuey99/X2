@@ -10,7 +10,7 @@ package X.Collections {
 		public function XDict () {
 			super();
 			
-			m_dict = new Dictionary;
+			m_dict = new Dictionary ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ package X.Collections {
 		public function exists (__key:*):Boolean {
 			return __key in m_dict;
 		}
-				
+
 //------------------------------------------------------------------------------------------
 		public function get (__key:*):* {
 			return m_dict[__key];
