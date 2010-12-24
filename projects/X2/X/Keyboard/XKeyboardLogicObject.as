@@ -2,6 +2,7 @@
 package X.Keyboard {
 	
 	import X.*;
+	import X.Collections.*;
 	import X.Task.*;
 	import X.World.*;
 	import X.World.Collision.*;
@@ -18,13 +19,13 @@ package X.Keyboard {
 	public class XKeyboardLogicObject extends XLogicObject {
 		private var m_focus:XTask;
 		private var m_text:XTextSprite;
-		private var m_keyCodes:Dictionary;
+		private var m_keyCodes:XDict;
 		
 //------------------------------------------------------------------------------------------
 		public function XKeyboardLogicObject () {
 			m_focus = null;
 			
-			m_keyCodes = new Dictionary ();
+			m_keyCodes = new XDict ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -111,7 +112,7 @@ package X.Keyboard {
 			
 			var __c:uint = e.keyCode;
 			
-			m_keyCodes[__c] = 1;
+			m_keyCodes.put (__c, 1);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -120,15 +121,15 @@ package X.Keyboard {
 			
 			var __c:uint = e.keyCode;
 			
-			if (__c in m_keyCodes) {
-				m_keyCodes[__c] = 0;
+			if (m_keyCodes.exists (__c)) {
+				m_keyCodes.put (__c, 0);
 			}
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getKeyCode (__c:uint):Boolean {
-			if (__c in m_keyCodes) {
-				return m_keyCodes[__c] == 1;
+			if (m_keyCodes.exists (__c)) {
+				return m_keyCodes.get (__c) == 1;
 			}
 			else
 			{
