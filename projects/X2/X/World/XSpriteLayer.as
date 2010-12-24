@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------------------
 package X.World {
 
+	import X.Collections.*;
 	import X.World.Sprite.*;
 	
 	import flash.display.*;
-	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSpriteLayer extends XSprite {
-		private var m_XDepthSpriteMap:Dictionary;
+		private var m_XDepthSpriteMap:XDict;
 		
 		public var forceSort:Boolean;
 		
 //------------------------------------------------------------------------------------------
 		public function XSpriteLayer () {
-			m_XDepthSpriteMap = new Dictionary ();
+			m_XDepthSpriteMap = new XDict ();
 			
 			forceSort = false;
 		}
@@ -37,28 +37,29 @@ package X.World {
 			
 			addChild (__depthSprite);
 				
-			m_XDepthSpriteMap[__depthSprite] = 0;
+			m_XDepthSpriteMap.put (__depthSprite, 0);
 			
 			return __depthSprite;
 		}	
 
 //------------------------------------------------------------------------------------------
 		public function removeSprite (__depthSprite:Sprite):void {
-			if (__depthSprite in m_XDepthSpriteMap) {
+			if (m_XDepthSpriteMap.exists (__depthSprite)) {
 				removeChild (__depthSprite);
 				
-				delete m_XDepthSpriteMap[__depthSprite];
+				m_XDepthSpriteMap.remove (__depthSprite);
 			}
 		}
 		
 //------------------------------------------------------------------------------------------	
 		public function depthSort ():void {
-			var sprite:*;
 			var list:Array = new Array ();
 			
-			for (sprite in m_XDepthSpriteMap) {
-				list.push (sprite);
-			}
+			m_XDepthSpriteMap.forEach (
+				function (sprite:*):void {
+					list.push (sprite);
+				}
+			);
 		
 			var i:Number;
 			var d:Number;
