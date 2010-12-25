@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------------------
 package X.XMap {
 
-// X classes	
+// X classes
+	import X.Collections.*;
 	import X.MVC.*;
 	import X.Utils.*;
 	
 	import flash.events.*;
 	import flash.geom.Rectangle;
-	import flash.utils.*;
 			
 //------------------------------------------------------------------------------------------	
 	public class XMapLayerModel extends XModelBase {
@@ -24,7 +24,7 @@ package X.XMap {
 		
 		private var m_currID:Number;
 
-		private var m_items:Dictionary;
+		private var m_items:XDict;
 
 		private var m_classNames:XClassNameToIndex;
 		
@@ -50,7 +50,7 @@ package X.XMap {
 			m_submapHeight = __submapHeight;
 
 			m_currID = 0;
-			m_items = new Dictionary ();
+			m_items = new XDict ();
 			m_layer = __layer;
 			m_XSubmaps = new Array (__submapRows);
 
@@ -132,14 +132,14 @@ package X.XMap {
 // lr
 			m_XSubmaps[__r2][__c2].addItem (__item);
 
-			m_items[__item] = __item.id;
+			m_items.put (__item, __item.id);
 			
 			return __item;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeItem (__item:XMapItemModel):void {		
-			if (!(__item in m_items)) {
+			if (!m_items.exists (__item)) {
 				return;
 			}
 			
@@ -164,7 +164,7 @@ package X.XMap {
 // lr
 			m_XSubmaps[__r2][__c2].removeItem (__item);
 				
-			delete m_items[__item];
+			m_items.remove (__item);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -209,7 +209,7 @@ package X.XMap {
 			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
 			var i:Number;
-			var src_items:Dictionary;
+			var src_items:XDict;
 			var dst_items:Array = new Array ();
 			var x:*;
 			var item:XMapItemModel;
@@ -221,24 +221,26 @@ package X.XMap {
 			for (i=0; i<submaps.length; i++) {
 				src_items = submaps[i].items ();
 							
-				for (x in src_items) {
-					item = x as XMapItemModel;
-					
-					var b:Rectangle = item.boundingRect.clone ();
-					b.offset (item.x, item.y);
-					
-					if (
-						!(__x2 < b.left || __x1 > b.right ||
-						  __y2 < b.top || __y1 > b.bottom)
-						) {
-							
-						if (!(item in dst_items)) {
-//							trace (": item: ", item);
-							
-							dst_items.push (item);
+				src_items.forEach (
+					function (x:*):void {
+						item = x as XMapItemModel;
+						
+						var b:Rectangle = item.boundingRect.clone ();
+						b.offset (item.x, item.y);
+						
+						if (
+							!(__x2 < b.left || __x1 > b.right ||
+							  __y2 < b.top || __y1 > b.bottom)
+							) {
+								
+							if (!(item in dst_items)) {
+	//							trace (": item: ", item);
+								
+								dst_items.push (item);
+							}
 						}
-					}
 				}
+				);
 			}
 			
 			return dst_items;		
@@ -253,7 +255,7 @@ package X.XMap {
 			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
 							
 			var i:Number;
-			var src_items:Dictionary;
+			var src_items:XDict;
 			var dst_items:Array = new Array ();
 			var x:*;
 			var item:XMapItemModel;
@@ -265,22 +267,24 @@ package X.XMap {
 			for (i=0; i<submaps.length; i++) {
 				src_items = submaps[i].items ();
 								
-				for (x in src_items) {
-					item = x as XMapItemModel;
-			
-					var cx:Rectangle = item.collisionRect.clone ();
-					cx.offset (item.x, item.y);
-					
-					if (
-						!(__x2 < cx.left || __x1 > cx.right ||
-						  __y2 < cx.top || __y1 > cx.bottom)
-						) {
-							
-						if (dst_items.indexOf (item) == -1) {
-							dst_items.push (item);
+				src_items.forEach (
+					function (x:*):void {
+						item = x as XMapItemModel;
+				
+						var cx:Rectangle = item.collisionRect.clone ();
+						cx.offset (item.x, item.y);
+						
+						if (
+							!(__x2 < cx.left || __x1 > cx.right ||
+							  __y2 < cx.top || __y1 > cx.bottom)
+							) {
+								
+							if (dst_items.indexOf (item) == -1) {
+								dst_items.push (item);
+							}
 						}
 					}
-				}
+				);
 			}
 			
 			return dst_items;		
@@ -345,13 +349,13 @@ package X.XMap {
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function items ():Dictionary {
+		public function items ():XDict {
 			return m_items;
 		}
 			
 //------------------------------------------------------------------------------------------
 		public function getItemId (__item:XMapItemModel):Number {
-			return m_items[__item];
+			return m_items.get (__item);
 		}		
 
 //------------------------------------------------------------------------------------------
@@ -463,7 +467,7 @@ package X.XMap {
 			
 			m_classNames = new XClassNameToIndex ();
 			
-			m_items = new Dictionary ();
+			m_items = new XDict ();
 			m_XSubmaps = new Array (m_submapRows);
 			
 			m_classNames.deserialize (__xml);
