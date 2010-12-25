@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------------------
 package X.XMap {
 
-// X classes		
+// X classes
+	import X.Collections.*;
 	import X.MVC.*;
 	
 	import flash.events.*;
 	import flash.geom.Rectangle;
-	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapModel extends XModelBase {
@@ -65,7 +65,7 @@ package X.XMap {
 		public static var CX_TILE_WIDTH_UNMASK:Number = 0xfffffff0;
 		public static var CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
 		
-		private var m_items:Dictionary;
+		private var m_items:XDict;
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapModel (
@@ -95,7 +95,7 @@ package X.XMap {
 				m_tiles[i] = CX_EMPTY;
 			}
 			
-			m_items = new Dictionary ();
+			m_items = new XDict ();
 		}	
 
 //------------------------------------------------------------------------------------------
@@ -156,8 +156,8 @@ package X.XMap {
 			__item:XMapItemModel
 			):XMapItemModel {
 							
-			if (!(__item in m_items)) {
-				m_items[__item] = __item.id;
+			if (!m_items.exists (__item)) {
+				m_items.put (__item, __item.id);
 			}
 					
 			return __item;
@@ -168,13 +168,13 @@ package X.XMap {
 			__item:XMapItemModel
 			):void {
 			
-			if (__item in m_items) {
-				delete m_items[__item];
+			if (m_items.exists (__item)) {
+				m_items.remove (__item);
 			}
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function items ():Dictionary {
+		public function items ():XDict {
 			return m_items;
 		}
 
