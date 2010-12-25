@@ -8,7 +8,7 @@ package X.Collections {
 		
 //------------------------------------------------------------------------------------------
 		public function XDict () {
-			super();
+			super ();
 			
 			m_dict = new Dictionary ();
 		}
