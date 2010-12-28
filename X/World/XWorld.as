@@ -23,6 +23,7 @@ package X.World {
 	import X.World.Sprite.*;
 	import X.World.Tiles.*;
 	import X.World.UI.XButton;
+	import X.XML.*;
 	import X.XMap.*;
 	
 	import flash.display.*;
@@ -74,7 +75,10 @@ package X.World {
 		public var m_XSoundTask:XSoundTask;
 		public var m_XDebugConsole:XDebugConsole;
 		public var m_XKeyboardLogicObject:XKeyboardLogicObject;
-
+		public var m_XXML:XXMLDoc;
+		public var m_XXMLNode:XXMLNode;
+		public var m_XXMLList:XXMLList;
+		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){
 			m_parent = __parent;
