@@ -103,6 +103,30 @@ package X.XML {
 		public function getChildren ():Array {
 			return m_children;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function child (__tag:String):Array {
+			if (__tag == "*") {
+				return m_children;
+			}
+			
+			var __list:Array = new Array ();
+			
+			var i:Number;
+			
+			for (i=0; i<m_children.length; i++) {
+				if (m_children[i].tag == __tag) {
+					__list.push (m_children[i]);
+				}
+			}
+			
+			return __list;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get tag ():String {
+			return m_tag;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function addAttribute (__name:String, __value:String):void {
