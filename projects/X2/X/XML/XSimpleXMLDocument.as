@@ -2,10 +2,10 @@
 package X.XML {
 	
 //------------------------------------------------------------------------------------------
-	public class XXMLDoc extends XXMLNode {
+	public class XSimpleXMLDocument extends XSimpleXMLNode {
 		
 //------------------------------------------------------------------------------------------
-		public function XXMLDoc () {
+		public function XSimpleXMLDocument () {
 			super ();
 		}
 
