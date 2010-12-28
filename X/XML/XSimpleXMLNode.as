@@ -3,7 +3,6 @@ package X.XML {
 
 //------------------------------------------------------------------------------------------
 	public class XSimpleXMLNode extends Object {
-		
 		private var m_tag:String;
 		private var m_attribs:Object;
 		private var m_text:String;
