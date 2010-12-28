@@ -76,7 +76,7 @@ package X.World {
 		public var m_XDebugConsole:XDebugConsole;
 		public var m_XKeyboardLogicObject:XKeyboardLogicObject;
 		public var m_XXML:XXMLDoc;
-		public var m_XXMLNode:XXMLNode;
+		public var m_XXMLNode:XSimpleXMLNode;
 		public var m_XXMLList:XXMLList;
 		
 //------------------------------------------------------------------------------------------
