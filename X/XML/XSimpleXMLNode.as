@@ -7,6 +7,7 @@ package X.XML {
 		private var m_attribs:Object;
 		private var m_text:String;
 		private var m_children:Array;
+		private var m_parent:XSimpleXMLNode;
 		
 //------------------------------------------------------------------------------------------
 		public function XSimpleXMLNode () {
@@ -19,6 +20,7 @@ package X.XML {
 			m_text = __text;
 			m_attribs = __attribs;
 			m_children = new Array ();
+			m_parent = null;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -41,6 +43,7 @@ package X.XML {
 			m_attribs = new Object ();
 			
 			__xmlList = __xml.attributes ();
+			
 			for (i = 0; i<__xmlList.length (); i++) {
 				var __key:String = __xmlList[i].name ();
 				m_attribs[__key] = __xml.@[__key];
@@ -58,6 +61,7 @@ package X.XML {
 				
 //------------------------------------------------------------------------------------------
 			__xmlList = __xml.children ();
+			
 			for (i=0; i<__xmlList.length (); i++) {
 				var __xmlNode:XSimpleXMLNode = new XSimpleXMLNode ();
 				__xmlNode.setupWithXML (__xml);
@@ -77,6 +81,8 @@ package X.XML {
 			var __xmlNode:XSimpleXMLNode = new XSimpleXMLNode ();
 			__xmlNode.setupWithParams (__tag, __text, __attribs);
 			
+			__xmlNode.setParent (this);
+			
 			m_children.push (__xmlNode);
 			
 			return __xmlNode;
@@ -86,6 +92,8 @@ package X.XML {
 		public function addChildWithXMLString (__xmlString:String):XSimpleXMLNode {
 			var __xmlNode:XSimpleXMLNode = new XSimpleXMLNode ();
 			__xmlNode.setupWithXMLString (__xmlString);
+		
+			__xmlNode.setParent (this);
 			
 			m_children.push (__xmlNode);
 			
@@ -94,6 +102,8 @@ package X.XML {
 
 //------------------------------------------------------------------------------------------
 		public function addChildWithXXMLNode (__xmlNode:XSimpleXMLNode):XSimpleXMLNode {
+			__xmlNode.setParent (this);
+			
 			m_children.push (__xmlNode);
 			
 			return __xmlNode;
@@ -103,25 +113,6 @@ package X.XML {
 		public function getChildren ():Array {
 			return m_children;
 		}
-
-//------------------------------------------------------------------------------------------
-		public function child (__tag:String):Array {
-			if (__tag == "*") {
-				return m_children;
-			}
-			
-			var __list:Array = new Array ();
-			
-			var i:Number;
-			
-			for (i=0; i<m_children.length; i++) {
-				if (m_children[i].tag == __tag) {
-					__list.push (m_children[i]);
-				}
-			}
-			
-			return __list;
-		}
 		
 //------------------------------------------------------------------------------------------
 		public function get tag ():String {
@@ -129,7 +120,7 @@ package X.XML {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addAttribute (__name:String, __value:String):void {
+		public function addAttribute (__name:String, __value:*):void {
 			m_attribs[__name] = __value;
 		}
 		
@@ -138,6 +129,11 @@ package X.XML {
 			return m_attribs;
 		}
 
+//-----------------------------------------------------------------------------------------
+		public function getAttribute (__name:String):* {
+			return m_attribs[__name];
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getText ():String {
 			return m_text;
@@ -186,6 +182,40 @@ package X.XML {
 			return __string;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function parent ():XSimpleXMLNode {
+			return m_parent;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setParent (__parent:XSimpleXMLNode):void {
+			m_parent = __parent;
+		}
+			
+//------------------------------------------------------------------------------------------
+		public function localName ():String {
+			return m_tag;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function child (__tag:String):Array {
+			if (__tag == "*") {
+				return m_children;
+			}
+			
+			var __list:Array = new Array ();
+			
+			var i:Number;
+			
+			for (i=0; i<m_children.length; i++) {
+				if (m_children[i].tag == __tag) {
+					__list.push (m_children[i]);
+				}
+			}
+			
+			return __list;
+		}
+		
 //------------------------------------------------------------------------------------------
 	}
 	
