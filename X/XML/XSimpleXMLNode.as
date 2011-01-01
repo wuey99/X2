@@ -108,6 +108,10 @@ package X.XML {
 			
 			return __xmlNode;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function removeChild (__xmlNode:XSimpleXMLNode):void {
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function getChildren ():Array {
@@ -191,10 +195,14 @@ package X.XML {
 		public function setParent (__parent:XSimpleXMLNode):void {
 			m_parent = __parent;
 		}
-			
+
 //------------------------------------------------------------------------------------------
 		public function localName ():String {
 			return m_tag;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function insertChildAfter (__dst:XSimpleXMLNode, __src:XSimpleXMLNode):void {
 		}
 		
 //------------------------------------------------------------------------------------------
