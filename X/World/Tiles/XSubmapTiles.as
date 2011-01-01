@@ -49,7 +49,7 @@ package X.World.Tiles {
 				
 //------------------------------------------------------------------------------------------
 		public function __generateTiledDisplay ():void {
-			m_boundingRect = m_submapModel.boundingRect.clone ();
+			m_boundingRect = m_submapModel.boundingRect.cloneX ();
 			
 			var __width:Number = m_submapModel.width;
 			var __height:Number = m_submapModel.height;
@@ -57,7 +57,7 @@ package X.World.Tiles {
 			m_bitmap.createBitmap ("tiles", __width, __height);
 				
 			m_bitmap.bitmapData.fillRect (
-				new Rectangle (0, 0, m_submapModel.width, m_submapModel.height),
+				new XRect (0, 0, m_submapModel.width, m_submapModel.height),
 				0x00000000
 			);
 		
@@ -71,10 +71,10 @@ package X.World.Tiles {
 			function __tiles ():void {
 				var __col:Number;
 				var __row:Number;
-				var __rect:Rectangle;
+				var __rect:XRect;
 				var __p:XPoint = new XPoint ();
 		
-				__rect = new Rectangle (0, 0, XSubmapModel.CX_TILE_WIDTH, XSubmapModel.CX_TILE_HEIGHT);
+				__rect = new XRect (0, 0, XSubmapModel.CX_TILE_WIDTH, XSubmapModel.CX_TILE_HEIGHT);
 				
 				trace (": submapModel: ", m_submapModel);
 		
@@ -133,14 +133,14 @@ package X.World.Tiles {
 		public override function cullObject ():void {
 
 // determine whether this object is outside the current viewPort
-			var v:Rectangle = xxx.getXMapModel ().getViewRect ();
+			var v:XRect = xxx.getXMapModel ().getViewRect ();
 				
-			var r:Rectangle = xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height);
+			var r:XRect = xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height);
 			r.inflate (256, 256);
 
-			var i:Rectangle;
+			var i:XRect;
 
-			i = m_boundingRect.clone ();
+			i = m_boundingRect.cloneX ();
 			i.offsetPoint (getPos ());
 			
 			if (r.intersects (i)) {

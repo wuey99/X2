@@ -2,11 +2,11 @@
 package X.XMap {
 
 // X classes
+	import X.Geom.*;
 	import X.Collections.*;
 	import X.MVC.*;
 	
 	import flash.events.*;
-	import flash.geom.Rectangle;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapModel extends XModelBase {
@@ -24,7 +24,7 @@ package X.XMap {
 		private var m_tiles:Array;
 		private var m_inuse:Number;
 		
-		private var m_boundingRect:Rectangle;
+		private var m_boundingRect:XRect;
 		
 // empty
 		public static var CX_EMPTY:Number = 0;
@@ -85,7 +85,7 @@ package X.XMap {
 			m_cols = m_submapWidth/CX_TILE_WIDTH;
 			m_rows = m_submapHeight/CX_TILE_HEIGHT;
 
-			m_boundingRect = new Rectangle (0, 0, m_submapWidth, m_submapHeight);
+			m_boundingRect = new XRect (0, 0, m_submapWidth, m_submapHeight);
 			
 			m_tiles = new Array (m_cols * m_rows);
 			
@@ -127,7 +127,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function get boundingRect ():Rectangle {
+		public function get boundingRect ():XRect {
 			return m_boundingRect;
 		}
 		
@@ -230,9 +230,9 @@ package X.XMap {
 // __scale, __rotation, __depth
 					__xml.@scale, __xml.@rotation, __xml.@depth,
 // __collisionRect,
-					new Rectangle (__xml.@cx, __xml.@cy, __xml.@cw, __xml.@ch),
+					new XRect (__xml.@cx, __xml.@cy, __xml.@cw, __xml.@ch),
 // __boundingRect,
-					new Rectangle (__xml.@cx, __xml.@cy, __xml.@bw, __xml.@bh),
+					new XRect (__xml.@cx, __xml.@cy, __xml.@bw, __xml.@bh),
 // __params
 					__xml.@params
 					);

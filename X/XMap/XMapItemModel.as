@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------------------
 package X.XMap {
 
-// X classes		
+// X classes
+	import X.Geom.*;
 	import X.MVC.*;
 	
 	import flash.events.*;
-	import flash.geom.Rectangle;
 	import flash.utils.*;
 
 //------------------------------------------------------------------------------------------		
@@ -19,8 +19,8 @@ package X.XMap {
 		private var m_frame:Number;
 		private var m_x:Number, m_y:Number;
 		private var m_rotation:Number, m_scale:Number, m_depth:Number;
-		private var m_collisionRect:Rectangle;
-		private var m_boundingRect:Rectangle;
+		private var m_collisionRect:XRect;
+		private var m_boundingRect:XRect;
 		private var m_params:String;
 
 		private var m_inuse:Number;
@@ -40,8 +40,8 @@ package X.XMap {
 			__imageClassName:String, __frame:Number,
 			__x:Number, __y:Number,
 			__scale:Number, __rotation:Number, __depth:Number,
-			__collisionRect:Rectangle,
-			__boundingRect:Rectangle,
+			__collisionRect:XRect,
+			__boundingRect:XRect,
 			__params:String,
 			...args
 			):void {
@@ -89,9 +89,9 @@ package X.XMap {
 // __scale, __rotation, __depth
 				this.scale, this.rotation, this.depth,
 // __collisionRect,
-				this.collisionRect.clone (),
+				this.collisionRect.cloneX (),
 // __boundingRect,
-				this.boundingRect.clone (),
+				this.boundingRect.cloneX (),
 // __params
 				this.params
 				);
@@ -210,20 +210,20 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function get boundingRect ():Rectangle {
+		public function get boundingRect ():XRect {
 			return m_boundingRect;
 		}
 
-		public function set boundingRect (__rect:Rectangle):void {
+		public function set boundingRect (__rect:XRect):void {
 			m_boundingRect = __rect;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function get collisionRect ():Rectangle {
+		public function get collisionRect ():XRect {
 			return m_collisionRect;
 		}
 
-		public function set collisionRect (__rect:Rectangle):void {
+		public function set collisionRect (__rect:XRect):void {
 			m_collisionRect = __rect;
 		}
 

@@ -18,7 +18,7 @@ package X.World.Logic {
 		private var m_vel:XPoint;
 		private var m_oldPos:XPoint;
 		
-		protected var m_cx:Rectangle;
+		protected var m_cx:XRect;
 		protected var m_namedCX:XDict;
 		
 		public static var CELLSWIDE:Number = 80;
@@ -57,7 +57,7 @@ package X.World.Logic {
 			setVel (new XPoint (0, 0));
 			setOld (new XPoint (0, 0));
 			
-			m_cx = new Rectangle (0, 0, 0, 0);
+			m_cx = new XRect (0, 0, 0, 0);
 			m_namedCX = new XDict ();
 		}
 
@@ -69,7 +69,7 @@ package X.World.Logic {
 			__y2:Number
 			):void {
 				
-			m_cx = new Rectangle (__x1, __y1, __x2-__x1+1, __y2-__y1+1);
+			m_cx = new XRect (__x1, __y1, __x2-__x1+1, __y2-__y1+1);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -81,17 +81,17 @@ package X.World.Logic {
 			__y2:Number
 			):void {
 				
-			m_namedCX.put (__name, new Rectangle (__x1, __y1, __x2-__x1+1, __y2-__y1+1));
+			m_namedCX.put (__name, new XRect (__x1, __y1, __x2-__x1+1, __y2-__y1+1));
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getNamedCX (__name:String):Rectangle {
-			return m_namedCX.get (__name).clone ();
+		public function getNamedCX (__name:String):XRect {
+			return m_namedCX.get (__name).cloneX ();
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getAdjustedNamedCX (__name:String):Rectangle {
-			var __rect:Rectangle = m_namedCX.get (__name).clone ();	
+		public function getAdjustedNamedCX (__name:String):XRect {
+			var __rect:XRect = m_namedCX.get (__name).cloneX ();	
 			__rect.offset (oX, oY);
 			return __rect;
 		}
@@ -157,8 +157,8 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function collidesWithNamedCX (__name:String, __rectDst:Rectangle):Boolean {
-			var __rectSrc:Rectangle = getAdjustedNamedCX (__name);
+		public function collidesWithNamedCX (__name:String, __rectDst:XRect):Boolean {
+			var __rectSrc:XRect = getAdjustedNamedCX (__name);
 			
 			return __rectSrc.intersects (__rectDst);
 		}

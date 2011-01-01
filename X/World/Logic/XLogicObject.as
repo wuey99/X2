@@ -48,7 +48,7 @@ package X.World.Logic {
 		public var m_item:XMapItemModel;
 		public var m_layer:Number;
 		public var m_depth:Number;
-		public var m_boundingRect:Rectangle;
+		public var m_boundingRect:XRect;
 		public var m_pos:XPoint;
 		public var m_visible:Boolean;
 		public var m_masterVisible:Boolean;
@@ -213,21 +213,21 @@ package X.World.Logic {
 			}
 			
 // determine whether this object is outside the current viewPort
-			var v:Rectangle = xxx.getXMapModel ().getViewRect ();
+			var v:XRect = xxx.getXMapModel ().getViewRect ();
 				
-			var r:Rectangle = xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height);
+			var r:XRect = xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height);
 			r.inflate (256, 256);
 
-			var i:Rectangle;
+			var i:XRect;
 						
-			i = m_item.boundingRect.clone ();
+			i = m_item.boundingRect.cloneX ();
 			i.offsetPoint (getPos ());
 			
 			if (r.intersects (i)) {
 				return;
 			}
 			
-			i = m_boundingRect.clone ();
+			i = m_boundingRect.cloneX ();
 			i.offsetPoint (getPos ());
 			
 			if (r.intersects (i)) {
@@ -599,7 +599,7 @@ package X.World.Logic {
 			m_item = __item;
 			
 			if (m_item != null) {
-				m_boundingRect = __item.boundingRect.clone ();
+				m_boundingRect = __item.boundingRect.cloneX ();
 			}
 		}
 

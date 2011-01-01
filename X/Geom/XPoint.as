@@ -12,6 +12,13 @@ package X.Geom {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function cloneX ():XPoint {
+			var __point:Point = clone ();
+			
+			return new XPoint (__point.x, __point.y);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getPoint ():Point {
 			return this as Point;
 		}

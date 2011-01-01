@@ -36,8 +36,8 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):Rectangle {
-			return new Rectangle (-x/m_scale, -y/m_scale, __canvasWidth/m_scale, __canvasHeight/m_scale);
+		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):XRect {
+			return new XRect (-x/m_scale, -y/m_scale, __canvasWidth/m_scale, __canvasHeight/m_scale);
 		}
 		
 //------------------------------------------------------------------------------------------
