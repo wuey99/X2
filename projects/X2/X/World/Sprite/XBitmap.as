@@ -43,21 +43,23 @@ package X.World.Sprite {
 		public function initWithScalingXY (__movieClip:MovieClip, __scaleX:Number, __scaleY:Number):void {
 			var i:Number;
 			var __width:Number, __height:Number;
-			var __bounds:Rectangle;
-			
+			var __bounds:XRect;
+			var __rect:Rectangle;
 			__width = 0;
 			__height = 0;
 		
 			for (i=0; i < __movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
-				__bounds = __movieClip.getBounds (__movieClip);
+				__rect = __movieClip.getBounds (__movieClip);
+				__bounds = new XRect (__rect.x, __rect.y, __rect.width, __rect.height);
 				__width = Math.max (__width, __bounds.width);
 				__height = Math.max (__height, __bounds.height);
 			}
 									
 			for (i=0; i < __movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
-				__bounds = __movieClip.getBounds (__movieClip);
+				__rect = __movieClip.getBounds (__movieClip);
+				__bounds = new XRect (__rect.x, __rect.y, __rect.width, __rect.height);
 				var __bitmap:BitmapData = new BitmapData (__width*__scaleX, __height*__scaleY, true, 0xffffff);
 				var __matrix:Matrix = new Matrix ();
 				__matrix.scale (__scaleX, __scaleY);
@@ -105,8 +107,8 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):Rectangle {
-			return new Rectangle (-x/m_scale, -y/m_scale, __canvasWidth/m_scale, __canvasHeight/m_scale);
+		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):XRect {
+			return new XRect (-x/m_scale, -y/m_scale, __canvasWidth/m_scale, __canvasHeight/m_scale);
 		}
 		
 //------------------------------------------------------------------------------------------

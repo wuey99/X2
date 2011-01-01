@@ -7,8 +7,15 @@ package X.Geom {
 	public class XRect extends Rectangle {
 		
 //------------------------------------------------------------------------------------------
-		public function XRect (__x:Number = 0, __y:Number = 0, __width:Number = 0, __height:Number = 0)) {
+		public function XRect (__x:Number = 0, __y:Number = 0, __width:Number = 0, __height:Number = 0) {
 			super (__x, __y, __width, __height);
+		}	
+
+//------------------------------------------------------------------------------------------
+		public function cloneX ():XRect {
+			var __rect:Rectangle = clone ();
+			
+			return new XRect (__rect.x, __rect.y, __rect.width, __rect.height);
 		}
 		
 //------------------------------------------------------------------------------------------

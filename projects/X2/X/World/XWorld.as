@@ -77,6 +77,8 @@ package X.World {
 		public var m_XKeyboardLogicObject:XKeyboardLogicObject;
 		public var m_xmlDoc:XSimpleXMLDocument;
 		public var m_xmlNode:XSimpleXMLNode;
+		public var m_XPoint:XPoint;
+		public var m_XRect:XRect;
 		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){

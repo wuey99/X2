@@ -2,12 +2,12 @@
 package X.XMap {
 
 // X classes
+	import X.Geom.*;
 	import X.Collections.*;
 	import X.MVC.*;
 	import X.Utils.*;
 	
 	import flash.events.*;
-	import flash.geom.Rectangle;
 			
 //------------------------------------------------------------------------------------------	
 	public class XMapLayerModel extends XModelBase {
@@ -28,7 +28,7 @@ package X.XMap {
 
 		private var m_classNames:XClassNameToIndex;
 		
-		private var m_viewPort:Rectangle;
+		private var m_viewPort:XRect;
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
@@ -64,7 +64,7 @@ package X.XMap {
 			
 			m_classNames = new XClassNameToIndex ();
 			
-			m_viewPort = new Rectangle ();
+			m_viewPort = new XRect ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -77,12 +77,12 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setViewPort (__viewPort:Rectangle):void {
+		public function setViewPort (__viewPort:XRect):void {
 			m_viewPort = __viewPort;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function get viewPort ():Rectangle {
+		public function get viewPort ():XRect {
 			return m_viewPort;
 		}
 
@@ -109,7 +109,7 @@ package X.XMap {
 				__item.setID (__id);
 			}
 			
-			var r:Rectangle = __item.boundingRect.clone ();
+			var r:XRect = __item.boundingRect.cloneX ();
 			r.offset (__item.x, __item.y);
 			
 // determine submaps that the item straddles
@@ -145,7 +145,7 @@ package X.XMap {
 			
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 		
-			var r:Rectangle = __item.boundingRect.clone ();
+			var r:XRect = __item.boundingRect.cloneX ();
 			r.offset (__item.x, __item.y);
 			
 // determine submaps that the item straddles
@@ -225,7 +225,7 @@ package X.XMap {
 					function (x:*):void {
 						item = x as XMapItemModel;
 						
-						var b:Rectangle = item.boundingRect.clone ();
+						var b:XRect = item.boundingRect.cloneX ();
 						b.offset (item.x, item.y);
 						
 						if (
@@ -271,7 +271,7 @@ package X.XMap {
 					function (x:*):void {
 						item = x as XMapItemModel;
 				
-						var cx:Rectangle = item.collisionRect.clone ();
+						var cx:XRect = item.collisionRect.cloneX ();
 						cx.offset (item.x, item.y);
 						
 						if (
@@ -457,7 +457,7 @@ package X.XMap {
 		public function deserialize (__xml:XML):void {
 			trace (": [XMapLayer]: deserialize: ");
 			
-			m_viewPort = new Rectangle (__xml.@vx, __xml.@vy, __xml.@vw, __xml.@vh);
+			m_viewPort = new XRect (__xml.@vx, __xml.@vy, __xml.@vw, __xml.@vh);
 			m_layer = __xml.@layer;
 			m_submapRows = __xml.@submapRows;
 			m_submapCols = __xml.@submapCols;

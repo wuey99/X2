@@ -2,10 +2,10 @@
 package X.XMap {
 
 // X classes	
+	import X.Geom.*;
 	import X.MVC.*;
 	
 	import flash.events.*;
-	import flash.geom.Rectangle;
 				
 //------------------------------------------------------------------------------------------
 // XMapModel:
@@ -17,7 +17,7 @@ package X.XMap {
 				
 		private var m_numLayers:Number;
 		private var m_layers:Array;
-		protected var m_viewRect:Rectangle;
+		protected var m_viewRect:XRect;
 		private var m_allClassNames:Array;
 		
 //------------------------------------------------------------------------------------------	
@@ -112,11 +112,11 @@ package X.XMap {
 			__width:Number, __height:Number
 			):void {
 				
-			m_viewRect = new Rectangle (__left, __top, __width, __height);
+			m_viewRect = new XRect (__left, __top, __width, __height);
 		}
 
 //------------------------------------------------------------------------------------------	
-		public function getViewRect ():Rectangle {
+		public function getViewRect ():XRect {
 			return m_viewRect
 		}
 
