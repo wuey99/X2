@@ -153,7 +153,7 @@ package X.XMap {
 			var i:Number;
 			
 			for (i=0; i<m_numLayers; i++) {
-				xml.addChildWithXMLNode (m_layers[i].serialize ());
+				m_layers[i].serialize (xml);
 			}
 			
 			return xml;

@@ -127,7 +127,7 @@ package X.XML {
 //------------------------------------------------------------------------------------------
 		public function addAttribute (__name:String, __value:*):void {
 			m_attribs[__name] = __value;
-		}
+		}	
 		
 //------------------------------------------------------------------------------------------
 		public function getAttributes ():Object {
@@ -168,21 +168,27 @@ package X.XML {
 				__string += " " + __props + "=" + "\"" + m_attribs[__props] + "\"";	
 			}
 			
-			__string += ">\n";
-			
-			if (m_text != "") {
-				__string += __tab (__indent) + m_text + "\n";
-			}
-			
-			if (m_children.length != 0) {
-				var i:Number;
+			if (m_text != "" || m_children.length) {
+				__string += ">\n";
 				
-				for (i=0; i<m_children.length; i++) {
-					__string += __tab (__indent) + m_children[i].toXMLString (__indent+1);
+				if (m_text != "") {
+					__string += __tab (__indent) + m_text + "\n";
 				}
+				
+				if (m_children.length != 0) {
+					var i:Number;
+					
+					for (i=0; i<m_children.length; i++) {
+						__string += m_children[i].toXMLString (__indent+1);
+					}
+				}
+				
+				__string += __tab (__indent) + "</" + m_tag + ">\n";
 			}
-			
-			__string += __tab (__indent) + "</" + m_tag + ">\n"
+			else
+			{
+				__string += "/>\n";
+			}
 			
 			return __string;
 		}

@@ -380,9 +380,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function serialize ():XSimpleXMLNode {
-			var __xml:XSimpleXMLNode = new XSimpleXMLNode ();
-			
+		public function serialize (__xml:XSimpleXMLNode):XSimpleXMLNode {
 			var __attribs:Object = {
 				"vx":			viewPort.x,
 				"vy":			viewPort.y,
