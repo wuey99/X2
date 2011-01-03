@@ -443,12 +443,13 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function submapHasItems (submap:XSubmapModel):Number {
-			var x:*;
 			var count:Number = 0;
 					
-			for (x in submap.items ()) {	
-				count++;
-			}
+			submap.items ().forEach (
+				function (x:*):void {	
+					count++;
+				}
+			);
 			
 			return count;
 		}
@@ -515,9 +516,11 @@ package X.XMap {
 			
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
-					for (var __item:* in m_XSubmaps[__row][__col].items ()) {
-						addItem (__item);
-					}
+					m_XSubmaps[__row][__col].items ().forEach (
+						function (__item:*):void {
+							addItem (__item);
+						}
+					);
 				}
 			}
 		}
