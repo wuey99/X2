@@ -4,6 +4,7 @@ package X.XMap {
 // X classes
 	import X.Geom.*;
 	import X.MVC.*;
+	import X.XML.*;
 	
 	import flash.events.*;
 	import flash.utils.*;
@@ -237,30 +238,33 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function serialize ():XML {
-			var xml:XML =
-				<XMapItem
-					logicClassIndex={logicClassIndex}
-					name={name}
-					id={id}
-					imageClassIndex={imageClassIndex}
-					frame={frame}
-					x={x}
-					y={y}
-					rotation={rotation}
-					scale={scale}
-					depth={depth}
-					cx={collisionRect.x}
-					cy={collisionRect.y}
-					cw={collisionRect.width}
-					ch={collisionRect.height}
-					bx={boundingRect.x}
-					by={boundingRect.y}
-					bw={boundingRect.width}
-					bh={boundingRect.height}
-				>
-					{new XML (params)}
-				</XMapItem>
+		public function serialize ():XSimpleXMLNode {
+			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			var __attribs:Object = {
+				logicClassIndex:	logicClassIndex,
+				name:				name,
+				id:					id,
+				imageClassIndex:	imageClassIndex,
+				frame:				frame,
+				x:					x,
+				y:					y,
+				rotation:			rotation,
+				scale:				scale,
+				depth:				depth,
+				cx:					collisionRect.x,
+				cy:					collisionRect.y,
+				cw:					collisionRect.width,
+				ch:					collisionRect.height,
+				bx:					boundingRect.x,
+				by:					boundingRect.y,
+				bw:					boundingRect.width,
+				bh:					boundingRect.height
+			};
+			
+			xml.setupWithParams ("XMapItem", "", __attribs);
+			
+			xml.addChildWithXMLString (params);
 			
 			return xml;
 		}

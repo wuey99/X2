@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------------------
 package X.Utils {
 			
+	import X.XML.*;
+	
 //------------------------------------------------------------------------------------------
 // this class maps a list of classNames to unique indexes
 //------------------------------------------------------------------------------------------
@@ -88,39 +90,47 @@ package X.Utils {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function serialize ():XML {
-			var __xml:XML =
-				<classNames/>
-
+		public function serialize ():XSimpleXMLNode {
+			var __xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			__xml.setupWithParams ("classNames", "", {});
+			
 			var i:Number;
 			
 			for (i=0; i<m_classNamesStrings.length; i++) {
-				var __className:XML = 
-					<className index={i} name={m_classNamesStrings[i]} count={m_classNamesCounts[i]}/>
+				var __attribs:Object = {
+					index:			i,
+					name:			m_classNamesStrings[i],
+					count:			m_classNamesCounts[i]					
+				};
 				
-				__xml.appendChild (__className);
+				var __className:XSimpleXMLNode = new XSimpleXMLNode ();
+				
+				__className.setupWithParams ("className", "", __attribs);
+				
+				__xml.addChildWithXMLNode (__className);
 			}
 			
 			return __xml;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function deserialize (__xml:XML):void {
+		public function deserialize (__xml:XSimpleXMLNode):void {
 			m_classNamesStrings = new Array ();
 			m_classNamesCounts = new Array ();
 			m_freeClassNameIndexes = new Array ();
 			
 			trace (": XClassNameToIndex: deserialize: ");
 			
-			var __xmlList:XMLList = __xml.classNames.child ("className");
+			var __xmlList:Array = __xml.child ("classNames")[0].child ("className");
 			
 			var i:Number;
 			var __name:String;
 			var __count:Number;
 			
-			for (i=0; i<__xmlList.length (); i++) {
-				__name = __xmlList[i].@name;
-				__count = __xmlList[i].@count;
+			for (i=0; i<__xmlList.length; i++) {
+				__name = __xmlList[i].getAttribute ("name");
+				__count = __xmlList[i].getAttribute ("count");
 				
 				trace (": ", __name);
 				

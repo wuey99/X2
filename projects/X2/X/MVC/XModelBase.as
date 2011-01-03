@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------
 package X.MVC {
 	import X.Signals.XSignal;
+	import X.XML.*;
 	
 // flash classes
 	import flash.events.*;
@@ -25,12 +26,12 @@ package X.MVC {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function serializeAll ():XML {
+		public function serializeAll ():XSimpleXMLNode {
 			return null;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function deserializeAll (__xml:XML):void {
+		public function deserializeAll (__xml:XSimpleXMLNode):void {
 		}
 			
 //------------------------------------------------------------------------------------------	

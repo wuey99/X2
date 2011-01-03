@@ -4,6 +4,7 @@ package X.XMap {
 // X classes	
 	import X.Geom.*;
 	import X.MVC.*;
+	import X.XML.*;
 	
 	import flash.events.*;
 				
@@ -121,54 +122,55 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function serializeAll ():XML {
+		public override function serializeAll ():XSimpleXMLNode {
 			return serialize ();
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function deserializeAll (__xml:XML):void {
+		public override function deserializeAll (__xml:XSimpleXMLNode):void {
 			trace (": [XMap] deserializeAll: ");
 			
 			deserialize (__xml);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function serialize ():XML {
-			var xml:XML =
-				<XMap
-				>
-					{serializeLayers ()}
-				</XMap>
+		public function serialize ():XSimpleXMLNode {
+			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			xml.setupWithParams ("XMap", "", {});
+			
+			xml.addChildWithXMLNode (serializeLayers ());
 							
 			return xml;
 		}
 
 //------------------------------------------------------------------------------------------	
-		private function serializeLayers ():XML {
-			var xml:XML =
-				<XLayers/>
-				
+		private function serializeLayers ():XSimpleXMLNode {
+			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			xml.setupWithParams ("XLayers", "", {});
+	
 			var i:Number;
 			
 			for (i=0; i<m_numLayers; i++) {
-				xml.appendChild (m_layers[i].serialize ());
+				xml.addChildWithXMLNode (m_layers[i].serialize ());
 			}
 			
 			return xml;
 		}
 
 //------------------------------------------------------------------------------------------
-		private function deserialize (__xml:XML):void {
+		private function deserialize (__xml:XSimpleXMLNode):void {
 			trace (": [XMap] deserialize: ");
 			
-			var __xmlList:XMLList = __xml.XLayers.child ("XLayer");
+			var __xmlList:Array = __xml.child ("XLayers")[0].child ("XLayer");
 			
-			m_numLayers = __xmlList.length ();
+			m_numLayers = __xmlList.length;
 			m_layers = new Array (m_numLayers);
 			
 			var i:Number;
 			
-			for (i=0; i<__xmlList.length (); i++) {
+			for (i=0; i<__xmlList.length; i++) {
 				m_layers[i] = new XMapLayerModel ();
 				
 				m_layers[i].deserialize (__xmlList[i]);

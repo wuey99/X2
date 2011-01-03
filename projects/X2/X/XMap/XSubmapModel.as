@@ -2,9 +2,10 @@
 package X.XMap {
 
 // X classes
-	import X.Geom.*;
 	import X.Collections.*;
+	import X.Geom.*;
 	import X.MVC.*;
+	import X.XML.*;
 	
 	import flash.events.*;
 	
@@ -53,8 +54,7 @@ package X.XMap {
 		public static var CX_LL225B:Number = 13;
 		public static var CX_LR225A:Number = 14;
 		public static var CX_LR225B:Number = 15;
-				
-				
+
 // tile width, height
 		public static var CX_TILE_WIDTH:Number = 16;
 		public static var CX_TILE_HEIGHT:Number = 16;
@@ -179,12 +179,15 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function serializeRowCol (__row:Number, __col:Number):XML {	
-			var xml:XML =
-				<XSubmap
-					row={__row}
-					col={__col}	
-				/>
+		public function serializeRowCol (__row:Number, __col:Number):XSimpleXMLNode {	
+			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			var __attribs:Object = {
+				"row":	__row,
+				"col":	__col
+			};
+			
+			xml.setupWithParams ("XSubmap", "", __attribs);
 
 			var item:XMapItemModel;
 	
@@ -192,7 +195,7 @@ package X.XMap {
 				function (x:*):void {
 					item = x as XMapItemModel;
 					
-					xml.appendChild (item.serialize ());
+					xml.addChildWithXMLNode (item.serialize ());
 				}
 			);
 			
@@ -200,20 +203,20 @@ package X.XMap {
 	}
 
 //------------------------------------------------------------------------------------------
-		public function deserializeRowCol (__xml:XML):void {
-			var __xmlList:XMLList = __xml.child ("XMapItem");
+		public function deserializeRowCol (__xml:XSimpleXMLNode):void {
+			var __xmlList:Array = __xml.child ("XMapItem");
 			
 			var i:Number;
 			
-			for (i=0; i<__xmlList.length (); i++) {
-				var __xml:XML = __xmlList[i];
+			for (i=0; i<__xmlList.length; i++) {
+				var __xml:XSimpleXMLNode = __xmlList[i];
 				
 				trace (": XMapItem: ", __xml);
 				
 				var __item:XMapItemModel = new XMapItemModel ();
 		
-				var __logicClassIndex:Number = __xml.@logicClassIndex;
-				var __imageClassIndex:Number = __xml.@imageClassIndex;
+				var __logicClassIndex:Number = __xml.getAttribute ("logicClassIndex");
+				var __imageClassIndex:Number = __xml.getAttribute ("imageClassIndex");
 				
 				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex));
 				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex));
@@ -223,19 +226,19 @@ package X.XMap {
 // __logicClassName
 					m_XMapLayer.getClassNameFromIndex (__logicClassIndex),
 // __name, __id
-					__xml.@name, __xml.@id,
+					__xml.getAttribute ("name"), __xml.getAttribute ("id"),
 // __imageClassName, __frame
-					m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __xml.@frame,
+					m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __xml.getAttribute ("frame"),
 // __x, __y,
-					__xml.@x, __xml.@y,
+					__xml.getAttribute ("x"), __xml.getAttribute ("y"),
 // __scale, __rotation, __depth
-					__xml.@scale, __xml.@rotation, __xml.@depth,
+					__xml.getAttribute ("scale"), __xml.getAttribute ("rotation"), __xml.getAttribute ("depth"),
 // __collisionRect,
-					new XRect (__xml.@cx, __xml.@cy, __xml.@cw, __xml.@ch),
+					new XRect (__xml.getAttribute ("cx"), __xml.getAttribute ("cy"), __xml.getAttribute ("cw"), __xml.getAttribute ("ch")),
 // __boundingRect,
-					new XRect (__xml.@cx, __xml.@cy, __xml.@bw, __xml.@bh),
+					new XRect (__xml.getAttribute ("cx"), __xml.getAttribute ("cy"), __xml.getAttribute ("bw"), __xml.getAttribute ("bh")),
 // __params
-					__xml.@params
+					__xml.child ("params")[0].toXMLString ()
 					);
 					
 					addItem (__item);

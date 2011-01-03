@@ -12,6 +12,9 @@ package X.XML {
 //------------------------------------------------------------------------------------------
 		public function XSimpleXMLNode () {
 			super ();
+			
+			m_children = new Array ();
+			m_parent = null;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -19,8 +22,6 @@ package X.XML {
 			m_tag = __tag;
 			m_text = __text;
 			m_attribs = __attribs;
-			m_children = new Array ();
-			m_parent = null;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -64,7 +65,7 @@ package X.XML {
 			
 			for (i=0; i<__xmlList.length (); i++) {
 				var __xmlNode:XSimpleXMLNode = new XSimpleXMLNode ();
-				__xmlNode.setupWithXML (__xml);
+				__xmlNode.setupWithXML (__xmlList[i]);
 				__children.push (__xmlNode);	
 			}
 
@@ -101,7 +102,7 @@ package X.XML {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addChildWithXXMLNode (__xmlNode:XSimpleXMLNode):XSimpleXMLNode {
+		public function addChildWithXMLNode (__xmlNode:XSimpleXMLNode):XSimpleXMLNode {
 			__xmlNode.setParent (this);
 			
 			m_children.push (__xmlNode);
