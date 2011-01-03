@@ -186,14 +186,15 @@ package X.XMap {
 					col={__col}	
 				/>
 
-			var x:*;
 			var item:XMapItemModel;
-				
-			for (x in items ()) {	
-				item = x as XMapItemModel;
+	
+			items ().forEach (
+				function (x:*):void {
+					item = x as XMapItemModel;
 					
-				xml.appendChild (item.serialize ());
-			}
+					xml.appendChild (item.serialize ());
+				}
+			);
 			
 			return xml;
 	}
