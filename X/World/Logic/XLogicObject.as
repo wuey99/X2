@@ -14,7 +14,9 @@ package X.World.Logic {
 	import X.Task.*;
 	import X.World.*;
 	import X.World.Sprite.*;
+	import X.XML.XSimpleXMLNode;
 	import X.XMap.*;
+	import X.XML.*;
 	
 	import flash.display.*;
 	import flash.geom.*;
@@ -590,7 +592,7 @@ package X.World.Logic {
 // not implemented: XLogicObjects that are spawned from a level can contain intialization
 // parameters
 //------------------------------------------------------------------------------------------	
-		public function getDefaultParams ():XML {
+		public function getDefaultParams ():XSimpleXMLNode {
 			return null;
 		}
 

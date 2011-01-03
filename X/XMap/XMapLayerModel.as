@@ -2,10 +2,11 @@
 package X.XMap {
 
 // X classes
-	import X.Geom.*;
 	import X.Collections.*;
+	import X.Geom.*;
 	import X.MVC.*;
 	import X.Utils.*;
+	import X.XML.*;
 	
 	import flash.events.*;
 			
@@ -379,42 +380,46 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function serialize ():XML {
-			var __xml:XML = 
-				<XLayer
-					vx={viewPort.x}
-					vy={viewPort.y}
-					vw={viewPort.width}
-					vh={viewPort.height}
-					layer={m_layer}
-					submapRows={m_submapRows}
-					submapCols={m_submapCols}
-					submapWidth={m_submapWidth}
-					submapHeight={m_submapHeight}
-					currID={m_currID}
-				>
-					{m_classNames.serialize ()}
-					{serializeItems ()}
-					{serializeSubmaps ()}
-					
-				</XLayer>
+		public function serialize ():XSimpleXMLNode {
+			var __xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			var __attribs:Object = {
+				"vx":			viewPort.x,
+				"vy":			viewPort.y,
+				"vw":			viewPort.width,
+				"vh":			viewPort.height,
+				"layer":		m_layer,
+				"submapRows":	m_submapRows,
+				"submapCols":	m_submapCols,
+				"submapWidth":	m_submapWidth,
+				"submapHeight":	m_submapHeight,
+				"currID":		m_currID
+			};
+			
+			__xml.addChildWithParams ("XLayer", "", __attribs);
+			
+			__xml.addChildWithXMLNode (m_classNames.serialize ());
+			__xml.addChildWithXMLNode (serializeItems ());
+			__xml.addChildWithXMLNode (serializeSubmaps ());
 				
 			return __xml;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function serializeItems ():XML {
-			var xml:XML =
-				<items/>
-				
+		public function serializeItems ():XSimpleXMLNode {
+			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			xml.setupWithParams ("items", "", {});
+		
 			return xml;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function serializeSubmaps ():XML {
-			var xml:XML =
-				<XSubmaps/>
-				
+		public function serializeSubmaps ():XSimpleXMLNode {
+			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
+			
+			xml.setupWithParams ("XSubmaps", "", {});
+			
 			var __row:Number, __col:Number;
 			var __x1:Number, __y1:Number, __x2:Number, __y2:Number;
 			
@@ -432,7 +437,7 @@ package X.XMap {
 						var submap:XSubmapModel = submaps[0] as XSubmapModel;
 						
 						if (submapHasItems (submap)) {
-							xml.appendChild (submap.serializeRowCol (__row, __col));
+							xml.addChildWithXMLNode (submap.serializeRowCol (__row, __col));
 						}
 					}
 				}
@@ -455,16 +460,22 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function deserialize (__xml:XML):void {
+		public function deserialize (__xml:XSimpleXMLNode):void {
 			trace (": [XMapLayer]: deserialize: ");
 			
-			m_viewPort = new XRect (__xml.@vx, __xml.@vy, __xml.@vw, __xml.@vh);
-			m_layer = __xml.@layer;
-			m_submapRows = __xml.@submapRows;
-			m_submapCols = __xml.@submapCols;
-			m_submapWidth = __xml.@submapWidth;
-			m_submapHeight = __xml.@submapHeight;
-			m_currID = __xml.@currID;
+			m_viewPort = new XRect (
+				__xml.getAttribute ("vx"),
+				__xml.getAttribute ("vy"),
+				__xml.getAttribute ("vw"),
+				__xml.getAttribute ("vh")
+			);
+			
+			m_layer = __xml.getAttribute ("layer");
+			m_submapRows = __xml.getAttribute ("submapRows");
+			m_submapCols = __xml.getAttribute ("submapCols");
+			m_submapWidth = __xml.getAttribute ("submapWidth");
+			m_submapHeight = __xml.getAttribute ("submapHeight");
+			m_currID = __xml.getAttribute ("currID");
 			
 			m_classNames = new XClassNameToIndex ();
 			
@@ -477,11 +488,11 @@ package X.XMap {
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function deserializeItems (__xml:XML):void {
+		public function deserializeItems (__xml:XSimpleXMLNode):void {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function deserializeSubmaps (__xml:XML):void {
+		public function deserializeSubmaps (__xml:XSimpleXMLNode):void {
 			trace (": [XMapLayer]: deserializeSubmaps: ");
 			
 			trace (": xml: ", __xml);
@@ -497,17 +508,17 @@ package X.XMap {
 				}
 			}
 			
-			var __xmlList:XMLList = __xml.XSubmaps.child ("XSubmap");
+			var __xmlList:Array = __xml.child ("XSubmaps")[0].child ("XSubmap");
 			
-			trace (": __xmlList.length (): ", __xmlList.length ());
+			trace (": __xmlList.length: ", __xmlList.length);
 			
 			var i:Number;
 			
-			for (i=0; i<__xmlList.length (); i++) {
-				var __submapXML:XML = __xmlList[i];
+			for (i=0; i<__xmlList.length; i++) {
+				var __submapXML:XSimpleXMLNode = __xmlList[i];
 				
-				__row = __submapXML.@row;
-				__col = __submapXML.@col;
+				__row = __submapXML.getAttribute ("row");
+				__col = __submapXML.getAttribute ("col");
 				
 				trace (": __submapXML: ", __submapXML);
 				

@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------
 package X.Document {
 	
+	import X.XML.*;
 	import X.MVC.XModelBase;
 	import X.XApp;
 
@@ -9,7 +10,7 @@ package X.Document {
 		protected var m_model:XModelBase;
 		protected var m_XApp:XApp;
 		protected var m_name:String;
-		protected var m_xml:XML;
+		protected var m_xml:XSimpleXMLNode;
 						
 //------------------------------------------------------------------------------------------
 		public function XDocument () {	
@@ -17,7 +18,7 @@ package X.Document {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setup (__XApp:XApp, __model:XModelBase, __xml:XML):void {
+		public function setup (__XApp:XApp, __model:XModelBase, __xml:XSimpleXMLNode):void {
 			m_XApp = __XApp;
 			model = __model;
 			xml = __xml;
@@ -41,21 +42,21 @@ package X.Document {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function get xml ():XML {
+		public function get xml ():XSimpleXMLNode {
 			return m_xml;
 		}
 		
-		public function set xml (__xml:XML):void {
+		public function set xml (__xml:XSimpleXMLNode):void {
 			m_xml = __xml;
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function serializeAll ():XML {
+		public function serializeAll ():XSimpleXMLNode {
 			return m_model.serializeAll ();
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function deserializeAll (__xml:XML):void {
+		public function deserializeAll (__xml:XSimpleXMLNode):void {
 			m_model.deserializeAll (__xml);
 		}
 		
