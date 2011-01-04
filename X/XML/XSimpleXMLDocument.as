@@ -17,7 +17,7 @@ package X.XML {
 		public function toXMLString (__indent:Number = 0):String {
 			var __xmlString:String = "<?xml version='1.0' encoding='UTF-8'?>";
 			
-			__xmlString + = __tabs (__indent) + super.toXMLString (indent+1);
+			__xmlString += __tab (__indent) + super.toXMLString (indent+1);
 			
 			return __xmlString;	
 		}
