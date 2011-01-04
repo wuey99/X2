@@ -297,12 +297,10 @@ package X.World {
 			var __x:Point;
 			
 			if (__layer < 0) {
-// spoom
 				__x = getXHudLayer ().globalToLocal (__p);
 			}
 			else 
 			{
-// spoom
 				__x = getXWorldLayer (__layer).globalToLocal (__p);
 			}
 			

@@ -5,7 +5,6 @@ import X.Geom.XPoint;
 		
 //------------------------------------------------------------------------------------------
 		public function globalToParent():XPoint {
-// spoom
 			var __p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			return new XPoint (__p.x, __p.y);
