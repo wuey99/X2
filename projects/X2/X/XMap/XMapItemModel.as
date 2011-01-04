@@ -242,24 +242,24 @@ package X.XMap {
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
 			var __attribs:Object = {
-				logicClassIndex:	logicClassIndex,
-				name:				name,
-				id:					id,
-				imageClassIndex:	imageClassIndex,
-				frame:				frame,
-				x:					x,
-				y:					y,
-				rotation:			rotation,
-				scale:				scale,
-				depth:				depth,
-				cx:					collisionRect.x,
-				cy:					collisionRect.y,
-				cw:					collisionRect.width,
-				ch:					collisionRect.height,
-				bx:					boundingRect.x,
-				by:					boundingRect.y,
-				bw:					boundingRect.width,
-				bh:					boundingRect.height
+				"logicClassIndex":	logicClassIndex,
+				"name":				name,
+				"id":				id,
+				"imageClassIndex":	imageClassIndex,
+				"frame":			frame,
+				"x":				x,
+				"y":				y,
+				"rotation":			rotation,
+				"scale":			scale,
+				"depth":			depth,
+				"cx":				collisionRect.x,
+				"cy":				collisionRect.y,
+				"cw":				collisionRect.width,
+				"ch":				collisionRect.height,
+				"bx":				boundingRect.x,
+				"by":				boundingRect.y,
+				"bw":				boundingRect.width,
+				"bh":				boundingRect.height
 			};
 			
 			xml.setupWithParams ("XMapItem", "", __attribs);
