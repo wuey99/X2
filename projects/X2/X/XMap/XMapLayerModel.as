@@ -381,20 +381,20 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function serialize (__xml:XSimpleXMLNode):XSimpleXMLNode {
-			var __attribs:Object = {
-				"vx":			viewPort.x,
-				"vy":			viewPort.y,
-				"vw":			viewPort.width,
-				"vh":			viewPort.height,
-				"layer":		m_layer,
-				"submapRows":	m_submapRows,
-				"submapCols":	m_submapCols,
-				"submapWidth":	m_submapWidth,
-				"submapHeight":	m_submapHeight,
-				"currID":		m_currID
-			};
+			var __attribs:Array = [
+				"vx",			viewPort.x,
+				"vy",			viewPort.y,
+				"vw",			viewPort.width,
+				"vh",			viewPort.height,
+				"layer",		m_layer,
+				"submapRows",	m_submapRows,
+				"submapCols",	m_submapCols,
+				"submapWidth",	m_submapWidth,
+				"submapHeight",	m_submapHeight,
+				"currID",		m_currID
+			];
 			
-			__xml.addChildWithParams ("XLayer", "", __attribs);
+			__xml = __xml.addChildWithParams ("XLayer", "", __attribs);
 			
 			__xml.addChildWithXMLNode (m_classNames.serialize ());
 			__xml.addChildWithXMLNode (serializeItems ());
@@ -407,7 +407,7 @@ package X.XMap {
 		public function serializeItems ():XSimpleXMLNode {
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			xml.setupWithParams ("items", "", {});
+			xml.setupWithParams ("items", "", []);
 		
 			return xml;
 		}
@@ -416,7 +416,7 @@ package X.XMap {
 		public function serializeSubmaps ():XSimpleXMLNode {
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			xml.setupWithParams ("XSubmaps", "", {});
+			xml.setupWithParams ("XSubmaps", "", []);
 			
 			var __row:Number, __col:Number;
 			var __x1:Number, __y1:Number, __x2:Number, __y2:Number;

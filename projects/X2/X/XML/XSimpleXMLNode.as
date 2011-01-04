@@ -4,7 +4,8 @@ package X.XML {
 //------------------------------------------------------------------------------------------
 	public class XSimpleXMLNode extends Object {
 		private var m_tag:String;
-		private var m_attribs:Object;
+		private var m_attribs:Array;
+		private var m_attribsMap:Object;
 		private var m_text:String;
 		private var m_children:Array;
 		private var m_parent:XSimpleXMLNode;
@@ -13,15 +14,22 @@ package X.XML {
 		public function XSimpleXMLNode () {
 			super ();
 			
+			m_attribs = new Array ();
+			m_attribsMap = new Object ();
 			m_children = new Array ();
 			m_parent = null;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setupWithParams (__tag:String, __text:String, __attribs:Object):void {
+		public function setupWithParams (__tag:String, __text:String, __attribs:Array):void {
 			m_tag = __tag;
 			m_text = __text;
-			m_attribs = __attribs;
+			var i:Number;
+			
+			for (i=0; i<__attribs.length; i+=2) {
+				m_attribs.push (__attribs[i+0]);
+				m_attribsMap[__attribs[i+0]] = __attribs[i+1];
+			}
 		}
 
 //------------------------------------------------------------------------------------------
@@ -41,13 +49,15 @@ package X.XML {
 			m_text = __xml.text ();
 	
 //------------------------------------------------------------------------------------------
-			m_attribs = new Object ();
+			m_attribs = new Array ();
+			m_attribsMap = new Object ();
 			
 			__xmlList = __xml.attributes ();
 			
 			for (i = 0; i<__xmlList.length (); i++) {
 				var __key:String = __xmlList[i].name ();
-				m_attribs[__key] = __xml.@[__key];
+				m_attribs.push (__key);
+				m_attribsMap[__key] = __xml.@[__key];
 			}
 		
 //------------------------------------------------------------------------------------------	
@@ -78,7 +88,7 @@ package X.XML {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addChildWithParams (__tag:String, __text:String, __attribs:Object):XSimpleXMLNode {
+		public function addChildWithParams (__tag:String, __text:String, __attribs:Array):XSimpleXMLNode {
 			var __xmlNode:XSimpleXMLNode = new XSimpleXMLNode ();
 			__xmlNode.setupWithParams (__tag, __text, __attribs);
 			
@@ -126,17 +136,18 @@ package X.XML {
 		
 //------------------------------------------------------------------------------------------
 		public function addAttribute (__name:String, __value:*):void {
-			m_attribs[__name] = __value;
+			m_attribs.push (__name);
+			m_attribsMap[__name] = __value;
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function getAttributes ():Object {
-			return m_attribs;
-		}
+//		public function getAttributes ():Object {
+//			return m_attribs;
+//		}
 
 //-----------------------------------------------------------------------------------------
 		public function getAttribute (__name:String):* {
-			return m_attribs[__name];
+			return m_attribsMap[__name];
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -161,11 +172,10 @@ package X.XML {
 			var __string:String = "";
 			
 			__string += __tab (__indent) + "<" + m_tag;
-			
-			var __props:*;
-			
-			for (__props in m_attribs) {
-				__string += " " + __props + "=" + "\"" + m_attribs[__props] + "\"";	
+					
+			for (var i:Number = 0; i<m_attribs.length; i++) {
+				var __key:String = m_attribs[i];	
+				__string += " " + __key + "=" + "\"" + m_attribsMap[__key] + "\"";	
 			}
 			
 			if (m_text != "" || m_children.length) {

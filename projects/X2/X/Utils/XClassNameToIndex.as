@@ -93,16 +93,16 @@ package X.Utils {
 		public function serialize ():XSimpleXMLNode {
 			var __xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			__xml.setupWithParams ("classNames", "", {});
+			__xml.setupWithParams ("classNames", "", []);
 			
 			var i:Number;
 			
 			for (i=0; i<m_classNamesStrings.length; i++) {
-				var __attribs:Object = {
-					index:			i,
-					name:			m_classNamesStrings[i],
-					count:			m_classNamesCounts[i]					
-				};
+				var __attribs:Array = [
+					"index",		i,
+					"name",			m_classNamesStrings[i],
+					"count",		m_classNamesCounts[i]					
+				];
 				
 				var __className:XSimpleXMLNode = new XSimpleXMLNode ();
 				
