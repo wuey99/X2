@@ -137,7 +137,7 @@ package X.XMap {
 		public function serialize ():XSimpleXMLNode {
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			xml.setupWithParams ("XMap", "", {});
+			xml.setupWithParams ("XMap", "", []);
 			
 			xml.addChildWithXMLNode (serializeLayers ());
 							
@@ -148,7 +148,7 @@ package X.XMap {
 		private function serializeLayers ():XSimpleXMLNode {
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			xml.setupWithParams ("XLayers", "", {});
+			xml.setupWithParams ("XLayers", "", []);
 	
 			var i:Number;
 			

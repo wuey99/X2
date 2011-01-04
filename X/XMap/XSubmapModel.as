@@ -182,10 +182,10 @@ package X.XMap {
 		public function serializeRowCol (__row:Number, __col:Number):XSimpleXMLNode {	
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			var __attribs:Object = {
-				"row":	__row,
-				"col":	__col
-			};
+			var __attribs:Array = [
+				"row",	__row,
+				"col",	__col
+			];
 			
 			xml.setupWithParams ("XSubmap", "", __attribs);
 
