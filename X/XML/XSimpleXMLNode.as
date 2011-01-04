@@ -156,7 +156,7 @@ package X.XML {
 		}
 			
 //------------------------------------------------------------------------------------------
-		private function __tab (__indent:Number):String {
+		protected function __tab (__indent:Number):String {
 			var i:Number;
 			var tabs:String = "";
 			
