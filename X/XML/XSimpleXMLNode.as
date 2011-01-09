@@ -182,7 +182,7 @@ package X.XML {
 				__string += ">\n";
 				
 				if (m_text != "") {
-					__string += __tab (__indent) + m_text + "\n";
+					__string += __tab (__indent+1) + m_text + "\n";
 				}
 				
 				if (m_children.length != 0) {

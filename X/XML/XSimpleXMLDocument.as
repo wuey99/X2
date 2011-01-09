@@ -15,9 +15,9 @@ package X.XML {
 		
 //------------------------------------------------------------------------------------------
 		public override function toXMLString (__indent:Number = 0):String {
-			var __xmlString:String = "<?xml version='1.0' encoding='UTF-8'?>";
+			var __xmlString:String = "<?xml version='1.0' encoding='UTF-8'?>\n";
 			
-			__xmlString += __tab (__indent) + super.toXMLString (__indent+1);
+			__xmlString += __tab (__indent) + super.toXMLString (__indent);
 			
 			return __xmlString;	
 		}
