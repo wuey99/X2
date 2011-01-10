@@ -253,7 +253,6 @@ package X.Resource {
 			}
 		}
 
-
 //------------------------------------------------------------------------------------------
 		public override function findResourceName (__resourceName:String):XML {	
 			return findNodeFromResourceName (
