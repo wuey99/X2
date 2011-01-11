@@ -158,11 +158,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function quit ():void {		
+		public function cleanup ():void {	
 			m_worldSprites.forEach (
 				function (x:*):void {
 					removeSprite (x);
