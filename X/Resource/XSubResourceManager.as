@@ -414,8 +414,7 @@ package X.Resource {
 				}
 			}
 		}
-				
-						
+	
 //------------------------------------------------------------------------------------------
 		private function __lookUpResourcePathByClassName (__fullName:String):String {
 			if (m_manifestXML == null) {

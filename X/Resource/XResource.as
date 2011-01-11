@@ -19,7 +19,7 @@ package X.Resource {
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
 			):void {
-			}
+		}
 			
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
