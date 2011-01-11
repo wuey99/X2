@@ -211,13 +211,13 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function cleanupKills ():void {
+		public function killList ():void {
 			var i:Number;
 					
 			for (i=0; i<m_killList.length; i++) {
 				var x:XLogicObject = m_killList[i] as XLogicObject;
 				
-				x.quit ();
+				x.cleanup ();
 				
 				m_XLogicObjects.remove (x);
 				
