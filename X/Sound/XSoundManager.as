@@ -22,7 +22,6 @@ package X.Sound {
 			m_soundChannels = new XDict ();
 		}
 
-			
 //------------------------------------------------------------------------------------------
 		public function playSound (
 			__sound:Sound,
