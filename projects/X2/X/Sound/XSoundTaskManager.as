@@ -23,6 +23,13 @@ package X.Sound {
 		}
 			
 //------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+			super.cleanup ();
+			
+			removeAllSounds ();
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function setSoundManager (__soundManager:XSoundManager):void {
 			m_soundManager = __soundManager;
 		}
