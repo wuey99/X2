@@ -418,7 +418,7 @@ package X.Resource {
 //------------------------------------------------------------------------------------------
 		private function __lookUpResourcePathByClassName (__fullName:String):String {
 			if (m_manifestXML == null) {
-				throw (Error ("manifest hasn't been loaded yet"));
+				throw (Error ("manifest haz`sn't been loaded yet"));
 			}
 			
 			var r:XResourceName = new XResourceName (__fullName);
