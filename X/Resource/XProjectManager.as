@@ -37,37 +37,6 @@ package X.Resource {
 			m_projectXML = null;
 			m_embeddedResources = new Object ();
 		}
-		
-//------------------------------------------------------------------------------------------
-		public function setup (
-			__parent:Sprite,
-			__rootPath:String,
-			__urlName:String,
-			__callback:Function,
-			__loaderContextFactory:Function
-			):void {
-				
-			m_parent = __parent;
-			m_subResourceManagers = new Array ();
-			setBothPaths (__rootPath, __urlName);
-			m_loaderContextFactory = __loaderContextFactory;
-			loadProject (__rootPath, __urlName, __callback);
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function initFromXML (
-			__parent:Sprite,
-			__rootPath:String,
-			__xml:XML,
-			__callback:Function,
-			__loaderContextFactory:Function
-			):void {
-				
-			m_parent = __parent;
-			m_subResourceManagers = new Array ();
-			m_loaderContextFactory = __loaderContextFactory;
-			loadProjectFromXML (__rootPath, __xml, __callback);
-		}
 
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
@@ -77,7 +46,7 @@ package X.Resource {
 		public function kill ():void {
 			reset ();
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function reset ():void {
 			var i:int;
@@ -90,7 +59,23 @@ package X.Resource {
 				m_subResourceManagers.pop ();
 			}
 		}
-		
+				
+//------------------------------------------------------------------------------------------
+		public function setupFromURL (
+			__parent:Sprite,
+			__rootPath:String,
+			__urlName:String,
+			__callback:Function,
+			__loaderContextFactory:Function
+			):void {
+				
+			m_parent = __parent;
+			m_subResourceManagers = new Array ();
+			setBothPaths (__rootPath, __urlName);
+			m_loaderContextFactory = __loaderContextFactory;
+			loadProjectFromURL (__rootPath, __urlName, __callback);
+		}
+
 //------------------------------------------------------------------------------------------	
 		public function setLoaderContextFactory (__loaderContextFactory:Function):void {
 			m_loaderContextFactory = __loaderContextFactory;
@@ -102,7 +87,7 @@ package X.Resource {
 		}
 				
 //------------------------------------------------------------------------------------------	
-		public function loadProject (
+		public function loadProjectFromURL (
 			__rootPath:String,
 			__urlName:String,
 			__callback:Function):Boolean {
@@ -118,7 +103,7 @@ package X.Resource {
 			
 				m_rootDirectory = __rootPath;
 			
-				var __loader:URLLoader = __loadProject (m_rootDirectory + __urlName);
+				var __loader:URLLoader = __loadProjectFromURL (m_rootDirectory + __urlName);
 				__loader.addEventListener (Event.COMPLETE, __completeHandler);
 			}
 			
@@ -141,18 +126,49 @@ package X.Resource {
      	   		
 				m_loadComplete = true;
 			}
+			
+//------------------------------------------------------------------------------------------
+			function __loadProjectFromURL (__urlName:String):URLLoader {
+				var __loader:URLLoader = new URLLoader ();
+				var __urlReq:URLRequest = new URLRequest (__urlName);
+	
+				__loader.load (__urlReq);
+				
+				return __loader;
+			}
+		}
+
+//------------------------------------------------------------------------------------------	
+		public function setBothPaths (__rootPath:String, __urlName:String):void {
+			m_rootPath = __rootPath;
+			m_urlName = __urlName;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setRootPath (__rootPath:String):void {
+			m_rootDirectory = __rootPath;
 		}
 
 //------------------------------------------------------------------------------------------
-		private function __loadProject (__urlName:String):URLLoader {
-			var __loader:URLLoader = new URLLoader ();
-			var __urlReq:URLRequest = new URLRequest (__urlName);
-
-			__loader.load (__urlReq);
-			
-			return __loader;
+		public function getRootPath ():String {
+			return m_rootDirectory;
 		}
-
+		
+//------------------------------------------------------------------------------------------
+		public function setupFromXML (
+			__parent:Sprite,
+			__rootPath:String,
+			__xml:XML,
+			__callback:Function,
+			__loaderContextFactory:Function
+			):void {
+				
+			m_parent = __parent;
+			m_subResourceManagers = new Array ();
+			m_loaderContextFactory = __loaderContextFactory;
+			loadProjectFromXML (__rootPath, __xml, __callback);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function loadProjectFromXML (
 			__rootPath:String,
@@ -192,7 +208,7 @@ package X.Resource {
 				}
 	
 				if (__manifest == null) {
-					__subResourceManager.setup (
+					__subResourceManager.setupFromURL (
 						this,
 						m_parent,
 						getRootPath (),
@@ -203,7 +219,7 @@ package X.Resource {
 				}
 				else
 				{
-					__subResourceManager.initFromXML (
+					__subResourceManager.setupFromXML (
 						this,
 						m_parent,
 						getRootPath (),
@@ -249,22 +265,6 @@ package X.Resource {
 //------------------------------------------------------------------------------------------
 		public function findEmbeddedResource (__resourcePath:String):Class {
 			return m_embeddedResources[__resourcePath] as Class;
-		}
-		
-//------------------------------------------------------------------------------------------	
-		public function setBothPaths (__rootPath:String, __urlName:String):void {
-			m_rootPath = __rootPath;
-			m_urlName = __urlName;
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function setRootPath (__rootPath:String):void {
-			m_rootDirectory = __rootPath;
-		}
-
-//------------------------------------------------------------------------------------------
-		public function getRootPath ():String {
-			return m_rootDirectory;
 		}
 					
 //------------------------------------------------------------------------------------------

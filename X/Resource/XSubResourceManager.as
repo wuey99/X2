@@ -48,42 +48,6 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setup (
-			__projectManager:XProjectManager,
-			__parent:Sprite,
-			__rootPath:String,
-			__urlName:String,
-			__callback:Function,
-			__loaderContextFactory:Function
-			):void {
-				
-			m_projectManager = __projectManager;
-			m_parent = __parent;
-			setBothPaths (__rootPath, __urlName);
-			m_loaderContextFactory = __loaderContextFactory;
-
-			loadManifest (__rootPath, __urlName, __callback);
-		}
-
-//------------------------------------------------------------------------------------------
-		public function initFromXML (
-			__projectManager:XProjectManager,
-			__parent:Sprite,
-			__rootPath:String,
-			__xml:XML,
-			__callback:Function,
-			__loaderContextFactory:Function
-			):void {
-				
-			m_projectManager = __projectManager;
-			m_parent = __parent;
-			setBothPaths (__rootPath, "");
-			m_loaderContextFactory = __loaderContextFactory;
-
-			loadManifestFromXML (__rootPath, __xml, __callback);
-		}
-		
-//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
 		
@@ -99,7 +63,25 @@ package X.Resource {
 			m_resourceMap = new Object ();
 			m_classMap = new Object ();
 		}
-		
+				
+//------------------------------------------------------------------------------------------
+		public function setupFromURL (
+			__projectManager:XProjectManager,
+			__parent:Sprite,
+			__rootPath:String,
+			__urlName:String,
+			__callback:Function,
+			__loaderContextFactory:Function
+			):void {
+				
+			m_projectManager = __projectManager;
+			m_parent = __parent;
+			setBothPaths (__rootPath, __urlName);
+			m_loaderContextFactory = __loaderContextFactory;
+
+			loadManifestFromURL (__rootPath, __urlName, __callback);
+		}
+
 //------------------------------------------------------------------------------------------	
 		public function setLoaderContextFactory (__loaderContextFactory:Function):void {
 			m_loaderContextFactory = __loaderContextFactory;
@@ -111,7 +93,7 @@ package X.Resource {
 		}
 				
 //------------------------------------------------------------------------------------------	
-		public function loadManifest (
+		public function loadManifestFromURL (
 			__rootPath:String,
 			__urlName:String,
 			__callback:Function):Boolean {
@@ -125,7 +107,7 @@ package X.Resource {
 			
 				m_rootDirectory = __rootPath;
 			
-				var __loader:URLLoader = __loadManifest (m_rootDirectory + __urlName);
+				var __loader:URLLoader = __loadManifestFromURL (m_rootDirectory + __urlName);
 				__loader.addEventListener (Event.COMPLETE, __completeHandler);
 			}
 				
@@ -150,18 +132,36 @@ package X.Resource {
      	   		
 				m_loadComplete = true;
 			}
+			
+//------------------------------------------------------------------------------------------
+			function __loadManifestFromURL (__urlName:String):URLLoader {
+				var __loader:URLLoader = new URLLoader ();
+				var __urlReq:URLRequest = new URLRequest (__urlName);
+	
+				__loader.load (__urlReq);
+				
+				return __loader;
+			}
 		}
 
 //------------------------------------------------------------------------------------------
-		private function __loadManifest (__urlName:String):URLLoader {
-			var __loader:URLLoader = new URLLoader ();
-			var __urlReq:URLRequest = new URLRequest (__urlName);
+		public function setupFromXML (
+			__projectManager:XProjectManager,
+			__parent:Sprite,
+			__rootPath:String,
+			__xml:XML,
+			__callback:Function,
+			__loaderContextFactory:Function
+			):void {
+				
+			m_projectManager = __projectManager;
+			m_parent = __parent;
+			setBothPaths (__rootPath, "");
+			m_loaderContextFactory = __loaderContextFactory;
 
-			__loader.load (__urlReq);
-			
-			return __loader;
+			loadManifestFromXML (__rootPath, __xml, __callback);
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function loadManifestFromXML (
 			__rootPath:String,
