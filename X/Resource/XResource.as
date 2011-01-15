@@ -9,7 +9,9 @@ package X.Resource {
 	
 //------------------------------------------------------------------------------------------	
 	public class XResource extends Object {
-		
+		protected var m_resourcePath:String;
+		protected var m_resourceXML:XML;
+
 //------------------------------------------------------------------------------------------
 		public function XResource () {
 		}
@@ -20,6 +22,9 @@ package X.Resource {
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
 			):void {
+				
+			m_resourcePath = "";
+			m_resourceXML = null;
 		}
 			
 //------------------------------------------------------------------------------------------
@@ -36,19 +41,24 @@ package X.Resource {
 		
 //------------------------------------------------------------------------------------------
 		public function getResourcePath ():String {
-			return "";
+			return m_resourcePath;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function getResourceXML ():XML {
+			return m_resourceXML;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getAllClassNames ():Array {
 			return null;
 		}
-		
+				
 //------------------------------------------------------------------------------------------
 		public function getClassByName (__className:String):Class {
 			return null;
 		}
-
+		
 //------------------------------------------------------------------------------------------
 	}
 	
