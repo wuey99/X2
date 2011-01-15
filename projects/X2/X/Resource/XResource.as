@@ -51,7 +51,15 @@ package X.Resource {
 
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array {
-			return null;
+			var __xmlList:XMLList = m_resourceXML.child ("*");
+			var i:Number;
+			var __classes:Array = new Array ();
+						
+			for (i=0; i<__xmlList.length (); i++) {
+				__classes.push (__xmlList[i].@name);	
+			}
+			
+			return __classes;
 		}
 				
 //------------------------------------------------------------------------------------------
