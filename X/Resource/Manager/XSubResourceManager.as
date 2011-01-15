@@ -515,7 +515,7 @@ package X.Resource.Manager {
 			{
 				__XClass.setClass (XResource (__r).getClassByName (__XClass.getClassName ()));
 			}
-				
+			
 			return __XClass.getClass ();
 		}		
 		

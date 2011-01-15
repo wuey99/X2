@@ -163,7 +163,7 @@ package X.Resource.Types {
 			if (!m_loadComplete) {
 				return null;
 			}
-			
+
 			var r:XResourceName = new XResourceName (__fullName);
 			
 			var __resourceName:String = r.resourceName;
