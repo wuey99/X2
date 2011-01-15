@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------------------	
-package X.Resource {
+package X.Resource.Manager {
+	
+	import X.Resource.*;
 	
 	import flash.display.*;
 	import flash.events.Event;
