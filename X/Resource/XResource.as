@@ -5,7 +5,6 @@ package X.Resource {
 	
 	import flash.display.*;
 	import flash.events.*;
-	import flash.net.URLRequest;
 	import flash.system.*;
 	
 //------------------------------------------------------------------------------------------	
@@ -17,7 +16,7 @@ package X.Resource {
 		
 //------------------------------------------------------------------------------------------
 		public function setup (
-			__resourcePath:String,
+			__resourcePath:String, __resourceXML:XML,
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
 			):void {
@@ -40,6 +39,11 @@ package X.Resource {
 			return "";
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getResourceXML ():XML {
+			return null;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getClassByName (__className:String):Class {
 			return null;

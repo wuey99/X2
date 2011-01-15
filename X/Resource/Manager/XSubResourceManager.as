@@ -419,9 +419,9 @@ package X.Resource.Manager {
 		}
 	
 //------------------------------------------------------------------------------------------
-		private function __lookUpResourcePathByClassName (__fullName:String):String {
+		private function __lookUpResourcePathByClassName (__fullName:String):Array {
 			if (m_manifestXML == null) {
-				throw (Error ("manifest haz`sn't been loaded yet"));
+				throw (Error ("manifest hasn't been loaded yet"));
 			}
 			
 			var r:XResourceName = new XResourceName (__fullName);
@@ -446,7 +446,7 @@ package X.Resource.Manager {
 				throw (Error ("className not found in manifest: " + __fullName));
 			}
 			
-			return match.@path + "\\" + match.@dst;
+			return [match, match.@path + "\\" + match.@dst];
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -461,11 +461,14 @@ package X.Resource.Manager {
 			trace (": XResourceManager:__resolveXClass (): ", __className);
 			
 			if (__c == undefined) {
-				var __resourcePath:String = __lookUpResourcePathByClassName (__className);
+				var __match:Array = __lookUpResourcePathByClassName (__className);
+				
+				var __resourceXML:XML = __match[0];
+				var __resourcePath:String = __match[1];
 				
 //				trace ("$ __resolveXClass: ", __className, __resourcePath);
 				
-				__XClass = new XClass (__className, __resourcePath);
+				__XClass = new XClass (__className, __resourcePath, __resourceXML);
 				__XClass.setClass (null);
 				m_classMap[__className] = __XClass;				
 			}
@@ -485,7 +488,8 @@ package X.Resource.Manager {
 //------------------------------------------------------------------------------------------
 		private function __resolveClass (__XClass:XClass):Class {
 			var	__resourcePath:String = __XClass.getResourcePath ();
-				
+			var __resourceXML:XML = __XClass.getResourceXML ();
+			
 			var __r:* = m_resourceMap[__resourcePath];
 				
 //			trace ("$ __resolveClass: ", __resourcePath);
@@ -495,12 +499,12 @@ package X.Resource.Manager {
 				
 				if (m_projectManager.findEmbeddedResource (__resourcePath) == null) {
 					__XResource = new XSWFResource ();
-					__XResource.setup (m_rootDirectory + __resourcePath, m_parent, this);
+					__XResource.setup (m_rootDirectory + __resourcePath, __resourceXML, m_parent, this);
 				}
 				else
 				{
 					__XResource = new XSWFEmbeddedResource ();
-					__XResource.setup (__resourcePath, m_parent, this);					
+					__XResource.setup (__resourcePath, __resourceXML, m_parent, this);					
 				}
 						
 				__XResource.loadResource ();
