@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------
-package X.Resource {
+package X.Resource.Types {
 
+	import X.Resource.*;
 	import X.Resource.Manager.*;
 	
 	import flash.display.*;

@@ -2,6 +2,7 @@
 package X.Resource.Manager {
 	
 	import X.Resource.*;
+	import X.Resource.Types.*;
 	
 	import flash.display.*;
 	import flash.events.Event;
