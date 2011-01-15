@@ -16,6 +16,7 @@ package X.Resource.Types {
 	public class XSWFResource extends XResource {
 		private var m_loader:Loader = null;
 		private var m_resourcePath:String;
+		private var m_resourceXML:XML;
 		private var m_loadComplete:Boolean;
 		private var m_parent:Sprite;
 		private var m_resourceManager:XSubResourceManager;
@@ -26,12 +27,13 @@ package X.Resource.Types {
 
 //------------------------------------------------------------------------------------------
 		public override function setup (
-			__resourcePath:String,
+			__resourcePath:String, __resourceXML:XML,
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
 			):void {
 				
 			m_resourcePath = __resourcePath;
+			m_resourceXML = __resourceXML;
 			m_parent = __parent;
 			m_loader = null;
 			m_loadComplete = false;
@@ -258,6 +260,11 @@ package X.Resource.Types {
 			return m_resourcePath;
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function getResourceXML ():XML {
+			return m_resourceXML;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public override function getClassByName (__fullName:String):Class {
 			if (m_loader == null) {
