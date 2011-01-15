@@ -15,6 +15,7 @@ package X.World {
 	import X.Keyboard.*;
 	import X.MVC.*;
 	import X.Resource.*;
+	import X.Resource.Manager.*;
 	import X.Signals.*;
 	import X.Sound.*;
 	import X.Task.*;

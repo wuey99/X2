@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------------------
 package X.Resource {
 
+	import X.Resource.Manager.*;
+	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.net.URLLoader;

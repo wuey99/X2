@@ -9,7 +9,7 @@ package X {
 	
 	import X.Debug.XDebug;
 	import X.MVC.*;
-	import X.Resource.*;
+	import X.Resource.Manager.*;
 	import X.Signals.*;
 	import X.Sound.*;
 	import X.Task.*;
