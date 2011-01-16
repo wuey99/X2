@@ -53,7 +53,7 @@ package X.Resource.Types {
 			try {
 				var c:Class = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
 				
-				trace (": oooooooo: ", getQualifiedClassName (c));
+//				trace (": oooooooo: ", getQualifiedClassName (c));
 			}
 			catch (e:Error) {
 // how should we handle this error?
@@ -83,7 +83,7 @@ package X.Resource.Types {
 				try {
 					c = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__classNames[i]) as Class;
 					
-					trace (": oooooooo: ", getQualifiedClassName (c));
+//					trace (": oooooooo: ", getQualifiedClassName (c));
 				}
 				catch (e:Error) {
 // how should we handle this error?
