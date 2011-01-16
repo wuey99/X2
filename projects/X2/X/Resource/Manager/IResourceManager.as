@@ -9,15 +9,15 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function deleteResource (__xml:XML):void {
+		public function deleteResourceXML (__xml:XML):void {
 		}		
 		
 //------------------------------------------------------------------------------------------
-		public function insertResource (item:XML, __xmlToInsert:XML):void {
+		public function insertResourceXML (item:XML, __xmlToInsert:XML):void {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function findResourceName (__resourceName:String):XML {
+		public function findResourceXMLFromName (__resourceName:String):XML {
 			return null;
 		}
 		
