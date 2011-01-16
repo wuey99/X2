@@ -80,6 +80,7 @@ package X.World {
 		public var m_xmlNode:XSimpleXMLNode;
 		public var m_XPoint:XPoint;
 		public var m_XRect:XRect;
+		public var m_g$:g$;
 		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){
