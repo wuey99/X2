@@ -233,12 +233,12 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function deleteResource (__xml:XML):void {
+		public override function deleteResourceXML (__xml:XML):void {
 			delete __xml.parent ().resource.(@name == __xml.@name)[0];
 		}		
 	
 //------------------------------------------------------------------------------------------
-		public override function insertResource (__xmlItem:XML, __xmlToInsert:XML):void {			
+		public override function insertResourceXML (__xmlItem:XML, __xmlToInsert:XML):void {			
 			if (__xmlItem == null) {
 				return;
 			}
@@ -257,7 +257,7 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function findResourceName (__resourceName:String):XML {	
+		public override function findResourceXMLFromName (__resourceName:String):XML {	
 			return findNodeFromResourceName (
 					null,
 					__resourceName,
