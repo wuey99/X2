@@ -507,7 +507,7 @@ package X.Resource.Manager {
 				var	__XResource:XResource;
 				
 				if (m_projectManager.findEmbeddedResource (__resourcePath) == null) {
-					__XResource = new XSWFResource ();
+					__XResource = new XSWFURLResource ();
 					__XResource.setup (m_rootDirectory + __resourcePath, __resourceXML, m_parent, this);
 				}
 				else
