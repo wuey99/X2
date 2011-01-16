@@ -86,7 +86,7 @@ package X.Resource.Types {
 					trace (": oooooooo: ", getQualifiedClassName (c));
 				}
 				catch (e:Error) {
-	// how should we handle this error?
+// how should we handle this error?
 					throw (Error ("unable to resolve: " + __classNames[i] + " in resource, error: " + e));
 				}
 				
