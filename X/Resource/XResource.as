@@ -22,9 +22,6 @@ package X.Resource {
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
 			):void {
-				
-			m_resourcePath = "";
-			m_resourceXML = null;
 		}
 			
 //------------------------------------------------------------------------------------------
@@ -53,17 +50,22 @@ package X.Resource {
 		public function getAllClassNames ():Array {
 			var __xmlList:XMLList = m_resourceXML.child ("*");
 			var i:Number;
-			var __classes:Array = new Array ();
+			var __classNames:Array = new Array ();
 						
 			for (i=0; i<__xmlList.length (); i++) {
-				__classes.push (__xmlList[i].@name);	
+				__classNames.push (__xmlList[i].@name);	
 			}
 			
-			return __classes;
+			return __classNames;
 		}
-				
+		
 //------------------------------------------------------------------------------------------
 		public function getClassByName (__className:String):Class {
+			return null;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getAllClasses ():Array {
 			return null;
 		}
 		
