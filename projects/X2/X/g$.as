@@ -4,7 +4,13 @@ package X {
 //------------------------------------------------------------------------------------------
 public class g$ extends Object {
 	
+// g$.v.
+// g$.XApp$.
+// g$.app$.
+
 	public static var v:g$ = new g$();
+	public static var XApp$:XApp;
+	public static var app$:*;
 	
 //------------------------------------------------------------------------------------------
 }
