@@ -489,11 +489,20 @@ package X.Resource.Manager {
 		private function __resolveClass (__XClass:XClass):Class {
 			var	__resourcePath:String = __XClass.getResourcePath ();
 			var __resourceXML:XML = __XClass.getResourceXML ();
+	
+			var __r:XResource = __getXResourceFromPath (__resourcePath, __resourceXML);
+					
+			if (__XClass.getClass () == null) {
+				__XClass.setClass (__r.getClassByName (__XClass.getClassName ()));
+			}
 			
-			var __r:* = m_resourceMap[__resourcePath];
-				
-//			trace ("$ __resolveClass: ", __resourcePath);
-			
+			return __XClass.getClass ();
+		}		
+
+//------------------------------------------------------------------------------------------
+		private function __getXResourceFromPath (__resourcePath:String, __resourceXML:XML):XResource {
+			var __r:XResource = m_resourceMap[__resourcePath] as XResource;
+						
 			if (__r == undefined) {
 				var	__XResource:XResource;
 				
@@ -510,14 +519,12 @@ package X.Resource.Manager {
 				__XResource.loadResource ();
 				
 				m_resourceMap[__resourcePath] = __XResource;
-			}
-			else
-			{
-				__XClass.setClass (XResource (__r).getClassByName (__XClass.getClassName ()));
+				
+				__r = __XResource;
 			}
 			
-			return __XClass.getClass ();
-		}		
+			return __r
+		}
 		
 //------------------------------------------------------------------------------------------
 	}
