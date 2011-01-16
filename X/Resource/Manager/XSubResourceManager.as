@@ -503,7 +503,7 @@ package X.Resource.Manager {
 		private function __getXResourceFromPath (__resourcePath:String, __resourceXML:XML):XResource {
 			var __r:XResource = m_resourceMap[__resourcePath] as XResource;
 						
-			if (__r == undefined) {
+			if (__r == null) {
 				var	__XResource:XResource;
 				
 				if (m_projectManager.findEmbeddedResource (__resourcePath) == null) {
