@@ -264,7 +264,17 @@ package X.Resource.Manager {
 					m_manifestXML.folder.child ("*")
 					);
 		}
-				
+		
+//------------------------------------------------------------------------------------------
+		public function findResourceFromName (__resourceName:String):XResource {
+			var __resourceXML:XML = findResourceXMLFromName (__resourceName);
+			
+			return __getXResourceFromPath (
+				__resourceXML.@path + "\\" +__resourceXML.@dst,
+				__resourceXML
+				);
+		}
+		
 //------------------------------------------------------------------------------------------
 // looks up Class based on the full class name
 //------------------------------------------------------------------------------------------
