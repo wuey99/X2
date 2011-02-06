@@ -23,6 +23,17 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function replaceSound (
+			__sound:Sound,
+			__completeListener:Function = null
+			):Number {
+				
+			removeAllSounds ();
+			
+			return playSound (__sound, __completeListener);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function playSound (
 			__sound:Sound,
 			__completeListener:Function = null
