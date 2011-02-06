@@ -169,7 +169,7 @@ package X.World {
 			
 			m_inuse_ENTER_FRAME++;
 			
-			getXLogicManager ().killList ();
+			getXLogicManager ().emptyKillQueue ();
 			
 				getXLogicManager ().updateLogic ();
 				getXTaskManager ().updateTasks ();
@@ -178,7 +178,7 @@ package X.World {
 				m_world.Step (m_timeStep, m_iterations);
 				getXLogicManager ().setValues ();
 				
-			getXLogicManager ().killList ();
+			getXLogicManager ().emptyKillQueue ();
 
 			getXLogicManager ().updateDisplay ();
  

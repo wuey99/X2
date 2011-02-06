@@ -16,7 +16,7 @@ package X.World {
 		private var xxx:XWorld;
 		private var m_XLogicObjects:XDict;
 		private var m_XLogicObjectsTopLevel:XDict;
-		private var m_killList:Array;
+		private var m_killQueue:Array;
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicManager (__xxx:XWorld) {
@@ -25,7 +25,7 @@ package X.World {
 			m_XLogicObjects = new XDict ();
 			m_XLogicObjectsTopLevel = new XDict ();
 			
-			m_killList = new Array ();
+			m_killQueue = new Array ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -202,41 +202,44 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function kill (__object:XLogicObject):void {
+		public function killLater (__object:XLogicObject):void {
 			trace (": kill? ", __object);
 			
-			if (m_killList.indexOf (__object) == -1) {
-				m_killList.push (__object);
+			if (m_killQueue.indexOf (__object) == -1) {
+				m_killQueue.push (__object);
 			}
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function killList ():void {
+		public function emptyKillQueue ():void {
 			var i:Number;
 					
-			for (i=0; i<m_killList.length; i++) {
-				var x:XLogicObject = m_killList[i] as XLogicObject;
+			for (i=0; i<m_killQueue.length; i++) {
+				var x:XLogicObject = m_killQueue[i] as XLogicObject;
 				
 				x.cleanup ();
 				
-				m_XLogicObjects.remove (x);
-				
-				if (m_XLogicObjectsTopLevel.exists (x)) {
-					m_XLogicObjectsTopLevel.remove (x);
-				}
-				
-				trace (": kill: ", x, x.m_GUID, x.xxx, xxx);
-				
-				xxx.removeChild (x);
-				
-				if (x.getParent () != null) {
-					x.getParent ().removeXLogicObject0 (x);
-				}
+				removeXLogicObject (x);
 			}
 			
-			m_killList = new Array ();
+			m_killQueue = new Array ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function removeXLogicObject (x:XLogicObject):void {
+			if (m_XLogicObjects.exists (x)) {
+				m_XLogicObjects.remove (x);
+			}
+						
+			if (m_XLogicObjectsTopLevel.exists (x)) {
+				m_XLogicObjectsTopLevel.remove (x);
+			}
+				
+			trace (": kill: ", x, x.m_GUID, x.xxx, xxx);
+				
+			xxx.removeChild (x);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getXLogicObjects ():XDict {
 			return m_XLogicObjects;
@@ -262,7 +265,7 @@ package X.World {
 		
 //------------------------------------------------------------------------------------------
 		public function cullObjects ():void {
-			m_XLogicObjects.forEach (
+			m_XLogicObjectsTopLevel.forEach (
 				function (x:*):void {
 					x.cullObject ();
 				}
