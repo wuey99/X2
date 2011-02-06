@@ -38,7 +38,15 @@ package X.World.Tiles {
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
-			super.cleanup ();
+			removeAll ();
+			
+			if (m_submapModel != null) {
+				fireKillSignal (m_submapModel);
+							
+				m_submapModel.inuse--;
+				
+				m_submapModel = null;
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -110,21 +118,6 @@ package X.World.Tiles {
 				}
 			}
 		}
-
-//------------------------------------------------------------------------------------------
-// kill this object and remove it from the World
-//------------------------------------------------------------------------------------------
-		public override function kill ():void {
-			xxx.getXLogicManager ().killLater (this);
-
-			if (m_submapModel != null) {
-				fireKillSignal (m_submapModel);
-							
-				m_submapModel.inuse--;
-				
-				m_submapModel = null;
-			}
-		}
 		
 //------------------------------------------------------------------------------------------
 // cull this object if it strays outside the current viewPort
@@ -150,7 +143,7 @@ package X.World.Tiles {
 			trace (": ---------------------------------------: ");
 			trace (": cull: ", this);
 			
-			kill ();
+			killLater ();
 		}
 		
 //------------------------------------------------------------------------------------------

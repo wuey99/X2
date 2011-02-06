@@ -159,15 +159,7 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {		
-			removeAllWorldSprites ();
-			removeAllHudSprites ();
-			removeAllXLogicObjects ();
-			removeAllXSignals ();
-			removeAllTasks ();
-			
-			if (getParent () != null) {
-				getParent ().removeXLogicObject0 (this);
-			}
+			removeAll ();
 			
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
@@ -182,12 +174,32 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-// kill this object and remove it from the World
+// kill this object and remove it from the World (delayed)
+//------------------------------------------------------------------------------------------
+		public function killLater ():void {
+			xxx.getXLogicManager ().killLater (this);
+		}
+
+//------------------------------------------------------------------------------------------
+// kill this object and remove it from the World (now)
 //------------------------------------------------------------------------------------------
 		public function kill ():void {
 			xxx.getXLogicManager ().killLater (this);
 		}
-				
+
+//------------------------------------------------------------------------------------------
+		public function removeAll ():void {
+			removeAllWorldSprites ();
+			removeAllHudSprites ();
+			removeAllXLogicObjects ();
+			removeAllXSignals ();
+			removeAllTasks ();
+			
+			if (getParent () != null) {
+				getParent ().removeXLogicObject0 (this);
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 // cull this object if it strays outside the current viewPort
 //------------------------------------------------------------------------------------------	
@@ -223,7 +235,7 @@ package X.World.Logic {
 			trace (": ---------------------------------------: ");
 			trace (": cull: ", this);
 			
-			kill ();
+			killLater ();
 		}
 
 //------------------------------------------------------------------------------------------
