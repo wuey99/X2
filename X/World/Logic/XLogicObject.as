@@ -158,36 +158,16 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {	
-			m_worldSprites.forEach (
-				function (x:*):void {
-					removeSprite (x);
-				}
-			);
-
-			m_hudSprites.forEach (
-				function (x:*):void {
-					removeSpriteFromHud (x);
-				}
-			);
-			
-			m_XLogicObjects.forEach (
-				function (x:*):void {
-					XLogicObject (x).kill ();
-				}
-			);
-			
+		public function cleanup ():void {		
+			removeAllWorldSprites ();
+			removeAllHudSprites ();
+			removeAllXLogicObjects ();
 			removeAllXSignals ();
 			removeAllTasks ();
-		}
-
-//------------------------------------------------------------------------------------------
-// kill this object and remove it from the World
-//------------------------------------------------------------------------------------------
-		public function kill ():void {
 			
-// let the Object Manager handle the kill
-			xxx.getXLogicManager ().kill (this);
+			if (getParent () != null) {
+				getParent ().removeXLogicObject0 (this);
+			}
 			
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
@@ -199,6 +179,13 @@ package X.World.Logic {
 				
 				m_item = null;
 			}
+		}
+
+//------------------------------------------------------------------------------------------
+// kill this object and remove it from the World
+//------------------------------------------------------------------------------------------
+		public function kill ():void {
+			xxx.getXLogicManager ().killLater (this);
 		}
 				
 //------------------------------------------------------------------------------------------
@@ -562,7 +549,7 @@ package X.World.Logic {
 			if (m_XLogicObjects.exists (__XLogicObject)) {
 				m_XLogicObjects.remove (__XLogicObject);
 				
-				__XLogicObject.kill ();
+				__XLogicObject.cleanup ();
 			}
 		}
 		
@@ -579,7 +566,7 @@ package X.World.Logic {
 		public function removeAllXLogicObjects ():void {
 			m_XLogicObjects.forEach (
 				function (x:*):void {
-					XLogicObject (x).kill ();
+					removeXLogicObject (x);
 				}
 			);
 		}

@@ -115,9 +115,7 @@ package X.World.Tiles {
 // kill this object and remove it from the World
 //------------------------------------------------------------------------------------------
 		public override function kill ():void {
-			
-// let the Object Manager handle the kill
-			xxx.getXLogicManager ().kill (this);
+			xxx.getXLogicManager ().killLater (this);
 
 			if (m_submapModel != null) {
 				fireKillSignal (m_submapModel);
