@@ -34,7 +34,7 @@ package X {
 
 //------------------------------------------------------------------------------------------
 		public function XApp () {
-			m_XTaskManager = new XTaskManager ();
+			m_XTaskManager = new XTaskManager (this);
 			m_XSignalManager = new XSignalManager ();
 			m_XSoundManager = new XSoundManager (this);
 			
@@ -62,12 +62,19 @@ package X {
 				
 				return;
 			}
-			
+
 			m_inuse_TIMER_FRAME++;
 			
 			getXTaskManager ().updateTasks ();
 			
 			m_inuse_TIMER_FRAME--;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getTime ():Number {
+			var __date:Date = new Date ();
+			
+			return __date.time;
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -62,6 +62,8 @@ package X.Task {
 		private var m_parent:*;
 		private var m_flags:Number;
 		private var m_subTask:XTask;
+		private var m_time:Number;
+		private var m_WAIT1000:Boolean;
 
 		protected var m_manager:XTaskManager;
 		
@@ -77,6 +79,7 @@ package X.Task {
 		public static var FLAGS:Number = 9;
 		public static var EXEC:Number = 10;
 		public static var FUNC:Number = 11;
+		public static var WAIT1000:Number = 12; 
 		
 		public static var FLAGS_EQ:Number = 1;
 		
@@ -89,6 +92,8 @@ package X.Task {
 			__reset (__taskList, __findLabelsFlag);
 			
 			m_parent = null;
+			
+			m_WAIT1000 = false;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -226,6 +231,11 @@ package X.Task {
 						
 						break;
 						
+					case WAIT1000:
+						i++;
+						
+						break;
+						
 					case GOTO:
 						i++;
 						
@@ -301,7 +311,36 @@ package X.Task {
 		}
 							
 		break;
-	
+
+//------------------------------------------------------------------------------------------
+	case WAIT1000:
+//------------------------------------------------------------------------------------------
+		if (!m_WAIT1000) {
+			m_time = m_XTaskSubManager.getManager ().getXApp ().getTime ();
+			
+			m_ticks += 0x0100;
+			m_taskIndex--;
+			
+			m_WAIT1000 = true;
+		}
+		else
+		{
+			var __time:Number = __evalNumber ();
+			
+			if (m_XTaskSubManager.getManager ().getXApp ().getTime () < m_time + __time) {
+				m_ticks += 0x0100;
+				m_taskIndex -= 2;
+			}
+			else
+			{
+				m_WAIT1000 = false;
+				
+				return true;
+			}		
+		}
+		
+		return false;
+				
 //------------------------------------------------------------------------------------------					
 	case LOOP:
 //------------------------------------------------------------------------------------------
