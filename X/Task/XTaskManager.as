@@ -9,14 +9,22 @@ package X.Task {
 	public class XTaskManager extends Object {
 		protected var m_XTasks:XDict;
 		protected var m_paused:Number;
+		protected var m_XApp:XApp;
 		
 //------------------------------------------------------------------------------------------
-		public function XTaskManager () {
+		public function XTaskManager (__XApp:XApp) {
+			m_XApp = __XApp;
+			
 			m_XTasks = new XDict ();
 			
 			m_paused = 0;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getXApp ():XApp {
+			return m_XApp;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function pause ():void {
 			m_paused++;

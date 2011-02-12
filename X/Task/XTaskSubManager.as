@@ -28,7 +28,12 @@ package X.Task {
 		public function cleanup ():void {
 			removeAllTasks ();
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function getManager ():XTaskManager {
+			return m_manager;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function setManager (__manager:XTaskManager):void {
 			m_manager = __manager;

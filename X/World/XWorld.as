@@ -114,8 +114,8 @@ package X.World {
 			m_ticks = 0;
 			
 			m_XLogicManager = new XLogicManager (this);
-			m_XTaskManager = new XTaskManager ();
-			m_renderManager = new XTaskManager ();
+			m_XTaskManager = new XTaskManager (__XApp);
+			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager ();
 									
 			m_XMapModel = null;
