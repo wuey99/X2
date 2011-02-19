@@ -80,6 +80,7 @@ package X.Task {
 		public static var EXEC:Number = 10;
 		public static var FUNC:Number = 11;
 		public static var WAIT1000:Number = 12; 
+		public static var UNTIL:Number = 13;
 		
 		public static var FLAGS_EQ:Number = 1;
 		
@@ -225,7 +226,12 @@ package X.Task {
 						
 					case NEXT:
 						break;
+
+					case UNTIL:
+						i++;
 						
+						break;
+												
 					case WAIT:
 						i++;
 						
@@ -367,7 +373,24 @@ package X.Task {
 		}
 			
 		break;
+
+//------------------------------------------------------------------------------------------
+	case UNTIL:
+//------------------------------------------------------------------------------------------
+		var __funcUntil:Function = m_taskList[m_taskIndex++] as Function;
+		
+		__funcUntil (this);
+		
+		if (!(m_flags & FLAGS_EQ)) {	
+			m_taskIndex = m_stack[m_stackPtr-1];
+		}
+		else
+		{
+			m_stackPtr--;
+		}
 			
+		break;
+					
 //------------------------------------------------------------------------------------------					
 	case GOTO:
 //------------------------------------------------------------------------------------------
