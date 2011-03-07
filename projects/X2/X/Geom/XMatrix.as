@@ -71,21 +71,23 @@ package X.Geom {
 		}
 				
 //------------------------------------------------------------------------------------------
-		public static function createScale (__sx:Number, __sy:Number):XMatrix {
+		public static function createScaling (__sx:Number, __sy:Number):XMatrix {
 			return new XMatrix (__sx, 0, 0, __sy, 0, 0);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public static function createTranslate (__tx:Number, __ty:Number):XMatrix {
+		public static function createTranslation (__tx:Number, __ty:Number):XMatrix {
 			return new XMatrix (1, 0, 0, 1, __tx, __ty);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public static function createRotate (__angle:Number):XMatrix {
-			var sin:Number = Math.sin (__angle*Math.PI/180);
-			var cos:Number = Math.cos (__angle*Math.PI/180);
+		public static function createRotatation (__angle:Number):XMatrix {
+			var __radians:Number = __angle*Math.PI/180;
 			
-			return new XMatrix (cos, sin, -sin, cos, 0, 0);
+			var __sin:Number = Math.sin (__radians);
+			var __cos:Number = Math.cos (__radians);
+			
+			return new XMatrix (__cos, __sin, -__sin, __cos, 0, 0);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -139,17 +141,17 @@ package X.Geom {
 		
 //------------------------------------------------------------------------------------------
 		public function rotate (__angle:Number):XMatrix {
-			return concat (createRotate (__angle));
+			return concat (createRotatation (__angle));
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function scale (__sx:Number, __sy:Number):XMatrix {
-			return concat (createScale (__sx, __sy));
+			return concat (createScaling (__sx, __sy));
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function translate (__dx:Number, __dy:Number):XMatrix {
-			return concat (createTranslate (__dx, __dy));
+			return concat (createTranslation (__dx, __dy));
 		}
 
 //------------------------------------------------------------------------------------------
