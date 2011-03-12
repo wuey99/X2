@@ -240,7 +240,7 @@ package X.XMap {
 								dst_items.push (item);
 							}
 						}
-				}
+					}
 				);
 			}
 			
