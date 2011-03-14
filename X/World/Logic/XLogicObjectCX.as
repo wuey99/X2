@@ -33,10 +33,10 @@ package X.World.Logic {
 	
 		public static var CX_COLLIDE_LF:Number = 0x0001;
 		public static var CX_COLLIDE_RT:Number = 0x0002;
-		public static var CX_COLLIDE_HORZ:Number = (CX_COLLIDE_LF+CX_COLLIDE_RT) 
+		public static var CX_COLLIDE_HORZ:Number = (CX_COLLIDE_LF+CX_COLLIDE_RT); 
 		public static var CX_COLLIDE_UP:Number = 0x0004;
 		public static var CX_COLLIDE_DN:Number = 0x0008;
-		public static var CX_COLLIDE_VERT:Number = (CX_COLLIDE_UP+CX_COLLIDE_DN)
+		public static var CX_COLLIDE_VERT:Number = (CX_COLLIDE_UP+CX_COLLIDE_DN);
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicObjectCX () {
