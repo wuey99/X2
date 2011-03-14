@@ -167,7 +167,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			...args
+			args:Array
 			):XLogicObject {
 
 			xxx.addChild (__logicObject);
