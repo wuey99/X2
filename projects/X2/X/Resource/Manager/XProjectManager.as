@@ -20,9 +20,8 @@ package X.Resource.Manager {
 		private var m_XApp:XApp;
 		private var m_parent:Sprite;
 		private var m_rootPath:String;
-		private var m_urlName:String;
+		private var m_projectName:String;
 		private var m_loadComplete:Boolean;
-		private var m_rootDirectory:String;
 		private var m_projectXML:XML;
 		private var m_loaderContextFactory:Function;
 		private var m_subResourceManagers:Array;
@@ -65,16 +64,16 @@ package X.Resource.Manager {
 		public function setupFromURL (
 			__parent:Sprite,
 			__rootPath:String,
-			__urlName:String,
+			__projectName:String,
 			__callback:Function,
 			__loaderContextFactory:Function
 			):void {
 				
 			m_parent = __parent;
 			m_subResourceManagers = new Array ();
-			setBothPaths (__rootPath, __urlName);
+			setBothPaths (__rootPath, __projectName);
 			m_loaderContextFactory = __loaderContextFactory;
-			loadProjectFromURL (__rootPath, __urlName, __callback);
+			loadProjectFromURL (__rootPath, __projectName, __callback);
 		}
 
 //------------------------------------------------------------------------------------------	
@@ -90,7 +89,7 @@ package X.Resource.Manager {
 //------------------------------------------------------------------------------------------	
 		public function loadProjectFromURL (
 			__rootPath:String,
-			__urlName:String,
+			__projectName:String,
 			__callback:Function):Boolean {
 				
 			if (!m_loadComplete) {
@@ -99,12 +98,12 @@ package X.Resource.Manager {
 			
 			reset ();
 			
-			if (__urlName != null) {
+			if (__projectName != null) {
 				m_loadComplete = false;
 			
-				m_rootDirectory = __rootPath;
+				m_rootPath = __rootPath;
 			
-				var __loader:URLLoader = __loadProjectFromURL (m_rootDirectory + __urlName);
+				var __loader:URLLoader = __loadProjectFromURL (m_rootPath + __projectName);
 				__loader.addEventListener (Event.COMPLETE, __completeHandler);
 			}
 			
@@ -114,7 +113,7 @@ package X.Resource.Manager {
 						
 //------------------------------------------------------------------------------------------					
      	   function __completeHandler(event:Event):void {
-     	   		try {
+				try {
 	     	   		var __loader:URLLoader = event.target as URLLoader;
      	   		  
      	   		  	var xml:XML = new XML (__loader.data);
@@ -129,9 +128,9 @@ package X.Resource.Manager {
 			}
 			
 //------------------------------------------------------------------------------------------
-			function __loadProjectFromURL (__urlName:String):URLLoader {
+			function __loadProjectFromURL (__projectName:String):URLLoader {
 				var __loader:URLLoader = new URLLoader ();
-				var __urlReq:URLRequest = new URLRequest (__urlName);
+				var __urlReq:URLRequest = new URLRequest (__projectName);
 	
 				__loader.load (__urlReq);
 				
@@ -140,19 +139,19 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------	
-		public function setBothPaths (__rootPath:String, __urlName:String):void {
+		public function setBothPaths (__rootPath:String, __projectName:String):void {
 			m_rootPath = __rootPath;
-			m_urlName = __urlName;
+			m_projectName = __projectName;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function setRootPath (__rootPath:String):void {
-			m_rootDirectory = __rootPath;
+			m_rootPath = __rootPath;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function getRootPath ():String {
-			return m_rootDirectory;
+			return m_rootPath;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -180,7 +179,7 @@ package X.Resource.Manager {
 			
 			m_loadComplete = false;
 			
-			m_rootDirectory = __rootPath;	
+			m_rootPath = __rootPath;	
 			m_callback = __callback;
 			
 			setProject (__xml);
