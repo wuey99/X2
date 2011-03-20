@@ -30,9 +30,8 @@ package X.Resource.Manager {
 		private var m_classMap:Object;
 		private var m_parent:Sprite;
 		private var m_rootPath:String;
-		private var m_urlName:String;
+		private var m_manifestName:String;
 		private var m_loadComplete:Boolean;
-		private var m_rootDirectory:String;
 		private var m_loaderContextFactory:Function;
 		private var m_cachedClassName:Object;
 		
@@ -72,17 +71,17 @@ package X.Resource.Manager {
 			__projectManager:XProjectManager,
 			__parent:Sprite,
 			__rootPath:String,
-			__urlName:String,
+			__manifestName:String,
 			__callback:Function,
 			__loaderContextFactory:Function
 			):void {
 				
 			m_projectManager = __projectManager;
 			m_parent = __parent;
-			setBothPaths (__rootPath, __urlName);
+			setBothPaths (__rootPath, __manifestName);
 			m_loaderContextFactory = __loaderContextFactory;
 
-			loadManifestFromURL (__rootPath, __urlName, __callback);
+			loadManifestFromURL (__rootPath, __manifestName, __callback);
 		}
 
 //------------------------------------------------------------------------------------------	
@@ -98,19 +97,19 @@ package X.Resource.Manager {
 //------------------------------------------------------------------------------------------	
 		public function loadManifestFromURL (
 			__rootPath:String,
-			__urlName:String,
+			__manifestName:String,
 			__callback:Function):Boolean {
 				
 			if (!m_loadComplete) {
 				return false;
 			}
 					
-			if (__urlName != null) {
+			if (__manifestName != null) {
 				m_loadComplete = false;
 			
-				m_rootDirectory = __rootPath;
+				m_rootPath = __rootPath;
 			
-				var __loader:URLLoader = __loadManifestFromURL (m_rootDirectory + __urlName);
+				var __loader:URLLoader = __loadManifestFromURL (m_rootPath + __manifestName);
 				__loader.addEventListener (Event.COMPLETE, __completeHandler);
 			}
 				
@@ -137,9 +136,9 @@ package X.Resource.Manager {
 			}
 			
 //------------------------------------------------------------------------------------------
-			function __loadManifestFromURL (__urlName:String):URLLoader {
+			function __loadManifestFromURL (__url:String):URLLoader {
 				var __loader:URLLoader = new URLLoader ();
-				var __urlReq:URLRequest = new URLRequest (__urlName);
+				var __urlReq:URLRequest = new URLRequest (__url);
 	
 				__loader.load (__urlReq);
 				
@@ -173,7 +172,7 @@ package X.Resource.Manager {
 		
 			m_loadComplete = false;
 			
-			m_rootDirectory = __rootPath;
+			m_rootPath = __rootPath;
 				
 			setManifest (__xml);
 			
@@ -197,29 +196,29 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------	
-		public function setBothPaths (__rootPath:String, __urlName:String):void {
+		public function setBothPaths (__rootPath:String, __manifestName:String):void {	
 			m_rootPath = __rootPath;
-			m_urlName = __urlName;
+			m_manifestName = __manifestName;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function setRootPath (__rootPath:String):void {
-			m_rootDirectory = __rootPath;
+			m_rootPath = __rootPath;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function getRootPath ():String {
-			return m_rootDirectory;
+			return m_rootPath;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getUrlName ():String {
-			return m_urlName;
+		public function getManifestName ():String {
+			return m_manifestName;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function getName ():String {
-			return getUrlName ().substr(0, getUrlName ().lastIndexOf('.'))
+			return getManifestName ().substr(0, getManifestName ().lastIndexOf('.'))
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -460,7 +459,7 @@ package X.Resource.Manager {
 		}
 		
 //------------------------------------------------------------------------------------------
-// Given a class name, this function determins if an existing
+// Given a class name, this function determines if an existing
 // XClass has been cached.  if not, it creates a new XClass
 //------------------------------------------------------------------------------------------
 		private function __resolveXClass (__className:String):XClass {
@@ -518,7 +517,7 @@ package X.Resource.Manager {
 				
 				if (m_projectManager.findEmbeddedResource (__resourcePath) == null) {
 					__XResource = new XSWFURLResource ();
-					__XResource.setup (m_rootDirectory + __resourcePath, __resourceXML, m_parent, this);
+					__XResource.setup (m_rootPath + __resourcePath, __resourceXML, m_parent, this);
 				}
 				else
 				{
