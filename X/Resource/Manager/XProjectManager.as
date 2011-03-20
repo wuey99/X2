@@ -14,7 +14,7 @@ package X.Resource.Manager {
 //------------------------------------------------------------------------------------------
 // XProjectManager
 //
-// manages one or more sub-resource managers
+// manages the main project which can contain one more more sub-projects
 //------------------------------------------------------------------------------------------	
 	public class XProjectManager extends Object {
 		private var m_XApp:XApp;
@@ -128,9 +128,9 @@ package X.Resource.Manager {
 			}
 			
 //------------------------------------------------------------------------------------------
-			function __loadProjectFromURL (__projectName:String):URLLoader {
+			function __loadProjectFromURL (__url:String):URLLoader {
 				var __loader:URLLoader = new URLLoader ();
-				var __urlReq:URLRequest = new URLRequest (__projectName);
+				var __urlReq:URLRequest = new URLRequest (__url);
 	
 				__loader.load (__urlReq);
 				
