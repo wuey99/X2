@@ -140,7 +140,7 @@ package X.World {
 
 			m_XKeyboardManager = new XKeyboardManager (this);
 					
-			setupDebug ()
+			setupDebug ();
 		}
 
 //------------------------------------------------------------------------------------------
