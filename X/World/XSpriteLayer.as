@@ -14,6 +14,8 @@ package X.World {
 		
 //------------------------------------------------------------------------------------------
 		public function XSpriteLayer () {
+			super ();
+			
 			m_XDepthSpriteMap = new XDict ();
 			
 			forceSort = false;
