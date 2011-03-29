@@ -33,6 +33,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
+			super ();
 		}	
 
 //------------------------------------------------------------------------------------------
@@ -41,7 +42,7 @@ package X.XMap {
 			__submapCols:Number, __submapRows:Number,
 			__submapWidth:Number, __submapHeight:Number
 			):void {
-				
+
 			var __row:Number;
 			var __col:Number;
 
