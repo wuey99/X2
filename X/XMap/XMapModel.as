@@ -23,6 +23,8 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapModel () {
+			super ();
+			
 			m_allClassNames = new Array ();
 		}	
 

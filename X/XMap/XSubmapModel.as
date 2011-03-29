@@ -74,6 +74,8 @@ package X.XMap {
 			__width:Number, __height:Number
 			) {
 				
+			super ();
+			
 			m_XMapLayer = __XMapLayer;
 				
 			m_submapWidth = __width;
