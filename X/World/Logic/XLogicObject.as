@@ -30,7 +30,7 @@ package X.World.Logic {
 // XLogicObjects can either be instantiated dynamically from code or from an externally
 // created level via a Level Manager.
 //
-// XLogicObjects that are craated from a Level Manager are responsible for handling their
+// XLogicObjects that are created from a Level Manager are responsible for handling their
 // own birth/death: XLogicObjects that stray outside the current viewport are automatically
 // culled and returned back to the level.  Alternatively they can be "nuked": permanently
 // removed from Level, never to return.  This system is based on Mario-like level management:
