@@ -50,10 +50,12 @@ package X.World {
 		public var m_inuse_ENTER_FRAME:Number;
 		public var m_inuse_RENDER_FRAME:Number;
 		public var m_XKeyboardManager:XKeyboardManager;
-				
+		protected var m_viewRect:XRect;
+					
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
 		public var m_XLogicObject:XLogicObject;
+		public var m_XLogicObjectCX0:XLogicObjectCX0;
 		public var m_XLogicObjectCX:XLogicObjectCX;
 		public var m_XLogicObjectBox2D:XLogicObjectBox2D;
 		public var m_XShape:XShape;
@@ -82,6 +84,8 @@ package X.World {
 		public var m_XRect:XRect;
 		public var m_XMatrix:XMatrix;
 		public var m_g$:g$;
+		public var m_XMapLayerView:XMapLayerView;
+		public var m_XMapView:XMapView;
 		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp){
@@ -310,6 +314,20 @@ package X.World {
 			return new XPoint (__x.x, __x.y);
 		}
 				
+
+//------------------------------------------------------------------------------------------
+		public function setViewRect (
+			__width:Number, __height:Number
+			):void {
+				
+			m_viewRect = new XRect (0, 0, __width, __height);
+		}
+
+//------------------------------------------------------------------------------------------	
+		public function getViewRect ():XRect {
+			return m_viewRect
+		}
+		
 //------------------------------------------------------------------------------------------
 	}
 

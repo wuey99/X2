@@ -35,6 +35,10 @@ package X.Resource.Manager {
 		private var m_loaderContextFactory:Function;
 		private var m_cachedClassName:Object;
 		
+		public static var CLASS_TYPE:String = "classX";
+		public static var RESOURCE_TYPE:String = "resource";
+		public static var FOLDER_TYPE:String = "folder";
+		
 //------------------------------------------------------------------------------------------		
 		public function XSubResourceManager () {
 			super ();
@@ -242,15 +246,15 @@ package X.Resource.Manager {
 				return;
 			}
 		
-			if (__xmlItem.localName () == "classX") {
+			if (__xmlItem.localName () == XSubResourceManager.CLASS_TYPE) {
 				__xmlItem.parent ().insertChildAfter (__xmlItem.parent (), __xmlToInsert);
 			}
 				
-			if (__xmlItem.localName () == "resource") {
+			if (__xmlItem.localName () == XSubResourceManager.RESOURCE_TYPE) {
 				__xmlItem.parent ().insertChildAfter (__xmlItem, __xmlToInsert);
 			}
 				
-			if (__xmlItem.localName () == "folder") {
+			if (__xmlItem.localName () == XSubResourceManager.FOLDER_TYPE) {
 				__xmlItem.appendChild (__xmlToInsert);
 			}
 		}

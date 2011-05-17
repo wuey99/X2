@@ -89,6 +89,16 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getSubmapRows ():Number {
+			return m_submapRows;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getSubmapCols ():Number {
+			return m_submapCols;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getSubmapWidth ():Number {
 			return m_submapWidth;
 		}	
@@ -122,7 +132,8 @@ package X.XMap {
 			__r2 = r.bottom/m_submapHeight;
 
 			trace (": -----------------------: ");
-			trace (": addItem: ");
+			trace (": XXMapLayerModel: addItem: ", __id);
+			trace (": x, y: ", __item.x, __item.y);
 			trace (": ", r.left, r.top, r.right, r.bottom);
 			trace (": ", __c1, __r1, __c2, __r2);
 // ul
@@ -319,7 +330,7 @@ package X.XMap {
 				var submapRow:int = row/row32;
 				
 				for (var col:int=c1; col <= c2; col++) {
-					var dstCol:int = c1-col, dstRow:int = r1-row;
+					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
 					var submapCol:int = col/col32;
 				
@@ -333,10 +344,70 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function setCXTiles (
-			__tiles:Array,
-			__c1:Number, __r1:Number,
-			__cols:Number, __rows:Number
+			tiles:Array,
+			c1:Number, r1:Number,
+			c2:Number, r2:Number
 		):void {
+// col, row divisor
+			var row32:int = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
+
+// col, row mask for the submap
+			var rowMask:int = row32-1;
+			var colMask:int = col32-1;
+			
+// total columns wide, rows high
+			var cols:int = c2-c1+1;
+			var rows:int = r2-r1+1;
+	
+			for (var row:int=r1; row <= r2; row++) {
+				var submapRow:int = row/row32;
+				
+				for (var col:int=c1; col <= c2; col++) {
+					var dstCol:int = col-c1, dstRow:int = row-r1;
+					
+					var submapCol:int = col/col32;
+								
+					m_XSubmaps[submapRow][submapCol].setCXTile (
+						tiles[dstRow * cols + dstCol],
+						col & colMask, row & rowMask
+					);
+				}
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function eraseWithCXTiles (
+			tiles:Array,
+			c1:Number, r1:Number,
+			c2:Number, r2:Number
+		):void {
+// col, row divisor
+			var row32:int = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
+
+// col, row mask for the submap
+			var rowMask:int = row32-1;
+			var colMask:int = col32-1;
+			
+// total columns wide, rows high
+			var cols:int = c2-c1+1;
+			var rows:int = r2-r1+1;
+	
+			for (var row:int=r1; row <= r2; row++) {
+				var submapRow:int = row/row32;
+				
+				for (var col:int=c1; col <= c2; col++) {
+					var dstCol:int = col-c1, dstRow:int = row-r1;
+					
+					var submapCol:int = col/col32;
+								
+					m_XSubmaps[submapRow][submapCol].setCXTile (
+						XSubmapModel.CX_EMPTY,
+						col & colMask, row & rowMask
+					);
+				}
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -354,7 +425,12 @@ package X.XMap {
 		public function items ():XDict {
 			return m_items;
 		}
-			
+
+//------------------------------------------------------------------------------------------
+		public function submaps ():Array {
+			return m_XSubmaps;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getItemId (__item:XMapItemModel):Number {
 			return m_items.get (__item);
@@ -378,6 +454,11 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array {
 			return m_classNames.getAllClassNames ();
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getClassNames ():XClassNameToIndex {
+			return m_classNames;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -435,7 +516,7 @@ package X.XMap {
 					if (submaps.length == 1) {
 						var submap:XSubmapModel = submaps[0] as XSubmapModel;
 						
-						if (submapHasItems (submap)) {
+						if (submapIsNotEmpty (submap)) {
 							xml.addChildWithXMLNode (submap.serializeRowCol (__row, __col));
 						}
 					}
@@ -446,7 +527,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function submapHasItems (submap:XSubmapModel):Number {
+		public function submapIsNotEmpty (submap:XSubmapModel):Boolean {
 			var count:Number = 0;
 					
 			submap.items ().forEach (
@@ -455,7 +536,7 @@ package X.XMap {
 				}
 			);
 			
-			return count;
+			return count > 0 || submap.hasCXTiles ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -494,8 +575,7 @@ package X.XMap {
 		public function deserializeSubmaps (__xml:XSimpleXMLNode):void {
 			trace (": [XMapLayer]: deserializeSubmaps: ");
 			
-			trace (": xml: ", __xml);
-			
+//------------------------------------------------------------------------------------------	
 			var __row:Number;
 			var __col:Number;
 			
@@ -506,24 +586,25 @@ package X.XMap {
 					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
 				}
 			}
-			
-			var __xmlList:Array = __xml.child ("XSubmaps")[0].child ("XSubmap");
-			
-			trace (": __xmlList.length: ", __xmlList.length);
-			
+		
+//------------------------------------------------------------------------------------------	
+			var __xmlList:Array;
 			var i:Number;
 			
+			__xmlList = __xml.child ("XSubmaps")[0].child ("XSubmap");
+				
 			for (i=0; i<__xmlList.length; i++) {
 				var __submapXML:XSimpleXMLNode = __xmlList[i];
 				
 				__row = __submapXML.getAttribute ("row");
 				__col = __submapXML.getAttribute ("col");
-				
-				trace (": __submapXML: ", __submapXML);
-				
+					
 				m_XSubmaps[__row][__col].deserializeRowCol (__submapXML);
 			}
 			
+			return;
+			
+//------------------------------------------------------------------------------------------	
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
 					m_XSubmaps[__row][__col].items ().forEach (

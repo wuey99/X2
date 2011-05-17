@@ -18,7 +18,6 @@ package X.XMap {
 				
 		private var m_numLayers:Number;
 		private var m_layers:Array;
-		protected var m_viewRect:XRect;
 		private var m_allClassNames:Array;
 		
 //------------------------------------------------------------------------------------------	
@@ -63,7 +62,12 @@ package X.XMap {
 			
 			return m_allClassNames;
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function getLayers ():Array {
+			return m_layers;
+		}	
+				
 //------------------------------------------------------------------------------------------
 		public function getLayer (__layer:Number):XMapLayerModel {
 			return m_layers[__layer];
@@ -107,20 +111,6 @@ package X.XMap {
 			):Array {
 				
 			return m_layers[__layer].getItemsAtCX (__x1, __y1, __x2, __y2);
-		}
-
-//------------------------------------------------------------------------------------------
-		public function setViewRect (
-			__left:Number, __top:Number,
-			__width:Number, __height:Number
-			):void {
-				
-			m_viewRect = new XRect (__left, __top, __width, __height);
-		}
-
-//------------------------------------------------------------------------------------------	
-		public function getViewRect ():XRect {
-			return m_viewRect
 		}
 
 //------------------------------------------------------------------------------------------
