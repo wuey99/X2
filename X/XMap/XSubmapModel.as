@@ -5,6 +5,7 @@ package X.XMap {
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.MVC.*;
+	import X.Utils.XClassNameToIndex;
 	import X.XML.*;
 	
 	import flash.events.*;
@@ -13,8 +14,8 @@ package X.XMap {
 	public class XSubmapModel extends XModelBase {
 		private var m_XMapLayer:XMapLayerModel;
 			
-		private var m_submapWidth:Number;
-		private var m_cols:Number;
+		private var m_submapWidth:int;
+		private var m_cols:int;
 		
 		private var m_submapHeight:int;
 		private var m_rows:int;
@@ -22,7 +23,7 @@ package X.XMap {
 		private var m_col:int;
 		private var m_row:int;
 		
-		private var m_tiles:Array;
+		private var m_cmap:Array;
 		private var m_inuse:Number;
 		
 		private var m_boundingRect:XRect;
@@ -55,6 +56,24 @@ package X.XMap {
 		public static var CX_LR225A:Number = 14;
 		public static var CX_LR225B:Number = 15;
 
+// 67.5 degree diagonals
+		public static var CX_UL675A:Number = 16;
+		public static var CX_UL675B:Number = 17;
+		public static var CX_UR675A:Number = 18;
+		public static var CX_UR675B:Number = 19;
+		public static var CX_LL675A:Number = 20;
+		public static var CX_LL675B:Number = 21;
+		public static var CX_LR675A:Number = 22;
+		public static var CX_LR675B:Number = 23;
+		
+// soft tiles
+		public static var CX_SOFTLF:Number = 24;
+		public static var CX_SOFTRT:Number = 25;
+		public static var CX_SOFTUP:Number = 26;
+		public static var CX_SOFTDN:Number = 27;
+		
+		public static var CX_MAX:Number = 28;
+		
 // tile width, height
 		public static var CX_TILE_WIDTH:Number = 16;
 		public static var CX_TILE_HEIGHT:Number = 16;
@@ -66,6 +85,8 @@ package X.XMap {
 		public static var CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
 		
 		private var m_items:XDict;
+		
+		private static var CXToChar:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapModel (
@@ -89,25 +110,46 @@ package X.XMap {
 
 			m_boundingRect = new XRect (0, 0, m_submapWidth, m_submapHeight);
 			
-			m_tiles = new Array (m_cols * m_rows);
+			m_cmap = new Array (m_cols * m_rows);
 			
 			m_inuse = 0;
 			
-			for (var i:int = 0; i< m_tiles.length; i++) {
-				m_tiles[i] = CX_EMPTY;
+			for (var i:int = 0; i< m_cmap.length; i++) {
+				m_cmap[i] = CX_EMPTY;
 			}
 			
 			m_items = new XDict ();
 		}	
 
 //------------------------------------------------------------------------------------------
+		public function get cmap ():Array {
+			return m_cmap;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function setCXTile (__type:Number, __col:Number, __row:Number):void {
+			m_cmap[__row * m_cols + __col] = __type;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getCXTile (__col:Number, __row:Number):Number {
-			return m_tiles[__row * m_cols + __col];
+			return m_cmap[__row * m_cols + __col];
 		}
+
+//------------------------------------------------------------------------------------------
+		public function hasCXTiles ():Boolean {
+			var __row:Number, __col:Number;
+			
+			for (__row = 0; __row < m_rows; __row++) {
+				for (__col = 0; __col < m_cols; __col++) {
+					if (m_cmap[__row * m_cols + __col] != CX_EMPTY) {
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		}	
 		
 //------------------------------------------------------------------------------------------
 		public function get inuse ():Number {
@@ -158,6 +200,8 @@ package X.XMap {
 			__item:XMapItemModel
 			):XMapItemModel {
 							
+			trace (": XSubmapModel: additem: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
+			
 			if (!m_items.exists (__item)) {
 				m_items.put (__item, __item.id);
 			}
@@ -191,6 +235,10 @@ package X.XMap {
 			
 			xml.setupWithParams ("XSubmap", "", __attribs);
 
+			if (hasCXTiles ()) {
+				xml.addChildWithXMLNode (serializeCXTiles ());
+			}
+					
 			var item:XMapItemModel;
 	
 			items ().forEach (
@@ -205,24 +253,59 @@ package X.XMap {
 	}
 
 //------------------------------------------------------------------------------------------
+		public function serializeCXTiles ():XSimpleXMLNode {
+			var __xmlCX:XSimpleXMLNode = new XSimpleXMLNode ();			
+			__xmlCX.setupWithParams ("CX", "", []);
+			
+			var __row:Number, __col:Number;
+				
+			for (__row = 0; __row < m_rows; __row++) {
+				var __xmlRow:XSimpleXMLNode = new XSimpleXMLNode ();
+		
+				var __rowString:String = "";
+				
+				for (__col = 0; __col < m_cols; __col++) {
+					__rowString += CXToChar.charAt (m_cmap[__row * m_cols + __col]);
+				}
+				
+				__xmlRow.setupWithParams ("row", __rowString, []);
+				
+				__xmlCX.addChildWithXMLNode (__xmlRow);
+			}
+
+			return __xmlCX;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function deserializeRowCol (__xml:XSimpleXMLNode):void {
-			var __xmlList:Array = __xml.child ("XMapItem");
-			
+			var __xmlList:Array;
 			var i:Number;
+
+//------------------------------------------------------------------------------------------			
+			__xmlList = __xml.child ("CX");
 			
+			if (__xmlList.length) {
+				deserializeCXTiles (__xmlList[0]);
+			}
+			
+//------------------------------------------------------------------------------------------
+			__xmlList = __xml.child ("XMapItem");
+						
 			for (i=0; i<__xmlList.length; i++) {
 				var __xml:XSimpleXMLNode = __xmlList[i];
 				
-				trace (": XMapItem: ", __xml);
+				trace (": deserializeRowCol: ", m_col, m_row);
 				
 				var __item:XMapItemModel = new XMapItemModel ();
 		
+				var __classNameToIndex:XClassNameToIndex = m_XMapLayer.getClassNames ();
+				
 				var __logicClassIndex:Number = __xml.getAttribute ("logicClassIndex");
 				var __imageClassIndex:Number = __xml.getAttribute ("imageClassIndex");
 				
-				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex));
-				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex));
-				
+				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex), __classNameToIndex.getClassNameCount (__logicClassIndex));
+				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex),  __classNameToIndex.getClassNameCount (__imageClassIndex));
+								
 				__item.setup (
 					m_XMapLayer,
 // __logicClassName
@@ -238,7 +321,7 @@ package X.XMap {
 // __collisionRect,
 					new XRect (__xml.getAttribute ("cx"), __xml.getAttribute ("cy"), __xml.getAttribute ("cw"), __xml.getAttribute ("ch")),
 // __boundingRect,
-					new XRect (__xml.getAttribute ("cx"), __xml.getAttribute ("cy"), __xml.getAttribute ("bw"), __xml.getAttribute ("bh")),
+					new XRect (__xml.getAttribute ("bx"), __xml.getAttribute ("by"), __xml.getAttribute ("bw"), __xml.getAttribute ("bh")),
 // __params
 					__xml.child ("params")[0].toXMLString ()
 					);
@@ -246,7 +329,22 @@ package X.XMap {
 					addItem (__item);
 			}
 		}
+		
+//----------------------------------------------------------------------------------------
+		public function deserializeCXTiles (__cx:XSimpleXMLNode):void {
+			var __xmlList:Array = __cx.child ("row");
+			var __row:Number, __col:Number;
+			
+			for (__row=0; __row<__xmlList.length; __row++) {
+				var __xml:XSimpleXMLNode = __xmlList[__row];
+				var __rowString:String = __xml.getText ();
 				
+				for (__col=0; __col<__rowString.length; __col++) {
+					m_cmap[__row * m_cols + __col] = CXToChar.indexOf (__rowString.charAt (__col));
+				}
+			}
+		}
+		
 //------------------------------------------------------------------------------------------	
 	}
 	

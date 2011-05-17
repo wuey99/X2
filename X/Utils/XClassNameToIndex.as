@@ -83,10 +83,24 @@ package X.Utils {
 				m_freeClassNameIndexes.push (__index);
 			}
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array {
-			return m_classNamesStrings;
+			var __classNames:Array = new Array ();
+			var i:Number;
+			
+			for (i=0; i<m_classNamesStrings.length; i++) {
+				if (m_classNamesStrings[i] != "") {
+					__classNames.push (m_classNamesStrings[i]);
+				}
+			}
+			
+			return __classNames;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getClassNameCount (__index:Number):Number {
+			return m_classNamesCounts[__index];
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -132,10 +146,14 @@ package X.Utils {
 				__name = __xmlList[i].getAttribute ("name");
 				__count = __xmlList[i].getAttribute ("count");
 				
-				trace (": ", __name);
+				trace (": XClassNameToIndex: deserialize: ", __name, __count);
 				
 				m_classNamesStrings.push (__name);
-				m_classNamesCounts.push (__count);
+				
+// don't use the count because the rest of the deserialization code is going to add
+// the items back to the XMap.
+//				m_classNamesCounts.push (__count);
+				m_classNamesCounts.push (0);
 			}
 			
 			for (i=0; i<m_classNamesStrings.length; i++) {

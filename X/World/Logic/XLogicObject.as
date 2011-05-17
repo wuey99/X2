@@ -14,9 +14,8 @@ package X.World.Logic {
 	import X.Task.*;
 	import X.World.*;
 	import X.World.Sprite.*;
-	import X.XML.XSimpleXMLNode;
-	import X.XMap.*;
 	import X.XML.*;
+	import X.XMap.*;
 	
 	import flash.display.*;
 	import flash.geom.*;
@@ -133,7 +132,7 @@ package X.World.Logic {
 			m_detachedSprites = new XDict ();
 			m_XSignals = new XDict ();
 			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
-
+			
 			m_killSignal = createXSignal ();
 			
 			setVisible (false);			
@@ -158,9 +157,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {		
-			removeAll ();
-			
+		public function cleanup ():void {			
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
 // to a the "kill" event.
@@ -171,6 +168,8 @@ package X.World.Logic {
 				
 				m_item = null;
 			}
+			
+			removeAll ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -210,7 +209,7 @@ package X.World.Logic {
 			}
 			
 // determine whether this object is outside the current viewPort
-			var v:XRect = xxx.getXMapModel ().getViewRect ();
+			var v:XRect = xxx.getViewRect();
 				
 			var r:XRect = xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height);
 			r.inflate (256, 256);
@@ -247,7 +246,7 @@ package X.World.Logic {
 		public function getParent ():XLogicObject {
 			return m_parent;
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function findMovieClipByName (
 			__movieClip:MovieClip,
@@ -605,6 +604,11 @@ package X.World.Logic {
 			m_layer = __layer;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getLayer ():Number {
+			return m_layer;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setValues ():void {		
 			setRegistration (-getPos ().x, -getPos ().y);
