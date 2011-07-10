@@ -99,6 +99,7 @@ package X.World.Logic {
 			m_parent = null;
 			m_boundingRect = null;
 			m_delayed = 1;
+			m_layer = -1;
 			
 			m_GUID = g_GUID++;
 			
@@ -601,6 +602,14 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function setLayer (__layer:Number):void {
+			if (__layer != m_layer && m_layer != -1) {
+				m_worldSprites.forEach (
+					function (x:*):void {
+						xxx.getXWorldLayer (m_layer).removeSprite (x);
+						xxx.getXWorldLayer (__layer).addDepthSprite (x);
+					}
+				);
+			}
 			m_layer = __layer;
 		}
 

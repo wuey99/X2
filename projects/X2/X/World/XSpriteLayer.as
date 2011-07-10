@@ -45,6 +45,15 @@ package X.World {
 		}	
 
 //------------------------------------------------------------------------------------------
+		public function addDepthSprite (__depthSprite:XDepthSprite):XDepthSprite {
+			addChild (__depthSprite);
+				
+			m_XDepthSpriteMap.put (__depthSprite, 0);
+			
+			return __depthSprite;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function removeSprite (__depthSprite:Sprite):void {
 			if (m_XDepthSpriteMap.exists (__depthSprite)) {
 				removeChild (__depthSprite);

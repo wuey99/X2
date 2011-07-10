@@ -213,7 +213,9 @@ package X.XMap {
 		public function removeItem (
 			__item:XMapItemModel
 			):void {
-			
+
+			trace (": XSubmapModel: removeItem: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
+						
 			if (m_items.exists (__item)) {
 				m_items.remove (__item);
 			}

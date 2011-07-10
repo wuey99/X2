@@ -19,6 +19,7 @@ package X.XMap {
 		private var m_numLayers:Number;
 		private var m_layers:Array;
 		private var m_allClassNames:Array;
+		private var m_currLayer:Number;
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapModel () {
@@ -34,6 +35,7 @@ package X.XMap {
 			
 			m_numLayers = __layers.length;	
 			m_layers = new Array (m_numLayers);
+			m_currLayer = 0;
 			
 			var i:Number;
 			
@@ -44,6 +46,21 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getNumLayers ():Number {
+			return m_numLayers;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setCurrLayer (__layer:Number):void {
+			m_currLayer = __layer;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getCurrLayer ():Number {
+			return m_currLayer;
 		}
 		
 //------------------------------------------------------------------------------------------

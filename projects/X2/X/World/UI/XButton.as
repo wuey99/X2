@@ -22,15 +22,18 @@ package X.World.UI {
 		protected var m_buttonClassName:String;
 		protected var m_mouseDownSignal:XSignal;
 		protected var m_mouseUpSignal:XSignal;
-		
+		protected var m_mouseOutSignal:XSignal;
+
 		public var NORMAL_STATE:Number = 1;
 		public var OVER_STATE:Number = 2;
 		public var DOWN_STATE:Number = 3;
 		public var SELECTED_STATE:Number = 4;
-		
+		public var DISABLED_STATE:Number = 5;
+				
 		public var m_label:Number;
 		public var m_currState:Number;
-		
+		protected var m_disabledFlag:Boolean;
+				
 //------------------------------------------------------------------------------------------
 		public function XButton () {
 		}
@@ -42,6 +45,7 @@ package X.World.UI {
 			m_buttonClassName = args[0];
 
 			m_mouseDownSignal = createXSignal ();	
+			m_mouseOutSignal = createXSignal ();
 			m_mouseUpSignal = createXSignal ();
 			
 			createSprites ();
@@ -49,6 +53,8 @@ package X.World.UI {
 //			mouseEnabled = true;
 			
 			m_sprite.mouseEnabled = true;
+			
+			m_disabledFlag = false;
 			
 			xxx.getXTaskManager ().addTask ([
 				function ():void {
@@ -62,9 +68,9 @@ package X.World.UI {
 				XTask.RETN,
 			]);
 			
-			goto (NORMAL_STATE);
+			goto (getNormalState ());
 			
-			m_currState = NORMAL_STATE;
+			m_currState = getNormalState ()
 		
 			createHighlightTask ();	
 		}
@@ -95,6 +101,10 @@ package X.World.UI {
 		
 //------------------------------------------------------------------------------------------		
 		public function onMouseOver (e:MouseEvent):void {
+			if (m_disabledFlag) {
+				return;
+			}
+			
 			goto (OVER_STATE);
 			
 			m_currState = OVER_STATE;
@@ -102,16 +112,26 @@ package X.World.UI {
 
 //------------------------------------------------------------------------------------------		
 		public function onMouseDown (e:MouseEvent):void {
+			if (m_disabledFlag) {
+				return;
+			}
+			
 			goto (DOWN_STATE);	
 
 			m_currState = DOWN_STATE;
+			
+			fireMouseDownSignal ();
 		}	
 
 //------------------------------------------------------------------------------------------		
-		public function onMouseUp (e:MouseEvent):void {				
-			goto (NORMAL_STATE);
+		public function onMouseUp (e:MouseEvent):void {
+			if (m_disabledFlag) {
+				return;
+			}
+						
+			goto (getNormalState ());
 			
-			m_currState = NORMAL_STATE;
+			m_currState = getNormalState ();
 			
 			fireMouseUpSignal ();
 		}
@@ -121,12 +141,50 @@ package X.World.UI {
 		}
 									
 //------------------------------------------------------------------------------------------		
-		public function onMouseOut (e:MouseEvent):void {	
-			goto (NORMAL_STATE);
+		public function onMouseOut (e:MouseEvent):void {
+			if (m_disabledFlag) {
+				return;
+			}
 			
-			m_currState = NORMAL_STATE;
+			goto (getNormalState ());
+			
+			m_currState = getNormalState ();
+			
+			fireMouseOutSignal ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function setNormalState ():void {
+			goto (getNormalState ());
+			
+			m_currState = getNormalState ();		
+		}
+
+//------------------------------------------------------------------------------------------
+		protected function getNormalState ():Number {
+			return NORMAL_STATE;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function isDisabled ():Boolean {
+			return m_disabledFlag;
+		}
+			
+//------------------------------------------------------------------------------------------
+		public function setDisabled (__disabled:Boolean):void {
+			if (__disabled) {
+				goto (DISABLED_STATE);
+							
+				m_disabledFlag = true;
+			}
+			else
+			{
+				setNormalState ();
+				
+				m_disabledFlag = false;
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public override function setValues ():void {
 			setRegistration (-getPos ().x, -getPos ().y);
@@ -141,6 +199,8 @@ package X.World.UI {
 			x_sprite = addSpriteToHud (m_sprite);
 			
 			goto (NORMAL_STATE);
+			
+			m_currState = getNormalState ();
 			
 			show ();
 		}
@@ -169,11 +229,22 @@ package X.World.UI {
 		public function fireMouseUpSignal ():void {
 			m_mouseUpSignal.fireSignal ();
 		}
-	
+
+//------------------------------------------------------------------------------------------
+		public function addMouseOutListener (__listener:Function):void {
+			m_mouseOutSignal.addListener (__listener);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function fireMouseOutSignal ():void {
+			m_mouseOutSignal.fireSignal ();
+		}
+			
 //------------------------------------------------------------------------------------------
 		public function removeAllListeners ():void {
 			m_mouseUpSignal.removeAllListeners ();
 		}
+
 			
 //------------------------------------------------------------------------------------------	
 	}
