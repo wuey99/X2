@@ -31,6 +31,10 @@ package X.XMap {
 		
 		private var m_viewPort:XRect;
 		
+		private var m_visible:Boolean;
+		private var m_name:String;
+		private var m_grid:Boolean
+		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
 			super ();
@@ -55,6 +59,9 @@ package X.XMap {
 			m_items = new XDict ();
 			m_layer = __layer;
 			m_XSubmaps = new Array (__submapRows);
+			m_visible = true;
+			m_name = "layer" + __layer;
+			m_grid = false;
 
 			for (__row=0; __row<__submapRows; __row++) {
 				m_XSubmaps[__row] = new Array (__submapCols);
@@ -88,6 +95,36 @@ package X.XMap {
 			return m_viewPort;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function get visible ():Boolean {
+			return m_visible;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function set visible (__value:Boolean):void {
+			m_visible = __value;
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function get name ():String {
+			return m_name;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function set name (__value:String):void {
+			m_name = __value;
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function get grid ():Boolean {
+			return m_grid;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function set grid (__value:Boolean):void {
+			m_grid = __value;
+		}
+					
 //------------------------------------------------------------------------------------------
 		public function getSubmapRows ():Number {
 			return m_submapRows;
@@ -179,7 +216,7 @@ package X.XMap {
 				
 			m_items.remove (__item);
 		}
-		
+				
 //------------------------------------------------------------------------------------------
 		public function getSubmapsAt (
 				__x1:Number, __y1:Number,
@@ -473,7 +510,10 @@ package X.XMap {
 				"submapCols",	m_submapCols,
 				"submapWidth",	m_submapWidth,
 				"submapHeight",	m_submapHeight,
-				"currID",		m_currID
+				"currID",		m_currID,
+				"visible", 		m_visible,
+				"name",			m_name,
+				"grid", 		m_grid,
 			];
 			
 			__xml = __xml.addChildWithParams ("XLayer", "", __attribs);
@@ -502,6 +542,8 @@ package X.XMap {
 			
 			var __row:Number, __col:Number;
 			var __x1:Number, __y1:Number, __x2:Number, __y2:Number;
+			
+			cullUnneededItems ();
 			
 			for (__row=0; __row<m_submapRows; __row++) {
 				__y1 = __row * m_submapHeight;
@@ -556,7 +598,27 @@ package X.XMap {
 			m_submapWidth = __xml.getAttribute ("submapWidth");
 			m_submapHeight = __xml.getAttribute ("submapHeight");
 			m_currID = __xml.getAttribute ("currID");
-			
+			if (__xml.hasAttribute ("visible")) {
+				m_visible = __xml.getAttribute ("visible");
+			}
+			else
+			{
+				m_visible = true;
+			}
+			if (__xml.hasAttribute ("name")) {
+				m_name = __xml.getAttribute ("name");
+			}
+			else
+			{
+				m_name = "";
+			}
+			if (__xml.hasAttribute ("grid")) {
+				m_grid = __xml.getAttribute ("grid");
+			}
+			else
+			{
+				m_grid = false;
+			}	
 			m_classNames = new XClassNameToIndex ();
 			
 			m_items = new XDict ();
@@ -601,21 +663,53 @@ package X.XMap {
 					
 				m_XSubmaps[__row][__col].deserializeRowCol (__submapXML);
 			}
-			
-			return;
-			
+	
 //------------------------------------------------------------------------------------------	
+// add items to the layer's dictionary
+//------------------------------------------------------------------------------------------
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
 					m_XSubmaps[__row][__col].items ().forEach (
 						function (__item:*):void {
-							addItem (__item);
+							m_items.put (__item, __item.id);
 						}
 					);
 				}
 			}
+
+//------------------------------------------------------------------------------------------
+			cullUnneededItems ();
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function cullUnneededItems ():void {
+			var __row:Number;
+			var __col:Number;
+			var __submapRect:XRect; 
+										
+			for (__row=0; __row<m_submapRows; __row++) {
+				for (__col=0; __col<m_submapCols; __col++) {
+					__submapRect = new XRect (
+						__col * m_submapWidth, __row * m_submapHeight,
+						m_submapWidth, m_submapHeight
+					);
+							
+					m_XSubmaps[__row][__col].items ().forEach (
+						function (__item:*):void {			
+							var __itemRect:XRect = __item.boundingRect.cloneX ();
+							__itemRect.offset (__item.x, __item.y);
+							
+							trace (": submapRect, itemRect: ", __item.id, __submapRect, __itemRect, __submapRect.intersects (__itemRect));
+							
+							if (!__submapRect.intersects (__itemRect)) {
+								m_XSubmaps[__row][__col].removeItem (__item);
+							}
+						}
+					);
+				}
+			}		
+		}
+			
 //------------------------------------------------------------------------------------------	
 	}
 	

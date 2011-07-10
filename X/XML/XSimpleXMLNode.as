@@ -146,6 +146,11 @@ package X.XML {
 //		}
 
 //-----------------------------------------------------------------------------------------
+		public function hasAttribute (__name:String):Boolean {
+			return m_attribsMap[__name] == undefined ? false : true;
+		}
+		
+//-----------------------------------------------------------------------------------------
 		public function getAttribute (__name:String):* {
 			return m_attribsMap[__name];
 		}

@@ -117,8 +117,9 @@ package X.Resource.Manager {
 	     	   		var __loader:URLLoader = event.target as URLLoader;
      	   		  
      	   		  	var xml:XML = new XML (__loader.data);
+     	   		  	m_projectXML = xml;
      	   		  	
-					setProject (xml);
+					__importManifests ();
      	   		}
      	   		catch (e:Error) {
      	   			throw (new Error ("Not a valid XML file"));
@@ -181,8 +182,9 @@ package X.Resource.Manager {
 			
 			m_rootPath = __rootPath;	
 			m_callback = __callback;
+			m_projectXML = __xml;
 			
-			setProject (__xml);
+			__importManifests ();
 			
 			m_loadComplete = true;
 			
@@ -190,17 +192,14 @@ package X.Resource.Manager {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setProject (__xml:XML):void {
-			m_projectXML = __xml;
-			
-			var __xmlList:XMLList = m_projectXML.child ("*");
+		private function __importManifests ():void {	
+			var __xmlList:XMLList = m_projectXML.child ("manifest");
 			
 			var i:Number;
 				
 			for (i=0; i<__xmlList.length (); i++) {
 				var __subResourceManager:XSubResourceManager = new XSubResourceManager ();
-			
-				var __project:XML = __xmlList[i];
+				
 				var __manifestList:XMLList = __xmlList[i].child ("*");
 				var __manifest:XML = null;
 				if (__manifestList.length ()) {
