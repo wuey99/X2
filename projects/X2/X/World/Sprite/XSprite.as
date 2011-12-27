@@ -16,7 +16,7 @@ package X.World.Sprite {
 		public var m_visible:Boolean;
 
 //------------------------------------------------------------------------------------------
-		include "..\\Sprite\\XRegistration_impl.as";
+		include "..\\Sprite\\XRegistration_impl.h";
 				
 //------------------------------------------------------------------------------------------
 		public function XSprite () {

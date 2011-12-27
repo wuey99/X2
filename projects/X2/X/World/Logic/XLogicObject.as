@@ -88,7 +88,7 @@ package X.World.Logic {
 		private static var g_GUID:Number = 0;
 		
 //------------------------------------------------------------------------------------------
-		include "..\\Sprite\\XRegistration_impl.as";
+		include "..\\Sprite\\XRegistration_impl.h";
 						
 //------------------------------------------------------------------------------------------
 		public function XLogicObject () {
