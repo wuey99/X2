@@ -610,6 +610,7 @@ package X.World.Logic {
 					}
 				);
 			}
+			
 			m_layer = __layer;
 		}
 
@@ -982,6 +983,14 @@ package X.World.Logic {
 			);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function gotoAndPlay (__frame:Number):void {
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function gotoAndStop (__frame:Number):void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
 			var __signal:XSignal = xxx.getXSignalManager ().createXSignal ();

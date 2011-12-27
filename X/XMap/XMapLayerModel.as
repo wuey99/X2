@@ -173,6 +173,16 @@ package X.XMap {
 			trace (": x, y: ", __item.x, __item.y);
 			trace (": ", r.left, r.top, r.right, r.bottom);
 			trace (": ", __c1, __r1, __c2, __r2);
+			
+			__c1 = Math.max (__c1, 0);
+			__c2 = Math.max (__c2, 0);
+			__r1 = Math.max (__r1, 0);
+			__r2 = Math.max (__r2, 0);
+			
+			__c1 = Math.min (__c1, m_submapCols-1);
+			__c2 = Math.min (__c2, m_submapCols-1);
+			__r1 = Math.min (__r1, m_submapRows-1);
+			__r2 = Math.min (__r2, m_submapRows-1);
 // ul
 			m_XSubmaps[__r1][__c1].addItem (__item);
 // ur
@@ -205,6 +215,15 @@ package X.XMap {
 			__c2 = r.right/m_submapWidth;
 			__r2 = r.bottom/m_submapHeight;
 
+			__c1 = Math.max (__c1, 0);
+			__c2 = Math.max (__c2, 0);
+			__r1 = Math.max (__r1, 0);
+			__r2 = Math.max (__r2, 0);
+			
+			__c1 = Math.min (__c1, m_submapCols-1);
+			__c2 = Math.min (__c2, m_submapCols-1);
+			__r1 = Math.min (__r1, m_submapRows-1);
+			__r2 = Math.min (__r2, m_submapRows-1);
 // ul
 			m_XSubmaps[__r1][__c1].removeItem (__item);
 // ur
