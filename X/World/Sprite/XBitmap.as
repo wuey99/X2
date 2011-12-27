@@ -19,7 +19,7 @@ package X.World.Sprite {
 		public var m_frame:Number;
 
 //------------------------------------------------------------------------------------------
-		include "..\\Sprite\\XRegistration_impl.as";
+		include "..\\Sprite\\XRegistration_impl.h";
 				
 //------------------------------------------------------------------------------------------
 		public function XBitmap () {
