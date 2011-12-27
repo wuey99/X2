@@ -68,7 +68,7 @@ package X.World.UI {
 				XTask.RETN,
 			]);
 			
-			goto (getNormalState ());
+			__gotoState (getNormalState ());
 			
 			m_currState = getNormalState ()
 		
@@ -105,7 +105,7 @@ package X.World.UI {
 				return;
 			}
 			
-			goto (OVER_STATE);
+			__gotoState (OVER_STATE);
 			
 			m_currState = OVER_STATE;
 		}	
@@ -116,7 +116,7 @@ package X.World.UI {
 				return;
 			}
 			
-			goto (DOWN_STATE);	
+			__gotoState (DOWN_STATE);	
 
 			m_currState = DOWN_STATE;
 			
@@ -129,7 +129,7 @@ package X.World.UI {
 				return;
 			}
 						
-			goto (getNormalState ());
+			__gotoState (getNormalState ());
 			
 			m_currState = getNormalState ();
 			
@@ -146,7 +146,7 @@ package X.World.UI {
 				return;
 			}
 			
-			goto (getNormalState ());
+			__gotoState (getNormalState ());
 			
 			m_currState = getNormalState ();
 			
@@ -155,7 +155,7 @@ package X.World.UI {
 
 //------------------------------------------------------------------------------------------
 		public function setNormalState ():void {
-			goto (getNormalState ());
+			__gotoState (getNormalState ());
 			
 			m_currState = getNormalState ();		
 		}
@@ -173,7 +173,7 @@ package X.World.UI {
 //------------------------------------------------------------------------------------------
 		public function setDisabled (__disabled:Boolean):void {
 			if (__disabled) {
-				goto (DISABLED_STATE);
+				__gotoState (DISABLED_STATE);
 							
 				m_disabledFlag = true;
 			}
@@ -198,7 +198,7 @@ package X.World.UI {
 					
 			x_sprite = addSpriteToHud (m_sprite);
 			
-			goto (NORMAL_STATE);
+			__gotoState (NORMAL_STATE);
 			
 			m_currState = getNormalState ();
 			
@@ -206,7 +206,12 @@ package X.World.UI {
 		}
 
 //------------------------------------------------------------------------------------------
-		protected function goto (__label:Number):void {
+		public function gotoState (__label:Number):void {
+			m_label = __label;
+		}
+		
+//------------------------------------------------------------------------------------------
+		private function __gotoState (__label:Number):void {
 			m_label = __label;
 		}
 
@@ -243,8 +248,8 @@ package X.World.UI {
 //------------------------------------------------------------------------------------------
 		public function removeAllListeners ():void {
 			m_mouseUpSignal.removeAllListeners ();
+			m_mouseOutSignal.removeAllListeners ();
 		}
-
 			
 //------------------------------------------------------------------------------------------	
 	}

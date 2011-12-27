@@ -86,7 +86,7 @@ package X.XMap {
 // __name, __id
 				"", -1,
 // __imageClassName, __frame
-				this.layerModel.getClassNameFromIndex (m_imageClassIndex), 0,
+				this.layerModel.getClassNameFromIndex (m_imageClassIndex), this.frame,
 // __x, __y,
 				this.x, this.y,
 // __scale, __rotation, __depth
@@ -166,7 +166,11 @@ package X.XMap {
 		public function get frame ():Number {
 			return m_frame;
 		}
-						
+
+		public function set frame (__frame:Number):void {
+			m_frame = __frame;
+		}
+								
 //------------------------------------------------------------------------------------------
 		public function get x ():Number {
 			return m_x;

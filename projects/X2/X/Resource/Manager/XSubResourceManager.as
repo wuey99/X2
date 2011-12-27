@@ -237,9 +237,12 @@ package X.Resource.Manager {
 
 //------------------------------------------------------------------------------------------
 		public override function deleteResourceXML (__xml:XML):void {
-			delete __xml.parent ().resource.(@name == __xml.@name)[0];
+//			delete __xml.parent ().resource.(@name == __xml.@name)[0];
+
+// let it match any node name
+			delete __xml.parent ().*.(@name == __xml.@name)[0];
 		}		
-	
+
 //------------------------------------------------------------------------------------------
 		public override function insertResourceXML (__xmlItem:XML, __xmlToInsert:XML):void {			
 			if (__xmlItem == null) {
@@ -518,10 +521,10 @@ package X.Resource.Manager {
 						
 			if (__r == null) {
 				var	__XResource:XResource;
-				
+	
 				if (m_projectManager.findEmbeddedResource (__resourcePath) == null) {
 					__XResource = new XSWFURLResource ();
-					__XResource.setup (m_rootPath + __resourcePath, __resourceXML, m_parent, this);
+					__XResource.setup (m_rootPath + "\\" + __resourcePath, __resourceXML, m_parent, this);
 				}
 				else
 				{
