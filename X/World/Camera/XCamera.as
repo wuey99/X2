@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------
-package World.Camera {
+package X.World.Camera {
 	
 	import X.*;
 	import X.Task.*;
