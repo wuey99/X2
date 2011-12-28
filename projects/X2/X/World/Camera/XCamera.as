@@ -22,7 +22,7 @@ package X.World.Camera {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function setup (__xxx:XWorld, ...args):void {
+		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx);
 		}
 
