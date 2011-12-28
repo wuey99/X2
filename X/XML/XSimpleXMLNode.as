@@ -174,11 +174,13 @@ package X.XML {
 		
 //------------------------------------------------------------------------------------------
 		public function toXMLString (__indent:Number = 0):String {
+			var i:Number;
+			
 			var __string:String = "";
 			
 			__string += __tab (__indent) + "<" + m_tag;
 					
-			for (var i:Number = 0; i<m_attribs.length; i++) {
+			for (var i = 0; i<m_attribs.length; i++) {
 				var __key:String = m_attribs[i];	
 				__string += " " + __key + "=" + "\"" + m_attribsMap[__key] + "\"";	
 			}
@@ -190,9 +192,7 @@ package X.XML {
 					__string += __tab (__indent+1) + m_text + "\n";
 				}
 				
-				if (m_children.length != 0) {
-					var i:Number;
-					
+				if (m_children.length != 0) {	
 					for (i=0; i<m_children.length; i++) {
 						__string += m_children[i].toXMLString (__indent+1);
 					}
