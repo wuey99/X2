@@ -14,7 +14,7 @@ public class g$ extends Object {
 	public static var app$:*;
 	
 //------------------------------------------------------------------------------------------
-	Function.prototype.$ = function (owner):Function {
+	Function.prototype.$ = function (owner:*):Function {
 		var that:* = this;
 		
 		return function ():void {
