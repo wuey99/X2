@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------
-package {
+package X.World.BG {
 
 // Box2D classes
 	import Box2D.Collision.*;
