@@ -26,7 +26,7 @@ package X.World.BG {
 		}
 
 //------------------------------------------------------------------------------------------			
-		public override function setup (__xxx:XWorld, ...args):void {
+		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx, args);
 			
 			m_spriteClassName = args[0];
