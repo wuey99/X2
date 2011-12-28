@@ -180,7 +180,7 @@ package X.XML {
 			
 			__string += __tab (__indent) + "<" + m_tag;
 					
-			for (var i = 0; i<m_attribs.length; i++) {
+			for (i = 0; i<m_attribs.length; i++) {
 				var __key:String = m_attribs[i];	
 				__string += " " + __key + "=" + "\"" + m_attribsMap[__key] + "\"";	
 			}
