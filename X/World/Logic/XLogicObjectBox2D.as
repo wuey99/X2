@@ -127,7 +127,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function getXShapeRectFromMovieClip (__movieClip:Sprite):XShapeRect {
 			trace (": !: ", __movieClip.numChildren, __movieClip);
-			
+/*
 			for (var i:uint = 0; i < __movieClip.numChildren; i++) {
 				var x$:MovieClip = __movieClip.getChildAt (i) as MovieClip;
 				
@@ -145,7 +145,7 @@ package X.World.Logic {
 					}
 				}
 			}
-	
+*/
 			return null;
 		}
 
@@ -154,7 +154,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function getXShapeCircleFromMovieClip (__movieClip:Sprite):XShapeCircle {
 			trace (": !: ", __movieClip.numChildren, __movieClip);
-			
+/*
 			for (var i:uint = 0; i < __movieClip.numChildren; i++) {
 				var x$:MovieClip = __movieClip.getChildAt (i) as MovieClip;
 							
@@ -172,7 +172,7 @@ package X.World.Logic {
 					}
 				}
 			}
-	
+*/	
 			return null;
 		}
 		
