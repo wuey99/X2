@@ -14,6 +14,7 @@ package X.XMap {
 		
 		private var m_layerModel:XMapLayerModel;
 		private var m_logicClassIndex:int;
+		private var m_hasLogic:Boolean;
 		private var m_name:String;
 		private var m_id:Number;
 		private var m_imageClassIndex:int;
@@ -39,6 +40,7 @@ package X.XMap {
 		public function setup (
 			__layerModel:XMapLayerModel,
 			__logicClassName:String,
+			__hasLogic:Boolean,
 			__name:String, __id:Number,
 			__imageClassName:String, __frame:Number,
 			__x:Number, __y:Number,
@@ -51,6 +53,7 @@ package X.XMap {
 				
 				m_layerModel = __layerModel;
 				m_logicClassIndex = m_layerModel.getIndexFromClassName (__logicClassName);
+				m_hasLogic = __hasLogic;
 				m_name = __name;
 				m_id = __id;
 				m_imageClassIndex = m_layerModel.getIndexFromClassName (__imageClassName);
@@ -83,6 +86,8 @@ package X.XMap {
 				this.layerModel,
 // __logicClassName
 				this.layerModel.getClassNameFromIndex (m_logicClassIndex),
+// __hasLogic
+				this.hasLogic,
 // __name, __id
 				"", -1,
 // __imageClassName, __frame
@@ -152,7 +157,16 @@ package X.XMap {
 		public function get logicClassName ():String {
 			return m_layerModel.getClassNameFromIndex (logicClassIndex);
 		}
-				
+
+//------------------------------------------------------------------------------------------
+		public function get hasLogic ():Boolean {
+			return m_hasLogic;
+		}
+		
+		public function set hasLogic (__value:Boolean):void {
+			m_hasLogic = __value;
+		}
+						
 //------------------------------------------------------------------------------------------
 		public function get imageClassIndex ():int {
 			return m_imageClassIndex;
@@ -249,6 +263,7 @@ package X.XMap {
 			
 			var __attribs:Array = [
 				"logicClassIndex",	logicClassIndex,
+				"hasLogic",			hasLogic ? "true" : "false",
 				"name",				name,
 				"id",				id,
 				"imageClassIndex",	imageClassIndex,
