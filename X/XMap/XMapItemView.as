@@ -15,9 +15,9 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 	public class XMapItemView extends XLogicObject {
-		private var m_movieClip:MovieClip;
-		private var x_sprite:XDepthSprite;
-		private var m_frame:Number;
+		protected var m_movieClip:MovieClip;
+		protected var x_sprite:XDepthSprite;
+		protected var m_frame:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function XMapItemView () {
@@ -44,7 +44,12 @@ package X.XMap {
 				gotoAndStop (m_frame);
 			}
 		}
-	
+
+//------------------------------------------------------------------------------------------
+		public function getTotalFrames ():Number {
+			return m_movieClip.totalFrames;	
+		}	
+		
 //------------------------------------------------------------------------------------------
 		public override function gotoAndPlay (__frame:Number):void {
 			m_movieClip.gotoAndPlay (__frame);

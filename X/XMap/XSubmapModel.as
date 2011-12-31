@@ -312,6 +312,8 @@ package X.XMap {
 					m_XMapLayer,
 // __logicClassName
 					m_XMapLayer.getClassNameFromIndex (__logicClassIndex),
+// __hasLogic
+					__xml.hasAttribute ("hasLogic") && __xml.getAttribute ("hasLogic") == "true" ? true : false,
 // __name, __id
 					__xml.getAttribute ("name"), __xml.getAttribute ("id"),
 // __imageClassName, __frame
