@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------------------
 package X.Document {
 	
-	import X.XML.*;
 	import X.MVC.XModelBase;
 	import X.XApp;
+	import X.XML.*;
 
 //------------------------------------------------------------------------------------------
 	public class XDocument extends Object {
@@ -11,7 +11,8 @@ package X.Document {
 		protected var m_XApp:XApp;
 		protected var m_name:String;
 		protected var m_xml:XSimpleXMLNode;
-						
+		protected var m_documentName:String;
+				
 //------------------------------------------------------------------------------------------
 		public function XDocument () {	
 			super ();
@@ -31,7 +32,17 @@ package X.Document {
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
+
+//------------------------------------------------------------------------------------------
+		public function setDocumentName (__name:String):void {
+			m_documentName = __name;
+		}
 		
+//------------------------------------------------------------------------------------------
+		public function getDocumentName ():String {
+			return m_documentName;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function get model ():XModelBase {
 			return m_model;
