@@ -35,6 +35,24 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+			var i:Number;
+			
+			for (i=0; m_bitmaps.length; i++) {
+				m_bitmaps[i].dispose ().
+				m_bitmaps[i] = null;
+			}
+			
+			var __name:String;
+			
+			for (__name in m_bitmapsX) {
+				m_bitmaps[__name].dispose ();
+				
+				delete m_bitmaps[__name];
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function initWithScaling (__movieClip:MovieClip, __scale:Number):void {
 			initWithScalingXY (__movieClip, __scale, __scale);
 		}

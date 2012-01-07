@@ -46,7 +46,7 @@ package X.World {
 		public var m_XMapModel:XMapModel;
 		public var m_XWorldLayers:Array;
 		public var m_XHudLayer:XSpriteLayer;
-		public static var MAX_LAYERS:Number = 4;
+		public var MAX_LAYERS:Number;
 		public var m_inuse_ENTER_FRAME:Number;
 		public var m_inuse_RENDER_FRAME:Number;
 		public var m_XKeyboardManager:XKeyboardManager;
@@ -88,9 +88,11 @@ package X.World {
 		public var m_XMapView:XMapView;
 		
 //------------------------------------------------------------------------------------------
-		public function XWorld (__parent:Sprite, __XApp:XApp){
+		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=4){
 			m_parent = __parent;
 			m_XApp = __XApp;
+			
+			MAX_LAYERS = __layers;
 			
 			mouseEnabled = true;
 			mouseChildren = true;
