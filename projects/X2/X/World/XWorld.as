@@ -8,12 +8,14 @@ package X.World {
 	import Box2D.Dynamics.*;
 	
 	import X.*;
+	import X.Bitmap.*;
 	import X.Datasource.XDatasource;
 	import X.Debug.*;
 	import X.Document.*;
 	import X.Geom.*;
 	import X.Keyboard.*;
 	import X.MVC.*;
+	import X.Pool.XObjectPoolManager;
 	import X.Resource.*;
 	import X.Resource.Manager.*;
 	import X.Signals.*;
@@ -86,7 +88,9 @@ package X.World {
 		public var m_g$:g$;
 		public var m_XMapLayerView:XMapLayerView;
 		public var m_XMapView:XMapView;
-		
+		public var m_XRectPoolManager:XObjectPoolManager;
+		public var m_XPointPoolManager:XObjectPoolManager;
+						
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=4){
 			m_parent = __parent;
@@ -124,13 +128,51 @@ package X.World {
 			m_XTaskManager = new XTaskManager (__XApp);
 			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager ();
-									
+			
+			m_XRectPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XRect ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					var __rect1:XRect = __src as XRect;
+					var __rect2:XRect = __dst as XRect;
+					
+					__rect2.x = __rect1.x
+					__rect2.y = __rect1.y;
+					__rect2.width = __rect1.width;
+					__rect2.height = __rect1.height;
+					
+					return __rect2;
+				},
+				
+				25000, 1000
+			);
+		
+			m_XPointPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XPoint ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					var __point1:XPoint = __src as XPoint;
+					var __point2:XPoint = __dst as XPoint;
+					
+					__point2.x = __point1.x
+					__point2.y = __point1.y;
+
+					return __point2;
+				},
+				
+				25000, 1000
+			);
+				
 			m_XMapModel = null;
 						
 			m_XWorldLayers = new Array ();
-						
-//			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
-			for (var i:Number = 0; i<MAX_LAYERS; i++) {
+							
+			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
+//			for (var i:Number = 0; i<MAX_LAYERS; i++) {
 				m_XWorldLayers[i] = new XSpriteLayer ();
 				m_XWorldLayers[i].setup (this);
 				addChild (m_XWorldLayers[i]);
@@ -266,6 +308,21 @@ package X.World {
 			return m_XTaskManager;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getXRectPoolManager ():XObjectPoolManager {
+			return m_XRectPoolManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXPointPoolManager ():XObjectPoolManager {
+			return m_XPointPoolManager;
+		}
+				
+//------------------------------------------------------------------------------------------
+		public function getBitmapCacheManager ():XBitmapCacheManager {
+			return m_XApp.getBitmapCacheManager ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function grabFocus ():void {
 			m_XKeyboardManager.grabFocus ();

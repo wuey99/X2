@@ -211,26 +211,36 @@ package X.World.Logic {
 			
 // determine whether this object is outside the current viewPort
 			var v:XRect = xxx.getViewRect();
-				
-			var r:XRect = xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height);
+			
+			var r:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;	
+			var i:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			
+			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (r);
 			r.inflate (256, 256);
-
-			var i:XRect;
 						
-			i = m_item.boundingRect.cloneX ();
+			m_item.boundingRect.copy2 (i);
 			i.offsetPoint (getPos ());
 			
 			if (r.intersects (i)) {
+				xxx.getXRectPoolManager ().returnObject (r);
+				xxx.getXRectPoolManager ().returnObject (i);
+				
 				return;
 			}
 			
-			i = m_boundingRect.cloneX ();
+			m_boundingRect.copy2 (i);
 			i.offsetPoint (getPos ());
 			
 			if (r.intersects (i)) {
+				xxx.getXRectPoolManager ().returnObject (r);
+				xxx.getXRectPoolManager ().returnObject (i);
+				
 				return;
 			}
 			
+			xxx.getXRectPoolManager ().returnObject (r);			
+			xxx.getXRectPoolManager ().returnObject (i);
+				
 // yep, kill it
 			trace (": ---------------------------------------: ");
 			trace (": cull: ", this);

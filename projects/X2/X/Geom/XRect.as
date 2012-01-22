@@ -17,7 +17,15 @@ package X.Geom {
 			
 			return new XRect (__rect.x, __rect.y, __rect.width, __rect.height);
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function copy2 (__rect:XRect):void {
+			__rect.x = x;
+			__rect.y = y;
+			__rect.width = width;
+			__rect.height = height;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function getRectangle ():Rectangle {
 			return this as Rectangle;

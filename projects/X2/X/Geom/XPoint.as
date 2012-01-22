@@ -17,7 +17,13 @@ package X.Geom {
 			
 			return new XPoint (__point.x, __point.y);
 		}
-		
+	
+//------------------------------------------------------------------------------------------
+		public function copy2 (__point:XPoint):void {
+			__point.x = x;
+			__point.y = y;
+		}
+			
 //------------------------------------------------------------------------------------------
 		public function getPoint ():Point {
 			return this as Point;
