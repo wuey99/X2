@@ -13,10 +13,12 @@ package X.World.Sprite {
 		public var m_scale:Number;
 		public var m_visible:Boolean;
 		public var m_bitmaps:Array;
-		public var m_bitmapsX:Object;
+		public var m_bitmapNames:Object;
 		public var m_dx:Number;
 		public var m_dy:Number;
 		public var m_frame:Number;
+		public var m_pos:XPoint;
+		public var m_rect:XRect;
 
 //------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
@@ -25,13 +27,16 @@ package X.World.Sprite {
 		public function XBitmap () {
 			super ();
 			
+			m_pos = new XPoint ();
+			m_rect = new XRect ();
+						
 			setRegistration ();
 			
 			m_scale = 1.0;
 			m_visible = true;
 			
 			m_bitmaps = new Array ();
-			m_bitmapsX = new Object ();
+			m_bitmapNames = new Object ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -45,7 +50,7 @@ package X.World.Sprite {
 			
 			var __name:String;
 			
-			for (__name in m_bitmapsX) {
+			for (__name in m_bitmapNames) {
 				m_bitmaps[__name].dispose ();
 				
 				delete m_bitmaps[__name];
@@ -92,6 +97,21 @@ package X.World.Sprite {
 			
 			goto (m_frame);
 		}
+
+//------------------------------------------------------------------------------------------
+		public function getNumBitmaps ():Number {
+			return m_bitmaps.length;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getBitmap (__frame:Number):BitmapData {
+			return m_bitmaps[__frame];
+		}		
+		
+//------------------------------------------------------------------------------------------
+		public function getBitmapByName (__name:String):BitmapData {
+			return m_bitmapNames[__name];
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function goto (__frame:Number):void {
@@ -104,14 +124,14 @@ package X.World.Sprite {
 		public function createBitmap (__name:String, __width:Number, __height:Number):void {
 			var __bitmap:BitmapData = new BitmapData (__width, __height);
 			
-			m_bitmapsX[__name] = __bitmap;
+			m_bitmapNames[__name] = __bitmap;
 			
 			gotoX (__name);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function gotoX (__name:String):void {
-			bitmapData = m_bitmapsX[__name];
+			bitmapData = m_bitmapNames[__name];
 		}
 				
 //------------------------------------------------------------------------------------------
@@ -121,17 +141,25 @@ package X.World.Sprite {
 		
 //------------------------------------------------------------------------------------------
 		public function get dy ():Number {
-			return  m_dy;
+			return m_dy;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):XRect {
-			return new XRect (-x/m_scale, -y/m_scale, __canvasWidth/m_scale, __canvasHeight/m_scale);
+			m_rect.x = -x/m_scale;
+			m_rect.y = -y/m_scale;
+			m_rect.width = __canvasWidth/m_scale;
+			m_rect.height = __canvasHeight/m_scale;
+			
+			return m_rect;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getPos ():XPoint {
-			return new XPoint (x2, y2);
+			m_pos.x = x2;
+			m_pos.y = y2;
+			
+			return m_pos;
 		}
 
 //------------------------------------------------------------------------------------------		

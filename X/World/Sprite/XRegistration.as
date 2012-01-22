@@ -11,7 +11,7 @@ package X.World.Sprite {
 	public interface XRegistration {
 		
 //------------------------------------------------------------------------------------------
-		function globalToParent():XPoint;
+		function globalToParent():Point;
 
 //------------------------------------------------------------------------------------------
 		function setRegistration(x:Number=0, y:Number=0):void;

@@ -14,6 +14,16 @@ package X.XMap {
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------
+// represents the view for all Submaps in a XMap.
+//
+// using the layer's viewport, instantiates/spawns XMapItemModels as XLogicObjects
+// that fall within the viewport's rect.
+//
+// the XLogicObject is responsible for culling.  This class monitor's the XLogicObject's
+// life-cycle by listening to the XLogicObject's kill signal.  XMapItemModels are returned
+// to the Submap on a cull/kill;  However, objects that have been nuked () are permanently
+// removed from the XMapModel.
+//------------------------------------------------------------------------------------------
 	public class XMapLayerView extends XLogicObject {
 		private var m_XMapItemToXLogicObject:XDict;
 		private var m_XMapModel:XMapModel;
@@ -45,7 +55,10 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function updateFromXMapModel ():void {
-			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (512, 512);			
+			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
+				xxx.getViewRect ().width, xxx.getViewRect ().height
+			);
+						
 			var __items:Array;
 							
 			__items = m_XMapModel.getItemsAt (
@@ -79,8 +92,11 @@ package X.XMap {
 			{
 				if (m_XMapItemToXLogicObject.exists (__item)) {
 					var logicObject:XLogicObject = m_XMapItemToXLogicObject.get (__item);
-							
-					logicObject.setPos (new XPoint (__item.x, __item.y));
+					
+					var __point:XPoint = logicObject.getPos ();
+					
+					__point.x = __item.x;
+					__point.y = __item.y;
 				}
 			}
 		}	
@@ -100,7 +116,9 @@ package X.XMap {
 				// scale, rotation
 					__item.scale, __item.rotation,
 				// imageClassName
-					__item.imageClassName	
+					__item.imageClassName,
+				// frame
+					__item.frame
 				);
 			
 			__item.inuse++;

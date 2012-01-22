@@ -4,8 +4,10 @@ import X.Geom.XPoint;
 		public var rp:XPoint;
 		
 //------------------------------------------------------------------------------------------
-		public function globalToParent():Point {
-			return parent.globalToLocal (localToGlobal (rp));
+		public function globalToParent():XPoint {
+			var __p:Point = parent.globalToLocal (localToGlobal (rp));
+			
+			return new XPoint (__p.x, __p.y);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -20,28 +22,28 @@ import X.Geom.XPoint;
 				
 //------------------------------------------------------------------------------------------		
 		public function get x2():Number {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			return p.x;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function set x2(value:Number):void {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			this.x += value - p.x;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function get y2():Number {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			return p.y;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function set y2(value:Number):void {
-			var p:Point = globalToParent ();
+			var p:XPoint = globalToParent ();
 			
 			this.y += value - p.y;
 		}
@@ -88,11 +90,11 @@ import X.Geom.XPoint;
 
 //------------------------------------------------------------------------------------------
 		public function setProperty2(prop:String, n:Number):void {			
-			var a:Point = globalToParent ();
+			var a:XPoint = globalToParent ();
 			
 			this[prop] = n;
 
-			var b:Point = globalToParent ();
+			var b:XPoint = globalToParent ();
 
 			this.x -= b.x - a.x;
 			this.y -= b.y - a.y;

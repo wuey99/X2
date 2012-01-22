@@ -7,8 +7,10 @@ package X {
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
 	
+	import X.Bitmap.*;
 	import X.Debug.XDebug;
 	import X.MVC.*;
+	import X.Pool.XObjectPoolManager;
 	import X.Resource.Manager.*;
 	import X.Signals.*;
 	import X.Sound.*;
@@ -31,12 +33,14 @@ package X {
 		private var m_projectManager:XProjectManager;
 		private var m_XSignalManager:XSignalManager;
 		private var m_XSoundManager:XSoundManager;
+		private var m_XBitmapCacheManager:XBitmapCacheManager;
 
 //------------------------------------------------------------------------------------------
 		public function XApp () {
 			m_XTaskManager = new XTaskManager (this);
 			m_XSignalManager = new XSignalManager ();
 			m_XSoundManager = new XSoundManager (this);
+			m_XBitmapCacheManager = new XBitmapCacheManager (this);
 			
 			m_XDebug = new XDebug ();
 			m_XDebug.setup (this);
@@ -105,6 +109,11 @@ package X {
 //------------------------------------------------------------------------------------------
 		public function getProjectManager ():XProjectManager {
 			return m_projectManager;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getBitmapCacheManager ():XBitmapCacheManager {
+			return m_XBitmapCacheManager;
 		}
 
 //------------------------------------------------------------------------------------------

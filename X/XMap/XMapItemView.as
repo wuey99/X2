@@ -27,9 +27,9 @@ package X.XMap {
 		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx, args);
 			
-			createSprite (args[0]);
-			
 			m_frame = args[1];
+			
+			createSprite (args[0]);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ package X.XMap {
 			m_movieClip = new (xxx.getClass (__spriteClassName)) ();
 
 			x_sprite = addSprite (m_movieClip);
-				
+			
 			if (m_frame) {
 				gotoAndStop (m_frame);
 			}

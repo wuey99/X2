@@ -5,8 +5,6 @@ package X.World.Sprite {
 	import X.Geom.*;
 	import X.World.*;
 	
-// flash classes
-	import flash.display.Sprite;
 	import flash.geom.*;
 	import flash.utils.*;
 	
@@ -14,14 +12,19 @@ package X.World.Sprite {
 	public class XSprite extends XSprite0 implements XRegistration {
 		public var m_scale:Number;
 		public var m_visible:Boolean;
-
+		public var m_pos:XPoint;
+		public var m_rect:XRect;
+		
 //------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
 				
 //------------------------------------------------------------------------------------------
 		public function XSprite () {
 			super ();
-			
+		
+			m_pos = new XPoint ();
+			m_rect = new XRect ();
+					
 			setRegistration ();
 			
 			m_scale = 1.0;
@@ -32,17 +35,27 @@ package X.World.Sprite {
 		public function globalToLocalXPoint (__p:XPoint):XPoint {
 			var __x:Point = globalToLocal (__p.getPoint ());
 			
+// this creates a new XPoint.  Think of a better solution.  Perhaps passing a  reference
+// to a XPoint to modify?
 			return new XPoint (__x.x, __x.y);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):XRect {
-			return new XRect (-x/m_scale, -y/m_scale, __canvasWidth/m_scale, __canvasHeight/m_scale);
+			m_rect.x = -x/m_scale;
+			m_rect.y = -y/m_scale;
+			m_rect.width = __canvasWidth/m_scale;
+			m_rect.height = __canvasHeight/m_scale;
+			
+			return m_rect;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getPos ():XPoint {
-			return new XPoint (x2, y2);
+			m_pos.x = x2;
+			m_pos.y = y2;
+			
+			return m_pos;
 		}
 
 //------------------------------------------------------------------------------------------		
