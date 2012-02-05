@@ -34,7 +34,7 @@ package X.Utils {
 		}
 
 //------------------------------------------------------------------------------------------
-// given as className assign a unique index to it.
+// given a className assign a unique index to it.
 //------------------------------------------------------------------------------------------
 		public function getIndexFromClassName (__className:String):int {
 			var index:int;

@@ -57,14 +57,32 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup ();
+			
+			xxx.getXPointPoolManager ().returnObject (m_vel);
+			xxx.getXPointPoolManager ().returnObject (m_oldPos);
+			xxx.getXRectPoolManager ().returnObject (m_cx);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public override function setupX ():void {
-			setVel (new XPoint (0, 0));
-			setOld (new XPoint (0, 0));
+			var __vel:XPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			var __old:XPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			
-			m_cx = new XRect (0, 0, 0, 0);
+			__vel.x = __vel.y = 0;
+			__old.x = __old.y = 0;
+			
+			setVel (__vel);
+			setOld (__old);
+			
+//			m_cx = new XRect (0, 0, 0, 0);
+	
+			m_cx = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			
+			m_cx.x = 0;
+			m_cx.y = 0;
+			m_cx.width = 0;
+			m_cx.height = 0;
+					
 			m_namedCX = new XDict ();
 		}
 
@@ -119,8 +137,13 @@ package X.World.Logic {
 			__y2:Number
 			):void {
 				
-			m_cx = new XRect (__x1, __y1, __x2-__x1+1, __y2-__y1+1);
-			
+//			m_cx = new XRect (__x1, __y1, __x2-__x1+1, __y2-__y1+1);
+	
+			m_cx.x = __x1;
+			m_cx.y = __y1;
+			m_cx.width = __x2-__x1+1;
+			m_cx.height = __y2-__y1+1;
+				
 			trace (": left, right, top, bottom ", m_cx.left, m_cx.right, m_cx.top, m_cx.bottom);
 			trace (": width, height: ", m_cx.width, m_cx.height);
 		}

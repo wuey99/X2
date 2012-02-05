@@ -10,6 +10,7 @@ package X {
 	import X.Bitmap.*;
 	import X.Debug.XDebug;
 	import X.MVC.*;
+	import X.Geom.*;
 	import X.Pool.XObjectPoolManager;
 	import X.Resource.Manager.*;
 	import X.Signals.*;
@@ -34,14 +35,67 @@ package X {
 		private var m_XSignalManager:XSignalManager;
 		private var m_XSoundManager:XSoundManager;
 		private var m_XBitmapCacheManager:XBitmapCacheManager;
-
+		private var m_XSignalPoolManager:XObjectPoolManager;
+		private var m_XRectPoolManager:XObjectPoolManager;
+		private var m_XPointPoolManager:XObjectPoolManager;
+		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
 			m_XTaskManager = new XTaskManager (this);
-			m_XSignalManager = new XSignalManager ();
+			m_XSignalManager = new XSignalManager (this);
 			m_XSoundManager = new XSoundManager (this);
 			m_XBitmapCacheManager = new XBitmapCacheManager (this);
-			
+		
+			m_XSignalPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XSignal ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				10000, 1000
+			);
+				
+			m_XRectPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XRect ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					var __rect1:XRect = __src as XRect;
+					var __rect2:XRect = __dst as XRect;
+					
+					__rect2.x = __rect1.x
+					__rect2.y = __rect1.y;
+					__rect2.width = __rect1.width;
+					__rect2.height = __rect1.height;
+					
+					return __rect2;
+				},
+				
+				25000, 1000
+			);
+		
+			m_XPointPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XPoint ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					var __point1:XPoint = __src as XPoint;
+					var __point2:XPoint = __dst as XPoint;
+					
+					__point2.x = __point1.x
+					__point2.y = __point1.y;
+
+					return __point2;
+				},
+				
+				25000, 1000
+			);
+				
 			m_XDebug = new XDebug ();
 			m_XDebug.setup (this);
 			
@@ -86,6 +140,21 @@ package X {
 			return m_XTaskManager;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getXSignalPoolManager ():XObjectPoolManager {
+			return m_XSignalPoolManager;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getXRectPoolManager ():XObjectPoolManager {
+			return m_XRectPoolManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXPointPoolManager ():XObjectPoolManager {
+			return m_XPointPoolManager;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
 			return m_XSignalManager.createXSignal ();

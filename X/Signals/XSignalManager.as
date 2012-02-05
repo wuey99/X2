@@ -2,13 +2,18 @@
 package X.Signals {
 	
 	import X.Collections.*;
+	import X.XApp;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSignalManager extends Object {
+		private var m_XApp:XApp;
+		
 		private var m_XSignals:XDict;
 		
 //------------------------------------------------------------------------------------------
-		public function XSignalManager () {
+		public function XSignalManager (__XApp:XApp) {
+			m_XApp = __XApp;
+			
 			m_XSignals = new XDict ();
 		}
 

@@ -3,6 +3,7 @@ package X.Bitmap {
 	
 // X classes
 	import X.Collections.*;
+	import X.Task.*;
 	import X.World.Sprite.XBitmap;
 	import X.XApp;
 	
@@ -13,6 +14,7 @@ package X.Bitmap {
 		private var m_XApp:XApp;
 		private var m_bitmaps:XDict;
 		private var m_count:Object;
+		private var m_queue:XDict;
 		
 //------------------------------------------------------------------------------------------
 		public function XBitmapCacheManager (__XApp:XApp) {
@@ -20,34 +22,73 @@ package X.Bitmap {
 			
 			m_bitmaps = new XDict ();
 			m_count = new Object ();
+			m_queue = new XDict ();
+			
+// checked queued images and cache the ones that have loaded.
+			m_XApp.getXTaskManager ().addTask ([
+				XTask.LABEL, "loop",
+					XTask.WAIT, 0x0100,
+					
+					function ():void {
+						m_queue.forEach (
+							function (x:*):void {
+								var __className:String = x as String;
+								var __class:Class = m_XApp.getClass (__className);
+								
+								if (__class != null) {
+									__createBitmap (__className, __class);
+																		
+									m_queue.remove (__className);
+								}
+							}
+						);
+					},
+					
+					XTask.GOTO, "loop",
+							
+				XTask.RETN,
+			]);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addMovieClipToCache (__className:String):XBitmap {
+		public function add (__className:String):XBitmap {
 			if (m_bitmaps.exists (__className)) {
 				m_count[__className]++;
 				
+// this could return null if the image is still loading.	
 				return m_bitmaps.get (__className);
 			}
 			
+			m_count[__className] = 1;
+			m_bitmaps.put (__className, null);
+				
 			var __class:Class = m_XApp.getClass (__className);
 			
-			if (__class == null) {
-				return null;
+			if (__class) {
+				return __createBitmap (__className, __class);
 			}
 			
+// wait for image to load before caching it.
+			m_queue.put (__className, 0);
+			
+			return null;
+		}
+
+//------------------------------------------------------------------------------------------
+		private function __createBitmap (__className:String, __class:Class):XBitmap {
 			var __movieClip:MovieClip = new (__class) ();		
 			var __XBitmap:XBitmap = new XBitmap ();			
 			__XBitmap.initWithScaling (__movieClip, 1.0);
 		
-			m_count[__className] = 1;
+			trace (": adding bitmap: ", __movieClip, __XBitmap);
+	
 			m_bitmaps.put (__className, __XBitmap);
 			
-			return __XBitmap;
+			return __XBitmap;			
 		}
-		
+			
 //------------------------------------------------------------------------------------------
-		public function removeMovieClipFromCache (__className:String):void {
+		public function remove (__className:String):void {
 			if (m_bitmaps.exists (__className)) {
 				m_count[__className]--;
 				
@@ -62,7 +103,7 @@ package X.Bitmap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getBitmapFromMovieClip (__className:String):XBitmap {
+		public function get (__className:String):XBitmap {
 			if (m_bitmaps.exists (__className)) {
 				return m_bitmaps.get (__className);
 			}

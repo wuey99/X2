@@ -4,6 +4,7 @@ package X.XMap {
 // X classes	
 	import X.Geom.*;
 	import X.MVC.*;
+	import X.XApp;
 	import X.XML.*;
 	
 	import flash.events.*;
@@ -15,7 +16,6 @@ package X.XMap {
 //		each submap is submapWidth pixels wide and submapHeight pixels high.
 //------------------------------------------------------------------------------------------
 	public class XMapModel extends XModelBase {
-				
 		private var m_numLayers:Number;
 		private var m_layers:Array;
 		private var m_allClassNames:Array;
@@ -30,8 +30,12 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function setup (
-			__layers:Array
+			__layers:Array = null
 			):void {
+				
+			if (!__layers) {
+				return;
+			}
 			
 			m_numLayers = __layers.length;	
 			m_layers = new Array (m_numLayers);
@@ -46,6 +50,11 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			var i:Number;
+			
+			for (i=0; i<m_numLayers; i++) {
+				m_layers[i].cleanup ();
+			}
 		}
 
 //------------------------------------------------------------------------------------------

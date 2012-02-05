@@ -16,6 +16,7 @@ package X.World {
 	import X.Keyboard.*;
 	import X.MVC.*;
 	import X.Pool.XObjectPoolManager;
+	import X.Pool.XSubObjectPoolManager;
 	import X.Resource.*;
 	import X.Resource.Manager.*;
 	import X.Signals.*;
@@ -88,9 +89,10 @@ package X.World {
 		public var m_g$:g$;
 		public var m_XMapLayerView:XMapLayerView;
 		public var m_XMapView:XMapView;
-		public var m_XRectPoolManager:XObjectPoolManager;
-		public var m_XPointPoolManager:XObjectPoolManager;
-						
+		public var m_XSubXRectPoolManager:XSubObjectPoolManager;
+		public var m_XSubXPointPoolManager:XSubObjectPoolManager;
+		public var m_XMapLayerCachedView:XMapLayerCachedView;
+				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=4){
 			m_parent = __parent;
@@ -127,45 +129,7 @@ package X.World {
 			m_XLogicManager = new XLogicManager (this);
 			m_XTaskManager = new XTaskManager (__XApp);
 			m_renderManager = new XTaskManager (__XApp);
-			m_XSignalManager = new XSignalManager ();
-			
-			m_XRectPoolManager = new XObjectPoolManager (
-				function ():* {
-					return new XRect ();
-				},
-				
-				function (__src:*, __dst:*):* {
-					var __rect1:XRect = __src as XRect;
-					var __rect2:XRect = __dst as XRect;
-					
-					__rect2.x = __rect1.x
-					__rect2.y = __rect1.y;
-					__rect2.width = __rect1.width;
-					__rect2.height = __rect1.height;
-					
-					return __rect2;
-				},
-				
-				25000, 1000
-			);
-		
-			m_XPointPoolManager = new XObjectPoolManager (
-				function ():* {
-					return new XPoint ();
-				},
-				
-				function (__src:*, __dst:*):* {
-					var __point1:XPoint = __src as XPoint;
-					var __point2:XPoint = __dst as XPoint;
-					
-					__point2.x = __point1.x
-					__point2.y = __point1.y;
-
-					return __point2;
-				},
-				
-				25000, 1000
-			);
+			m_XSignalManager = new XSignalManager (__XApp);
 				
 			m_XMapModel = null;
 						
@@ -310,12 +274,12 @@ package X.World {
 
 //------------------------------------------------------------------------------------------
 		public function getXRectPoolManager ():XObjectPoolManager {
-			return m_XRectPoolManager;
+			return m_XApp.getXRectPoolManager ();
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getXPointPoolManager ():XObjectPoolManager {
-			return m_XPointPoolManager;
+			return m_XApp.getXPointPoolManager ();
 		}
 				
 //------------------------------------------------------------------------------------------
@@ -372,8 +336,24 @@ package X.World {
 			
 			return new XPoint (__x.x, __x.y);
 		}
-				
 
+//------------------------------------------------------------------------------------------
+		public function globalToWorld2 (__layer:Number, __src:XPoint, __dst:XPoint):XPoint {
+			var __x:Point;
+			
+			if (__layer < 0) {
+				__x = getXHudLayer ().globalToLocal (__src);
+			}
+			else 
+			{
+				__x = getXWorldLayer (__layer).globalToLocal (__src);
+			}
+			
+			__dst.x = __x.x; __dst.y = __x.y;
+			
+			return __dst;
+		}
+							
 //------------------------------------------------------------------------------------------
 		public function setViewRect (
 			__width:Number, __height:Number

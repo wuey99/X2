@@ -40,20 +40,20 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {
+		public function cleanup ():void {	
 			var i:Number;
-			
-			for (i=0; m_bitmaps.length; i++) {
-				m_bitmaps[i].dispose ().
+				
+			for (i=0; i<m_bitmaps.length; i++) {
+				m_bitmaps[i].dispose ();
 				m_bitmaps[i] = null;
 			}
 			
 			var __name:String;
 			
 			for (__name in m_bitmapNames) {
-				m_bitmaps[__name].dispose ();
+				m_bitmapNames[__name].dispose ();
 				
-				delete m_bitmaps[__name];
+				delete m_bitmapNames[__name];
 			}
 		}
 		
@@ -98,6 +98,21 @@ package X.World.Sprite {
 			goto (m_frame);
 		}
 
+
+//------------------------------------------------------------------------------------------
+		public function disposeBitmapByName (__name:String):void {
+			if (__name in m_bitmapNames) {
+				m_bitmapNames[__name].dispose ();
+				
+				delete m_bitmapNames[__name];
+			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public function nameInBitmapNames (__name:String):Boolean {
+			return __name in m_bitmapNames;
+		}		
+		
 //------------------------------------------------------------------------------------------
 		public function getNumBitmaps ():Number {
 			return m_bitmaps.length;

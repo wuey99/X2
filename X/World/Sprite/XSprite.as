@@ -34,10 +34,17 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------
 		public function globalToLocalXPoint (__p:XPoint):XPoint {
 			var __x:Point = globalToLocal (__p.getPoint ());
-			
-// this creates a new XPoint.  Think of a better solution.  Perhaps passing a  reference
-// to a XPoint to modify?
+		
 			return new XPoint (__x.x, __x.y);
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function globalToLocalXPoint2 (__src:XPoint, __dst:XPoint):XPoint {
+			var __x:Point = globalToLocal (__src.getPoint ());
+		
+			__dst.x = __x.x;  __dst.y = __x.y;
+			
+			return __dst;
 		}
 		
 //------------------------------------------------------------------------------------------
