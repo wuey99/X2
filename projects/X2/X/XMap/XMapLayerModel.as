@@ -28,6 +28,7 @@ package X.XMap {
 		private var m_items:XDict;
 
 		private var m_classNames:XClassNameToIndex;
+		private var m_imageClassNames:XDict;
 		
 		private var m_viewPort:XRect;
 		
@@ -72,6 +73,7 @@ package X.XMap {
 			}
 			
 			m_classNames = new XClassNameToIndex ();
+			m_imageClassNames = new XDict ();
 			
 			m_viewPort = new XRect ();
 		}
@@ -516,7 +518,12 @@ package X.XMap {
 		public function getClassNames ():XClassNameToIndex {
 			return m_classNames;
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function getImageClassNames ():XDict {
+			return m_imageClassNames;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function serialize (__xml:XSimpleXMLNode):XSimpleXMLNode {
 			var __attribs:Array = [
@@ -537,6 +544,7 @@ package X.XMap {
 			
 			__xml = __xml.addChildWithParams ("XLayer", "", __attribs);
 			
+			__xml.addChildWithXMLNode (serializeImageClassNames ());
 			__xml.addChildWithXMLNode (m_classNames.serialize ());
 			__xml.addChildWithXMLNode (serializeItems ());
 			__xml.addChildWithXMLNode (serializeSubmaps ());
@@ -587,6 +595,40 @@ package X.XMap {
 			return xml;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function serializeImageClassNames ():XSimpleXMLNode {
+			var __imageClassNames:XDict = new XDict ();
+			
+			var __row:Number, __col:Number;
+			
+			for (__row=0; __row<m_submapRows; __row++) {
+				for (__col=0; __col<m_submapCols; __col++) {
+					m_XSubmaps[__row][__col].items ().forEach (
+						function (__item:*):void {
+							__imageClassNames.put (__item.imageClassName, 0);
+						}
+					);
+				}
+			}
+	
+			var __xml:XSimpleXMLNode = new XSimpleXMLNode ();		
+			__xml.setupWithParams ("imageClassNames", "", []);
+					
+			__imageClassNames.forEach (
+				function (__imageClassName:*):void {
+					var __attribs:Array = [
+						"name",	__imageClassName as String,					
+					];
+					
+					var __className:XSimpleXMLNode = new XSimpleXMLNode ();				
+					__className.setupWithParams ("imageClassName", "", __attribs);
+					__xml.addChildWithXMLNode (__className);
+				}
+			);
+			
+			return __xml;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function submapIsNotEmpty (submap:XSubmapModel):Boolean {
 			var count:Number = 0;
@@ -639,10 +681,12 @@ package X.XMap {
 				m_grid = false;
 			}	
 			m_classNames = new XClassNameToIndex ();
-			
+			m_imageClassNames = new XDict ();			
+
 			m_items = new XDict ();
 			m_XSubmaps = new Array (m_submapRows);
 			
+			deserializeImageClassNames (__xml);
 			m_classNames.deserialize (__xml);
 			deserializeItems (__xml);
 			deserializeSubmaps (__xml);
@@ -700,6 +744,26 @@ package X.XMap {
 			cullUnneededItems ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function deserializeImageClassNames (__xml:XSimpleXMLNode):void {
+			if (__xml.child ("imageClassNames").length == 0) {
+				return;
+			}
+
+			var __xmlList:Array = __xml.child ("imageClassNames")[0].child ("imageClassName");
+
+			var __name:String;	
+			var i:Number;
+		
+			for (i=0; i<__xmlList.length; i++) {
+				__name = __xmlList[i].getAttribute ("name");
+				
+				trace (": deserializeImageClassName: ", __name);
+				
+				m_imageClassNames.put (__name, 0);
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function cullUnneededItems ():void {
 			var __row:Number;

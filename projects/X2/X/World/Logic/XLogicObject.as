@@ -136,6 +136,8 @@ package X.World.Logic {
 			
 			m_killSignal = createXSignal ();
 			
+			m_pos = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			
 			setVisible (false);			
 			visible = false;
 			
@@ -158,7 +160,9 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {			
+		public function cleanup ():void {
+			xxx.getXPointPoolManager ().returnObject (m_pos);
+				
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
 // to a the "kill" event.
@@ -345,6 +349,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+/*
 		public function localToGlobalXX (__obj:XLogicObject, __pos:XPoint):XPoint {
 			var __x:Number;
 			var __y:Number;
@@ -400,7 +405,8 @@ package X.World.Logic {
 			
 			return __newPos;
 		}
-				
+*/
+		
 //------------------------------------------------------------------------------------------
 // get a map of all our child sprites that live in the World
 //------------------------------------------------------------------------------------------	

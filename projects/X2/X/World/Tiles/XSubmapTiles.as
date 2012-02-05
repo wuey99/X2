@@ -42,13 +42,17 @@ package X.World.Tiles {
 			
 			createSprites ();
 			
-			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;;
+			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			
+			cx_bitmap = xxx.getBitmapCacheManager ().get ("CX:CXClass");
 		}
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
-			removeAll ();
+			m_bitmap.cleanup ();
 			
+			removeAll ();
+					
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			
 			if (m_submapModel != null) {
@@ -64,20 +68,25 @@ package X.World.Tiles {
 		public function setModel (__model:XSubmapModel):void {
 			m_submapModel = __model;
 			
-			refresh ();
-		}
-				
-//------------------------------------------------------------------------------------------
-		public function refresh ():void {
 			m_boundingRect = m_submapModel.boundingRect.cloneX ();
 			
 			var __width:Number = m_submapModel.width;
 			var __height:Number = m_submapModel.height;
 	
-			m_bitmap.createBitmap ("tiles", __width, __height);
+			if (!m_bitmap.nameInBitmapNames ("tiles")) {
+				m_bitmap.createBitmap ("tiles", __width, __height);
+			}
+						
+			refresh ();
+		}
 				
+//------------------------------------------------------------------------------------------
+		public function refresh ():void {
 			m_bitmap.bitmapData.lock ();
-			
+
+			var __width:Number = m_submapModel.width;
+			var __height:Number = m_submapModel.height;
+						
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
@@ -94,9 +103,9 @@ package X.World.Tiles {
 			__hline (__height-1);
 		
 			__tiles ();
-			
+		
 			m_bitmap.bitmapData.unlock ();
-			
+				
 			function __tiles ():void {
 				var __col:Number;
 				var __row:Number;
@@ -183,9 +192,9 @@ package X.World.Tiles {
 			x_sprite = addSpriteAt (m_bitmap, 0, 0);
 			x_sprite.setDepth (getDepth ());
 			
-			cx_sprite = new (xxx.getClass ("CX:CXClass")) ();
-			cx_bitmap = new XBitmap ();
-			cx_bitmap.initWithScaling (cx_sprite, 1.0);
+//			cx_sprite = new (xxx.getClass ("CX:CXClass")) ();
+//			cx_bitmap = new XBitmap ();
+//			cx_bitmap.initWithScaling (cx_sprite, 1.0);
 			
 			show ();
 		}

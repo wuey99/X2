@@ -12,6 +12,14 @@ package X.Geom {
 		}	
 
 //------------------------------------------------------------------------------------------
+		public function setRect (__x:Number, __y:Number, __width:Number, __height:Number):void {
+			x = __x;
+			y = __y;
+			width = __width;
+			height = __height;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function cloneX ():XRect {
 			var __rect:Rectangle = clone ();
 			

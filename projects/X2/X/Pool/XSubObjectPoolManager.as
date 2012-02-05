@@ -9,7 +9,7 @@ package X.Pool {
 		private var m_inuseObjects:XDict;
 		
 //------------------------------------------------------------------------------------------
-		public function XObjectPoolManager (__manager:XObjectPoolManager) {
+		public function XSubObjectPoolManager (__manager:XObjectPoolManager) {
 			m_manager = __manager;
 			
 			m_inuseObjects = new XDict ();
@@ -17,7 +17,7 @@ package X.Pool {
 		
 //------------------------------------------------------------------------------------------
 		public function isObject (__object:Object):Boolean {
-			return m_manager.exists (__object);
+			return m_manager.isObject (__object);
 		}	
 
 //------------------------------------------------------------------------------------------
