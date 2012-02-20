@@ -30,7 +30,10 @@ package X.World.Tiles {
 		private var cx_bitmap:XBitmap;
 		
 		private var tempRect:XRect;
-		
+		private var tempPoint:XPoint;
+
+		private var m_XMapView:*;
+
 //------------------------------------------------------------------------------------------	
 		public function XSubmapTiles () {
 			m_submapModel = null;
@@ -40,20 +43,26 @@ package X.World.Tiles {
 		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx, args);
 			
+			m_XMapView = getArg (args, 0);
+			
 			createSprites ();
 			
 			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			tempPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			
 			cx_bitmap = xxx.getBitmapCacheManager ().get ("CX:CXClass");
 		}
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
-			m_bitmap.cleanup ();
+//			m_bitmap.cleanup ();
 			
 			removeAll ();
+			
+			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_bitmap);
 					
 			xxx.getXRectPoolManager ().returnObject (tempRect);
+			xxx.getXPointPoolManager ().returnObject (tempPoint);
 			
 			if (m_submapModel != null) {
 				fireKillSignal (m_submapModel);
@@ -69,13 +78,6 @@ package X.World.Tiles {
 			m_submapModel = __model;
 			
 			m_boundingRect = m_submapModel.boundingRect.cloneX ();
-			
-			var __width:Number = m_submapModel.width;
-			var __height:Number = m_submapModel.height;
-	
-			if (!m_bitmap.nameInBitmapNames ("tiles")) {
-				m_bitmap.createBitmap ("tiles", __width, __height);
-			}
 						
 			refresh ();
 		}
@@ -110,7 +112,7 @@ package X.World.Tiles {
 				var __col:Number;
 				var __row:Number;
 				var __rect:XRect;
-				var __p:XPoint = new XPoint ();
+//				var __p:XPoint = new XPoint ();
 		
 //				__rect = new XRect (0, 0, XSubmapModel.CX_TILE_WIDTH, XSubmapModel.CX_TILE_HEIGHT);
 	
@@ -123,11 +125,11 @@ package X.World.Tiles {
 					for (__col=0; __col < m_submapModel.cols; __col++) {
 						cx_bitmap.goto (m_submapModel.getCXTile (__col, __row)+1);
 																					
-						__p.x = __col << 4;
-						__p.y = __row << 4;
+						tempPoint.x = __col << 4;
+						tempPoint.y = __row << 4;
 						
 						m_bitmap.bitmapData.copyPixels (
-							cx_bitmap.bitmapData, tempRect, __p, null, null, true
+							cx_bitmap.bitmapData, tempRect, tempPoint, null, null, true
 						);
 					}
 				}
@@ -178,8 +180,8 @@ package X.World.Tiles {
 			xxx.getXRectPoolManager ().returnObject (i);
 					
 // yep, kill it
-			trace (": ---------------------------------------: ");
-			trace (": cull: ", this);
+//			trace (": ---------------------------------------: ");
+//			trace (": cull: ", this);
 			
 			killLater ();
 		}
@@ -188,13 +190,10 @@ package X.World.Tiles {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_bitmap = new XBitmap ();
+			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XBitmap;
 			x_sprite = addSpriteAt (m_bitmap, 0, 0);
 			x_sprite.setDepth (getDepth ());
-			
-//			cx_sprite = new (xxx.getClass ("CX:CXClass")) ();
-//			cx_bitmap = new XBitmap ();
-//			cx_bitmap.initWithScaling (cx_sprite, 1.0);
+
 			
 			show ();
 		}

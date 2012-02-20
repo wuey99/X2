@@ -9,14 +9,15 @@ package X {
 	
 	import X.Bitmap.*;
 	import X.Debug.XDebug;
-	import X.MVC.*;
 	import X.Geom.*;
+	import X.MVC.*;
 	import X.Pool.XObjectPoolManager;
 	import X.Resource.Manager.*;
 	import X.Signals.*;
 	import X.Sound.*;
 	import X.Task.*;
 	import X.World.*;
+	import X.World.Sprite.XDepthSprite;
 	import X.XMap.*;
 	
 	import flash.display.*;
@@ -38,6 +39,7 @@ package X {
 		private var m_XSignalPoolManager:XObjectPoolManager;
 		private var m_XRectPoolManager:XObjectPoolManager;
 		private var m_XPointPoolManager:XObjectPoolManager;
+		private var m_XDepthSpritePoolManager:XObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
@@ -46,55 +48,7 @@ package X {
 			m_XSoundManager = new XSoundManager (this);
 			m_XBitmapCacheManager = new XBitmapCacheManager (this);
 		
-			m_XSignalPoolManager = new XObjectPoolManager (
-				function ():* {
-					return new XSignal ();
-				},
-				
-				function (__src:*, __dst:*):* {
-					return null;
-				},
-				
-				10000, 1000
-			);
-				
-			m_XRectPoolManager = new XObjectPoolManager (
-				function ():* {
-					return new XRect ();
-				},
-				
-				function (__src:*, __dst:*):* {
-					var __rect1:XRect = __src as XRect;
-					var __rect2:XRect = __dst as XRect;
-					
-					__rect2.x = __rect1.x
-					__rect2.y = __rect1.y;
-					__rect2.width = __rect1.width;
-					__rect2.height = __rect1.height;
-					
-					return __rect2;
-				},
-				
-				25000, 1000
-			);
-		
-			m_XPointPoolManager = new XObjectPoolManager (
-				function ():* {
-					return new XPoint ();
-				},
-				
-				function (__src:*, __dst:*):* {
-					var __point1:XPoint = __src as XPoint;
-					var __point2:XPoint = __dst as XPoint;
-					
-					__point2.x = __point1.x
-					__point2.y = __point1.y;
-
-					return __point2;
-				},
-				
-				25000, 1000
-			);
+			__initPoolManagers ();
 				
 			m_XDebug = new XDebug ();
 			m_XDebug.setup (this);
@@ -112,7 +66,87 @@ package X {
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
+
+//------------------------------------------------------------------------------------------
+		private function __initPoolManagers ():void {
+
+//------------------------------------------------------------------------------------------
+// XSignals
+//------------------------------------------------------------------------------------------
+			m_XSignalPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XSignal ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				10000, 1000
+			);
+				
+//------------------------------------------------------------------------------------------
+// XRect
+//------------------------------------------------------------------------------------------
+			m_XRectPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XRect ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					var __rect1:XRect = __src as XRect;
+					var __rect2:XRect = __dst as XRect;
+					
+					__rect2.x = __rect1.x;
+					__rect2.y = __rect1.y;
+					__rect2.width = __rect1.width;
+					__rect2.height = __rect1.height;
+					
+					return __rect2;
+				},
+				
+				25000, 1000
+			);
 		
+//------------------------------------------------------------------------------------------
+// XPoint
+//------------------------------------------------------------------------------------------
+			m_XPointPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XPoint ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					var __point1:XPoint = __src as XPoint;
+					var __point2:XPoint = __dst as XPoint;
+					
+					__point2.x = __point1.x;
+					__point2.y = __point1.y;
+
+					return __point2;
+				},
+				
+				25000, 1000
+			);
+
+//------------------------------------------------------------------------------------------
+// XDepthSprite
+//------------------------------------------------------------------------------------------
+			m_XDepthSpritePoolManager = new XObjectPoolManager (
+				function ():* {
+					var __sprite:XDepthSprite = new XDepthSprite ();
+					__sprite.clear ();
+					return __sprite;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				4000, 1000
+			);
+		}
+			
 //------------------------------------------------------------------------------------------
 		public function updateTimer (e:Event):void {
 			if (m_inuse_TIMER_FRAME) {
@@ -154,7 +188,12 @@ package X {
 		public function getXPointPoolManager ():XObjectPoolManager {
 			return m_XPointPoolManager;
 		}
-				
+
+//------------------------------------------------------------------------------------------
+		public function getXDepthSpritePoolManager ():XObjectPoolManager {
+			return m_XDepthSpritePoolManager;
+		}
+						
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
 			return m_XSignalManager.createXSignal ();

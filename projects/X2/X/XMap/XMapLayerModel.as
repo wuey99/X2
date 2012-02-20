@@ -447,7 +447,7 @@ package X.XMap {
 // col, row mask for the submap
 			var rowMask:int = row32-1;
 			var colMask:int = col32-1;
-			
+					
 // total columns wide, rows high
 			var cols:int = c2-c1+1;
 			var rows:int = r2-r1+1;

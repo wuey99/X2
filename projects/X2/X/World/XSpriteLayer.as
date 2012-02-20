@@ -32,7 +32,10 @@ package X.World {
 		
 //------------------------------------------------------------------------------------------
 		public function addSprite (__sprite:DisplayObject, __depth:Number, __visible:Boolean = false):XDepthSprite {
-			var __depthSprite:XDepthSprite =  new XDepthSprite ();
+//			var __depthSprite:XDepthSprite =  new XDepthSprite ();
+			var __depthSprite:XDepthSprite = xxx.getXDepthSpritePoolManager ().borrowObject () as XDepthSprite;
+			
+			__depthSprite.clear ();
 			__depthSprite.addSprite (__sprite, __depth, this);
 			__depthSprite.visible = __visible;
 			__depthSprite.xxx = xxx;
@@ -45,7 +48,7 @@ package X.World {
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function addDepthSprite (__depthSprite:XDepthSprite):XDepthSprite {
+		public function addDepthSprite (__depthSprite:XDepthSprite):XDepthSprite {	
 			addChild (__depthSprite);
 				
 			m_XDepthSpriteMap.put (__depthSprite, 0);
@@ -57,11 +60,22 @@ package X.World {
 		public function removeSprite (__depthSprite:Sprite):void {
 			if (m_XDepthSpriteMap.exists (__depthSprite)) {
 				removeChild (__depthSprite);
+	
+				xxx.getXDepthSpritePoolManager ().returnObject (__depthSprite);
+							
+				m_XDepthSpriteMap.remove (__depthSprite);
+			}
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function moveSprite (__depthSprite:Sprite):void {
+			if (m_XDepthSpriteMap.exists (__depthSprite)) {
+				removeChild (__depthSprite);
 				
 				m_XDepthSpriteMap.remove (__depthSprite);
 			}
 		}
-		
+			
 //------------------------------------------------------------------------------------------	
 		public function depthSort ():void {
 			var list:Array = new Array ();

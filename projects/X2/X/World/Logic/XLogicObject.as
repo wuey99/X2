@@ -246,8 +246,8 @@ package X.World.Logic {
 			xxx.getXRectPoolManager ().returnObject (i);
 				
 // yep, kill it
-			trace (": ---------------------------------------: ");
-			trace (": cull: ", this);
+//			trace (": ---------------------------------------: ");
+//			trace (": cull: ", this);
 			
 			killLater ();
 		}
@@ -621,7 +621,7 @@ package X.World.Logic {
 			if (__layer != m_layer && m_layer != -1) {
 				m_worldSprites.forEach (
 					function (x:*):void {
-						xxx.getXWorldLayer (m_layer).removeSprite (x);
+						xxx.getXWorldLayer (m_layer).moveSprite (x);
 						xxx.getXWorldLayer (__layer).addDepthSprite (x);
 					}
 				);

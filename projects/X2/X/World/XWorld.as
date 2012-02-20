@@ -281,7 +281,12 @@ package X.World {
 		public function getXPointPoolManager ():XObjectPoolManager {
 			return m_XApp.getXPointPoolManager ();
 		}
-				
+
+//------------------------------------------------------------------------------------------
+		public function getXDepthSpritePoolManager ():XObjectPoolManager {
+			return m_XApp.getXDepthSpritePoolManager ();
+		}
+					
 //------------------------------------------------------------------------------------------
 		public function getBitmapCacheManager ():XBitmapCacheManager {
 			return m_XApp.getBitmapCacheManager ();
