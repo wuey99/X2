@@ -18,8 +18,17 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------
 		public function XDepthSprite () {
 			super ();
+			
+			clear ();
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function clear ():void {
+			while (numChildren) {
+				removeChildAt (0);
+			}
+		}
+			
 //------------------------------------------------------------------------------------------
 		public function addSprite (
 			__sprite:DisplayObject,

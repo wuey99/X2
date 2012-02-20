@@ -8,9 +8,6 @@ package X.XMap {
 	import X.World.Collision.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
-	import X.XMap.XMapItemModel;
-	import X.XMap.XMapView;
-	import X.XMap.XSubmapModel;
 	
 	import flash.display.*;
 	import flash.geom.*;
@@ -43,6 +40,7 @@ package X.XMap {
 		private var x_sprite:XDepthSprite;
 	
 		private var tempRect:XRect;
+		private var tempPoint:XPoint;
 					
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewCache () {
@@ -53,18 +51,22 @@ package X.XMap {
 		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx, args);
 			
+			m_XMapView = getArg (args, 0);
+			
 			createSprites ();
 			
 			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			tempPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 		}
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
-			m_bitmap.cleanup ();
-		
 			removeAll ();
-			
+
+			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_bitmap);
+					
 			xxx.getXRectPoolManager ().returnObject (tempRect);
+			xxx.getXPointPoolManager ().returnObject (tempPoint);
 			
 			if (m_submapModel != null) {
 				fireKillSignal (m_submapModel);
@@ -85,13 +87,6 @@ package X.XMap {
 			m_submapModel = __model;
 			
 			m_boundingRect = m_submapModel.boundingRect.cloneX ();
-			
-			var __width:Number = m_submapModel.width;
-			var __height:Number = m_submapModel.height;
-	
-			if (!m_bitmap.nameInBitmapNames ("tiles")) {
-				m_bitmap.createBitmap ("tiles", __width, __height);
-			}
 			
 			refresh ();
 		}
@@ -117,7 +112,7 @@ package X.XMap {
 			var __items:XDict = m_submapModel.items ();
 			var __item:XMapItemModel;
 			var __bitmap:XBitmap;
-			var __p:XPoint = new XPoint ();
+//			var __p:XPoint = new XPoint ();
 			
 			tempRect.x = 0;
 			tempRect.y = 0;
@@ -133,14 +128,14 @@ package X.XMap {
 					if (__bitmap != null) {
 						__bitmap.goto (__item.frame);
 						
-						__p.x = __item.x - m_submapModel.x;
-						__p.y = __item.y - m_submapModel.y;
+						tempPoint.x = __item.x - m_submapModel.x;
+						tempPoint.y = __item.y - m_submapModel.y;
 						
 						tempRect.width = __item.boundingRect.width;
 						tempRect.height = __item.boundingRect.height;
 						
 						m_bitmap.bitmapData.copyPixels (
-							__bitmap.bitmapData, tempRect, __p, null, null, true
+							__bitmap.bitmapData, tempRect, tempPoint, null, null, true
 						);
 					}
 				}
@@ -193,8 +188,8 @@ package X.XMap {
 			xxx.getXRectPoolManager ().returnObject (i);
 					
 // yep, kill it
-			trace (": ---------------------------------------: ");
-			trace (": cull: ", this);
+//			trace (": ---------------------------------------: ");
+//			trace (": cull: ", this);
 			
 			killLater ();
 		}
@@ -203,7 +198,7 @@ package X.XMap {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_bitmap = new XBitmap ();
+			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapBitmap;
 			x_sprite = addSpriteAt (m_bitmap, 0, 0);
 			x_sprite.setDepth (getDepth ());
 			

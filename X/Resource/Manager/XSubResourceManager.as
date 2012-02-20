@@ -303,6 +303,46 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------
+// eventually replace:
+//
+// findNodeFromSrcName
+// findNodeFromResourceName
+// findNodeFromClassName
+//------------------------------------------------------------------------------------------
+		public function iterateAllNodes (
+			__match:XML,
+			__xmlList:XMLList,
+			__callback:Function
+			):XML {
+			
+			var i:int;
+				
+			for (i = 0; i<__xmlList.length (); i++) {
+				if (__xmlList[i].localName () == "folder") {
+					var nuMatch:XML = iterateAllNodes (
+						__match,
+						__xmlList[i].child ("*"),
+						__callback
+						);
+						
+					if (nuMatch != null) {
+						__match = nuMatch;
+					}
+				}
+				else
+				{	
+					var __results:Array = __callback (__xmlList[i]);
+					
+					if (__results[0]) {
+						__match = __results[1];
+					}
+				}
+			}
+			
+			return __match;			
+		}
+			
+//------------------------------------------------------------------------------------------
 		public function findNodeFromSrcName (
 			__match:XML,
 			__srcName:String,
@@ -420,7 +460,7 @@ package X.Resource.Manager {
 			var i:int, j:int;
 						
 			for (i = 0; i<__xmlList.length (); i++) {
-				trace (": caching: ", __xmlList[i].localName ());
+//				trace (": caching: ", __xmlList[i].localName ());
 				
 				if (__xmlList[i].localName () == "folder") {
 					cacheClassNames (__xmlList[i].child ("*"));
@@ -474,7 +514,7 @@ package X.Resource.Manager {
 			
 			var __c:* = m_classMap[__className];
 			
-			trace (": XResourceManager:__resolveXClass (): ", __className);
+//			trace (": XResourceManager:__resolveXClass (): ", __className);
 			
 			if (__c == undefined) {
 				var __match:Array = __lookUpResourcePathByClassName (__className);

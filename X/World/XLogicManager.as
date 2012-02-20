@@ -135,7 +135,7 @@ package X.World {
 			__logicObject.setRelativeDepthFlag (false);
 			__logicObject.setLayer (__layer);
 									
-			trace (": XLogicManager:init: ", __logicObject, args.length, args);
+//			trace (": XLogicManager:init: ", __logicObject, args.length, args);
 							
 			__logicObject.setup (xxx, args);
 
@@ -177,8 +177,8 @@ package X.World {
 			__logicObject.setDepth (__depth);
 			__logicObject.setRelativeDepthFlag (__relative);
 			__logicObject.setLayer (__layer);
-									
-			trace (": XLogicManager:init: ", __logicObject, args.length, args);
+
+//			trace (": XLogicManager:init: ", __logicObject, args.length, args);
 							
 			__logicObject.setup (xxx, args);
 
@@ -207,7 +207,7 @@ package X.World {
 
 //------------------------------------------------------------------------------------------
 		public function killLater (__object:XLogicObject):void {
-			trace (": kill? ", __object);
+//			trace (": kill? ", __object);
 			
 			if (m_killQueue.indexOf (__object) == -1) {
 				m_killQueue.push (__object);
@@ -239,9 +239,11 @@ package X.World {
 				m_XLogicObjectsTopLevel.remove (x);
 			}
 				
-			trace (": kill: ", x, x.m_GUID, x.xxx, xxx);
+//			trace (": kill: ", x, x.m_GUID, x.xxx, xxx);
 				
-			xxx.removeChild (x);
+			if (xxx.contains (x)) {
+				xxx.removeChild (x);
+			}
 		}
 		
 //------------------------------------------------------------------------------------------

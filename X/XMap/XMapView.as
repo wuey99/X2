@@ -4,6 +4,7 @@ package X.XMap {
 // X classes
 	import X.Collections.*;
 	import X.Geom.*;
+	import X.Pool.XObjectPoolManager;
 	import X.Task.*;
 	import X.World.*;
 	import X.World.Logic.*;
@@ -18,7 +19,8 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;
-		
+		protected var m_submapBitmapPoolManager:XObjectPoolManager;
+				
 //------------------------------------------------------------------------------------------
 		public function XMapView () {
 			super ();
@@ -95,7 +97,35 @@ package X.XMap {
 				);
 			}
 		}
+
+//------------------------------------------------------------------------------------------
+		public function initSubmapBitmapPoolManager (
+			__width:Number=512, __height:Number=512,
+			__alloc:Number=64, __spill:Number=16
+			):void {
+				
+			m_submapBitmapPoolManager = new XObjectPoolManager (
+				function ():* {
+					var __bitmap:XSubmapBitmap = new XSubmapBitmap ();
+					
+					__bitmap.createBitmap ("tiles", __width, __height);
+				
+					return __bitmap;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__alloc, __spill
+			);
+		}
 		
+//------------------------------------------------------------------------------------------
+		public function getSubmapBitmapPoolManager ():XObjectPoolManager {
+			return m_submapBitmapPoolManager;
+		}
+			
 //------------------------------------------------------------------------------------------
 		public function createModelFromXML (__xml:XSimpleXMLNode):void {
 			var __model:XMapModel = new XMapModel ();

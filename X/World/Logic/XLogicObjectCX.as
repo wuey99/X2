@@ -61,23 +61,28 @@ package X.World.Logic {
 			xxx.getXPointPoolManager ().returnObject (m_vel);
 			xxx.getXPointPoolManager ().returnObject (m_oldPos);
 			xxx.getXRectPoolManager ().returnObject (m_cx);
+			
+			m_vel = null;
+			m_oldPos = null;
+			m_cx = null;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public override function setupX ():void {
 			var __vel:XPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			var __old:XPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
-			
+//			var __vel:XPoint = new XPoint ();
+//			var __old:XPoint = new XPoint ();
+					
 			__vel.x = __vel.y = 0;
 			__old.x = __old.y = 0;
 			
 			setVel (__vel);
 			setOld (__old);
-			
-//			m_cx = new XRect (0, 0, 0, 0);
-	
+
 			m_cx = xxx.getXRectPoolManager ().borrowObject () as XRect;
-			
+//			m_cx = new XRect (0, 0, 0, 0);
+					
 			m_cx.x = 0;
 			m_cx.y = 0;
 			m_cx.width = 0;
@@ -87,7 +92,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setXMapModel (__XMapModel:XMapModel, __XMapView:XMapView):void {
+		public function setXMapModel (__XMapModel:XMapModel, __XMapView:XMapView=null):void {
 			m_XMapModel = __XMapModel;
 			m_XMapView = __XMapView;
 			
@@ -103,7 +108,8 @@ package X.World.Logic {
 			
 			m_cols = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
 			m_rows = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
-			
+
+			/*			
 			trace (": --------------------------------:");
 			trace (": submapWidth: ", m_submapWidth);
 			trace (": submapHeight: ", m_submapHeight);
@@ -117,6 +123,7 @@ package X.World.Logic {
 			trace (": tileHeight: ", XSubmapModel.CX_TILE_HEIGHT);
 			trace (": tileHeightMask: ", XSubmapModel.CX_TILE_HEIGHT_MASK);
 			trace (": tileHeightUnMask: ", XSubmapModel.CX_TILE_HEIGHT_UNMASK);
+			*/
 		}
 
 //------------------------------------------------------------------------------------------
@@ -144,8 +151,8 @@ package X.World.Logic {
 			m_cx.width = __x2-__x1+1;
 			m_cx.height = __y2-__y1+1;
 				
-			trace (": left, right, top, bottom ", m_cx.left, m_cx.right, m_cx.top, m_cx.bottom);
-			trace (": width, height: ", m_cx.width, m_cx.height);
+//			trace (": left, right, top, bottom ", m_cx.left, m_cx.right, m_cx.top, m_cx.bottom);
+//			trace (": width, height: ", m_cx.width, m_cx.height);
 		}
 
 //------------------------------------------------------------------------------------------

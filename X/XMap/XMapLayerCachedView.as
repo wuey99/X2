@@ -4,6 +4,7 @@ package X.XMap {
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.Task.*;
+	import X.Pool.*;
 	import X.World.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
@@ -19,7 +20,7 @@ package X.XMap {
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
 		private var m_currLayer:Number;
-		
+				
 //------------------------------------------------------------------------------------------
 		public function XMapLayerCachedView () {
 			super ();
@@ -32,7 +33,7 @@ package X.XMap {
 			m_XMapView = getArg (args, 0);
 			m_XMapModel = getArg (args, 1);
 			m_currLayer = getArg (args, 2);
-			
+
 			m_XSubmapToXLogicObject = new XDict ();
 		}
 
@@ -97,7 +98,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function addXSubmap (__submap:XSubmapModel, __depth:Number):void {
-			trace (": addXSubmap: ", __submap.x, __submap.y);
+//			trace (": addXSubmap: ", __submap.x, __submap.y);
 			
 			var __logicObject:XSubmapViewCache =
 			  xxx.getXLogicManager ().initXLogicObject (
@@ -110,7 +111,9 @@ package X.XMap {
 				// x, y, z
 					__submap.x, __submap.y, 0,
 				// scale, rotation
-					1.0, 0
+					1.0, 0,
+					// XMapView
+					m_XMapView
 				) as XSubmapViewCache;
 			
 			__submap.inuse++;
