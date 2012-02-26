@@ -12,6 +12,7 @@ package X.World {
 	import X.Datasource.XDatasource;
 	import X.Debug.*;
 	import X.Document.*;
+	import X.Game.*;
 	import X.Geom.*;
 	import X.Keyboard.*;
 	import X.MVC.*;
@@ -54,6 +55,7 @@ package X.World {
 		public var m_inuse_RENDER_FRAME:Number;
 		public var m_XKeyboardManager:XKeyboardManager;
 		protected var m_viewRect:XRect;
+		private var m_XBulletCollisionManager:XBulletCollisionManager;
 					
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
@@ -130,6 +132,7 @@ package X.World {
 			m_XTaskManager = new XTaskManager (__XApp);
 			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager (__XApp);
+			m_XBulletCollisionManager = new XBulletCollisionManager ();
 				
 			m_XMapModel = null;
 						
@@ -183,6 +186,7 @@ package X.World {
 			m_inuse_ENTER_FRAME++;
 			
 			getXLogicManager ().emptyKillQueue ();
+			m_XBulletCollisionManager.clearCollisions ();
 			
 				getXLogicManager ().updateLogic ();
 				getXTaskManager ().updateTasks ();
@@ -257,6 +261,11 @@ package X.World {
 			return m_XLogicManager;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getXBulletCollisionManager ():XBulletCollisionManager {
+			return  m_XBulletCollisionManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
 			return  m_XSignalManager.createXSignal ();
