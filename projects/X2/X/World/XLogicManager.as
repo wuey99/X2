@@ -250,6 +250,15 @@ package X.World {
 		public function getXLogicObjects ():XDict {
 			return m_XLogicObjects;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function setCollisions ():void {
+			m_XLogicObjects.forEach (
+				function (x:*):void {
+					x.setCollisions ();
+				}
+			);		
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function updateLogic ():void {

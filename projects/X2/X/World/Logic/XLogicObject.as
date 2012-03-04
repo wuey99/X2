@@ -74,6 +74,7 @@ package X.World.Logic {
 		public var self:XLogicObject;
 		public var m_killSignal:XSignal;
 		public var m_XTaskSubManager:XTaskSubManager;
+		public var m_XTaskSubManagerCX:XTaskSubManager;
 		
 		public var m_iX:Number;
 		public var m_iY:Number;
@@ -133,6 +134,7 @@ package X.World.Logic {
 			m_detachedSprites = new XDict ();
 			m_XSignals = new XDict ();
 			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
+			m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());
 			
 			m_killSignal = createXSignal ();
 			
@@ -198,6 +200,7 @@ package X.World.Logic {
 			removeAllXLogicObjects ();
 			removeAllXSignals ();
 			removeAllTasks ();
+			removeAllTasksCX ();
 			
 			if (getParent () != null) {
 				getParent ().removeXLogicObject0 (this);
@@ -1042,7 +1045,7 @@ package X.World.Logic {
 		public function getXTaskManager ():XTaskManager {
 			return xxx.getXTaskManager ();
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function addTask (
 			__taskList:Array,
@@ -1094,6 +1097,68 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function gotoLogic (__logic:Function):void {
 			m_XTaskSubManager.gotoLogic (__logic);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXTaskManagerCX ():XTaskManager {
+			return xxx.getXTaskManagerCX ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function addTaskCX (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+		):XTask {
+			
+			var __task:XTask = m_XTaskSubManagerCX.addTask (__taskList, __findLabelsFlag);
+			
+			__task.setParent (this);
+			
+			return __task;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function changeTaskCX (
+			__task:XTask,
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+		):XTask {
+			
+			return m_XTaskSubManagerCX.changeTask (__task, __taskList, __findLabelsFlag);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function isTaskCX (__task:XTask):Boolean {
+			return m_XTaskSubManagerCX.isTask (__task);
+		}		
+		
+//------------------------------------------------------------------------------------------
+		public function removeTaskCX (__task:XTask):void {
+			m_XTaskSubManagerCX.removeTask (__task);	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeAllTasksCX ():void {
+			m_XTaskSubManagerCX.removeAllTasks ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function addEmptyTaskCX ():XTask {
+			return m_XTaskSubManagerCX.addEmptyTask ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getEmptyTaskCX$ ():Array {
+			return m_XTaskSubManagerCX.getEmptyTask$ ();
+		}	
+		
+//------------------------------------------------------------------------------------------
+		public function gotoLogicCX (__logic:Function):void {
+			m_XTaskSubManagerCX.gotoLogic (__logic);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setCollisions ():void {
 		}
 		
 //------------------------------------------------------------------------------------------

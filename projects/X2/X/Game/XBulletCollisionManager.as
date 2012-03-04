@@ -9,11 +9,14 @@ package X.Game {
 	
 //------------------------------------------------------------------------------------------
 	public class XBulletCollisionManager extends Object {
+		private var xxx:XWorld;
 		private var m_collisionLists:XDict;
 		
 //------------------------------------------------------------------------------------------
-		public function XBulletCollisionManager () {
+		public function XBulletCollisionManager (__xxx:XWorld) {
 			super ();
+			
+			xxx = __xxx;
 			
 			m_collisionLists = new XDict ();
 		}
@@ -41,6 +44,8 @@ package X.Game {
 //------------------------------------------------------------------------------------------
 		public function addCollisionList ():XBulletCollisionList {
 			var __collisionList:XBulletCollisionList = new XBulletCollisionList ();
+			
+			__collisionList.setup (xxx);
 			
 			m_collisionLists.put (__collisionList, 0);
 			

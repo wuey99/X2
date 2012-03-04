@@ -46,6 +46,7 @@ package X.World {
 		public var m_XApp:XApp
 		public var m_XLogicManager:XLogicManager;
 		public var m_XTaskManager:XTaskManager;
+		public var m_XTaskManagerCX:XTaskManager;
 		public var m_renderManager:XTaskManager;
 		public var m_XMapModel:XMapModel;
 		public var m_XWorldLayers:Array;
@@ -96,7 +97,7 @@ package X.World {
 		public var m_XMapLayerCachedView:XMapLayerCachedView;
 				
 //------------------------------------------------------------------------------------------
-		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=4){
+		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){
 			m_parent = __parent;
 			m_XApp = __XApp;
 			
@@ -130,9 +131,10 @@ package X.World {
 			
 			m_XLogicManager = new XLogicManager (this);
 			m_XTaskManager = new XTaskManager (__XApp);
+			m_XTaskManagerCX = new XTaskManager (__XApp);
 			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager (__XApp);
-			m_XBulletCollisionManager = new XBulletCollisionManager ();
+			m_XBulletCollisionManager = new XBulletCollisionManager (this);
 				
 			m_XMapModel = null;
 						
@@ -186,10 +188,10 @@ package X.World {
 			m_inuse_ENTER_FRAME++;
 			
 			getXLogicManager ().emptyKillQueue ();
-			m_XBulletCollisionManager.clearCollisions ();
 			
 				getXLogicManager ().updateLogic ();
 				getXTaskManager ().updateTasks ();
+				getXTaskManagerCX ().updateTasks ();
 //				getXLogicManager ().updatePhysics ();
 				getXLogicManager ().cullObjects ();
 				m_world.Step (m_timeStep, m_iterations);
@@ -197,6 +199,10 @@ package X.World {
 				
 			getXLogicManager ().emptyKillQueue ();
 
+			m_XBulletCollisionManager.clearCollisions ();
+			
+			getXLogicManager ().setCollisions ();
+				
 			getXLogicManager ().updateDisplay ();
  
 			for (var i:Number=0; i<MAX_LAYERS; i++) {
@@ -247,6 +253,11 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getMaxLayers ():Number {
+			return MAX_LAYERS;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function setXMapModel (__XMapModel:XMapModel):void {
 			m_XMapModel = __XMapModel;
 		}
@@ -281,6 +292,11 @@ package X.World {
 			return m_XTaskManager;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getXTaskManagerCX ():XTaskManager {
+			return m_XTaskManagerCX;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getXRectPoolManager ():XObjectPoolManager {
 			return m_XApp.getXRectPoolManager ();

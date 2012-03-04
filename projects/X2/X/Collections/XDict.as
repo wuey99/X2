@@ -41,6 +41,15 @@ package X.Collections {
 		public function remove (__key:*):void {
 			delete m_dict[__key];
 		}
+
+//------------------------------------------------------------------------------------------
+		public function removeAll ():void {
+			var __key:*;
+			
+			for (__key in m_dict) {
+				remove (__key);
+			}
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function length ():Number {
