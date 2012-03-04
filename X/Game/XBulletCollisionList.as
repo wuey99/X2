@@ -4,13 +4,13 @@ package X.Game {
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.Pool.*;
+	import X.World.Logic.*;
 	import X.World.XWorld;
 	import X.XMap.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XBulletCollisionList extends Object {
 		private var xxx:XWorld;
-		private var m_XMapModel:XMapModel;
 		private var m_rects:Array;
 		private var m_XSubRectPoolManager:XSubObjectPoolManager;
 		
@@ -19,21 +19,17 @@ package X.Game {
 			super ();
 			
 			xxx = null;
-			m_XMapModel = null;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setup (__xxx:XWorld, __XMapModel:XMapModel):void {
-			xxx = __xxx;
-			
-			m_XMapModel = __XMapModel;
-			
+		public function setup (__xxx:XWorld):void {
+			xxx = __xxx;		
 			m_rects = new Array ();
 			
 			var i:Number;
 			
-			for (i=0; i<m_XMapModel.getNumLayers (); i++) {
-				m_rects[i] = new Array ();
+			for (i=0; i < xxx.getMaxLayers (); i++) {
+				m_rects[i] = new XDict ();
 			}
 			
 			m_XSubRectPoolManager = new XSubObjectPoolManager (xxx.getXRectPoolManager ());
@@ -49,28 +45,82 @@ package X.Game {
 //------------------------------------------------------------------------------------------		
 		public function clear ():void {
 			var i:Number;
-			
-			for (i=0; i<m_XMapModel.getNumLayers (); i++) {
-				m_rects[i].slice (0);
+
+			for (i=0; i < xxx.getMaxLayers (); i++) {
+				m_rects[i].removeAll ();
 			}
 			
 			m_XSubRectPoolManager.returnAllObjects ();
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function setCollision (__layer:Number, __x:Number, __y:Number, __width:Number, __height:Number):void {
+		public function addCollision (
+			__layer:Number,
+			__logicObject:XLogicObject,
+			__srcPoint:XPoint, __srcRect:XRect
+			):void {
+
 			var __rect:XRect = m_XSubRectPoolManager.borrowObject () as XRect;
-			
-			__rect.setRect (__x, __y, __width, __height);
-			
-			m_rects[__layer].push (__rect);
+			__srcRect.copy2 (__rect); __rect.offsetPoint (__srcPoint);
+			m_rects[__layer].put (__logicObject, __rect);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getRects (__layer:Number):Array {
-			return m_rects[__layer];
+		public function findCollision (
+			__layer:Number,
+			__srcPoint:XPoint,
+			__srcRect:XRect
+		):XLogicObject {
+			
+			var __logicObject:XLogicObject = null;
+			
+			var __rect:XRect = m_XSubRectPoolManager.borrowObject () as XRect;
+			__srcRect.copy2 (__rect); __rect.offsetPoint (__srcPoint);
+			
+			m_rects[__layer].forEach (
+				function (x:*):void {
+					if (XRect (m_rects[__layer].get (x)).intersects (__rect)) {
+						__logicObject = x as XLogicObject;
+					}
+				}
+			);	
+			
+			m_XSubRectPoolManager.returnObject (__rect);
+	
+			return __logicObject;
 		}
 		
+//------------------------------------------------------------------------------------------
+		public function findCollisions (
+			__layer:Number,
+			__srcPoint:XPoint,
+			__srcRect:XRect
+			):Array {
+
+			var __logicObjects:Array = new Array ();
+
+			var __rect:XRect = m_XSubRectPoolManager.borrowObject () as XRect;
+			__srcRect.copy2 (__rect); __rect.offsetPoint (__srcPoint);
+
+			m_rects[__layer].forEach (
+				function (x:*):void {
+					if (XRect (m_rects[__layer].get (x)).intersects (__rect)) {
+						__logicObjects.push (x);
+					}
+				}
+			);	
+			
+			m_XSubRectPoolManager.returnObject (__rect);
+			
+			return __logicObjects;
+		}
+		
+
+//------------------------------------------------------------------------------------------
+		public function getRects (__layer:Number):XDict {
+			return m_rects[__layer];
+		}
+
 //------------------------------------------------------------------------------------------
 	}
 
