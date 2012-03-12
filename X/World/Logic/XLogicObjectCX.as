@@ -92,11 +92,11 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setXMapModel (__XMapModel:XMapModel, __XMapView:XMapView=null):void {
+		public function setXMapModel (__layer:Number, __XMapModel:XMapModel, __XMapView:XMapView=null):void {
 			m_XMapModel = __XMapModel;
 			m_XMapView = __XMapView;
 			
-			m_XMapLayerModel = m_XMapModel.getLayer (getLayer ());
+			m_XMapLayerModel = m_XMapModel.getLayer (__layer);
 			
 			m_XSubmaps = m_XMapLayerModel.submaps ();
 			

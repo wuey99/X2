@@ -122,11 +122,15 @@ package X.XMap {
 			__items.forEach (
 				function (x:*):void {
 					__item = x as XMapItemModel;
-	
+
 					__bitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
 
+					trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+					
 					if (__bitmap != null) {
-						__bitmap.goto (__item.frame);
+						if (__item.frame != 0) {
+							__bitmap.goto (__item.frame);
+						}
 						
 						tempPoint.x = __item.x - m_submapModel.x;
 						tempPoint.y = __item.y - m_submapModel.y;

@@ -75,6 +75,7 @@ package X.World.Logic {
 		public var m_killSignal:XSignal;
 		public var m_XTaskSubManager:XTaskSubManager;
 		public var m_XTaskSubManagerCX:XTaskSubManager;
+		public var m_isDead:Boolean;
 		
 		public var m_iX:Number;
 		public var m_iY:Number;
@@ -101,6 +102,7 @@ package X.World.Logic {
 			m_boundingRect = null;
 			m_delayed = 1;
 			m_layer = -1;
+			m_isDead = false;
 			
 			m_GUID = g_GUID++;
 			
@@ -180,9 +182,20 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function nukeLater ():void {
+			if (m_item != null) {
+				m_item.inuse++;
+			}
+			
+			killLater ();
+		}
+		
+//------------------------------------------------------------------------------------------
 // kill this object and remove it from the World (delayed)
 //------------------------------------------------------------------------------------------
 		public function killLater ():void {
+			isDead = true;
+			
 			xxx.getXLogicManager ().killLater (this);
 		}
 
@@ -190,9 +203,20 @@ package X.World.Logic {
 // kill this object and remove it from the World (now)
 //------------------------------------------------------------------------------------------
 		public function kill ():void {
+			isDead = true;
+			
 			xxx.getXLogicManager ().killLater (this);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function nuke ():void {
+			if (m_item != null) {
+				m_item.inuse++;
+			}
+			
+			kill ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function removeAll ():void {
 			removeAllWorldSprites ();
@@ -221,16 +245,18 @@ package X.World.Logic {
 			
 			var r:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;	
 			var i:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			var itemPos:XPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			
 			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (r);
 			r.inflate (256, 256);
 						
 			m_item.boundingRect.copy2 (i);
-			i.offsetPoint (getPos ());
+			itemPos.x = m_item.x;
+			itemPos.y = m_item.y;
+			i.offsetPoint (itemPos);
 			
 			if (r.intersects (i)) {
-				xxx.getXRectPoolManager ().returnObject (r);
-				xxx.getXRectPoolManager ().returnObject (i);
+				__dealloc ();
 				
 				return;
 			}
@@ -239,20 +265,23 @@ package X.World.Logic {
 			i.offsetPoint (getPos ());
 			
 			if (r.intersects (i)) {
-				xxx.getXRectPoolManager ().returnObject (r);
-				xxx.getXRectPoolManager ().returnObject (i);
+				__dealloc ();
 				
 				return;
 			}
 			
-			xxx.getXRectPoolManager ().returnObject (r);			
-			xxx.getXRectPoolManager ().returnObject (i);
+			__dealloc ();
 				
 // yep, kill it
-//			trace (": ---------------------------------------: ");
-//			trace (": cull: ", this);
+			trace (": ---------------------------------------: ");
+			trace (": cull: ", this);
 			
 			killLater ();
+			
+			function __dealloc ():void {
+				xxx.getXRectPoolManager ().returnObject (r);
+				xxx.getXRectPoolManager ().returnObject (i);			
+			}
 		}
 
 //------------------------------------------------------------------------------------------
@@ -653,6 +682,15 @@ package X.World.Logic {
 			return this as Object;
 		}	
 	
+//------------------------------------------------------------------------------------------		
+		public function get isDead ():Boolean {
+			return m_isDead;
+		}
+		
+		public function set isDead (__value:Boolean):void {
+			m_isDead = __value;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setPos (__pos:XPoint):void {
 			m_pos = __pos;
@@ -669,7 +707,7 @@ package X.World.Logic {
 			__pos.y = __value;
 			setPos (__pos);
 		}
-				
+		
 //------------------------------------------------------------------------------------------
 		public function getPos ():XPoint {
 			return m_pos;

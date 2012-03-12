@@ -61,12 +61,16 @@ package X.Bitmap {
 			
 			m_count[__className] = 1;
 			m_bitmaps.put (__className, null);
-				
+					
 			var __class:Class = m_XApp.getClass (__className);
+			
+			trace (": caching: ", __className, __class);
 			
 			if (__class) {
 				return __createBitmap (__className, __class);
 			}
+			
+			trace (": queuing: ", __className);
 			
 // wait for image to load before caching it.
 			m_queue.put (__className, 0);
@@ -75,12 +79,17 @@ package X.Bitmap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function isQueued (__className:String):Boolean {
+			return m_queue.exists (__className);	
+		}
+		
+//------------------------------------------------------------------------------------------
 		private function __createBitmap (__className:String, __class:Class):XBitmap {
 			var __movieClip:MovieClip = new (__class) ();		
 			var __XBitmap:XBitmap = new XBitmap ();			
 			__XBitmap.initWithScaling (__movieClip, 1.0);
 		
-			trace (": adding bitmap: ", __movieClip, __XBitmap);
+			trace (": adding bitmap: ", __movieClip, __XBitmap, __XBitmap.bitmapData);
 	
 			m_bitmaps.put (__className, __XBitmap);
 			
