@@ -19,20 +19,28 @@ package X.Resource {
 			
 			var s:Array = __fullName.split (":");
 			
-			if (s.length != 2 && s.length != 3) {
-				throw (Error ("className not valid: " + __fullName));
-			}
+			if (s.length == 1) {
+				m_manifestName = "";
+				m_resourceName = s[0];
+				m_className = ""
 			
-			if (s.length == 2) {
+				if (m_resourceName.charAt (0) != "$") {
+					throw (Error ("className not valid: " + __fullName));					
+				}
+			}
+			else if (s.length == 2) {
 				m_manifestName = "";
 				m_resourceName = s[0];
 				m_className = s[1];
 			}
-			else
-			{
+			else if (s.length == 3) {
 				m_manifestName = s[0];
 				m_resourceName = s[1];
 				m_className = s[2];
+			}
+			else
+			{
+				throw (Error ("className not valid: " + __fullName));				
 			}
 		}
 		

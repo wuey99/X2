@@ -19,6 +19,7 @@ package X.XMap {
 		private var m_id:Number;
 		private var m_imageClassIndex:int;
 		private var m_frame:Number;
+		private var m_XMapItem:String;
 		private var m_x:Number, m_y:Number;
 		private var m_rotation:Number, m_scale:Number, m_depth:Number;
 		private var m_collisionRect:XRect;
@@ -43,6 +44,7 @@ package X.XMap {
 			__hasLogic:Boolean,
 			__name:String, __id:Number,
 			__imageClassName:String, __frame:Number,
+			__XMapItem:String,
 			__x:Number, __y:Number,
 			__scale:Number, __rotation:Number, __depth:Number,
 			__collisionRect:XRect,
@@ -58,6 +60,7 @@ package X.XMap {
 				m_id = __id;
 				m_imageClassIndex = m_layerModel.getIndexFromClassName (__imageClassName);
 				m_frame = __frame;
+				m_XMapItem = __XMapItem;
 				m_x = __x;
 				m_y = __y;
 				m_scale = __scale;
@@ -92,6 +95,8 @@ package X.XMap {
 				"", -1,
 // __imageClassName, __frame
 				this.layerModel.getClassNameFromIndex (m_imageClassIndex), this.frame,
+// XMapItem
+				this.XMapItem,
 // __x, __y,
 				this.x, this.y,
 // __scale, __rotation, __depth
@@ -166,7 +171,16 @@ package X.XMap {
 		public function set hasLogic (__value:Boolean):void {
 			m_hasLogic = __value;
 		}
-						
+		
+//------------------------------------------------------------------------------------------
+		public function get XMapItem ():String {
+			return m_XMapItem;
+		}
+		
+		public function set XMapItem (__value:String):void {
+			m_XMapItem = __value;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function get imageClassIndex ():int {
 			return m_imageClassIndex;
@@ -268,6 +282,7 @@ package X.XMap {
 				"id",				id,
 				"imageClassIndex",	imageClassIndex,
 				"frame",			frame,
+				"XMapItem",			XMapItem,
 				"x",				x,
 				"y",				y,
 				"rotation",			rotation,

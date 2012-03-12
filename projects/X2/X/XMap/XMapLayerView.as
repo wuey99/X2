@@ -29,7 +29,7 @@ package X.XMap {
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
 		private var m_currLayer:Number;
-		private var m_logicClassNameToXLogicObject:Function;
+		private var m_logicClassNameToClass:Function;
 		
 //------------------------------------------------------------------------------------------
 		public function XMapLayerView () {
@@ -43,7 +43,7 @@ package X.XMap {
 			m_XMapView = getArg (args, 0);
 			m_XMapModel = getArg (args, 1);
 			m_currLayer = getArg (args, 2);
-			m_logicClassNameToXLogicObject = getArg (args, 3);
+			m_logicClassNameToClass = getArg (args, 3);
 			
 			m_XMapItemToXLogicObject = new XDict ();
 		}
@@ -84,7 +84,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function updateXMapItemModel (__item:XMapItemModel):void {
-			if (!__item.inuse) {
+			if (__item.inuse == 0) {
 				addXMapItem (
 					// item
 					__item,
@@ -99,42 +99,65 @@ package X.XMap {
 					
 					var __point:XPoint = logicObject.getPos ();
 					
-					__point.x = __item.x;
-					__point.y = __item.y;
+//					__point.x = __item.x;
+//					__point.y = __item.y;
 				}
 			}
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function addXMapItem (__item:XMapItemModel, __depth:Number):void {	
-			var __logicObject:XLogicObject =
-			  xxx.getXLogicManager ().createXLogicObjectFromClassName (
-				// parent
-					null,
-				// logicClassName
-					__item.logicClassName,
-				// item, layer, depth
-					__item, m_currLayer, __depth,
-				// x, y, z
-					__item.x, __item.y, 0,
-				// scale, rotation
-					__item.scale, __item.rotation,
-				// imageClassName
-					__item.imageClassName,
-				// frame
-					__item.frame
-				);
+		public function addXMapItem (__item:XMapItemModel, __depth:Number):void {
+			var __logicObject:XLogicObjectCX;
 			
+			if (__item.logicClassName.charAt (0) == "$") {		
+				__logicObject = xxx.getXLogicManager ().initXLogicObject (
+					// parent
+					null,
+					// logicObject
+					new (m_logicClassNameToClass (__item.logicClassName)) () as XLogicObject,
+					// item, layer, depth
+					__item, m_currLayer, __depth,
+					// x, y, z
+					__item.x, __item.y, 0,
+					// scale, rotation
+					__item.scale, __item.rotation,
+					// imageClassName
+					__item.imageClassName,
+					// frame
+					__item.frame
+				) as XLogicObjectCX;
+			}
+			else
+			{
+				__logicObject = xxx.getXLogicManager ().createXLogicObjectFromClassName (
+					// parent
+						null,
+					// logicClassName
+						__item.logicClassName,
+					// item, layer, depth
+						__item, m_currLayer, __depth,
+					// x, y, z
+						__item.x, __item.y, 0,
+					// scale, rotation
+						__item.scale, __item.rotation,
+					// imageClassName
+						__item.imageClassName,
+					// frame
+						__item.frame
+					) as XLogicObjectCX;
+			}
+
 			__item.inuse++;
-				
+
 			m_XMapItemToXLogicObject.put (__item, __logicObject);
+
+			__logicObject.setXMapModel (m_currLayer + 1, m_XMapModel, m_XMapView);
 			
 			__logicObject.addKillListener (removeXMapItem);
-			
+
 			__logicObject.show ();
 		}
-		
-			
+
 //------------------------------------------------------------------------------------------
 		public function removeXMapItem (...args):void {
 			var item:XMapItemModel = args[0] as XMapItemModel;
@@ -143,9 +166,9 @@ package X.XMap {
 				m_XMapItemToXLogicObject.remove (item);
 			}
 		}
-		
+
 //------------------------------------------------------------------------------------------
 	}
-	
+
 //------------------------------------------------------------------------------------------
 }

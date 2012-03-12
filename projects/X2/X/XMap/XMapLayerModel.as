@@ -27,7 +27,7 @@ package X.XMap {
 
 		private var m_items:XDict;
 
-		private var m_classNames:XClassNameToIndex;
+		private var m_classNames:XReferenceNameToIndex;
 		private var m_imageClassNames:XDict;
 		
 		private var m_viewPort:XRect;
@@ -72,7 +72,7 @@ package X.XMap {
 				}
 			}
 			
-			m_classNames = new XClassNameToIndex ();
+			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();
 			
 			m_viewPort = new XRect ();
@@ -496,26 +496,26 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function getClassNameFromIndex (__index:int):String {
-			return m_classNames.getClassNameFromIndex (__index);
+			return m_classNames.getReferenceNameFromIndex (__index);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function getIndexFromClassName (__className:String):int {
-			return m_classNames.getIndexFromClassName (__className);
+			return m_classNames.getIndexFromReferenceName (__className);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeIndexFromClassNames (__index:int):void {
-			m_classNames.removeIndexFromClassNames (__index);
+			m_classNames.removeIndexFromReferenceNames (__index);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array {
-			return m_classNames.getAllClassNames ();
+			return m_classNames.getAllReferenceNames ();
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getClassNames ():XClassNameToIndex {
+		public function getClassNames ():XReferenceNameToIndex {
 			return m_classNames;
 		}
 
@@ -541,14 +541,14 @@ package X.XMap {
 				"name",			m_name,
 				"grid", 		m_grid,
 			];
-			
+
 			__xml = __xml.addChildWithParams ("XLayer", "", __attribs);
-			
+	
 			__xml.addChildWithXMLNode (serializeImageClassNames ());
 			__xml.addChildWithXMLNode (m_classNames.serialize ());
 			__xml.addChildWithXMLNode (serializeItems ());
 			__xml.addChildWithXMLNode (serializeSubmaps ());
-				
+
 			return __xml;
 		}
 
@@ -680,7 +680,7 @@ package X.XMap {
 			{
 				m_grid = false;
 			}	
-			m_classNames = new XClassNameToIndex ();
+			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();			
 
 			m_items = new XDict ();

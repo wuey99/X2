@@ -5,7 +5,7 @@ package X.XMap {
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.MVC.*;
-	import X.Utils.XClassNameToIndex;
+	import X.Utils.XReferenceNameToIndex;
 	import X.XML.*;
 	
 	import flash.events.*;
@@ -300,13 +300,13 @@ package X.XMap {
 				
 				var __item:XMapItemModel = new XMapItemModel ();
 		
-				var __classNameToIndex:XClassNameToIndex = m_XMapLayer.getClassNames ();
+				var __classNameToIndex:XReferenceNameToIndex = m_XMapLayer.getClassNames ();
 				
 				var __logicClassIndex:Number = __xml.getAttribute ("logicClassIndex");
 				var __imageClassIndex:Number = __xml.getAttribute ("imageClassIndex");
 				
-				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex), __classNameToIndex.getClassNameCount (__logicClassIndex));
-				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex),  __classNameToIndex.getClassNameCount (__imageClassIndex));
+				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex), __classNameToIndex.getReferenceNameCount (__logicClassIndex));
+				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex),  __classNameToIndex.getReferenceNameCount (__imageClassIndex));
 								
 				__item.setup (
 					m_XMapLayer,
@@ -318,6 +318,8 @@ package X.XMap {
 					__xml.getAttribute ("name"), __xml.getAttribute ("id"),
 // __imageClassName, __frame
 					m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __xml.getAttribute ("frame"),
+// XMapItem
+					__xml.hasAttribute ("XMapItem") ? __xml.getAttribute ("XMapItem") : "",
 // __x, __y,
 					__xml.getAttribute ("x"), __xml.getAttribute ("y"),
 // __scale, __rotation, __depth
