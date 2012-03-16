@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------
 package X.Bitmap {
 	
-// X classes
+	// X classes
 	import X.Collections.*;
 	import X.Task.*;
 	import X.World.Sprite.XBitmap;
@@ -10,21 +10,21 @@ package X.Bitmap {
 	import flash.display.MovieClip;
 	
 //------------------------------------------------------------------------------------------	
-	public class XBitmapCacheManager extends Object {
+	public class XBitmapDataAnimManager extends Object {
 		private var m_XApp:XApp;
-		private var m_bitmaps:XDict;
+		private var m_bitmapAnims:XDict;
 		private var m_count:Object;
 		private var m_queue:XDict;
 		
 //------------------------------------------------------------------------------------------
-		public function XBitmapCacheManager (__XApp:XApp) {
+		public function XBitmapDataAnimManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
-			m_bitmaps = new XDict ();
+			m_bitmapAnims = new XDict ();
 			m_count = new Object ();
 			m_queue = new XDict ();
 			
-// checked queued images and cache the ones that have loaded.
+			// checked queued images and cache the ones that have loaded.
 			m_XApp.getXTaskManager ().addTask ([
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,
@@ -36,92 +36,92 @@ package X.Bitmap {
 								var __class:Class = m_XApp.getClass (__className);
 								
 								if (__class != null) {
-									__createBitmap (__className, __class);
-																		
+									__createBitmapAnim (__className, __class);
+									
 									m_queue.remove (__className);
 								}
 							}
 						);
 					},
-					
-					XTask.GOTO, "loop",
-							
+						
+				XTask.GOTO, "loop",
+						
 				XTask.RETN,
 			]);
 		}
-
-//------------------------------------------------------------------------------------------
-		public function add (__className:String):XBitmap {
-			if (m_bitmaps.exists (__className)) {
-				m_count[__className]++;
-				
-// this could return null if the image is still loading.	
-				return m_bitmaps.get (__className);
-			}
-			
-			m_count[__className] = 1;
-			m_bitmaps.put (__className, null);
 					
-			var __class:Class = m_XApp.getClass (__className);
-			
-			trace (": caching: ", __className, __class);
-			
-			if (__class) {
-				return __createBitmap (__className, __class);
+//------------------------------------------------------------------------------------------
+		public function add (__className:String):XBitmapDataAnim {
+			if (m_bitmapAnims.exists (__className)) {
+				m_count[__className]++;
+								
+				// this could return null if the image is still loading.	
+				return m_bitmapAnims.get (__className);
 			}
-			
+							
+			m_count[__className] = 1;
+			m_bitmapAnims.put (__className, null);
+							
+			var __class:Class = m_XApp.getClass (__className);
+							
+			trace (": XBitmapDataAnimManager: caching: ", __className, __class);
+							
+			if (__class) {
+				return __createBitmapAnim (__className, __class);
+			}
+							
 			trace (": queuing: ", __className);
-			
-// wait for image to load before caching it.
+							
+			// wait for image to load before caching it.
 			m_queue.put (__className, 0);
-			
+							
 			return null;
 		}
-
+						
 //------------------------------------------------------------------------------------------
 		public function isQueued (__className:String):Boolean {
 			return m_queue.exists (__className);	
 		}
-		
+						
 //------------------------------------------------------------------------------------------
-		private function __createBitmap (__className:String, __class:Class):XBitmap {
+		private function __createBitmapAnim (__className:String, __class:Class):XBitmapDataAnim {
 			var __movieClip:MovieClip = new (__class) ();		
-			var __XBitmap:XBitmap = new XBitmap ();		
-			__XBitmap.initWithClassName (null, m_XApp, __className);
-		
-			trace (": adding bitmap: ", __movieClip, __XBitmap, __XBitmap.bitmapData);
-	
-			m_bitmaps.put (__className, __XBitmap);
-			
-			return __XBitmap;			
+			var __XBitmapDataAnim:XBitmapDataAnim = new XBitmapDataAnim ();
+			__XBitmapDataAnim.initWithScaling (__movieClip, 1.0);
+							
+			trace (": adding bitmap: ", __movieClip, __XBitmapDataAnim, __XBitmapDataAnim);
+							
+			m_bitmapAnims.put (__className, __XBitmapDataAnim);
+							
+			return __XBitmapDataAnim;			
 		}
-			
+						
 //------------------------------------------------------------------------------------------
 		public function remove (__className:String):void {
-			if (m_bitmaps.exists (__className)) {
+			if (m_bitmapAnims.exists (__className)) {
 				m_count[__className]--;
-				
+								
 				if (m_count[__className] == 0) {
-					var __XBitmap:XBitmap = m_bitmaps.get (__className);
-				
-					__XBitmap.cleanup ();
-					
-					m_bitmaps.remove (__className);
+					var __XBitmapDataAnim:XBitmapDataAnim = m_bitmapAnims.get (__className);
+									
+					__XBitmapDataAnim.cleanup ();
+									
+					m_bitmapAnims.remove (__className);
 				}
 			}		
 		}
-
-//------------------------------------------------------------------------------------------
-		public function get (__className:String):XBitmap {
-			if (m_bitmaps.exists (__className)) {
-				return m_bitmaps.get (__className);
+						
+	//------------------------------------------------------------------------------------------
+		public function get (__className:String):XBitmapDataAnim {
+			if (m_bitmapAnims.exists (__className)) {
+				return m_bitmapAnims.get (__className);
 			}
-
+							
 			return null;
 		}
-		
-//------------------------------------------------------------------------------------------
+						
+	//------------------------------------------------------------------------------------------
 	}
-	
+				
 //------------------------------------------------------------------------------------------
 }

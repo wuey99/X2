@@ -36,6 +36,7 @@ package X {
 		private var m_XSignalManager:XSignalManager;
 		private var m_XSoundManager:XSoundManager;
 		private var m_XBitmapCacheManager:XBitmapCacheManager;
+		private var m_XBitmapDataAnimManager:XBitmapDataAnimManager;
 		private var m_XSignalPoolManager:XObjectPoolManager;
 		private var m_XRectPoolManager:XObjectPoolManager;
 		private var m_XPointPoolManager:XObjectPoolManager;
@@ -47,6 +48,7 @@ package X {
 			m_XSignalManager = new XSignalManager (this);
 			m_XSoundManager = new XSoundManager (this);
 			m_XBitmapCacheManager = new XBitmapCacheManager (this);
+			m_XBitmapDataAnimManager = new XBitmapDataAnimManager (this);
 		
 			__initPoolManagers ();
 				
@@ -224,6 +226,11 @@ package X {
 			return m_XBitmapCacheManager;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getBitmapDataAnimManager ():XBitmapDataAnimManager {
+			return m_XBitmapDataAnimManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getResourceManagerByName (__name:String):XSubResourceManager {
 			return getProjectManager ().getResourceManagerByName (__name);
