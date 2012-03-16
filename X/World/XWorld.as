@@ -95,6 +95,7 @@ package X.World {
 		public var m_XSubXRectPoolManager:XSubObjectPoolManager;
 		public var m_XSubXPointPoolManager:XSubObjectPoolManager;
 		public var m_XMapLayerCachedView:XMapLayerCachedView;
+		public var m_XBitmapDataAnimManager:XBitmapDataAnimManager;
 				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){
@@ -315,6 +316,11 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public function getBitmapCacheManager ():XBitmapCacheManager {
 			return m_XApp.getBitmapCacheManager ();
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getBitmapDataAnimManager ():XBitmapDataAnimManager {
+			return m_XApp.getBitmapDataAnimManager ();
 		}
 		
 //------------------------------------------------------------------------------------------
