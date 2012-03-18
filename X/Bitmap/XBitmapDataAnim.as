@@ -54,19 +54,20 @@ package X.Bitmap {
 				__rect = __movieClip.getBounds (__movieClip);
 				__width = Math.max (__width, __rect.width);
 				__height = Math.max (__height, __rect.height);
+				var __bitmap:BitmapData = new BitmapData (__width*__scaleX, __height*__scaleY, true, 0xffffff);
+				m_bitmaps.push (__bitmap);
 			}
+		
+			m_dx = -__rect.x*__scaleX;
+			m_dy = -__rect.y*__scaleY;
 			
 			for (i=0; i < __movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
 				__rect = __movieClip.getBounds (__movieClip);
-				var __bitmap:BitmapData = new BitmapData (__width*__scaleX, __height*__scaleY, true, 0xffffff);
 				var __matrix:Matrix = new Matrix ();
 				__matrix.scale (__scaleX, __scaleY);
 				__matrix.translate (-__rect.x*__scaleX, -__rect.y*__scaleY)
-				__bitmap.draw (__movieClip, __matrix);
-				m_bitmaps.push (__bitmap);
-				m_dx = -__rect.x*__scaleX;
-				m_dy = -__rect.y*__scaleY;
+				m_bitmaps[i].draw (__movieClip, __matrix);
 			}
 		}
 		
