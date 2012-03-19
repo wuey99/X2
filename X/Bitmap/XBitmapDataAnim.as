@@ -1,7 +1,9 @@
 //------------------------------------------------------------------------------------------
 package X.Bitmap {
 	
+	import X.*;
 	import X.Geom.*;
+	import X.Task.*;
 	import X.World.*;
 	
 	import flash.display.*;
@@ -13,12 +15,15 @@ package X.Bitmap {
 		public var m_bitmaps:Array;
 		public var m_dx:Number;
 		public var m_dy:Number;
+		public var m_ready:Boolean;
 		
 		//------------------------------------------------------------------------------------------
 		public function XBitmapDataAnim () {
 			super ();
 
 			m_bitmaps = new Array ();
+			
+			m_ready = false;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -36,12 +41,12 @@ package X.Bitmap {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function initWithScaling (__movieClip:MovieClip, __scale:Number):void {
-			initWithScalingXY (__movieClip, __scale, __scale);
+		public function initWithScaling (__XApp:XApp, __movieClip:MovieClip, __scale:Number):void {
+			initWithScalingXY (__XApp, __movieClip, __scale, __scale);
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function initWithScalingXY (__movieClip:MovieClip, __scaleX:Number, __scaleY:Number):void {
+		public function initWithScalingXY (__XApp:XApp, __movieClip:MovieClip, __scaleX:Number, __scaleY:Number):void {
 			var i:Number;
 			var __width:Number, __height:Number;
 			var __rect:Rectangle;
@@ -49,11 +54,14 @@ package X.Bitmap {
 			__width = 0;
 			__height = 0;
 			
-			for (i=0; i < __movieClip.totalFrames; i++) {
+			for (i=0; i < 1; i++) {
 				__movieClip.gotoAndStop (i+1);
 				__rect = __movieClip.getBounds (__movieClip);
 				__width = Math.max (__width, __rect.width);
 				__height = Math.max (__height, __rect.height);
+			}
+		
+			for (i=0; i < __movieClip.totalFrames; i++) {
 				var __bitmap:BitmapData = new BitmapData (__width*__scaleX, __height*__scaleY, true, 0xffffff);
 				m_bitmaps.push (__bitmap);
 			}
@@ -61,14 +69,44 @@ package X.Bitmap {
 			m_dx = -__rect.x*__scaleX;
 			m_dy = -__rect.y*__scaleY;
 			
-			for (i=0; i < __movieClip.totalFrames; i++) {
-				__movieClip.gotoAndStop (i+1);
-				__rect = __movieClip.getBounds (__movieClip);
-				var __matrix:Matrix = new Matrix ();
-				__matrix.scale (__scaleX, __scaleY);
-				__matrix.translate (-__rect.x*__scaleX, -__rect.y*__scaleY)
-				m_bitmaps[i].draw (__movieClip, __matrix);
-			}
+			var __index:Number;
+
+			__XApp.getXTaskManager ().addTask ([		
+				function ():void {
+					__index = 0;
+				},
+				
+				XTask.LABEL, "loop",
+					function ():void {
+						__movieClip.gotoAndStop (__index + 1);
+					}, 
+
+					function ():void {
+						__rect = __movieClip.getBounds (__movieClip);
+						var __matrix:Matrix = new Matrix ();
+						__matrix.scale (__scaleX, __scaleY);
+						__matrix.translate (-__rect.x*__scaleX, -__rect.y*__scaleY)
+						m_bitmaps[__index].draw (__movieClip, __matrix);
+						__index += 1;
+					},
+					
+					XTask.FLAGS, function (__task:XTask):void {
+						__task.ifTrue (__index == __movieClip.totalFrames);
+					},
+					
+					XTask.BNE, "loop",
+					
+					function ():void {
+						m_ready = true;
+					},
+					
+				XTask.RETN,
+			]);
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function isReady ():Boolean {
+			return m_ready;
 		}
 		
 		//------------------------------------------------------------------------------------------
