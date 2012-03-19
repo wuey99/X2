@@ -54,13 +54,13 @@ package X.Bitmap {
 			__width = 0;
 			__height = 0;
 			
-			for (i=0; i < 1; i++) {
+			for (i=0; i < __movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
 				__rect = __movieClip.getBounds (__movieClip);
 				__width = Math.max (__width, __rect.width);
 				__height = Math.max (__height, __rect.height);
 			}
-		
+		 
 			for (i=0; i < __movieClip.totalFrames; i++) {
 				var __bitmap:BitmapData = new BitmapData (__width*__scaleX, __height*__scaleY, true, 0xffffff);
 				m_bitmaps.push (__bitmap);
