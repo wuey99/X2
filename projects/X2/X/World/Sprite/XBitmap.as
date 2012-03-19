@@ -2,8 +2,8 @@
 package X.World.Sprite {
 	
 	import X.*;
-	import X.Geom.*;
 	import X.Bitmap.*;
+	import X.Geom.*;
 	import X.World.*;
 	
 	import flash.display.*;
@@ -88,6 +88,11 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function getNumBitmaps ():Number {
 			return m_bitmapDataAnim.getNumBitmaps ();
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function getBitmapDataAnim ():XBitmapDataAnim {
+			return m_bitmapDataAnim;
 		}
 		
 		//------------------------------------------------------------------------------------------

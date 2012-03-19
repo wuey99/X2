@@ -54,12 +54,6 @@ package X.XMap {
 	
 				__layer.getImageClassNames ().forEach (
 					function (__name:*):void {
-//						if (xxx.getBitmapCacheManager ().get (__name as String) == null) {
-//							__flags = false;
-//						}
-						
-//						trace (": isCached: ", __name, xxx.getBitmapCacheManager ().isQueued (__name));
-						
 						if (xxx.getBitmapCacheManager ().isQueued (__name as String)) {
 							__flags = false;
 						}

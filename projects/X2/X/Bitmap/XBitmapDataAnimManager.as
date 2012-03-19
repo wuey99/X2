@@ -36,9 +36,15 @@ package X.Bitmap {
 								var __class:Class = m_XApp.getClass (__className);
 								
 								if (__class != null) {
-									__createBitmapAnim (__className, __class);
+									var __bitmapAnim:XBitmapDataAnim = m_bitmapAnims.get (__className);
 									
-									m_queue.remove (__className);
+									if (__bitmapAnim == null) {
+										__createBitmapAnim (__className, __class);
+									}								
+	
+									if (__bitmapAnim.isReady ()) {
+										m_queue.remove (__className);
+									}
 								}
 							}
 						);
@@ -61,7 +67,12 @@ package X.Bitmap {
 							
 			m_count[__className] = 1;
 			m_bitmapAnims.put (__className, null);
-							
+	
+			trace (": queuing: ", __className);
+			
+			// wait for image to load before caching it.
+			m_queue.put (__className, 0);
+
 			var __class:Class = m_XApp.getClass (__className);
 							
 			trace (": XBitmapDataAnimManager: caching: ", __className, __class);
@@ -69,12 +80,7 @@ package X.Bitmap {
 			if (__class) {
 				return __createBitmapAnim (__className, __class);
 			}
-							
-			trace (": queuing: ", __className);
-							
-			// wait for image to load before caching it.
-			m_queue.put (__className, 0);
-							
+										
 			return null;
 		}
 						
@@ -85,9 +91,11 @@ package X.Bitmap {
 						
 //------------------------------------------------------------------------------------------
 		private function __createBitmapAnim (__className:String, __class:Class):XBitmapDataAnim {
-			var __movieClip:MovieClip = new (__class) ();		
+			var __movieClip:MovieClip = new (__class) ();
+			__movieClip.stop ();
+			
 			var __XBitmapDataAnim:XBitmapDataAnim = new XBitmapDataAnim ();
-			__XBitmapDataAnim.initWithScaling (__movieClip, 1.0);
+			__XBitmapDataAnim.initWithScaling (m_XApp, __movieClip, 1.0);
 							
 			trace (": adding bitmap: ", __movieClip, __XBitmapDataAnim, __XBitmapDataAnim);
 							

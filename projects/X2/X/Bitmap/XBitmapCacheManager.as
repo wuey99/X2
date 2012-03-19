@@ -36,9 +36,17 @@ package X.Bitmap {
 								var __class:Class = m_XApp.getClass (__className);
 								
 								if (__class != null) {
-									__createBitmap (__className, __class);
-																		
-									m_queue.remove (__className);
+									var __bitmap:XBitmap = m_bitmaps.get (__className);
+									
+									var __bitmapAnim:XBitmapDataAnim = __bitmap.getBitmapDataAnim ();
+									
+									if (__bitmapAnim == null) {
+										__createBitmap (__className, __class);
+									}								
+									
+									if (__bitmapAnim.isReady ()) {
+										m_queue.remove (__className);
+									}
 								}
 							}
 						);
@@ -66,14 +74,14 @@ package X.Bitmap {
 			
 			trace (": caching: ", __className, __class);
 			
+			trace (": queuing: ", __className);
+			
+			// wait for image to load before caching it.
+			m_queue.put (__className, 0);
+			
 			if (__class) {
 				return __createBitmap (__className, __class);
 			}
-			
-			trace (": queuing: ", __className);
-			
-// wait for image to load before caching it.
-			m_queue.put (__className, 0);
 			
 			return null;
 		}
@@ -85,7 +93,9 @@ package X.Bitmap {
 		
 //------------------------------------------------------------------------------------------
 		private function __createBitmap (__className:String, __class:Class):XBitmap {
-			var __movieClip:MovieClip = new (__class) ();		
+			var __movieClip:MovieClip = new (__class) ();
+			__movieClip.stop ();
+			
 			var __XBitmap:XBitmap = new XBitmap ();		
 			__XBitmap.initWithClassName (null, m_XApp, __className);
 		
