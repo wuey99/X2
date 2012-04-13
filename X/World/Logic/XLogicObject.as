@@ -690,6 +690,10 @@ package X.World.Logic {
 		public function set isDead (__value:Boolean):void {
 			m_isDead = __value;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function collisionCallback ():void {	
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function setPos (__pos:XPoint):void {

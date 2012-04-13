@@ -38,6 +38,8 @@ package X.World.Sprite {
 			m_visible = true;
 			
 			m_bitmapNames = new Object ();
+			
+			m_bitmapDataAnimManager = null;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -46,7 +48,9 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
-			m_bitmapDataAnimManager.remove (m_className);
+			if (m_bitmapDataAnimManager != null) {
+				m_bitmapDataAnimManager.remove (m_className);
+			}
 			
 			var i:Number;
 			

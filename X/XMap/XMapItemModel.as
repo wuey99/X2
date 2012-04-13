@@ -82,11 +82,11 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function clone ():XMapItemModel {
+		public function clone (__newLayerModel:XMapLayerModel = null):XMapItemModel {
 			var __item:XMapItemModel = new XMapItemModel ();
 
 			__item.setup (
-				this.layerModel,
+				__newLayerModel != null ? __newLayerModel : this.layerModel,
 // __logicClassName
 				this.layerModel.getClassNameFromIndex (m_logicClassIndex),
 // __hasLogic

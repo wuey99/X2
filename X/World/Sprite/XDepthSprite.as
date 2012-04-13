@@ -47,6 +47,13 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function replaceSprite (__sprite:DisplayObject):void {
+			clear ();
+			
+			childList.addChild (__sprite);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public override function set visible (__visible:Boolean):void {
 			super.visible = __visible;
 			

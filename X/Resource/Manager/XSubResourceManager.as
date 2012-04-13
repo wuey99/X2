@@ -406,6 +406,35 @@ package X.Resource.Manager {
 			return __match;
 		}
 		
+		//------------------------------------------------------------------------------------------
+		public function findNodeFromXML (
+			__match:XML,
+			__xml:XML,
+			__xmlList:XMLList
+		):XML {
+			
+			var i:int, j:int;
+			
+			for (i = 0; i<__xmlList.length (); i++) {
+				if (__xml == __xmlList[i]) {
+					__match = __xmlList[i];
+				}
+				else if (__xmlList[i].localName () == "folder") {
+					var nuMatch:XML = findNodeFromXML (
+						__match,
+						__xml,
+						__xmlList[i].child ("*")
+					);
+					
+					if (nuMatch != null) {
+						__match = nuMatch;
+					}
+				}
+			}
+			
+			return __match;
+		}
+		
 //------------------------------------------------------------------------------------------
 // look for an e4x-centric way of finding a "classX" name
 // my intuition tells me that this method can be achieved via e4x

@@ -10,23 +10,41 @@ package X.Pool {
 		private var m_newObject:Function;
 		private var m_cloneObject:Function;
 		private var m_overflow:Number;
+		private var m_cleanup:Function;
 		
 //------------------------------------------------------------------------------------------
 		public function XObjectPoolManager (
 			__newObject:Function,
 			__cloneObject:Function,
 			__numObjects:Number,
-			__overflow:Number) {
+			__overflow:Number,
+			__cleanup:Function = null) {
 				
 			m_freeObjects = new Array ();
 			m_inuseObjects = new XDict ();
 			m_newObject = __newObject;
 			m_cloneObject = __cloneObject;
 			m_overflow = __overflow;
+			m_cleanup = __cleanup;
 			
 			addMoreObjects (__numObjects);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+			returnAllObjects ();
+			
+			if (m_cleanup == null) {
+				return;
+			}
+			
+			var i:Number;
+			
+			for (i=0; i<m_freeObjects.length; i++) {
+				m_cleanup (m_freeObjects[i]);
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function addMoreObjects (__numObjects:Number):void {
 			var i:Number;

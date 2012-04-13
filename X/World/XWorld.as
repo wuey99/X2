@@ -163,6 +163,18 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+			m_XTaskManager.removeAllTasks ();
+			m_XTaskManagerCX.removeAllTasks ();
+			m_renderManager.removeAllTasks ();
+			m_XSignalManager.removeAllXSignals ();
+			m_XBulletCollisionManager.cleanup ();
+			
+			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
+			removeEventListener(Event.RENDER, onRenderFrame);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function setupDebug ():void {
 			// set debug draw
 			

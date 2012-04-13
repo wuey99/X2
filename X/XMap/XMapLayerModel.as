@@ -523,7 +523,29 @@ package X.XMap {
 		public function getImageClassNames ():XDict {
 			return m_imageClassNames;
 		}
-				
+
+//------------------------------------------------------------------------------------------
+		public function lookForItem (__itemName:String):Array {
+			var __row:Number, __col:Number;
+			var __list:Array = new Array ();
+			
+			for (__row=0; __row<m_submapRows; __row++) {
+				for (__col=0; __col<m_submapCols; __col++) {
+					m_XSubmaps[__row][__col].items ().forEach (
+						function (x:*):void {
+							var __item:XMapItemModel = x as XMapItemModel;
+							
+							if (__item.XMapItem == __itemName) {
+								__list.push (__item);
+							}
+						}
+					);
+				}
+			}
+			
+			return __list;	
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function serialize (__xml:XSimpleXMLNode):XSimpleXMLNode {
 			var __attribs:Array = [
