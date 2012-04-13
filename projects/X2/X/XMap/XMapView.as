@@ -117,7 +117,11 @@ package X.XMap {
 					return null;
 				},
 				
-				__alloc, __spill
+				__alloc, __spill,
+				
+				function (x:*):void {
+					XBitmap (x).cleanup ();
+				}
 			);
 		}
 		

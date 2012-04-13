@@ -255,6 +255,10 @@ package X.World.Logic {
 		public function get CX_Collide_Flag ():Number {
 			return m_CX_Collide_Flag;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function handleCollision (__collider:XLogicObject):void {
+		}
 		
 //------------------------------------------------------------------------------------------
 		public override function updatePhysics ():void {

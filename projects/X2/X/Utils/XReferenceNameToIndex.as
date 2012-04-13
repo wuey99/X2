@@ -36,26 +36,26 @@ package X.Utils {
 		//------------------------------------------------------------------------------------------
 		// given a reference assign a unique index to it.
 		//------------------------------------------------------------------------------------------
-		public function getIndexFromReferenceName (__ReferenceName:String):int {
+		public function getIndexFromReferenceName (__referenceName:String):int {
 			var index:int;
 			
 			// look up the index associated with the ReferenceName
-			index = m_referenceNamesStrings.indexOf (__ReferenceName);
+			index = m_referenceNamesStrings.indexOf (__referenceName);
 			
 			// if no index can be found, create a new index
 			if (index == -1) {
 				
 				// create a new ReferenceName if there are no previously deleted ones
 				if (m_freeReferenceNameIndexes.length == 0) {		
-					m_referenceNamesStrings.push (__ReferenceName);
+					m_referenceNamesStrings.push (__referenceName);
 					m_referenceNamesCounts.push (1);
-					index = m_referenceNamesStrings.indexOf (__ReferenceName);
+					index = m_referenceNamesStrings.indexOf (__referenceName);
 				}
 					// reclaim a previously deleted ReferenceName's index
 				else
 				{	
 					index = m_freeReferenceNameIndexes.pop ();
-					m_referenceNamesStrings[index] = __ReferenceName;	
+					m_referenceNamesStrings[index] = __referenceName;	
 					m_referenceNamesCounts[index]++;	
 				}		
 			}
@@ -118,11 +118,11 @@ package X.Utils {
 					"count",		m_referenceNamesCounts[i]					
 				];
 				
-				var __ReferenceName:XSimpleXMLNode = new XSimpleXMLNode ();
+				var __referenceName:XSimpleXMLNode = new XSimpleXMLNode ();
 				
-				__ReferenceName.setupWithParams ("className", "", __attribs);
+				__referenceName.setupWithParams ("className", "", __attribs);
 				
-				__xml.addChildWithXMLNode (__ReferenceName);
+				__xml.addChildWithXMLNode (__referenceName);
 			}
 			
 			return __xml;
@@ -135,6 +135,10 @@ package X.Utils {
 			m_freeReferenceNameIndexes = new Array ();
 			
 			trace (": XReferenceNameIndex: deserialize: ");
+			
+			if (__xml.child ("classNames").length == 0) {
+				return;
+			}
 			
 			var __xmlList:Array = __xml.child ("classNames")[0].child ("className");
 			

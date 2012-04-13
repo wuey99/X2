@@ -81,7 +81,9 @@ package X.XMap {
 					var __classNames:Array = m_layers[i].getAllClassNames ();
 				
 					for (j=0; j<__classNames.length; j++) {
-						m_allClassNames.push (__classNames[j]);
+						if (__classNames[j] != null && m_allClassNames.indexOf (__classNames[j]) == -1) {
+							m_allClassNames.push (__classNames[j]);
+						}
 					}
 				}
 			}
