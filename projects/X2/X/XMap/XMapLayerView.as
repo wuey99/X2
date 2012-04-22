@@ -28,6 +28,7 @@ package X.XMap {
 		private var m_XMapItemToXLogicObject:XDict;
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
+		private var m_XMapLayerModel:XMapLayerModel;
 		private var m_currLayer:Number;
 		private var m_logicClassNameToClass:Function;
 		
@@ -44,6 +45,8 @@ package X.XMap {
 			m_XMapModel = getArg (args, 1);
 			m_currLayer = getArg (args, 2);
 			m_logicClassNameToClass = getArg (args, 3);
+			
+			m_XMapLayerModel = m_XMapModel.getLayer (m_currLayer);
 			
 			m_XMapItemToXLogicObject = new XDict ();
 		}

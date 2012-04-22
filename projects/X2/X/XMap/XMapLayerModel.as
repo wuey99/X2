@@ -36,6 +36,8 @@ package X.XMap {
 		private var m_name:String;
 		private var m_grid:Boolean
 		
+		private var m_itemInuse:Object;
+		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
 			super ();
@@ -74,6 +76,8 @@ package X.XMap {
 			
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();
+			
+			m_itemInuse = new Object ();
 			
 			m_viewPort = new XRect ();
 		}
@@ -145,6 +149,30 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function getSubmapHeight ():Number {
 			return m_submapHeight;
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function getItemInuse (__id:Number):Number {
+			if (m_itemInuse[__id] == null) {
+				m_itemInuse[__id] = 0;
+			}
+
+			return m_itemInuse[__id];
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setItemInuse (__id:Number, __inuse:Number):void {
+			if (m_itemInuse[__id] == null) {
+				m_itemInuse[__id] = 0;
+			}
+			
+			if (__inuse == 0) {
+				delete m_itemInuse[__id];
+			}
+			else
+			{
+				m_itemInuse[__id] = __inuse;
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -323,6 +351,8 @@ package X.XMap {
 				__x2:Number, __y2:Number
 				):Array {
 			
+			__x2--; __y2--;
+			
 			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
 							
 			var i:Number;
@@ -346,8 +376,8 @@ package X.XMap {
 						cx.offset (item.x, item.y);
 						
 						if (
-							!(__x2 < cx.left || __x1 > cx.right ||
-							  __y2 < cx.top || __y1 > cx.bottom)
+							!(__x2 < cx.left || __x1 > cx.right - 1 ||
+							  __y2 < cx.top || __y1 > cx.bottom - 1)
 							) {
 								
 							if (dst_items.indexOf (item) == -1) {
@@ -545,6 +575,17 @@ package X.XMap {
 			
 			return __list;	
 		}
+
+//------------------------------------------------------------------------------------------
+		public function iterateAllSubmaps (__callback:Function):void {
+			var __row:Number, __col:Number;
+			
+			for (__row=0; __row<m_submapRows; __row++) {
+				for (__col=0; __col<m_submapCols; __col++) {
+					__callback (m_XSubmaps[__row][__col], __row, __col);
+				}
+			}				
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function serialize (__xml:XSimpleXMLNode):XSimpleXMLNode {
@@ -705,6 +746,8 @@ package X.XMap {
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();			
 
+			m_itemInuse = new Object ();
+			
 			m_items = new XDict ();
 			m_XSubmaps = new Array (m_submapRows);
 			
