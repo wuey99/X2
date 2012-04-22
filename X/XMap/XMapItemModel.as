@@ -26,15 +26,11 @@ package X.XMap {
 		private var m_boundingRect:XRect;
 		private var m_params:String;
 
-		private var m_inuse:Number;
-		
 //------------------------------------------------------------------------------------------	
 		public function XMapItemModel () {
 			super ();
 			
 			m_id = -1;
-			
-			m_inuse = 0;
 		}	
 
 //------------------------------------------------------------------------------------------	
@@ -129,11 +125,11 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function get inuse ():Number {
-			return m_inuse;
+			return m_layerModel.getItemInuse (id);
 		}
 		
 		public function set inuse (__inuse:Number):void {
-			m_inuse = __inuse;
+			m_layerModel.setItemInuse (id, __inuse);
 		}
 		
 //------------------------------------------------------------------------------------------
