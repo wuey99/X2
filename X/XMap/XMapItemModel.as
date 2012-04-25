@@ -76,6 +76,23 @@ package X.XMap {
 			m_layerModel.removeIndexFromClassNames (logicClassIndex);
 			m_layerModel.removeIndexFromClassNames (imageClassIndex);
 		}
+
+//------------------------------------------------------------------------------------------
+		public function copy2 (__dst:XMapItemModel):void {
+			__dst.layerModel = layerModel;
+			__dst.hasLogic = hasLogic;
+			__dst.name = name;
+			__dst.id = id;
+			__dst.imageClassIndex = imageClassIndex;
+			__dst.frame = frame;
+			__dst.XMapItem = XMapItem;
+			__dst.scale = scale;
+			__dst.rotation = rotation;
+			__dst.depth = depth;
+			collisionRect.copy2 (__dst.collisionRect);
+			boundingRect.copy2 (__dst.boundingRect);
+			__dst.params = params;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function clone (__newLayerModel:XMapLayerModel = null):XMapItemModel {
@@ -123,6 +140,10 @@ package X.XMap {
 			return m_layerModel;
 		}
 		
+		public function set layerModel (__layerModel:XMapLayerModel):void {
+			m_layerModel = __layerModel;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function get inuse ():Number {
 			return m_layerModel.getItemInuse (id);
@@ -155,6 +176,10 @@ package X.XMap {
 			return m_logicClassIndex;
 		}
 		
+		public function set logicClassIndex (__value:int):void {
+			m_logicClassIndex = __value;
+		}
+		
 		public function get logicClassName ():String {
 			return m_layerModel.getClassNameFromIndex (logicClassIndex);
 		}
@@ -180,6 +205,10 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function get imageClassIndex ():int {
 			return m_imageClassIndex;
+		}
+
+		public function set imageClassIndex (__value:int):void {
+			m_imageClassIndex = __value
 		}
 		
 		public function get imageClassName ():String {

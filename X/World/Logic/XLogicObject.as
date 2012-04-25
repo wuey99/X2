@@ -649,6 +649,11 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function get item ():XMapItemModel {
+			return m_item;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function setLayer (__layer:Number):void {
 			if (__layer != m_layer && m_layer != -1) {
 				m_worldSprites.forEach (
@@ -693,6 +698,11 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function collisionCallback ():void {	
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get boundingRect ():XRect {
+			return m_boundingRect;
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -112,12 +112,17 @@ package X.XMap {
 		public function addXMapItem (__item:XMapItemModel, __depth:Number):void {
 			var __logicObject:XLogicObjectCX;
 			
-			if (__item.logicClassName.charAt (0) == "$") {		
+			var __object:* = m_logicClassNameToClass (__item.logicClassName);
+				
+			if (__object is Function) {
+				__logicObject = (__object as Function) ();
+			}
+			else if (__item.logicClassName.charAt (0) == "$") {
 				__logicObject = xxx.getXLogicManager ().initXLogicObject (
 					// parent
 					null,
 					// logicObject
-					new (m_logicClassNameToClass (__item.logicClassName)) () as XLogicObject,
+					new (__object as Class) () as XLogicObject,
 					// item, layer, depth
 					__item, m_currLayer, __depth,
 					// x, y, z
@@ -152,6 +157,10 @@ package X.XMap {
 
 			__item.inuse++;
 
+			if (__logicObject == null) {
+				return;
+			}
+			
 			m_XMapItemToXLogicObject.put (__item, __logicObject);
 
 			__logicObject.setXMapModel (m_currLayer + 1, m_XMapModel, m_XMapView);
