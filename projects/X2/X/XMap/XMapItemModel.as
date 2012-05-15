@@ -98,14 +98,18 @@ package X.XMap {
 		public function clone (__newLayerModel:XMapLayerModel = null):XMapItemModel {
 			var __item:XMapItemModel = new XMapItemModel ();
 
+			if (__newLayerModel == null) {
+				__newLayerModel = this.layerModel;
+			}
+			
 			__item.setup (
-				__newLayerModel != null ? __newLayerModel : this.layerModel,
+				__newLayerModel,
 // __logicClassName
 				this.layerModel.getClassNameFromIndex (m_logicClassIndex),
 // __hasLogic
 				this.hasLogic,
 // __name, __id
-				"", -1,
+				"", __newLayerModel.generateID (),
 // __imageClassName, __frame
 				this.layerModel.getClassNameFromIndex (m_imageClassIndex), this.frame,
 // XMapItem

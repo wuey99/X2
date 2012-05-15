@@ -110,6 +110,11 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public function gotoAndStop (__frame:Number):void {
+			goto (__frame);
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public function goto (__frame:Number):void {
 			m_frame = __frame-1;
 			

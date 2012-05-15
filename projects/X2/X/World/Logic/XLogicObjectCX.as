@@ -132,6 +132,11 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function getXMapLayerModel ():XMapLayerModel {
+			return m_XMapLayerModel;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getXMapView ():XMapView {
 			return m_XMapView;
 		}
