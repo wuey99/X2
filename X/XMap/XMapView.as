@@ -77,6 +77,8 @@ package X.XMap {
 	
 				__layer.getImageClassNames ().forEach (
 					function (__name:*):void {
+						trace (": cacheImageClassName: ", __name);
+						
 						xxx.getBitmapCacheManager ().add (__name as String);
 					}
 				);

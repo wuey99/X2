@@ -555,9 +555,12 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function lookForItem (__itemName:String):XDict {
+		public function lookForItem (__itemName:String, __list:XDict=null):XDict {
 			var __row:Number, __col:Number;
-			var __list:XDict = new XDict ();
+			
+			if (__list == null) {
+				var __list:XDict = new XDict ();
+			}
 			
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
