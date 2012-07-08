@@ -103,7 +103,7 @@ package X.XMap {
 			var __logicObject:XSubmapViewCache =
 			  xxx.getXLogicManager ().initXLogicObject (
 				// parent
-					null,
+					m_XMapView,
 				// logicClassName
 					new XSubmapViewCache as XLogicObject,
 				// item, layer, depth
@@ -117,7 +117,9 @@ package X.XMap {
 				) as XSubmapViewCache;
 			
 			__submap.inuse++;
-				
+			
+			m_XMapView.addXLogicObject (__logicObject);
+			
 			m_XSubmapToXLogicObject.put (__submap, __logicObject);
 			
 			__logicObject.setModel (__submap);
