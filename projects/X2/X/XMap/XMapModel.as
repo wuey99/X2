@@ -107,6 +107,11 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function replaceItems (__layer:Number, __item:XMapItemModel):void {
+			m_layers[__layer].replaceItems (__item);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function removeItem (__layer:Number, __item:XMapItemModel):void {
 			m_layers[__layer].removeItem (__item);
 		}
