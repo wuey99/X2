@@ -154,6 +154,13 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function deserializeAllReadOnly (__xml:XSimpleXMLNode):void {
+			trace (": [XMap] deserializeAll: ");
+			
+			deserialize (__xml, true);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function serialize ():XSimpleXMLNode {
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
@@ -180,7 +187,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		private function deserialize (__xml:XSimpleXMLNode):void {
+		private function deserialize (__xml:XSimpleXMLNode, __readonly:Boolean=false):void {
 			trace (": [XMap] deserialize: ");
 			
 			var __xmlList:Array = __xml.child ("XLayers")[0].child ("XLayer");
@@ -193,7 +200,7 @@ package X.XMap {
 			for (i=0; i<__xmlList.length; i++) {
 				m_layers[i] = new XMapLayerModel ();
 				
-				m_layers[i].deserialize (__xmlList[i]);
+				m_layers[i].deserialize (__xmlList[i], __readonly);
 			}
 		}
 		
