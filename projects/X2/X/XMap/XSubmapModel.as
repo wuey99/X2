@@ -28,6 +28,9 @@ package X.XMap {
 		
 		private var m_boundingRect:XRect;
 		
+		private var m_src:XRect;
+		private var m_dst:XRect;
+		
 // empty
 		public static var CX_EMPTY:Number = 0;
 		
@@ -119,6 +122,9 @@ package X.XMap {
 			}
 			
 			m_items = new XDict ();
+
+			m_src = new XRect ();
+			m_dst = new XRect ();
 		}	
 
 //------------------------------------------------------------------------------------------
@@ -209,6 +215,32 @@ package X.XMap {
 			return __item;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function replaceItems (
+			__item:XMapItemModel
+			):XMapItemModel {
+	
+			trace (": XSubmapModel: replaceitem: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
+			
+			__item.boundingRect.copy2 (m_src);
+			m_src.offset (__item.x, __item.y);
+			
+			m_items.forEach (
+				function (x:*) {
+					var __dstItem:XMapItemModel = x as XMapItemModel;
+					
+					__dstItem.boundingRect.copy2 (m_dst);
+					m_dst.offset (__dstItem.x, __dstItem.y);
+					
+					if (m_src.intersects (m_dst)) {
+						removeItem (__dstItem);
+					}
+				}
+			);
+			
+			addItem (__item);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function removeItem (
 			__item:XMapItemModel

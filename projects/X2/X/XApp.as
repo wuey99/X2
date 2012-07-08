@@ -44,14 +44,18 @@ package X {
 		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setup (__poolSettings:Object):void {
 			m_XTaskManager = new XTaskManager (this);
 			m_XSignalManager = new XSignalManager (this);
 			m_XSoundManager = new XSoundManager (this);
 			m_XBitmapCacheManager = new XBitmapCacheManager (this);
 			m_XBitmapDataAnimManager = new XBitmapDataAnimManager (this);
-		
-			__initPoolManagers ();
-				
+			
+			__initPoolManagers (__poolSettings);
+			
 			m_XDebug = new XDebug ();
 			m_XDebug.setup (this);
 			
@@ -62,15 +66,31 @@ package X {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setup ():void {
-		}
-
-//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
 
 //------------------------------------------------------------------------------------------
-		private function __initPoolManagers ():void {
+		public function getMaximalPoolSettings ():Object {
+			return {
+				XSignal: {init: 10000, overflow: 1000},
+				XRect: {init: 25000, overflow: 1000},				
+				XPoint: {init: 25000, overflow: 1000},
+				XDepthSprite: {init: 4000, overflow: 1000}
+			};
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getDefaultPoolSettings ():Object {
+			return {
+				XSignal: {init: 2000, overflow: 1000},
+				XRect: {init: 2500, overflow: 1000},				
+				XPoint: {init: 2500, overflow: 1000},
+				XDepthSprite: {init: 2000, overflow: 1000}
+			};
+		}
+		
+//------------------------------------------------------------------------------------------
+		private function __initPoolManagers (__poolSettings:Object):void {
 
 //------------------------------------------------------------------------------------------
 // XSignals
@@ -84,7 +104,7 @@ package X {
 					return null;
 				},
 				
-				10000, 1000
+				__poolSettings.XSignal.init, __poolSettings.XSignal.overflow
 			);
 				
 //------------------------------------------------------------------------------------------
@@ -107,7 +127,7 @@ package X {
 					return __rect2;
 				},
 				
-				25000, 1000
+				__poolSettings.XRect.init, __poolSettings.XRect.overflow
 			);
 		
 //------------------------------------------------------------------------------------------
@@ -128,7 +148,7 @@ package X {
 					return __point2;
 				},
 				
-				25000, 1000
+				__poolSettings.XPoint.init, __poolSettings.XPoint.overflow
 			);
 
 //------------------------------------------------------------------------------------------
@@ -145,7 +165,7 @@ package X {
 					return null;
 				},
 				
-				4000, 1000
+				__poolSettings.XDepthSprite.init, __poolSettings.XDepthSprite.overflow
 			);
 		}
 			
