@@ -120,7 +120,7 @@ package X.XMap {
 			else if (__item.logicClassName.charAt (0) == "$") {
 				__logicObject = xxx.getXLogicManager ().initXLogicObject (
 					// parent
-					null,
+					m_XMapView,
 					// logicObject
 					new (__object as Class) () as XLogicObject,
 					// item, layer, depth
@@ -139,7 +139,7 @@ package X.XMap {
 			{
 				__logicObject = xxx.getXLogicManager ().createXLogicObjectFromClassName (
 					// parent
-						null,
+						m_XMapView,
 					// logicClassName
 						__item.logicClassName,
 					// item, layer, depth
@@ -160,6 +160,9 @@ package X.XMap {
 			if (__logicObject == null) {
 				return;
 			}
+			
+			m_XMapView.addXLogicObject (__logicObject);
+			
 			
 			m_XMapItemToXLogicObject.put (__item, __logicObject);
 
