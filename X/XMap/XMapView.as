@@ -140,6 +140,15 @@ package X.XMap {
 			
 			setModel (__model);		
 		}
+
+//------------------------------------------------------------------------------------------
+		public function createModelFromXMLReadOnly (__xml:XSimpleXMLNode):void {
+			var __model:XMapModel = new XMapModel ();
+			
+			__model.deserializeAllReadOnly (__xml);	
+			
+			setModel (__model);		
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function getModel ():XMapModel {

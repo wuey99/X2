@@ -709,7 +709,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function deserialize (__xml:XSimpleXMLNode):void {
+		public function deserialize (__xml:XSimpleXMLNode, __readonly:Boolean=false):void {
 			trace (": [XMapLayer]: deserialize: ");
 			
 			m_viewPort = new XRect (
@@ -757,7 +757,7 @@ package X.XMap {
 			deserializeImageClassNames (__xml);
 			m_classNames.deserialize (__xml);
 			deserializeItems (__xml);
-			deserializeSubmaps (__xml);
+			deserializeSubmaps (__xml, __readonly);
 		}
 	
 //------------------------------------------------------------------------------------------
@@ -765,22 +765,40 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function deserializeSubmaps (__xml:XSimpleXMLNode):void {
+		public function deserializeSubmaps (__xml:XSimpleXMLNode, __readonly:Boolean):void {
 			trace (": [XMapLayer]: deserializeSubmaps: ");
 			
-//------------------------------------------------------------------------------------------	
+//------------------------------------------------------------------------------------------
+			trace (": creating XSubmaps: ");
+			
 			var __row:Number;
 			var __col:Number;
 			
-			for (__row=0; __row<m_submapRows; __row++) {
-				m_XSubmaps[__row] = new Array (m_submapCols);
+			if (__readonly) {
+				var __empty:XSubmapModel = new XSubmapModel (this, 0, 0, m_submapWidth, m_submapHeight);
 
-				for (__col=0; __col<m_submapCols; __col++) {
-					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
+				for (__row=0; __row<m_submapRows; __row++) {
+					m_XSubmaps[__row] = new Array (m_submapCols);
+					
+					for (__col=0; __col<m_submapCols; __col++) {
+						m_XSubmaps[__row][__col] = __empty;
+					}
 				}
 			}
-		
-//------------------------------------------------------------------------------------------	
+			else
+			{
+				for (__row=0; __row<m_submapRows; __row++) {
+					m_XSubmaps[__row] = new Array (m_submapCols);
+	
+					for (__col=0; __col<m_submapCols; __col++) {
+						m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
+					}
+				}
+			}
+			
+//------------------------------------------------------------------------------------------
+			trace (": deserializing XSubmaps: ");
+			
 			var __xmlList:Array;
 			var i:Number;
 			
@@ -792,12 +810,18 @@ package X.XMap {
 				__row = __submapXML.getAttribute ("row");
 				__col = __submapXML.getAttribute ("col");
 					
+				if (__readonly) {
+					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
+				}
+				
 				m_XSubmaps[__row][__col].deserializeRowCol (__submapXML);
 			}
 	
 //------------------------------------------------------------------------------------------	
 // add items to the layer's dictionary
 //------------------------------------------------------------------------------------------
+			trace (": adding items: ");
+			
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
 					m_XSubmaps[__row][__col].items ().forEach (
