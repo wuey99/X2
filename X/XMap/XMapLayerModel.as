@@ -228,6 +228,58 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function replaceItems (__item:XMapItemModel):XMapItemModel {
+			var __c1:int, __r1:int, __c2:int, __r2:int;
+			
+			var __id:Number = __item.getID ();
+			
+			if (__id == -1) {
+				// obtain unique ID for this item			
+				__id = generateID ();
+				
+				__item.setID (__id);
+			}
+			
+			var r:XRect = __item.boundingRect.cloneX ();
+			r.offset (__item.x, __item.y);
+			
+			// determine submaps that the item straddles
+			__c1 = r.left/m_submapWidth;
+			__r1 = r.top/m_submapHeight;
+			
+			__c2 = r.right/m_submapWidth;
+			__r2 = r.bottom/m_submapHeight;
+			
+			trace (": -----------------------: ");
+			trace (": XXMapLayerModel: replaceItems: ", __id);
+			trace (": x, y: ", __item.x, __item.y);
+			trace (": ", r.left, r.top, r.right, r.bottom);
+			trace (": ", __c1, __r1, __c2, __r2);
+			
+			__c1 = Math.max (__c1, 0);
+			__c2 = Math.max (__c2, 0);
+			__r1 = Math.max (__r1, 0);
+			__r2 = Math.max (__r2, 0);
+			
+			__c1 = Math.min (__c1, m_submapCols-1);
+			__c2 = Math.min (__c2, m_submapCols-1);
+			__r1 = Math.min (__r1, m_submapRows-1);
+			__r2 = Math.min (__r2, m_submapRows-1);
+			// ul
+			m_XSubmaps[__r1][__c1].replaceItems (__item);
+			// ur
+			m_XSubmaps[__r1][__c2].replaceItems (__item);
+			// ll
+			m_XSubmaps[__r2][__c1].replaceItems (__item);
+			// lr
+			m_XSubmaps[__r2][__c2].replaceItems (__item);
+			
+			m_items.put (__item, __item.id);
+			
+			return __item;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function removeItem (__item:XMapItemModel):void {		
 			if (!m_items.exists (__item)) {
 				return;
