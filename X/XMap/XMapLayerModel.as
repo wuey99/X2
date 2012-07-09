@@ -228,7 +228,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function replaceItems (__item:XMapItemModel):XMapItemModel {
+		public function replaceItems (__item:XMapItemModel):Array {
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 			
 			var __id:Number = __item.getID ();
@@ -239,6 +239,8 @@ package X.XMap {
 				
 				__item.setID (__id);
 			}
+			
+			var __removedItems:Array = new Array ();
 			
 			var r:XRect = __item.boundingRect.cloneX ();
 			r.offset (__item.x, __item.y);
@@ -266,17 +268,25 @@ package X.XMap {
 			__r1 = Math.min (__r1, m_submapRows-1);
 			__r2 = Math.min (__r2, m_submapRows-1);
 			// ul
-			m_XSubmaps[__r1][__c1].replaceItems (__item);
+			__extend (m_XSubmaps[__r1][__c1].replaceItems (__item));
 			// ur
-			m_XSubmaps[__r1][__c2].replaceItems (__item);
+			__extend (m_XSubmaps[__r1][__c2].replaceItems (__item));
 			// ll
-			m_XSubmaps[__r2][__c1].replaceItems (__item);
+			__extend (m_XSubmaps[__r2][__c1].replaceItems (__item));
 			// lr
-			m_XSubmaps[__r2][__c2].replaceItems (__item);
+			__extend (m_XSubmaps[__r2][__c2].replaceItems (__item));
 			
 			m_items.put (__item, __item.id);
 			
-			return __item;
+			return __removedItems;
+			
+			function __extend (__items:Array) {
+				for each (var __item:XMapItemModel in __items) {
+					if (__removedItems.indexOf (__item) == -1) {
+						__removedItems.push (__item);
+					}
+				}
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
