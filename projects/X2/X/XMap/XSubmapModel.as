@@ -218,9 +218,11 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function replaceItems (
 			__item:XMapItemModel
-			):XMapItemModel {
+			):Array {
 	
 			trace (": XSubmapModel: replaceitem: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
+			
+			var __removedItems:Array = new Array ();
 			
 			__item.boundingRect.copy2 (m_src);
 			m_src.offset (__item.x, __item.y);
@@ -234,13 +236,17 @@ package X.XMap {
 					
 					if (m_src.intersects (m_dst)) {
 						removeItem (__dstItem);
+						
+						__removedItems.push (__dstItem);
 					}
 				}
 			);
 			
 			addItem (__item);
 			
-			return __item;
+			trace (": XSubmapModel: replaceItems: ", __removedItems);
+			
+			return __removedItems;
 		}
 		
 //------------------------------------------------------------------------------------------
