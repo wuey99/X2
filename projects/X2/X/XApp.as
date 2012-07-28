@@ -353,6 +353,26 @@ package X {
 					m_XApp.print (": task: " + i + ": " + x + ", parent: " + x.getParent ());
 				}
 			);
+			
+			m_XApp.print ("------------------------------");
+			m_XApp.print ("XSignalPoolManager XApp: ");
+			
+			m_XApp.print (": XSignalPoolManager: " + m_XSignalPoolManager.numberOfBorrowedObjects ());
+			
+			m_XApp.print ("------------------------------");
+			m_XApp.print ("XRectPoolManager XApp: ");
+			
+			m_XApp.print (": XRectPoolManager: " + m_XRectPoolManager.numberOfBorrowedObjects ());
+
+			m_XApp.print ("------------------------------");
+			m_XApp.print ("XPointPoolManager XApp: ");
+			
+			m_XApp.print (": XPointPoolManager: " + m_XPointPoolManager.numberOfBorrowedObjects ());		
+
+			m_XApp.print ("------------------------------");
+			m_XApp.print ("XDepthSpritePoolManager XApp: ");
+			
+			m_XApp.print (": XDepthSpritePoolManager: " + m_XDepthSpritePoolManager.numberOfBorrowedObjects ());
 		}
 			
 //------------------------------------------------------------------------------------------

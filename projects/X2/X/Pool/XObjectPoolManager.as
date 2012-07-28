@@ -11,6 +11,7 @@ package X.Pool {
 		private var m_cloneObject:Function;
 		private var m_overflow:Number;
 		private var m_cleanup:Function;
+		private var m_numberOfBorrowedObjects:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function XObjectPoolManager (
@@ -26,6 +27,8 @@ package X.Pool {
 			m_cloneObject = __cloneObject;
 			m_overflow = __overflow;
 			m_cleanup = __cleanup;
+			
+			m_numberOfBorrowedObjects = 0;
 			
 			addMoreObjects (__numObjects);
 		}
@@ -53,6 +56,11 @@ package X.Pool {
 				m_freeObjects.push (m_newObject ());
 			}
 		}
+	
+//------------------------------------------------------------------------------------------
+		public function numberOfBorrowedObjects ():Number {
+			return m_numberOfBorrowedObjects;
+		}	
 		
 //------------------------------------------------------------------------------------------
 		public function isObject (__object:Object):Boolean {
@@ -86,6 +94,8 @@ package X.Pool {
 				m_freeObjects.push (__object);
 				
 				m_inuseObjects.remove (__object);
+				
+				m_numberOfBorrowedObjects--;
 			}
 		}
 
@@ -98,6 +108,8 @@ package X.Pool {
 			var __object:Object = m_freeObjects.pop ();
 				
 			m_inuseObjects.put (__object, 0);
+			
+			m_numberOfBorrowedObjects++;
 			
 			return __object;
 		}
