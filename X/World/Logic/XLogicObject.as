@@ -280,7 +280,8 @@ package X.World.Logic {
 			
 			function __dealloc ():void {
 				xxx.getXRectPoolManager ().returnObject (r);
-				xxx.getXRectPoolManager ().returnObject (i);			
+				xxx.getXRectPoolManager ().returnObject (i);
+				xxx.getXPointPoolManager ().returnObject (itemPos);
 			}
 		}
 
