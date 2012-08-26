@@ -555,7 +555,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addSpriteToHudAt (__sprite:Sprite, __dx:Number, __dy:Number, __relative:Boolean = false):XDepthSprite {
+		public function addSpriteToHudAt (__sprite:DisplayObject, __dx:Number, __dy:Number, __relative:Boolean = false):XDepthSprite {
 			var __depthSprite:XDepthSprite;
 			
 			if (__relative || getRelativeDepthFlag ()) {
