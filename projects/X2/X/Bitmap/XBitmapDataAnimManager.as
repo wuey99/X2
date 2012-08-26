@@ -40,6 +40,8 @@ package X.Bitmap {
 									
 									if (__bitmapAnim == null) {
 										__createBitmapAnim (__className, __class);
+										
+										__bitmapAnim = m_bitmapAnims.get (__className);
 									}								
 	
 									if (__bitmapAnim.isReady ()) {
