@@ -26,6 +26,7 @@ package X.XMap {
 		private var m_currID:Number;
 
 		private var m_items:XDict;
+		private var m_ids:XDict;
 
 		private var m_classNames:XReferenceNameToIndex;
 		private var m_imageClassNames:XDict;
@@ -60,6 +61,7 @@ package X.XMap {
 
 			m_currID = 0;
 			m_items = new XDict ();
+			m_ids = new XDict ();
 			m_layer = __layer;
 			m_XSubmaps = new Array (__submapRows);
 			m_visible = true;
@@ -222,7 +224,7 @@ package X.XMap {
 // lr
 			m_XSubmaps[__r2][__c2].addItem (__item);
 
-			m_items.put (__item, __item.id);
+			trackItem (__item);
 			
 			return __item;
 		}
@@ -276,7 +278,7 @@ package X.XMap {
 			// lr
 			__extend (m_XSubmaps[__r2][__c2].replaceItems (__item));
 			
-			m_items.put (__item, __item.id);
+			trackItem (__item);
 			
 			return __removedItems;
 			
@@ -325,7 +327,7 @@ package X.XMap {
 // lr
 			m_XSubmaps[__r2][__c2].removeItem (__item);
 				
-			m_items.remove (__item);
+			untrackItem (__item);
 		}
 				
 //------------------------------------------------------------------------------------------
@@ -575,7 +577,12 @@ package X.XMap {
 		public function items ():XDict {
 			return m_items;
 		}
-
+		
+//------------------------------------------------------------------------------------------
+		public function ids ():XDict {
+			return m_ids;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function submaps ():Array {
 			return m_XSubmaps;
@@ -584,8 +591,25 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function getItemId (__item:XMapItemModel):Number {
 			return m_items.get (__item);
-		}		
+		}	
+		
+//------------------------------------------------------------------------------------------
+		public function getIdItem(__id:Number):XMapItemModel {
+			return m_ids.get (__id);
+		}
 
+//------------------------------------------------------------------------------------------
+		public function trackItem (__item:XMapItemModel):void {
+			m_items.put (__item, __item.id);
+			m_ids.put (__item.id, __item);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function untrackItem (__item:XMapItemModel):void {
+			m_items.remove (__item);
+			m_ids.remove (__item.id);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getClassNameFromIndex (__index:int):String {
 			return m_classNames.getReferenceNameFromIndex (__index);
@@ -814,6 +838,7 @@ package X.XMap {
 			m_itemInuse = new Object ();
 			
 			m_items = new XDict ();
+			m_ids = new XDict ();
 			m_XSubmaps = new Array (m_submapRows);
 			
 			deserializeImageClassNames (__xml);
@@ -888,7 +913,7 @@ package X.XMap {
 				for (__col=0; __col<m_submapCols; __col++) {
 					m_XSubmaps[__row][__col].items ().forEach (
 						function (__item:*):void {
-							m_items.put (__item, __item.id);
+							trackItem (__item);
 						}
 					);
 				}

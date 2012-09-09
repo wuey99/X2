@@ -337,9 +337,18 @@ package X.XMap {
 				var __xml:XSimpleXMLNode = __xmlList[i];
 				
 				trace (": deserializeRowCol: ", m_col, m_row);
+
+				var __id:Number = __xml.getAttribute ("id");
+				var __item:XMapItemModel = m_XMapLayer.ids ().get (__id);
 				
-				var __item:XMapItemModel = new XMapItemModel ();
-		
+				if (__item != null) {
+					trace (": **** existing item found ****: ", __item, __item.id);
+				}
+				else
+				{
+					__item = new XMapItemModel ();
+				}
+
 				var __classNameToIndex:XReferenceNameToIndex = m_XMapLayer.getClassNames ();
 				
 				var __logicClassIndex:Number = __xml.getAttribute ("logicClassIndex");
@@ -355,7 +364,7 @@ package X.XMap {
 // __hasLogic
 					__xml.hasAttribute ("hasLogic") && __xml.getAttribute ("hasLogic") == "true" ? true : false,
 // __name, __id
-					__xml.getAttribute ("name"), __xml.getAttribute ("id"),
+					__xml.getAttribute ("name"), __id,
 // __imageClassName, __frame
 					m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __xml.getAttribute ("frame"),
 // XMapItem
@@ -373,6 +382,8 @@ package X.XMap {
 					);
 					
 					addItem (__item);
+					
+					m_XMapLayer.trackItem (__item);
 			}
 		}
 		
