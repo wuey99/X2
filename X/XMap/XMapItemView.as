@@ -15,7 +15,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 	public class XMapItemView extends XLogicObject {
-		protected var m_movieClip:MovieClip;
+		protected var m_sprite:MovieClip;
 		protected var x_sprite:XDepthSprite;
 		protected var m_frame:Number;
 		
@@ -29,16 +29,16 @@ package X.XMap {
 			
 			m_frame = args[1];
 			
-			createSprite (args[0]);
+			__createSprites (args[0]);
 		}
 
 //------------------------------------------------------------------------------------------
 // create sprite
 //------------------------------------------------------------------------------------------
-		public function createSprite (__spriteClassName:String):void {			
-			m_movieClip = new (xxx.getClass (__spriteClassName)) ();
+		protected function __createSprites (__spriteClassName:String):void {			
+			m_sprite = new (xxx.getClass (__spriteClassName)) ();
 
-			x_sprite = addSprite (m_movieClip);
+			x_sprite = addSprite (m_sprite);
 			
 			if (m_frame) {
 				gotoAndStop (m_frame);
@@ -47,17 +47,17 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function getTotalFrames ():Number {
-			return m_movieClip.totalFrames;	
+			return m_sprite.totalFrames;	
 		}	
 		
 //------------------------------------------------------------------------------------------
 		public override function gotoAndPlay (__frame:Number):void {
-			m_movieClip.gotoAndPlay (__frame);
+			m_sprite.gotoAndPlay (__frame);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public override function gotoAndStop (__frame:Number):void {
-			m_movieClip.gotoAndStop (__frame);
+			m_sprite.gotoAndStop (__frame);
 		}
 		
 //------------------------------------------------------------------------------------------	
