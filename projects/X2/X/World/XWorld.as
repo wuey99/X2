@@ -97,6 +97,7 @@ package X.World {
 		public var m_XMapLayerCachedView:XMapLayerCachedView;
 		public var m_XBitmapDataAnimManager:XBitmapDataAnimManager;
 		public var m_XControllerBase:XControllerBase;
+		public var m_XMapItemCachedView:XMapItemCachedView;
 		public var m_XMapItemXBitmapView:XMapItemXBitmapView;
 				
 //------------------------------------------------------------------------------------------

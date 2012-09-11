@@ -37,11 +37,14 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		protected function __createSprites (__spriteClassName:String):void {			
 			m_sprite = new (xxx.getClass (__spriteClassName)) ();
-
 			x_sprite = addSprite (m_sprite);
 			
 			if (m_frame) {
 				gotoAndStop (m_frame);
+			}
+			else
+			{
+				gotoAndStop (1);
 			}
 		}
 
