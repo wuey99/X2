@@ -195,6 +195,11 @@ package X.World {
 		
 //------------------------------------------------------------------------------------------
 		public function onEnterFrame(e:Event):void {
+			__onEnterFrame ();
+		}
+
+//------------------------------------------------------------------------------------------
+		protected function __onEnterFrame ():void {
 			if (m_inuse_ENTER_FRAME) {
 				trace (": overflow: ENTER_FRAME: ");
 				
@@ -205,22 +210,22 @@ package X.World {
 			
 			getXLogicManager ().emptyKillQueue ();
 			
-				getXLogicManager ().updateLogic ();
-				getXTaskManager ().updateTasks ();
-				getXTaskManagerCX ().updateTasks ();
+			getXLogicManager ().updateLogic ();
+			getXTaskManager ().updateTasks ();
+			getXTaskManagerCX ().updateTasks ();
 //				getXLogicManager ().updatePhysics ();
-				getXLogicManager ().cullObjects ();
-				m_world.Step (m_timeStep, m_iterations);
-				getXLogicManager ().setValues ();
-				
+			getXLogicManager ().cullObjects ();
+			m_world.Step (m_timeStep, m_iterations);
+			getXLogicManager ().setValues ();
+			
 			getXLogicManager ().emptyKillQueue ();
-
+			
 			m_XBulletCollisionManager.clearCollisions ();
 			
 			getXLogicManager ().setCollisions ();
-				
+			
 			getXLogicManager ().updateDisplay ();
- 
+			
 			for (var i:Number=0; i<MAX_LAYERS; i++) {
 				if (getXWorldLayer (i).forceSort) {
 					getXWorldLayer (i).depthSort ();
@@ -230,9 +235,9 @@ package X.World {
 			
 			getXHudLayer ().depthSort ();
 			
-			m_inuse_ENTER_FRAME--;
+			m_inuse_ENTER_FRAME--;			
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function onRenderFrame(e:Event):void {
 			if (m_inuse_RENDER_FRAME) {
