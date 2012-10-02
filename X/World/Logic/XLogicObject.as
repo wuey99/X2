@@ -67,6 +67,7 @@ package X.World.Logic {
 		public var m_hudSprites:XDict;
 		public var m_childSprites:XDict;
 		public var m_detachedSprites:XDict;
+		public var m_bitmaps:XDict;
 		public var m_GUID:Number;
 		public var m_alpha:Number;
 		public var m_masterAlpha:Number;
@@ -134,6 +135,7 @@ package X.World.Logic {
 			m_hudSprites = new XDict ();
 			m_childSprites = new XDict ();
 			m_detachedSprites = new XDict ();
+			m_bitmaps = new XDict ();
 			m_XSignals = new XDict ();
 			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
 			m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());
@@ -222,6 +224,7 @@ package X.World.Logic {
 			removeAllWorldSprites ();
 			removeAllHudSprites ();
 			removeAllXLogicObjects ();
+			removeAllXBitmaps ();
 			removeAllXSignals ();
 			removeAllTasks ();
 			removeAllTasksCX ();
@@ -294,7 +297,7 @@ package X.World.Logic {
 		public function getParent ():XLogicObject {
 			return m_parent;
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function findMovieClipByName (
 			__movieClip:MovieClip,
@@ -466,6 +469,30 @@ package X.World.Logic {
 			return m_XLogicObjects;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function createXBitmap (__name:String):XBitmap {	
+			var __bitmap:XBitmap = new XBitmap ();
+			
+			__bitmap.initWithClassName (xxx, null, __name);
+			
+			m_bitmaps.put (__name, __bitmap);
+			
+			return __bitmap;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function removeAllXBitmaps ():void {
+			m_bitmaps.forEach (
+				function (__name:*) {
+					var __bitmap:XBitmap = m_bitmaps.get (__name) as XBitmap;
+					
+					__bitmap.cleanup ();
+				}
+			);
+			
+			m_bitmaps.removeAll ();
+		}
+		
 //------------------------------------------------------------------------------------------
 // add sprite to another sprite
 //------------------------------------------------------------------------------------------
