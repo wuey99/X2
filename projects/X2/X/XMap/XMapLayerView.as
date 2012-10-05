@@ -118,6 +118,9 @@ package X.XMap {
 				__logicObject = (__object as Function) ();
 			}
 			else if (__item.logicClassName.charAt (0) == "$") {
+				if (__object == null) {
+					trace (": (error) logicClassName: ", __item.logicClassName);
+				}
 				__logicObject = xxx.getXLogicManager ().initXLogicObject (
 					// parent
 					m_XMapView,
@@ -162,7 +165,6 @@ package X.XMap {
 			}
 			
 			m_XMapView.addXLogicObject (__logicObject);
-			
 			
 			m_XMapItemToXLogicObject.put (__item, __logicObject);
 
