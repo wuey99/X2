@@ -121,6 +121,7 @@ package X.XMap {
 				if (__object == null) {
 					trace (": (error) logicClassName: ", __item.logicClassName);
 				}
+				
 				__logicObject = xxx.getXLogicManager ().initXLogicObject (
 					// parent
 					m_XMapView,
