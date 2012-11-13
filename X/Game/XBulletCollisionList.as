@@ -115,7 +115,6 @@ package X.Game {
 			return __logicObjects;
 		}
 		
-
 //------------------------------------------------------------------------------------------
 		public function getRects (__layer:Number):XDict {
 			return m_rects[__layer];
