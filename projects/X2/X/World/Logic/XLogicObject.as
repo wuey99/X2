@@ -172,8 +172,11 @@ package X.World.Logic {
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
 // to a the "kill" event.
+			
+			fireKillSignal (m_item);
+			
 			if (m_item != null) {
-				fireKillSignal (m_item);
+//				fireKillSignal (m_item);
 							
 				m_item.inuse--;
 				
