@@ -247,6 +247,7 @@ package X.World.UI {
 			
 //------------------------------------------------------------------------------------------
 		public function removeAllListeners ():void {
+			m_mouseDownSignal.removeAllListeners ();
 			m_mouseUpSignal.removeAllListeners ();
 			m_mouseOutSignal.removeAllListeners ();
 		}
