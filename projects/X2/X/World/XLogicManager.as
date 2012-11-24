@@ -255,7 +255,11 @@ package X.World {
 		public function setCollisions ():void {
 			m_XLogicObjects.forEach (
 				function (x:*):void {
-					x.setCollisions ();
+					var __logicObject:XLogicObject = x as XLogicObject;
+					
+					if (!__logicObject.isDead) {
+						__logicObject.setCollisions ();
+					}
 				}
 			);		
 		}
@@ -264,7 +268,11 @@ package X.World {
 		public function updateLogic ():void {
 			m_XLogicObjects.forEach (
 				function (x:*):void {
-					x.updateLogic ();
+					var __logicObject:XLogicObject = x as XLogicObject;
+					
+					if (!__logicObject.isDead) {
+						__logicObject.updateLogic ();
+					}
 				}
 			);		
 		}
@@ -273,7 +281,11 @@ package X.World {
 		public function updatePhysics ():void {
 			m_XLogicObjects.forEach (
 				function (x:*):void {
-					x.updatePhysics ();
+					var __logicObject:XLogicObject = x as XLogicObject;
+					
+					if (!__logicObject.isDead) {
+						__logicObject.updatePhysics ();
+					}
 				}
 			);
 		}
@@ -282,7 +294,11 @@ package X.World {
 		public function cullObjects ():void {
 			m_XLogicObjectsTopLevel.forEach (
 				function (x:*):void {
-					x.cullObject ();
+					var __logicObject:XLogicObject = x as XLogicObject;
+					
+					if (!__logicObject.isDead) {
+						__logicObject.cullObject ();
+					}
 				}
 			);
 		}
@@ -291,7 +307,11 @@ package X.World {
 		public function setValues ():void {
 			m_XLogicObjects.forEach (
 				function (x:*):void {
-					x.setValues ();
+					var __logicObject:XLogicObject = x as XLogicObject;
+					
+					if (!__logicObject.isDead) {
+						__logicObject.setValues ();
+					}
 				}
 			);
 		}
@@ -300,17 +320,19 @@ package X.World {
 		public function updateDisplay ():void {					
 			m_XLogicObjectsTopLevel.forEach (
 				function (x:*):void {
-					var logicObject:XLogicObject = x as XLogicObject;
-					
-					logicObject.x2 = logicObject.y2 = 0;
-					logicObject.setMasterAlpha (logicObject.getAlpha ());
-					logicObject.setMasterDepth (logicObject.getDepth ());
-					logicObject.setMasterVisible (logicObject.getVisible ());
-					logicObject.setMasterScaleX (logicObject.getScaleX ());
-					logicObject.setMasterScaleY (logicObject.getScaleY ());
-					logicObject.setMasterRotation (logicObject.getRotation ());
-							
-					logicObject.updateDisplay ();
+					var __logicObject:XLogicObject = x as XLogicObject;
+				
+					if (!__logicObject.isDead) {
+						__logicObject.x2 = __logicObject.y2 = 0;
+						__logicObject.setMasterAlpha (__logicObject.getAlpha ());
+						__logicObject.setMasterDepth (__logicObject.getDepth ());
+						__logicObject.setMasterVisible (__logicObject.getVisible ());
+						__logicObject.setMasterScaleX (__logicObject.getScaleX ());
+						__logicObject.setMasterScaleY (__logicObject.getScaleY ());
+						__logicObject.setMasterRotation (__logicObject.getRotation ());
+								
+						__logicObject.updateDisplay ();
+					}
 				}
 			);
 		}
