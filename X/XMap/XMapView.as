@@ -42,6 +42,20 @@ package X.XMap {
 		public override function setupX ():void {
 		}
 
+		
+//------------------------------------------------------------------------------------------
+		public override function cullObject ():void {
+			getXLogicObjects ().forEach (
+				function (x:*):void {
+					var __logicObject:XLogicObject = x as XLogicObject;
+					
+					__logicObject.cullObject ();
+				}
+			);
+			
+			super.cullObject ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function areImageClassNamesCached ():Boolean {
 			var __flags:Boolean;
