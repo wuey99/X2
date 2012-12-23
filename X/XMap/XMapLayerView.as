@@ -109,7 +109,7 @@ package X.XMap {
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function addXMapItem (__item:XMapItemModel, __depth:Number):void {
+		public function addXMapItem (__item:XMapItemModel, __depth:Number):XLogicObject {
 			var __logicObject:XLogicObjectCX;
 			
 			var __object:* = m_logicClassNameToClass (__item.logicClassName);
@@ -162,7 +162,7 @@ package X.XMap {
 			__item.inuse++;
 
 			if (__logicObject == null) {
-				return;
+				return null;
 			}
 			
 			m_XMapView.addXLogicObject (__logicObject);
@@ -174,6 +174,8 @@ package X.XMap {
 			__logicObject.addKillListener (removeXMapItem);
 
 			__logicObject.show ();
+			
+			return __logicObject;
 		}
 
 //------------------------------------------------------------------------------------------
