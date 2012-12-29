@@ -245,8 +245,13 @@ package X.World.Logic {
 // cull this object if it strays outside the current viewPort
 //------------------------------------------------------------------------------------------	
 		public function cullObject ():void {
+			if (autoCulling) {
+				autoCullObject ();
+				
+				return;
+			}
 // if this object wasn't ever spawned from a level, don't perform any culling
-			if (!(m_item != null || m_autoCulling)) {
+			if (m_item == null) {
 				return;
 			}
 			
@@ -295,6 +300,46 @@ package X.World.Logic {
 			}
 		}
 
+		//------------------------------------------------------------------------------------------
+		// auto-cull this object if it strays outside the current viewPort
+		//
+		// auto-culled objects aren't spawned from a level so there's no
+		// item object to retrieve a boundingRect from.  we're going to have
+		// to provide a reasonable default for the boundingRect
+		//------------------------------------------------------------------------------------------	
+		public function autoCullObject ():void {
+			// determine whether this object is outside the current viewPort
+			var v:XRect = xxx.getViewRect();
+			
+			var r:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;	
+			var i:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+
+			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (r);
+			r.inflate (512, 512);
+			
+			m_boundingRect.copy2 (i);
+			i.offsetPoint (getPos ());
+			
+			if (r.intersects (i)) {
+				__dealloc ();
+				
+				return;
+			}
+			
+			__dealloc ();
+			
+			// yep, kill it
+			trace (": ---------------------------------------: ");
+			trace (": cull: ", this);
+			
+			killLater ();
+			
+			function __dealloc ():void {
+				xxx.getXRectPoolManager ().returnObject (r);
+				xxx.getXRectPoolManager ().returnObject (i);
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setParent (__parent:XLogicObject):void {
 			m_parent = __parent;
@@ -677,6 +722,10 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function set autoCulling (__value:Boolean):void {
 			m_autoCulling = __value;
+			
+			if (autoCulling) {
+				boundingRect = new XRect (-32, -32, +64, +64);
+			}
 		}
 		
 		public function get autoCulling ():Boolean {
@@ -745,6 +794,10 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function set boundingRect (__value:XRect):void {
+			m_boundingRect = __value;
+		}
+		
 		public function get boundingRect ():XRect {
 			return m_boundingRect;
 		}
