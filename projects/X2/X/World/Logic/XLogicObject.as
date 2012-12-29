@@ -77,6 +77,7 @@ package X.World.Logic {
 		public var m_XTaskSubManager:XTaskSubManager;
 		public var m_XTaskSubManagerCX:XTaskSubManager;
 		public var m_isDead:Boolean;
+		public var m_autoCulling:Boolean;
 		
 		public var m_iX:Number;
 		public var m_iY:Number;
@@ -104,6 +105,7 @@ package X.World.Logic {
 			m_delayed = 1;
 			m_layer = -1;
 			m_isDead = false;
+			m_autoCulling = false;
 			
 			m_GUID = g_GUID++;
 			
@@ -244,7 +246,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------	
 		public function cullObject ():void {
 // if this object wasn't ever spawned from a level, don't perform any culling
-			if (m_item == null) {
+			if (!(m_item != null || m_autoCulling)) {
 				return;
 			}
 			
@@ -672,6 +674,15 @@ package X.World.Logic {
 			return null;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function set autoCulling (__value:Boolean):void {
+			m_autoCulling = __value;
+		}
+		
+		public function get autoCulling ():Boolean {
+			return m_autoCulling;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setItem (__item:XMapItemModel):void {
 			m_item = __item;
