@@ -47,6 +47,7 @@ package X.World.Logic {
 //		public var xxx:XWorld;
 		public var m_parent:XLogicObject;
 		public var m_item:XMapItemModel;
+		public var m_xml:XSimpleXMLNode;
 		public var m_layer:Number;
 		public var m_depth:Number;
 		public var m_boundingRect:XRect;
