@@ -748,12 +748,22 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function initItemParamsXML ():void {
+		public function setupItemParamsXML ():void {
 			m_xml = new XSimpleXMLNode ();
 			
 			if (item != null && item.params != null && item.params != "") {
 				m_xml.setupWithXMLString (item.params);
 			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function itemHasAttribute (__attr:String):Boolean {
+			return m_xml.hasAttribute (__attr);	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function itemGetAttribute (__attr:String):* {
+			return m_xml.getAttribute (__attr);
 		}
 		
 //------------------------------------------------------------------------------------------
