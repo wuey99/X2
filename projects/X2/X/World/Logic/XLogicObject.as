@@ -746,6 +746,15 @@ package X.World.Logic {
 		public function get item ():XMapItemModel {
 			return m_item;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function initItemParamsXML ():void {
+			m_xml = new XSimpleXMLNode ();
+			
+			if (item != null && item.params != null && item.params != "") {
+				m_xml.setupWithXMLString (item.params);
+			}
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function setLayer (__layer:Number):void {
