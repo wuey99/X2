@@ -755,6 +755,16 @@ package X.World.Logic {
 				m_xml.setupWithXMLString (item.params);
 			}
 		}
+
+//------------------------------------------------------------------------------------------
+		public function setXML (__xml:XSimpleXMLNode):void {
+			m_xml = __xml;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXML ():XSimpleXMLNode {
+			return m_xml;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function itemHasAttribute (__attr:String):Boolean {
