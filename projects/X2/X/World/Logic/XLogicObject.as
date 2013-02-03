@@ -534,6 +534,13 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function createMovieClip (__name:String):MovieClip {	
+			var __movieClip:MovieClip = new (xxx.getClass (__name)) ();
+			
+			return __movieClip;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function removeAllXBitmaps ():void {
 			m_bitmaps.forEach (
 				function (__name:*) {
