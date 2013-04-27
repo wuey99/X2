@@ -99,6 +99,7 @@ package X.World {
 		public var m_XControllerBase:XControllerBase;
 		public var m_XMapItemCachedView:XMapItemCachedView;
 		public var m_XMapItemXBitmapView:XMapItemXBitmapView;
+		public var m_XSound:XSound;
 				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){
