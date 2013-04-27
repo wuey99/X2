@@ -102,7 +102,7 @@ package X.Sound {
 		//---------------------------------------------------------------------
 		
 		/**
-		 * Handels a sound complete event.
+		 * Handles a sound complete event.
 		 * @private
 		 */
 		private function soundCompleteHandler( event: Event ): void
@@ -113,7 +113,7 @@ package X.Sound {
 		}
 		
 		/**
-		 * Handels a sampleData event.
+		 * Handles a sampleData event.
 		 * @private
 		 */
 		private function sampleDataHandler( event: SampleDataEvent ): void
