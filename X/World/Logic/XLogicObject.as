@@ -534,6 +534,16 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function createXMovieClip (__name:String):XMovieClip {	
+			var __movieClip:MovieClip = new (xxx.getClass (__name)) ();
+			
+			var __xmovieClip:XMovieClip = new XMovieClip ();
+			__xmovieClip.setup (__movieClip);
+			
+			return __xmovieClip;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function createMovieClip (__name:String):MovieClip {	
 			var __movieClip:MovieClip = new (xxx.getClass (__name)) ();
 			
