@@ -1,122 +1,162 @@
 //------------------------------------------------------------------------------------------
 package X.Sound {
 	
-	import X.*;
+	import X.XApp;
 	
-	import flash.events.EventDispatcher;
 	import flash.events.Event;
 	import flash.events.SampleDataEvent;
 	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	import flash.media.SoundTransform;
 	import flash.net.URLRequest;
 	import flash.utils.ByteArray;
 	
-	/**
-	 * @author Andre Michelle (andre.michelle@gmail.com)
-	 * @author Stefan van Dinther (stefan@eiland.cc)
-	 */
-	
 	//------------------------------------------------------------------------------------------
-	public class XSound extends EventDispatcher {
+	/**
+	 * Sound wrapper which allows you to dynamically modify the rate of play.
+	 *
+	 * As the name suggests this file only operates on mp3 encoded tracks.
+	 *
+	 * @author Andre Michelle (andre.michelle@gmail.com)
+	 * @author Alexander Schearer <aschearer@gmail.com>
+	 */
+	//------------------------------------------------------------------------------------------
+	public class XSound
+	{
+		private const BLOCK_SIZE: int = 2048;
 		
-		//---------------------------------------------------------------------
-		//  Members
-		//---------------------------------------------------------------------
-		
-		private const BLOCK_SIZE: int = 3072;
-		
-		private var _loop: Boolean;
-		
-		private var _mp3: Sound;
 		private var _sound: Sound;
 		
 		private var _target: ByteArray;
 		
+		private var _playing:Boolean;
+		private var _looping:Boolean;
+		private var _channel:SoundChannel;
 		private var _position: Number;
 		private var _rate: Number;
-		private var _volume: Number;
 		
-		private var _length: Number;
-		private var _isPlaying: Boolean;
+		private var _mp3:Sound;
 		
-		//---------------------------------------------------------------------
-		//  Constructor
-		//---------------------------------------------------------------------
-		/**
-		 * Constructor
-		 *
-		 * @param url The url of the mp3-file to load.
-		 * @param loop If true, the sound loops when playing.
-		 */
-		public function XSound(xApp:XApp, resourceName: String , loop:Boolean = true) {
-			_loop = loop;
-			_isPlaying = false;
-			
-			_mp3 = new (xApp.getClass (resourceName)) ();
-			initSoundCompleteListeners();
-			
+		//------------------------------------------------------------------------------------------
+		public function XSound(xApp:XApp, resourceName:String):void
+		{
 			_target = new ByteArray();
+			
 			_position = 0.0;
 			_rate = 1.0;
-			_volume = 1.0;
-		}
-		
-		//---------------------------------------------------------------------
-		//  Events
-		//---------------------------------------------------------------------
-		
-		/**
-		 * Init sound load event listeners.
-		 * @private
-		 */
-		private function initSoundCompleteListeners():void {
-			_mp3.addEventListener( Event.COMPLETE, soundCompleteHandler );
+			
+			_mp3 = new (xApp.getClass (resourceName)) ();
+			_sound = new Sound();
+			_sound.addEventListener( SampleDataEvent.SAMPLE_DATA, sampleData );
 		}
 		
 		/**
-		 * Init a SampleData listener.
-		 * @private
+		 * @return Boolean Whether the sound is currently playing
 		 */
-		private function initSampleDataEventListeners():void {
-			_sound.addEventListener( SampleDataEvent.SAMPLE_DATA, sampleDataHandler );
-		}
-		
-		/**
-		 * Exit sound load event listeners.
-		 * @private
-		 */
-		private function exitSoundCompleteListeners():void {
-			_mp3.removeEventListener( Event.COMPLETE, soundCompleteHandler );
-		}
-		
-		/**
-		 * Exit a SampleData listener.
-		 * @private
-		 */
-		private function exitSampleDataEventListeners():void {
-			_sound.removeEventListener( SampleDataEvent.SAMPLE_DATA, sampleDataHandler );
-		}
-		
-		//---------------------------------------------------------------------
-		//  Event handlers
-		//---------------------------------------------------------------------
-		
-		/**
-		 * Handles a sound complete event.
-		 * @private
-		 */
-		private function soundCompleteHandler( event: Event ): void
+		public function get playing():Boolean
 		{
-			exitSoundCompleteListeners();
-			_length = _mp3.length * 44.1;
-			dispatchEvent(new Event(Event.COMPLETE));
+			return _playing;
+		}
+		
+		public function play(start:Number = 0, loops:int = 0, transform:SoundTransform = null):SoundChannel
+		{
+			if (_channel)
+				return _channel;
+			
+			_channel = _sound.play();
+			_channel.addEventListener(Event.SOUND_COMPLETE, soundComplete);
+			_playing = true;
+			return _channel;
 		}
 		
 		/**
-		 * Handles a sampleData event.
-		 * @private
+		 * Loops the sound after it finishes playing indefinitely.
 		 */
-		private function sampleDataHandler( event: SampleDataEvent ): void
+		public function loop():SoundChannel
+		{
+			_looping = true;
+			return play();
+		}
+		
+		public function set paused(value:Boolean):void
+		{
+			if (value)
+				pause();
+			else
+				resume();
+		}
+		
+		/**
+		 * Stops the music keeping track of its current position. Use resume
+		 * to play the music from where it was left off.
+		 */
+		private function pause():void
+		{
+			if (!_channel)
+				return;
+			
+			// bug position will not be set unless it's read once
+			var p:uint = _channel.position; 
+			_playing = false;
+			_channel.stop();
+		}
+		
+		/**
+		 * Plays the music from wherever it was left off when paused. This
+		 * can't be called unless the music has been paused.
+		 */
+		private function resume():SoundChannel
+		{
+			if (!_channel || _playing)
+				return _channel;
+			
+			var p:Number = _channel.position;
+			_playing = true;
+			_channel = null;
+			_channel = play(p);
+			return _channel;
+		}
+		
+		/**
+		 * Stops the music disposing of its sound channel. Use play to restart
+		 * the track.
+		 */
+		public function stop():void
+		{
+			if (!_channel)
+				return;
+			
+			_rate = 1.0;
+			_position = 0;
+			_playing = false;
+			_looping = false;
+			_channel.stop();
+			_channel = null;
+		}
+		
+		private function soundComplete(e:Event):void
+		{
+			_playing = false;
+			_position = 0;
+			var transform:SoundTransform = _channel.soundTransform;
+			_channel = null;
+			if (_looping)
+				play(0, 0, transform);
+		}
+		
+		public function get rate(): Number
+		{
+			return _rate;
+		}
+		
+		public function set rate( value: Number ): void
+		{
+			if( value < 0.0 )
+				value = 0;
+			_rate = value;
+		}
+		
+		private function sampleData( event: SampleDataEvent ): void
 		{
 			//-- REUSE INSTEAD OF RECREATION
 			_target.position = 0;
@@ -129,6 +169,7 @@ package X.Sound {
 			var alpha: Number = _position - positionInt;
 			
 			var positionTargetNum: Number = alpha;
+			var positionTargetInt: int = -1;
 			
 			//-- COMPUTE NUMBER OF SAMPLES NEED TO PROCESS BLOCK (+2 FOR INTERPOLATION)
 			var need: int = Math.ceil( scaledBlockSize ) + 2;
@@ -136,42 +177,7 @@ package X.Sound {
 			//-- EXTRACT SAMPLES
 			var read: int = _mp3.extract( _target, need, positionInt );
 			
-			var n:uint;
-			
-			if (read == need) {
-				n = BLOCK_SIZE;
-			}
-			else {
-				n = read / _rate;
-			}
-			
-			writeData(data, alpha, n, positionTargetNum);
-			
-			if( n < BLOCK_SIZE )
-			{
-				if (_loop) {
-					positionTargetNum = 0;
-					_position = 0;
-					n = BLOCK_SIZE - n;
-					
-					writeData(data, alpha, n, positionTargetNum);
-					
-					_position = n;
-				}
-				else {
-					//-- SET AT START OF SOUND FOR REPLAY
-					_position = 0;
-					stop();
-				}
-			}
-			else {
-				//-- INCREASE SOUND POSITION
-				_position += scaledBlockSize;
-			}
-		}
-		
-		private function writeData(data, alpha, n:uint, positionTargetNum:Number): void {
-			var positionTargetInt: int = -1;
+			var n: int = read == need ? BLOCK_SIZE : read / _rate;
 			
 			var l0: Number;
 			var r0: Number;
@@ -189,25 +195,16 @@ package X.Sound {
 					_target.position = positionTargetInt << 3;
 					
 					//-- READ TWO STEREO SAMPLES FOR LINEAR INTERPOLATION
-					try {
-						l0 = _target.readFloat();
-						r0 = _target.readFloat();
-						
-						l1 = _target.readFloat();
-						r1 = _target.readFloat();
-					} catch (errObject:Error) {
-						// IF WE ENTER AN END_OF_FILE FILL REST OF STREAM WITH ZEROs
-						l0 = 0;
-						r0 = 0;
-						
-						l1 = 0;
-						l1 = 0;
-					}
+					l0 = _target.readFloat();
+					r0 = _target.readFloat();
+					
+					l1 = _target.readFloat();
+					r1 = _target.readFloat();
 				}
 				
 				//-- WRITE INTERPOLATED AMPLITUDES INTO STREAM
-				data.writeFloat( (l0 + alpha * ( l1 - l0 )) * _volume );
-				data.writeFloat(( r0 + alpha * ( r1 - r0 )) * _volume );
+				data.writeFloat( l0 + alpha * ( l1 - l0 ) );
+				data.writeFloat( r0 + alpha * ( r1 - r0 ) );
 				
 				//-- INCREASE TARGET POSITION
 				positionTargetNum += _rate;
@@ -216,73 +213,9 @@ package X.Sound {
 				alpha += _rate;
 				while( alpha >= 1.0 ) --alpha;
 			}
-		}
-		
-		//---------------------------------------------------------------------
-		//  Getters && Setters
-		//---------------------------------------------------------------------
-		
-		public function get rate(): Number {
-			return _rate;
-		}
-		
-		public function set rate( value: Number ): void {
-			if( value < 0.1 ) {
-				value = 0.1;
-			}
 			
-			_rate = value;
+			//-- INCREASE SOUND POSITION
+			_position += scaledBlockSize;
 		}
-		
-		public function get volume(): Number {
-			return _volume;
-		}
-		
-		public function set volume( value: Number ): void {
-			if( value < 0.0 ) {
-				value = 0;
-			}
-			
-			_volume = value;
-		}
-		
-		public function get position(): Number {
-			return _position;
-		}
-		
-		public function get length(): Number {
-			return _length;
-		}
-		
-		//---------------------------------------------------------------------
-		//  Public methods
-		//---------------------------------------------------------------------
-		
-		/**
-		 * Plays the sound
-		 */
-		public function play(): void {
-			if  (!_isPlaying) {
-				_sound = new Sound();
-				initSampleDataEventListeners();
-				_sound.play();
-				_isPlaying = true;
-			}
-		}
-		
-		/**
-		 * Stops the sound
-		 */
-		public function stop(): void {
-			if  (_isPlaying) {
-				exitSampleDataEventListeners();
-				_isPlaying = false;
-				_sound = null;
-			}
-		}
-		
-	//------------------------------------------------------------------------------------------
 	}
-	
-//------------------------------------------------------------------------------------------	
 }
