@@ -38,6 +38,8 @@ package X.Bitmap {
 				m_bitmaps[i].dispose ();
 				m_bitmaps[i] = null;
 			}
+			
+			m_bitmaps = null;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -82,11 +84,13 @@ package X.Bitmap {
 					}, 
 
 					function ():void {
-						__rect = __movieClip.getBounds (__movieClip);
-						var __matrix:Matrix = new Matrix ();
-						__matrix.scale (__scaleX, __scaleY);
-						__matrix.translate (-__rect.x*__scaleX, -__rect.y*__scaleY)
-						m_bitmaps[__index].draw (__movieClip, __matrix);
+						if (m_bitmaps && m_bitmaps[__index]) {
+							__rect = __movieClip.getBounds (__movieClip);
+							var __matrix:Matrix = new Matrix ();
+							__matrix.scale (__scaleX, __scaleY);
+							__matrix.translate (-__rect.x*__scaleX, -__rect.y*__scaleY)
+							m_bitmaps[__index].draw (__movieClip, __matrix);
+						}
 						__index += 1;
 					},
 					
