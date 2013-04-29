@@ -69,6 +69,15 @@ package X.World.Sprite {
 		public override function get rotation ():Number {
 			return m_movieclip.rotation;
 		}
+
+		//------------------------------------------------------------------------------------------
+		public override function set alpha (__value:Number):void {
+			m_movieclip.alpha = __value;
+		}
+		
+		public override function get alpha ():Number {
+			return m_movieclip.alpha;
+		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function get graphics ():Graphics {
