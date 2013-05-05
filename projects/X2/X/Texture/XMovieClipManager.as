@@ -23,14 +23,14 @@ package X.Texture {
 		private var m_textures:Array;
 		private var m_atlases:Array;
 		
-		private var m_texture:Texture;
-		private var m_atlas:TextureAtlas;
-		private var m_atlasText:String;
-		private var m_bitmap:BitmapData;
+		private var m_currentAtlas:TextureAtlas;
+		private var m_currentAtlasText:String;
+		private var m_currentBitmap:BitmapData;
+		
 		private var m_packer:MaxRectPacker;
 		
-		private const TEXTURE_WIDTH:Number = 1024;
-		private const TEXTURE_HEIGHT:Number = 1024;
+		private const TEXTURE_WIDTH:Number = 2048;
+		private const TEXTURE_HEIGHT:Number = 2048;
 			
 		//------------------------------------------------------------------------------------------
 		public function XMovieClipManager () {
@@ -52,8 +52,28 @@ package X.Texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function end ():void {
+		public function finish ():void {
 			__end ();
+			
+			m_movieClips.forEach (
+				function (x:*):void {
+					var __name:String = x as String;
+					
+					var __movieClipMetadata:Array = m_movieClips.get (__name);
+					
+					trace (": movieClipName: ", __name);
+					
+					for (var i:Number = 0; i <m_atlases.length; i++) {
+						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
+						
+						var __texture:Texture = __atlas.getTexture (__name + "_" + __generateIndex (0));
+						
+						if (__texture) {
+							__movieClipMetadata.push (__atlas);
+						}
+					}
+				}
+			);	
 		}
 		 
 		//------------------------------------------------------------------------------------------
@@ -65,7 +85,7 @@ package X.Texture {
 			var __padding:Number = 2.0;
 			var __rect:Rectangle;
 			var __realBounds:Rectangle;
-			
+
 			var i:Number;
 			
 			for (i=0; i<__movieClip.totalFrames; i++) {
@@ -86,7 +106,7 @@ package X.Texture {
 						(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
 					);
 				}
-				
+
 				__rect.x += __padding;
 				__rect.y += __padding;
 				__rect.width -= __padding * 2;
@@ -97,73 +117,96 @@ package X.Texture {
 				var __matrix:Matrix = new Matrix ();
 				__matrix.scale (__scaleX, __scaleY);
 				__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y)
-				m_bitmap.draw (__movieClip, __matrix);
+				m_currentBitmap.draw (__movieClip, __matrix);
 				
 				var __subText:String = '<SubTexture name="'+__name+'_' + __generateIndex (i) + '" ' +
 					'x="'+__rect.x+'" y="'+__rect.y+'" width="'+__rect.width+'" height="'+__rect.height+'" frameX="0" frameY="0" ' +
 					'frameWidth="'+__rect.width+'" frameHeight="'+__rect.height+'"/>';
 				
-				m_atlasText = m_atlasText + __subText;
+				m_currentAtlasText = m_currentAtlasText + __subText;
 			}
+
+			var __movieClipMetadata:Array = new Array ();
+			__movieClipMetadata.push (__realBounds);
 			
-			function __generateIndex (__index:int):String {
-				var __indexString:String = String (__index);
-				
-				switch (__indexString.length) {
-					case 1:
-						return "00" + __indexString;
-						break;
-					case 2:
-						return "0" + __indexString;
-						break;
-					case 3:
-						return __indexString;
-						break;
-				}
-				
-				return __indexString;
-			}
+			m_movieClips.put (__name, __movieClipMetadata);
 		}	
 		
 		//------------------------------------------------------------------------------------------
-		public function getXMovieClip (__name:String):XMovieClip {
-			return null;
+		public function createXMovieClip (__name:String):MovieClip {
+			if (!m_movieClips.exists (__name)) {
+				return null;
+			}
+			
+			var __movieClipMetadata:Array = m_movieClips.get (__name);
+			
+			var __rect:Rectangle = __movieClipMetadata[0] as Rectangle;
+			var __pivotX:Number = __rect.x; 
+			var __pivotY:Number = __rect.y;
+			
+			var __textures:Vector.<Texture> = new Vector.<Texture> ();
+			var __atlas:TextureAtlas;
+			
+			for (var i:Number=1; i<=__movieClipMetadata.length-1; i++) {
+				__atlas = __movieClipMetadata[i] as TextureAtlas;
+				 
+				__textures = __textures.concat (__atlas.getTextures (__name));
+			}
+
+			return new MovieClip (__textures);
 		}
 
 		//------------------------------------------------------------------------------------------
 		public function getBitmapData ():BitmapData {
-			return m_bitmap;
+			return m_currentBitmap;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		private function __begin ():void {
 			var __rect:Rectangle = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			m_bitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			m_bitmap.fillRect (__rect, 0x00000000);
+			m_currentBitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
+			m_currentBitmap.fillRect (__rect, 0x00000000);
 			
 			m_packer = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			
-			m_atlasText = "";
+			m_currentAtlasText = "";
 		}
 		
 		//------------------------------------------------------------------------------------------
 		private function __end ():void {
-			if (m_bitmap) {
-				m_atlasText = '<TextureAtlas imagePath="atlas.png">' + m_atlasText + "</TextureAtlas>";
-				var __atlasXML:XML = new XML (m_atlasText);
+			if (m_currentBitmap) {
+				m_currentAtlasText = '<TextureAtlas imagePath="atlas.png">' + m_currentAtlasText + "</TextureAtlas>";
+				var __atlasXML:XML = new XML (m_currentAtlasText);
 				
-				trace (": atlasXML: ", m_atlasText);
+				trace (": atlasXML: ", m_currentAtlasText);
 				
-				/*
-				var __texture:Texture = Texture.fromBitmapData (m_bitmap, false);
+				var __texture:Texture = Texture.fromBitmapData (m_currentBitmap, false);
 				var __atlas:TextureAtlas = new TextureAtlas (__texture, __atlasXML);
 				
-				m_textures.push (__texture);
+//				m_textures.push (__texture);
 				m_atlases.push (__atlas);
-				*/
 				
-				m_bitmap.dispose ();
+				m_currentBitmap.dispose ();
 			}			
+		}
+
+		//------------------------------------------------------------------------------------------
+		private function __generateIndex (__index:int):String {
+			var __indexString:String = String (__index);
+			
+			switch (__indexString.length) {
+				case 1:
+					return "00" + __indexString;
+					break;
+				case 2:
+					return "0" + __indexString;
+					break;
+				case 3:
+					return __indexString;
+					break;
+			}
+			
+			return __indexString;
 		}
 		
 		//------------------------------------------------------------------------------------------

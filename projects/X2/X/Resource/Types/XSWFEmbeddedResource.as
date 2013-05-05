@@ -62,6 +62,8 @@ package X.Resource.Types {
 						__loaderContext = new LoaderContext();
 					}
 
+					__loaderContext.allowCodeImport = true;
+					
 					m_loader.loadBytes (new (m_resourceManager.findEmbeddedResource (m_resourcePath)) (), __loaderContext);
  				}
  				catch (error:Error) {
