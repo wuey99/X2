@@ -18,8 +18,16 @@ package X.Texture {
 	public class XMovieClipSubManager extends Object {
 		private var m_XApp:XApp;
 		
+		private var m_manager:XMovieClipManager;
+		
 		//------------------------------------------------------------------------------------------
 		public function XMovieClipSubManager (__XApp:XApp) {
+			m_manager = new XMovieClipManager ();
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function add (__name):void {
+			m_manager.add (__name);
 		}
 		
 	//------------------------------------------------------------------------------------------
