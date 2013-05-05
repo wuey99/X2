@@ -48,7 +48,12 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function cleanup ():void {	
+		public function cleanup ():void {
+			var i:Number;
+			
+			for (i=0; i<m_atlases.length; i++) {
+				m_atlases[i].dispose ();
+			}
 		}
 
 		//------------------------------------------------------------------------------------------
@@ -60,9 +65,7 @@ package X.Texture {
 					var __name:String = x as String;
 					
 					var __movieClipMetadata:Array = m_movieClips.get (__name);
-					
-					trace (": movieClipName: ", __name);
-					
+						
 					for (var i:Number = 0; i <m_atlases.length; i++) {
 						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
 						
