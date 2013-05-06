@@ -4,13 +4,22 @@ package X.World.Sprite {
 	import X.*;
 	import X.Geom.*;
 	import X.World.*;
+	import X.World.Sprite.*;
 	
-	import flash.display.*;
 	import flash.geom.*;
 	import flash.utils.*;
 	
+	if (CONFIG::starling) {
+		import starling.display.*;
+	}
+	else
+	{
+		import flash.display.MovieClip;
+		import flash.display.Graphics;
+	}
+	
 	//------------------------------------------------------------------------------------------	
-	public class XMovieClip extends Sprite {
+	public class XMovieClip extends XSprite {
 		public var m_movieclip:MovieClip;
 		
 		//------------------------------------------------------------------------------------------
@@ -44,12 +53,26 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:Number):void {
-			m_movieclip.gotoAndPlay (__frame);
+			if (CONFIG::starling) {
+				m_movieClip.currentFrame = __frame;
+				m_movieClip.stop ();
+			}
+			else
+			{
+				m_movieclip.gotoAndPlay (__frame);
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:Number):void {
-			m_movieclip.gotoAndStop (__frame);
+			if (CONFIG::starling) {
+				m_movieclip.currentFrame = _frame;
+				m_movieclip.stop ();
+			}
+			else
+			{
+				m_movieclip.gotoAndStop (__frame);
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -80,8 +103,10 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function get graphics ():Graphics {
-			return m_movieclip.graphics;
+		if (CONFIG::starling == false) {
+			public override function get graphics ():Graphics {
+				return m_movieclip.graphics;
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------

@@ -40,6 +40,10 @@ package X.Texture {
 		public function setup (__XApp:XApp):void {
 			m_XApp = __XApp;
 			
+			if (!CONFIG::starling) {
+				return;
+			}
+			
 			m_movieClips = new XDict ();
 			m_textures = new Array ();
 			m_atlases = new Array ();
@@ -58,6 +62,10 @@ package X.Texture {
 
 		//------------------------------------------------------------------------------------------
 		public function finish ():void {
+			if (!CONFIG::starling) {
+				return;
+			}
+			
 			__end ();
 			
 			m_movieClips.forEach (
@@ -81,6 +89,10 @@ package X.Texture {
 		 
 		//------------------------------------------------------------------------------------------
 		public function add (__name:String):void {	
+			if (!CONFIG::starling) {
+				return;
+			}
+			
 			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__name)) ();
 			
 			var __scaleX:Number = 1.0;
