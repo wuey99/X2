@@ -4,8 +4,15 @@ package X.World.Sprite {
 // X classes
 	import X.World.*;
 	
+	
 // flash classes
-	import flash.display.Sprite;
+	if (CONFIG::starling) {
+		import starling.display.Sprite;
+	}
+	else
+	{
+		import flash.display.Sprite;
+	}
 	
 //------------------------------------------------------------------------------------------
 	public class XSprite0 extends Sprite {
