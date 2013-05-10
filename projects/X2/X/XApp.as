@@ -16,6 +16,7 @@ package X {
 	import X.Signals.*;
 	import X.Sound.*;
 	import X.Task.*;
+	import X.Texture.*;
 	import X.World.*;
 	import X.World.Sprite.XDepthSprite;
 	import X.XMap.*;
@@ -41,6 +42,7 @@ package X {
 		private var m_XRectPoolManager:XObjectPoolManager;
 		private var m_XPointPoolManager:XObjectPoolManager;
 		private var m_XDepthSpritePoolManager:XObjectPoolManager;
+		private var m_XMovieClipManager:XMovieClipManager;
 		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
@@ -53,6 +55,9 @@ package X {
 			m_XSoundManager = new XSoundManager (this);
 			m_XBitmapCacheManager = new XBitmapCacheManager (this);
 			m_XBitmapDataAnimManager = new XBitmapDataAnimManager (this);
+			m_XMovieClipManager = new XMovieClipManager (this);
+			
+			m_XMovieClipManager.setup ();
 			
 			__initPoolManagers (__poolSettings);
 			
@@ -249,6 +254,11 @@ package X {
 //------------------------------------------------------------------------------------------
 		public function getBitmapDataAnimManager ():XBitmapDataAnimManager {
 			return m_XBitmapDataAnimManager;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getXMovieClipManager ():XMovieClipManager {
+			return m_XMovieClipManager;
 		}
 		
 //------------------------------------------------------------------------------------------

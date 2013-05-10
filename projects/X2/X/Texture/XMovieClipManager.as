@@ -33,17 +33,16 @@ package X.Texture {
 		private const TEXTURE_HEIGHT:Number = 2048;
 			
 		//------------------------------------------------------------------------------------------
-		public function XMovieClipManager () {
+		public function XMovieClipManager (__XApp:XApp) {
+			m_XApp = __XApp;
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function setup (__XApp:XApp):void {
-			m_XApp = __XApp;
-			
+		public function setup ():void {	
 //			if (!CONFIG::starling) {
 //				return;
 //			}
-			
+
 			m_movieClips = new XDict ();
 			m_textures = new Array ();
 			m_atlases = new Array ();
@@ -53,6 +52,10 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			if (m_atlases == null) {
+				return;
+			}
+			
 			var i:Number;
 			
 			for (i=0; i<m_atlases.length; i++) {
