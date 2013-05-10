@@ -100,12 +100,12 @@ package X.XMap {
 		public function addXSubmap (__submap:XSubmapModel, __depth:Number):void {
 //			trace (": addXSubmap: ", __submap.x, __submap.y);
 			
-			var __logicObject:XSubmapViewCache =
+			var __logicObject:XSubmapBitmapViewCache =
 			  xxx.getXLogicManager ().initXLogicObject (
 				// parent
 					m_XMapView,
 				// logicClassName
-					new XSubmapViewCache as XLogicObject,
+					new XSubmapBitmapViewCache as XLogicObject,
 				// item, layer, depth
 					null, m_currLayer, __depth,
 				// x, y, z
@@ -114,7 +114,7 @@ package X.XMap {
 					1.0, 0,
 					// XMapView
 					m_XMapView
-				) as XSubmapViewCache;
+				) as XSubmapBitmapViewCache;
 			
 			__submap.inuse++;
 			

@@ -32,7 +32,7 @@ package X.XMap {
 //
 // 3) possibly large set-up times (each Submap is 512 x 512 pixels by default)
 //------------------------------------------------------------------------------------------
-	public class XSubmapViewCache extends XLogicObject {
+	public class XSubmapBitmapViewCache extends XLogicObject {
 		private var m_XMapView:XMapView;
 		private var m_submapModel:XSubmapModel;
 		
@@ -43,7 +43,7 @@ package X.XMap {
 		private var tempPoint:XPoint;
 					
 //------------------------------------------------------------------------------------------	
-		public function XSubmapViewCache () {
+		public function XSubmapBitmapViewCache () {
 			m_submapModel = null;
 		}
 
