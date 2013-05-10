@@ -16,8 +16,8 @@ package X.XMap {
 	
 //------------------------------------------------------------------------------------------	
 // instead of maintaining an XLogicObject for an XMapItemModel (for the view), maintain a 
-// view-cache/bitmap for eash Submap.  On initialization, all XMapItemModel's that flagged
-// for caching are drawing directly into the Submap's view-cache/bitmap.
+// bitmap/view-cache for eash Submap.  On initialization, all XMapItemModel's that flagged
+// for caching are drawing directly into the Submap's bitmap/view-cache.
 //
 // pros:
 //
