@@ -33,8 +33,8 @@ package X.World {
 	import X.Texture.*;
 	
 	include "..\\flash.h";
+	include "..\\events.h";
 	
-	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.system.*;
 	
@@ -111,15 +111,18 @@ package X.World {
 			
 			MAX_LAYERS = __layers;
 			
+// !STARLING!
 			mouseEnabled = true;
 			mouseChildren = true;
 			
 			// Add event for main loop
-			addEventListener(Event.ENTER_FRAME, onEnterFrame, false, 0, true);
+			addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			m_inuse_ENTER_FRAME = 0;
-			
-			addEventListener(Event.RENDER, onRenderFrame, false, 0, true);
-			m_inuse_RENDER_FRAME = 0;
+
+			if (CONFIG::flash) {
+				addEventListener(Event.RENDER, onRenderFrame);
+				m_inuse_RENDER_FRAME = 0;
+			}
 			
 			// Create world AABB
 			var worldAABB:b2AABB = new b2AABB ();
@@ -160,6 +163,7 @@ package X.World {
 			m_XHudLayer = new XSpriteLayer ();
 			m_XHudLayer.setup (this);
 			addChild (m_XHudLayer);
+// !STARLING!
 			m_XHudLayer.mouseEnabled = true;
 			m_XHudLayer.mouseChildren = true;
 
@@ -177,7 +181,10 @@ package X.World {
 			m_XBulletCollisionManager.cleanup ();
 			
 			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-			removeEventListener(Event.RENDER, onRenderFrame);
+			
+			if (CONFIG::flash) {
+				removeEventListener(Event.RENDER, onRenderFrame);
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -189,7 +196,10 @@ package X.World {
 			var dbgSprite:Sprite = new Sprite();
 // !!!
 			getXWorldLayer (0).childList.addChild(dbgSprite);
-			dbgDraw.m_sprite = dbgSprite;
+// !STARLING!
+			if (CONFIG::flash) {
+				dbgDraw.m_sprite = dbgSprite;
+			}
 			dbgDraw.m_drawScale = 30.0;
 			dbgDraw.m_fillAlpha = 0.75;
 			dbgDraw.m_lineThickness = 2.0;
@@ -219,7 +229,9 @@ package X.World {
 			getXTaskManagerCX ().updateTasks ();
 //				getXLogicManager ().updatePhysics ();
 			getXLogicManager ().cullObjects ();
-			m_world.Step (m_timeStep, m_iterations);
+			if (CONFIG::flash) {
+				m_world.Step (m_timeStep, m_iterations);
+			}
 			getXLogicManager ().setValues ();
 			
 			getXLogicManager ().emptyKillQueue ();
@@ -382,6 +394,51 @@ package X.World {
 			return m_XApp.getClass (__className);
 		}					
 
+//------------------------------------------------------------------------------------------
+		if (CONFIG::starling) {
+			public function get MOUSE_DOWN ():String {
+				return TouchPhase.BEGAN;	
+			}
+			
+			public function get MOUSE_UP ():String {
+				return TouchPhase.BEGAN;	
+			}
+			
+			public function get MOUSE_MOVE ():String {
+				return TouchPhase.ENDED;	
+			}
+	
+			public function get MOUSE_OVER ():String {
+				return TouchPhase.HOVER;	
+			}
+			
+			public function get MOUSE_OUT ():String {
+				return TouchPhase.ENDED;	
+			}
+		}
+		else
+		{
+			public function get MOUSE_DOWN ():String {
+				return MouseEvent.MOUSE_DOWN;	
+			}
+			
+			public function get MOUSE_UP ():String {
+				return MouseEvent.MOUSE_UP;	
+			}
+			
+			public function get MOUSE_MOVE ():String {
+				return MouseEvent.MOUSE_MOVE;	
+			}
+			
+			public function get MOUSE_OVER ():String {
+				return MouseEvent.MOUSE_OVER;	
+			}
+			
+			public function get MOUSE_OUT ():String {
+				return MouseEvent.MOUSE_OUT;	
+			}	
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function globalToWorld (__layer:Number, __p:XPoint):XPoint {
 			var __x:Point;

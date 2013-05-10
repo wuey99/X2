@@ -191,9 +191,11 @@ package X.World.Tiles {
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
 			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XBitmap;
-			x_sprite = addSpriteAt (m_bitmap, 0, 0);
-			x_sprite.setDepth (getDepth ());
-
+// !STARLING!
+			if (CONFIG::flash) {
+				x_sprite = addSpriteAt (m_bitmap, 0, 0);
+				x_sprite.setDepth (getDepth ());
+			}
 			
 			show ();
 		}

@@ -40,9 +40,9 @@ package X.Texture {
 		public function setup (__XApp:XApp):void {
 			m_XApp = __XApp;
 			
-			if (!CONFIG::starling) {
-				return;
-			}
+//			if (!CONFIG::starling) {
+//				return;
+//			}
 			
 			m_movieClips = new XDict ();
 			m_textures = new Array ();
@@ -62,9 +62,9 @@ package X.Texture {
 
 		//------------------------------------------------------------------------------------------
 		public function finish ():void {
-			if (!CONFIG::starling) {
-				return;
-			}
+//			if (!CONFIG::starling) {
+//				return;
+//			}
 			
 			__end ();
 			
@@ -89,9 +89,9 @@ package X.Texture {
 		 
 		//------------------------------------------------------------------------------------------
 		public function add (__name:String):void {	
-			if (!CONFIG::starling) {
-				return;
-			}
+//			if (!CONFIG::starling) {
+//				return;
+//			}
 			
 			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__name)) ();
 			
@@ -148,10 +148,10 @@ package X.Texture {
 		}	
 		
 		//------------------------------------------------------------------------------------------
-		public function createXMovieClip (__name:String):MovieClip {
-			if (!m_movieClips.exists (__name)) {
-				return null;
-			}
+		public function createXMovieClip (__name:String):starling.display.MovieClip {
+//			if (!m_movieClips.exists (__name)) {
+//				return null;
+//			}
 			
 			var __movieClipMetadata:Array = m_movieClips.get (__name);
 			
@@ -168,7 +168,7 @@ package X.Texture {
 				__textures = __textures.concat (__atlas.getTextures (__name));
 			}
 
-			return new MovieClip (__textures);
+			return new starling.display.MovieClip (__textures);
 		}
 
 		//------------------------------------------------------------------------------------------

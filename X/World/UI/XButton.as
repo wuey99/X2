@@ -3,21 +3,20 @@ package X.World.UI {
 
 // X classes
 	import X.*;
+	import X.Signals.*;
 	import X.Task.*;
 	import X.World.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
-	import X.Signals.*;
-	import X.World.Sprite.XDepthSprite;
+	import X.World.Sprite.*;
 	
-	import flash.display.*;
-	import flash.events.*;
+	include "..\\..\\events.h";
 	import flash.text.*;
 	import flash.utils.*;
 
 //------------------------------------------------------------------------------------------
 	public class XButton extends XLogicObject {
-		protected var m_sprite:MovieClip;
+		protected var m_sprite:XMovieClip;
 		protected var x_sprite:XDepthSprite;
 		protected var m_buttonClassName:String;
 		protected var m_mouseDownSignal:XSignal;
@@ -58,11 +57,11 @@ package X.World.UI {
 			
 			xxx.getXTaskManager ().addTask ([
 				function ():void {
-					m_sprite.addEventListener (MouseEvent.MOUSE_OVER, onMouseOver, false, 0, true);
-					m_sprite.addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown, false, 0, true);
-					m_sprite.addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove, false, 0, true);
-					m_sprite.addEventListener (MouseEvent.MOUSE_UP, onMouseUp, false, 0, true);
-					m_sprite.addEventListener (MouseEvent.MOUSE_OUT, onMouseOut, false, 0, true);
+					m_sprite.addEventListener (xxx.MOUSE_OVER, onMouseOver);
+					m_sprite.addEventListener (xxx.MOUSE_DOWN, onMouseDown);
+					m_sprite.addEventListener (xxx.MOUSE_MOVE, onMouseMove);
+					m_sprite.addEventListener (xxx.MOUSE_UP, onMouseUp);
+					m_sprite.addEventListener (xxx.MOUSE_OUT, onMouseOut);
 				},
 				
 				XTask.RETN,
@@ -96,11 +95,11 @@ package X.World.UI {
 		
 //------------------------------------------------------------------------------------------
 		public function addMouseUpEventListener (func:Function):void {
-			m_sprite.addEventListener (MouseEvent.MOUSE_UP, func, false, 0, true);
+			m_sprite.addEventListener (xxx.MOUSE_UP, func);
 		}
 		
-//------------------------------------------------------------------------------------------		
-		public function onMouseOver (e:MouseEvent):void {
+//------------------------------------------------------------------------------------------
+		public function onMouseOver (e:TouchEvent):void {
 			if (m_disabledFlag) {
 				return;
 			}
@@ -111,7 +110,7 @@ package X.World.UI {
 		}	
 
 //------------------------------------------------------------------------------------------		
-		public function onMouseDown (e:MouseEvent):void {
+		public function onMouseDown (e:TouchEvent):void {
 			if (m_disabledFlag) {
 				return;
 			}
@@ -124,7 +123,7 @@ package X.World.UI {
 		}	
 
 //------------------------------------------------------------------------------------------		
-		public function onMouseUp (e:MouseEvent):void {
+		public function onMouseUp (e:TouchEvent):void {
 			if (m_disabledFlag) {
 				return;
 			}
@@ -137,11 +136,11 @@ package X.World.UI {
 		}
 
 //------------------------------------------------------------------------------------------		
-		public function onMouseMove (e:MouseEvent):void {	
+		public function onMouseMove (e:TouchEvent):void {	
 		}
 									
 //------------------------------------------------------------------------------------------		
-		public function onMouseOut (e:MouseEvent):void {
+		public function onMouseOut (e:TouchEvent):void {
 			if (m_disabledFlag) {
 				return;
 			}
@@ -194,8 +193,7 @@ package X.World.UI {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {			
-			m_sprite = new (xxx.getClass (m_buttonClassName)) ();
-					
+			m_sprite = createXMovieClip (m_buttonClassName);
 			x_sprite = addSpriteToHud (m_sprite);
 			
 			__gotoState (NORMAL_STATE);

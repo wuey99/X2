@@ -10,7 +10,14 @@ package X.World.Sprite {
 		
 //------------------------------------------------------------------------------------------
 		public function XTextSprite () {
-			m_text = new TextField ();
+// !STARLING!
+			if (CONFIG::starling) {
+				m_text = new TextField (100, 8, "");
+			}
+			else
+			{
+				m_text = new TextField ();
+			}
 			
 			addChild (m_text);
 		}
@@ -35,7 +42,8 @@ package X.World.Sprite {
 
 //------------------------------------------------------------------------------------------
 		public function set textColor (__color:uint):void {
-			m_text.textColor = __color;
+// !STARLING!
+//			m_text.textColor = __color;
 		}
 				
 //------------------------------------------------------------------------------------------

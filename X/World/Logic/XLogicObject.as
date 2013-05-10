@@ -353,6 +353,8 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+/*
+//------------------------------------------------------------------------------------------
 		public function findMovieClipByName (
 			__movieClip:flash.display.MovieClip,
 			__className:String
@@ -437,6 +439,7 @@ package X.World.Logic {
 			
 			return null;
 		}
+*/
 		
 //------------------------------------------------------------------------------------------
 /*
@@ -535,22 +538,23 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function createXMovieClip (__name:String):XMovieClip {	
-			var __movieClip:MovieClip = new (xxx.getClass (__name)) ();
+		public function createXMovieClip (__name:String):XMovieClip {
+			var __movieClip:MovieClip;
 			
+			if (CONFIG::starling) {
+				__movieClip = null;
+			}
+			else
+			{
+				__movieClip = new (xxx.getClass (__name)) ();
+			}
+		
 			var __xmovieClip:XMovieClip = new XMovieClip ();
 			__xmovieClip.setup (__movieClip);
 			
 			return __xmovieClip;
 		}
-		
-//------------------------------------------------------------------------------------------
-		public function createMovieClip (__name:String):flash.display.MovieClip {	
-			var __movieClip:flash.display.MovieClip = new (xxx.getClass (__name)) ();
-			
-			return __movieClip;
-		}
-		
+				
 //------------------------------------------------------------------------------------------
 		public function removeAllXBitmaps ():void {
 			m_bitmaps.forEach (

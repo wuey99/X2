@@ -64,10 +64,13 @@ package X.Debug  {
 // set text field properties
 //------------------------------------------------------------------------------------------
 		public function setTextProps ():void {
-			m_textArea.v.selectable = true;
-			m_textArea.v.multiline = true;
-			m_textArea.v.wordWrap = true;
-			m_textArea.v.embedFonts = true;
+// !STARLING!
+			if (CONFIG::flash) {
+				m_textArea.v.selectable = true;
+				m_textArea.v.multiline = true;
+				m_textArea.v.wordWrap = true;
+				m_textArea.v.embedFonts = true;
+			}
 			m_textArea.v.width = 320;
 			m_textArea.v.height = 480;
             m_textFormat = __TextFormat (m_fontClass);
@@ -87,10 +90,13 @@ package X.Debug  {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addText (__text:String):void {		
+		public function addText (__text:String):void {
+// !STARLING!
 			if (!m_disableOutput) {
-				m_textArea.v.appendText (__text + "\n");
-				m_textArea.v.setTextFormat (m_textFormat);
+				if (CONFIG::flash) {
+					m_textArea.v.appendText (__text + "\n");
+					m_textArea.v.setTextFormat (m_textFormat);
+				}
 			}
 		}
 

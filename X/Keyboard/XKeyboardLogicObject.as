@@ -56,10 +56,10 @@ package X.Keyboard {
 //------------------------------------------------------------------------------------------
 		public function grabFocus ():void {
 			if (m_focus == null) {
-				stage.addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown, true, 0, true);
-				stage.addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp, true, 0, true);
-				stage.addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown, true, 0, true);
-				stage.addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove, true, 0, true);
+				stage.addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
+				stage.addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
+				stage.addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
+				stage.addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
 								
 				takeStageFocus ();
 						
@@ -80,8 +80,11 @@ package X.Keyboard {
 
 //------------------------------------------------------------------------------------------
 		public function takeStageFocus ():void {
-			if (stage.focus != m_text.v) {
-				stage.focus = m_text.v;
+// !STARLING!
+			if (CONFIG::flash) {
+				if (stage.focus != m_text.v) {
+					stage.focus = m_text.v;
+				}
 			}
 		}
 		
