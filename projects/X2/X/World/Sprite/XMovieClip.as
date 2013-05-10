@@ -47,8 +47,8 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieClip.currentFrame = __frame;
-				m_movieClip.stop ();
+				m_movieclip.currentFrame = __frame;
+				m_movieclip.stop ();
 			}
 			else
 			{
@@ -59,22 +59,13 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieclip.currentFrame = _frame;
+				m_movieclip.currentFrame = __frame;
 				m_movieclip.stop ();
 			}
 			else
 			{
 				m_movieclip.gotoAndStop (__frame);
 			}
-		}
-		
-		//------------------------------------------------------------------------------------------
-		public override function set mouseEnabled (__value:Boolean):void {
-			m_movieclip.mouseEnabled = __value;
-		}
-		
-		public override function get mouseEnabled ():Boolean {
-			return m_movieclip.mouseEnabled;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -96,7 +87,10 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		if (CONFIG::starling == false) {
+		if (CONFIG::starling) {
+		}
+		else
+		{
 			public override function get graphics ():Graphics {
 				return m_movieclip.graphics;
 			}
@@ -119,16 +113,6 @@ package X.World.Sprite {
 		public override function get scaleY ():Number {
 			return m_movieclip.scaleY;
 		}		
-		
-		//------------------------------------------------------------------------------------------
-		public override function addEventListener (__type:String, __listener:Function, __useCapture:Boolean = false, __priority:int = 0, __useWeakReference:Boolean = false):void {
-			m_movieclip.addEventListener (__type, __listener, __useCapture, __priority, __useWeakReference);
-		}
-		
-		//------------------------------------------------------------------------------------------
-		public override function removeEventListener (__type:String, __listener:Function, __useCapture:Boolean = false):void {
-			m_movieclip.removeEventListener(__type, __listener, __useCapture);
-		}
 		
 		//------------------------------------------------------------------------------------------
 	}

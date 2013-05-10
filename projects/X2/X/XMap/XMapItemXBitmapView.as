@@ -40,7 +40,10 @@ package X.XMap {
 		protected override function __createSprites (__spriteClassName:String):void {			
 			m_bitmap = new XBitmap ();
 			m_bitmap.initWithClassName (xxx, null, __spriteClassName);
-			x_sprite = addSpriteAt (m_bitmap, m_bitmap.dx, m_bitmap.dy);
+// !STARLING!
+			if (CONFIG::flash) {
+				x_sprite = addSpriteAt (m_bitmap, m_bitmap.dx, m_bitmap.dy);
+			}
 			
 			if (m_frame) {
 				gotoAndStop (m_frame);

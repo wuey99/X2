@@ -47,7 +47,10 @@ package X.World.BG {
 		public override function createSprites ():void {		
 			m_sprite = new (xxx.getClass (m_spriteClassName)) ();
 
-			addSprite (m_sprite);
+// !STARLING!
+			if (CONFIG::flash) {
+				addSprite (m_sprite);
+			}
 			
 			show ();
 		}
