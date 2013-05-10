@@ -358,6 +358,11 @@ package X.World {
 		public function getBitmapDataAnimManager ():XBitmapDataAnimManager {
 			return m_XApp.getBitmapDataAnimManager ();
 		}
+
+//------------------------------------------------------------------------------------------
+		public function getXMovieClipManager ():XMovieClipManager {
+			return m_XApp.getXMovieClipManager ();
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function grabFocus ():void {
