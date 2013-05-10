@@ -4,7 +4,7 @@ package X.World {
 	import X.Collections.*;
 	import X.World.Sprite.*;
 	
-	import flash.display.*;
+	include "..\\flash.h";
 	
 //------------------------------------------------------------------------------------------	
 	public class XSpriteLayer extends XSprite {

@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------------------
 package X.World.Sprite {
 	
-	import flash.display.*;
-	import flash.text.*;
-				
+	include "..\\..\\flash.h";
+	include "..\\..\\text.h";
+
 //------------------------------------------------------------------------------------------
 	public class XTextSprite extends XSprite {
 		private var m_text:TextField;

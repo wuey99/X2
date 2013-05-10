@@ -17,7 +17,8 @@ package X.World.Logic {
 	import X.XML.*;
 	import X.XMap.*;
 	
-	import flash.display.*;
+	include "..\\..\\flash.h";
+	
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
@@ -353,12 +354,12 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function findMovieClipByName (
-			__movieClip:MovieClip,
+			__movieClip:flash.display.MovieClip,
 			__className:String
-			):MovieClip {
+			):flash.display.MovieClip {
 				
 			for (var i:uint = 0; i < __movieClip.numChildren; i++) {
-				var m$:MovieClip = __movieClip.getChildAt (i) as MovieClip;
+				var m$:flash.display.MovieClip = __movieClip.getChildAt (i) as MovieClip;
 				
 				if (m$ != null) {
 					if (m$.name == __className) {
@@ -380,7 +381,7 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function findClassByName (
-			__movieClip:MovieClip,
+			__movieClip:flash.display.MovieClip,
 			__className:String
 			):* {
 				
@@ -393,7 +394,7 @@ package X.World.Logic {
 					}
 					else
 					{
-						var m:MovieClip = m$ as MovieClip;
+						var m:flash.display.MovieClip = m$ as MovieClip;
 						
 						if (m != null) {
 							m$ = findClassByName (m, __className);
@@ -411,13 +412,13 @@ package X.World.Logic {
 				
 //------------------------------------------------------------------------------------------
 		public function findTextFieldByName (
-			__movieClip:MovieClip,
+			__movieClip:flash.display.MovieClip,
 			__className:String
 			):TextField {
 				
 			for (var i:uint = 0; i < __movieClip.numChildren; i++) {
-				var m$:MovieClip = __movieClip.getChildAt (i) as MovieClip;
-				var t$:TextField = __movieClip.getChildAt (i) as TextField;
+				var m$:flash.display.MovieClip = __movieClip.getChildAt (i) as flash.display.MovieClip;
+				var t$:flash.text.TextField = __movieClip.getChildAt (i) as flash.text.TextField;
 				
 				if (m$ != null) {
 					t$ = findTextFieldByName (m$, __className);
@@ -544,8 +545,8 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function createMovieClip (__name:String):MovieClip {	
-			var __movieClip:MovieClip = new (xxx.getClass (__name)) ();
+		public function createMovieClip (__name:String):flash.display.MovieClip {	
+			var __movieClip:flash.display.MovieClip = new (xxx.getClass (__name)) ();
 			
 			return __movieClip;
 		}

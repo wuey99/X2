@@ -5,7 +5,7 @@ package X.XMap {
 	import X.World.*;
 	import X.World.Sprite.*;
 		
-	import flash.display.*;
+//	import flash.display.*;
 	import flash.geom.*;
 	import flash.utils.*;
 	

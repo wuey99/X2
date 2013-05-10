@@ -11,12 +11,14 @@ package X.XMap {
 	import X.World.Sprite.*;
 	import X.XML.XSimpleXMLNode;
 	
-	import flash.display.*;
+//	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
 		
 //------------------------------------------------------------------------------------------
+// STARLING: implement Texture pool manager
+//------------------------------------------------------------------------------------------	
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;
 		protected var m_submapBitmapPoolManager:XObjectPoolManager;

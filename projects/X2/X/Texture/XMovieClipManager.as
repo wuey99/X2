@@ -172,7 +172,7 @@ package X.Texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function getBitmapData ():BitmapData {
+		public function getBitmapData ():BitmapData { 	
 			return m_currentBitmap;
 		}
 		
