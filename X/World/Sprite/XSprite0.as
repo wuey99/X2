@@ -6,13 +6,7 @@ package X.World.Sprite {
 	
 	
 // flash classes
-	if (CONFIG::starling) {
-		import starling.display.Sprite;
-	}
-	else
-	{
-		import flash.display.Sprite;
-	}
+	include "..\\..\\flash.h";
 	
 //------------------------------------------------------------------------------------------
 	public class XSprite0 extends Sprite {

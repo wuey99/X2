@@ -9,14 +9,7 @@ package X.World.Sprite {
 	import flash.geom.*;
 	import flash.utils.*;
 	
-	if (CONFIG::starling) {
-		import starling.display.*;
-	}
-	else
-	{
-		import flash.display.MovieClip;
-		import flash.display.Graphics;
-	}
+	include "..\\..\\flash.h";
 	
 	//------------------------------------------------------------------------------------------	
 	public class XMovieClip extends XSprite {

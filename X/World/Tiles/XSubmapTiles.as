@@ -15,7 +15,7 @@ package X.World.Tiles {
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
-// this class probably more appropriately belongs in TikiEdit
+// primarily used in TikiEdit
 //
 // this class handles the view and caching of CX (collision tiles) and represents a Submap's
 // collision data.

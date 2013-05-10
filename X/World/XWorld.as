@@ -32,7 +32,8 @@ package X.World {
 	import X.XMap.*;
 	import X.Texture.*;
 	
-	import flash.display.*;
+	include "..\\flash.h";
+	
 	import flash.events.Event;
 	import flash.geom.Point;
 	import flash.system.*;

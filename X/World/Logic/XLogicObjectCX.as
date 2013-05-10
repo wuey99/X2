@@ -8,7 +8,7 @@ package X.World.Logic {
 	import X.World.Sprite.*;
 	import X.XMap.*;
 	
-	import flash.display.*;
+//	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;

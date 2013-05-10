@@ -2,8 +2,8 @@
 package X.World.Sprite {
 
 	import X.World.*;
-	
-	import flash.display.*;
+
+	include "..\\..\\flash.h";
 	import flash.geom.*;
 	import flash.utils.*;
 	
