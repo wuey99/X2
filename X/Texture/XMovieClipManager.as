@@ -16,13 +16,13 @@ package X.Texture {
 	//------------------------------------------------------------------------------------------
 	// this class manages XSubMovieClipCacheManagers
 	//------------------------------------------------------------------------------------------
-	public class XMovieClipCacheManager extends Object {
+	public class XMovieClipManager extends Object {
 		private var m_XApp:XApp;
 		
 		private var m_subManagers:XDict;
 			
 		//------------------------------------------------------------------------------------------
-		public function XMovieClipCacheManager (__XApp:XApp) {
+		public function XMovieClipManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
 			m_subManagers = new XDict ();
@@ -37,8 +37,8 @@ package X.Texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function createSubManager (__name:String, __width:Number=2048, __height:Number=2048):XSubMovieClipCacheManager {
-			var __subManager:XSubMovieClipCacheManager = new XSubMovieClipCacheManager (m_XApp);
+		public function createSubManager (__name:String, __width:Number=2048, __height:Number=2048):XSubMovieClipManager {
+			var __subManager:XSubMovieClipManager = new XSubMovieClipManager (m_XApp);
 			
 			m_subManagers.put (__name, __subManager);
 			
@@ -47,7 +47,7 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public function removeSubManager (__name:String):void {	
-			var __subManager:XSubMovieClipCacheManager = m_subManagers.get (__name) as XSubMovieClipCacheManager;
+			var __subManager:XSubMovieClipManager = m_subManagers.get (__name) as XSubMovieClipManager;
 			
 			__subManager.cleanup ();
 			
@@ -55,8 +55,8 @@ package X.Texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function getSubManager (__name:String):XSubMovieClipCacheManager {
-			return m_subManagers.get (__name) as XSubMovieClipCacheManager;
+		public function getSubManager (__name:String):XSubMovieClipManager {
+			return m_subManagers.get (__name) as XSubMovieClipManager;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ package X.Texture {
 			m_subManagers.forEach (
 				function (x:*):void {
 					if (__movieClip == null) {
-						var __subManager:XSubMovieClipCacheManager = m_subManagers.get (x as String);
+						var __subManager:XSubMovieClipManager = m_subManagers.get (x as String);
 					
 						if (__subManager.movieClipExists (__movieClipName)) {
 							__movieClip = __subManager.createXMovieClip (__movieClipName);
