@@ -29,17 +29,15 @@ package X.Texture {
 		
 		private var m_packer:MaxRectPacker;
 		
-		private const TEXTURE_WIDTH:Number = 2048;
-		private const TEXTURE_HEIGHT:Number = 2048;
+		private var TEXTURE_WIDTH:Number = 2048;
+		private var TEXTURE_HEIGHT:Number = 2048;
 			
 		//------------------------------------------------------------------------------------------
-		public function XSubTextureManager (__XApp:XApp) {
+		public function XSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
 			m_XApp = __XApp;
-		}
-
-		//------------------------------------------------------------------------------------------
-		public function setup (__width:Number=2048, __height:Number=2048):void {	
-			start ();
+			
+			TEXTURE_WIDTH = __width;
+			TEXTURE_HEIGHT = __height;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -49,14 +47,17 @@ package X.Texture {
 
 		//------------------------------------------------------------------------------------------
 		public function reset ():void {
-			if (m_atlases == null) {
-				return;
-			}
-			
 			var i:Number;
 			
-			for (i=0; i<m_atlases.length; i++) {
-				m_atlases[i].dispose ();
+			if (m_currentBitmap) {
+				m_currentBitmap.dispose ();	
+				m_currentBitmap = null;
+			}
+			
+			if (m_atlases) {				
+				for (i=0; i<m_atlases.length; i++) {
+					m_atlases[i].dispose ();
+				}
 			}
 		}
 		
@@ -186,11 +187,6 @@ package X.Texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function getBitmapData ():BitmapData { 	
-			return m_currentBitmap;
-		}
-		
-		//------------------------------------------------------------------------------------------
 		private function __begin ():void {
 			var __rect:Rectangle = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			m_currentBitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
@@ -216,6 +212,7 @@ package X.Texture {
 				m_atlases.push (__atlas);
 				
 				m_currentBitmap.dispose ();
+				m_currentBitmap = null;
 			}			
 		}
 
