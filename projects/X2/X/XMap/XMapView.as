@@ -63,7 +63,7 @@ package X.XMap {
 // !STARLING! 
 //		
 // all levels/XMaps contain a list of images used in the level.  We cache them all as
-// bitmap's (in flash) and MovieClips/Textures (in starling).		
+// bitmap's (in flash) and textures (in starling).		
 //------------------------------------------------------------------------------------------
 		
 //------------------------------------------------------------------------------------------

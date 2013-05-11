@@ -38,7 +38,7 @@ package X.Texture {
 
 		//------------------------------------------------------------------------------------------
 		public function createSubManager (__name:String, __width:Number=2048, __height:Number=2048):XSubTextureManager {
-			var __subManager:XSubTextureManager = new XSubTextureManager (m_XApp);
+			var __subManager:XSubTextureManager = new XSubTextureManager (m_XApp, __width, __height);
 			
 			m_subManagers.put (__name, __subManager);
 			
@@ -48,7 +48,6 @@ package X.Texture {
 		//------------------------------------------------------------------------------------------
 		public function removeSubManager (__name:String):void {	
 			var __subManager:XSubTextureManager = m_subManagers.get (__name) as XSubTextureManager;
-			
 			__subManager.cleanup ();
 			
 			m_subManagers.remove (__name);
