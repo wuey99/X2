@@ -78,14 +78,14 @@ package X.Texture {
 			
 			m_movieClips.forEach (
 				function (x:*):void {
-					var __name:String = x as String;
+					var __className:String = x as String;
 					
-					var __movieClipMetadata:Array = m_movieClips.get (__name);
+					var __movieClipMetadata:Array = m_movieClips.get (__className);
 						
 					for (var i:Number = 0; i <m_atlases.length; i++) {
 						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
 						
-						var __texture:Texture = __atlas.getTexture (__name + "_" + __generateIndex (0));
+						var __texture:Texture = __atlas.getTexture (__className + "_" + __generateIndex (0));
 						
 						if (__texture) {
 							__movieClipMetadata.push (__atlas);
@@ -96,8 +96,8 @@ package X.Texture {
 		}
 		 
 		//------------------------------------------------------------------------------------------
-		public function add (__name:String):void {	
-			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__name)) ();
+		public function add (__className:String):void {	
+			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__className)) ();
 			
 			var __scaleX:Number = 1.0;
 			var __scaleY:Number = 1.0;
@@ -138,7 +138,7 @@ package X.Texture {
 				__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y)
 				m_currentBitmap.draw (__movieClip, __matrix);
 				
-				var __subText:String = '<SubTexture name="'+__name+'_' + __generateIndex (i) + '" ' +
+				var __subText:String = '<SubTexture name="'+__className+'_' + __generateIndex (i) + '" ' +
 					'x="'+__rect.x+'" y="'+__rect.y+'" width="'+__rect.width+'" height="'+__rect.height+'" frameX="0" frameY="0" ' +
 					'frameWidth="'+__rect.width+'" frameHeight="'+__rect.height+'"/>';
 				
@@ -148,21 +148,21 @@ package X.Texture {
 			var __movieClipMetadata:Array = new Array ();
 			__movieClipMetadata.push (__realBounds);
 			
-			m_movieClips.put (__name, __movieClipMetadata);
+			m_movieClips.put (__className, __movieClipMetadata);
 		}	
 
 		//------------------------------------------------------------------------------------------
-		public function movieClipExists (__name:String):Boolean {
-			return m_movieClips.exists (__name);
+		public function movieClipExists (__className:String):Boolean {
+			return m_movieClips.exists (__className);
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createXMovieClip (__name:String):starling.display.MovieClip {
-			if (!m_movieClips.exists (__name)) {
-				throw (new Error (": unable to find XMovieClip: " + __name));
+		public function createXMovieClip (__className:String):starling.display.MovieClip {
+			if (!m_movieClips.exists (__className)) {
+				throw (new Error (": unable to find XMovieClip: " + __className));
 			}
 			
-			var __movieClipMetadata:Array = m_movieClips.get (__name);
+			var __movieClipMetadata:Array = m_movieClips.get (__className);
 			
 			var __rect:Rectangle = __movieClipMetadata[0] as Rectangle;
 			var __pivotX:Number = __rect.x; 
@@ -174,12 +174,10 @@ package X.Texture {
 			for (var i:Number=1; i<=__movieClipMetadata.length-1; i++) {
 				__atlas = __movieClipMetadata[i] as TextureAtlas;
 				 
-				__textures = __textures.concat (__atlas.getTextures (__name));
+				__textures = __textures.concat (__atlas.getTextures (__className));
 			}
 
 			var __movieClip:MovieClip = new MovieClip (__textures);
-			
-			var __rect:Rectangle = __movieClipMetadata[0] as Rectangle;
 			__movieClip.pivotX = -__rect.x;
 			__movieClip.pivotY = -__rect.y;
 			
