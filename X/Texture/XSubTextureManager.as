@@ -152,6 +152,11 @@ package X.Texture {
 		}	
 
 		//------------------------------------------------------------------------------------------
+		public function isQueued (__className:String):Boolean {
+			return false;	
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public function movieClipExists (__className:String):Boolean {
 			return m_movieClips.exists (__className);
 		}
