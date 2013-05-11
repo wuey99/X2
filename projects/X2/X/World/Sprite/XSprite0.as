@@ -4,7 +4,6 @@ package X.World.Sprite {
 // X classes
 	import X.World.*;
 	
-	
 // flash classes
 	include "..\\..\\flash.h";
 	
@@ -33,6 +32,18 @@ package X.World.Sprite {
 		
 //------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
+
+			//------------------------------------------------------------------------------------------
+			public override function get rotation ():Number {
+				return super.rotation * 180/Math.PI;
+			}
+			
+			//------------------------------------------------------------------------------------------
+			public override function set rotation (__value:Number):void {
+				super.rotation = __value * Math.PI/180;
+			}
+			
+			//------------------------------------------------------------------------------------------
 			public function get mouseX ():Number {
 				return 0;
 			}
