@@ -16,7 +16,7 @@ package X.Texture {
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
-	public class XSubMovieClipManager extends Object {
+	public class XSubTextureManager extends Object {
 		private var m_XApp:XApp;
 		
 		private var m_movieClips:XDict;
@@ -33,7 +33,7 @@ package X.Texture {
 		private const TEXTURE_HEIGHT:Number = 2048;
 			
 		//------------------------------------------------------------------------------------------
-		public function XSubMovieClipManager (__XApp:XApp) {
+		public function XSubTextureManager (__XApp:XApp) {
 			m_XApp = __XApp;
 		}
 
