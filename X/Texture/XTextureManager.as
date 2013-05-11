@@ -59,7 +59,7 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createXMovieClip (__movieClipName:String):starling.display.MovieClip {
+		public function createXMovieClip (__className:String):starling.display.MovieClip {
 			var __movieClip:starling.display.MovieClip;
 			
 			m_subManagers.forEach (
@@ -67,8 +67,8 @@ package X.Texture {
 					if (__movieClip == null) {
 						var __subManager:XSubTextureManager = m_subManagers.get (x as String);
 					
-						if (__subManager.movieClipExists (__movieClipName)) {
-							__movieClip = __subManager.createXMovieClip (__movieClipName);
+						if (__subManager.movieClipExists (__className)) {
+							__movieClip = __subManager.createXMovieClip (__className);
 						}
 					}
 				}
