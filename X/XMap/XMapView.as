@@ -11,7 +11,7 @@ package X.XMap {
 	import X.World.Sprite.*;
 	import X.XML.XSimpleXMLNode;
 	
-//	import flash.display.*;
+	import starling.textures.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
@@ -22,6 +22,7 @@ package X.XMap {
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;
 		protected var m_submapBitmapPoolManager:XObjectPoolManager;
+		protected var m_submapImagePoolManager:XObjectPoolManager;
 				
 //------------------------------------------------------------------------------------------
 		public function XMapView () {
@@ -62,7 +63,7 @@ package X.XMap {
 // !STARLING! 
 //		
 // all levels/XMaps contain a list of images used in the level.  We cache them all as
-// bitmap's (in flash) and MovieClip/Textures (in starling).		
+// bitmap's (in flash) and MovieClips/Textures (in starling).		
 //------------------------------------------------------------------------------------------
 		
 //------------------------------------------------------------------------------------------
@@ -155,6 +156,38 @@ package X.XMap {
 			return m_submapBitmapPoolManager;
 		}
 			
+//------------------------------------------------------------------------------------------
+		public function initSubmapImagePoolManager (
+			__width:Number=512, __height:Number=512,
+			__alloc:Number=16, __spill:Number=8
+			):void {
+			
+			m_submapImagePoolManager = new XObjectPoolManager (
+				function ():* {
+					var __texture = new RenderTexture (__width, __height);
+					
+					var __image:XSubmapImage = new XSubmapImage (__texture);
+					
+					return __image;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__alloc, __spill,
+				
+				function (x:*):void {
+					XImage (x).cleanup ();
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getSubmapImagePoolManager ():XObjectPoolManager {
+			return m_submapImagePoolManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function createModelFromXML (__xml:XSimpleXMLNode):void {
 			var __model:XMapModel = new XMapModel ();
