@@ -38,7 +38,7 @@ package X.Texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function setup ():void {	
+		public function setup (__width:Number=2048, __height:Number=2048):void {	
 			start ();
 		}
 		
@@ -149,6 +149,11 @@ package X.Texture {
 			
 			m_movieClips.put (__name, __movieClipMetadata);
 		}	
+
+		//------------------------------------------------------------------------------------------
+		public function movieClipExists (__name:String):Boolean {
+			return m_movieClips.exists (__name);
+		}
 		
 		//------------------------------------------------------------------------------------------
 		public function createXMovieClip (__name:String):starling.display.MovieClip {
