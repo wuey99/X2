@@ -107,7 +107,8 @@ package X.World {
 		public var m_XMapItemCachedView:XMapItemCachedView;
 		public var m_XMapItemXBitmapView:XMapItemXBitmapView;
 		public var m_XSound:XSound;
-		public var m_XMovieClipManager:XMovieClipCacheManager;
+		public var m_XMovieClipCacheManager:XMovieClipCacheManager;
+		public var m_XSubMovieClipCacheManager:XSubMovieClipCacheManager;
 				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){

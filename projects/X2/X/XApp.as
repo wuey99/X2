@@ -57,8 +57,6 @@ package X {
 			m_XBitmapDataAnimManager = new XBitmapDataAnimManager (this);
 			m_XMovieClipCacheManager = new XMovieClipCacheManager (this);
 			
-			m_XMovieClipCacheManager.setup ();
-			
 			__initPoolManagers (__poolSettings);
 			
 			m_XDebug = new XDebug ();
