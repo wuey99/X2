@@ -4,16 +4,17 @@ package X.XMap {
 	import X.Geom.*;
 	import X.World.*;
 	import X.World.Sprite.*;
-		
+	
+	import starling.textures.*;
 	import flash.geom.*;
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
-	public class XSubmapBitmap extends XBitmap {
+	public class XSubmapImage extends XImage {
 
 //------------------------------------------------------------------------------------------
-		public function XSubmapBitmap () {
-			super ();
+		public function XSubmapImage (__texture:RenderTexture) {
+			super (__texture);
 		}
 
 //------------------------------------------------------------------------------------------
