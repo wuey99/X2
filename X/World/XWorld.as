@@ -38,6 +38,9 @@ package X.World {
 	import flash.geom.Point;
 	import flash.system.*;
 	
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
+	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
 		public var m_ticks:Number;
@@ -59,7 +62,9 @@ package X.World {
 		public var m_XKeyboardManager:XKeyboardManager;
 		protected var m_viewRect:XRect;
 		private var m_XBulletCollisionManager:XBulletCollisionManager;
-					
+		public var m_mouseX;
+		public var m_mouseY;
+		
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
 		public var m_XLogicObject:XLogicObject;
@@ -102,7 +107,7 @@ package X.World {
 		public var m_XMapItemCachedView:XMapItemCachedView;
 		public var m_XMapItemXBitmapView:XMapItemXBitmapView;
 		public var m_XSound:XSound;
-		public var m_XMovieClipManager:XMovieClipManager;
+		public var m_XMovieClipManager:XMovieClipCacheManager;
 				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){
@@ -170,6 +175,12 @@ package X.World {
 			m_XKeyboardManager = new XKeyboardManager (this);
 					
 			setupDebug ();
+			
+			m_mouseX = m_mouseY = 0;
+			
+			if (CONFIG::starling) {
+				addEventListener (TouchEvent.TOUCH, onTouchEvent);
+			}
 		}
 
 //------------------------------------------------------------------------------------------
@@ -179,6 +190,10 @@ package X.World {
 			m_renderManager.removeAllTasks ();
 			m_XSignalManager.removeAllXSignals ();
 			m_XBulletCollisionManager.cleanup ();
+			
+			if (CONFIG::starling) {
+				removeEventListener (TouchEvent.TOUCH, onTouchEvent);
+			}
 			
 			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
@@ -270,6 +285,43 @@ package X.World {
 		}	
 
 //------------------------------------------------------------------------------------------
+		private function onTouchEvent(e:TouchEvent):void {
+			var __touches:Vector.<Touch> = e.getTouches(this);
+			
+			for each (var __touch:Touch in __touches)
+			{
+				if (__touch.phase == TouchPhase.HOVER )
+				{
+					var __location:Point = __touch.getLocation (this);
+					
+					m_mouseX = __location.x;
+					m_mouseY = __location.y;
+				}
+			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public override function get mouseX ():Number {
+			if (CONFIG::starling) {
+				return m_mouseX;
+			}
+			else
+			{
+				return stage.mouseX;
+			}
+		}
+		
+		public override function get mouseY ():Number {
+			if (CONFIG::starling) {
+				return m_mouseY;
+			}
+			else
+			{
+				return stage.mouseY;
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getXApp ():XApp {
 			return m_XApp;
 		}
@@ -360,8 +412,8 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getXMovieClipManager ():XMovieClipManager {
-			return m_XApp.getXMovieClipManager ();
+		public function getXMovieClipCacheManager ():XMovieClipCacheManager {
+			return m_XApp.getXMovieClipCacheManager ();
 		}
 		
 //------------------------------------------------------------------------------------------

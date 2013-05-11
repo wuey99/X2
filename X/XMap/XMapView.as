@@ -17,7 +17,7 @@ package X.XMap {
 	import flash.utils.*;
 		
 //------------------------------------------------------------------------------------------
-// STARLING: implement Texture pool manager
+// !STARLING!: implement Texture pool manager
 //------------------------------------------------------------------------------------------	
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;
@@ -59,6 +59,13 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
+// !STARLING! 
+//		
+// all levels/XMaps contain a list of images used in the level.  We cache them all as
+// bitmap's (in flash) and MovieClip/Textures (in starling).		
+//------------------------------------------------------------------------------------------
+		
+//------------------------------------------------------------------------------------------
 		public function areImageClassNamesCached ():Boolean {
 			var __flags:Boolean;
 			var i:Number;
@@ -83,7 +90,7 @@ package X.XMap {
 			
 			return true;	
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function cacheImageClassNames ():void {
 			var i:Number;

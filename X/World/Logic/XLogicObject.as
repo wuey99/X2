@@ -542,7 +542,7 @@ package X.World.Logic {
 			var __movieClip:MovieClip;
 			
 			if (CONFIG::starling) {
-				__movieClip = null;
+				__movieClip = xxx.getXMovieClipCacheManager ().createXMovieClip (__name);
 			}
 			else
 			{
