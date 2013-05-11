@@ -16,7 +16,7 @@ package X.Texture {
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
-	public class XMovieClipManager extends Object {
+	public class XMovieClipCacheManager extends Object {
 		private var m_XApp:XApp;
 		
 		private var m_movieClips:XDict;
@@ -33,25 +33,22 @@ package X.Texture {
 		private const TEXTURE_HEIGHT:Number = 2048;
 			
 		//------------------------------------------------------------------------------------------
-		public function XMovieClipManager (__XApp:XApp) {
+		public function XMovieClipCacheManager (__XApp:XApp) {
 			m_XApp = __XApp;
 		}
 
 		//------------------------------------------------------------------------------------------
 		public function setup ():void {	
-//			if (!CONFIG::starling) {
-//				return;
-//			}
-
-			m_movieClips = new XDict ();
-			m_textures = new Array ();
-			m_atlases = new Array ();
-			
-			__begin ();
+			start ();
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			reset ();
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function reset ():void {
 			if (m_atlases == null) {
 				return;
 			}
@@ -62,13 +59,20 @@ package X.Texture {
 				m_atlases[i].dispose ();
 			}
 		}
-
+		
+		//------------------------------------------------------------------------------------------
+		public function start ():void {
+			reset ();
+			
+			m_movieClips = new XDict ();
+			m_textures = new Array ();
+			m_atlases = new Array ();
+			
+			__begin ();
+		}
+		
 		//------------------------------------------------------------------------------------------
 		public function finish ():void {
-//			if (!CONFIG::starling) {
-//				return;
-//			}
-			
 			__end ();
 			
 			m_movieClips.forEach (
@@ -92,10 +96,6 @@ package X.Texture {
 		 
 		//------------------------------------------------------------------------------------------
 		public function add (__name:String):void {	
-//			if (!CONFIG::starling) {
-//				return;
-//			}
-			
 			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__name)) ();
 			
 			var __scaleX:Number = 1.0;
@@ -152,9 +152,9 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public function createXMovieClip (__name:String):starling.display.MovieClip {
-//			if (!m_movieClips.exists (__name)) {
-//				return null;
-//			}
+			if (!m_movieClips.exists (__name)) {
+				throw (new Error (": unable to find XMovieClip: " + __name));
+			}
 			
 			var __movieClipMetadata:Array = m_movieClips.get (__name);
 			
@@ -171,7 +171,13 @@ package X.Texture {
 				__textures = __textures.concat (__atlas.getTextures (__name));
 			}
 
-			return new starling.display.MovieClip (__textures);
+			var __movieClip:MovieClip = new MovieClip (__textures);
+			
+			var __rect:Rectangle = __movieClipMetadata[0] as Rectangle;
+			__movieClip.pivotX = -__rect.x;
+			__movieClip.pivotY = -__rect.y;
+			
+			return __movieClip;
 		}
 
 		//------------------------------------------------------------------------------------------
