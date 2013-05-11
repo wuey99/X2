@@ -125,6 +125,17 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function initSubmapPoolManager ():void {
+			if (CONFIG::starling) {
+				initSubmapImagePoolManager (512, 512);
+			}
+			else
+			{
+				initSubmapBitmapPoolManager (512, 512);
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function initSubmapBitmapPoolManager (
 			__width:Number=512, __height:Number=512,
 			__alloc:Number=64, __spill:Number=16
