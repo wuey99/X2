@@ -107,8 +107,8 @@ package X.World {
 		public var m_XMapItemCachedView:XMapItemCachedView;
 		public var m_XMapItemXBitmapView:XMapItemXBitmapView;
 		public var m_XSound:XSound;
-		public var m_XMovieClipManager:XMovieClipManager;
-		public var m_XSubMovieClipManager:XSubMovieClipManager;
+		public var m_XTextureManager:XTextureManager;
+		public var m_XSubTextureManager:XSubTextureManager;
 				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){
@@ -415,8 +415,8 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getXMovieClipManager ():XMovieClipManager {
-			return m_XApp.getXMovieClipManager ();
+		public function getTextureManager ():XTextureManager {
+			return m_XApp.getTextureManager ();
 		}
 		
 //------------------------------------------------------------------------------------------
