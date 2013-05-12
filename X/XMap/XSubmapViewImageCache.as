@@ -36,7 +36,7 @@ package X.XMap {
 		private var m_XMapView:XMapView;
 		private var m_submapModel:XSubmapModel;
 		
-		private var m_bitmap:XBitmap;
+		private var m_image:XImage;
 		private var x_sprite:XDepthSprite;
 	
 		private var tempRect:XRect;
@@ -63,7 +63,7 @@ package X.XMap {
 		public override function cleanup ():void {
 			removeAll ();
 
-			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_bitmap);
+			m_XMapView.getSubmapImagePoolManager ().returnObject (m_image);
 					
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			xxx.getXPointPoolManager ().returnObject (tempPoint);
@@ -103,9 +103,9 @@ package X.XMap {
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 			
-			m_bitmap.bitmapData.fillRect (
-				tempRect, 0x00000000
-			);
+//			m_bitmap.bitmapData.fillRect (
+//				tempRect, 0x00000000
+//			);
 			
 			__vline (0);
 			__vline (m_submapModel.width-1);
@@ -125,13 +125,13 @@ package X.XMap {
 				function (x:*):void {
 					__item = x as XMapItemModel;
 
-					__movieClip = xxx.getBitmapCacheManager ().get (__item.imageClassName);
+					__movieClip = xxx.getMovieClipManager ().get (__item.imageClassName);
 
-					trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+					trace (": imageClassName: ", __item.imageClassName, __movieClip, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 					
-					if (__bitmap != null) {
+					if (__movieClip != null) {
 						if (__item.frame != 0) {
-							__bitmap.goto (__item.frame);
+							__movieClip.gotoToAndStop (__item.frame);
 						}
 						
 						tempPoint.x = __item.x - m_submapModel.x;
@@ -140,9 +140,9 @@ package X.XMap {
 						tempRect.width = __item.boundingRect.width;
 						tempRect.height = __item.boundingRect.height;
 						
-						m_bitmap.bitmapData.copyPixels (
-							__bitmap.bitmapData, tempRect, tempPoint, null, null, true
-						);
+//						m_bitmap.bitmapData.copyPixels (
+//							__bitmap.bitmapData, tempRect, tempPoint, null, null, true
+//						);
 					}
 				}
 			);
@@ -194,10 +194,9 @@ package X.XMap {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapBitmap;
-// !STARLING!
-			if (CONFIG::flash) {
-				x_sprite = addSpriteAt (m_bitmap, 0, 0);
+			if (CONFIG::starling) {
+				m_image = m_XMapView.getSubmapImagePoolManager ().borrowObject () as XSubmapBitmap;
+				x_sprite = addSpriteAt (m_image, 0, 0);
 				x_sprite.setDepth (getDepth ());
 			}
 			
