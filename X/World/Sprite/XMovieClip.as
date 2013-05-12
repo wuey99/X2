@@ -10,6 +10,7 @@ package X.World.Sprite {
 	import flash.utils.*;
 	
 	include "..\\..\\flash.h";
+	import flash.display.Graphics;
 	
 	//------------------------------------------------------------------------------------------	
 	public class XMovieClip extends XSprite {
@@ -119,6 +120,9 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
+			public function get graphics ():Graphics {
+				return null;
+			}
 		}
 		else
 		{
