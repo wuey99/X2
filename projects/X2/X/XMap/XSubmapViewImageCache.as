@@ -199,7 +199,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
 			if (CONFIG::starling) {
-				m_image = m_XMapView.getSubmapImagePoolManager ().borrowObject () as XSubmapBitmap;
+				m_image = m_XMapView.getSubmapImagePoolManager ().borrowObject () as XSubmapImage;
 				x_sprite = addSpriteAt (m_image, 0, 0);
 				x_sprite.setDepth (getDepth ());
 			}
