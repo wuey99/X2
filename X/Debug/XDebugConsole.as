@@ -48,7 +48,7 @@ package X.Debug  {
 		public override function createSprites ():void {
 			var xsprite:XDepthSprite;
 			
-			m_textArea = new XTextSprite ();
+			m_textArea = new XTextSprite (32, 32, "");
 			
 			xsprite = addSpriteAt (m_textArea, 0, 0, true);
 			xsprite.setDepth (999999);
