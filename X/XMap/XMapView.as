@@ -6,23 +6,26 @@ package X.XMap {
 	import X.Geom.*;
 	import X.Pool.XObjectPoolManager;
 	import X.Task.*;
+	import X.Texture.XSubTextureManager;
+	import X.Utils.*;
 	import X.World.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	import X.XML.XSimpleXMLNode;
 	
-	import starling.textures.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
+	
+	import starling.textures.*;
 		
-//------------------------------------------------------------------------------------------
-// !STARLING!: implement Texture pool manager
 //------------------------------------------------------------------------------------------	
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;
 		protected var m_submapBitmapPoolManager:XObjectPoolManager;
 		protected var m_submapImagePoolManager:XObjectPoolManager;
+		protected var m_subTextureManager:XSubTextureManager;
+		protected var m_textureManagerName:String;
 				
 //------------------------------------------------------------------------------------------
 		public function XMapView () {
@@ -32,6 +35,12 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx, args);
+			
+			if (CONFIG::starling) {
+				m_textureManagerName = GUID.create ();
+				
+				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
+			}
 		}
 
 //------------------------------------------------------------------------------------------
@@ -60,8 +69,6 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-// !STARLING! 
-//		
 // all levels/XMaps contain a list of images used in the level.  We cache them all as
 // bitmap's (in flash) and textures (in starling).		
 //------------------------------------------------------------------------------------------
@@ -78,8 +85,16 @@ package X.XMap {
 	
 				__layer.getImageClassNames ().forEach (
 					function (__name:*):void {
-						if (xxx.getBitmapCacheManager ().isQueued (__name as String)) {
-							__flags = false;
+						if (CONFIG::starling) {
+							if (m_subTextureManager.isQueued (__name as String)) {
+								__flags = false;
+							}							
+						}
+						else
+						{
+							if (xxx.getBitmapCacheManager ().isQueued (__name as String)) {
+								__flags = false;
+							}
 						}
 					}
 				);
@@ -93,37 +108,72 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function cacheImageClassNames ():void {
-			var i:Number;
-			
-			for (i=0; i<m_XMapModel.getLayers ().length; i++) {
-				var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
-	
-				__layer.getImageClassNames ().forEach (
-					function (__name:*):void {
-						trace (": cacheImageClassName: ", __name);
-						
-						xxx.getBitmapCacheManager ().add (__name as String);
-					}
-				);
-			}			
+		if (CONFIG::starling) {
+			public function cacheImageClassNames ():void {
+				var i:Number;
+				
+				m_subTextureManager.start ();
+				
+				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
+					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
+		
+					__layer.getImageClassNames ().forEach (
+						function (__name:*):void {
+							trace (": cacheImageClassName: ", __name);
+							
+							m_subTextureManager.add (__name as String);
+						}
+					);
+				}
+				
+				m_subTextureManager.finish ();
+			}
+		}
+		else
+		{
+			public function cacheImageClassNames ():void {
+				var i:Number;
+				
+				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
+					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
+					
+					__layer.getImageClassNames ().forEach (
+						function (__name:*):void {
+							trace (": cacheImageClassName: ", __name);
+							
+							xxx.getBitmapCacheManager ().add (__name as String);
+						}
+					);
+				}			
+			}		
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function uncacheImageClassNames ():void {
 			var i:Number;
 			
-			for (i=0; i<m_XMapModel.getLayers ().length; i++) {
-				var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
-	
-				__layer.getImageClassNames ().forEach (
-					function (__name:*):void {
-						xxx.getBitmapCacheManager ().remove (__name as String);
-					}
-				);
+			if (CONFIG::starling) {
+				xxx.getTextureManager ().removeSubManager (m_textureManagerName);
+			}
+			else
+			{
+				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
+					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
+		
+					__layer.getImageClassNames ().forEach (
+						function (__name:*):void {
+							xxx.getBitmapCacheManager ().remove (__name as String);
+						}
+					);
+				}
 			}
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getSubTextureManager ():XSubTextureManager {
+			return m_subTextureManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function initSubmapPoolManager ():void {
 			if (CONFIG::starling) {
