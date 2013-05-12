@@ -5,11 +5,14 @@ package X.World.Sprite {
 	include "..\\..\\text.h";
 
 	import flash.filters.*;
+	import flash.text.TextFormat;
+	
+	import starling.utils.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XTextSprite extends XSprite {
 		private var m_text:TextField;
-		private var m_textFormat:flash.text.TextFormat;
+		private var m_textFormat:TextFormat;
 
 //------------------------------------------------------------------------------------------
 		public function XTextSprite (
@@ -66,13 +69,14 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
+		CONFIG::starling
+		public function set filters (__value:Array):void {
+			
+		}
+		
+		CONFIG::flash
 		public override function set filters (__value:Array):void {
-			if (CONFIG::starling) {
-			}
-			else
-			{
-				m_text.filters = __value;
-			}
+			m_text.filters = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -129,13 +133,13 @@ package X.World.Sprite {
 			if (CONFIG::starling) {
 				switch (__value) {
 					case "left":
-						m_text.hAlign = starling.utils.hAlign.CENTER;
+						m_text.hAlign = HAlign.CENTER;
 						break;
 					case "right":
-						m_text.hAlign = starling.utils.hAlign.RIGHT;
+						m_text.hAlign = HAlign.RIGHT;
 						break;
 					case "center":
-						m_text.hAlign = starling.utils.hAlign.CENTER;
+						m_text.hAlign = HAlign.CENTER;
 						break;
 				}
 			}
@@ -162,13 +166,13 @@ package X.World.Sprite {
 			if (CONFIG::starling) {
 				switch (__value) {
 					case "top":
-						m_text.vAlign = starling.utils.vAlign.TOP;
+						m_text.vAlign = VAlign.TOP;
 						break;
 					case "bottom":
-						m_text.vAlign = starling.utils.vAlign.BOTTOM;
+						m_text.vAlign = VAlign.BOTTOM;
 						break;
 					case "center":
-						m_text.vAlign = starling.utils.vAlign.CENTER;
+						m_text.vAlign = VAlign.CENTER;
 						break;
 				}
 			}
@@ -251,7 +255,12 @@ package X.World.Sprite {
 		
 //------------------------------------------------------------------------------------------
 		public function set embedFonts (__value:Boolean):void {
-			m_text.embedFonts = __value;
+			if (CONFIG::starling) {
+			}
+			else
+			{
+				m_text.embedFonts = __value;
+			}
 		}
 		
 //------------------------------------------------------------------------------------------

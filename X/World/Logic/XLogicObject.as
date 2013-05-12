@@ -550,7 +550,7 @@ package X.World.Logic {
 			}
 		
 			var __xmovieClip:XMovieClip = new XMovieClip ();
-			__xmovieClip.setup (__movieClip);
+			__xmovieClip.initWithMovieClip (__movieClip);
 			
 			__xmovieClip.gotoAndStop (0);
 			

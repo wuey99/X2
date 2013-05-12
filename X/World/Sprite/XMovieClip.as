@@ -21,16 +21,37 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function setup (__movieclip:MovieClip):void {
-			m_movieClip = __movieclip;
-			
-			addChild (__movieclip);
+		public function setup ():void {
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
 
+		//------------------------------------------------------------------------------------------
+		public function initWithMovieClip (__movieclip:MovieClip):void {
+			m_movieClip = __movieclip;
+			
+			addChild (__movieclip);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
+			var __movieClip:MovieClip;
+			
+			if (CONFIG::starling) {
+				__movieClip = xxx.getTextureManager ().createXMovieClip (__className);
+			}
+			else
+			{
+				__movieClip = new (xxx.getClass (__name)) ();
+			}
+			
+			initWithMovieClip (__movieClip);
+			
+			gotoAndStop (0);	
+		}
+		
 		//------------------------------------------------------------------------------------------
 		public function getMovieClip ():MovieClip {
 			return m_movieClip;

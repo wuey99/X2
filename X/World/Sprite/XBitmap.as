@@ -6,7 +6,7 @@ package X.World.Sprite {
 	import X.Geom.*;
 	import X.World.*;
 	
-	include "..\\..\\flash.h";
+	import flash.display.BitmapData;
 	import flash.geom.*;
 	import flash.utils.*;
 	
@@ -201,15 +201,6 @@ package X.World.Sprite {
 		CONFIG::starling
 			//------------------------------------------------------------------------------------------	
 			public class XBitmap extends XMovieClip {
-				public var m_bitmapDataAnimManager:XBitmapDataAnimManager;
-				public var m_bitmapDataAnim:XBitmapDataAnim;
-				public var m_className:String;
-				public var m_bitmapNames:Object;
-				public var m_frame:Number;
-				public var m_scale:Number;
-				public var m_visible:Boolean;
-				public var m_pos:XPoint;
-				public var m_rect:XRect;
 				
 				//------------------------------------------------------------------------------------------
 				public function XBitmap () {
@@ -217,15 +208,15 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function setup ():void {	
+				public override function setup ():void {	
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function cleanup ():void {
+				public override function cleanup ():void {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
+				public override function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
 					goto (1);
 				}
 				
@@ -249,12 +240,17 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function getBitmap (__frame:Number):BitmapData {
+				public function getBitmap (__frame:Number):* {
 					return null;
 				}		
 				
 				//------------------------------------------------------------------------------------------
-				public function getBitmapByName (__name:String):BitmapData {
+				public function getBitmapByName (__name:String):* {
+					return null;
+				}
+
+				//------------------------------------------------------------------------------------------
+				public function get bitmapData ():BitmapData {
 					return null;
 				}
 				
