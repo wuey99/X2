@@ -33,7 +33,7 @@ package X.Texture {
 			
 			m_count[__className] = 1;
 			
-			var __movieClip:XMovieClip = __createMovieClip (__className);
+			var __movieClip:XMovieClip = __createXMovieClip (__className);
 			
 			m_movieClips.put (__className, __movieClip);
 			
@@ -46,7 +46,7 @@ package X.Texture {
 		}
 
 //------------------------------------------------------------------------------------------
-		private function __createMovieClip (__className:String):XMovieClip {
+		private function __createXMovieClip (__className:String):XMovieClip {
 			if (CONFIG::starling) {
 				var __movieClip:MovieClip = m_XApp.getTextureManager ().createMovieClip (__className);
 			
