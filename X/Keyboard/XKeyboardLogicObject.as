@@ -82,8 +82,8 @@ package X.Keyboard {
 		public function takeStageFocus ():void {
 // !STARLING!
 			if (CONFIG::flash) {
-				if (stage.focus != m_text.v) {
-					stage.focus = m_text.v;
+				if (stage.focus != m_text.getTextField ()) {
+					stage.focus = m_text.getTextField ();
 				}
 			}
 		}
