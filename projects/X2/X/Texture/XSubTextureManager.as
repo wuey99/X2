@@ -162,7 +162,7 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createXMovieClip (__className:String):starling.display.MovieClip {
+		public function createMovieClip (__className:String):starling.display.MovieClip {
 			if (!m_movieClips.exists (__className)) {
 				throw (new Error (": unable to find XMovieClip: " + __className));
 			}

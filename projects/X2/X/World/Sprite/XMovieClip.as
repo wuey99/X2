@@ -40,7 +40,7 @@ package X.World.Sprite {
 			var __movieClip:MovieClip;
 			
 			if (CONFIG::starling) {
-				__movieClip = xxx.getTextureManager ().createXMovieClip (__className);
+				__movieClip = xxx.getTextureManager ().createMovieClip (__className);
 			}
 			else
 			{
@@ -125,6 +125,16 @@ package X.World.Sprite {
 			public override function get graphics ():Graphics {
 				return m_movieClip.graphics;
 			}
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function get dx ():Number {
+			return 0;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function get dy ():Number {
+			return 0;
 		}
 		
 		//------------------------------------------------------------------------------------------
