@@ -4,6 +4,8 @@ package X.World.Sprite {
 	include "..\\..\\flash.h";
 	include "..\\..\\text.h";
 
+	import flash.filters.*;
+	
 //------------------------------------------------------------------------------------------
 	public class XTextSprite extends XSprite {
 		private var m_text:TextField;
@@ -46,9 +48,9 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
-		
+
 //------------------------------------------------------------------------------------------
-		public function get v ():TextField {
+		public function getTextField ():TextField {
 			return m_text;
 		}
 		
@@ -63,6 +65,16 @@ package X.World.Sprite {
 			}
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function set filters (__value:Array):void {
+			if (CONFIG::starling) {
+			}
+			else
+			{
+				m_text.filters = __value;
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function set color (__color:uint):void {
 			if (CONFIG::starling) {
@@ -224,7 +236,7 @@ package X.World.Sprite {
 				m_text.wordWrap = __value;
 			}
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function set italic (__value:Boolean):void {
 		}
@@ -236,7 +248,12 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------
 		public function set underline (__value:Boolean):void {
 		}
-
+		
+//------------------------------------------------------------------------------------------
+		public function set embedFonts (__value:Boolean):void {
+			m_text.embedFonts = __value;
+		}
+		
 //------------------------------------------------------------------------------------------
 		private function __format ():void {
 			if (CONFIG::flash) {

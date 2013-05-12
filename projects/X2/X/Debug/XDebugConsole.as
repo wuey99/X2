@@ -64,16 +64,20 @@ package X.Debug  {
 // set text field properties
 //------------------------------------------------------------------------------------------
 		public function setTextProps ():void {
-// !STARLING!
-			if (CONFIG::flash) {
-				m_textArea.v.selectable = true;
-				m_textArea.v.multiline = true;
-				m_textArea.v.wordWrap = true;
-				m_textArea.v.embedFonts = true;
-			}
-			m_textArea.v.width = 320;
-			m_textArea.v.height = 480;
-            m_textFormat = __TextFormat (m_fontClass);
+			m_textArea.selectable = true;
+			m_textArea.multiline = true;
+			m_textArea.wordWrap = true;
+			m_textArea.embedFonts = true;
+		
+			m_textArea.width = 320;
+			m_textArea.height = 480;
+			
+//			var __font:Font = new __fontClass ();		
+//			m_textArea.font = __font.fontName;
+			
+			m_textArea.bold = true;
+			m_textArea.color = 0x404040;
+			m_textArea.letterSpacing = 0.0;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -94,31 +98,17 @@ package X.Debug  {
 // !STARLING!
 			if (!m_disableOutput) {
 				if (CONFIG::flash) {
-					m_textArea.v.appendText (__text + "\n");
-					m_textArea.v.setTextFormat (m_textFormat);
+//					m_textArea.v.appendText (__text + "\n");
+//					m_textArea.v.setTextFormat (m_textFormat);
 				}
 			}
 		}
 
 //------------------------------------------------------------------------------------------
 		public function clear ():void {
-			m_textArea.v.text = "";
+			m_textArea.text = "";
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function __TextFormat (__fontClass:Class):TextFormat {
-			var __font:Font = new __fontClass ();
-			
-            var __format:TextFormat = new TextFormat();
-            __format.font = __font.fontName;
-            
-            __format.bold = true;
-            __format.color = 0x404040;
-            __format.letterSpacing = 0.0;
-            
-            return __format;
-  		}
-            
 //------------------------------------------------------------------------------------------
 	}
 
