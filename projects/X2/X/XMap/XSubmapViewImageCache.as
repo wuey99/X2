@@ -90,11 +90,14 @@ package X.XMap {
 			
 			refresh ();
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
-			m_bitmap.bitmapData.lock ();
-	
+			__refresh ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		private function __refresh ():void {
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
@@ -111,8 +114,7 @@ package X.XMap {
 			
 			var __items:XDict = m_submapModel.items ();
 			var __item:XMapItemModel;
-			var __bitmap:XBitmap;
-//			var __p:XPoint = new XPoint ();
+			var __movieClip:XMovieClip;
 			
 			tempRect.x = 0;
 			tempRect.y = 0;
@@ -123,7 +125,7 @@ package X.XMap {
 				function (x:*):void {
 					__item = x as XMapItemModel;
 
-					__bitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
+					__movieClip = xxx.getBitmapCacheManager ().get (__item.imageClassName);
 
 					trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 					
@@ -145,22 +147,12 @@ package X.XMap {
 				}
 			);
 							
-			m_bitmap.bitmapData.unlock ();
-			
 			function __vline (x:Number):void {
 				var y:Number;
-				
-				for (y=0; y<m_submapModel.height; y++) {
-					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
-				}
 			}
 			
 			function __hline (y:Number):void {
 				var x:Number;
-				
-				for (x=0; x<m_submapModel.width; x++) {
-					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
-				}
 			}
 		}
 		

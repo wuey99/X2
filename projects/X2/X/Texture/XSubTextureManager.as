@@ -183,6 +183,7 @@ package X.Texture {
 			}
 
 			var __movieClip:MovieClip = new MovieClip (__textures);
+			
 			__movieClip.pivotX = -__rect.x;
 			__movieClip.pivotY = -__rect.y;
 			
