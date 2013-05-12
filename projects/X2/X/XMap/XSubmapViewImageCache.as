@@ -128,21 +128,23 @@ package X.XMap {
 		
 							trace (": imageClassName: ", __item.imageClassName, __movieClip, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 							
-							if (__movieClip != null) {
-								if (__item.frame != 0) {
-									__movieClip.gotoToAndStop (__item.frame);
+							if (CONFIG::starling) {
+								if (__movieClip != null) {
+									if (__item.frame != 0) {
+										__movieClip.gotoAndStop (__item.frame);
+									}
+									
+									tempPoint.x = __item.x - m_submapModel.x;
+									tempPoint.y = __item.y - m_submapModel.y;
+									
+									tempRect.width = __item.boundingRect.width;
+									tempRect.height = __item.boundingRect.height;
+									
+									__movieClip.x = tempPoint.x;
+									__movieClip.y = tempPoint.y;
+									
+									__renderTexture.draw (__movieClip);
 								}
-								
-								tempPoint.x = __item.x - m_submapModel.x;
-								tempPoint.y = __item.y - m_submapModel.y;
-								
-								tempRect.width = __item.boundingRect.width;
-								tempRect.height = __item.boundingRect.height;
-								
-								__movieClip.x = tempPoint.x;
-								__movieClip.y = tempPoint.y;
-								
-								__renderTexture.draw (__movieClip);
 							}
 						}
 					);

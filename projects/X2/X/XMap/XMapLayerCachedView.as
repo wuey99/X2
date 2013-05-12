@@ -100,21 +100,41 @@ package X.XMap {
 		public function addXSubmap (__submap:XSubmapModel, __depth:Number):void {
 //			trace (": addXSubmap: ", __submap.x, __submap.y);
 			
-			var __logicObject:XSubmapViewBitmapCache =
-			  xxx.getXLogicManager ().initXLogicObject (
-				// parent
-					m_XMapView,
-				// logicClassName
-					new XSubmapViewBitmapCache as XLogicObject,
-				// item, layer, depth
-					null, m_currLayer, __depth,
-				// x, y, z
-					__submap.x, __submap.y, 0,
-				// scale, rotation
-					1.0, 0,
-					// XMapView
-					m_XMapView
-				) as XSubmapViewBitmapCache;
+			if (CONFIG::starling) {
+				var __logicObject:XSubmapViewImageCache =
+					xxx.getXLogicManager ().initXLogicObject (
+						// parent
+						m_XMapView,
+						// logicClassName
+						new XSubmapViewImageCache as XLogicObject,
+						// item, layer, depth
+						null, m_currLayer, __depth,
+						// x, y, z
+						__submap.x, __submap.y, 0,
+						// scale, rotation
+						1.0, 0,
+						// XMapView
+						m_XMapView
+					) as XSubmapViewImageCache;
+			}
+			else
+			{
+				var __logicObject:XSubmapViewBitmapCache =
+					xxx.getXLogicManager ().initXLogicObject (
+						// parent
+						m_XMapView,
+						// logicClassName
+						new XSubmapViewBitmapCache as XLogicObject,
+						// item, layer, depth
+						null, m_currLayer, __depth,
+						// x, y, z
+						__submap.x, __submap.y, 0,
+						// scale, rotation
+						1.0, 0,
+						// XMapView
+						m_XMapView
+					) as XSubmapViewBitmapCache;
+			}
 			
 			__submap.inuse++;
 			
