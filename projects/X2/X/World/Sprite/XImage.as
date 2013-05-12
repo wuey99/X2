@@ -15,8 +15,6 @@ package X.World.Sprite {
 	import starling.textures.RenderTexture;
 	
 	//------------------------------------------------------------------------------------------	
-	// !STARLING!
-	//
 	// starling equivalent of the XBitmap class.  Curently supports only a single texture.
 	//------------------------------------------------------------------------------------------
 	public class XImage extends Image implements XRegistration {
@@ -54,6 +52,11 @@ package X.World.Sprite {
 			if (m_texture) {
 				m_texture.dispose ();
 			}
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function getTexture ():RenderTexture {
+			return m_texture;
 		}
 		
 		//------------------------------------------------------------------------------------------
