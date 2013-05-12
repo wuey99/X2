@@ -47,16 +47,22 @@ package X.Texture {
 
 //------------------------------------------------------------------------------------------
 		private function __createMovieClip (__className:String):XMovieClip {
-			var __movieClip:MovieClip = m_XApp.getTextureManager ().createXMovieClip (__className);
+			if (CONFIG::starling) {
+				var __movieClip:MovieClip = m_XApp.getTextureManager ().createXMovieClip (__className);
 			
-			var __xmovieClip:XMovieClip = new XMovieClip ();
-			__xmovieClip.setup (__movieClip);
+				var __xmovieClip:XMovieClip = new XMovieClip ();
+				__xmovieClip.setup (__movieClip);
 			
-			__xmovieClip.gotoAndStop (0);
+				__xmovieClip.gotoAndStop (0);
 			
-			m_movieClips.put (__className, __xmovieClip);
+				m_movieClips.put (__className, __xmovieClip);
 			
-			return __xmovieClip;
+				return __xmovieClip;
+			}
+			else
+			{
+				return null;
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
