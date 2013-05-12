@@ -109,6 +109,7 @@ package X.World {
 		public var m_XSound:XSound;
 		public var m_XTextureManager:XTextureManager;
 		public var m_XSubTextureManager:XSubTextureManager;
+		public var m_XMovieClipCacheManager:XMovieClipCacheManager;
 				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){
@@ -403,7 +404,12 @@ package X.World {
 		public function getXDepthSpritePoolManager ():XObjectPoolManager {
 			return m_XApp.getXDepthSpritePoolManager ();
 		}
-					
+
+//------------------------------------------------------------------------------------------
+		public function getMovieClipCacheManager ():XMovieClipCacheManager {
+			return m_XApp.getMovieClipCacheManager ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getBitmapCacheManager ():XBitmapCacheManager {
 			return m_XApp.getBitmapCacheManager ();
