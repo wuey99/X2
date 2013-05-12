@@ -14,6 +14,8 @@ package X.XMap {
 	import flash.text.*;
 	import flash.utils.*;
 	
+	import starling.textures.*;
+	
 //------------------------------------------------------------------------------------------	
 // instead of maintaining an XLogicObject for an XMapItemModel (for the view), maintain a 
 // texture/view-cache for eash Submap.  On initialization, all XMapItemModel's that flagged
@@ -93,60 +95,61 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
-			__refresh ();
-		}
-		
-//------------------------------------------------------------------------------------------
-		private function __refresh ():void {
-			tempRect.x = 0;
-			tempRect.y = 0;
-			tempRect.width = m_submapModel.width;
-			tempRect.height = m_submapModel.height;
+			var __renderTexture:RenderTexture = m_image.getTexture ();
 			
-//			m_bitmap.bitmapData.fillRect (
-//				tempRect, 0x00000000
-//			);
-			
-			__vline (0);
-			__vline (m_submapModel.width-1);
-			__hline (0);
-			__hline (m_submapModel.height-1);
-			
-			var __items:XDict = m_submapModel.items ();
-			var __item:XMapItemModel;
-			var __movieClip:XMovieClip;
-			
-			tempRect.x = 0;
-			tempRect.y = 0;
-			
-			var i:Number;
-			
-			__items.forEach (
-				function (x:*):void {
-					__item = x as XMapItemModel;
-
-					__movieClip = xxx.getMovieClipManager ().get (__item.imageClassName);
-
-					trace (": imageClassName: ", __item.imageClassName, __movieClip, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+			__renderTexture.drawBundled (
+				function ():void {
+					tempRect.x = 0;
+					tempRect.y = 0;
+					tempRect.width = m_submapModel.width;
+					tempRect.height = m_submapModel.height;
 					
-					if (__movieClip != null) {
-						if (__item.frame != 0) {
-							__movieClip.gotoToAndStop (__item.frame);
+//					m_bitmap.bitmapData.fillRect (
+//						tempRect, 0x00000000
+//					);
+					
+					__vline (0);
+					__vline (m_submapModel.width-1);
+					__hline (0);
+					__hline (m_submapModel.height-1);
+					
+					var __items:XDict = m_submapModel.items ();
+					var __item:XMapItemModel;
+					var __movieClip:XMovieClip;
+					
+					tempRect.x = 0;
+					tempRect.y = 0;
+					
+					var i:Number;
+					
+					__items.forEach (
+						function (x:*):void {
+							__item = x as XMapItemModel;
+		
+							__movieClip = xxx.getMovieClipCacheManager ().get (__item.imageClassName);
+		
+							trace (": imageClassName: ", __item.imageClassName, __movieClip, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+							
+							if (__movieClip != null) {
+								if (__item.frame != 0) {
+									__movieClip.gotoToAndStop (__item.frame);
+								}
+								
+								tempPoint.x = __item.x - m_submapModel.x;
+								tempPoint.y = __item.y - m_submapModel.y;
+								
+								tempRect.width = __item.boundingRect.width;
+								tempRect.height = __item.boundingRect.height;
+								
+//								m_bitmap.bitmapData.copyPixels (
+//									__bitmap.bitmapData, tempRect, tempPoint, null, null, true
+//								);
+							}
 						}
-						
-						tempPoint.x = __item.x - m_submapModel.x;
-						tempPoint.y = __item.y - m_submapModel.y;
-						
-						tempRect.width = __item.boundingRect.width;
-						tempRect.height = __item.boundingRect.height;
-						
-//						m_bitmap.bitmapData.copyPixels (
-//							__bitmap.bitmapData, tempRect, tempPoint, null, null, true
-//						);
-					}
+					);
 				}
 			);
-							
+			
 			function __vline (x:Number):void {
 				var y:Number;
 			}
