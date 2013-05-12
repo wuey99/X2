@@ -13,7 +13,7 @@ package X.World.Sprite {
 	
 	//------------------------------------------------------------------------------------------	
 	public class XMovieClip extends XSprite {
-		public var m_movieclip:MovieClip;
+		public var m_movieClip:MovieClip;
 		
 		//------------------------------------------------------------------------------------------
 		public function XMovieClip () {
@@ -22,7 +22,7 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function setup (__movieclip:MovieClip):void {
-			m_movieclip = __movieclip;
+			m_movieClip = __movieclip;
 			
 			addChild (__movieclip);
 		}
@@ -33,57 +33,67 @@ package X.World.Sprite {
 
 		//------------------------------------------------------------------------------------------
 		public function getMovieClip ():MovieClip {
-			return m_movieclip;
+			return m_movieClip;
 		}
 		
 		public function set movieclip (__value:MovieClip):void {
-			m_movieclip = __value;
+			m_movieClip = __value;
 		}
 		
 		public function get movieclip ():MovieClip {
-			return m_movieclip;
+			return m_movieClip;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieclip.currentFrame = __frame;
-				m_movieclip.stop ();
+				m_movieClip.currentFrame = __frame;
+				m_movieClip.stop ();
 			}
 			else
 			{
-				m_movieclip.gotoAndPlay (__frame);
+				m_movieClip.gotoAndPlay (__frame);
 			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieclip.currentFrame = __frame;
-				m_movieclip.stop ();
+				m_movieClip.currentFrame = __frame;
+				m_movieClip.stop ();
 			}
 			else
 			{
-				m_movieclip.gotoAndStop (__frame);
+				m_movieClip.gotoAndStop (__frame);
 			}
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function play ():void {
+			m_movieClip.play ();
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function stop ():void {
+			m_movieClip.stop ();
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function set rotation (__value:Number):void {
-			m_movieclip.rotation = __value;
+			m_movieClip.rotation = __value;
 		}
 		
 		public override function get rotation ():Number {
-			return m_movieclip.rotation;
+			return m_movieClip.rotation;
 		}
 
 		//------------------------------------------------------------------------------------------
 		public override function set alpha (__value:Number):void {
-			m_movieclip.alpha = __value;
+			m_movieClip.alpha = __value;
 		}
 		
 		public override function get alpha ():Number {
-			return m_movieclip.alpha;
+			return m_movieClip.alpha;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -92,26 +102,26 @@ package X.World.Sprite {
 		else
 		{
 			public override function get graphics ():Graphics {
-				return m_movieclip.graphics;
+				return m_movieClip.graphics;
 			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function set scaleX (__value:Number):void {
-			m_movieclip.scaleX = __value;
+			m_movieClip.scaleX = __value;
 		}
 		
 		public override function get scaleX ():Number {
-			return m_movieclip.scaleX;
+			return m_movieClip.scaleX;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function set scaleY (__value:Number):void {
-			m_movieclip.scaleY = __value;
+			m_movieClip.scaleY = __value;
 		}
 		
 		public override function get scaleY ():Number {
-			return m_movieclip.scaleY;
+			return m_movieClip.scaleY;
 		}		
 		
 		//------------------------------------------------------------------------------------------

@@ -70,7 +70,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 // all levels/XMaps contain a list of images used in the level.  We cache them all as
-// bitmap's (in flash) and textures (in starling).		
+// bitmap's (in flash) and textures/movieclips (in starling).		
 //------------------------------------------------------------------------------------------
 		
 //------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ package X.XMap {
 				__layer.getImageClassNames ().forEach (
 					function (__name:*):void {
 						if (CONFIG::starling) {
-							if (m_subTextureManager.isQueued (__name as String)) {
+							if (xxx.getMovieClipCacheManager ().isQueued (__name as String)) {
 								__flags = false;
 							}							
 						}
@@ -127,6 +127,18 @@ package X.XMap {
 				}
 				
 				m_subTextureManager.finish ();
+				
+				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
+					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
+					
+					__layer.getImageClassNames ().forEach (
+						function (__name:*):void {
+							trace (": cacheImageClassName: ", __name);
+							
+							xxx.getMovieClipCacheManager ().add (__name as String);
+						}
+					);
+				}	
 			}
 		}
 		else
@@ -153,6 +165,16 @@ package X.XMap {
 			var i:Number;
 			
 			if (CONFIG::starling) {
+				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
+					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
+					
+					__layer.getImageClassNames ().forEach (
+						function (__name:*):void {
+							xxx.getMovieClipCacheManager ().remove (__name as String);
+						}
+					);
+				}
+				
 				xxx.getTextureManager ().removeSubManager (m_textureManagerName);
 			}
 			else
