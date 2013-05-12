@@ -104,9 +104,7 @@ package X.XMap {
 					tempRect.width = m_submapModel.width;
 					tempRect.height = m_submapModel.height;
 					
-//					m_bitmap.bitmapData.fillRect (
-//						tempRect, 0x00000000
-//					);
+					__renderTexture.clear ();
 					
 					__vline (0);
 					__vline (m_submapModel.width-1);
@@ -141,9 +139,10 @@ package X.XMap {
 								tempRect.width = __item.boundingRect.width;
 								tempRect.height = __item.boundingRect.height;
 								
-//								m_bitmap.bitmapData.copyPixels (
-//									__bitmap.bitmapData, tempRect, tempPoint, null, null, true
-//								);
+								__movieClip.x = tempPoint.x;
+								__movieClip.y = tempPoint.y;
+								
+								__renderTexture.draw (__movieClip);
 							}
 						}
 					);
