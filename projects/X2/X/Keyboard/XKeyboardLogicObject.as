@@ -48,7 +48,7 @@ package X.Keyboard {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_text = new XTextSprite ();
+			m_text = new XTextSprite (32, 32, "");
 			
 			addSpriteAt (m_text, 9999, 9999);
 		}
