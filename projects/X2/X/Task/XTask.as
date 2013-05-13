@@ -64,7 +64,12 @@ package X.Task {
 		private var m_subTask:XTask;
 		private var m_time:Number;
 		private var m_WAIT1000:Boolean;
-
+		public var m_isDead:Boolean;
+		public var tag:String;
+		public var m_id:Number;
+		
+		public static var g_id:Number = 0;
+		
 		protected var m_manager:XTaskManager;
 		
 		public static var CALL:Number = 0;
@@ -95,6 +100,12 @@ package X.Task {
 			m_parent = null;
 			
 			m_WAIT1000 = false;
+			
+			tag = "";
+			
+			m_id = ++g_id;
+			
+			trace (": XTask: ", m_id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -108,6 +119,7 @@ package X.Task {
 			m_ticks = 0x0100 + 0x0080;
 			m_flags = ~FLAGS_EQ;
 			m_subTask = null;
+			m_isDead = false;
 
 			m_XTaskSubManager = createXTaskSubManager ();
 			
@@ -149,6 +161,8 @@ package X.Task {
 //------------------------------------------------------------------------------------------
 		public function kill ():void {
 			removeAllTasks ();
+			
+			m_isDead = true;
 		}	
 			
 //------------------------------------------------------------------------------------------
@@ -156,6 +170,10 @@ package X.Task {
 //------------------------------------------------------------------------------------------
 		public function run ():void {
 // done execution?
+			if (m_isDead) {
+				return;
+			}
+			
 			if (m_stackPtr < 0) {
 				m_manager.removeTask (this);
 
@@ -482,7 +500,8 @@ package X.Task {
 	case EXEC:
 		if (m_subTask == null) {
 // get new XTask Array run it immediately
-			m_subTask = m_manager.addTask ((m_taskList[m_taskIndex] as Array), true);
+			m_subTask = m_XTaskSubManager.addTask ((m_taskList[m_taskIndex] as Array), true);
+			m_subTask.tag = tag;
 			m_subTask.setParent (m_parent);
 			m_subTask.run ();
 			
