@@ -74,7 +74,7 @@ package X.World.Sprite {
 		public function gotoAndPlay (__frame:Number):void {
 			if (CONFIG::starling) {
 				m_movieClip.currentFrame = __frame-1;
-				m_movieClip.stop ();
+				m_movieClip.play ();
 			}
 			else
 			{
@@ -86,7 +86,7 @@ package X.World.Sprite {
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
 				m_movieClip.currentFrame = __frame-1;
-				m_movieClip.stop ();
+				m_movieClip.pause ();
 			}
 			else
 			{
