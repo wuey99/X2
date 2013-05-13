@@ -73,6 +73,7 @@ package X.Task {
 		
 //------------------------------------------------------------------------------------------
 		public function addTask (__taskList:Array, __findLabelsFlag:Boolean = true):XTask {
+//			var __task:XTask = m_XTaskPoolManager.borrowObject () as XTask;
 			var __task:XTask = new XTask ();
 			__task.setup (__taskList, __findLabelsFlag);
 			
@@ -101,7 +102,7 @@ package X.Task {
 				
 				m_XTasks.remove (__task);
 				
-//				m_XTaskPoolManager.returnObject (__task);
+				m_XTaskPoolManager.returnObject (__task);
 			}
 		}
 		

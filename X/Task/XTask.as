@@ -97,7 +97,7 @@ package X.Task {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setup (__taskList:Array, __findLabelsFlag:Boolean = true) {
+		public function setup (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			__reset (__taskList, __findLabelsFlag);
 			
 			m_parent = null;
