@@ -3,6 +3,7 @@ package X.Task {
 
 	import X.*;
 	import X.Collections.*;
+	import X.Pool.*;
 	import X.World.Logic.*;
 	
 //------------------------------------------------------------------------------------------	
@@ -10,6 +11,7 @@ package X.Task {
 		protected var m_XTasks:XDict;
 		protected var m_paused:Number;
 		protected var m_XApp:XApp;
+		protected var m_XTaskPoolManager:XObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskManager (__XApp:XApp) {
@@ -18,6 +20,21 @@ package X.Task {
 			m_XTasks = new XDict ();
 			
 			m_paused = 0;
+			
+			m_XTaskPoolManager = new XObjectPoolManager (
+				function ():* {
+					return new XTask ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				512, 128,
+				
+				function (x:*):void {
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -83,6 +100,8 @@ package X.Task {
 				__task.kill ();
 				
 				m_XTasks.remove (__task);
+				
+//				m_XTaskPoolManager.returnObject (__task);
 			}
 		}
 		

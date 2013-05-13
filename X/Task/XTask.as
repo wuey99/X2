@@ -300,7 +300,6 @@ package X.Task {
 // evaluate instructions
 //------------------------------------------------------------------------------------------	
 	private function __evalInstructions ():Boolean {
-		
 		var value:* = m_taskList[m_taskIndex++];
 				
 //------------------------------------------------------------------------------------------
