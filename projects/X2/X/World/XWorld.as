@@ -62,8 +62,8 @@ package X.World {
 		public var m_XKeyboardManager:XKeyboardManager;
 		protected var m_viewRect:XRect;
 		private var m_XBulletCollisionManager:XBulletCollisionManager;
-		public var m_mouseX;
-		public var m_mouseY;
+		public var m_mouseX:Number;
+		public var m_mouseY:Number;
 		
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;

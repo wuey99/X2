@@ -74,6 +74,10 @@ package X.Texture {
 				}
 			);
 			
+			if (__movieClip == null) {
+				throw (new Error (": unable to find XMovieClip: " + __className));	
+			}
+			
 			return __movieClip;
 		}
 		
