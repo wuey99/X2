@@ -5,6 +5,7 @@ package X.World.Sprite {
 	import X.Geom.*;
 	import X.World.*;
 	import X.World.Sprite.*;
+	import X.Texture.*;
 	
 	import flash.geom.*;
 	import flash.utils.*;
@@ -40,8 +41,11 @@ package X.World.Sprite {
 		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
 			var __movieClip:MovieClip;
 			
+			var __textureManager:XTextureManager =
+				__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
+			
 			if (CONFIG::starling) {
-				__movieClip = xxx.getTextureManager ().createMovieClip (__className);
+				__movieClip = __textureManager.createMovieClip (__className);
 			}
 			else
 			{
@@ -50,7 +54,7 @@ package X.World.Sprite {
 			
 			initWithMovieClip (__movieClip);
 			
-			gotoAndStop (0);	
+			gotoAndStop (1);	
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -69,7 +73,7 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieClip.currentFrame = __frame;
+				m_movieClip.currentFrame = __frame-1;
 				m_movieClip.stop ();
 			}
 			else
@@ -81,7 +85,7 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieClip.currentFrame = __frame;
+				m_movieClip.currentFrame = __frame-1;
 				m_movieClip.stop ();
 			}
 			else
