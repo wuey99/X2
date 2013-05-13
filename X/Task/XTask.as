@@ -90,11 +90,14 @@ package X.Task {
 		public static var FLAGS_EQ:Number = 1;
 		
 		protected var m_XTaskSubManager:XTaskSubManager;
-				
+
 //------------------------------------------------------------------------------------------
-		public function XTask (__taskList:Array, __findLabelsFlag:Boolean = true) {
-			super ();
-			
+		public function XTask () {
+			super ();	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setup (__taskList:Array, __findLabelsFlag:Boolean = true) {
 			__reset (__taskList, __findLabelsFlag);
 			
 			m_parent = null;
@@ -175,7 +178,8 @@ package X.Task {
 			if (m_stackPtr < 0) {
 				m_manager.removeTask (this);
 
-				kill ();
+// this should be called from the XTaskManager ().
+//				kill ();
 				
 				return;
 			}
