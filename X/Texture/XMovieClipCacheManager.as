@@ -53,7 +53,7 @@ package X.Texture {
 				var __xmovieClip:XMovieClip = new XMovieClip ();
 				__xmovieClip.initWithMovieClip (__movieClip);
 			
-				__xmovieClip.gotoAndStop (0);
+				__xmovieClip.gotoAndStop (1);
 			
 				m_movieClips.put (__className, __xmovieClip);
 			
