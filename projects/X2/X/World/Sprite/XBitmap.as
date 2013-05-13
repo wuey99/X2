@@ -219,11 +219,6 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public override function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
-					goto (1);
-				}
-				
-				//------------------------------------------------------------------------------------------
 				public function disposeBitmapByName (__name:String):void {
 				}
 				
