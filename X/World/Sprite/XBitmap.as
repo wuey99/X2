@@ -5,11 +5,12 @@ package X.World.Sprite {
 	import X.Bitmap.*;
 	import X.Geom.*;
 	import X.World.*;
+	import X.World.Logic.XLogicObject;
 	
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.geom.*;
 	import flash.utils.*;
-	
-	include "..\\..\\flash.h";
 	
 		//------------------------------------------------------------------------------------------
 		CONFIG::flash
@@ -24,6 +25,7 @@ package X.World.Sprite {
 				public var m_visible:Boolean;
 				public var m_pos:XPoint;
 				public var m_rect:XRect;
+				public var theParent:*;
 				
 				//------------------------------------------------------------------------------------------
 				include "..\\Sprite\\XRegistration_impl.h";
