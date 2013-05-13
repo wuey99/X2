@@ -6,9 +6,10 @@ package X.World.Sprite {
 	import X.Geom.*;
 	import X.World.*;
 	
-	import flash.display.BitmapData;
 	import flash.geom.*;
 	import flash.utils.*;
+	
+	include "..\\..\\flash.h";
 	
 		//------------------------------------------------------------------------------------------
 		CONFIG::flash

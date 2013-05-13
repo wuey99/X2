@@ -45,7 +45,7 @@ package X.World.Sprite {
 			}
 			else
 			{
-				__movieClip = new (xxx.getClass (__name)) ();
+				__movieClip = new (xxx.getClass (__className)) ();
 			}
 			
 			initWithMovieClip (__movieClip);
