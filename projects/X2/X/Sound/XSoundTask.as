@@ -17,7 +17,7 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function setup (__taskList:Array, __findLabelsFlag:Boolean = true) {
+		public override function setup (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			super.setup (__taskList, __findLabelsFlag);
 		}
 		
