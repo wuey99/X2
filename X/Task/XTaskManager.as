@@ -49,7 +49,7 @@ package X.Task {
 		public function removeAllTasks ():void {
 			m_XTasks.forEach (
 				function (__task:*):void {
-					m_XTasks.remove (__task as XTask);
+					removeTask (__task);
 				}
 			);
 		}		
