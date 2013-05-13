@@ -47,7 +47,7 @@ package X.World {
 		public var m_world:b2World;
 		public var m_iterations:int = 20;
 		public var m_timeStep:Number = 1.0/30.0;
-		public var m_parent:Sprite;	
+		public var m_parent:*;	
 		public var m_XApp:XApp
 		public var m_XLogicManager:XLogicManager;
 		public var m_XTaskManager:XTaskManager;
@@ -90,7 +90,6 @@ package X.World {
 		public var m_XSoundTaskManager:XSoundTaskManager;
 		public var m_XSoundTask:XSoundTask;
 		public var m_XDebugConsole:XDebugConsole;
-		public var m_XKeyboardLogicObject:XKeyboardLogicObject;
 		public var m_xmlDoc:XSimpleXMLDocument;
 		public var m_xmlNode:XSimpleXMLNode;
 		public var m_XPoint:XPoint;
@@ -112,7 +111,7 @@ package X.World {
 		public var m_XMovieClipCacheManager:XMovieClipCacheManager;
 				
 //------------------------------------------------------------------------------------------
-		public function XWorld (__parent:Sprite, __XApp:XApp, __layers:Number=8){
+		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8){
 			m_parent = __parent;
 			m_XApp = __XApp;
 			
@@ -323,6 +322,11 @@ package X.World {
 			{
 				return stage.mouseY;
 			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getParent ():* {
+			return m_parent;
 		}
 		
 //------------------------------------------------------------------------------------------
