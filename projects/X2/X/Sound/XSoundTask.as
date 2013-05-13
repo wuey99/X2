@@ -12,10 +12,15 @@ package X.Sound {
 		protected var m_XSoundTaskManager:XSoundTaskManager;
 		
 //------------------------------------------------------------------------------------------
-		public function XSoundTask (__taskList:Array, __findLabelsFlag:Boolean = true) {
-			super (__taskList, __findLabelsFlag);
+		public function XSoundTask () {
+			super ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function setup (__taskList:Array, __findLabelsFlag:Boolean = true) {
+			super.setup (__taskList, __findLabelsFlag);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public override function createXTaskSubManager ():XTaskSubManager {
 			m_XSoundTaskManager = new XSoundTaskManager (null, null);

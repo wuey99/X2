@@ -56,7 +56,8 @@ package X.Task {
 		
 //------------------------------------------------------------------------------------------
 		public function addTask (__taskList:Array, __findLabelsFlag:Boolean = true):XTask {
-			var __task:XTask = new XTask (__taskList, __findLabelsFlag);
+			var __task:XTask = new XTask ();
+			__task.setup (__taskList, __findLabelsFlag);
 			
 			__task.setManager (this);
 			__task.setParent (this);

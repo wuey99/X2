@@ -104,7 +104,10 @@ package X.Sound {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 
-			var __task:XSoundTask = addXTask (new XSoundTask (__taskList, __findLabelsFlag)) as XSoundTask;
+			var __task0:XSoundTask = new XSoundTask ();
+			__task0.setup (__taskList, __findLabelsFlag);
+			
+			var __task:XSoundTask = addXTask (__task0) as XSoundTask;
 			
 			__task.setSoundManager (m_soundManager);
 			
@@ -128,7 +131,10 @@ package X.Sound {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			var __task:XSoundTask = addXTask (new XSoundTask (__taskList, __findLabelsFlag)) as XSoundTask;
+			var __task0:XSoundTask = new XSoundTask ();
+			__task0.setup (__taskList, __findLabelsFlag);
+			
+			var __task:XSoundTask = addXTask (__task0) as XSoundTask;
 			
 			__task.setSoundManager (m_soundManager);
 			
@@ -142,7 +148,10 @@ package X.Sound {
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
-			var __task:XSoundTask = changeXTask (__oldTask, new XSoundTask (__taskList, __findLabelsFlag)) as XSoundTask;
+			var __task0:XSoundTask = new XSoundTask ();
+			__task0.setup (__taskList, __findLabelsFlag);
+			
+			var __task:XSoundTask = changeXTask (__oldTask, __task0) as XSoundTask;
 			
 			return __task;
 		}
