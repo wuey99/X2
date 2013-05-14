@@ -20,12 +20,10 @@ package X.Texture {
 		protected var m_XApp:XApp;
 		
 		protected var m_movieClips:XDict;
-		protected var m_textures:Array;
 		protected var m_atlases:Array;
 		
 		protected var m_currentAtlas:TextureAtlas;
 		protected var m_currentAtlasText:String;
-		protected var m_currentBitmap:BitmapData;
 		
 		protected var m_packer:MaxRectPacker;
 		

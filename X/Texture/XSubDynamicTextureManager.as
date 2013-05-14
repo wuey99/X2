@@ -18,6 +18,7 @@ package X.Texture {
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
 	public class XSubDynamicTextureManager extends XSubTextureManager {
+		protected var m_textures:Array;
 		protected var m_currentTexture:RenderTexture;
 		
 		//------------------------------------------------------------------------------------------
