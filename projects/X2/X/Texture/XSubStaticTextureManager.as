@@ -18,6 +18,7 @@ package X.Texture {
 	//------------------------------------------------------------------------------------------
 	public class XSubStaticTextureManager extends XSubTextureManager {
 		protected var m_currentBitmap:BitmapData;
+		protected var m_currentAtlasText:String;
 		
 		//------------------------------------------------------------------------------------------
 		public function XSubStaticTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
@@ -50,6 +51,29 @@ package X.Texture {
 			__begin ();
 		}
 		 
+		//------------------------------------------------------------------------------------------
+		public override function finish ():void {
+			__end ();
+			
+			m_movieClips.forEach (
+				function (x:*):void {
+					var __className:String = x as String;
+					
+					var __movieClipMetadata:Array = m_movieClips.get (__className);
+					
+					for (var i:Number = 0; i < m_atlases.length; i++) {
+						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
+						
+						var __texture:Texture = __atlas.getTexture (__className + "_" + __generateIndex (0));
+						
+						if (__texture) {
+							__movieClipMetadata.push (__atlas);
+						}
+					}
+				}
+			);	
+		}
+		
 		//------------------------------------------------------------------------------------------
 		public override function add (__className:String):void {	
 			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__className)) ();
