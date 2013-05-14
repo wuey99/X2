@@ -16,12 +16,12 @@ package X.Texture {
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
-	public class XSubStaticTextureManager extends XSubTextureManager {
+	public class XStaticSubTextureManager extends XSubTextureManager {
 		protected var m_currentBitmap:BitmapData;
 		protected var m_currentAtlasText:String;
 		
 		//------------------------------------------------------------------------------------------
-		public function XSubStaticTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
+		public function XStaticSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
 			super (__XApp, __width, __height);
 		}
 		
