@@ -560,7 +560,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function removeAllXBitmaps ():void {
 			m_bitmaps.forEach (
-				function (__name:*) {
+				function (__name:*):void {
 					var __bitmap:XBitmap = m_bitmaps.get (__name) as XBitmap;
 					
 					__bitmap.cleanup ();
