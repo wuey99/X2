@@ -105,15 +105,21 @@ package X.Texture {
 				
 				m_currentTexture.draw (__image);
 				
-				var __subText:String = '<SubTexture name="'+__className+'_' + __generateIndex (i) + '" ' +
-					'x="'+__rect.x+'" y="'+__rect.y+'" width="'+__rect.width+'" height="'+__rect.height+'" frameX="0" frameY="0" ' +
-					'frameWidth="'+__rect.width+'" frameHeight="'+__rect.height+'"/>';
-				
-				m_currentAtlasText = m_currentAtlasText + __subText;
+				m_currentAtlas.addRegion (__className+"_"+__generateIndex (i), __rect, new Rectangle (0, 0, __rect.width, __rect.height));
 			}
 
 			var __movieClipMetadata:Array = new Array ();
 			__movieClipMetadata.push (__realBounds);
+			
+			for (i=0; i < m_atlases.length; i++) {
+				var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
+				
+				var __texture:Texture = __atlas.getTexture (__className + "_" + __generateIndex (0));
+				
+				if (__texture) {
+					__movieClipMetadata.push (__atlas);
+				}
+			}
 			
 			m_movieClips.put (__className, __movieClipMetadata);
 		}	
@@ -122,25 +128,17 @@ package X.Texture {
 		protected override function __begin ():void {
 			m_packer = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			
-			m_currentAtlasText = "";
-			
 			m_currentTexture = new RenderTexture (TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			m_textures.push (m_currentTexture);
+
+			m_currentAtlas = new TextureAtlas (m_currentTexture);
+			m_atlases.push (m_currentAtlas);
 			
 			m_currentTexture.clear ();
 		}
 		
 		//------------------------------------------------------------------------------------------
-		protected override function __end ():void {
-			if (1) {
-				m_currentAtlasText = '<TextureAtlas imagePath="atlas.png">' + m_currentAtlasText + "</TextureAtlas>";
-				var __atlasXML:XML = new XML (m_currentAtlasText);
-				
-				trace (": atlasXML: ", m_currentAtlasText);
-				
-				var __atlas:TextureAtlas = new TextureAtlas (m_currentTexture, __atlasXML);
-				m_atlases.push (__atlas);
-			}			
+		protected override function __end ():void {		
 		}
 
 		

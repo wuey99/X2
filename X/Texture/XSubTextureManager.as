@@ -20,10 +20,9 @@ package X.Texture {
 		protected var m_XApp:XApp;
 		
 		protected var m_movieClips:XDict;
-		protected var m_atlases:Array;
 		
+		protected var m_atlases:Array;
 		protected var m_currentAtlas:TextureAtlas;
-		protected var m_currentAtlasText:String;
 		
 		protected var m_packer:MaxRectPacker;
 		
@@ -53,25 +52,6 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public function finish ():void {
-			__end ();
-			
-			m_movieClips.forEach (
-				function (x:*):void {
-					var __className:String = x as String;
-					
-					var __movieClipMetadata:Array = m_movieClips.get (__className);
-						
-					for (var i:Number = 0; i < m_atlases.length; i++) {
-						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
-						
-						var __texture:Texture = __atlas.getTexture (__className + "_" + __generateIndex (0));
-						
-						if (__texture) {
-							__movieClipMetadata.push (__atlas);
-						}
-					}
-				}
-			);	
 		}
 		 
 		//------------------------------------------------------------------------------------------
