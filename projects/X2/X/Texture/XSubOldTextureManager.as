@@ -7,7 +7,6 @@ package X.Texture {
 	import X.World.Sprite.*;
 	import X.XApp;
 	
-	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.*;
 	
@@ -17,7 +16,7 @@ package X.Texture {
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
-	public class XSubTextureManager extends Object {
+	public class XSubOldTextureManager extends Object {
 		private var m_XApp:XApp;
 		
 		private var m_movieClips:XDict;
@@ -26,15 +25,15 @@ package X.Texture {
 		
 		private var m_currentAtlas:TextureAtlas;
 		private var m_currentAtlasText:String;
-		private var m_currentTexture:RenderTexture;
+		private var m_currentBitmap:BitmapData;
 		
 		private var m_packer:MaxRectPacker;
 		
 		private var TEXTURE_WIDTH:Number = 2048;
 		private var TEXTURE_HEIGHT:Number = 2048;
-
+			
 		//------------------------------------------------------------------------------------------
-		public function XSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
+		public function XSubOldTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
 			m_XApp = __XApp;
 			
 			TEXTURE_WIDTH = __width;
@@ -49,6 +48,11 @@ package X.Texture {
 		//------------------------------------------------------------------------------------------
 		public function reset ():void {
 			var i:Number;
+			
+			if (m_currentBitmap) {
+				m_currentBitmap.dispose ();	
+				m_currentBitmap = null;
+			}
 			
 			if (m_atlases) {				
 				for (i=0; i<m_atlases.length; i++) {
@@ -126,27 +130,13 @@ package X.Texture {
 				__rect.y += __padding;
 				__rect.width -= __padding * 2;
 				__rect.height -= __padding * 2;
-	
+				
+				trace (": rect: ", __rect);
+				
 				var __matrix:Matrix = new Matrix ();
 				__matrix.scale (__scaleX, __scaleY);
-				__matrix.translate (-__realBounds.x*__scaleX, -__realBounds.y*__scaleY);
-				
-				var __bitmapData:BitmapData = new BitmapData (__rect.width, __rect.height);
-				var __fillRect:Rectangle = new Rectangle (0, 0, __rect.width, __rect.height);
-				__bitmapData.fillRect (
-					__fillRect, 0x00000000
-				);
-				
-				__bitmapData.draw (__movieClip, __matrix);
-				
-				var __bitmap:Bitmap = new Bitmap (__bitmapData);
-				var __image:Image = Image.fromBitmap (__bitmap);
-				
-				__bitmapData.dispose ();
-				
-				__image.x = __rect.x; __image.y = __rect.y;
-				
-				m_currentTexture.draw (__image);
+				__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y)
+				m_currentBitmap.draw (__movieClip, __matrix);
 				
 				var __subText:String = '<SubTexture name="'+__className+'_' + __generateIndex (i) + '" ' +
 					'x="'+__rect.x+'" y="'+__rect.y+'" width="'+__rect.width+'" height="'+__rect.height+'" frameX="0" frameY="0" ' +
@@ -202,26 +192,31 @@ package X.Texture {
 
 		//------------------------------------------------------------------------------------------
 		private function __begin ():void {
+			var __rect:Rectangle = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+			m_currentBitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
+			m_currentBitmap.fillRect (__rect, 0x00000000);
+			
 			m_packer = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			
 			m_currentAtlasText = "";
-			
-			m_currentTexture = new RenderTexture (TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			m_textures.push (m_currentTexture);
-			
-			m_currentTexture.clear ();
 		}
 		
 		//------------------------------------------------------------------------------------------
 		private function __end ():void {
-			if (1) {
+			if (m_currentBitmap) {
 				m_currentAtlasText = '<TextureAtlas imagePath="atlas.png">' + m_currentAtlasText + "</TextureAtlas>";
 				var __atlasXML:XML = new XML (m_currentAtlasText);
 				
 				trace (": atlasXML: ", m_currentAtlasText);
 				
-				var __atlas:TextureAtlas = new TextureAtlas (m_currentTexture, __atlasXML);
+				var __texture:Texture = Texture.fromBitmapData (m_currentBitmap, false);
+				var __atlas:TextureAtlas = new TextureAtlas (__texture, __atlasXML);
+				
+//				m_textures.push (__texture);
 				m_atlases.push (__atlas);
+				
+				m_currentBitmap.dispose ();
+				m_currentBitmap = null;
 			}			
 		}
 
