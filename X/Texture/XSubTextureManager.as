@@ -61,7 +61,7 @@ package X.Texture {
 					
 					var __movieClipMetadata:Array = m_movieClips.get (__className);
 						
-					for (var i:Number = 0; i <m_atlases.length; i++) {
+					for (var i:Number = 0; i < m_atlases.length; i++) {
 						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
 						
 						var __texture:Texture = __atlas.getTexture (__className + "_" + __generateIndex (0));
