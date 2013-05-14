@@ -75,6 +75,11 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public override function isDynamic ():Boolean {
+			return false;	
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public override function add (__className:String):void {	
 			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__className)) ();
 			
