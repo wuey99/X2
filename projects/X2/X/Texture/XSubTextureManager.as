@@ -7,7 +7,6 @@ package X.Texture {
 	import X.World.Sprite.*;
 	import X.XApp;
 	
-	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.*;
 	
@@ -18,21 +17,21 @@ package X.Texture {
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
 	public class XSubTextureManager extends Object {
-		private var m_XApp:XApp;
+		protected var m_XApp:XApp;
 		
-		private var m_movieClips:XDict;
-		private var m_textures:Array;
-		private var m_atlases:Array;
+		protected var m_movieClips:XDict;
+		protected var m_textures:Array;
+		protected var m_atlases:Array;
 		
-		private var m_currentAtlas:TextureAtlas;
-		private var m_currentAtlasText:String;
-		private var m_currentTexture:RenderTexture;
+		protected var m_currentAtlas:TextureAtlas;
+		protected var m_currentAtlasText:String;
+		protected var m_currentBitmap:BitmapData;
 		
-		private var m_packer:MaxRectPacker;
+		protected var m_packer:MaxRectPacker;
 		
-		private var TEXTURE_WIDTH:Number = 2048;
-		private var TEXTURE_HEIGHT:Number = 2048;
-
+		protected var TEXTURE_WIDTH:Number = 2048;
+		protected var TEXTURE_HEIGHT:Number = 2048;
+			
 		//------------------------------------------------------------------------------------------
 		public function XSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
 			m_XApp = __XApp;
@@ -48,24 +47,10 @@ package X.Texture {
 
 		//------------------------------------------------------------------------------------------
 		public function reset ():void {
-			var i:Number;
-			
-			if (m_atlases) {				
-				for (i=0; i<m_atlases.length; i++) {
-					m_atlases[i].dispose ();
-				}
-			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function start ():void {
-			reset ();
-			
-			m_movieClips = new XDict ();
-			m_textures = new Array ();
-			m_atlases = new Array ();
-			
-			__begin ();
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -93,72 +78,6 @@ package X.Texture {
 		 
 		//------------------------------------------------------------------------------------------
 		public function add (__className:String):void {	
-			var __movieClip:flash.display.MovieClip = new (m_XApp.getClass (__className)) ();
-			
-			var __scaleX:Number = 1.0;
-			var __scaleY:Number = 1.0;
-			var __padding:Number = 2.0;
-			var __rect:Rectangle;
-			var __realBounds:Rectangle;
-
-			var i:Number;
-			
-			for (i=0; i<__movieClip.totalFrames; i++) {
-				__movieClip.gotoAndStop (i+1);
-				
-				trace (": getBounds: ", __getRealBounds (__movieClip));
-				
-				__realBounds = __getRealBounds (__movieClip);
-				
-				__rect = m_packer.quickInsert (
-					(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
-				);
-				
-				if (__rect == null) {
-					__end (); __begin ();
-					
-					__rect = m_packer.quickInsert (
-						(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
-					);
-				}
-
-				__rect.x += __padding;
-				__rect.y += __padding;
-				__rect.width -= __padding * 2;
-				__rect.height -= __padding * 2;
-	
-				var __matrix:Matrix = new Matrix ();
-				__matrix.scale (__scaleX, __scaleY);
-				__matrix.translate (-__realBounds.x*__scaleX, -__realBounds.y*__scaleY);
-				
-				var __bitmapData:BitmapData = new BitmapData (__rect.width, __rect.height);
-				var __fillRect:Rectangle = new Rectangle (0, 0, __rect.width, __rect.height);
-				__bitmapData.fillRect (
-					__fillRect, 0x00000000
-				);
-				
-				__bitmapData.draw (__movieClip, __matrix);
-				
-				var __bitmap:Bitmap = new Bitmap (__bitmapData);
-				var __image:Image = Image.fromBitmap (__bitmap);
-				
-				__bitmapData.dispose ();
-				
-				__image.x = __rect.x; __image.y = __rect.y;
-				
-				m_currentTexture.draw (__image);
-				
-				var __subText:String = '<SubTexture name="'+__className+'_' + __generateIndex (i) + '" ' +
-					'x="'+__rect.x+'" y="'+__rect.y+'" width="'+__rect.width+'" height="'+__rect.height+'" frameX="0" frameY="0" ' +
-					'frameWidth="'+__rect.width+'" frameHeight="'+__rect.height+'"/>';
-				
-				m_currentAtlasText = m_currentAtlasText + __subText;
-			}
-
-			var __movieClipMetadata:Array = new Array ();
-			__movieClipMetadata.push (__realBounds);
-			
-			m_movieClips.put (__className, __movieClipMetadata);
 		}	
 
 		//------------------------------------------------------------------------------------------
@@ -201,32 +120,15 @@ package X.Texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		private function __begin ():void {
-			m_packer = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			
-			m_currentAtlasText = "";
-			
-			m_currentTexture = new RenderTexture (TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			m_textures.push (m_currentTexture);
-			
-			m_currentTexture.clear ();
+		protected function __begin ():void {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		private function __end ():void {
-			if (1) {
-				m_currentAtlasText = '<TextureAtlas imagePath="atlas.png">' + m_currentAtlasText + "</TextureAtlas>";
-				var __atlasXML:XML = new XML (m_currentAtlasText);
-				
-				trace (": atlasXML: ", m_currentAtlasText);
-				
-				var __atlas:TextureAtlas = new TextureAtlas (m_currentTexture, __atlasXML);
-				m_atlases.push (__atlas);
-			}			
+		protected function __end ():void {	
 		}
 
 		//------------------------------------------------------------------------------------------
-		private function __generateIndex (__index:int):String {
+		protected function __generateIndex (__index:int):String {
 			var __indexString:String = String (__index);
 			
 			switch (__indexString.length) {
@@ -245,7 +147,7 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		private function __getRealBounds(clip:flash.display.DisplayObject):Rectangle {
+		protected function __getRealBounds(clip:flash.display.DisplayObject):Rectangle {
 			var bounds:Rectangle = clip.getBounds(clip.parent);
 			bounds.x = Math.floor(bounds.x);
 			bounds.y = Math.floor(bounds.y);
