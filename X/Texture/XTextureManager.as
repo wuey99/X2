@@ -60,13 +60,19 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public function createMovieClip (__className:String):starling.display.MovieClip {
-			var __movieClip:starling.display.MovieClip;
+			var __movieClip:starling.display.MovieClip = null;
+			
+			var __dynamicSubManagers:Array = new Array ();
 			
 			m_subManagers.forEach (
 				function (x:*):void {
 					if (__movieClip == null) {
 						var __subManager:XSubTextureManager = m_subManagers.get (x as String);
 					
+						if (__subManager.isDynamic ()) {
+							__dynamicSubManagers.push (__subManager);
+						}
+						
 						if (__subManager.movieClipExists (__className)) {
 							__movieClip = __subManager.createMovieClip (__className);
 						}
@@ -75,7 +81,17 @@ package X.Texture {
 			);
 			
 			if (__movieClip == null) {
-				throw (new Error (": unable to find XMovieClip: " + __className));	
+				var i:Number;
+				
+				for (i=0; i<__dynamicSubManagers.length; i++) {
+					__dynamicSubManagers[i].add (__className);
+					
+					__movieClip = __dynamicSubManagers[i].createMovieClip (__className);
+				}
+				
+				if (__movieClip == null) {
+					throw (new Error (": unable to find XMovieClip: " + __className));
+				}
 			}
 			
 			return __movieClip;
