@@ -121,7 +121,7 @@ package X.World.Sprite {
 			}
 			else
 			{
-				m_movieClip.rotation = __value;
+				return m_movieClip.rotation;
 			}
 		}
 
