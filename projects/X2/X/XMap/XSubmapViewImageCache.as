@@ -97,8 +97,6 @@ package X.XMap {
 		public function refresh ():void {
 			var __renderTexture:RenderTexture = m_image.getTexture ();
 			
-			__renderTexture.clear ();
-			
 			__renderTexture.drawBundled (
 				function ():void {
 					tempRect.x = 0;
