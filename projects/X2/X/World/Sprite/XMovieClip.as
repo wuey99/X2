@@ -106,11 +106,23 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public override function set rotation (__value:Number):void {
-			m_movieClip.rotation = __value * Math.PI/180
+			if (CONFIG::starling) {
+				m_movieClip.rotation = __value * Math.PI/180;
+			}
+			else
+			{
+				m_movieClip.rotation = __value;
+			}
 		}
 		
 		public override function get rotation ():Number {
-			return m_movieClip.rotation * 180/Math.PI;
+			if (CONFIG::starling) {
+				return m_movieClip.rotation * 180/Math.PI;
+			}
+			else
+			{
+				m_movieClip.rotation = __value;
+			}
 		}
 
 		//------------------------------------------------------------------------------------------
