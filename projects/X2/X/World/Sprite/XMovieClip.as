@@ -106,11 +106,11 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public override function set rotation (__value:Number):void {
-			m_movieClip.rotation = __value;
+			m_movieClip.rotation = __value * Math.PI/180
 		}
 		
 		public override function get rotation ():Number {
-			return m_movieClip.rotation;
+			return m_movieClip.rotation * 180/Math.PI;
 		}
 
 		//------------------------------------------------------------------------------------------
