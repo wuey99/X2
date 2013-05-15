@@ -97,13 +97,15 @@ package X.XMap {
 		public function refresh ():void {
 			var __renderTexture:RenderTexture = m_image.getTexture ();
 			
+			__renderTexture.clear ();
+			
+			__renderTexture.drawBundled (
+				function ():void {
 					tempRect.x = 0;
 					tempRect.y = 0;
 					tempRect.width = m_submapModel.width;
 					tempRect.height = m_submapModel.height;
-					
-					__renderTexture.clear ();
-					
+									
 					__vline (0);
 					__vline (m_submapModel.width-1);
 					__hline (0);
@@ -146,6 +148,8 @@ package X.XMap {
 							}
 						}
 					);
+				}
+			);
 
 			
 			function __vline (x:Number):void {
