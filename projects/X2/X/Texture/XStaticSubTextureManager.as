@@ -94,7 +94,7 @@ package X.Texture {
 			for (i=0; i<__movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
 				
-				trace (": getBounds: ", __getRealBounds (__movieClip));
+				trace (": getBounds: ", __className, __getRealBounds (__movieClip));
 				
 				__realBounds = __getRealBounds (__movieClip);
 				
