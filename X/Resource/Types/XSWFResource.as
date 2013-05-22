@@ -21,6 +21,7 @@ package X.Resource.Types {
 		
 //------------------------------------------------------------------------------------------
 		public function XSWFResource () {
+			super ();
 		}
 	
 //------------------------------------------------------------------------------------------	
@@ -31,8 +32,28 @@ package X.Resource.Types {
 //------------------------------------------------------------------------------------------
 		public override function kill ():void {
 			m_parent.removeChild (m_loader);
+			m_loader.unloadAndStop ();
 			m_loader = null;
 			m_loadComplete = false;
+		}
+
+//------------------------------------------------------------------------------------------
+		private function __getClassByName (__className:String, __resourceName:String=""):Class {
+			var c:Class;
+			
+			try {
+				var c:Class = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
+				
+//				trace (": oooooooo: ", getQualifiedClassName (c));
+				
+				m_count++;
+			}
+			catch (e:Error) {
+// how should we handle this error?
+				throw (Error ("unable to resolve: " + __className + " in " + __resourceName + ", error: " + e));
+			}	
+			
+			return c;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -50,15 +71,7 @@ package X.Resource.Types {
 			var __resourceName:String = r.resourceName;
 			var __className:String = r.className;
 			
-			try {
-				var c:Class = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
-				
-//				trace (": oooooooo: ", getQualifiedClassName (c));
-			}
-			catch (e:Error) {
-// how should we handle this error?
-				throw (Error ("unable to resolve: " + __className + " in " + __resourceName + ", error: " + e));
-			}		
+			var c:Class = __getClassByName (__className, __resourceName);	
 			
 			return c;
 		}
@@ -80,15 +93,7 @@ package X.Resource.Types {
 			for (i=0; i<__classNames.length; i++) {
 				var c:Class;
 				
-				try {
-					c = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__classNames[i]) as Class;
-					
-//					trace (": oooooooo: ", getQualifiedClassName (c));
-				}
-				catch (e:Error) {
-// how should we handle this error?
-					throw (Error ("unable to resolve: " + __classNames[i] + " in resource, error: " + e));
-				}
+				c = __getClassByName (__classNames[i]);
 				
 				__classes.push (c);			
 			}

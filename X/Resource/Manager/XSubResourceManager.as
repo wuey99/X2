@@ -50,7 +50,7 @@ package X.Resource.Manager {
 			m_loaderContextFactory = null;
 			
 			m_loadComplete = true;
-			m_manifestXML =  null;
+			m_manifestXML = null;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -292,6 +292,7 @@ package X.Resource.Manager {
 //			trace (": XResourceManager:getClass (): ", __className);
 							
 			var __XClass:XClass = __resolveXClass (__className);
+			__XClass.count++;
 			
 			var __class:Class = __XClass.getClass ();
 			
@@ -299,9 +300,51 @@ package X.Resource.Manager {
 				__class = __resolveClass (__XClass);
 			}
 			
+			var __r:XResource = m_resourceMap[__XClass.getResourcePath ()] as XResource;
+			__r.count++;
+			
 			return __class;
 		}
 
+//------------------------------------------------------------------------------------------
+// unloads a class by name.  returns false if the resource hasn't been loaded yet. 
+// returns true if when the resource is successfully unloaded.
+//------------------------------------------------------------------------------------------
+		public function unloadClassByName (__className:String):Boolean {
+			if (!m_loadComplete) {
+				return false;
+			}
+	
+			var __XClass:XClass = __resolveXClass (__className);
+			
+			var __class:Class = __XClass.getClass ();
+			
+			if (__class == null) {
+				__class = __resolveClass (__XClass);
+				
+				if (__class == null) {
+					return false;
+				}
+			}
+
+			__XClass.count--;
+			
+			if (__XClass.count == 0) {
+				delete m_classMap[__className];
+			}
+			
+			var __r:XResource = m_resourceMap[__XClass.getResourcePath ()] as XResource;
+			__r.count--;
+			
+			if (__r.count == 0) {
+				__r.kill ();
+				
+				delete m_resourceMap[__XClass.getResourcePath ()];
+			}
+
+			return true;
+		}
+		
 //------------------------------------------------------------------------------------------
 // eventually replace:
 //
