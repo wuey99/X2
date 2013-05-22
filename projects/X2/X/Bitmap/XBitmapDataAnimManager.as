@@ -47,6 +47,8 @@ package X.Bitmap {
 									if (__bitmapAnim.isReady ()) {
 										m_queue.remove (__className);
 									}
+									
+									m_XApp.unloadClass (__className);
 								}
 							}
 						);
@@ -80,7 +82,11 @@ package X.Bitmap {
 			trace (": XBitmapDataAnimManager: caching: ", __className, __class);
 							
 			if (__class) {
-				return __createBitmapAnim (__className, __class);
+				var __bitmapDataAnim:XBitmapDataAnim = __createBitmapAnim (__className, __class);
+				
+				m_XApp.unloadClass (__className);
+				
+				return __bitmapDataAnim;
 			}
 										
 			return null;

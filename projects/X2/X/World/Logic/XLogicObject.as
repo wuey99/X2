@@ -70,6 +70,7 @@ package X.World.Logic {
 		public var m_childSprites:XDict;
 		public var m_detachedSprites:XDict;
 		public var m_bitmaps:XDict;
+		public var m_movieClips:XDict;
 		public var m_GUID:Number;
 		public var m_alpha:Number;
 		public var m_masterAlpha:Number;
@@ -140,6 +141,7 @@ package X.World.Logic {
 			m_childSprites = new XDict ();
 			m_detachedSprites = new XDict ();
 			m_bitmaps = new XDict ();
+			m_movieClips = new XDict ();
 			m_XSignals = new XDict ();
 			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
 			m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());
@@ -234,6 +236,7 @@ package X.World.Logic {
 			removeAllHudSprites ();
 			removeAllXLogicObjects ();
 			removeAllXBitmaps ();
+			removeAllMovieClips ();
 			removeAllXSignals ();
 			removeAllTasks ();
 			removeAllTasksCX ();
@@ -547,11 +550,12 @@ package X.World.Logic {
 			else
 			{
 				__movieClip = new (xxx.getClass (__name)) ();
+				
+				m_movieClips.put (__name, 0);
 			}
 		
 			var __xmovieClip:XMovieClip = new XMovieClip ();
 			__xmovieClip.initWithMovieClip (__movieClip);
-			
 			__xmovieClip.gotoAndStop (1);
 			
 			return __xmovieClip;
@@ -568,6 +572,15 @@ package X.World.Logic {
 			);
 			
 			m_bitmaps.removeAll ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeAllMovieClips ():void {
+			m_movieClips.forEach (
+				function (__name:*):void {
+					xxx.unloadClass (__name as String);
+				}
+			);
 		}
 		
 //------------------------------------------------------------------------------------------

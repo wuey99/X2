@@ -7,6 +7,7 @@ package X {
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
 	
+	import X.Collections.*;
 	import X.Bitmap.*;
 	import X.Debug.XDebug;
 	import X.Geom.*;
@@ -296,6 +297,66 @@ package X {
 			return getProjectManager ().unloadClassByName (__className);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function cacheAllClasses (__project:XML):Boolean {			
+			var ready:Boolean = true;
+	
+			var __classMap:XDict = new XDict ();
+			
+			trace (": cacheAllClasses: ");
+			
+			__cacheAllClasses (true, __project.child ("*"));
+			
+			__classMap.forEach (
+				function (x:*) {
+					var __fullName:String = x as String;
+				}
+			);
+			
+			return (ready);
+			
+			//------------------------------------------------------------------------------------------
+			function __cacheAllClasses (__cacheAll:Boolean, __xmlList:XMLList):void {
+				var i:int, j:int;
+				
+				for (i = 0; i<__xmlList.length (); i++) {
+					if (__xmlList[i].localName () == "folder") {
+						__cacheAllClasses (
+							__cacheAll,
+							__xmlList[i].child ("*")
+						);
+					}
+					if (__xmlList[i].localName () == "manifest") {
+						__cacheAllClasses (
+							__cacheAll,
+							__xmlList[i].child ("*")
+						);
+					}
+					else
+					{
+						var __resourceName:String = __xmlList[i].@name;					
+						var __classList:XMLList = __xmlList[i].child ("classX");
+						
+						if (__cacheAll || (!__cacheAll && __xmlList[i].@embed == "true")) {	
+							for (j = 0; j<__classList.length (); j++) {
+								var __fullName:String = __resourceName + ":" + __classList[j].@name;
+								
+								trace (": class: ", __fullName, __classMap.exists (__fullName));
+								
+								if (getClass (__fullName) == null) {
+									ready = false;
+								}
+								
+								__classMap.put (__fullName, 0);
+							}
+						}
+					}
+				}
+			}
+			
+		//------------------------------------------------------------------------------------------
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function disableDebug ():void {
 			m_XDebug.disable (true);

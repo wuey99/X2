@@ -47,6 +47,8 @@ package X.Bitmap {
 									if (__bitmapAnim.isReady ()) {
 										m_queue.remove (__className);
 									}
+									
+									m_XApp.unloadClass (__className);
 								}
 							}
 						);
@@ -80,7 +82,11 @@ package X.Bitmap {
 			m_queue.put (__className, 0);
 			
 			if (__class) {
-				return __createBitmap (__className, __class);
+				var __bitmap:XBitmap = __createBitmap (__className, __class);
+				
+				m_XApp.unloadClass (__className);
+				
+				return __bitmap;
 			}
 			
 			return null;

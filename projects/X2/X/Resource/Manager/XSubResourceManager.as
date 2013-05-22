@@ -289,10 +289,9 @@ package X.Resource.Manager {
 				return null;
 			}
 			
-//			trace (": XResourceManager:getClass (): ", __className);
+			trace (": XResourceManager:getClass (): ", __className);
 							
 			var __XClass:XClass = __resolveXClass (__className);
-			__XClass.count++;
 			
 			var __class:Class = __XClass.getClass ();
 			
@@ -300,8 +299,14 @@ package X.Resource.Manager {
 				__class = __resolveClass (__XClass);
 			}
 			
-			var __r:XResource = m_resourceMap[__XClass.getResourcePath ()] as XResource;
-			__r.count++;
+			if (__class) {
+				__XClass.count++;
+			
+				var __r:XResource = m_resourceMap[__XClass.getResourcePath ()] as XResource;
+				__r.count++;
+			
+				trace (": getClassByName: loaded: ", __XClass.count, __r.count, __class);
+			}
 			
 			return __class;
 		}
@@ -311,6 +316,8 @@ package X.Resource.Manager {
 // returns true if when the resource is successfully unloaded.
 //------------------------------------------------------------------------------------------
 		public function unloadClassByName (__className:String):Boolean {
+			return false;
+			
 			if (!m_loadComplete) {
 				return false;
 			}
@@ -329,12 +336,14 @@ package X.Resource.Manager {
 
 			__XClass.count--;
 			
+			var __r:XResource = m_resourceMap[__XClass.getResourcePath ()] as XResource;
+			__r.count--;
+			
+			trace (": unloadClassName: ", __className, __XClass.count, __r.count);
+			
 			if (__XClass.count == 0) {
 				delete m_classMap[__className];
 			}
-			
-			var __r:XResource = m_resourceMap[__XClass.getResourcePath ()] as XResource;
-			__r.count--;
 			
 			if (__r.count == 0) {
 				__r.kill ();

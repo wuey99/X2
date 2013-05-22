@@ -31,6 +31,8 @@ package X.Resource.Types {
 		
 //------------------------------------------------------------------------------------------
 		public override function kill ():void {
+			trace (": XResource: kill: ");
+			
 			m_parent.removeChild (m_loader);
 			m_loader.unloadAndStop ();
 			m_loader = null;
@@ -42,11 +44,9 @@ package X.Resource.Types {
 			var c:Class;
 			
 			try {
-				var c:Class = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
+				c = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
 				
 //				trace (": oooooooo: ", getQualifiedClassName (c));
-				
-				m_count++;
 			}
 			catch (e:Error) {
 // how should we handle this error?
