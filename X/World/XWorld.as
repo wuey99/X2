@@ -465,6 +465,11 @@ package X.World {
 		}					
 
 //------------------------------------------------------------------------------------------
+		public function unloadClass (__className:String):Boolean {
+			return m_XApp.unloadClass (__className);
+		}	
+		
+//------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
 			public function get MOUSE_DOWN ():String {
 				return TouchPhase.BEGAN;	
