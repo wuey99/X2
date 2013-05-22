@@ -285,6 +285,16 @@ package X {
 		public function getClassByName (__className:String):Class {
 			return getProjectManager ().getClassByName (__className);
 		}
+		
+//------------------------------------------------------------------------------------------
+		public function unloadClass (__className:String):Boolean {
+			return getProjectManager ().unloadClassByName (__className);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function unloadClassByName (__className:String):Boolean {
+			return getProjectManager ().unloadClassByName (__className);
+		}
 
 //------------------------------------------------------------------------------------------
 		public function disableDebug ():void {

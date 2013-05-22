@@ -361,6 +361,42 @@ package X.Resource.Manager {
 		}	
 
 //------------------------------------------------------------------------------------------
+// unloads a Class based on the full class name
+//------------------------------------------------------------------------------------------
+		public function unloadClassByName (__className:String):Boolean {
+			if (!resourceManagerReady ()) {
+				return null;
+			}
+			
+			var i:Number;
+			var r:XSubResourceManager;
+			var results:Boolean;
+			
+			for (i=0; i<m_subResourceManagers.length; i++) {
+				r = m_subResourceManagers[i];
+				
+				try {
+					results = r.unloadClassByName (__className);
+				}
+				catch (e:Error) {
+					var error:String = "className not found in manifest";
+					
+					if (e.message.substring (0, error.length) == error) {
+						continue;
+					}
+					else
+					{
+						throw (e);
+					}
+				}
+				
+				return results;
+			}
+			
+			throw (Error ("className not found in any manifest: " + __className));
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function	cacheClassNames ():Boolean {
 			if (!resourceManagerReady ()) {
 				return false;
