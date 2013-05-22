@@ -11,9 +11,11 @@ package X.Resource {
 	public class XResource extends Object {
 		protected var m_resourcePath:String;
 		protected var m_resourceXML:XML;
+		protected var m_count:Number;
 
 //------------------------------------------------------------------------------------------
 		public function XResource () {
+			m_count = 0;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -34,6 +36,15 @@ package X.Resource {
 		
 //------------------------------------------------------------------------------------------
 		public function kill ():void {
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get count ():Number {
+			return m_count;
+		}
+		
+		public function set count (__value:Number):void {
+			m_count = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
