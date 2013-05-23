@@ -91,7 +91,13 @@ package X.Bitmap {
 										
 			return null;
 		}
-						
+
+
+//------------------------------------------------------------------------------------------
+		public function getXTaskManager ():XTaskManager {
+			return m_XApp.getXTaskManager ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function isQueued (__className:String):Boolean {
 			return m_queue.exists (__className);	
