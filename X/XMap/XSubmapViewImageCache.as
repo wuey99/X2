@@ -124,7 +124,7 @@ package X.XMap {
 		
 							__movieClip = xxx.getMovieClipCacheManager ().get (__item.imageClassName);
 		
-							trace (": imageClassName: ", __item.imageClassName, __movieClip, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+							trace (": imageClassName: ", __item.imageClassName, __movieClip, xxx.getMovieClipCacheManager ().isQueued (__item.imageClassName), __movieClip.getMovieClip (), __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 							
 							if (CONFIG::starling) {
 								if (__movieClip != null) {
