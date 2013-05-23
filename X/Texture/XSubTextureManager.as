@@ -29,12 +29,42 @@ package X.Texture {
 		protected var TEXTURE_WIDTH:Number = 2048;
 		protected var TEXTURE_HEIGHT:Number = 2048;
 			
+		protected var m_queue:XDict;
+		
 		//------------------------------------------------------------------------------------------
 		public function XSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
 			m_XApp = __XApp;
 			
 			TEXTURE_WIDTH = __width;
 			TEXTURE_HEIGHT = __height;
+			
+			m_queue = new XDict ();
+			
+			m_XApp.getXTaskManager ().addTask ([
+				XTask.LABEL, "loop",
+					XTask.WAIT, 0x0100,
+				
+					function ():void {
+						m_queue.forEach (
+							function (x:*):void {
+								var __className:String = x as String;
+								var __class:Class = m_XApp.getClass (__className);
+							
+								if (__class != null) {
+									createTexture (__className, __class);
+								
+									m_queue.remove (__className);
+								
+//									m_XApp.unloadClass (__className);
+								}
+							}
+						);
+					},
+						
+					XTask.GOTO, "loop",
+						
+				XTask.RETN,
+			]);
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -71,6 +101,10 @@ package X.Texture {
 		//------------------------------------------------------------------------------------------
 		public function movieClipExists (__className:String):Boolean {
 			return m_movieClips.exists (__className);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function createTexture (__className:String, __class:Class):void {	
 		}
 		
 		//------------------------------------------------------------------------------------------
