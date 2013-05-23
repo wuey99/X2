@@ -41,6 +41,9 @@ package X.World.Sprite {
 		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
 			var __movieClip:MovieClip;
 			
+			var __textureManager:XTextureManager =
+				__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
+			
 			if (CONFIG::starling) {
 				__movieClip = __textureManager.createMovieClip (__className);
 			}
