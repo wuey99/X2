@@ -48,6 +48,14 @@ package X.XMap {
 			super.cleanup ();
 			
 			uncacheImageClassNames ();
+			
+			if (m_submapBitmapPoolManager) {
+				m_submapBitmapPoolManager.cleanup ();
+			}
+			
+			if (m_submapImagePoolManager) {
+				m_submapImagePoolManager.cleanup ();
+			}
 		}
 		
 //--------------------------------------------f----------------------------------------------
