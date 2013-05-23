@@ -53,10 +53,24 @@ package X.Texture {
 			return true;	
 		}
 		
+		
 		//------------------------------------------------------------------------------------------
 		public override function add (__className:String):void {	
 			var __class:Class = m_XApp.getClass (__className);
 			
+			if (__class != null) {
+				createTexture (__className, __class);
+				
+//				m_XApp.unloadClass (__className);
+			}
+			else
+			{
+				m_queue.put (__className, 0);
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public override function createTexture (__className:String, __class:Class):void {	
 			var __movieClip:flash.display.MovieClip = new (__class) ();
 			
 			var __scaleX:Number = 1.0;
