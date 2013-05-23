@@ -58,6 +58,8 @@ package X.Texture {
 		public override function add (__className:String):void {	
 			var __class:Class = m_XApp.getClass (__className);
 			
+			m_movieClips.put (__className, []);
+			
 			if (__class != null) {
 				createTexture (__className, __class);
 				

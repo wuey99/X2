@@ -115,6 +115,10 @@ package X.Texture {
 			
 			var __movieClipMetadata:Array = m_movieClips.get (__className);
 			
+			if (__movieClipMetadata.length == 0) {
+				return null;
+			}
+			
 			var __rect:Rectangle = __movieClipMetadata[0] as Rectangle;
 			var __pivotX:Number = __rect.x; 
 			var __pivotY:Number = __rect.y;

@@ -89,9 +89,9 @@ package X.Texture {
 					__movieClip = __dynamicSubManagers[i].createMovieClip (__className);
 				}
 				
-				if (__movieClip == null) {
-					throw (new Error (": unable to find XMovieClip: " + __className));
-				}
+//				if (__movieClip == null) {
+//					throw (new Error (": unable to find XMovieClip: " + __className));
+//				}
 			}
 			
 			return __movieClip;
