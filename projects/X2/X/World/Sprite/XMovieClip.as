@@ -3,15 +3,16 @@ package X.World.Sprite {
 	
 	import X.*;
 	import X.Geom.*;
+	import X.Task.XTask;
+	import X.Texture.*;
 	import X.World.*;
 	import X.World.Sprite.*;
-	import X.Texture.*;
-	
-	import flash.geom.*;
-	import flash.utils.*;
 	
 	include "..\\..\\flash.h";
+	
 	import flash.display.Graphics;
+	import flash.geom.*;
+	import flash.utils.*;
 	
 	//------------------------------------------------------------------------------------------	
 	public class XMovieClip extends XSprite {
@@ -49,7 +50,36 @@ package X.World.Sprite {
 			}
 			else
 			{
-				__movieClip = new (xxx.getClass (__className)) ();
+				var __class:Class = __xxx.getClass (__className);
+				
+				if (__class) {
+					__movieClip = new (__class) ();
+				}
+				else
+				{
+					__xxx.getXTaskManager ().addTask ([
+						XTask.LABEL, "loop",
+							XTask.WAIT, 0x0100,
+							
+							XTask.FLAGS, function (__task:XTask):void {
+								__class = __xxx.getClass (__className);
+								
+								__task.ifTrue (__class);
+							}, XTask.BNE, "loop",
+						
+							function ():void {
+								__movieClip = new (__class) ();
+								
+								initWithMovieClip (__movieClip);
+								
+								gotoAndStop (1);
+							},
+							
+						XTask.RETN,
+					]);
+					
+					return;
+				}
 			}
 			
 			initWithMovieClip (__movieClip);
@@ -78,7 +108,9 @@ package X.World.Sprite {
 			}
 			else
 			{
-				m_movieClip.gotoAndPlay (__frame);
+				if (m_movieClip) {
+					m_movieClip.gotoAndPlay (__frame);
+				}
 			}
 		}
 		
@@ -90,22 +122,32 @@ package X.World.Sprite {
 			}
 			else
 			{
-				m_movieClip.gotoAndStop (__frame);
+				if (m_movieClip) {
+					m_movieClip.gotoAndStop (__frame);
+				}
 			}
 		}
 
 		//------------------------------------------------------------------------------------------
 		public function play ():void {
-			m_movieClip.play ();
+			if (m_movieClip) {
+				m_movieClip.play ();
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function stop ():void {
-			m_movieClip.stop ();
+			if (m_movieClip) {
+				m_movieClip.stop ();
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function set rotation (__value:Number):void {
+			if (!m_movieClip) {
+				return;
+			}
+			
 			if (CONFIG::starling) {
 				m_movieClip.rotation = __value * Math.PI/180;
 			}
@@ -116,6 +158,10 @@ package X.World.Sprite {
 		}
 		
 		public override function get rotation ():Number {
+			if (!m_movieClip) {
+				return 0.0;
+			}
+			
 			if (CONFIG::starling) {
 				return m_movieClip.rotation * 180/Math.PI;
 			}
@@ -127,10 +173,18 @@ package X.World.Sprite {
 
 		//------------------------------------------------------------------------------------------
 		public override function set alpha (__value:Number):void {
+			if (!m_movieClip) {
+				return;
+			}
+			
 			m_movieClip.alpha = __value;
 		}
 		
 		public override function get alpha ():Number {
+			if (!m_movieClip) {
+				return 1.0;
+			}
+			
 			return m_movieClip.alpha;
 		}
 		
@@ -143,6 +197,10 @@ package X.World.Sprite {
 		else
 		{
 			public override function get graphics ():Graphics {
+				if (!m_movieClip) {
+					return null;
+				}
+				
 				return m_movieClip.graphics;
 			}
 		}
@@ -159,19 +217,35 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public override function set scaleX (__value:Number):void {
+			if (!m_movieClip) {
+				return;
+			}
+			
 			m_movieClip.scaleX = __value;
 		}
 		
 		public override function get scaleX ():Number {
+			if (!m_movieClip) {
+				return 1.0;
+			}
+			
 			return m_movieClip.scaleX;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function set scaleY (__value:Number):void {
+			if (!m_movieClip) {
+				return;
+			}
+			
 			m_movieClip.scaleY = __value;
 		}
 		
 		public override function get scaleY ():Number {
+			if (!m_movieClip) {
+				return 1.0;
+			}
+			
 			return m_movieClip.scaleY;
 		}		
 		
