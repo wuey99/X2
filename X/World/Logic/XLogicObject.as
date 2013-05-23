@@ -545,18 +545,14 @@ package X.World.Logic {
 			var __movieClip:MovieClip;
 			
 			if (CONFIG::starling) {
-				__movieClip = xxx.getTextureManager ().createMovieClip (__name);
 			}
 			else
 			{
-				__movieClip = new (xxx.getClass (__name)) ();
-				
 				m_movieClips.put (__name, 0);
 			}
 		
 			var __xmovieClip:XMovieClip = new XMovieClip ();
-			__xmovieClip.initWithMovieClip (__movieClip);
-			__xmovieClip.gotoAndStop (1);
+			__xmovieClip.initWithClassName (xxx, null, __name);
 			
 			return __xmovieClip;
 		}

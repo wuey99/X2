@@ -38,13 +38,11 @@ package X.Bitmap {
 								if (__class != null) {
 									var __bitmap:XBitmap = m_bitmaps.get (__className);
 									
-									var __bitmapAnim:XBitmapDataAnim = __bitmap.getBitmapDataAnim ();
-									
-									if (__bitmapAnim == null) {
-										__createBitmap (__className, __class);
+									if (__bitmap == null) {
+										__bitmap = __createBitmap (__className, __class);
 									}								
 									
-									if (__bitmapAnim.isReady ()) {
+									if (__bitmap.getBitmapDataAnim ()) {
 										m_queue.remove (__className);
 									}
 									

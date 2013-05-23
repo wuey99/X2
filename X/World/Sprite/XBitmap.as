@@ -89,7 +89,7 @@ package X.World.Sprite {
 							
 								XTask.FLAGS, function (__task:XTask):void {
 									__task.ifTrue (m_bitmapDataAnimManager.isQueued (__className));
-								}, XTask.BEQ, "__loop",
+								}, XTask.BEQ, "loop",
 								
 								function ():void {
 									m_bitmapDataAnim = m_bitmapDataAnimManager.get (__className);
