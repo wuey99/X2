@@ -52,6 +52,8 @@ package X.XMap {
 				return;
 			}
 	
+			trace (": ----------------->: updateFromXMapModel: ");
+			
 //------------------------------------------------------------------------------------------		
 			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
 				xxx.getViewRect ().width, xxx.getViewRect ().height

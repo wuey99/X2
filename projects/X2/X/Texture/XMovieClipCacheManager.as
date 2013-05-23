@@ -42,7 +42,15 @@ package X.Texture {
 
 //------------------------------------------------------------------------------------------
 		public function isQueued (__className:String):Boolean {
-			return false;	
+			var __movieClip:XMovieClip = m_movieClips.get (__className);
+			
+			if (!__movieClip.getMovieClip ()) {
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 //------------------------------------------------------------------------------------------

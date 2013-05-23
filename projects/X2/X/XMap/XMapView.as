@@ -26,6 +26,7 @@ package X.XMap {
 		protected var m_submapImagePoolManager:XObjectPoolManager;
 		protected var m_subTextureManager:XSubTextureManager;
 		protected var m_textureManagerName:String;
+		protected var m_imageNamesCached:Boolean;
 				
 //------------------------------------------------------------------------------------------
 		public function XMapView () {
@@ -35,6 +36,8 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx, args);
+			
+			m_imageNamesCached = false;
 			
 			if (CONFIG::starling) {
 				m_textureManagerName = GUID.create ();
@@ -86,6 +89,10 @@ package X.XMap {
 			var __flags:Boolean;
 			var i:Number;
 			
+			if (m_imageNamesCached) {
+				return true;
+			}
+			
 			__flags = true;
 			
 			for (i=0; i<m_XMapModel.getLayers ().length; i++) {
@@ -111,6 +118,8 @@ package X.XMap {
 					return false;
 				}
 			}
+			
+			m_imageNamesCached = true;
 			
 			return true;	
 		}
