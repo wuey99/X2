@@ -51,8 +51,6 @@ package X.XMap {
 			if (!m_XMapView.areImageClassNamesCached ()) {
 				return;
 			}
-	
-			trace (": ----------------->: updateFromXMapModel: ");
 			
 //------------------------------------------------------------------------------------------		
 			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
