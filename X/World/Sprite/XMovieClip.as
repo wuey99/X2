@@ -3,7 +3,7 @@ package X.World.Sprite {
 	
 	import X.*;
 	import X.Geom.*;
-	import X.Task.XTask;
+	import X.Task.*;
 	import X.Texture.*;
 	import X.World.*;
 	import X.World.Sprite.*;
@@ -32,21 +32,47 @@ package X.World.Sprite {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function initWithMovieClip (__movieclip:MovieClip):void {
-			m_movieClip = __movieclip;
+		public function initWithMovieClip (__movieClip:MovieClip):void {
+			m_movieClip = __movieClip;
 			
-			addChild (__movieclip);
+			addChild (__movieClip);
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
 			var __movieClip:MovieClip;
 			
-			var __textureManager:XTextureManager =
-				__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
-			
 			if (CONFIG::starling) {
+				var __textureManager:XTextureManager =
+					__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
+				
+				var __taskManager:XTaskManager =
+					__xxx != null ? __xxx.getXTaskManager () : __XApp.getXTaskManager ();
+									
 				__movieClip = __textureManager.createMovieClip (__className);
+				
+				if (__movieClip == null) {
+					__taskManager.addTask ([
+						XTask.LABEL, "loop",
+							XTask.WAIT, 0x0100,
+						
+							XTask.FLAGS, function (__task:XTask):void {
+								__movieClip = __textureManager.createMovieClip (__className);
+								
+								__task.ifTrue (__movieClip);
+							}, XTask.BNE, "loop",
+							
+							function ():void {
+								initWithMovieClip (__movieClip);
+								
+								gotoAndStop (1);
+							},
+						
+						XTask.RETN,
+					]);
+					
+					return;
+				}
 			}
 			else
 			{
@@ -57,7 +83,7 @@ package X.World.Sprite {
 				}
 				else
 				{
-					__xxx.getXTaskManager ().addTask ([
+					__taskManager.addTask ([
 						XTask.LABEL, "loop",
 							XTask.WAIT, 0x0100,
 							
@@ -117,8 +143,10 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieClip.currentFrame = __frame-1;
-				m_movieClip.pause ();
+				if (m_movieClip) {
+					m_movieClip.currentFrame = __frame-1;
+					m_movieClip.pause ();
+				}
 			}
 			else
 			{

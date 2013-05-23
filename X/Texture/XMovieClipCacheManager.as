@@ -48,15 +48,11 @@ package X.Texture {
 //------------------------------------------------------------------------------------------
 		private function __createXMovieClip (__className:String):XMovieClip {
 			if (CONFIG::starling) {
-				var __movieClip:MovieClip = m_XApp.getTextureManager ().createMovieClip (__className);
-			
 				var __xmovieClip:XMovieClip = new XMovieClip ();
-				__xmovieClip.initWithMovieClip (__movieClip);
-			
-				__xmovieClip.gotoAndStop (1);
-			
+				__xmovieClip.initWithClassName (null, m_XApp, __className);
+				
 				m_movieClips.put (__className, __xmovieClip);
-			
+								
 				return __xmovieClip;
 			}
 			else
