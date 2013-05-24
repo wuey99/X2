@@ -55,7 +55,7 @@ package X.Texture {
 								
 									m_queue.remove (__className);
 								
-//									m_XApp.unloadClass (__className);
+									m_XApp.unloadClass (__className);
 								}
 							}
 						);

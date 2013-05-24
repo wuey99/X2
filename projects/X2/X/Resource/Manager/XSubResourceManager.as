@@ -316,7 +316,7 @@ package X.Resource.Manager {
 // returns true if when the resource is successfully unloaded.
 //------------------------------------------------------------------------------------------
 		public function unloadClassByName (__className:String):Boolean {	
-			return false;
+//			return false;
 			
 			if (!m_loadComplete) {
 				return false;

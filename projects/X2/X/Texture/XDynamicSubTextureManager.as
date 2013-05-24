@@ -69,7 +69,7 @@ package X.Texture {
 			if (__class != null) {
 				createTexture (__className, __class);
 				
-//				m_XApp.unloadClass (__className);
+				m_XApp.unloadClass (__className);
 			}
 			else
 			{
