@@ -130,11 +130,12 @@ package X.Texture {
 				var __bitmap:Bitmap = new Bitmap (__bitmapData);
 				var __image:Image = Image.fromBitmap (__bitmap);
 				
-				__bitmapData.dispose ();
-				
 				__image.x = __rect.x; __image.y = __rect.y;
 				
 				m_currentTexture.draw (__image);
+				
+				__bitmapData.dispose ();
+				__image.texture.dispose ();
 				
 				m_currentAtlas.addRegion (__className + "_" + __generateIndex (i), __rect, new Rectangle (0, 0, __rect.width, __rect.height));
 			}
