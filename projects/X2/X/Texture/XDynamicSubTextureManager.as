@@ -58,10 +58,6 @@ package X.Texture {
 		public override function add (__className:String):void {
 			trace (": XDynamicSubTextureManager: add: ", __className);
 			
-			if (__className == "Tileset001:Tileset001") {
-				trace (": Tileset001:Tileset001");
-			}
-			
 			var __class:Class = m_XApp.getClass (__className);
 			
 			m_movieClips.put (__className, []);
