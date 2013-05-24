@@ -315,9 +315,7 @@ package X.Resource.Manager {
 // unloads a class by name.  returns false if the resource hasn't been loaded yet. 
 // returns true if when the resource is successfully unloaded.
 //------------------------------------------------------------------------------------------
-		public function unloadClassByName (__className:String):Boolean {	
-//			return false;
-			
+		public function unloadClassByName (__className:String):Boolean {			
 			if (!m_loadComplete) {
 				return false;
 			}
