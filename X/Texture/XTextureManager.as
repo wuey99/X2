@@ -65,6 +65,7 @@ package X.Texture {
 			
 			var __dynamicSubManagers:Array = new Array ();
 			
+// look for texture in static managers first
 			m_subManagers.forEach (
 				function (x:*):void {
 					if (__movieClip == null) {
@@ -72,27 +73,34 @@ package X.Texture {
 					
 						if (__subManager.isDynamic ()) {
 							__dynamicSubManagers.push (__subManager);
-						}
-						
-						if (__subManager.movieClipExists (__className)) {
+						}	
+						else if (__subManager.movieClipExists (__className)) {
 							__movieClip = __subManager.createMovieClip (__className);
 						}
 					}
 				}
 			);
+
+			var i:Number;
 			
-			if (__movieClip == null) {
-				var i:Number;
-				
+// try and find one in a dynamic manager
+			if (__movieClip == null) {	
 				for (i=0; i<__dynamicSubManagers.length; i++) {
-					__dynamicSubManagers[i].add (__className);
-					
-					__movieClip = __dynamicSubManagers[i].createMovieClip (__className);
+					if (__dynamicSubManagers[i].movieClipExists (__className)) {
+						__movieClip = __dynamicSubManagers[i].createMovieClip (__className);
+					}
 				}
-				
-//				if (__movieClip == null) {
-//					throw (new Error (": unable to find XMovieClip: " + __className));
-//				}
+			}
+			
+// if nothing is found, try and add it to a dynamic manager
+			if (__movieClip == null) {
+				for (i=0; i<__dynamicSubManagers.length; i++) {
+					if (!__dynamicSubManagers[i].isQueued (__className)) {
+						__dynamicSubManagers[i].add (__className);
+					}
+					
+					return null;
+				}	
 			}
 			
 			return __movieClip;

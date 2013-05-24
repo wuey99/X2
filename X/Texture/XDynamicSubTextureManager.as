@@ -55,7 +55,13 @@ package X.Texture {
 		
 		
 		//------------------------------------------------------------------------------------------
-		public override function add (__className:String):void {	
+		public override function add (__className:String):void {
+			trace (": XDynamicSubTextureManager: add: ", __className);
+			
+			if (__className == "Tileset001:Tileset001") {
+				trace (": Tileset001:Tileset001");
+			}
+			
 			var __class:Class = m_XApp.getClass (__className);
 			
 			m_movieClips.put (__className, []);
@@ -83,10 +89,12 @@ package X.Texture {
 
 			var i:Number;
 			
+			trace (": XDynamicSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
+			
 			for (i=0; i<__movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
 				
-				trace (": getBounds: ", __className, __getRealBounds (__movieClip));
+				trace (": getBounds: ", i, __className, __getRealBounds (__movieClip));
 				
 				__realBounds = __getRealBounds (__movieClip);
 				

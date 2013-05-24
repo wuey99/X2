@@ -95,12 +95,26 @@ package X.Texture {
 
 		//------------------------------------------------------------------------------------------
 		public function isQueued (__className:String):Boolean {
-			return false;	
+			return m_movieClips.exists (__className);
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function movieClipExists (__className:String):Boolean {
-			return m_movieClips.exists (__className);
+			if (m_movieClips.exists (__className)) {
+				var __movieClipMetadata:Array = m_movieClips.get (__className);
+				
+				if (__movieClipMetadata.length == 0) {
+					return false;
+				}		
+				else
+				{
+					return true;
+				}
+			}
+			else
+			{
+				return false;
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -109,8 +123,8 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public function createMovieClip (__className:String):starling.display.MovieClip {
-			if (!m_movieClips.exists (__className)) {
-				throw (new Error (": unable to find XMovieClip: " + __className));
+			if (!isQueued (__className)) {
+				return null;
 			}
 			
 			var __movieClipMetadata:Array = m_movieClips.get (__className);
