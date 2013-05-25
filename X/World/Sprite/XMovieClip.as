@@ -44,13 +44,13 @@ package X.World.Sprite {
 		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
 			var __movieClip:MovieClip;
 			
+			var __taskManager:XTaskManager =
+				__xxx != null ? __xxx.getXTaskManager () : __XApp.getXTaskManager ();
+			
 			if (CONFIG::starling) {
 				var __textureManager:XTextureManager =
 					__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
-				
-				var __taskManager:XTaskManager =
-					__xxx != null ? __xxx.getXTaskManager () : __XApp.getXTaskManager ();
-									
+							
 				__movieClip = __textureManager.createMovieClip (__className);
 				
 				if (__movieClip == null) {

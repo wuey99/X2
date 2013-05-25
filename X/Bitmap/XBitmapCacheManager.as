@@ -76,15 +76,18 @@ package X.Bitmap {
 			
 			trace (": queuing: ", __className);
 			
-			// wait for image to load before caching it.
-			m_queue.put (__className, 0);
-			
 			if (__class) {
 				var __bitmap:XBitmap = __createBitmap (__className, __class);
 				
 				m_XApp.unloadClass (__className);
 				
 				return __bitmap;
+			}
+			else
+			{
+				// wait for image to load before caching it.
+				m_queue.put (__className, 0);
+				
 			}
 			
 			return null;

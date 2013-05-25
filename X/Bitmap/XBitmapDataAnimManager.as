@@ -74,9 +74,6 @@ package X.Bitmap {
 	
 			trace (": queuing: ", __className);
 			
-			// wait for image to load before caching it.
-			m_queue.put (__className, 0);
-
 			var __class:Class = m_XApp.getClass (__className);
 							
 			trace (": XBitmapDataAnimManager: caching: ", __className, __class);
@@ -88,7 +85,12 @@ package X.Bitmap {
 				
 				return __bitmapDataAnim;
 			}
-										
+			else
+			{
+				// wait for image to load before caching it.
+				m_queue.put (__className, 0);
+			}
+			
 			return null;
 		}
 
