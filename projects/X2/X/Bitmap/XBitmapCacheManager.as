@@ -86,8 +86,7 @@ package X.Bitmap {
 			else
 			{
 				// wait for image to load before caching it.
-				m_queue.put (__className, 0);
-				
+				m_queue.put (__className, 0);	
 			}
 			
 			return null;
