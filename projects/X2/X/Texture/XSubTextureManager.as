@@ -31,12 +31,16 @@ package X.Texture {
 			
 		protected var m_queue:XDict;
 		
+		protected var m_count:Number;
+		
 		//------------------------------------------------------------------------------------------
 		public function XSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
 			m_XApp = __XApp;
 			
 			TEXTURE_WIDTH = __width;
 			TEXTURE_HEIGHT = __height;
+			
+			m_count = 0;
 			
 			m_queue = new XDict ();
 			
