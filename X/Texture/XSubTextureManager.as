@@ -20,7 +20,7 @@ package X.Texture {
 		protected var m_XApp:XApp;
 		
 		protected var m_movieClips:XDict;
-		
+		 
 		protected var m_atlases:Array;
 		protected var m_currentAtlas:TextureAtlas;
 		
