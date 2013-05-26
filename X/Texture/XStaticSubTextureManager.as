@@ -161,6 +161,10 @@ package X.Texture {
 			m_packer = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			
 			m_currentAtlasText = "";
+			
+			m_count++;
+			
+			trace (": XStaticSubTextureManager: count: ", m_count);
 		}
 		
 		//------------------------------------------------------------------------------------------
