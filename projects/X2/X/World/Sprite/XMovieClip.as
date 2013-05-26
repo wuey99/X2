@@ -131,8 +131,14 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:Number):void {
 			if (CONFIG::starling) {
-				m_movieClip.currentFrame = __frame-1;
-				m_movieClip.play ();
+				if (m_movieClip) {
+					if (__frame > m_movieClip.numFrames) {
+						trace (": XMovieClip: gotoAndPlay out of range @: ", __frame - 1);
+						return;
+					}
+					m_movieClip.currentFrame = __frame-1;
+					m_movieClip.play ();
+				}
 			}
 			else
 			{
@@ -146,6 +152,10 @@ package X.World.Sprite {
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
 				if (m_movieClip) {
+					if (__frame > m_movieClip.numFrames) {
+						trace (": XMovieClip: gotoAndStop out of range @: ", __frame - 1);
+						return;
+					}
 					m_movieClip.currentFrame = __frame-1;
 					m_movieClip.pause ();
 				}
