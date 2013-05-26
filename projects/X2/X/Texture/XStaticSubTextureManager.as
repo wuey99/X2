@@ -97,7 +97,7 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function add (__className:String, __class:Class):void {	
+		public override function createTexture (__className:String, __class:Class):void {	
 			var __movieClip:flash.display.MovieClip = new (__class) ();
 			
 			var __scaleX:Number = 1.0;
