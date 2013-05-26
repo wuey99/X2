@@ -17,12 +17,14 @@ package X.World.Sprite {
 	//------------------------------------------------------------------------------------------	
 	public class XMovieClip extends XSprite {
 		public var m_movieClip:MovieClip;
+		public var m_className:String;
 		
 		//------------------------------------------------------------------------------------------
 		public function XMovieClip () {
 			super ();
 			
 			m_movieClip = null;
+			m_className = "";
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -43,6 +45,8 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
 			var __movieClip:MovieClip;
+			
+			m_className = __className;
 			
 			var __taskManager:XTaskManager =
 				__xxx != null ? __xxx.getXTaskManager () : __XApp.getXTaskManager ();
@@ -133,7 +137,7 @@ package X.World.Sprite {
 			if (CONFIG::starling) {
 				if (m_movieClip) {
 					if (__frame > m_movieClip.numFrames) {
-						trace (": XMovieClip: gotoAndPlay out of range @: ", __frame - 1);
+						trace (": XMovieClip: ", m_className, " gotoAndPlay out of range @: ", __frame - 1);
 						return;
 					}
 					m_movieClip.currentFrame = __frame-1;
@@ -153,7 +157,7 @@ package X.World.Sprite {
 			if (CONFIG::starling) {
 				if (m_movieClip) {
 					if (__frame > m_movieClip.numFrames) {
-						trace (": XMovieClip: gotoAndStop out of range @: ", __frame - 1);
+						trace (": XMovieClip: ", m_className, " gotoAndStop out of range @: ", __frame - 1);
 						return;
 					}
 					m_movieClip.currentFrame = __frame-1;
