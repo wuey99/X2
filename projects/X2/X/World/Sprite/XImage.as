@@ -18,12 +18,13 @@ package X.World.Sprite {
 	// starling equivalent of the XBitmap class.  Curently supports only a single texture.
 	//------------------------------------------------------------------------------------------
 	public class XImage extends Image implements XRegistration {
-		public var m_texture:RenderTexture;
 		public var m_frame:Number;
 		public var m_scale:Number;
 		public var m_visible:Boolean;
 		public var m_pos:XPoint;
 		public var m_rect:XRect;
+		public var m_id:Number;
+		public static var g_id:Number = 0;
 		
 		//------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
@@ -32,8 +33,6 @@ package X.World.Sprite {
 		public function XImage (__texture:RenderTexture) {
 			super (__texture);
 			
-			m_texture = __texture;
-			
 			m_pos = new XPoint ();
 			m_rect = new XRect ();
 			
@@ -41,6 +40,8 @@ package X.World.Sprite {
 			
 			m_scale = 1.0;
 			m_visible = true;
+			
+			m_id = g_id++;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -49,14 +50,19 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
-			if (m_texture) {
-				m_texture.dispose ();
+			if (texture) {
+				texture.dispose ();
 			}
 		}
 
 		//------------------------------------------------------------------------------------------
 		public function getTexture ():RenderTexture {
-			return m_texture;
+			return texture as RenderTexture;
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function get id ():Number {
+			return m_id;
 		}
 		
 		//------------------------------------------------------------------------------------------
