@@ -20,6 +20,7 @@ package X.Texture {
 	public class XDynamicSubTextureManager extends XSubTextureManager {
 		protected var m_textures:Array;
 		protected var m_currentTexture:RenderTexture;
+		protected var m_count:Number;
 		
 		//------------------------------------------------------------------------------------------
 		public function XDynamicSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
@@ -44,6 +45,8 @@ package X.Texture {
 			m_movieClips = new XDict ();
 			m_textures = new Array ();
 			m_atlases = new Array ();
+			
+			m_count = 0;
 			
 			__begin ();
 		}
@@ -163,6 +166,10 @@ package X.Texture {
 			m_atlases.push (m_currentAtlas);
 			
 			m_currentTexture.clear ();
+			
+			m_count++;
+			
+			trace (": XDynamicSubTextureManager: count: ", m_count);
 		}
 		
 		//------------------------------------------------------------------------------------------
