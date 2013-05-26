@@ -19,7 +19,8 @@ package X.Pool {
 			__cloneObject:Function,
 			__numObjects:Number,
 			__overflow:Number,
-			__cleanup:Function = null) {
+			__cleanup:Function = null
+		) {
 				
 			m_freeObjects = new Array ();
 			m_inuseObjects = new XDict ();
@@ -56,7 +57,12 @@ package X.Pool {
 				m_freeObjects.push (m_newObject ());
 			}
 		}
-	
+
+//------------------------------------------------------------------------------------------
+		public function totalNumberOfObjects ():Number {
+			return m_freeObjects.length + m_numberOfBorrowedObjects;	
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function numberOfBorrowedObjects ():Number {
 			return m_numberOfBorrowedObjects;
