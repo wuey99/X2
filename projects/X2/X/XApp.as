@@ -7,8 +7,8 @@ package X {
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
 	
-	import X.Collections.*;
 	import X.Bitmap.*;
+	import X.Collections.*;
 	import X.Debug.XDebug;
 	import X.Geom.*;
 	import X.MVC.*;
@@ -45,7 +45,8 @@ package X {
 		private var m_XDepthSpritePoolManager:XObjectPoolManager;
 		private var m_XTextureManager:XTextureManager;
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
-		
+		private var m_allClassNames:XDict;
+			
 //------------------------------------------------------------------------------------------
 		public function XApp () {
 		}
@@ -301,15 +302,21 @@ package X {
 		public function cacheAllClasses (__project:XML):Boolean {			
 			var ready:Boolean = true;
 	
-			var __classMap:XDict = new XDict ();
-			
 			trace (": cacheAllClasses: ");
+			
+			m_allClassNames = new XDict ();
 			
 			__cacheAllClasses (true, __project.child ("*"));
 			
-			__classMap.forEach (
-				function (x:*) {
+			var i:Number;
+			
+			i = 0;
+			
+			m_allClassNames.forEach (
+				function (x:*):void {
 					var __fullName:String = x as String;
+					
+					trace (": fullName: ", i++, __fullName);
 				}
 			);
 			
@@ -334,20 +341,28 @@ package X {
 					}
 					else
 					{
-						var __resourceName:String = __xmlList[i].@name;					
+						var __resourceName:String = __xmlList[i].@name;		
+						var __resourceType:String = __xmlList[i].@type;
 						var __classList:XMLList = __xmlList[i].child ("classX");
 						
 						if (__cacheAll || (!__cacheAll && __xmlList[i].@embed == "true")) {	
 							for (j = 0; j<__classList.length (); j++) {
 								var __fullName:String = __resourceName + ":" + __classList[j].@name;
 								
-								trace (": class: ", __fullName, __classMap.exists (__fullName));
+								trace (": class: ", __fullName, m_allClassNames.exists (__fullName));
 								
 								if (getClass (__fullName) == null) {
 									ready = false;
 								}
 								
-								__classMap.put (__fullName, 0);
+								if (__resourceType != ".as") {
+									if (__fullName == "sfx:sfx" || __fullName == "square:square") {	
+									}
+									else
+									{
+										m_allClassNames.put (__fullName, 0);
+									}
+								}
 							}
 						}
 					}
@@ -355,6 +370,11 @@ package X {
 			}
 			
 		//------------------------------------------------------------------------------------------
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getAllClassNames ():XDict {
+			return m_allClassNames;
 		}
 		
 //------------------------------------------------------------------------------------------
