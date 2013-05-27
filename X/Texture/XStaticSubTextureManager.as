@@ -108,6 +108,8 @@ package X.Texture {
 
 			var i:Number;
 			
+			trace (": XStaticSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
+			
 			for (i=0; i<__movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
 				
