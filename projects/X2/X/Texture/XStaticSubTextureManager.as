@@ -122,6 +122,8 @@ package X.Texture {
 				);
 				
 				if (__rect == null) {
+					trace (": split @: ", m_count, __className, i);
+					
 					__end (); __begin ();
 					
 					__rect = m_packer.quickInsert (
