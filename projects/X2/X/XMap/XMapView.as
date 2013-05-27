@@ -40,9 +40,9 @@ package X.XMap {
 			m_imageNamesCached = false;
 			
 			if (CONFIG::starling) {
-				m_textureManagerName = GUID.create ();
+//				m_textureManagerName = GUID.create ();
 				
-				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
+//				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
 			}
 		}
 
@@ -100,14 +100,22 @@ package X.XMap {
 	
 				__layer.getImageClassNames ().forEach (
 					function (__name:*):void {
+						if (__name == "ErrorImages:undefinedClass") {
+							return;
+						}
+						
 						if (CONFIG::starling) {
 							if (xxx.getMovieClipCacheManager ().isQueued (__name as String)) {
+								trace (": not cached: ", __name);
+								
 								__flags = false;
 							}							
 						}
 						else
 						{
 							if (xxx.getBitmapCacheManager ().isQueued (__name as String)) {
+								trace (": not cached: ", __name);
+								
 								__flags = false;
 							}
 						}
@@ -129,6 +137,7 @@ package X.XMap {
 			public function cacheImageClassNames ():void {
 				var i:Number;
 				
+				/*
 				m_subTextureManager.start ();
 				
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
@@ -144,6 +153,7 @@ package X.XMap {
 				}
 				
 				m_subTextureManager.finish ();
+				*/
 				
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
 					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
@@ -259,12 +269,12 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function initSubmapImagePoolManager (
 			__width:Number=512, __height:Number=512,
-			__alloc:Number=16, __spill:Number=8
+			__alloc:Number=8, __spill:Number=1
 			):void {
 			
 			m_submapImagePoolManager = new XObjectPoolManager (
 				function ():* {
-					var __texture = new RenderTexture (__width, __height);
+					var __texture = new RenderTexture (__width, __height, false);
 					
 					var __image:XSubmapImage = new XSubmapImage (__texture);
 					
