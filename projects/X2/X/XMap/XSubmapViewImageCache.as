@@ -9,7 +9,6 @@ package X.XMap {
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	
-//	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
@@ -44,6 +43,8 @@ package X.XMap {
 		private var tempRect:XRect;
 		private var tempPoint:XPoint;
 					
+		private var m_text:XTextSprite;
+		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewImageCache () {
 			m_submapModel = null;
@@ -63,10 +64,12 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
+			x_sprite.removeChild (m_image);
+			
 			removeAll ();
 
 			m_XMapView.getSubmapImagePoolManager ().returnObject (m_image);
-					
+			
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			xxx.getXPointPoolManager ().returnObject (tempPoint);
 			
@@ -189,8 +192,8 @@ package X.XMap {
 			xxx.getXRectPoolManager ().returnObject (i);
 					
 // yep, kill it
-//			trace (": ---------------------------------------: ");
-//			trace (": cull: ", this);
+			trace (": ---------------------------------------: ");
+			trace (": XSubmapViewImage: cull: ", this, m_image.id);
 			
 			killLater ();
 		}
@@ -200,9 +203,17 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
 			if (CONFIG::starling) {
-				m_image = m_XMapView.getSubmapImagePoolManager ().borrowObject () as XSubmapImage;
+				m_image = m_XMapView.getSubmapImagePoolManager ().borrowObject () as XSubmapImage;				
 				x_sprite = addSpriteAt (m_image, 0, 0);
 				x_sprite.setDepth (getDepth ());
+
+				m_text = new XTextSprite (96, 32, ": " + m_image.id, "Verdana", 24, 0xffffff, true);
+				var __x_sprite:XDepthSprite = addSpriteAt (m_text, 0, 0);
+				__x_sprite.setDepth (getDepth () + 1001);
+	
+				trace (": XSubmapViewImage: id: ", m_image.id, m_image.visible);
+				
+//				trace (": numberOfBorrowedObjects: ", m_XMapView.getSubmapImagePoolManager ().numberOfBorrowedObjects (),  m_XMapView.getSubmapImagePoolManager ().totalNumberOfObjects ());
 			}
 			
 			show ();
