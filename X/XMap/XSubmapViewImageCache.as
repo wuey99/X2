@@ -66,9 +66,15 @@ package X.XMap {
 		public override function cleanup ():void {
 			x_sprite.removeChild (m_image);
 			
+			if (CONFIG::starling) {
+				dispose ();
+			}
+			
 			removeAll ();
 
 			m_XMapView.getSubmapImagePoolManager ().returnObject (m_image);
+			
+			m_text.cleanup ();
 			
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			xxx.getXPointPoolManager ().returnObject (tempPoint);
