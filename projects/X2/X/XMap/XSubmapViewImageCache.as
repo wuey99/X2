@@ -154,7 +154,6 @@ package X.XMap {
 				}
 			);
 
-			
 			function __vline (x:Number):void {
 				var y:Number;
 			}
