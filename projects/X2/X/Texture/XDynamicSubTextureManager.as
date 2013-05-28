@@ -53,7 +53,6 @@ package X.Texture {
 			return true;	
 		}
 		
-		
 		//------------------------------------------------------------------------------------------
 		public override function add (__className:String):void {
 			trace (": XDynamicSubTextureManager: add: ", __className);
