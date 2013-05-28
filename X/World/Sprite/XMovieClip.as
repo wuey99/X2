@@ -33,12 +33,14 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
-			if (m_movieClip) {
-				m_movieClip.removeFromParent (true);
+			if (CONFIG::starling) {
+				if (m_movieClip) {
+					m_movieClip.removeFromParent (true);
 			
-				m_movieClip.dispose ();
+					m_movieClip.dispose ();
 	
-				m_movieClip = null;
+					m_movieClip = null;
+				}
 			}
 		}
 
