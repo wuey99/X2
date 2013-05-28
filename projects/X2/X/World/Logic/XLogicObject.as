@@ -173,6 +173,10 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			if (CONFIG::starling) {
+				dispose ();
+			}
+			
 			xxx.getXPointPoolManager ().returnObject (m_pos);
 				
 // if this item was spawned from a Level, decrement the item count and

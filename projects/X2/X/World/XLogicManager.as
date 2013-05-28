@@ -242,7 +242,13 @@ package X.World {
 //			trace (": kill: ", x, x.m_GUID, x.xxx, xxx);
 				
 			if (xxx.contains (x)) {
-				xxx.removeChild (x);
+				if (CONFIG::starling) {
+					xxx.removeChild (x, true);
+				}
+				else
+				{
+					xxx.removeChild (x);
+				}
 			}
 		}
 		

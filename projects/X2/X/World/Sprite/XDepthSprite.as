@@ -25,7 +25,13 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------
 		public function clear ():void {
 			while (numChildren) {
-				removeChildAt (0);
+				if (CONFIG::starling) {
+					removeChildAt (0, true);
+				}
+				else
+				{
+					removeChildAt (0);
+				}
 			}
 		}
 			

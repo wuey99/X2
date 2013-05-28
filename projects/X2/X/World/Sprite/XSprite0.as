@@ -15,7 +15,7 @@ package X.World.Sprite {
 		public function XSprite0 () {
 			super ();
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function get xxx ():XWorld {
 			return m_xxx;

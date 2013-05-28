@@ -60,8 +60,14 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public function removeSprite (__depthSprite:Sprite):void {
 			if (m_XDepthSpriteMap.exists (__depthSprite)) {
-				removeChild (__depthSprite);
-	
+				if (CONFIG::starling) {
+					removeChild (__depthSprite, true);
+				}
+				else
+				{
+					removeChild (__depthSprite);
+				}
+				
 				xxx.getXDepthSpritePoolManager ().returnObject (__depthSprite);
 							
 				m_XDepthSpriteMap.remove (__depthSprite);
