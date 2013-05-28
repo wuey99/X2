@@ -37,6 +37,8 @@ package X.World.Sprite {
 				m_movieClip.removeFromParent (true);
 			
 				m_movieClip.dispose ();
+	
+				m_movieClip = null;
 			}
 		}
 
