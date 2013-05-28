@@ -144,9 +144,9 @@ package X.Texture {
 			for (i=0; i < m_atlases.length; i++) {
 				var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
 				
-				var __texture:Texture = __atlas.getTexture (__className + "_" + __generateIndex (0));
+				var __textures:Vector.<Texture> = __atlas.getTextures (__className);
 				
-				if (__texture) {
+				if (__textures.length) {
 					__movieClipMetadata.push (__atlas);
 				}
 			}
