@@ -542,17 +542,10 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function createXMovieClip (__name:String):XMovieClip {
-			var __movieClip:MovieClip;
-			
-			if (CONFIG::starling) {
-			}
-			else
-			{
-				m_movieClips.put (__name, 0);
-			}
-		
 			var __xmovieClip:XMovieClip = new XMovieClip ();
 			__xmovieClip.initWithClassName (xxx, null, __name);
+			
+			m_movieClips.put (__name, __xmovieClip);
 			
 			return __xmovieClip;
 		}
@@ -574,7 +567,15 @@ package X.World.Logic {
 		public function removeAllMovieClips ():void {
 			m_movieClips.forEach (
 				function (__name:*):void {
-					xxx.unloadClass (__name as String);
+					var __xmovieClip:XMovieClip = m_movieClips.get (__name) as XMovieClip;
+					
+					if (CONFIG::starling) {
+						__xmovieClip.cleanup ();
+					}
+					else
+					{
+						xxx.unloadClass (__name as String);
+					}
 				}
 			);
 		}
