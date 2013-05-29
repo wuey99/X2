@@ -151,6 +151,10 @@ package X.XMap {
 						function (__name:*):void {
 							trace (": cacheImageClassName: (textures): ", __name);
 							
+							if (__name == "ErrorImages:undefinedClass") {
+								return;
+							}
+							
 							m_subTextureManager.add (__name as String);
 						}
 					);
@@ -164,6 +168,10 @@ package X.XMap {
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
 							trace (": cacheImageClassName: (movieClips): ", __name);
+							
+							if (__name == "ErrorImages:undefinedClass") {
+								return;
+							}
 							
 							xxx.getMovieClipCacheManager ().add (__name as String);
 						}
