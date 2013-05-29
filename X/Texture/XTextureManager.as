@@ -76,8 +76,9 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		// TODO: figure out a better way of deciding which dynamic texture manager to add
-		// the MovieClip to.  Currently, it'll always add it to the first one
+		// TODO: figure out a better way of deciding which dynamic texture manager to use
+		// to create the MovieClip to.  Currently, it'll always use the first one.  It might
+		// make sense to only support one dynamic texture manager?
 		//------------------------------------------------------------------------------------------
 		public function createMovieClip (__className:String):starling.display.MovieClip {
 			var __movieClip:starling.display.MovieClip = null;
