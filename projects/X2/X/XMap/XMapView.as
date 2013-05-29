@@ -40,7 +40,7 @@ package X.XMap {
 			m_imageNamesCached = false;
 			
 			if (CONFIG::starling) {
-//				m_textureManagerName = GUID.create ();
+				m_textureManagerName = GUID.create ();
 				
 //				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
 			}
@@ -51,6 +51,10 @@ package X.XMap {
 			super.cleanup ();
 			
 			uncacheImageClassNames ();
+			
+			if (m_subTextureManager) {
+				xxx.getTextureManager ().removeSubManager (m_textureManagerName);
+			}
 			
 			if (m_submapBitmapPoolManager) {
 				m_submapBitmapPoolManager.cleanup ();
@@ -65,7 +69,6 @@ package X.XMap {
 		public override function setupX ():void {
 		}
 
-		
 //------------------------------------------------------------------------------------------
 		public override function cullObject ():void {
 			getXLogicObjects ().forEach (
@@ -201,8 +204,6 @@ package X.XMap {
 						}
 					);
 				}
-				
-				xxx.getTextureManager ().removeSubManager (m_textureManagerName);
 			}
 			else
 			{
@@ -274,7 +275,7 @@ package X.XMap {
 			
 			m_submapImagePoolManager = new XObjectPoolManager (
 				function ():* {
-					var __texture = new RenderTexture (__width, __height, false);
+					var __texture:RenderTexture = new RenderTexture (__width, __height, false);
 					
 					var __image:XSubmapImage = new XSubmapImage (__texture);
 					

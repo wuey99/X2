@@ -213,8 +213,8 @@ package X.XMap {
 				x_sprite.setDepth (getDepth ());
 
 				m_text = new XTextSprite (96, 32, ": " + m_image.id, "Verdana", 24, 0xffffff, true);
-				var __x_sprite:XDepthSprite = addSpriteAt (m_text, 0, 0);
-				__x_sprite.setDepth (getDepth () + 1001);
+				var __depthSprite:XDepthSprite = addSpriteAt (m_text, 0, 0);
+				__depthSprite.setDepth (getDepth () + 1001);
 	
 				trace (": XSubmapViewImage: id: ", m_image.id, m_image.visible);
 				
