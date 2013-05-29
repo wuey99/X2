@@ -125,24 +125,27 @@ package X.XMap {
 			else if (__item.logicClassName.charAt (0) == "$") {
 				if (__object == null) {
 					trace (": (error) logicClassName: ", __item.logicClassName);
+					
+					__logicObject = null;
 				}
-				
-				__logicObject = xxx.getXLogicManager ().initXLogicObject (
-					// parent
-					m_XMapView,
-					// logicObject
-					new (__object as Class) () as XLogicObject,
-					// item, layer, depth
-					__item, m_currLayer, __depth,
-					// x, y, z
-					__item.x, __item.y, 0,
-					// scale, rotation
-					__item.scale, __item.rotation,
-					// imageClassName
-					__item.imageClassName,
-					// frame
-					__item.frame
-				) as XLogicObjectCX;
+				else {
+					__logicObject = xxx.getXLogicManager ().initXLogicObject (
+						// parent
+						m_XMapView,
+						// logicObject
+						new (__object as Class) () as XLogicObject,
+						// item, layer, depth
+						__item, m_currLayer, __depth,
+						// x, y, z
+						__item.x, __item.y, 0,
+						// scale, rotation
+						__item.scale, __item.rotation,
+						// imageClassName
+						__item.imageClassName,
+						// frame
+						__item.frame
+					) as XLogicObjectCX;
+				}
 			}
 			else
 			{
