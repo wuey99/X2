@@ -42,7 +42,7 @@ package X.XMap {
 			if (CONFIG::starling) {
 				m_textureManagerName = GUID.create ();
 				
-//				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
+				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
 			}
 		}
 
@@ -138,13 +138,14 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
 			public function cacheImageClassNames ():void {
+				var __layer:XMapLayerModel;
+				
 				var i:Number;
 				
-				/*
 				m_subTextureManager.start ();
 				
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
-					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
+					__layer = m_XMapModel.getLayers ()[i] as XMapLayerModel;
 		
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
@@ -156,10 +157,9 @@ package X.XMap {
 				}
 				
 				m_subTextureManager.finish ();
-				*/
 				
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
-					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
+					__layer = m_XMapModel.getLayers ()[i] as XMapLayerModel;
 					
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
