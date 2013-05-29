@@ -74,7 +74,7 @@ package X.XMap {
 
 			m_XMapView.getSubmapImagePoolManager ().returnObject (m_image);
 			
-			m_text.cleanup ();
+//			m_text.cleanup ();
 			
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			xxx.getXPointPoolManager ().returnObject (tempPoint);
@@ -197,8 +197,8 @@ package X.XMap {
 			xxx.getXRectPoolManager ().returnObject (i);
 					
 // yep, kill it
-			trace (": ---------------------------------------: ");
-			trace (": XSubmapViewImage: cull: ", this, m_image.id);
+//			trace (": ---------------------------------------: ");
+//			trace (": XSubmapViewImage: cull: ", this, m_image.id);
 			
 			killLater ();
 		}
@@ -212,11 +212,13 @@ package X.XMap {
 				x_sprite = addSpriteAt (m_image, 0, 0);
 				x_sprite.setDepth (getDepth ());
 
+				/*
 				m_text = new XTextSprite (96, 32, ": " + m_image.id, "Verdana", 24, 0xffffff, true);
 				var __depthSprite:XDepthSprite = addSpriteAt (m_text, 0, 0);
 				__depthSprite.setDepth (getDepth () + 1001);
 	
 				trace (": XSubmapViewImage: id: ", m_image.id, m_image.visible);
+				*/
 				
 //				trace (": numberOfBorrowedObjects: ", m_XMapView.getSubmapImagePoolManager ().numberOfBorrowedObjects (),  m_XMapView.getSubmapImagePoolManager ().totalNumberOfObjects ());
 			}
