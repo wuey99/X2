@@ -149,7 +149,7 @@ package X.XMap {
 		
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
-							trace (": cacheImageClassName: ", __name);
+							trace (": cacheImageClassName: (textures): ", __name);
 							
 							m_subTextureManager.add (__name as String);
 						}
@@ -163,7 +163,7 @@ package X.XMap {
 					
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
-							trace (": cacheImageClassName: ", __name);
+							trace (": cacheImageClassName: (movieClips): ", __name);
 							
 							xxx.getMovieClipCacheManager ().add (__name as String);
 						}
