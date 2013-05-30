@@ -42,7 +42,7 @@ package X.XMap {
 			if (CONFIG::starling) {
 				m_textureManagerName = GUID.create ();
 				
-				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
+//				m_subTextureManager = xxx.getTextureManager ().createSubManager (m_textureManagerName);
 			}
 		}
 
@@ -142,6 +142,7 @@ package X.XMap {
 				
 				var i:Number;
 				
+				/*
 				m_subTextureManager.start ();
 				
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
@@ -161,6 +162,7 @@ package X.XMap {
 				}
 				
 				m_subTextureManager.finish ();
+				*/
 				
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
 					__layer = m_XMapModel.getLayers ()[i] as XMapLayerModel;
