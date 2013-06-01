@@ -163,6 +163,12 @@ package X.Task {
 		public function kill ():void {
 			removeAllTasks ();
 			
+			if (m_subTask) {
+				m_subTask.kill ();
+				
+				m_subTask = null;
+			}
+			
 			m_isDead = true;
 		}	
 			

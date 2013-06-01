@@ -102,7 +102,7 @@ package X.Task {
 				
 				m_XTasks.remove (__task);
 				
-				m_XTaskPoolManager.returnObject (__task);
+//				m_XTaskPoolManager.returnObject (__task);
 			}
 		}
 		
