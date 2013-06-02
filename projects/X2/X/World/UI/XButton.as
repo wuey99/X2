@@ -99,57 +99,126 @@ package X.World.UI {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function onMouseOver (e:TouchEvent):void {
-			if (m_disabledFlag) {
-				return;
+		if (CONFIG::starling) {
+			public function onMouseOver (e:TouchEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+				
+				__gotoState (OVER_STATE);
+				
+				m_currState = OVER_STATE;
 			}
-			
-			__gotoState (OVER_STATE);
-			
-			m_currState = OVER_STATE;
-		}	
-
-//------------------------------------------------------------------------------------------		
-		public function onMouseDown (e:TouchEvent):void {
-			if (m_disabledFlag) {
-				return;
-			}
-			
-			__gotoState (DOWN_STATE);	
-
-			m_currState = DOWN_STATE;
-			
-			fireMouseDownSignal ();
-		}	
-
-//------------------------------------------------------------------------------------------		
-		public function onMouseUp (e:TouchEvent):void {
-			if (m_disabledFlag) {
-				return;
-			}
-						
-			__gotoState (getNormalState ());
-			
-			m_currState = getNormalState ();
-			
-			fireMouseUpSignal ();
+		}
+		else
+		{
+			public function onMouseOver (e:MouseEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+				
+				__gotoState (OVER_STATE);
+				
+				m_currState = OVER_STATE;
+			}			
 		}
 
-//------------------------------------------------------------------------------------------		
-		public function onMouseMove (e:TouchEvent):void {	
-		}
-									
-//------------------------------------------------------------------------------------------		
-		public function onMouseOut (e:TouchEvent):void {
-			if (m_disabledFlag) {
-				return;
+//------------------------------------------------------------------------------------------
+		if (CONFIG::starling) {
+			public function onMouseDown (e:TouchEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+				
+				__gotoState (DOWN_STATE);	
+	
+				m_currState = DOWN_STATE;
+				
+				fireMouseDownSignal ();
 			}
-			
-			__gotoState (getNormalState ());
-			
-			m_currState = getNormalState ();
-			
-			fireMouseOutSignal ();
+		}
+		else
+		{
+			public function onMouseDown (e:MouseEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+				
+				__gotoState (DOWN_STATE);	
+				
+				m_currState = DOWN_STATE;
+				
+				fireMouseDownSignal ();
+			}			
+		}
+
+//------------------------------------------------------------------------------------------
+		if (CONFIG::starling) {
+			public function onMouseUp (e:TouchEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+							
+				__gotoState (getNormalState ());
+				
+				m_currState = getNormalState ();
+				
+				fireMouseUpSignal ();
+			}
+		}
+		else
+		{
+			public function onMouseUp (e:MouseEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+				
+				__gotoState (getNormalState ());
+				
+				m_currState = getNormalState ();
+				
+				fireMouseUpSignal ();
+			}			
+		}
+
+//------------------------------------------------------------------------------------------
+		if (CONFIG::starling) {
+			public function onMouseMove (e:TouchEvent):void {	
+			}
+		}
+		else
+		{
+			public function onMouseMove (e:MouseEvent):void {	
+			}			
+		}
+		
+//------------------------------------------------------------------------------------------	
+		if (CONFIG::starling) {
+			public function onMouseOut (e:TouchEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+				
+				__gotoState (getNormalState ());
+				
+				m_currState = getNormalState ();
+				
+				fireMouseOutSignal ();
+			}
+		}
+		else
+		{
+			public function onMouseOut (e:MouseEvent):void {
+				if (m_disabledFlag) {
+					return;
+				}
+				
+				__gotoState (getNormalState ());
+				
+				m_currState = getNormalState ();
+				
+				fireMouseOutSignal ();
+			}			
 		}
 
 //------------------------------------------------------------------------------------------
