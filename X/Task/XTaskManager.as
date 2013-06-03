@@ -12,14 +12,18 @@ package X.Task {
 		protected var m_paused:Number;
 		protected var m_XApp:XApp;
 		protected var m_XTaskPoolManager:XObjectPoolManager;
-		
+		protected var m_killQueue:XDict;
+		protected var m_delay:Number = 0;
+
 //------------------------------------------------------------------------------------------
 		public function XTaskManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
 			m_XTasks = new XDict ();
-			
+			m_killQueue = new XDict ();
+		
 			m_paused = 0;
+			m_delay = 0;
 			
 			m_XTaskPoolManager = new XObjectPoolManager (
 				function ():* {
@@ -30,7 +34,7 @@ package X.Task {
 					return null;
 				},
 				
-				512, 128,
+				256, 128,
 				
 				function (x:*):void {
 				}
@@ -73,8 +77,7 @@ package X.Task {
 		
 //------------------------------------------------------------------------------------------
 		public function addTask (__taskList:Array, __findLabelsFlag:Boolean = true):XTask {
-//			var __task:XTask = m_XTaskPoolManager.borrowObject () as XTask;
-			var __task:XTask = new XTask ();
+			var __task:XTask = m_XTaskPoolManager.borrowObject () as XTask;
 			__task.setup (__taskList, __findLabelsFlag);
 			
 			__task.setManager (this);
@@ -102,7 +105,7 @@ package X.Task {
 				
 				m_XTasks.remove (__task);
 				
-//				m_XTaskPoolManager.returnObject (__task);
+				m_killQueue.put (__task, 4);
 			}
 		}
 		
@@ -110,6 +113,26 @@ package X.Task {
 		public function updateTasks ():void {	
 			if (m_paused) {
 				return;
+			}
+			
+			m_delay += 1;
+			
+			if ((m_delay & 63) == 0) {
+				m_killQueue.forEach (
+					function (__task:*):void {
+						var __count:Number = m_killQueue.get (__task); __count--;
+						
+						if (__count == 0) {
+							m_XTaskPoolManager.returnObject (__task);
+							
+							m_killQueue.remove (__task);
+						}
+						else
+						{
+							m_killQueue.put (__task, __count);
+						}
+					}
+				);
 			}
 			
 			m_XTasks.forEach (
