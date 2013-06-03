@@ -94,17 +94,15 @@ package X.Task {
 //------------------------------------------------------------------------------------------
 		public function XTask () {
 			super ();	
+			
+			m_XTaskSubManager = createXTaskSubManager ();
+			
+			m_isDead = true;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function setup (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			__reset (__taskList, __findLabelsFlag);
-			
-			m_parent = null;
-			
-			m_WAIT1000 = false;
-			
-			tag = "";
 			
 			m_id = ++g_id;
 		}
@@ -121,8 +119,9 @@ package X.Task {
 			m_flags = ~FLAGS_EQ;
 			m_subTask = null;
 			m_isDead = false;
-
-			m_XTaskSubManager = createXTaskSubManager ();
+			m_parent = null;
+			m_WAIT1000 = false;
+			tag = "";
 			
 // locate forward referenced labels.  this is usually done by default, but
 // __findLabelsFlag can be set to false if it's known ahead of time that
@@ -162,13 +161,7 @@ package X.Task {
 //------------------------------------------------------------------------------------------
 		public function kill ():void {
 			removeAllTasks ();
-			
-			if (m_subTask) {
-				m_subTask.kill ();
-				
-				m_subTask = null;
-			}
-			
+
 			m_isDead = true;
 		}	
 			
