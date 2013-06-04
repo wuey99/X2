@@ -176,9 +176,6 @@ package X.Task {
 			
 			if (m_stackPtr < 0) {
 				m_manager.removeTask (this);
-
-// this should be called from the XTaskManager ().
-//				kill ();
 				
 				return;
 			}
