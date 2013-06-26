@@ -20,6 +20,7 @@ package X.XMap {
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
 		private var m_currLayer:Number;
+		private var m_delay:Number;
 				
 //------------------------------------------------------------------------------------------
 		public function XMapLayerCachedView () {
@@ -35,6 +36,8 @@ package X.XMap {
 			m_currLayer = getArg (args, 2);
 
 			m_XSubmapToXLogicObject = new XDict ();
+			
+			m_delay = 1;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -49,6 +52,12 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function updateFromXMapModel ():void {
 			if (!m_XMapView.areImageClassNamesCached ()) {
+				return;
+			}
+			
+			if (m_delay) {
+				m_delay--;
+				
 				return;
 			}
 			

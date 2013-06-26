@@ -77,7 +77,7 @@ package X.XMap {
 		
 		public static var CX_MAX:Number = 28;
 		
-// tile width, height
+// collision tile width, height
 		public static var CX_TILE_WIDTH:Number = 16;
 		public static var CX_TILE_HEIGHT:Number = 16;
 		
@@ -86,6 +86,16 @@ package X.XMap {
 		
 		public static var CX_TILE_WIDTH_UNMASK:Number = 0xfffffff0;
 		public static var CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
+
+// alternate tile width, height
+		public static var TX_TILE_WIDTH:Number = 64;
+		public static var TX_TILE_HEIGHT:Number = 64;
+		
+		public static var TX_TILE_WIDTH_MASK:Number = 63;
+		public static var TX_TILE_HEIGHT_MASK:Number = 63;
+		
+		public static var TX_TILE_WIDTH_UNMASK:Number = 0xffffffc0;
+		public static var TX_TILE_HEIGHT_UNMASK:Number = 0xffffffc0;
 		
 		private var m_items:XDict;
 		
