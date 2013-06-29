@@ -56,7 +56,7 @@ package X.XMap {
 				m_layers[i].cleanup ();
 			}
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function getNumLayers ():Number {
 			return m_numLayers;
