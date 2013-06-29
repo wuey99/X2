@@ -39,6 +39,8 @@ package X.XMap {
 		
 		private var m_itemInuse:Object;
 		
+		private var m_persistentStorage:XDict;
+		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
 			super ();
@@ -82,10 +84,17 @@ package X.XMap {
 			m_itemInuse = new Object ();
 			
 			m_viewPort = new XRect ();
+			
+			m_persistentStorage = new XDict ();
 		}
 
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get persistentStorage ():XDict {
+			return m_persistentStorage;
 		}
 		
 //------------------------------------------------------------------------------------------
