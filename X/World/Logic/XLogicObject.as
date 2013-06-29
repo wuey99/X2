@@ -784,7 +784,7 @@ package X.World.Logic {
 		public function get item ():XMapItemModel {
 			return m_item;
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function setupItemParamsXML ():void {
 			m_xml = new XSimpleXMLNode ();

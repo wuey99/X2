@@ -39,6 +39,8 @@ package X.XMap {
 		
 		private var m_itemInuse:Object;
 		
+		private var m_persistentStorage:XDict;
+		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
 			super ();
@@ -75,6 +77,8 @@ package X.XMap {
 					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col, __row, m_submapWidth, m_submapHeight);
 				}
 			}
+			
+			m_persistentStorage = new XDict ();
 			
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();
@@ -132,7 +136,12 @@ package X.XMap {
 		public function set grid (__value:Boolean):void {
 			m_grid = __value;
 		}
-					
+
+//------------------------------------------------------------------------------------------
+		public function getPersistentStorage ():XDict {
+			return m_persistentStorage;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getSubmapRows ():Number {
 			return m_submapRows;
@@ -832,6 +841,9 @@ package X.XMap {
 			{
 				m_grid = false;
 			}	
+			
+			m_persistentStorage = new XDict ();
+			
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();			
 

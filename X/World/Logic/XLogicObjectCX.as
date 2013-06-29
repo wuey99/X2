@@ -140,7 +140,34 @@ package X.World.Logic {
 		public function getXMapView ():XMapView {
 			return m_XMapView;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function hasItemStorage ():Boolean {
+			if (item == null) {
+				return false;
+			}
+			
+			return m_XMapLayerModel.getPersistentStorage ().exists (item.id);
+		}
 		
+//------------------------------------------------------------------------------------------
+		public function initItemStorage (__value:*):void {
+			if (!hasItemStorage ()) {
+				m_XMapLayerModel.getPersistentStorage ().put (item.id, __value);
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getItemStorage ():* {
+			if (hasItemStorage ()) {		
+				return m_XMapLayerModel.getPersistentStorage ().get (item.id);
+			}
+			else
+			{
+				return null;
+			}
+		}
+
 //------------------------------------------------------------------------------------------
 		public function setCX (
 			__x1:Number,
