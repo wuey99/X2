@@ -365,7 +365,7 @@ package X.Resource.Manager {
 //------------------------------------------------------------------------------------------
 		public function unloadClassByName (__className:String):Boolean {
 			if (!resourceManagerReady ()) {
-				return null;
+				return false;
 			}
 			
 			var i:Number;
