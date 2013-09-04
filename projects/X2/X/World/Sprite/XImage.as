@@ -9,8 +9,6 @@ package X.World.Sprite {
 	import flash.geom.*;
 	import flash.utils.*;
 	
-	import mx.charts.chartClasses.RenderData;
-	
 	import starling.display.*;
 	import starling.textures.RenderTexture;
 	
