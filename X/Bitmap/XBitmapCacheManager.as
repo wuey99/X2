@@ -60,6 +60,10 @@ package X.Bitmap {
 
 //------------------------------------------------------------------------------------------
 		public function add (__className:String):XBitmap {
+			if (__className == "ErrorImages:undefinedClass") {
+				return null;
+			}
+
 			if (m_bitmaps.exists (__className)) {
 				m_count[__className]++;
 				
