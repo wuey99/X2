@@ -149,22 +149,28 @@ package X.XMap {
 			}
 			else
 			{
-				__logicObject = xxx.getXLogicManager ().createXLogicObjectFromClassName (
-					// parent
-						m_XMapView,
-					// logicClassName
-						__item.logicClassName,
-					// item, layer, depth
-						__item, m_currLayer, __depth,
-					// x, y, z
-						__item.x, __item.y, 0,
-					// scale, rotation
-						__item.scale, __item.rotation,
-					// imageClassName
-						__item.imageClassName,
-					// frame
-						__item.frame
-					) as XLogicObjectCX;
+				if (__item.logicClassName == "XLogicObjectXMap:XLogicObjectXMap") {
+					__logicObject = null;
+				}
+				else
+				{
+					__logicObject = xxx.getXLogicManager ().createXLogicObjectFromClassName (
+						// parent
+							m_XMapView,
+						// logicClassName
+							__item.logicClassName,
+						// item, layer, depth
+							__item, m_currLayer, __depth,
+						// x, y, z
+							__item.x, __item.y, 0,
+						// scale, rotation
+							__item.scale, __item.rotation,
+						// imageClassName
+							__item.imageClassName,
+						// frame
+							__item.frame
+						) as XLogicObjectCX;
+				}
 			}
 
 			__item.inuse++;
