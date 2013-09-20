@@ -88,8 +88,27 @@ package X.Text {
 		}
 
 		//------------------------------------------------------------------------------------------
+		public function get text ():XTextSprite {
+			return m_text;
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public function autoCalcSize ():void {
 			m_text.autoCalcSize ();
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function centerOnX (__x:Number, __width:Number):void {	
+			autoCalcSize ();
+			
+			oX = __x + (__width - m_text.width)/2;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function centerOnY (__y:Number, __height:Number):void {
+			autoCalcSize ();
+			
+			oY = __y + (__height - m_text.height)/2;
 		}
 		
 		//------------------------------------------------------------------------------------------
