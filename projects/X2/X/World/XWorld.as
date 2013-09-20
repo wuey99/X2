@@ -23,6 +23,7 @@ package X.World {
 	import X.Signals.*;
 	import X.Sound.*;
 	import X.Task.*;
+	import X.Text.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
@@ -109,6 +110,7 @@ package X.World {
 		public var m_XTextureManager:XTextureManager;
 		public var m_XSubTextureManager:XSubTextureManager;
 		public var m_XMovieClipCacheManager:XMovieClipCacheManager;
+		public var m_XTextLogicObject:XTextLogicObject;
 				
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8){

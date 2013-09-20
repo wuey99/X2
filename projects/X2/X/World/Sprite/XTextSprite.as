@@ -193,7 +193,35 @@ package X.World.Sprite {
 		public override function set height (__value:Number):void {
 			m_text.height = __value;
 		}
-	
+
+//------------------------------------------------------------------------------------------
+		public function get textWidth ():Number {
+			if (CONFIG::starling) {
+				return m_text.textBounds.width;
+			}
+			else
+			{
+				return m_text.textWidth;
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get textHeight ():Number {
+			if (CONFIG::starling) {
+				return m_text.textBounds.height;
+			}
+			else
+			{
+				return m_text.textHeight;
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function autoCalcSize ():void {
+			width =	textWidth + 8;
+			height = textHeight;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function set letterSpacing (__value:Number):void {
 			if (CONFIG::starling) {
@@ -265,7 +293,7 @@ package X.World.Sprite {
 				m_text.embedFonts = __value;
 			}
 		}
-		
+				
 //------------------------------------------------------------------------------------------
 		private function __format ():void {
 			if (CONFIG::flash) {
