@@ -65,6 +65,10 @@ package X.Text {
 			__bold:Boolean=false
 		):void {
 			
+			if (x_text) {
+				removeSprite (x_text);
+			}
+			
 			m_text = new XTextSprite (
 				// width
 				__width,
