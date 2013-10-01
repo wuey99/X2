@@ -77,6 +77,7 @@ package X.World.Logic {
 		public var m_XSignals:XDict;
 		public var self:XLogicObject;
 		public var m_killSignal:XSignal;
+		public var m_killSignalWithLogic:XSignal;
 		public var m_XTaskSubManager:XTaskSubManager;
 		public var m_XTaskSubManagerCX:XTaskSubManager;
 		public var m_isDead:Boolean;
@@ -147,6 +148,7 @@ package X.World.Logic {
 			m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());
 			
 			m_killSignal = createXSignal ();
+			m_killSignalWithLogic = createXSignal ();
 			
 			m_pos = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			
@@ -170,6 +172,16 @@ package X.World.Logic {
 		public function fireKillSignal (__model:XModelBase):void {
 			m_killSignal.fireSignal (__model);
 		}
+	
+//------------------------------------------------------------------------------------------
+		public function addKillListenerWithLogic (__listener:Function):void {
+			m_killSignalWithLogic.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function fireKillSignalWithLogic (__logicObject:XLogicObject):void {
+			m_killSignalWithLogic.fireSignal (__logicObject);
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
@@ -184,6 +196,7 @@ package X.World.Logic {
 // to a the "kill" event.
 			
 			fireKillSignal (m_item);
+			fireKillSignalWithLogic (this);
 			
 			if (m_item != null) {
 //				fireKillSignal (m_item);
