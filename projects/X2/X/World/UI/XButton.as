@@ -49,9 +49,9 @@ package X.World.UI {
 			
 			createSprites ();
 			
-//			mouseEnabled = true;
-			
-			m_sprite.mouseEnabled = true;
+			if (CONFIG::flash) {
+				m_sprite.mouseEnabled = true;
+			}
 			
 			m_disabledFlag = false;
 			
@@ -101,6 +101,8 @@ package X.World.UI {
 //------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
 			public function onMouseOver (e:TouchEvent):void {
+				trace (": XButton: onMouseOver: ", e);
+				
 				if (m_disabledFlag) {
 					return;
 				}
