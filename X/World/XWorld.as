@@ -36,10 +36,14 @@ package X.World {
 	
 	include "..\\flash.h";
 	
+	import flash.events.Event;
+	import flash.events.TimerEvent;
 	import flash.geom.Point;
 	import flash.system.*;
-	import flash.events.*;
+	import flash.utils.Timer;
+	import flash.events.MouseEvent;
 	
+	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
@@ -66,6 +70,7 @@ package X.World {
 		private var m_XBulletCollisionManager:XBulletCollisionManager;
 		public var m_mouseX:Number;
 		public var m_mouseY:Number;
+		public var m_timer:Timer;
 		
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
@@ -115,7 +120,7 @@ package X.World {
 		public var m_GUID:GUID;
 		
 //------------------------------------------------------------------------------------------
-		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8){
+		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32){
 			m_parent = __parent;
 			m_XApp = __XApp;
 			
@@ -126,7 +131,9 @@ package X.World {
 			mouseChildren = true;
 			
 			// Add event for main loop
-			addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			m_timer = new Timer (__timerInterval, 0);
+			m_timer.start ();
+			m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
 			m_inuse_ENTER_FRAME = 0;
 
 			if (CONFIG::flash) {
@@ -247,7 +254,7 @@ package X.World {
 			getXLogicManager ().updateLogic ();
 			getXTaskManager ().updateTasks ();
 			getXTaskManagerCX ().updateTasks ();
-//				getXLogicManager ().updatePhysics ();
+//			getXLogicManager ().updatePhysics ();
 			getXLogicManager ().cullObjects ();
 			if (CONFIG::flash) {
 				m_world.Step (m_timeStep, m_iterations);
@@ -304,6 +311,19 @@ package X.World {
 						m_mouseY = __location.y;
 					}
 				}
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
+// returns the flash stage
+//------------------------------------------------------------------------------------------
+		public function getFlashStage ():* {
+			if (CONFIG::starling) {
+				return getParent ().stage;
+			}
+			else
+			{
+				return stage;
 			}
 		}
 

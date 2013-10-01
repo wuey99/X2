@@ -48,6 +48,14 @@ package X.World.Sprite {
 		public function initWithMovieClip (__movieClip:MovieClip):void {
 			m_movieClip = __movieClip;
 			
+			if (CONFIG::starling) {
+				m_movieClip.touchable = false;
+			}
+			else
+			{
+				m_movieClip.mouseEnabled = false;
+			}
+			
 			addChild (__movieClip);
 		}
 		
