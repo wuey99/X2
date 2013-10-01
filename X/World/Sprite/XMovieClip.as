@@ -162,6 +162,16 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public function gotoAndStopAtLabel (__label:String) {
+			if (CONFIG::starling) {	
+			}
+			else
+			{
+				m_movieClip.gotoAndStop (__label);
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
 				if (m_movieClip) {

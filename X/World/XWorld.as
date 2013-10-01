@@ -24,6 +24,8 @@ package X.World {
 	import X.Sound.*;
 	import X.Task.*;
 	import X.Text.*;
+	import X.Texture.*;
+	import X.Utils.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
@@ -31,13 +33,12 @@ package X.World {
 	import X.World.UI.XButton;
 	import X.XML.*;
 	import X.XMap.*;
-	import X.Texture.*;
 	
 	include "..\\flash.h";
-	include "..\\events.h";
 	
 	import flash.geom.Point;
 	import flash.system.*;
+	import flash.events.*;
 	
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -111,7 +112,8 @@ package X.World {
 		public var m_XSubTextureManager:XSubTextureManager;
 		public var m_XMovieClipCacheManager:XMovieClipCacheManager;
 		public var m_XTextLogicObject:XTextLogicObject;
-				
+		public var m_GUID:GUID;
+		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8){
 			m_parent = __parent;
@@ -209,20 +211,20 @@ package X.World {
 		public function setupDebug ():void {
 			// set debug draw
 			
-//			var dbgDraw:b2DebugDraw = new b2DebugDraw();
-			var dbgDraw:XDebugDraw = new XDebugDraw(this);
-			var dbgSprite:Sprite = new Sprite();
-// !!!
-			getXWorldLayer (0).childList.addChild(dbgSprite);
-// !STARLING!
-			if (CONFIG::flash) {
+			if (CONFIG::flash) {	
+//				var dbgDraw:b2DebugDraw = new b2DebugDraw();
+				var dbgDraw:XDebugDraw = new XDebugDraw(this);
+				var dbgSprite:Sprite = new Sprite ();
+	
+				getXWorldLayer (0).childList.addChild(dbgSprite);
+	
 				dbgDraw.m_sprite = dbgSprite;
+				dbgDraw.m_drawScale = 30.0;
+				dbgDraw.m_fillAlpha = 0.75;
+				dbgDraw.m_lineThickness = 2.0;
+				dbgDraw.m_drawFlags = b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit;
+				m_world.SetDebugDraw(dbgDraw);
 			}
-			dbgDraw.m_drawScale = 30.0;
-			dbgDraw.m_fillAlpha = 0.75;
-			dbgDraw.m_lineThickness = 2.0;
-			dbgDraw.m_drawFlags = b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit;
-			m_world.SetDebugDraw(dbgDraw);
 		}
 		
 //------------------------------------------------------------------------------------------
