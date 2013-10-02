@@ -49,7 +49,7 @@ package X.World.Sprite {
 			m_movieClip = __movieClip;
 			
 			if (CONFIG::starling) {
-				m_movieClip.touchable = false;
+				m_movieClip.touchable = true;
 			}
 			else
 			{
