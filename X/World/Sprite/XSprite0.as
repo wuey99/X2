@@ -16,7 +16,6 @@ package X.World.Sprite {
 			super ();
 			
 			if (CONFIG::starling) {
-				touchable = false;
 			}
 			else
 			{

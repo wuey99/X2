@@ -121,14 +121,20 @@ package X.World {
 		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32){
+			super ();
+			
 			m_parent = __parent;
 			m_XApp = __XApp;
 			
 			MAX_LAYERS = __layers;
 			
-// !STARLING!
-			mouseEnabled = true;
-			mouseChildren = true;
+			if (CONFIG::starling) {
+			}
+			else
+			{
+				mouseEnabled = true;
+				mouseChildren = true;
+			}
 			
 			// Add event for main loop
 			m_timer = new Timer (__timerInterval, 0);
@@ -298,7 +304,7 @@ package X.World {
 
 //------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
-			private function onTouchEvent(e:TouchEvent):void {
+			private function onTouchEvent (e:TouchEvent):void {
 				var __touches:Vector.<Touch> = e.getTouches(this);
 				
 				for each (var __touch:Touch in __touches)
@@ -309,6 +315,8 @@ package X.World {
 						
 						m_mouseX = __location.x;
 						m_mouseY = __location.y;
+						
+//						trace (": mouseX, mouseY: ", m_mouseX, m_mouseY);
 					}
 				}
 			}
