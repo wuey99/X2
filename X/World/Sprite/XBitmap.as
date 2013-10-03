@@ -28,6 +28,7 @@ package X.World.Sprite {
 				public var m_rect:XRect;
 				public var theParent:*;
 				public var rp:XPoint;
+				public static var g_XApp:XApp;
 				
 				//------------------------------------------------------------------------------------------
 				include "..\\Sprite\\XRegistration_impl.h";
@@ -36,9 +37,9 @@ package X.World.Sprite {
 				public function XBitmap () {
 					super ();
 					
-					m_pos = new XPoint ();
-					m_rect = new XRect ();
-					rp = new XPoint;
+					m_pos = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
+					m_rect = g_XApp.getXRectPoolManager ().borrowObject () as XRect;
+					rp = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
 					
 					setRegistration ();
 					
@@ -56,6 +57,10 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function cleanup ():void {
+					g_XApp.getXPointPoolManager ().returnObject (m_pos);
+					g_XApp.getXPointPoolManager ().returnObject (m_rect);
+					g_XApp.getXPointPoolManager ().returnObject (rp);	
+					
 					if (m_bitmapDataAnimManager != null) {
 						m_bitmapDataAnimManager.remove (m_className);
 					}
@@ -69,6 +74,11 @@ package X.World.Sprite {
 						
 						delete m_bitmapNames[__name];
 					}
+				}
+				
+				//------------------------------------------------------------------------------------------
+				public static function setXApp (__XApp:XApp):void {
+					g_XApp = __XApp;
 				}
 				
 				//------------------------------------------------------------------------------------------

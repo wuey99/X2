@@ -16,7 +16,6 @@ package X.World.Sprite {
 		public var m_pos:XPoint;
 		public var m_rect:XRect;
 		public var rp:XPoint;
-	
 		public static var g_XApp:XApp;
 		
 //------------------------------------------------------------------------------------------
@@ -26,9 +25,9 @@ package X.World.Sprite {
 		public function XSprite () {
 			super ();
 		
-			m_pos = new XPoint ();
-			m_rect = new XRect ();
-			rp = new XPoint ();
+			m_pos = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
+			m_rect = g_XApp.getXRectPoolManager ().borrowObject () as XRect;
+			rp = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
 			
 			setRegistration ();
 			
@@ -38,6 +37,9 @@ package X.World.Sprite {
 
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {	
+			g_XApp.getXPointPoolManager ().returnObject (m_pos);
+			g_XApp.getXPointPoolManager ().returnObject (m_rect);
+			g_XApp.getXPointPoolManager ().returnObject (rp);			
 		}
 
 //------------------------------------------------------------------------------------------
