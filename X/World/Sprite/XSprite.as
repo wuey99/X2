@@ -14,6 +14,9 @@ package X.World.Sprite {
 		public var m_visible:Boolean;
 		public var m_pos:XPoint;
 		public var m_rect:XRect;
+		public var rp:XPoint;
+	
+		public static var g_XApp;
 		
 //------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
@@ -24,7 +27,8 @@ package X.World.Sprite {
 		
 			m_pos = new XPoint ();
 			m_rect = new XRect ();
-					
+			rp = new XPoint ();
+			
 			setRegistration ();
 			
 			m_scale = 1.0;

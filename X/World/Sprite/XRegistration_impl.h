@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------------------
 import X.Geom.XPoint;
 
-		public var rp:XPoint;
-		
 //------------------------------------------------------------------------------------------
 		public function globalToParent():Point {
-			return parent.globalToLocal (localToGlobal (rp));
+// unused
+			return null;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function setRegistration(x:Number=0, y:Number=0):void {
-			rp = new XPoint (x, y);
+			rp.x = x;
+			rp.y = y;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -20,28 +20,28 @@ import X.Geom.XPoint;
 				
 //------------------------------------------------------------------------------------------		
 		public function get x2():Number {
-			var p:Point = globalToParent ();
+			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			return p.x;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function set x2(value:Number):void {
-			var p:Point = globalToParent ();
+			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			this.x += value - p.x;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function get y2():Number {
-			var p:Point = globalToParent ();
+			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			return p.y;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function set y2(value:Number):void {
-			var p:Point = globalToParent ();
+			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			this.y += value - p.y;
 		}
@@ -53,7 +53,14 @@ import X.Geom.XPoint;
 
 //------------------------------------------------------------------------------------------
 		public function set scaleX2(value:Number):void {
-			this.setProperty2("scaleX", value);
+			var a:Point = parent.globalToLocal (localToGlobal (rp));
+			
+			this.scaleX = value;
+
+			var b:Point = parent.globalToLocal (localToGlobal (rp));
+
+			this.x -= b.x - a.x;
+			this.y -= b.y - a.y;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -63,7 +70,14 @@ import X.Geom.XPoint;
 
 //------------------------------------------------------------------------------------------
 		public function set scaleY2(value:Number):void {
-			this.setProperty2("scaleY", value);
+			var a:Point = parent.globalToLocal (localToGlobal (rp));
+			
+			this.scaleY = value;
+
+			var b:Point = parent.globalToLocal (localToGlobal (rp));
+
+			this.x -= b.x - a.x;
+			this.y -= b.y - a.y;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -73,28 +87,28 @@ import X.Geom.XPoint;
 
 //------------------------------------------------------------------------------------------
 		public function set rotation2(value:Number):void {
-			this.setProperty2("rotation", value);
+			var a:Point = parent.globalToLocal (localToGlobal (rp));
+			
+			this.rotation = value;
+
+			var b:Point = parent.globalToLocal (localToGlobal (rp));
+
+			this.x -= b.x - a.x;
+			this.y -= b.y - a.y;
 		}
 
 //------------------------------------------------------------------------------------------
 		public function get mouseX2():Number {
-			return Math.round(this.mouseX - rp.x);
+			return Math.round (this.mouseX - rp.x);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function get mouseY2():Number {
-			return Math.round(this.mouseY - rp.y);
+			return Math.round (this.mouseY - rp.y);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function setProperty2(prop:String, n:Number):void {			
-			var a:Point = globalToParent ();
-			
-			this[prop] = n;
-
-			var b:Point = globalToParent ();
-
-			this.x -= b.x - a.x;
-			this.y -= b.y - a.y;
+// unused
 		}
 		

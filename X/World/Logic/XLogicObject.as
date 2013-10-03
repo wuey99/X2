@@ -95,6 +95,8 @@ package X.World.Logic {
 		
 		private static var g_GUID:Number = 0;
 		
+		public var rp:XPoint;
+		
 //------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
 						
@@ -112,9 +114,7 @@ package X.World.Logic {
 			m_autoCulling = false;
 			
 			m_GUID = g_GUID++;
-			
-			setRegistration ();
-			
+					
 			iX = 0;
 			iY = 0;
 			iScale = 1.0;
@@ -151,6 +151,9 @@ package X.World.Logic {
 			m_killSignalWithLogic = createXSignal ();
 			
 			m_pos = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			rp = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			
+			setRegistration ();
 			
 			setVisible (false);			
 			visible = false;
@@ -190,6 +193,7 @@ package X.World.Logic {
 			}
 			
 			xxx.getXPointPoolManager ().returnObject (m_pos);
+			xxx.getXPointPoolManager ().returnObject (rp);			
 				
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe

@@ -3,8 +3,8 @@ package X.World.Sprite {
 	
 	import X.*;
 	import X.Bitmap.*;
-	import X.Task.*;
 	import X.Geom.*;
+	import X.Task.*;
 	import X.World.*;
 	import X.World.Logic.XLogicObject;
 	
@@ -27,6 +27,7 @@ package X.World.Sprite {
 				public var m_pos:XPoint;
 				public var m_rect:XRect;
 				public var theParent:*;
+				public var rp:XPoint;
 				
 				//------------------------------------------------------------------------------------------
 				include "..\\Sprite\\XRegistration_impl.h";
@@ -37,6 +38,7 @@ package X.World.Sprite {
 					
 					m_pos = new XPoint ();
 					m_rect = new XRect ();
+					rp = new XPoint;
 					
 					setRegistration ();
 					

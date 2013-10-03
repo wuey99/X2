@@ -23,6 +23,7 @@ package X.World.Sprite {
 		public var m_rect:XRect;
 		public var m_id:Number;
 		public static var g_id:Number = 0;
+		public var rp:XPoint;
 		
 		//------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
@@ -33,6 +34,7 @@ package X.World.Sprite {
 			
 			m_pos = new XPoint ();
 			m_rect = new XRect ();
+			rp = new XPoint ();
 			
 			setRegistration ();
 			
