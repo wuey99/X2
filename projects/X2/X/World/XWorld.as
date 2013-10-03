@@ -186,10 +186,12 @@ package X.World {
 			m_XHudLayer = new XSpriteLayer ();
 			m_XHudLayer.setup (this);
 			addChild (m_XHudLayer);
-// !STARLING!
-			m_XHudLayer.mouseEnabled = true;
-			m_XHudLayer.mouseChildren = true;
 
+			if (CONFIG::flash) {
+				m_XHudLayer.mouseEnabled = true;
+				m_XHudLayer.mouseChildren = true;
+			}
+			
 			m_XKeyboardManager = new XKeyboardManager (this);
 					
 			setupDebug ();
@@ -316,7 +318,7 @@ package X.World {
 						m_mouseX = __location.x;
 						m_mouseY = __location.y;
 						
-//						trace (": mouseX, mouseY: ", m_mouseX, m_mouseY);
+						trace (": mouseX, mouseY: ", m_mouseX, m_mouseY);
 					}
 				}
 			}
