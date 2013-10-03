@@ -62,6 +62,7 @@ package X {
 			m_XMovieClipCacheManager = new XMovieClipCacheManager (this);
 			
 			XBitmap.setXApp (this);
+			XImage.setXApp (this);
 			XSprite.setXApp (this);
 			
 			__initPoolManagers (__poolSettings);
