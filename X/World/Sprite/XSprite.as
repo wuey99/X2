@@ -4,6 +4,7 @@ package X.World.Sprite {
 // X classes
 	import X.Geom.*;
 	import X.World.*;
+	import X.*;
 	
 	import flash.geom.*;
 	import flash.utils.*;
@@ -16,7 +17,7 @@ package X.World.Sprite {
 		public var m_rect:XRect;
 		public var rp:XPoint;
 	
-		public static var g_XApp;
+		public static var g_XApp:XApp;
 		
 //------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
@@ -40,9 +41,9 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
-//		public function setXApp (__XApp:XApp):void {
-//			g_XApp = __XApp;
-//		}
+		public static function setXApp (__XApp:XApp):void {
+			g_XApp = __XApp;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function globalToLocalXPoint (__p:XPoint):XPoint {
