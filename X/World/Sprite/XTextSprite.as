@@ -49,7 +49,9 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {
+		public override function cleanup ():void {
+			super.cleanup ();
+			
 			if (CONFIG::starling) {
 				m_text.dispose ();
 			}

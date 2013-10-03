@@ -69,7 +69,7 @@ package X.Text {
 				removeSprite (x_text);
 			}
 			
-			m_text = new XTextSprite (
+			m_text = createXTextSprite (
 				// width
 				__width,
 				// height

@@ -204,7 +204,9 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {
+		public override function cleanup ():void {
+			super.cleanup ();
+			
 			m_XTaskManager.removeAllTasks ();
 			m_XTaskManagerCX.removeAllTasks ();
 			m_renderManager.removeAllTasks ();

@@ -36,6 +36,15 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function cleanup ():void {	
+		}
+
+//------------------------------------------------------------------------------------------
+//		public function setXApp (__XApp:XApp):void {
+//			g_XApp = __XApp;
+//		}
+		
+//------------------------------------------------------------------------------------------
 		public function globalToLocalXPoint (__p:XPoint):XPoint {
 			var __x:Point = globalToLocal (__p.getPoint ());
 		
