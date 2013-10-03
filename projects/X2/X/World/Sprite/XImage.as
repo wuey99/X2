@@ -24,6 +24,7 @@ package X.World.Sprite {
 		public var m_id:Number;
 		public static var g_id:Number = 0;
 		public var rp:XPoint;
+		public static var g_XApp:XApp;
 		
 		//------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
@@ -32,9 +33,9 @@ package X.World.Sprite {
 		public function XImage (__texture:RenderTexture) {
 			super (__texture);
 			
-			m_pos = new XPoint ();
-			m_rect = new XRect ();
-			rp = new XPoint ();
+			m_pos = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
+			m_rect = g_XApp.getXRectPoolManager ().borrowObject () as XRect;
+			rp = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
 			
 			setRegistration ();
 			
@@ -50,6 +51,10 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			g_XApp.getXPointPoolManager ().returnObject (m_pos);
+			g_XApp.getXPointPoolManager ().returnObject (m_rect);
+			g_XApp.getXPointPoolManager ().returnObject (rp);
+			
 			if (texture) {
 				texture.dispose ();
 			}
@@ -57,6 +62,11 @@ package X.World.Sprite {
 			dispose ();
 		}
 
+		//------------------------------------------------------------------------------------------
+		public static function setXApp (__XApp:XApp):void {
+			g_XApp = __XApp;
+		}
+		
 		//------------------------------------------------------------------------------------------
 		public function getTexture ():RenderTexture {
 			return texture as RenderTexture;
