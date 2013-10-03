@@ -61,6 +61,7 @@ package X {
 			m_XTextureManager = new XTextureManager (this);
 			m_XMovieClipCacheManager = new XMovieClipCacheManager (this);
 			
+			XBitmap.setXApp (this);
 			XSprite.setXApp (this);
 			
 			__initPoolManagers (__poolSettings);
