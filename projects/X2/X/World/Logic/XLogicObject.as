@@ -624,6 +624,8 @@ package X.World.Logic {
 					}
 					else
 					{
+						__xmovieClip.cleanup ();
+						
 						xxx.unloadClass (__name as String);
 					}
 				}

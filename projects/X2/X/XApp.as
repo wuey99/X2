@@ -19,8 +19,8 @@ package X {
 	import X.Task.*;
 	import X.Texture.*;
 	import X.World.*;
-	import X.World.Sprite.XDepthSprite;
 	import X.XMap.*;
+	import X.World.Sprite.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -60,6 +60,8 @@ package X {
 			m_XBitmapDataAnimManager = new XBitmapDataAnimManager (this);
 			m_XTextureManager = new XTextureManager (this);
 			m_XMovieClipCacheManager = new XMovieClipCacheManager (this);
+			
+			XSprite.setXApp (this);
 			
 			__initPoolManagers (__poolSettings);
 			
@@ -164,7 +166,9 @@ package X {
 			m_XDepthSpritePoolManager = new XObjectPoolManager (
 				function ():* {
 					var __sprite:XDepthSprite = new XDepthSprite ();
+					
 					__sprite.clear ();
+					
 					return __sprite;
 				},
 				
