@@ -397,12 +397,19 @@ package X {
 		public function getCommonClasses ():Boolean {
 			trace (": -------------------------: ");
 			trace (": getting common classes: ");
+
+// 10/05/2013: removed external loading of classes
+//
+//			trace (": getting XLogicObjectXMap:XLogicObjectXMap: ");
+//			getClass ("XLogicObjectXMap:XLogicObjectXMap");
 			
-			getClass ("XLogicObjectXMap:XLogicObjectXMap");
+			trace (": getting ErrorImages:undefinedClass: ");
 			getClass ("ErrorImages:undefinedClass");
 				
+			trace (": finished getting commonClasses: ");
+	
 			return (
-				getClass ("XLogicObjectXMap:XLogicObjectXMap") == null ||
+//				getClass ("XLogicObjectXMap:XLogicObjectXMap") == null ||
 				getClass ("ErrorImages:undefinedClass") == null
 				)
 		}

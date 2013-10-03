@@ -56,7 +56,7 @@ package X.World.Sprite {
 				m_text.dispose ();
 			}
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function getTextField ():TextField {
 			return m_text;

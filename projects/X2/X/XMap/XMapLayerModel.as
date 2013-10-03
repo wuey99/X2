@@ -291,7 +291,7 @@ package X.XMap {
 			
 			return __removedItems;
 			
-			function __extend (__items:Array) {
+			function __extend (__items:Array):void {
 				for each (var __item:XMapItemModel in __items) {
 					if (__removedItems.indexOf (__item) == -1) {
 						__removedItems.push (__item);
