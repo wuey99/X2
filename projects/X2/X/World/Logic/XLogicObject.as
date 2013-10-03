@@ -17,7 +17,7 @@ package X.World.Logic {
 	import X.XML.*;
 	import X.XMap.*;
 	
-	include "..\\..\\flash.h";
+	include "..\\..\\flash.h"
 	
 	import flash.geom.*;
 	import flash.text.*;
@@ -71,6 +71,7 @@ package X.World.Logic {
 		public var m_detachedSprites:XDict;
 		public var m_bitmaps:XDict;
 		public var m_movieClips:XDict;
+		public var m_textSprites:XDict;
 		public var m_GUID:Number;
 		public var m_alpha:Number;
 		public var m_masterAlpha:Number;
@@ -143,6 +144,7 @@ package X.World.Logic {
 			m_detachedSprites = new XDict ();
 			m_bitmaps = new XDict ();
 			m_movieClips = new XDict ();
+			m_textSprites = new XDict ();
 			m_XSignals = new XDict ();
 			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
 			m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());
@@ -258,6 +260,7 @@ package X.World.Logic {
 			removeAllXLogicObjects ();
 			removeAllXBitmaps ();
 			removeAllMovieClips ();
+			removeAllXTextSprites ();
 			removeAllXSignals ();
 			removeAllTasks ();
 			removeAllTasksCX ();
@@ -570,7 +573,33 @@ package X.World.Logic {
 			
 			return __xmovieClip;
 		}
-				
+			
+//------------------------------------------------------------------------------------------
+		public function createXTextSprite (
+			__width:Number=32,
+			__height:Number=32,
+			__text:String="",
+			__fontName:String="Verdana",
+			__fontSize:Number=12,
+			__color:int=0x000000,
+			__bold:Boolean=false
+			):XTextSprite {
+			
+			var __textSprite:XTextSprite = new XTextSprite (
+				__width,
+				__height,
+				__text,
+				__fontName,
+				__fontSize,
+				__color,
+				__bold
+			);
+
+			m_textSprites.put (__textSprite, 0);
+			
+			return __textSprite;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function removeAllXBitmaps ():void {
 			m_bitmaps.forEach (
@@ -597,6 +626,17 @@ package X.World.Logic {
 					{
 						xxx.unloadClass (__name as String);
 					}
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeAllXTextSprites ():void {
+			m_textSprites.forEach (
+				function (x:*):void {
+					var __textSprite:XTextSprite = x as XTextSprite;
+					
+					__textSprite.cleanup ();
 				}
 			);
 		}

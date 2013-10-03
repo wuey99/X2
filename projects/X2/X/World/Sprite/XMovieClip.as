@@ -32,7 +32,9 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function cleanup ():void {
+		public override function cleanup ():void {
+			super.cleanup ();
+			
 			if (CONFIG::starling) {
 				if (m_movieClip) {
 					m_movieClip.removeFromParent (true);
