@@ -30,18 +30,18 @@ package X.World {
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	import X.World.Tiles.*;
-	import X.World.UI.XButton;
+	import X.World.UI.*;
 	import X.XML.*;
 	import X.XMap.*;
 	
 	include "..\\flash.h";
 	
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
 	import flash.system.*;
 	import flash.utils.Timer;
-	import flash.events.MouseEvent;
 	
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -84,6 +84,7 @@ package X.World {
 		public var m_XMapItemModel:XMapItemModel;
 		public var m_XDocument:XDocument;
 		public var m_XButton:XButton;
+		public var m_XWorldButton:XWorldButton;
 		public var m_XSprite:XSprite;
 		public var m_XTask:XTask;
 		public var m_XDatasource:XDatasource;
