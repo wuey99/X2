@@ -92,7 +92,7 @@ package X.World.UI {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function setupListeners ():void {		
+		public override function setupListeners ():void {	
 			xxx.getXTaskManager ().addTask ([
 				function ():void {
 //					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_OVER, onMouseOver);
