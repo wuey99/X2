@@ -106,7 +106,7 @@ package X.XMap {
 						if (__name == "ErrorImages:undefinedClass") {
 							return;
 						}
-						
+
 						if (CONFIG::starling) {
 							if (xxx.getMovieClipCacheManager ().isQueued (__name as String)) {
 								trace (": not cached: ", __name);
