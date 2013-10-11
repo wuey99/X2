@@ -237,7 +237,7 @@ package X.World.Logic {
 		public function getVel ():XPoint {
 			return m_vel;
 		}
-		
+		 
 		public function get oDX ():Number {
 			return getVel ().x
 		}

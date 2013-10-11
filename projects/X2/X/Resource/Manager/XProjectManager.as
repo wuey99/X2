@@ -332,6 +332,12 @@ package X.Resource.Manager {
 				return null;
 			}
 			
+			if (__className == "XLogicObjectXMap:XLogicObjectXMap") {
+				import X.XMap.*;
+				
+				return XLogicObjectXMap;
+			}
+			
 			var i:Number;
 			var r:XSubResourceManager;
 			var c:Class;
