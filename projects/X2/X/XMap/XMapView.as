@@ -338,7 +338,15 @@ package X.XMap {
 			
 			cacheImageClassNames ();
 		}
-					
+		
+//------------------------------------------------------------------------------------------
+		public function scrollTo (__layer:Number, __x:Number, __y:Number):void {
+		}
+
+//------------------------------------------------------------------------------------------
+		public function updateScroll ():void {
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function updateFromXMapModel ():void {
 		}
