@@ -59,6 +59,11 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function get freeObjects ():Array {
+			return m_freeObjects;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function totalNumberOfObjects ():Number {
 			return m_freeObjects.length + m_numberOfBorrowedObjects;	
 		}
@@ -105,6 +110,17 @@ package X.Pool {
 			}
 		}
 
+//------------------------------------------------------------------------------------------
+		public function returnObjectTo (__pool:XObjectPoolManager, __object:Object):void {
+			if (m_inuseObjects.exists (__object)) {
+				__pool.freeObjects.unshift (__object);
+				
+				m_inuseObjects.remove (__object);
+				
+				m_numberOfBorrowedObjects--;
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function borrowObject ():Object {
 			if (m_freeObjects.length == 0) {
