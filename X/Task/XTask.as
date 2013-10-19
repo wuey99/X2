@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------------------
 package X.Task {
 	
+	import X.Pool.*;
+	
 	import flash.system.*;
 	import flash.utils.*;
 	
@@ -67,6 +69,7 @@ package X.Task {
 		public var m_isDead:Boolean;
 		public var tag:String;
 		public var m_id:Number;
+		public var m_pool:XObjectPoolManager;
 		
 		public static var g_id:Number = 0;
 		
@@ -90,9 +93,7 @@ package X.Task {
 		public static var FLAGS_EQ:Number = 1;
 		
 		protected var m_XTaskSubManager:XTaskSubManager;
-
-		public var cullDelay:Number;
-		
+	
 //------------------------------------------------------------------------------------------
 		public function XTask () {
 			super ();	
@@ -107,8 +108,6 @@ package X.Task {
 			__reset (__taskList, __findLabelsFlag);
 			
 			m_id = ++g_id;
-			
-			cullDelay = 4;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -163,12 +162,22 @@ package X.Task {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function setPool (__pool:XObjectPoolManager):void {
+			m_pool = __pool;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getPool ():XObjectPoolManager {
+			return m_pool;
+		}
+				
+//------------------------------------------------------------------------------------------
 		public function kill ():void {
 			removeAllTasks ();
 
 			m_isDead = true;
 		}	
-			
+
 //------------------------------------------------------------------------------------------
 // execute the XTask, usually called by the XTaskManager.
 //------------------------------------------------------------------------------------------
