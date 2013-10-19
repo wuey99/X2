@@ -97,7 +97,7 @@ package X.Pool {
 //------------------------------------------------------------------------------------------
 		public function returnObject (__object:Object):void {
 			if (m_inuseObjects.exists (__object)) {
-				m_freeObjects.push (__object);
+				m_freeObjects.unshift (__object);
 				
 				m_inuseObjects.remove (__object);
 				

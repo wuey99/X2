@@ -91,6 +91,8 @@ package X.Task {
 		
 		protected var m_XTaskSubManager:XTaskSubManager;
 
+		public var cullDelay:Number;
+		
 //------------------------------------------------------------------------------------------
 		public function XTask () {
 			super ();	
@@ -105,6 +107,8 @@ package X.Task {
 			__reset (__taskList, __findLabelsFlag);
 			
 			m_id = ++g_id;
+			
+			cullDelay = 1;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -190,6 +194,10 @@ package X.Task {
 		
 			while (__cont) {
 				__cont = __evalInstructions ();
+				
+				if (m_isDead) {
+					return;
+				}
 			}
 		}
 
@@ -509,7 +517,7 @@ package X.Task {
 		else
 		{
 // if the sub-task is still active, wait another tick and check again
-			if (m_manager.isTask (m_subTask)) {
+			if (m_XTaskSubManager.isTask (m_subTask)) {
 				m_ticks += 0x0100;
 				m_taskIndex--;
 				return false;
