@@ -32,7 +32,7 @@ package X.Task {
 					return null;
 				},
 				
-				16834, 256,
+				2048, 256,
 				
 				function (x:*):void {
 				}
