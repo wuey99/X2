@@ -16,7 +16,7 @@ package X.Task {
 		protected var m_poolCycle:Number;
 
 		public const NUM_POOLS:Number = 8;
-		public const POOLS_MASK:Number = 7;
+		public const POOL_MASK:Number = 7;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskManager (__XApp:XApp) {
@@ -38,7 +38,7 @@ package X.Task {
 						return null;
 					},
 					
-					2048, 256,
+					1024, 256,
 					
 					function (x:*):void {
 					}
@@ -116,7 +116,7 @@ package X.Task {
 				
 				m_XTasks.remove (__task);
 				
-				__task.getPool ().returnObjectTo (m_pools[(m_currentPool + POOLS_MASK) & (POOLS_MASK)], __task);
+				__task.getPool ().returnObjectTo (m_pools[(m_currentPool + POOL_MASK) & (POOL_MASK)], __task);
 			}
 		}
 		
@@ -126,10 +126,10 @@ package X.Task {
 				return;
 			}
 			
-			m_poolCycle = (m_poolCycle + 1) & 15;
+			m_poolCycle = (m_poolCycle + 1) & 31;
 			
 			if (m_poolCycle == 0) {
-				m_currentPool = (m_currentPool + 1) & (POOLS_MASK);
+				m_currentPool = (m_currentPool + 1) & (POOL_MASK);
 			}
 			
 			m_XTasks.forEach (
