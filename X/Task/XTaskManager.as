@@ -114,9 +114,9 @@ package X.Task {
 			if (m_XTasks.exists (__task)) {
 				__task.kill ();
 				
-				m_XTasks.remove (__task);
-				
 				__task.getPool ().returnObjectTo (m_pools[(m_currentPool + POOL_MASK) & (POOL_MASK)], __task);
+				
+				m_XTasks.remove (__task);
 			}
 		}
 		
