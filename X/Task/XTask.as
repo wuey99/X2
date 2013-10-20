@@ -515,7 +515,7 @@ package X.Task {
 	case EXEC:
 		if (m_subTask == null) {
 // get new XTask Array run it immediately
-			m_subTask = m_XTaskSubManager.addTask ((m_taskList[m_taskIndex] as Array), true);
+			m_subTask = m_manager.addTask ((m_taskList[m_taskIndex] as Array), true);
 			m_subTask.tag = tag;
 			m_subTask.setParent (m_parent);
 			m_subTask.run ();
@@ -526,7 +526,7 @@ package X.Task {
 		else
 		{
 // if the sub-task is still active, wait another tick and check again
-			if (m_XTaskSubManager.isTask (m_subTask)) {
+			if (m_manager.isTask (m_subTask)) {
 				m_ticks += 0x0100;
 				m_taskIndex--;
 				return false;
