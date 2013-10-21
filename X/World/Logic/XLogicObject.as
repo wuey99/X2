@@ -934,16 +934,16 @@ package X.World.Logic {
 			m_pos = __pos;
 		}
 		
+		public function set pos (__pos:XPoint):void {
+			m_pos = __pos;
+		}
+		
 		public function set oX (__value:Number):void {
-			var __pos:XPoint = getPos ();
-			__pos.x = __value;
-			setPos (__pos);
+			pos.x = __value;
 		}
 
 		public function set oY (__value:Number):void {
-			var __pos:XPoint = getPos ();
-			__pos.y = __value;
-			setPos (__pos);
+			pos.y = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -951,12 +951,16 @@ package X.World.Logic {
 			return m_pos;
 		}
 		
+		public function get pos ():XPoint{
+			return m_pos;
+		}
+		
 		public function get oX ():Number {
-			return getPos ().x
+			return pos.x
 		}
 
 		public function get oY ():Number {
-			return getPos ().y
+			return pos.y
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -965,7 +969,7 @@ package X.World.Logic {
 		}
 		
 		public function set oAlpha (__alpha:Number):void {
-			setAlpha (__alpha);
+			m_alpha = __alpha;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -974,7 +978,7 @@ package X.World.Logic {
 		}
 		
 		public function get oAlpha ():Number {
-			return getAlpha ();
+			return m_alpha
 		}
 
 //------------------------------------------------------------------------------------------		
@@ -993,7 +997,7 @@ package X.World.Logic {
 		}
 		
 		public function set oVisible (__value:Boolean):void {
-			setVisible (__value);
+			m_visible = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -1002,7 +1006,7 @@ package X.World.Logic {
 		}
 		
 		public function get oVisible ():Boolean {
-			return getVisible ();
+			return m_visible;
 		}
 
 //------------------------------------------------------------------------------------------		
@@ -1021,7 +1025,7 @@ package X.World.Logic {
 		}
 		
 		public function set oRotation (__value:Number):void {
-			setRotation (__value);
+			m_rotation = __value % 360;
 		}
 
 //------------------------------------------------------------------------------------------		
@@ -1030,7 +1034,7 @@ package X.World.Logic {
 		}
 		
 		public function get oRotation ():Number {
-			return getRotation ();
+			return m_rotation;
 		}
 		
 //------------------------------------------------------------------------------------------		
@@ -1049,7 +1053,7 @@ package X.World.Logic {
 		}
 		
 		public function set oScale (__value:Number):void {
-			setScale (__value);
+			m_scaleX  = m_scaleY = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -1058,7 +1062,7 @@ package X.World.Logic {
 		}
 		
 		public function get oScale ():Number {
-			return getScale ();
+			return m_scaleX;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -1067,7 +1071,7 @@ package X.World.Logic {
 		}
 		
 		public function set oScaleX (__value:Number):void {
-			setScaleX (__value);
+			m_scaleX = __value;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -1076,7 +1080,7 @@ package X.World.Logic {
 		}
 		
 		public function get oScaleX ():Number {
-			return getScaleX ();
+			return m_scaleX;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -1085,7 +1089,7 @@ package X.World.Logic {
 		}
 		
 		public function set oScaleY (__value:Number):void {
-			setScaleY (__value);
+			m_scaleY = __value;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -1094,7 +1098,7 @@ package X.World.Logic {
 		}
 		
 		public function get oScaleY ():Number {
-			return getScaleY ();
+			return m_scaleY;
 		}
 		
 //------------------------------------------------------------------------------------------
