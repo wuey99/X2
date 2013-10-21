@@ -201,7 +201,7 @@ package X.Task {
 			// evaluate instructions
 			var __cont:Boolean = true;
 			
-			while (__cont) {
+			while (__cont && !m_isDead) {
 				__cont = __evalInstructions ();
 			}
 		}
@@ -228,7 +228,7 @@ package X.Task {
 						case LABEL:
 							var __label:String = m_taskList[i++] as String;	
 							
-							//						trace (": new Label: ", __label);
+//							trace (": new Label: ", __label);
 							
 							if (!(__label in m_labels)) {
 								m_labels[__label] = i;
