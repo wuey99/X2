@@ -75,22 +75,22 @@ package X.Task {
 		
 		protected var m_manager:XTaskManager;
 		
-		public static var CALL:Number = 0;
-		public static var RETN:Number = 1;
-		public static var LOOP:Number = 2;
-		public static var NEXT:Number = 3;
-		public static var WAIT:Number = 4;
-		public static var LABEL:Number = 5;
-		public static var GOTO:Number = 6;
-		public static var BEQ:Number = 7;
-		public static var BNE:Number = 8;
-		public static var FLAGS:Number = 9;
-		public static var EXEC:Number = 10;
-		public static var FUNC:Number = 11;
-		public static var WAIT1000:Number = 12; 
-		public static var UNTIL:Number = 13;
+		public static const CALL:Number = 0;
+		public static const RETN:Number = 1;
+		public static const LOOP:Number = 2;
+		public static const NEXT:Number = 3;
+		public static const WAIT:Number = 4;
+		public static const LABEL:Number = 5;
+		public static const GOTO:Number = 6;
+		public static const BEQ:Number = 7;
+		public static const BNE:Number = 8;
+		public static const FLAGS:Number = 9;
+		public static const EXEC:Number = 10;
+		public static const FUNC:Number = 11;
+		public static const WAIT1000:Number = 12; 
+		public static const UNTIL:Number = 13;
 		
-		public static var FLAGS_EQ:Number = 1;
+		public static const FLAGS_EQ:Number = 1;
 		
 		protected var m_XTaskSubManager:XTaskSubManager;
 		
