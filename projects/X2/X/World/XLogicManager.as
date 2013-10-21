@@ -45,6 +45,29 @@ package X.World {
 			return __initXLogicObject (
 				__parent,
 				__logicObject,
+				null,
+				__item, __layer, __depth,
+				__x, __y, __z,
+				__scale, __rotation,
+				args);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function initXLogicObjectFromPool (
+			__parent:XLogicObject,
+			__class:Class,
+			__item:XMapItemModel, __layer:Number, __depth:Number,
+			__x:Number, __y:Number, __z:Number, 
+			__scale:Number, __rotation:Number,
+			...args
+		):XLogicObject {
+			
+			var __logicObject:XLogicObject = xxx.getXLogicObjectPoolManager ().borrowObject (__class) as XLogicObject;
+			
+			return __initXLogicObject (
+				__parent,
+				__logicObject,
+				__class,
 				__item, __layer, __depth,
 				__x, __y, __z,
 				__scale, __rotation,
@@ -62,6 +85,7 @@ package X.World {
 				return __initXLogicObject (
 						__parent,
 						__logicObject,
+						null,
 						__logicObject.iItem, __logicObject.iLayer, __logicObject.iDepth,
 						__logicObject.iX, __logicObject.iY, 0,
 						__logicObject.iScale, __logicObject.iRotation,
@@ -72,6 +96,7 @@ package X.World {
 				return __initXLogicObject (
 						__parent,
 						__logicObject,
+						null,
 						__logicObject.iItem, __logicObject.iLayer, __logicObject.iDepth,
 						__logicObject.iX, __logicObject.iY, 0,
 						__logicObject.iScale, __logicObject.iRotation,
@@ -92,6 +117,7 @@ package X.World {
 			return __initXLogicObject (
 					__parent,
 					__logicObject,
+					null,
 					__item, __layer, __depth,
 					__x, __y, __z,
 					__scale, __rotation,
@@ -112,6 +138,7 @@ package X.World {
 			return __initXLogicObjectRel (
 					__parent,
 					__logicObject,
+					null,
 					__item, __layer, __depth, __relative,
 					__x, __y, __z,
 					__scale, __rotation,
@@ -123,6 +150,7 @@ package X.World {
 		public function __initXLogicObject (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
+			__class:Class,
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
@@ -148,6 +176,10 @@ package X.World {
 			__logicObject.setScale (__scale);
 			__logicObject.setRotation (__rotation);
 			__logicObject.setParent (__parent);
+
+			if (__class) {
+				__logicObject.setPoolClass (__class);
+			}
 			
 			__logicObject.setupX ();
 						
@@ -166,6 +198,7 @@ package X.World {
 		public function __initXLogicObjectRel (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
+			__class:Class,
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
@@ -191,6 +224,10 @@ package X.World {
 			__logicObject.setScale (__scale);
 			__logicObject.setRotation (__rotation);
 			__logicObject.setParent (__parent);
+			
+			if (__class) {
+				__logicObject.setPoolClass (__class);
+			}
 			
 			__logicObject.setupX ();
 						
