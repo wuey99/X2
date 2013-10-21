@@ -34,12 +34,12 @@ package X.World.Logic {
 
 		private var m_CX_Collide_Flag:Number;
 	
-		public static var CX_COLLIDE_LF:Number = 0x0001;
-		public static var CX_COLLIDE_RT:Number = 0x0002;
-		public static var CX_COLLIDE_HORZ:Number = (CX_COLLIDE_LF+CX_COLLIDE_RT); 
-		public static var CX_COLLIDE_UP:Number = 0x0004;
-		public static var CX_COLLIDE_DN:Number = 0x0008;
-		public static var CX_COLLIDE_VERT:Number = (CX_COLLIDE_UP+CX_COLLIDE_DN);
+		public static const CX_COLLIDE_LF:Number = 0x0001;
+		public static const CX_COLLIDE_RT:Number = 0x0002;
+		public static const CX_COLLIDE_HORZ:Number = (CX_COLLIDE_LF+CX_COLLIDE_RT); 
+		public static const CX_COLLIDE_UP:Number = 0x0004;
+		public static const CX_COLLIDE_DN:Number = 0x0008;
+		public static const CX_COLLIDE_VERT:Number = (CX_COLLIDE_UP+CX_COLLIDE_DN);
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicObjectCX () {

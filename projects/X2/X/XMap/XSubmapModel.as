@@ -32,70 +32,70 @@ package X.XMap {
 		private var m_dst:XRect;
 		
 // empty
-		public static var CX_EMPTY:Number = 0;
+		public static const CX_EMPTY:Number = 0;
 		
 // solid solid
-		public static var CX_SOLID:Number = 1;
+		public static const CX_SOLID:Number = 1;
 		
 // soft
-		public static var CX_SOFT:Number = 2;	
+		public static const CX_SOFT:Number = 2;	
 		
 // jump thru
-		public static var CX_JUMP_THRU:Number = 3;
+		public static const CX_JUMP_THRU:Number = 3;
 		
 // 45 degree diagonals
-		public static var CX_UL45:Number = 4;
-		public static var CX_UR45:Number = 5;
-		public static var CX_LL45:Number = 6;
-		public static var CX_LR45:Number = 7;
+		public static const CX_UL45:Number = 4;
+		public static const CX_UR45:Number = 5;
+		public static const CX_LL45:Number = 6;
+		public static const CX_LR45:Number = 7;
 		
 // 22.5 degree diagonals
-		public static var CX_UL225A:Number = 8;
-		public static var CX_UL225B:Number = 9;
-		public static var CX_UR225A:Number = 10;
-		public static var CX_UR225B:Number = 11;
-		public static var CX_LL225A:Number = 12;
-		public static var CX_LL225B:Number = 13;
-		public static var CX_LR225A:Number = 14;
-		public static var CX_LR225B:Number = 15;
+		public static const CX_UL225A:Number = 8;
+		public static const CX_UL225B:Number = 9;
+		public static const CX_UR225A:Number = 10;
+		public static const CX_UR225B:Number = 11;
+		public static const CX_LL225A:Number = 12;
+		public static const CX_LL225B:Number = 13;
+		public static const CX_LR225A:Number = 14;
+		public static const CX_LR225B:Number = 15;
 
 // 67.5 degree diagonals
-		public static var CX_UL675A:Number = 16;
-		public static var CX_UL675B:Number = 17;
-		public static var CX_UR675A:Number = 18;
-		public static var CX_UR675B:Number = 19;
-		public static var CX_LL675A:Number = 20;
-		public static var CX_LL675B:Number = 21;
-		public static var CX_LR675A:Number = 22;
-		public static var CX_LR675B:Number = 23;
+		public static const CX_UL675A:Number = 16;
+		public static const CX_UL675B:Number = 17;
+		public static const CX_UR675A:Number = 18;
+		public static const CX_UR675B:Number = 19;
+		public static const CX_LL675A:Number = 20;
+		public static const CX_LL675B:Number = 21;
+		public static const CX_LR675A:Number = 22;
+		public static const CX_LR675B:Number = 23;
 		
 // soft tiles
-		public static var CX_SOFTLF:Number = 24;
-		public static var CX_SOFTRT:Number = 25;
-		public static var CX_SOFTUP:Number = 26;
-		public static var CX_SOFTDN:Number = 27;
+		public static const CX_SOFTLF:Number = 24;
+		public static const CX_SOFTRT:Number = 25;
+		public static const CX_SOFTUP:Number = 26;
+		public static const CX_SOFTDN:Number = 27;
 		
-		public static var CX_MAX:Number = 28;
+		public static const CX_MAX:Number = 28;
 		
 // collision tile width, height
-		public static var CX_TILE_WIDTH:Number = 16;
-		public static var CX_TILE_HEIGHT:Number = 16;
+		public static const CX_TILE_WIDTH:Number = 16;
+		public static const CX_TILE_HEIGHT:Number = 16;
 		
-		public static var CX_TILE_WIDTH_MASK:Number = 15;
-		public static var CX_TILE_HEIGHT_MASK:Number = 15;
+		public static const CX_TILE_WIDTH_MASK:Number = 15;
+		public static const CX_TILE_HEIGHT_MASK:Number = 15;
 		
-		public static var CX_TILE_WIDTH_UNMASK:Number = 0xfffffff0;
-		public static var CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
+		public static const CX_TILE_WIDTH_UNMASK:Number = 0xfffffff0;
+		public static const CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
 
 // alternate tile width, height
-		public static var TX_TILE_WIDTH:Number = 64;
-		public static var TX_TILE_HEIGHT:Number = 64;
+		public static const TX_TILE_WIDTH:Number = 64;
+		public static const TX_TILE_HEIGHT:Number = 64;
 		
-		public static var TX_TILE_WIDTH_MASK:Number = 63;
-		public static var TX_TILE_HEIGHT_MASK:Number = 63;
+		public static const TX_TILE_WIDTH_MASK:Number = 63;
+		public static const TX_TILE_HEIGHT_MASK:Number = 63;
 		
-		public static var TX_TILE_WIDTH_UNMASK:Number = 0xffffffc0;
-		public static var TX_TILE_HEIGHT_UNMASK:Number = 0xffffffc0;
+		public static const TX_TILE_WIDTH_UNMASK:Number = 0xffffffc0;
+		public static const TX_TILE_HEIGHT_UNMASK:Number = 0xffffffc0;
 		
 		private var m_items:XDict;
 		
