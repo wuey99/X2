@@ -55,7 +55,7 @@ package X.Task {
 	//------------------------------------------------------------------------------------------
 	public class XTask extends Object {
 		private var m_taskList:Array;
-		private var m_taskIndex:Number;
+		private var m_taskIndex:int;
 		private var m_labels:Object;
 		private var m_ticks:int;
 		private var m_stack:Array;
