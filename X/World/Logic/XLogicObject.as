@@ -17,11 +17,11 @@ package X.World.Logic {
 	import X.XML.*;
 	import X.XMap.*;
 	
-	include "..\\..\\flash.h"
-	
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
+
+	include "..\\..\\flash.h";
 	
 //------------------------------------------------------------------------------------------
 // XLogicObject: Game object's that live in a "World".  These are essentially containers
@@ -83,6 +83,7 @@ package X.World.Logic {
 		public var m_XTaskSubManagerCX:XTaskSubManager;
 		public var m_isDead:Boolean;
 		public var m_autoCulling:Boolean;
+		public var m_poolClass:Class;
 		
 		public var m_iX:Number;
 		public var m_iY:Number;
@@ -102,7 +103,7 @@ package X.World.Logic {
 		include "..\\Sprite\\XRegistration_impl.h";
 						
 //------------------------------------------------------------------------------------------
-		public function XLogicObject () {
+		public function XLogicObject (__xxx:XWorld = null) {
 			super ();
 			
 			self = this;
@@ -113,7 +114,7 @@ package X.World.Logic {
 			m_layer = -1;
 			m_isDead = false;
 			m_autoCulling = false;
-			
+		
 			m_GUID = g_GUID++;
 					
 			iX = 0;
@@ -125,32 +126,55 @@ package X.World.Logic {
 			iRelativeDepth = false;
 			iLayer = 0;
 			iClassName = "";
+			
+			if (__xxx) {
+				xxx = __xxx;
+				
+				m_XLogicObjects = new XDict ();
+				m_worldSprites = new XDict ();
+				m_hudSprites = new XDict ();
+				m_childSprites = new XDict ();
+				m_detachedSprites = new XDict ();
+				m_bitmaps = new XDict ();
+				m_movieClips = new XDict ();
+				m_textSprites = new XDict ();
+				m_XSignals = new XDict ();
+				m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
+				m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());	
+				m_killSignal = createXSignal ();
+				m_killSignalWithLogic = createXSignal ();
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setup (__xxx:XWorld, args:Array):void {
-			xxx = __xxx;
-						
+		public function setup (__xxx:XWorld, args:Array):void {	
 			m_masterScaleX = m_masterScaleY = 1.0;
 			m_masterRotation = 0;
 			m_masterVisible = true;
 			m_masterDepth = 0;
 			m_masterAlpha = 1.0;
-				
-			m_XLogicObjects = new XDict ();
-			m_worldSprites = new XDict ();
-			m_hudSprites = new XDict ();
-			m_childSprites = new XDict ();
-			m_detachedSprites = new XDict ();
-			m_bitmaps = new XDict ();
-			m_movieClips = new XDict ();
-			m_textSprites = new XDict ();
-			m_XSignals = new XDict ();
-			m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
-			m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());
+		
+			m_isDead = false;
 			
-			m_killSignal = createXSignal ();
-			m_killSignalWithLogic = createXSignal ();
+			m_poolClass = null;
+			
+			if (xxx == null) {
+				xxx = __xxx;
+		
+				m_XLogicObjects = new XDict ();
+				m_worldSprites = new XDict ();
+				m_hudSprites = new XDict ();
+				m_childSprites = new XDict ();
+				m_detachedSprites = new XDict ();
+				m_bitmaps = new XDict ();
+				m_movieClips = new XDict ();
+				m_textSprites = new XDict ();
+				m_XSignals = new XDict ();
+				m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
+				m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());	
+				m_killSignal = createXSignal ();
+				m_killSignalWithLogic = createXSignal ();
+			}
 			
 			m_pos = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			rp = xxx.getXPointPoolManager ().borrowObject () as XPoint;
@@ -213,6 +237,10 @@ package X.World.Logic {
 			}
 			
 			removeAll ();
+
+			if (m_poolClass) {
+				xxx.getXLogicObjectPoolManager ().returnObject (m_poolClass, this);
+			}
 			
 			isDead = true;
 		}
@@ -526,6 +554,11 @@ package X.World.Logic {
 			return __newPos;
 		}
 */
+
+//------------------------------------------------------------------------------------------
+		public function setPoolClass (__class:Class):void {
+			m_poolClass = __class;
+		}
 		
 //------------------------------------------------------------------------------------------
 // get a map of all our child sprites that live in the World

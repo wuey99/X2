@@ -59,6 +59,7 @@ package X.World {
 		public var m_XTaskManager:XTaskManager;
 		public var m_XTaskManagerCX:XTaskManager;
 		public var m_renderManager:XTaskManager;
+		public var m_XLogicObjectPoolManager:XLogicObjectPoolManager;
 		public var m_XMapModel:XMapModel;
 		public var m_XWorldLayers:Array;
 		public var m_XHudLayer:XSpriteLayer;
@@ -170,6 +171,7 @@ package X.World {
 			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager (__XApp);
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
+			m_XLogicObjectPoolManager = new XLogicObjectPoolManager (this);
 				
 			m_XMapModel = null;
 						
@@ -399,6 +401,11 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public function getXMapModel ():XMapModel {
 			return m_XMapModel;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getXLogicObjectPoolManager ():XLogicObjectPoolManager {
+			return m_XLogicObjectPoolManager;
 		}
 		
 //------------------------------------------------------------------------------------------
