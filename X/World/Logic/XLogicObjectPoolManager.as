@@ -36,7 +36,7 @@ package X.World.Logic {
 			else
 			{
 				m_pools.forEach (
-					function (x:*) {
+					function (x:*):void {
 						__pool = m_pools.get (__class);
 						
 						__pool.returnAllObjects ();
