@@ -19,6 +19,7 @@ import X.Geom.XPoint;
 		}
 				
 //------------------------------------------------------------------------------------------		
+		[Inline]
 		public function get x2():Number {
 			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
@@ -26,6 +27,7 @@ import X.Geom.XPoint;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function set x2(value:Number):void {
 			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
@@ -33,6 +35,7 @@ import X.Geom.XPoint;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function get y2():Number {
 			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
@@ -40,6 +43,7 @@ import X.Geom.XPoint;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function set y2(value:Number):void {
 			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
@@ -47,11 +51,13 @@ import X.Geom.XPoint;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function get scaleX2():Number {
 			return this.scaleX;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function set scaleX2(value:Number):void {
 			var a:Point = parent.globalToLocal (localToGlobal (rp));
 			
@@ -64,11 +70,13 @@ import X.Geom.XPoint;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function get scaleY2():Number {
 			return this.scaleY;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function set scaleY2(value:Number):void {
 			var a:Point = parent.globalToLocal (localToGlobal (rp));
 			
@@ -81,11 +89,13 @@ import X.Geom.XPoint;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function get rotation2():Number {
 			return this.rotation;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function set rotation2(value:Number):void {
 			var a:Point = parent.globalToLocal (localToGlobal (rp));
 			

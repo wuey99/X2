@@ -954,10 +954,12 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function set boundingRect (__value:XRect):void {
 			m_boundingRect = __value;
 		}
 		
+		[Inline]
 		public function get boundingRect ():XRect {
 			return m_boundingRect;
 		}
@@ -967,14 +969,17 @@ package X.World.Logic {
 			m_pos = __pos;
 		}
 		
+		[Inline]
 		public function set pos (__pos:XPoint):void {
 			m_pos = __pos;
 		}
 		
+		[Inline]
 		public function set oX (__value:Number):void {
 			pos.x = __value;
 		}
 
+		[Inline]
 		public function set oY (__value:Number):void {
 			pos.y = __value;
 		}
@@ -984,32 +989,39 @@ package X.World.Logic {
 			return m_pos;
 		}
 		
+		[Inline]
 		public function get pos ():XPoint{
 			return m_pos;
 		}
 		
+		[Inline]
 		public function get oX ():Number {
 			return pos.x
 		}
 
+		[Inline]
 		public function get oY ():Number {
 			return pos.y
 		}
 		
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function setAlpha (__alpha:Number):void {
 			m_alpha = __alpha;
 		}
 		
+		[Inline]
 		public function set oAlpha (__alpha:Number):void {
 			m_alpha = __alpha;
 		}
 		
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function getAlpha ():Number {
 			return m_alpha;
 		}
 		
+		[Inline]
 		public function get oAlpha ():Number {
 			return m_alpha
 		}
@@ -1052,20 +1064,24 @@ package X.World.Logic {
 			return m_masterVisible;
 		}
 					
-//------------------------------------------------------------------------------------------		
+//------------------------------------------------------------------------------------------
+		[Inline]
 		public function setRotation (__rotation:Number):void {
 			m_rotation = __rotation % 360;
 		}
 		
+		[Inline]
 		public function set oRotation (__value:Number):void {
 			m_rotation = __value % 360;
 		}
 
-//------------------------------------------------------------------------------------------		
+//------------------------------------------------------------------------------------------
+		[Inline]
 		public function getRotation ():Number {
 			return m_rotation;
 		}
 		
+		[Inline]
 		public function get oRotation ():Number {
 			return m_rotation;
 		}
@@ -1081,55 +1097,67 @@ package X.World.Logic {
 		}
 				
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function setScale (__scale:Number):void {
 			m_scaleX  = m_scaleY = __scale;
 		}
 		
+		[Inline]
 		public function set oScale (__value:Number):void {
 			m_scaleX  = m_scaleY = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function getScale ():Number {
 			return m_scaleX;
 		}
 		
+		[Inline]
 		public function get oScale ():Number {
 			return m_scaleX;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function setScaleX (__scale:Number):void {
 			m_scaleX = __scale;
 		}
 		
+		[Inline]
 		public function set oScaleX (__value:Number):void {
 			m_scaleX = __value;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function getScaleX ():Number {
 			return m_scaleX;
 		}
 		
+		[Inline]
 		public function get oScaleX ():Number {
 			return m_scaleX;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function setScaleY (__scale:Number):void {
 			m_scaleY = __scale;
 		}
 		
+		[Inline]
 		public function set oScaleY (__value:Number):void {
 			m_scaleY = __value;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function getScaleY ():Number {
 			return m_scaleY;
 		}
 		
+		[Inline]
 		public function get oScaleY ():Number {
 			return m_scaleY;
 		}
@@ -1166,12 +1194,14 @@ package X.World.Logic {
 			return m_masterScaleY;
 		}
 				
-//------------------------------------------------------------------------------------------	
+//------------------------------------------------------------------------------------------
+		[Inline]
 		public function setDepth (__depth:Number):void {
 			m_depth = __depth;
 		}		
 		
-//------------------------------------------------------------------------------------------	
+//------------------------------------------------------------------------------------------
+		[Inline]
 		public function getDepth ():Number {
 			return m_depth;
 		}
