@@ -254,7 +254,7 @@ package X.XMap {
 			m_submapBitmapPoolManager = new XObjectPoolManager (
 				function ():* {
 					var __bitmap:XSubmapBitmap = new XSubmapBitmap ();
-					
+					__bitmap.setup ();					
 					__bitmap.createBitmap ("tiles", __width, __height);
 				
 					return __bitmap;
