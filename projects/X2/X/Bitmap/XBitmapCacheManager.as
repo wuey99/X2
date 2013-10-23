@@ -106,7 +106,8 @@ package X.Bitmap {
 			var __movieClip:MovieClip = new (__class) ();
 			__movieClip.stop ();
 			
-			var __XBitmap:XBitmap = new XBitmap ();		
+			var __XBitmap:XBitmap = new XBitmap ();
+			__XBitmap.setup ();
 			__XBitmap.initWithClassName (null, m_XApp, __className);
 		
 			trace (": adding bitmap: ", __movieClip, __XBitmap, __XBitmap.bitmapData);
