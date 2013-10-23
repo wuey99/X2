@@ -36,7 +36,10 @@ package X.World.Sprite {
 				//------------------------------------------------------------------------------------------
 				public function XBitmap () {
 					super ();
-					
+				}
+				
+				//------------------------------------------------------------------------------------------
+				public function setup ():void {
 					m_pos = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
 					m_rect = g_XApp.getXRectPoolManager ().borrowObject () as XRect;
 					rp = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
@@ -49,10 +52,6 @@ package X.World.Sprite {
 					m_bitmapNames = new Object ();
 					
 					m_bitmapDataAnimManager = null;
-				}
-				
-				//------------------------------------------------------------------------------------------
-				public function setup ():void {	
 				}
 				
 				//------------------------------------------------------------------------------------------
