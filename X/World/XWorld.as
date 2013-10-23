@@ -454,6 +454,11 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getXBitmapPoolManager ():XObjectPoolManager {
+			return m_XApp.getXBitmapPoolManager ();
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getMovieClipCacheManager ():XMovieClipCacheManager {
 			return m_XApp.getMovieClipCacheManager ();
 		}

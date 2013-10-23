@@ -589,7 +589,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function createXBitmap (__name:String):XBitmap {	
 			var __bitmap:XBitmap = new XBitmap ();
-			
+			__bitmap.setup ();
 			__bitmap.initWithClassName (xxx, null, __name);
 			
 			m_bitmaps.put (__name, __bitmap);

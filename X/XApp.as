@@ -19,8 +19,8 @@ package X {
 	import X.Task.*;
 	import X.Texture.*;
 	import X.World.*;
-	import X.XMap.*;
 	import X.World.Sprite.*;
+	import X.XMap.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -43,6 +43,7 @@ package X {
 		private var m_XRectPoolManager:XObjectPoolManager;
 		private var m_XPointPoolManager:XObjectPoolManager;
 		private var m_XDepthSpritePoolManager:XObjectPoolManager;
+		private var m_XBitmapPoolManager:XObjectPoolManager;
 		private var m_XTextureManager:XTextureManager;
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
 		private var m_allClassNames:XDict;
@@ -86,7 +87,8 @@ package X {
 				XSignal: {init: 10000, overflow: 1000},
 				XRect: {init: 25000, overflow: 1000},				
 				XPoint: {init: 25000, overflow: 1000},
-				XDepthSprite: {init: 4000, overflow: 1000}
+				XDepthSprite: {init: 4000, overflow: 1000},
+				XBitmap: {init: 4000, overflow: 1000}
 			};
 		}
 		
@@ -96,7 +98,8 @@ package X {
 				XSignal: {init: 2000, overflow: 1000},
 				XRect: {init: 2500, overflow: 1000},				
 				XPoint: {init: 2500, overflow: 1000},
-				XDepthSprite: {init: 2000, overflow: 1000}
+				XDepthSprite: {init: 2000, overflow: 1000},
+				XBitmap: {init: 2000, overflow: 1000}
 			};
 		}
 		
@@ -180,6 +183,23 @@ package X {
 				
 				__poolSettings.XDepthSprite.init, __poolSettings.XDepthSprite.overflow
 			);
+			
+//------------------------------------------------------------------------------------------
+// XDepthSprite
+//------------------------------------------------------------------------------------------
+			m_XBitmapPoolManager = new XObjectPoolManager (
+				function ():* {
+					var __bitmap:XBitmap = new XBitmap ();
+
+					return __bitmap;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__poolSettings.XBitmap.init, __poolSettings.XBitmap.overflow
+			);
 		}
 			
 //------------------------------------------------------------------------------------------
@@ -233,7 +253,12 @@ package X {
 		public function getXDepthSpritePoolManager ():XObjectPoolManager {
 			return m_XDepthSpritePoolManager;
 		}
-						
+			
+//------------------------------------------------------------------------------------------
+		public function getXBitmapPoolManager ():XObjectPoolManager {
+			return m_XBitmapPoolManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
 			return m_XSignalManager.createXSignal ();

@@ -39,6 +39,7 @@ package X.XMap {
 		//------------------------------------------------------------------------------------------
 		protected override function __createSprites (__spriteClassName:String):void {			
 			m_bitmap = new XBitmap ();
+			m_bitmap.setup ();
 			m_bitmap.initWithClassName (xxx, null, __spriteClassName);
 // !STARLING!
 			if (CONFIG::flash) {
