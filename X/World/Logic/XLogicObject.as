@@ -588,7 +588,7 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function createXBitmap (__name:String):XBitmap {	
-			var __bitmap:XBitmap = new XBitmap ();
+			var __bitmap:XBitmap = xxx.getXBitmapPoolManager ().borrowObject () as XBitmap;
 			__bitmap.setup ();
 			__bitmap.initWithClassName (xxx, null, __name);
 			
@@ -640,6 +640,8 @@ package X.World.Logic {
 					var __bitmap:XBitmap = m_bitmaps.get (__name) as XBitmap;
 					
 					__bitmap.cleanup ();
+					
+					xxx.getXBitmapPoolManager ().returnObject (__bitmap);
 				}
 			);
 			
