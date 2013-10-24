@@ -126,7 +126,7 @@ package X.Task {
 				return;
 			}
 			
-			m_poolCycle++; m_poolCycle &= 127;
+			m_poolCycle++; m_poolCycle &= 31;
 			
 			if (m_poolCycle == 0) {
 				m_currentPool = (m_currentPool + 1) & (POOL_MASK);

@@ -283,14 +283,14 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function removeAll ():void {
+			removeAllTasks ();
+			removeAllXLogicObjects ();
 			removeAllWorldSprites ();
 			removeAllHudSprites ();
-			removeAllXLogicObjects ();
 			removeAllXBitmaps ();
 			removeAllMovieClips ();
 			removeAllXTextSprites ();
 			removeAllXSignals ();
-			removeAllTasks ();
 			removeAllTasksCX ();
 			
 			if (getParent () != null) {
