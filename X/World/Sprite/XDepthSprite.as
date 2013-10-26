@@ -10,7 +10,7 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------	
 	public class XDepthSprite extends XSprite {
 		public var m_depth:Number;
-		public var m_depth2:Number;
+		public var m_depth2:int;
 		public var m_relativeDepthFlag:Boolean;
 		public var m_sprite:DisplayObject;
 		public var x_layer:XSpriteLayer;
@@ -109,11 +109,11 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function get depth2 ():Number {
+		public function get depth2 ():int {
 			return m_depth2;
 		}
 		
-		public function set depth2 (__depth:Number): void {
+		public function set depth2 (__depth:int): void {
 			if (__depth != m_depth2) {
 				m_depth2 = __depth;
 				x_layer.forceSort = true;

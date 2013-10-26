@@ -86,7 +86,7 @@ package X.World {
 			
 //------------------------------------------------------------------------------------------	
 		public function depthSort ():void {
-			var list:Array = new Array ();
+			var list:Vector.<XDepthSprite> = new Vector.<XDepthSprite> ();
 			
 			m_XDepthSpriteMap.forEach (
 				function (sprite:*):void {
@@ -94,67 +94,142 @@ package X.World {
 				}
 			);
 		
+			if (list.length < 20) {
+				list.sort (
+					function (a:XDepthSprite, b:XDepthSprite):int {
+						return a.depth2 - b.depth2;
+					}
+				);
+			}
+			else
+			{
+				flashSortOn (list, "depth2");
+			}
+
 			var i:Number;
-			var d:Number;
-			
-			mergeSort (list, 0, list.length-1);
-		
-			d = numChildren-1;
-			
+
 			for (i=0; i<list.length; i++) {
-				setChildIndex (list[i], d--);
+				setChildIndex (list[i], i);
 			}
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function mergeSort (a:Array, left:int, right:int):void {
-			var center:int;
+// see: http://guihaire.com/code/?p=894
+//------------------------------------------------------------------------------------------		
+		static public function flashSortOn(o:Vector.<XDepthSprite> , key:String , multiplier:Number = 0.43):void
+		{
+			var n:int = o.length;
+			var i:int = 0, j:int = 0, k:int = 0;
+			var a:Vector.<int> = new Vector.<int>(n);
+			var m:int = n*multiplier;if(m>262143)m=262143;
+			var l:Vector.<int> = new Vector.<int>(m);
+			var anmin:int = a[0] = o[0][key];
+			var anmax:int = anmin;
+			var nmax:int  = 0;
+			var nmove:int = 0;
+			var lk:int;
+			i =0;
 			
-			if (left < right) {
-				center = (left+right)/2;
+			var kmin:int,kmax:int,kimin:int,kimax:int;
+			for (i=0; (i+=2) < n;)
+			{
+				a[i] = kmin = o[i][key];
+				a[i-1] = kmax = o[i-1][key];
 				
-				mergeSort (a, left, center);
-				mergeSort (a, center+1, right);
+				if( kmin>kmax)
+				{
+					if (kmax< anmin) anmin = kmax;
+					if (kmin> anmax) { anmax = kmin; nmax = i;}                                      
+				}
+				else
+				{
+					if (kmin< anmin) anmin = kmin;
+					if (kmax > anmax) { anmax = kmax; nmax = i-1;}                   
+				}               
+			}           
+			if(--i < n)
+			{
+				a[i] = k = o[i][key];
 				
-				merge (a, left, center+1, right);
-			}	
-		}	
-
-//------------------------------------------------------------------------------------------
-		public function merge (a:Array, leftPos:int, rightPos:int, rightEnd:int):void {
-			var leftEnd:int = rightPos-1;
-			var tmpPos:int = leftPos;
-			var numElements:int = rightEnd - leftPos + 1;
+				if (k < anmin) anmin = k;
+				else if (k > anmax) { anmax = k; nmax = i;}
+			}
 			
-			var tmpArray:Array = new Array (a.length);
-	
-        	// Main loop
-        	while (leftPos <= leftEnd && rightPos <= rightEnd) {
-            	if (a[leftPos].depth2 > a[rightPos].depth2) {
-                	tmpArray[tmpPos++] = a[leftPos++];
-             	}
-            	else
-            	{
-                	tmpArray[tmpPos++] = a[rightPos++];
-             	}
-        	}
-        	
-        	// Copy rest of first half
-        	while (leftPos <= leftEnd) {
-            	tmpArray[tmpPos++] = a[leftPos++];
-        	}
-        	
-        	// Copy rest of right half
-        	while (rightPos <= rightEnd) { 
-            	tmpArray[tmpPos++] = a[rightPos++];
-        	}
-        	
-        	// Copy tmpArray back
-        	for (var i:int = 0; i < numElements; i++, rightEnd--) {
-            	a[rightEnd] = tmpArray[rightEnd];
-         	}
+			//var time3:int = getTimer();
+			//time2 = time3-time2;
+			//trace(time1,time2);
+			
+			if (anmin == anmax) return;
+			
+			var c1:int = ((m - 1)<<13) / (anmax - anmin);
+			
+			for (i = -1; ++i < n;)
+			{
+				++l[(c1*(a[i] - anmin))>>13];
+			}
+			
+			lk = l[0];
+			for (k = 0; ++k < m;)
+			{
+				lk = (l[k] += lk);
+			}
+			
+			//swap a[nmax] and a[0]
+			var hold:int = anmax;
+			var holdo:XDepthSprite = o[nmax];
+			
+			a[nmax] = a[0];
+			o[nmax] = o[0];
+			a[0] = hold;
+			o[0] = holdo;
+			
+			var flash:int;
+			var flasho:XDepthSprite;
+			j = 0;
+			k = (m - 1);
+			i = (n - 1);
+			
+			while (nmove < i)
+			{
+				while (j >= l[k])
+				{
+					k = (c1 * (a[ (++j)] - anmin))>>13;
+				}
+				
+				flash = a[j];
+				flasho = o[j];
+				
+				lk = l[k];
+				while (j !=lk)
+				{
+					hold = a[(lk = (--l[(k = ((c1 * (flash - anmin))>>13))]))];
+					holdo = o[lk];
+					a[lk] = flash;
+					o[lk] = flasho;
+					flash = hold;
+					flasho = holdo;
+					++nmove;                                    
+				}
+				
+			}
+			
+			for(j = 0; ++j < n;)
+			{
+				hold = a[j];
+				holdo = o[i=j];
+				while((--i >= 0) && ((k=a[i]) > hold))
+				{   
+					o[i+1] = o[i];
+					a[i+1] = k;
+				}
+				if(++i != j)
+				{
+					a[i] = hold;
+					o[i] = holdo;
+				}
+			}   
 		}
-
+		
 //------------------------------------------------------------------------------------------
 	}
 	
