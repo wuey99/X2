@@ -12,11 +12,15 @@ package X.World {
 		
 		public var forceSort:Boolean;
 		
+		public var list:Vector.<XDepthSprite>;
+		
 //------------------------------------------------------------------------------------------
 		public function XSpriteLayer () {
 			super ();
 			
 			m_XDepthSpriteMap = new XDict ();
+			
+			list = new Vector.<XDepthSprite> (2000);
 			
 			forceSort = false;
 		}
@@ -86,15 +90,17 @@ package X.World {
 			
 //------------------------------------------------------------------------------------------	
 		public function depthSort ():void {
-			var list:Vector.<XDepthSprite> = new Vector.<XDepthSprite> ();
+			var length:int = 0;
+
+			list.length = 0;
 			
 			m_XDepthSpriteMap.forEach (
 				function (sprite:*):void {
-					list.push (sprite);
+					list[length++] = sprite;
 				}
 			);
 		
-			if (list.length < 20) {
+			if (length < 20) {
 				list.sort (
 					function (a:XDepthSprite, b:XDepthSprite):int {
 						return a.depth2 - b.depth2;
@@ -106,9 +112,9 @@ package X.World {
 				flashSortOn (list, "depth2");
 			}
 
-			var i:Number;
+			var i:int;
 
-			for (i=0; i<list.length; i++) {
+			for (i=0; i<length; i++) {
 				setChildIndex (list[i], i);
 			}
 		}
