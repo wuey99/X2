@@ -126,10 +126,12 @@ package X.World {
 		{
 			var n:int = o.length;
 			var i:int = 0, j:int = 0, k:int = 0;
-			var a:Vector.<int> = new Vector.<int>(n);
+			var m_a:Vector.<int> = new Vector.<int>(n);
+			m_a.length = n;
 			var m:int = n*multiplier;if(m>262143)m=262143;
-			var l:Vector.<int> = new Vector.<int>(m);
-			var anmin:int = a[0] = o[0][key];
+			var m_l:Vector.<int> = new Vector.<int>(m);
+			m_l.length = m;
+			var anmin:int = m_a[0] = o[0][key];
 			var anmax:int = anmin;
 			var nmax:int  = 0;
 			var nmove:int = 0;
@@ -139,8 +141,8 @@ package X.World {
 			var kmin:int,kmax:int,kimin:int,kimax:int;
 			for (i=0; (i+=2) < n;)
 			{
-				a[i] = kmin = o[i][key];
-				a[i-1] = kmax = o[i-1][key];
+				m_a[i] = kmin = o[i][key];
+				m_a[i-1] = kmax = o[i-1][key];
 				
 				if( kmin>kmax)
 				{
@@ -155,7 +157,7 @@ package X.World {
 			}           
 			if(--i < n)
 			{
-				a[i] = k = o[i][key];
+				m_a[i] = k = o[i][key];
 				
 				if (k < anmin) anmin = k;
 				else if (k > anmax) { anmax = k; nmax = i;}
@@ -171,22 +173,22 @@ package X.World {
 			
 			for (i = -1; ++i < n;)
 			{
-				++l[(c1*(a[i] - anmin))>>13];
+				++m_l[(c1*(m_a[i] - anmin))>>13];
 			}
 			
-			lk = l[0];
+			lk = m_l[0];
 			for (k = 0; ++k < m;)
 			{
-				lk = (l[k] += lk);
+				lk = (m_l[k] += lk);
 			}
 			
 			//swap a[nmax] and a[0]
 			var hold:int = anmax;
 			var holdo:XDepthSprite = o[nmax];
 			
-			a[nmax] = a[0];
+			m_a[nmax] = m_a[0];
 			o[nmax] = o[0];
-			a[0] = hold;
+			m_a[0] = hold;
 			o[0] = holdo;
 			
 			var flash:int;
@@ -197,20 +199,20 @@ package X.World {
 			
 			while (nmove < i)
 			{
-				while (j >= l[k])
+				while (j >= m_l[k])
 				{
-					k = (c1 * (a[ (++j)] - anmin))>>13;
+					k = (c1 * (m_a[ (++j)] - anmin))>>13;
 				}
 				
-				flash = a[j];
+				flash = m_a[j];
 				flasho = o[j];
 				
-				lk = l[k];
+				lk = m_l[k];
 				while (j !=lk)
 				{
-					hold = a[(lk = (--l[(k = ((c1 * (flash - anmin))>>13))]))];
+					hold = m_a[(lk = (--m_l[(k = ((c1 * (flash - anmin))>>13))]))];
 					holdo = o[lk];
-					a[lk] = flash;
+					m_a[lk] = flash;
 					o[lk] = flasho;
 					flash = hold;
 					flasho = holdo;
@@ -221,16 +223,16 @@ package X.World {
 			
 			for(j = 0; ++j < n;)
 			{
-				hold = a[j];
+				hold = m_a[j];
 				holdo = o[i=j];
-				while((--i >= 0) && ((k=a[i]) > hold))
+				while((--i >= 0) && ((k=m_a[i]) > hold))
 				{   
 					o[i+1] = o[i];
-					a[i+1] = k;
+					m_a[i+1] = k;
 				}
 				if(++i != j)
 				{
-					a[i] = hold;
+					m_a[i] = hold;
 					o[i] = holdo;
 				}
 			}   
