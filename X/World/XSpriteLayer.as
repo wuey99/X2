@@ -37,7 +37,6 @@ package X.World {
 		
 //------------------------------------------------------------------------------------------
 		public function addSprite (__sprite:DisplayObject, __depth:Number, __visible:Boolean = false):XDepthSprite {
-//			var __depthSprite:XDepthSprite =  new XDepthSprite ();
 			var __depthSprite:XDepthSprite = xxx.getXDepthSpritePoolManager ().borrowObject () as XDepthSprite;
 			
 			__depthSprite.visible2 = true;
