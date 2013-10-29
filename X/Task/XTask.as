@@ -214,6 +214,18 @@ package X.Task {
 			while (__cont && !m_isDead) {
 				__cont = __evalInstructions ();
 			}
+			
+			if (m_stackPtr < 0) {
+				if (m_parent != m_manager) {
+					m_parent.removeTask (self);
+				}
+				else
+				{
+					m_manager.removeTask (self);
+				}
+				
+				return;
+			}			
 		}
 		
 		//------------------------------------------------------------------------------------------
