@@ -209,7 +209,7 @@ package X.Task {
 			
 			function __retn ():Boolean {
 				if (m_stackPtr < 0) {
-					if (m_parent != m_manager) {
+					if (m_parent && m_parent != m_manager) {
 						m_parent.removeTask (self);
 					}
 					else
@@ -540,24 +540,19 @@ package X.Task {
 						m_subTask.setManager (m_manager);
 						m_subTask.setParent (self);
 						m_subTask.run ();
-						
-						// return back to the EXEC command and wait
-						m_taskIndex--;
 					}
+
+					// if the sub-task is still active, wait another tick and check again
+					if (m_XTaskSubManager.isTask (m_subTask)) {
+						m_ticks += 0x0100;
+						m_taskIndex--;
+						return false;
+					}
+					// move along
 					else
 					{
-						// if the sub-task is still active, wait another tick and check again
-						if (m_XTaskSubManager.isTask (m_subTask)) {
-							m_ticks += 0x0100;
-							m_taskIndex--;
-							return false;
-						}
-							// move along
-						else
-						{
-							m_subTask = null;
-							m_taskIndex++;
-						}
+						m_subTask = null;
+						m_taskIndex++;
 					}
 					
 					break;
