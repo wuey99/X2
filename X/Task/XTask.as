@@ -1,8 +1,6 @@
 //------------------------------------------------------------------------------------------
 package X.Task {
 	
-	import X.Pool.*;
-	
 	import flash.system.*;
 	import flash.utils.*;
 	
@@ -69,7 +67,6 @@ package X.Task {
 		public var m_isDead:Boolean;
 		public var tag:String;
 		public var m_id:Number;
-		public var m_pool:XObjectPoolManager;
 		
 		public static var g_id:Number = 0;
 		
@@ -137,16 +134,6 @@ package X.Task {
 		//------------------------------------------------------------------------------------------
 		public function createXTaskSubManager ():XTaskSubManager {
 			return new XTaskSubManager (null);
-		}
-		
-		//------------------------------------------------------------------------------------------
-		public function setPool (__pool:XObjectPoolManager):void {
-			m_pool = __pool;
-		}
-		
-		//------------------------------------------------------------------------------------------
-		public function getPool ():XObjectPoolManager {
-			return m_pool;
 		}
 		
 		//------------------------------------------------------------------------------------------
