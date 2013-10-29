@@ -15,8 +15,8 @@ package X.Task {
 		protected var m_currentPool:Number;
 		protected var m_poolCycle:Number;
 
-		public const NUM_POOLS:Number = 16;
-		public const POOL_MASK:Number = 15;
+		public const NUM_POOLS:Number = 4;
+		public const POOL_MASK:Number = 3;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskManager (__XApp:XApp) {
@@ -126,7 +126,7 @@ package X.Task {
 				return;
 			}
 			
-			m_poolCycle++; m_poolCycle &= 255;
+			m_poolCycle++; m_poolCycle &= 3;
 			
 			if (m_poolCycle == 0) {
 				m_currentPool = (m_currentPool + 1) & (POOL_MASK);

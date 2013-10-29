@@ -175,6 +175,12 @@ package X.Task {
 		public function kill ():void {
 			removeAllTasks ();
 			
+			if (m_subTask != null) {
+				removeTask (m_subTask);
+			}
+			
+			m_subTask = null;
+			
 			m_isDead = true;
 		}	
 		
@@ -188,10 +194,11 @@ package X.Task {
 			}
 			
 			if (m_stackPtr < 0) {
-				m_manager.removeTask (this);
+				removeTask (this);
 				
 				return;
 			}
+			
 			// suspended?
 			m_ticks -= 0x0100;
 			
