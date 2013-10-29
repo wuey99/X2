@@ -189,16 +189,8 @@ package X.Task {
 			if (m_isDead) {
 				return;
 			}
-			
-			if (m_stackPtr < 0) {
-				if (m_parent != m_manager) {
-					m_parent.removeTask (self);
-				}
-				else
-				{
-					m_manager.removeTask (self);
-				}
-				
+
+			if (__retn ()) {
 				return;
 			}
 			
@@ -215,17 +207,23 @@ package X.Task {
 				__cont = __evalInstructions ();
 			}
 			
-			if (m_stackPtr < 0) {
-				if (m_parent != m_manager) {
-					m_parent.removeTask (self);
-				}
+			function __retn ():Boolean {
+				if (m_stackPtr < 0) {
+					if (m_parent != m_manager) {
+						m_parent.removeTask (self);
+					}
+					else
+					{
+						m_manager.removeTask (self);
+					}
+					
+					return true;;
+				}		
 				else
 				{
-					m_manager.removeTask (self);
+					return false;
 				}
-				
-				return;
-			}			
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------
