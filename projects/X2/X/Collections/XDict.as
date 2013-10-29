@@ -23,21 +23,25 @@ package X.Collections {
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function exists (__key:*):Boolean {
 			return __key in m_dict;
 		}
 
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function get (__key:*):* {
 			return m_dict[__key];
 		}
 	
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function put (__key:*, __value:*):void {
 			m_dict[__key] = __value;
 		}	
 		
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function remove (__key:*):void {
 			delete m_dict[__key];
 		}

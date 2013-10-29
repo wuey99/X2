@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------------------
 package X.Task {
 	
+	import X.Pool.*;
+	
 	import flash.system.*;
 	import flash.utils.*;
 	
@@ -67,6 +69,8 @@ package X.Task {
 		public var m_isDead:Boolean;
 		public var tag:String;
 		public var m_id:Number;
+		public var self:XTask;
+		public var m_pool:XObjectPoolManager;
 		
 		public static var g_id:Number = 0;
 		
@@ -94,6 +98,8 @@ package X.Task {
 		//------------------------------------------------------------------------------------------
 		public function XTask () {
 			super ();	
+			
+			self = this;
 			
 			m_XTaskSubManager = createXTaskSubManager ();
 			
@@ -145,6 +151,16 @@ package X.Task {
 		public function setParent (__parent:*):void {
 			m_parent = __parent;
 		}
+
+		//------------------------------------------------------------------------------------------
+		public function setPool (__pool:XObjectPoolManager):void {
+			m_pool = __pool;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getPool ():XObjectPoolManager {
+			return m_pool;
+		}
 		
 		//------------------------------------------------------------------------------------------
 		public function getManager ():XTaskManager {
@@ -162,12 +178,6 @@ package X.Task {
 		public function kill ():void {
 			removeAllTasks ();
 			
-			if (m_subTask != null) {
-				removeTask (m_subTask);
-			}
-			
-			m_subTask = null;
-			
 			m_isDead = true;
 		}	
 		
@@ -181,7 +191,13 @@ package X.Task {
 			}
 			
 			if (m_stackPtr < 0) {
-				removeTask (this);
+				if (m_parent != m_manager) {
+					m_parent.removeTask (self);
+				}
+				else
+				{
+					m_manager.removeTask (self);
+				}
 				
 				return;
 			}
@@ -402,7 +418,7 @@ package X.Task {
 					//------------------------------------------------------------------------------------------
 					var __funcUntil:Function = m_taskList[m_taskIndex++] as Function;
 					
-					__funcUntil (this);
+					__funcUntil (self);
 					
 					if (!(m_flags & FLAGS_EQ)) {	
 						m_taskIndex = m_stack[m_stackPtr-1];
@@ -490,7 +506,7 @@ package X.Task {
 					//------------------------------------------------------------------------------------------
 					var __funcFlags:Function = m_taskList[m_taskIndex++] as Function;
 					
-					__funcFlags (this);
+					__funcFlags (self);
 					
 					break;
 				
@@ -499,7 +515,7 @@ package X.Task {
 					//------------------------------------------------------------------------------------------
 					var __funcTask:Function = m_taskList[m_taskIndex++] as Function;
 					
-					__funcTask (this);
+					__funcTask (self);
 					
 					break;
 				
@@ -511,7 +527,8 @@ package X.Task {
 						// get new XTask Array run it immediately
 						m_subTask = m_XTaskSubManager.addTask ((m_taskList[m_taskIndex] as Array), true);
 						m_subTask.tag = tag;
-						m_subTask.setParent (m_parent);
+						m_subTask.setManager (m_manager);
+						m_subTask.setParent (self);
 						m_subTask.run ();
 						
 						// return back to the EXEC command and wait
@@ -520,7 +537,7 @@ package X.Task {
 					else
 					{
 						// if the sub-task is still active, wait another tick and check again
-						if (m_manager.isTask (m_subTask)) {
+						if (m_XTaskSubManager.isTask (m_subTask)) {
 							m_ticks += 0x0100;
 							m_taskIndex--;
 							return false;
