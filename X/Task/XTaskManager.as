@@ -11,7 +11,12 @@ package X.Task {
 		protected var m_XTasks:XDict;
 		protected var m_paused:Number;
 		protected var m_XApp:XApp;
-		protected var m_pool:XObjectPoolManager;
+		protected var m_pools:Array;
+		protected var m_currentPool:Number;
+		protected var m_poolCycle:Number;
+
+		public const NUM_POOLS:Number = 4;
+		public const POOL_MASK:Number = 3;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskManager (__XApp:XApp) {
@@ -21,20 +26,27 @@ package X.Task {
 			
 			m_paused = 0;
 			
-			m_pool = new XObjectPoolManager (
-				function ():* {
-					return new XTask ();
-				},
+			m_pools = new Array (NUM_POOLS);
+			
+			for (var i:Number=0; i<NUM_POOLS; i++) {
+				m_pools[i] = new XObjectPoolManager (
+					function ():* {
+						return new XTask ();
+					},
 					
-				function (__src:*, __dst:*):* {
-					return null;
-				},
+					function (__src:*, __dst:*):* {
+						return null;
+					},
 					
-				2048, 256,
+					2048, 256,
 					
-				function (x:*):void {
-				}
-			);
+					function (x:*):void {
+					}
+				);
+			}
+			
+			m_currentPool = 0;
+			m_poolCycle = 0;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -73,11 +85,14 @@ package X.Task {
 		
 //------------------------------------------------------------------------------------------
 		public function addTask (__taskList:Array, __findLabelsFlag:Boolean = true):XTask {
-			var __task:XTask = m_pool.borrowObject () as XTask;
+			var __pool:XObjectPoolManager = m_pools[m_currentPool];
+			
+			var __task:XTask = __pool.borrowObject () as XTask;
 			__task.setup (__taskList, __findLabelsFlag);
 			
 			__task.setManager (this);
 			__task.setParent (this);
+			__task.setPool (__pool);
 			
 			m_XTasks.put (__task, 0);
 			
@@ -99,7 +114,7 @@ package X.Task {
 			if (m_XTasks.exists (__task)) {
 				__task.kill ();
 				
-				m_pool.returnObject (__task);
+				__task.getPool ().returnObjectTo (m_pools[(m_currentPool + POOL_MASK) & (POOL_MASK)], __task);
 				
 				m_XTasks.remove (__task);
 			}
@@ -110,7 +125,13 @@ package X.Task {
 			if (m_paused) {
 				return;
 			}
-
+			
+			m_poolCycle++; m_poolCycle &= 3;
+			
+			if (m_poolCycle == 0) {
+				m_currentPool = (m_currentPool + 1) & (POOL_MASK);
+			}
+			
 			m_XTasks.forEach (
 				function (x:XTask):void {
 					x.run ();
