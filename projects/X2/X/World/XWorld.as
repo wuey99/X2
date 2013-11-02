@@ -564,6 +564,33 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
+// http://www.flipcode.com/archives/Fast_Approximate_Distance_Functions.shtml
+//------------------------------------------------------------------------------------------
+		public function approxDistance (dx:Number, dy:Number):Number {
+			var min:Number, max:Number, approx:Number;
+			
+			if ( dx < 0 ) dx = -dx;
+			if ( dy < 0 ) dy = -dy;
+			
+			if ( dx < dy ) {
+				min = dx;
+				max = dy;
+			}
+			else
+			{
+				min = dy;
+				max = dx;
+			}
+			
+			approx = ( max * 1007 ) + ( min * 441 );
+			if ( max < ( min << 4 ))
+				approx -= ( max * 40 );
+			
+			// add 512 for proper rounding
+			return (( approx + 512 ) >> 10 );			
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function globalToWorld (__layer:Number, __p:XPoint):XPoint {
 			var __x:Point;
 			
