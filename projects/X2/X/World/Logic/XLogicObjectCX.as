@@ -34,78 +34,78 @@ package X.World.Logic {
 
 		private var m_CX_Collide_Flag:Number;
 	
-		public static const CX_COLLIDE_LF:Number = 0x0001;
-		public static const CX_COLLIDE_RT:Number = 0x0002;
-		public static const CX_COLLIDE_HORZ:Number = (CX_COLLIDE_LF+CX_COLLIDE_RT); 
-		public static const CX_COLLIDE_UP:Number = 0x0004;
-		public static const CX_COLLIDE_DN:Number = 0x0008;
-		public static const CX_COLLIDE_VERT:Number = (CX_COLLIDE_UP+CX_COLLIDE_DN);
+		public static const CX_COLLIDE_LF:int = 0x0001;
+		public static const CX_COLLIDE_RT:int = 0x0002;
+		public static const CX_COLLIDE_HORZ:int = (CX_COLLIDE_LF+CX_COLLIDE_RT); 
+		public static const CX_COLLIDE_UP:int = 0x0004;
+		public static const CX_COLLIDE_DN:int = 0x0008;
+		public static const CX_COLLIDE_VERT:int = (CX_COLLIDE_UP+CX_COLLIDE_DN);
 	
 		// empty
-		public static const CX_EMPTY:Number = 0;
+		public static const CX_EMPTY:int = 0;
 		
 		// solid solid
-		public static const CX_SOLID:Number = 1;
+		public static const CX_SOLID:int = 1;
 		
 		// soft
-		public static const CX_SOFT:Number = 2;	
+		public static const CX_SOFT:int = 2;	
 		
 		// jump thru
-		public static const CX_JUMP_THRU:Number = 3;
+		public static const CX_JUMP_THRU:int = 3;
 		
 		// 45 degree diagonals
-		public static const CX_UL45:Number = 4;
-		public static const CX_UR45:Number = 5;
-		public static const CX_LL45:Number = 6;
-		public static const CX_LR45:Number = 7;
+		public static const CX_UL45:int = 4;
+		public static const CX_UR45:int = 5;
+		public static const CX_LL45:int = 6;
+		public static const CX_LR45:int = 7;
 		
 		// 22.5 degree diagonals
-		public static const CX_UL225A:Number = 8;
-		public static const CX_UL225B:Number = 9;
-		public static const CX_UR225A:Number = 10;
-		public static const CX_UR225B:Number = 11;
-		public static const CX_LL225A:Number = 12;
-		public static const CX_LL225B:Number = 13;
-		public static const CX_LR225A:Number = 14;
-		public static const CX_LR225B:Number = 15;
+		public static const CX_UL225A:int = 8;
+		public static const CX_UL225B:int = 9;
+		public static const CX_UR225A:int = 10;
+		public static const CX_UR225B:int = 11;
+		public static const CX_LL225A:int = 12;
+		public static const CX_LL225B:int = 13;
+		public static const CX_LR225A:int = 14;
+		public static const CX_LR225B:int = 15;
 		
 		// 67.5 degree diagonals
-		public static const CX_UL675A:Number = 16;
-		public static const CX_UL675B:Number = 17;
-		public static const CX_UR675A:Number = 18;
-		public static const CX_UR675B:Number = 19;
-		public static const CX_LL675A:Number = 20;
-		public static const CX_LL675B:Number = 21;
-		public static const CX_LR675A:Number = 22;
-		public static const CX_LR675B:Number = 23;
+		public static const CX_UL675A:int = 16;
+		public static const CX_UL675B:int = 17;
+		public static const CX_UR675A:int = 18;
+		public static const CX_UR675B:int = 19;
+		public static const CX_LL675A:int = 20;
+		public static const CX_LL675B:int = 21;
+		public static const CX_LR675A:int = 22;
+		public static const CX_LR675B:int = 23;
 		
 		// soft tiles
-		public static const CX_SOFTLF:Number = 24;
-		public static const CX_SOFTRT:Number = 25;
-		public static const CX_SOFTUP:Number = 26;
-		public static const CX_SOFTDN:Number = 27;
+		public static const CX_SOFTLF:int = 24;
+		public static const CX_SOFTRT:int = 25;
+		public static const CX_SOFTUP:int = 26;
+		public static const CX_SOFTDN:int = 27;
 		
-		public static const CX_MAX:Number = 28;
+		public static const CX_MAX:int = 28;
 		
 		// collision tile width, height
-		public static const CX_TILE_WIDTH:Number = 16;
-		public static const CX_TILE_HEIGHT:Number = 16;
+		public static const CX_TILE_WIDTH:int = 16;
+		public static const CX_TILE_HEIGHT:int = 16;
 		
-		public static const CX_TILE_WIDTH_MASK:Number = 15;
-		public static const CX_TILE_HEIGHT_MASK:Number = 15;
+		public static const CX_TILE_WIDTH_MASK:int = 15;
+		public static const CX_TILE_HEIGHT_MASK:int = 15;
 		
-		public static const CX_TILE_WIDTH_UNMASK:Number = 0xfffffff0;
-		public static const CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
+		public static const CX_TILE_WIDTH_UNMASK:int = 0xfffffff0;
+		public static const CX_TILE_HEIGHT_UNMASK:int = 0xfffffff0;
 		
 		// alternate tile width, height
-		public static const TX_TILE_WIDTH:Number = 64;
-		public static const TX_TILE_HEIGHT:Number = 64;
+		public static const TX_TILE_WIDTH:int = 64;
+		public static const TX_TILE_HEIGHT:int = 64;
 		
-		public static const TX_TILE_WIDTH_MASK:Number = 63;
-		public static const TX_TILE_HEIGHT_MASK:Number = 63;
+		public static const TX_TILE_WIDTH_MASK:int = 63;
+		public static const TX_TILE_HEIGHT_MASK:int = 63;
 		
-		public static const TX_TILE_WIDTH_UNMASK:Number = 0xffffffc0;
-		public static const TX_TILE_HEIGHT_UNMASK:Number = 0xffffffc0;
+		public static const TX_TILE_WIDTH_UNMASK:int = 0xffffffc0;
+		public static const TX_TILE_HEIGHT_UNMASK:int = 0xffffffc0;
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicObjectCX () {
