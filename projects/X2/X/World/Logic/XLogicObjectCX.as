@@ -1759,7 +1759,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function Ck_Slope_UP ():Boolean {
 			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var i:int, __x:Number, __y:Number;
 			var collided:Boolean;
 			var looking:Boolean = true;
 			var cx:Number;
