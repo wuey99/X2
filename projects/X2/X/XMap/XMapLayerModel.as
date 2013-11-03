@@ -16,7 +16,7 @@ package X.XMap {
 		
 		private var m_layer:Number;
 		
-		private var m_XSubmaps:Array;
+		private var m_XSubmaps:Vector.<Vector.<XSubmapModel>>;
 		
 		private var m_submapRows:Number;
 		private var m_submapCols:Number;
@@ -65,13 +65,13 @@ package X.XMap {
 			m_items = new XDict ();
 			m_ids = new XDict ();
 			m_layer = __layer;
-			m_XSubmaps = new Array (__submapRows);
+			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (__submapRows);
 			m_visible = true;
 			m_name = "layer" + __layer;
 			m_grid = false;
 
 			for (__row=0; __row<__submapRows; __row++) {
-				m_XSubmaps[__row] = new Array (__submapCols);
+				m_XSubmaps[__row] = new Vector.<XSubmapModel> (__submapCols);
 
 				for (__col=0; __col<__submapCols; __col++) {
 					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col, __row, m_submapWidth, m_submapHeight);
@@ -593,7 +593,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function submaps ():Array {
+		public function submaps ():Vector.<Vector.<XSubmapModel>> {
 			return m_XSubmaps;
 		}
 		
@@ -851,7 +851,7 @@ package X.XMap {
 			
 			m_items = new XDict ();
 			m_ids = new XDict ();
-			m_XSubmaps = new Array (m_submapRows);
+			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (m_submapRows);
 			
 			deserializeImageClassNames (__xml);
 			m_classNames.deserialize (__xml);
@@ -877,7 +877,7 @@ package X.XMap {
 				var __empty:XSubmapModel = new XSubmapModel (this, 0, 0, m_submapWidth, m_submapHeight);
 
 				for (__row=0; __row<m_submapRows; __row++) {
-					m_XSubmaps[__row] = new Array (m_submapCols);
+					m_XSubmaps[__row] = new Vector.<XSubmapModel> (m_submapCols);
 					
 					for (__col=0; __col<m_submapCols; __col++) {
 						m_XSubmaps[__row][__col] = __empty;
@@ -887,7 +887,7 @@ package X.XMap {
 			else
 			{
 				for (__row=0; __row<m_submapRows; __row++) {
-					m_XSubmaps[__row] = new Array (m_submapCols);
+					m_XSubmaps[__row] = new Vector.<XSubmapModel> (m_submapCols);
 	
 					for (__col=0; __col<m_submapCols; __col++) {
 						m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);

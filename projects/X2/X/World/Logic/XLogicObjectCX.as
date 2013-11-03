@@ -8,7 +8,6 @@ package X.World.Logic {
 	import X.World.Sprite.*;
 	import X.XMap.*;
 	
-//	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
@@ -24,7 +23,7 @@ package X.World.Logic {
 		public var m_XMapModel:XMapModel;
 		public var m_XMapView:XMapView;
 		public var m_XMapLayerModel:XMapLayerModel;
-		private var m_XSubmaps:Array;
+		private var m_XSubmaps:Vector.<Vector.<XSubmapModel>>;
 		private var m_submapWidth:int;
 		private var m_submapHeight:int;
 		private var m_submapWidthMask:int;
