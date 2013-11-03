@@ -412,6 +412,7 @@ package X.World.Logic {
 			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
+			var submapRow:int, submapCol:int;
 			
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
@@ -419,6 +420,8 @@ package X.World.Logic {
 			y2 = int (oY) + m_cx.bottom;
 						
 			y1 &= CX_TILE_HEIGHT_UNMASK;
+			r = y1 >> 9;
+			submapRow = ((y1 & m_submapHeightMask) >> 4) * m_cols;
 			
 			collided = false;
 			
@@ -426,12 +429,9 @@ package X.World.Logic {
 //				c = __x/m_submapWidth;
 //				r = y1/m_submapHeight;
 //				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
-				
-				c = __x >> 9;
-				r = y1 >> 9;
-				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((__x & m_submapWidthMask) >> 4);
-				
-				switch (m_XSubmaps[r][c].cmap[i]) {
+//				switch (m_XSubmaps[r][c].cmap[i]) {
+					
+				switch (m_XSubmaps[r][__x >> 9].cmap[submapRow + ((__x & m_submapWidthMask) >> 4)]) {
 				// ([
 					case CX_EMPTY:
 						break;
@@ -521,6 +521,7 @@ package X.World.Logic {
 			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
+			var submapRow:int, submapCol:int;
 			
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
@@ -528,6 +529,8 @@ package X.World.Logic {
 			y2 = int (oY) + m_cx.bottom;
 							
 			y2 &= CX_TILE_HEIGHT_UNMASK;
+			r = y2 >> 9;
+			submapRow = ((y2 & m_submapHeightMask) >> 4) * m_cols;
 			
 			collided = false;
 			
@@ -535,12 +538,9 @@ package X.World.Logic {
 //				c = __x/m_submapWidth;
 //				r = y2/m_submapHeight;
 //				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
-
-				c = __x >> 9;
-				r = y2 >> 9;
-				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((__x & m_submapWidthMask) >> 4);
-				
-				switch (m_XSubmaps[r][c].cmap[i]) {
+//				switch (m_XSubmaps[r][c].cmap[i]) {
+					
+				switch (m_XSubmaps[r][__x >> 9].cmap[submapRow + ((__x & m_submapWidthMask) >> 4)]) {
 				// ([
 					case CX_EMPTY:
 						break;
@@ -630,6 +630,7 @@ package X.World.Logic {
 			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
+			var submapRow:int, submapCol:int;
 			
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
@@ -637,6 +638,8 @@ package X.World.Logic {
 			y2 = int (oY) + m_cx.bottom;
 	
 			x1 &= CX_TILE_WIDTH_UNMASK;
+			c = x1 >> 9;
+			submapCol = (x1 & m_submapWidthMask) >> 4;
 			
 			collided = false;
 			
@@ -644,12 +647,9 @@ package X.World.Logic {
 //				c = x1/m_submapWidth;
 //				r = __y/m_submapHeight;
 //				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-				
-				c = x1 >> 9;
-				r = __y >> 9;
-				i = ( ((__y & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
-				
-				switch (m_XSubmaps[r][c].cmap[i]) {
+//				switch (m_XSubmaps[r][c].cmap[i]) {
+					
+				switch (m_XSubmaps[__y >> 9][c].cmap[((__y & m_submapHeightMask) >> 4) * m_cols + submapCol]) {
 				// ([
 					case CX_EMPTY:
 						break;
@@ -739,6 +739,7 @@ package X.World.Logic {
 			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
+			var submapRow:int, submapCol:int;
 			
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
@@ -746,6 +747,8 @@ package X.World.Logic {
 			y2 = int (oY) + m_cx.bottom;
 						
 			x2 &= CX_TILE_WIDTH_UNMASK;
+			c = x2 >> 9;
+			submapCol = (x2 & m_submapWidthMask) >> 4;
 			
 			collided = false;
 			
@@ -753,12 +756,9 @@ package X.World.Logic {
 //				c = x2/m_submapWidth;
 //				r = __y/m_submapHeight;
 //				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-
-				c = x2 >> 9;
-				r = __y >> 9;
-				i = ( ((__y & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
-				
-				switch (m_XSubmaps[r][c].cmap[i]) {
+//				switch (m_XSubmaps[r][c].cmap[i]) {
+					
+				switch (m_XSubmaps[__y >> 9][c].cmap[((__y & m_submapHeightMask) >> 4) * m_cols + submapCol]) {
 				// ([
 					case CX_EMPTY:
 						break;
