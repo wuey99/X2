@@ -428,81 +428,81 @@ package X.World.Logic {
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						nothing,
-					// CX_SOLID:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						break;
+					case CX_SOLID:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				
 							oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
 			
 							collided = true;
-						},
-					// CX_SOFT:
-						nothing,
-					// CX_JUMP_THRU:
-						nothing,
+						break; // },
+					case CX_SOFT:
+						break;
+					case CX_JUMP_THRU:
+						break;
 						
-					// CX_UL45:
-						nothing,
-					// CX_UR45:
-						nothing,
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						nothing,
+					case CX_UL45:
+						break;
+					case CX_UR45:
+						break;
+					case CX_LL45:
+						break;
+					case CX_LR45:
+						break;
 					
-					// CX_UL225A:
-						nothing,
-					// CX_UL225B:
-						nothing,
-					// CX_UR225A:
-						nothing,
-					// CX_UR225B:
-						nothing,
-					// CX_LL225A:
-						nothing,
-					// CX_LL225B:
-						nothing,
-					// CX_LR225A:
-						nothing,
-					// CX_LR225B:
-						nothing,
+					case CX_UL225A:
+						break;
+					case CX_UL225B:
+						break;
+					case CX_UR225A:
+						break;
+					case CX_UR225B:
+						break;
+					case CX_LL225A:
+						break;
+					case CX_LL225B:
+						break;
+					case CX_LR225A:
+						break;
+					case CX_LR225B:
+						break;
 					
-					// CX_UL675A:
-						nothing,
-					// CX_UL675B:
-						nothing,
-					// CX_UR675A:
-						nothing,
-					// CX_UR675B:
-						nothing,
-					// CX_LL675A:
-						nothing,
-					// CX_LL675B:
-						nothing,
-					// CX_LR675A:
-						nothing,
-					// CX_LR675B:
-						nothing,
+					case CX_UL675A:
+						break;
+					case CX_UL675B:
+						break;
+					case CX_UR675A:
+						break;
+					case CX_UR675B:
+						break;
+					case CX_LL675A:
+						break;
+					case CX_LL675B:
+						break;
+					case CX_LR675A:
+						break;
+					case CX_LR675B:
+						break;
 						
-					// CX_SOFTLF:
-						nothing,
-					// CX_SOFTRT:
-						nothing,
-					// CX_SOFTUP:
-						nothing,
-					// CX_SOFTDN:
-						function ():void {
+					case CX_SOFTLF:
+						break;
+					case CX_SOFTRT:
+						break;
+					case CX_SOFTUP:
+						break;
+					case CX_SOFTDN:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				
 							oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
 			
 							collided = true;
-						},
-				])[cx] ();
+						break; // },
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -534,81 +534,81 @@ package X.World.Logic {
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						nothing,
-					// CX_SOLID:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						break;
+					case CX_SOLID:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				
 							oY = (y2 - (m_cx.bottom) - 1);
 										
 							collided = true;
-						},
-					// CX_SOFT:
-						nothing,
-					// CX_JUMP_THRU:
-						nothing,
+						break; // },
+					case CX_SOFT:
+						break;
+					case CX_JUMP_THRU:
+						break;
 						
-					// CX_UL45:
-						nothing,
-					// CX_UR45:
-						nothing,
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						nothing,
+					case CX_UL45:
+						break;
+					case CX_UR45:
+						break;
+					case CX_LL45:
+						break;
+					case CX_LR45:
+						break;
 					
-					// CX_UL225A:
-						nothing,
-					// CX_UL225B:
-						nothing,
-					// CX_UR225A:
-						nothing,
-					// CX_UR225B:
-						nothing,
-					// CX_LL225A:
-						nothing,
-					// CX_LL225B:
-						nothing,
-					// CX_LR225A:
-						nothing,
-					// CX_LR225B:
-						nothing,
+					case CX_UL225A:
+						break;
+					case CX_UL225B:
+						break;
+					case CX_UR225A:
+						break;
+					case CX_UR225B:
+						break;
+					case CX_LL225A:
+						break;
+					case CX_LL225B:
+						break;
+					case CX_LR225A:
+						break;
+					case CX_LR225B:
+						break;
 					
-					// CX_UL675A:
-						nothing,
-					// CX_UL675B:
-						nothing,
-					// CX_UR675A:
-						nothing,
-					// CX_UR675B:
-						nothing,
-					// CX_LL675A:
-						nothing,
-					// CX_LL675B:
-						nothing,
-					// CX_LR675A:
-						nothing,
-					// CX_LR675B:
-						nothing,
+					case CX_UL675A:
+						break;
+					case CX_UL675B:
+						break;
+					case CX_UR675A:
+						break;
+					case CX_UR675B:
+						break;
+					case CX_LL675A:
+						break;
+					case CX_LL675B:
+						break;
+					case CX_LR675A:
+						break;
+					case CX_LR675B:
+						break;
 						
-					// CX_SOFTLF:
-						nothing,
-					// CX_SOFTRT:
-						nothing,
-					// CX_SOFTUP:
-						function ():void {
+					case CX_SOFTLF:
+						break;
+					case CX_SOFTRT:
+						break;
+					case CX_SOFTUP:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				
 							oY = (y2 - (m_cx.bottom) - 1);
 										
 							collided = true;
-						},
-					// CX_SOFTDN:
-						nothing,
-				])[cx] ();
+						break; // },
+					case CX_SOFTDN:
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -640,81 +640,81 @@ package X.World.Logic {
 				r = __y/m_submapHeight;
 				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						nothing,
-					// CX_SOLID:
-							function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						break;
+					case CX_SOLID:
+							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
 								oX = (x1 + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
-							},
-					// CX_SOFT:
-						nothing,
-					// CX_JUMP_THRU:
-						nothing,
+							break; // },
+					case CX_SOFT:
+						break;
+					case CX_JUMP_THRU:
+						break;
 						
-					// CX_UL45:
-						nothing,
-					// CX_UR45:
-						nothing,
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						nothing,
+					case CX_UL45:
+						break;
+					case CX_UR45:
+						break;
+					case CX_LL45:
+						break;
+					case CX_LR45:
+						break;
 					
-					// CX_UL225A:
-						nothing,
-					// CX_UL225B:
-						nothing,
-					// CX_UR225A:
-						nothing,
-					// CX_UR225B:
-						nothing,
-					// CX_LL225A:
-						nothing,
-					// CX_LL225B:
-						nothing,
-					// CX_LR225A:
-						nothing,
-					// CX_LR225B:
-						nothing,
+					case CX_UL225A:
+						break;
+					case CX_UL225B:
+						break;
+					case CX_UR225A:
+						break;
+					case CX_UR225B:
+						break;
+					case CX_LL225A:
+						break;
+					case CX_LL225B:
+						break;
+					case CX_LR225A:
+						break;
+					case CX_LR225B:
+						break;
 					
-					// CX_UL675A:
-						nothing,
-					// CX_UL675B:
-						nothing,
-					// CX_UR675A:
-						nothing,
-					// CX_UR675B:
-						nothing,
-					// CX_LL675A:
-						nothing,
-					// CX_LL675B:
-						nothing,
-					// CX_LR675A:
-						nothing,
-					// CX_LR675B:
-						nothing,
+					case CX_UL675A:
+						break;
+					case CX_UL675B:
+						break;
+					case CX_UR675A:
+						break;
+					case CX_UR675B:
+						break;
+					case CX_LL675A:
+						break;
+					case CX_LL675B:
+						break;
+					case CX_LR675A:
+						break;
+					case CX_LR675B:
+						break;
 						
-					// CX_SOFTLF:
-						nothing,
-					// CX_SOFTRT:
-							function ():void {
+					case CX_SOFTLF:
+						break;
+					case CX_SOFTRT:
+							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
 								oX = (x1 + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
-							},
-					// CX_SOFTUP:
-						nothing,
-					// CX_SOFTDN:
-						nothing,
-				])[cx] ();
+							break; // },
+					case CX_SOFTUP:
+						break;
+					case CX_SOFTDN:
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -746,81 +746,81 @@ package X.World.Logic {
 				r = __y/m_submapHeight;
 				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						nothing,
-					// CX_SOLID:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						break;
+					case CX_SOLID:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
 							oX = (x2 - (m_cx.right) - 1);
 			
 							collided = true;
-						},
-					// CX_SOFT:
-						nothing,
-					// CX_JUMP_THRU:
-						nothing,
+						break; // },
+					case CX_SOFT:
+						break;
+					case CX_JUMP_THRU:
+						break;
 						
-					// CX_UL45:
-						nothing,
-					// CX_UR45:
-						nothing,
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						nothing,
+					case CX_UL45:
+						break;
+					case CX_UR45:
+						break;
+					case CX_LL45:
+						break;
+					case CX_LR45:
+						break;
 					
-					// CX_UL225A:
-						nothing,
-					// CX_UL225B:
-						nothing,
-					// CX_UR225A:
-						nothing,
-					// CX_UR225B:
-						nothing,
-					// CX_LL225A:
-						nothing,
-					// CX_LL225B:
-						nothing,
-					// CX_LR225A:
-						nothing,
-					// CX_LR225B:
-						nothing,
+					case CX_UL225A:
+						break;
+					case CX_UL225B:
+						break;
+					case CX_UR225A:
+						break;
+					case CX_UR225B:
+						break;
+					case CX_LL225A:
+						break;
+					case CX_LL225B:
+						break;
+					case CX_LR225A:
+						break;
+					case CX_LR225B:
+						break;
 					
-					// CX_UL675A:
-						nothing,
-					// CX_UL675B:
-						nothing,
-					// CX_UR675A:
-						nothing,
-					// CX_UR675B:
-						nothing,
-					// CX_LL675A:
-						nothing,
-					// CX_LL675B:
-						nothing,
-					// CX_LR675A:
-						nothing,
-					// CX_LR675B:
-						nothing,
+					case CX_UL675A:
+						break;
+					case CX_UL675B:
+						break;
+					case CX_UR675A:
+						break;
+					case CX_UR675B:
+						break;
+					case CX_LL675A:
+						break;
+					case CX_LL675B:
+						break;
+					case CX_LR675A:
+						break;
+					case CX_LR675B:
+						break;
 						
-					// CX_SOFTLF:
-						function ():void {
+					case CX_SOFTLF:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
 							oX = (x2 - (m_cx.right) - 1);
 			
 							collided = true;
-						},
-					// CX_SOFTRT:
-						nothing,
-					// CX_SOFTUP:
-						nothing,
-					// CX_SOFTDN:
-						nothing,
-				])[cx] ();
+						break; // },
+					case CX_SOFTRT:
+						break;
+					case CX_SOFTUP:
+						break;
+					case CX_SOFTDN:
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -856,108 +856,131 @@ package X.World.Logic {
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 						
-					// CX_UL45:
-						__nothing,
-					// CX_UR45:
-						__nothing,
-					// CX_LL45:
-						function ():void {	
-							var __x:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+					case CX_UL45:
+						looking = false;
+						break;
+					case CX_UR45:
+						looking = false;
+						break;
+					case CX_LL45:
+						// function ():void {	
+							var __x_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 <= __x[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+							if (y15 <= __x_LL45[x15]) {
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL45[x15] - m_cx.top);
 							}
 	
 							looking = false;
-						},
-					// CX_LR45:
-						__nothing,
+						break; // },
+					case CX_LR45:
+						looking = false;
+						break;
 					
-					// CX_UL225A:
-						__nothing,
-					// CX_UL225B:
-						__nothing,
-					// CX_UR225A:
-						__nothing,
-					// CX_UR225B:
-						__nothing,
-					// CX_LL225A:
-						function ():void {	
-							var __x:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+					case CX_UL225A:
+						looking = false;
+						break;
+					case CX_UL225B:
+						looking = false;
+						break;
+					case CX_UR225A:
+						looking = false;
+						break;
+					case CX_UR225B:
+						looking = false;
+						break;
+					case CX_LL225A:
+						// function ():void {	
+							var __x_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+							
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+
+							if (y15 <= __x_LL225A[x15]) {
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225A[x15] - m_cx.top);
+							}
+	
+							looking = false;
+						break; // },
+					case CX_LL225B:
+						// function ():void {	
+							var __x_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225B[x15] - m_cx.top);
 							}
 	
 							looking = false;
-						},
-					// CX_LL225B:
-						function ():void {	
-							var __x:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 <= __x[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
-							}
-	
-							looking = false;
-						},
-					// CX_LR225A:
-						__nothing,
-					// CX_LR225B:
-						__nothing,
+						break; // },
+					case CX_LR225A:
+						looking = false;
+						break;
+					case CX_LR225B:
+						looking = false;
+						break;
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						__nothing,
-					// CX_SOFTRT:
-						__nothing,
-					// CX_SOFTUP:
-						__nothing,
-					// CX_SOFTDN:
-						function ():void {
+					case CX_SOFTLF:
+						looking = false;
+						break;
+					case CX_SOFTRT:
+						looking = false;
+						break;
+					case CX_SOFTUP:
+						looking = false;
+						break;
+					case CX_SOFTDN:
+						// function ():void {
 							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
 							
 							looking = false;
-						}
-				])[cx] ();
+						break; // },
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -979,117 +1002,135 @@ package X.World.Logic {
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 						
-					// CX_UL45:
-						function ():void {	
-							var __x:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+					case CX_UL45:
+						// function ():void {	
+							var __x_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __x[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+							if (y15 >= __x_UL45[x15]) {
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL45[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
-						},			
-					// CX_UR45:
-						__nothing,
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						__nothing,
+						break; // },			
+					case CX_UR45:
+						looking = false;
+						break;
+					case CX_LL45:
+						looking = false;
+						break;
+					case CX_LR45:
+						looking = false;
+						break;
 					
-					// CX_UL225A:
-						function ():void {	
-							var __x:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+					case CX_UL225A:
+						// function ():void {	
+							var __x_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __x[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+							if (y15 >= __x_UL225A[x15]) {
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225A[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
-						},	
-					// CX_UL225B:
-						function ():void {	
-							var __x:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						break; // },	
+					case CX_UL225B:
+						// function ():void {	
+							var __x_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __x[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+							if (y15 >= __x_UL225B[x15]) {
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225B[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
-						},	
-					// CX_UR225A:
-						__nothing,
-					// CX_UR225B:
-						__nothing,
-					// CX_LL225A:
-						__nothing,
-					// CX_LL225B:
-						__nothing,
-					// CX_LR225A:
-						__nothing,
-					// CX_LR225B:
-						__nothing,
+						break; // },	
+					case CX_UR225A:
+						looking = false;
+						break;
+					case CX_UR225B:
+						looking = false;
+						break;
+					case CX_LL225A:
+						looking = false;
+						break;
+					case CX_LL225B:
+						looking = false;
+						break;
+					case CX_LR225A:
+						looking = false;
+						break;
+					case CX_LR225B:
+						looking = false;
+						break;
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						__nothing,
-					// CX_SOFTRT:
-						__nothing,
-					// CX_SOFTUP:
-							function ():void {
+					case CX_SOFTLF:
+						looking = false;
+						break;
+					case CX_SOFTRT:
+						looking = false;
+						break;
+					case CX_SOFTUP:
+							// function ():void {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 								
 								looking = false;								
-							},
-					// CX_SOFTDN:
-						__nothing,
-				])[cx] ();
+							break; // },
+					case CX_SOFTDN:
+						looking = false;
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
 				}
-			}
-			
-//------------------------------------------------------------------------------------------
-			function __nothing ():void {
-				looking = false;
 			}
 			
 			return false;
@@ -1122,107 +1163,130 @@ package X.World.Logic {
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
 				
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 						
-					// CX_UL45:
-						__nothing,
-					// CX_UR45:
-						__nothing,
-					// CX_LL45:
-						__nothing,
-					// CX_LR45:
-						function ():void {	
-							var __x:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+					case CX_UL45:
+						looking = false;
+						break;
+					case CX_UR45:
+						looking = false;
+						break;
+					case CX_LL45:
+						looking = false;
+						break;
+					case CX_LR45:
+						// function ():void {	
+							var __x_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 <= __x[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+							if (y15 <= __x_LR45[x15]) {
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR45[x15] - m_cx.top);
 							}
 	
 							looking = false;
-						},			
-					// CX_UL225A:
-						__nothing,
-					// CX_UL225B:
-						__nothing,
-					// CX_UR225A:
-						__nothing,
-					// CX_UR225B:
-						__nothing,
-					// CX_LL225A:
-						__nothing,
-					// CX_LL225B:
-						__nothing,
-					// CX_LR225A:
-						function ():void {	
-							var __x:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						break; // },			
+					case CX_UL225A:
+						looking = false;
+						break;
+					case CX_UL225B:
+						looking = false;
+						break;
+					case CX_UR225A:
+						looking = false;
+						break;
+					case CX_UR225B:
+						looking = false;
+						break;
+					case CX_LL225A:
+						looking = false;
+						break;
+					case CX_LL225B:
+						looking = false;
+						break;
+					case CX_LR225A:
+						// function ():void {	
+							var __x_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 <= __x[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+							if (y15 <= __x_LR225A[x15]) {
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225A[x15] - m_cx.top);
 							}
 	
 							looking = false;
-						},		
-					// CX_LR225B:
-						function ():void {	
-							var __x:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						break; // },		
+					case CX_LR225B:
+						// function ():void {	
+							var __x_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 <= __x[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+							if (y15 <= __x_LR225B[x15]) {
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225B[x15] - m_cx.top);
 							}
 	
 							looking = false;
-						},		
+						break; // },		
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						__nothing,
-					// CX_SOFTRT:
-						__nothing,
-					// CX_SOFTUP:
-						__nothing,
-					// CX_SOFTDN:
-						function ():void {
+					case CX_SOFTLF:
+						looking = false;
+						break;
+					case CX_SOFTRT:
+						looking = false;
+						break;
+					case CX_SOFTUP:
+						looking = false;
+						break;
+					case CX_SOFTDN:
+						// function ():void {
 							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
 							
 							looking = false;
-						}
-				])[cx] ();
+						break; // },
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -1244,117 +1308,135 @@ package X.World.Logic {
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 						
-					// CX_UL45:
-						__nothing,
-					// CX_UR45:
-						function ():void {	
-							var __x:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+					case CX_UL45:
+						looking = false;
+						break;
+					case CX_UR45:
+						// function ():void {	
+							var __x_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __x[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+							if (y15 >= __x_UR45[x15]) {
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR45[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						__nothing,
+						break; // },
+					case CX_LL45:
+						looking = false;
+						break;
+					case CX_LR45:
+						looking = false;
+						break;
 					
-					// CX_UL225A:
-						__nothing,
-					// CX_UL225B:
-						__nothing,
-					// CX_UR225A:
-						function ():void {	
-							var __x:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+					case CX_UL225A:
+						looking = false;
+						break;
+					case CX_UL225B:
+						looking = false;
+						break;
+					case CX_UR225A:
+						// function ():void {	
+							var __x_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __x[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+							if (y15 >= __x_UR225A[x15]) {
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225A[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_UR225B:
-						function ():void {	
-							var __x:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						break; // },
+					case CX_UR225B:
+						// function ():void {	
+							var __x_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __x[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+							if (y15 >= __x_UR225B[x15]) {
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225B[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_LL225A:
-						__nothing,
-					// CX_LL225B:
-						__nothing,
-					// CX_LR225A:
-						__nothing,
-					// CX_LR225B:
-						__nothing,
+						break; // },
+					case CX_LL225A:
+						looking = false;
+						break;
+					case CX_LL225B:
+						looking = false;
+						break;
+					case CX_LR225A:
+						looking = false;
+						break;
+					case CX_LR225B:
+						looking = false;
+						break;
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						__nothing,
-					// CX_SOFTRT:
-						__nothing,
-					// CX_SOFTUP:
-							function ():void {
+					case CX_SOFTLF:
+						looking = false;
+						break;
+					case CX_SOFTRT:
+						looking = false;
+						break;
+					case CX_SOFTUP:
+							// function ():void {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 								
 								looking = false;								
-							},
-					// CX_SOFTDN:
-						__nothing,
-				])[cx] ();
+							break; // },
+					case CX_SOFTDN:
+						looking = false;
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
 				}
-			}
-			
-//------------------------------------------------------------------------------------------
-			function __nothing ():void {
-				looking = false;
 			}
 			
 			return false;
@@ -1386,112 +1468,135 @@ package X.World.Logic {
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 			
-					// CX_UL45:
-						__nothing,
-					// CX_UR45:
-						function ():void {				
-							var __y:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+					case CX_UL45:
+						looking = false;
+						break;
+					case CX_UR45:
+						// function ():void {				
+							var __y_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 						
-							if (x15 <= __y[y15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.left);
+							if (x15 <= __y_UR45[y15]) {
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR45[y15] - m_cx.left);
 							}
 	
 							looking = false;
-						},
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						__nothing,
+						break; // },
+					case CX_LL45:
+						looking = false;
+						break;
+					case CX_LR45:
+						looking = false;
+						break;
 					
-					// CX_UL225A:
-						__nothing,
-					// CX_UL225B:
-						__nothing,
-					// CX_UR225A:
-						function ():void {				
-							var __y:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-							var __x:Array = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
+					case CX_UL225A:
+						looking = false;
+						break;
+					case CX_UL225B:
+						looking = false;
+						break;
+					case CX_UR225A:
+						// function ():void {				
+							var __y_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+							var __x_UR225A:Array = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 						
-							if (y15 >= __y[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+							if (y15 >= __y_UR225A[x15]) {
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225A[y15] - m_cx.left);
 							}
 	
 							looking = false;
-						},
-					// CX_UR225B:
-						function ():void {				
-							var __y:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-							var __x:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
+						break; // },
+					case CX_UR225B:
+						// function ():void {				
+							var __y_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+							var __x_UR225B:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 						
-							if (y15 >= __y[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+							if (y15 >= __y_UR225B[x15]) {
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225B[y15] - m_cx.left);
 							}
 	
 							looking = false;
-						},
-					// CX_LL225A:
-						__nothing,
-					// CX_LL225B:
-						__nothing,
-					// CX_LR225A:
-						__nothing,
-					// CX_LR225B:
-						__nothing,
+						break; // },
+					case CX_LL225A:
+						looking = false;
+						break;
+					case CX_LL225B:
+						looking = false;
+						break;
+					case CX_LR225A:
+						looking = false;
+						break;
+					case CX_LR225B:
+						looking = false;
+						break;
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						__nothing,
-					// CX_SOFTRT:
-							function ():void {
+					case CX_SOFTLF:
+						looking = false;
+						break;
+					case CX_SOFTRT:
+							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
-							},
-					// CX_SOFTUP:
-						__nothing,
-					// CX_SOFTDN:
-						__nothing,
-				])[cx] ();
+							break; // },
+					case CX_SOFTUP:
+						looking = false;
+						break;
+					case CX_SOFTDN:
+						looking = false;
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -1513,121 +1618,139 @@ package X.World.Logic {
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 			
-					// CX_UL45:
-						function ():void {				
-							var __y:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+					case CX_UL45:
+						// function ():void {				
+							var __y_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (x15 >= __y[y15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.right - 1);
+							if (x15 >= __y_UL45[y15]) {
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL45[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_UR45:
-						__nothing,
-					// CX_LL45:
-						nothing,
-					// CX_LR45:
-						__nothing,
+						break; // },
+					case CX_UR45:
+						looking = false;
+						break;
+					case CX_LL45:
+						looking = false;
+						break;
+					case CX_LR45:
+						looking = false;
+						break;
 					
-					// CX_UL225A:
-						function ():void {				
-							var __y:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-							var __x:Array = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
+					case CX_UL225A:
+						// function ():void {				
+							var __y_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+							var __x_UL225A:Array = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __y[x15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+							if (y15 >= __y_UL225A[x15]) {
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225A[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_UL225B:
-						function ():void {				
-							var __y:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-							var __x:Array = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
+						break; // },
+					case CX_UL225B:
+						// function ():void {				
+							var __y_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+							var __x_UL225B:Array = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 >= __y[x15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+							if (y15 >= __y_UL225B[x15]) {
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225B[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_UR225A:
-						__nothing,
-					// CX_UR225B:
-						__nothing,
-					// CX_LL225A:
-						__nothing,
-					// CX_LL225B:
-						__nothing,
-					// CX_LR225A:
-						__nothing,
-					// CX_LR225B:
-						__nothing,
+						break; // },
+					case CX_UR225A:
+						looking = false;
+						break;
+					case CX_UR225B:
+						looking = false;
+						break;
+					case CX_LL225A:
+						looking = false;
+						break;
+					case CX_LL225B:
+						looking = false;
+						break;
+					case CX_LR225A:
+						looking = false;
+						break;
+					case CX_LR225B:
+						looking = false;
+						break;
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						function ():void {
+					case CX_SOFTLF:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
 							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 			
 							collided = true;
-						},
-					// CX_SOFTRT:
-						__nothing,
-					// CX_SOFTUP:
-						__nothing,
-					// CX_SOFTDN:
-						__nothing,
-				])[cx] ();
+						break; // },
+					case CX_SOFTRT:
+						looking = false;
+						break;
+					case CX_SOFTUP:
+						looking = false;
+						break;
+					case CX_SOFTDN:
+						looking = false;
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
 				}
-			}
-			
-//------------------------------------------------------------------------------------------
-			function __nothing ():void {
-				looking = false;
 			}
 			
 			return false;		
@@ -1659,112 +1782,135 @@ package X.World.Logic {
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 			
-					// CX_UL45:
-						__nothing,
-					// CX_UR45:
-						__nothing,
-					// CX_LL45:
-						__nothing,
-					// CX_LR45:
-						function ():void {				
-							var __y:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+					case CX_UL45:
+						looking = false;
+						break;
+					case CX_UR45:
+						looking = false;
+						break;
+					case CX_LL45:
+						looking = false;
+						break;
+					case CX_LR45:
+						// function ():void {				
+							var __y_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 						
-							if (x15 <= __y[y15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.left);
+							if (x15 <= __y_LR45[y15]) {
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR45[y15] - m_cx.left);
 							}
 	
 							looking = false;
-						},
+						break; // },
 					
-					// CX_UL225A:
-						__nothing,
-					// CX_UL225B:
-						__nothing,
-					// CX_UR225A:
-						__nothing,
-					// CX_UR225B:
-						__nothing,
-					// CX_LL225A:
-						__nothing,
-					// CX_LL225B:
-						__nothing,
-					// CX_LR225A:
-						function ():void {								
-							var __y:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-							var __x:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
+					case CX_UL225A:
+						looking = false;
+						break;
+					case CX_UL225B:
+						looking = false;
+						break;
+					case CX_UR225A:
+						looking = false;
+						break;
+					case CX_UR225B:
+						looking = false;
+						break;
+					case CX_LL225A:
+						looking = false;
+						break;
+					case CX_LL225B:
+						looking = false;
+						break;
+					case CX_LR225A:
+						// function ():void {								
+							var __y_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+							var __x_LR225A:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 							
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 						
-							if (y15 <= __y[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+							if (y15 <= __y_LR225A[x15]) {
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225A[y15] - m_cx.left);
 							}
 	
 							looking = false;
-						},
-					// CX_LR225B:
-						function ():void {							
-							var __y:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-							var __x:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
+						break; // },
+					case CX_LR225B:
+						// function ():void {							
+							var __y_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+							var __x_LR225B:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 													
 							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 						
-							if (y15 <= __y[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+							if (y15 <= __y_LR225B[x15]) {
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225B[y15] - m_cx.left);
 							}
 	
 							looking = false;
-						},
+						break; // },
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						__nothing,
-					// CX_SOFTRT:
-							function ():void {
+					case CX_SOFTLF:
+						looking = false;
+						break;
+					case CX_SOFTRT:
+							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
-							},
-					// CX_SOFTUP:
-						__nothing,
-					// CX_SOFTDN:
-						__nothing,
-				])[cx] ();
+							break; // },
+					case CX_SOFTUP:
+						looking = false;
+						break;
+					case CX_SOFTDN:
+						looking = false;
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
@@ -1786,130 +1932,144 @@ package X.World.Logic {
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < CX_MAX)
-				([
-					// CX_EMPTY:
-						__nothing,
-					// CX_SOLID:
-						__nothing,
-					// CX_SOFT:
-						function ():void {
+				switch (cx) {
+				// ([
+					case CX_EMPTY:
+						looking = false;
+						break;
+					case CX_SOLID:
+						looking = false;
+						break;
+					case CX_SOFT:
+						// function ():void {
 							x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
-						},
-					// CX_JUMP_THRU:
-						__nothing,
+						break; // },
+					case CX_JUMP_THRU:
+						looking = false;
+						break;
 			
-					// CX_UL45:
-						__nothing,
-					// CX_UR45:
-						__nothing,
-					// CX_LL45:
-						function ():void {				
-							var __y:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+					case CX_UL45:
+						looking = false;
+						break;
+					case CX_UR45:
+						looking = false;
+						break;
+					case CX_LL45:
+						// function ():void {				
+							var __y_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
-							if (x15 >= __y[y15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.right - 1);
+							if (x15 >= __y_LL45[y15]) {
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL45[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_LR45:
-						__nothing,
+						break; // },
+					case CX_LR45:
+						looking = false;
+						break;
 					
-					// CX_UL225A:
-						__nothing,
-					// CX_UL225B:
-						__nothing,
-					// CX_UR225A:
-						__nothing,
-					// CX_UR225B:
-						__nothing,
-					// CX_LL225A:
-						function ():void {					
-							var __y:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-							var __x:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
+					case CX_UL225A:
+						looking = false;
+						break;
+					case CX_UL225B:
+						looking = false;
+						break;
+					case CX_UR225A:
+						looking = false;
+						break;
+					case CX_UR225B:
+						looking = false;
+						break;
+					case CX_LL225A:
+						// function ():void {					
+							var __y_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+							var __x_LL225A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 	
-							if (y15 <= __y[x15]) {		
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+							if (y15 <= __y_LL225A[x15]) {		
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225A[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_LL225B:
-						function ():void {				
-							var __y:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-							var __x:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
+						break; // },
+					case CX_LL225B:
+						// function ():void {				
+							var __y_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+							var __x_LL225B:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
 							
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 	
-							if (y15 <= __y[x15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+							if (y15 <= __y_LL225B[x15]) {
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225B[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
-						},
-					// CX_LR225A:
-						__nothing,
-					// CX_LR225B:
-						__nothing,
+						break; // },
+					case CX_LR225A:
+						looking = false;
+						break;
+					case CX_LR225B:
+						looking = false;
+						break;
 					
-					// CX_UL675A:
-						__nothing,
-					// CX_UL675B:
-						__nothing,
-					// CX_UR675A:
-						__nothing,
-					// CX_UR675B:
-						__nothing,
-					// CX_LL675A:
-						__nothing,
-					// CX_LL675B:
-						__nothing,
-					// CX_LR675A:
-						__nothing,
-					// CX_LR675B:
-						__nothing,
+					case CX_UL675A:
+						looking = false;
+						break;
+					case CX_UL675B:
+						looking = false;
+						break;
+					case CX_UR675A:
+						looking = false;
+						break;
+					case CX_UR675B:
+						looking = false;
+						break;
+					case CX_LL675A:
+						looking = false;
+						break;
+					case CX_LL675B:
+						looking = false;
+						break;
+					case CX_LR675A:
+						looking = false;
+						break;
+					case CX_LR675B:
+						looking = false;
+						break;
 						
-					// CX_SOFTLF:
-						function ():void {
+					case CX_SOFTLF:
+						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
 							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 			
 							collided = true;
-						},
-					// CX_SOFTRT:
-						__nothing,
-					// CX_SOFTUP:
-						__nothing,
-					// CX_SOFTDN:
-						__nothing,
-				])[cx] ();
+						break; // },
+					case CX_SOFTRT:
+						looking = false;
+						break;
+					case CX_SOFTUP:
+						looking = false;
+						break;
+					case CX_SOFTDN:
+						looking = false;
+						break;
+				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
 				}
 			}
-			
-//------------------------------------------------------------------------------------------
-			function __nothing ():void {
-				looking = false;
-			}
-			
+
 			return false;		
 		}
-		
-//------------------------------------------------------------------------------------------
-		public function nothing ():void {
-		}
-			
+
 //------------------------------------------------------------------------------------------
 	}
 	
