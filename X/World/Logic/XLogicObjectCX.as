@@ -370,7 +370,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------			
 			oX += oDX;
 			
-//			if (Math.floor (oX) != Math.floor (oldX)) {
+//			if (int (oX) != int (oldX)) {
 			{
 				if (oDX == 0) {
 					
@@ -389,7 +389,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 			oY += oDY;
 			
-//			if (Math.floor (oY) != Math.floor (oldY)) {
+//			if (int (oY) != int (oldY)) {
 			{
 				if (oDY == 0) {
 					
@@ -413,10 +413,10 @@ package X.World.Logic {
 			var collided:Boolean;
 			var r:int, c:int;
 			
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 						
 			y1 &= CX_TILE_HEIGHT_UNMASK;
 			
@@ -425,7 +425,7 @@ package X.World.Logic {
 			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
 				c = __x/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -518,10 +518,10 @@ package X.World.Logic {
 			var collided:Boolean;
 			var r:int, c:int;
 			
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 							
 			y2 &= CX_TILE_HEIGHT_UNMASK;
 			
@@ -530,7 +530,7 @@ package X.World.Logic {
 			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
 				c = __x/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -623,10 +623,10 @@ package X.World.Logic {
 			var collided:Boolean;
 			var r:int, c:int;
 			
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 	
 			x1 &= CX_TILE_WIDTH_UNMASK;
 			
@@ -635,7 +635,7 @@ package X.World.Logic {
 			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
 				c = x1/m_submapWidth;
 				r = __y/m_submapHeight;
-				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -728,10 +728,10 @@ package X.World.Logic {
 			var collided:Boolean;
 			var r:int, c:int;
 			
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 						
 			x2 &= CX_TILE_WIDTH_UNMASK;
 			
@@ -740,7 +740,7 @@ package X.World.Logic {
 			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
 				c = x2/m_submapWidth;
 				r = __y/m_submapHeight;
-				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -841,17 +841,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // top
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 		
 			looking = true;
 			
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -987,17 +987,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // bottom
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 			
 			looking = true;
 			
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1148,17 +1148,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // top
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 			
 			looking = true;
 			
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1293,17 +1293,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // bottom
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 			
 			looking = true;
 			
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1454,17 +1454,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // left
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 			
 			looking = true;
 			
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1604,17 +1604,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // right
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 			
 			looking = true;
 			
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1769,17 +1769,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // left
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 			
 			looking = true;
 			
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1919,17 +1919,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // right
 //------------------------------------------------------------------------------------------
-			x1 = Math.floor (oX) + m_cx.left;
-			x2 = Math.floor (oX) + m_cx.right;
-			y1 = Math.floor (oY) + m_cx.top;
-			y2 = Math.floor (oY) + m_cx.bottom;
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
 			
 			looking = true;
 			
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
