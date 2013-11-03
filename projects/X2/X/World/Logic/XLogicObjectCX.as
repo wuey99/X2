@@ -40,6 +40,72 @@ package X.World.Logic {
 		public static const CX_COLLIDE_UP:Number = 0x0004;
 		public static const CX_COLLIDE_DN:Number = 0x0008;
 		public static const CX_COLLIDE_VERT:Number = (CX_COLLIDE_UP+CX_COLLIDE_DN);
+	
+		// empty
+		public static const CX_EMPTY:Number = 0;
+		
+		// solid solid
+		public static const CX_SOLID:Number = 1;
+		
+		// soft
+		public static const CX_SOFT:Number = 2;	
+		
+		// jump thru
+		public static const CX_JUMP_THRU:Number = 3;
+		
+		// 45 degree diagonals
+		public static const CX_UL45:Number = 4;
+		public static const CX_UR45:Number = 5;
+		public static const CX_LL45:Number = 6;
+		public static const CX_LR45:Number = 7;
+		
+		// 22.5 degree diagonals
+		public static const CX_UL225A:Number = 8;
+		public static const CX_UL225B:Number = 9;
+		public static const CX_UR225A:Number = 10;
+		public static const CX_UR225B:Number = 11;
+		public static const CX_LL225A:Number = 12;
+		public static const CX_LL225B:Number = 13;
+		public static const CX_LR225A:Number = 14;
+		public static const CX_LR225B:Number = 15;
+		
+		// 67.5 degree diagonals
+		public static const CX_UL675A:Number = 16;
+		public static const CX_UL675B:Number = 17;
+		public static const CX_UR675A:Number = 18;
+		public static const CX_UR675B:Number = 19;
+		public static const CX_LL675A:Number = 20;
+		public static const CX_LL675B:Number = 21;
+		public static const CX_LR675A:Number = 22;
+		public static const CX_LR675B:Number = 23;
+		
+		// soft tiles
+		public static const CX_SOFTLF:Number = 24;
+		public static const CX_SOFTRT:Number = 25;
+		public static const CX_SOFTUP:Number = 26;
+		public static const CX_SOFTDN:Number = 27;
+		
+		public static const CX_MAX:Number = 28;
+		
+		// collision tile width, height
+		public static const CX_TILE_WIDTH:Number = 16;
+		public static const CX_TILE_HEIGHT:Number = 16;
+		
+		public static const CX_TILE_WIDTH_MASK:Number = 15;
+		public static const CX_TILE_HEIGHT_MASK:Number = 15;
+		
+		public static const CX_TILE_WIDTH_UNMASK:Number = 0xfffffff0;
+		public static const CX_TILE_HEIGHT_UNMASK:Number = 0xfffffff0;
+		
+		// alternate tile width, height
+		public static const TX_TILE_WIDTH:Number = 64;
+		public static const TX_TILE_HEIGHT:Number = 64;
+		
+		public static const TX_TILE_WIDTH_MASK:Number = 63;
+		public static const TX_TILE_HEIGHT_MASK:Number = 63;
+		
+		public static const TX_TILE_WIDTH_UNMASK:Number = 0xffffffc0;
+		public static const TX_TILE_HEIGHT_UNMASK:Number = 0xffffffc0;
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicObjectCX () {
@@ -106,8 +172,8 @@ package X.World.Logic {
 			m_submapWidthMask = m_submapWidth - 1;
 			m_submapHeightMask = m_submapHeight - 1;
 			
-			m_cols = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
-			m_rows = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
+			m_cols = m_submapWidth/CX_TILE_WIDTH;
+			m_rows = m_submapHeight/CX_TILE_HEIGHT;
 
 			/*			
 			trace (": --------------------------------:");
@@ -117,12 +183,12 @@ package X.World.Logic {
 			trace (": submapHeightMask: ", m_submapHeightMask);
 			trace (": m_cols: ", m_cols);
 			trace (": m_rows: ", m_rows);
-			trace (": tileWidth: ", XSubmapModel.CX_TILE_WIDTH);
-			trace (": tileWidthMask: ", XSubmapModel.CX_TILE_WIDTH_MASK);
-			trace (": tileWidthUnmask: ", XSubmapModel.CX_TILE_WIDTH_UNMASK);
-			trace (": tileHeight: ", XSubmapModel.CX_TILE_HEIGHT);
-			trace (": tileHeightMask: ", XSubmapModel.CX_TILE_HEIGHT_MASK);
-			trace (": tileHeightUnMask: ", XSubmapModel.CX_TILE_HEIGHT_UNMASK);
+			trace (": tileWidth: ", CX_TILE_WIDTH);
+			trace (": tileWidthMask: ", CX_TILE_WIDTH_MASK);
+			trace (": tileWidthUnmask: ", CX_TILE_WIDTH_UNMASK);
+			trace (": tileHeight: ", CX_TILE_HEIGHT);
+			trace (": tileHeightMask: ", CX_TILE_HEIGHT_MASK);
+			trace (": tileHeightUnMask: ", CX_TILE_HEIGHT_UNMASK);
 			*/
 		}
 
@@ -353,16 +419,16 @@ package X.World.Logic {
 			y1 = Math.floor (oY) + m_cx.top;
 			y2 = Math.floor (oY) + m_cx.bottom;
 						
-			y1 &= XSubmapModel.CX_TILE_HEIGHT_UNMASK;
+			y1 &= CX_TILE_HEIGHT_UNMASK;
 			
 			collided = false;
 			
-			for (__x = (x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK); __x <= (x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK); __x += XSubmapModel.CX_TILE_WIDTH) {
+			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
 				c = __x/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						nothing,
@@ -370,7 +436,7 @@ package X.World.Logic {
 						function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				
-							oY = (y1 + XSubmapModel.CX_TILE_HEIGHT - m_cx.top);
+							oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
 			
 							collided = true;
 						},
@@ -432,7 +498,7 @@ package X.World.Logic {
 						function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				
-							oY = (y1 + XSubmapModel.CX_TILE_HEIGHT - m_cx.top);
+							oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
 			
 							collided = true;
 						},
@@ -459,16 +525,16 @@ package X.World.Logic {
 			y1 = Math.floor (oY) + m_cx.top;
 			y2 = Math.floor (oY) + m_cx.bottom;
 							
-			y2 &= XSubmapModel.CX_TILE_HEIGHT_UNMASK;
+			y2 &= CX_TILE_HEIGHT_UNMASK;
 			
 			collided = false;
 			
-			for (__x = (x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK); __x <= (x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK); __x += XSubmapModel.CX_TILE_WIDTH) {
+			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
 				c = __x/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						nothing,
@@ -565,16 +631,16 @@ package X.World.Logic {
 			y1 = Math.floor (oY) + m_cx.top;
 			y2 = Math.floor (oY) + m_cx.bottom;
 	
-			x1 &= XSubmapModel.CX_TILE_WIDTH_UNMASK;
+			x1 &= CX_TILE_WIDTH_UNMASK;
 			
 			collided = false;
 			
-			for (__y = (y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK); __y <= (y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK); __y += XSubmapModel.CX_TILE_HEIGHT) {
+			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
 				c = x1/m_submapWidth;
 				r = __y/m_submapHeight;
-				i = (Math.floor ((__y & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						nothing,
@@ -582,7 +648,7 @@ package X.World.Logic {
 							function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
-								oX = (x1 + XSubmapModel.CX_TILE_WIDTH - m_cx.left);
+								oX = (x1 + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
 							},
@@ -640,7 +706,7 @@ package X.World.Logic {
 							function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
-								oX = (x1 + XSubmapModel.CX_TILE_WIDTH - m_cx.left);
+								oX = (x1 + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
 							},
@@ -671,16 +737,16 @@ package X.World.Logic {
 			y1 = Math.floor (oY) + m_cx.top;
 			y2 = Math.floor (oY) + m_cx.bottom;
 						
-			x2 &= XSubmapModel.CX_TILE_WIDTH_UNMASK;
+			x2 &= CX_TILE_WIDTH_UNMASK;
 			
 			collided = false;
 			
-			for (__y = (y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK); __y <= (y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK); __y += XSubmapModel.CX_TILE_HEIGHT) {
+			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
 				c = x2/m_submapWidth;
 				r = __y/m_submapHeight;
-				i = (Math.floor ((__y & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						nothing,
@@ -788,9 +854,9 @@ package X.World.Logic {
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -798,7 +864,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							y1 = (y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + XSubmapModel.CX_TILE_HEIGHT;
+							y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -811,11 +877,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x[x15]) {
-								oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
 							}
 	
 							looking = false;
@@ -835,11 +901,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x[x15]) {
-								oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
 							}
 	
 							looking = false;
@@ -848,11 +914,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x[x15]) {
-								oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
 							}
 	
 							looking = false;
@@ -887,7 +953,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFTDN:
 						function ():void {
-							oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + XSubmapModel.CX_TILE_HEIGHT - m_cx.top);
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
 							
 							looking = false;
 						}
@@ -911,9 +977,9 @@ package X.World.Logic {
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -921,7 +987,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							y2 = (y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) - 1;
+							y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -930,11 +996,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x[x15]) {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
@@ -950,11 +1016,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x[x15]) {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
@@ -963,11 +1029,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x[x15]) {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
@@ -1008,7 +1074,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFTUP:
 							function ():void {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 								
 								looking = false;								
 							},
@@ -1053,10 +1119,10 @@ package X.World.Logic {
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
 				
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -1064,7 +1130,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							y1 = (y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + XSubmapModel.CX_TILE_HEIGHT;
+							y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -1079,11 +1145,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x[x15]) {
-								oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
 							}
 	
 							looking = false;
@@ -1104,11 +1170,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x[x15]) {
-								oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
 							}
 	
 							looking = false;
@@ -1117,11 +1183,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x[x15]) {
-								oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
+								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.top);
 							}
 	
 							looking = false;
@@ -1152,7 +1218,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFTDN:
 						function ():void {
-							oY = ((y1 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + XSubmapModel.CX_TILE_HEIGHT - m_cx.top);
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
 							
 							looking = false;
 						}
@@ -1176,9 +1242,9 @@ package X.World.Logic {
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -1186,7 +1252,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							y2 = (y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) - 1;
+							y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -1197,11 +1263,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x[x15]) {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
@@ -1219,11 +1285,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x[x15]) {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
@@ -1232,11 +1298,11 @@ package X.World.Logic {
 						function ():void {	
 							var __x:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x[x15]) {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x[x15] - m_cx.bottom - 1);
 							}
 	
 							looking = false;
@@ -1273,7 +1339,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFTUP:
 							function ():void {
-								oY = ((y2 & XSubmapModel.CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
+								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 								
 								looking = false;								
 							},
@@ -1318,9 +1384,9 @@ package X.World.Logic {
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -1328,7 +1394,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							x1 = (x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + XSubmapModel.CX_TILE_WIDTH;
+							x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -1339,11 +1405,11 @@ package X.World.Logic {
 						function ():void {				
 							var __y:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 						
 							if (x15 <= __y[y15]) {
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.left);
 							}
 	
 							looking = false;
@@ -1362,11 +1428,11 @@ package X.World.Logic {
 							var __y:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							var __x:Array = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 >= __y[x15]) {
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
 							}
 	
 							looking = false;
@@ -1376,11 +1442,11 @@ package X.World.Logic {
 							var __y:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							var __x:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 >= __y[x15]) {
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
 							}
 	
 							looking = false;
@@ -1417,7 +1483,7 @@ package X.World.Logic {
 							function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + XSubmapModel.CX_TILE_WIDTH - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
 							},
@@ -1445,9 +1511,9 @@ package X.World.Logic {
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y2/m_submapHeight;
-				i = (Math.floor ((y2 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -1455,7 +1521,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							x2 = (x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) - 1;
+							x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -1464,11 +1530,11 @@ package X.World.Logic {
 						function ():void {				
 							var __y:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (x15 >= __y[y15]) {
-								oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.right - 1);
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
@@ -1485,11 +1551,11 @@ package X.World.Logic {
 							var __y:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							var __x:Array = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __y[x15]) {
-								oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
@@ -1499,11 +1565,11 @@ package X.World.Logic {
 							var __y:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							var __x:Array = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __y[x15]) {
-								oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
@@ -1542,7 +1608,7 @@ package X.World.Logic {
 						function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
-							oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 			
 							collided = true;
 						},
@@ -1591,9 +1657,9 @@ package X.World.Logic {
 			while (looking) {
 				c = x1/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -1601,7 +1667,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							x1 = (x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + XSubmapModel.CX_TILE_WIDTH;
+							x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -1616,11 +1682,11 @@ package X.World.Logic {
 						function ():void {				
 							var __y:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 						
 							if (x15 <= __y[y15]) {
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.left);
 							}
 	
 							looking = false;
@@ -1643,11 +1709,11 @@ package X.World.Logic {
 							var __y:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							var __x:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 							
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 <= __y[x15]) {
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
 							}
 	
 							looking = false;
@@ -1657,11 +1723,11 @@ package X.World.Logic {
 							var __y:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							var __x:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 													
-							var x15:Number = x1 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 <= __y[x15]) {
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.left);
 							}
 	
 							looking = false;
@@ -1690,7 +1756,7 @@ package X.World.Logic {
 							function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
-								oX = ((x1 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + XSubmapModel.CX_TILE_WIDTH - m_cx.left);
+								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
 							},
@@ -1718,9 +1784,9 @@ package X.World.Logic {
 			while (looking) {
 				c = x2/m_submapWidth;
 				r = y1/m_submapHeight;
-				i = (Math.floor ((y1 & m_submapHeightMask)/XSubmapModel.CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/XSubmapModel.CX_TILE_WIDTH);
+				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
 				cx = m_XSubmaps[r][c].cmap[i];
-				if (cx >=0 && cx < XSubmapModel.CX_MAX)
+				if (cx >=0 && cx < CX_MAX)
 				([
 					// CX_EMPTY:
 						__nothing,
@@ -1728,7 +1794,7 @@ package X.World.Logic {
 						__nothing,
 					// CX_SOFT:
 						function ():void {
-							x2 = (x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) - 1;
+							x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
 						},
 					// CX_JUMP_THRU:
 						__nothing,
@@ -1741,11 +1807,11 @@ package X.World.Logic {
 						function ():void {				
 							var __y:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (x15 >= __y[y15]) {
-								oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.right - 1);
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
@@ -1766,11 +1832,11 @@ package X.World.Logic {
 							var __y:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							var __x:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 	
 							if (y15 <= __y[x15]) {		
-								oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
@@ -1780,11 +1846,11 @@ package X.World.Logic {
 							var __y:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							var __x:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
 							
-							var x15:Number = x2 & XSubmapModel.CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & XSubmapModel.CX_TILE_HEIGHT_MASK;
+							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
+							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 	
 							if (y15 <= __y[x15]) {
-								oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
+								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x[y15] - m_cx.right - 1);
 							}
 	
 							looking = false;
@@ -1815,7 +1881,7 @@ package X.World.Logic {
 						function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
-							oX = ((x2 & XSubmapModel.CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 			
 							collided = true;
 						},
