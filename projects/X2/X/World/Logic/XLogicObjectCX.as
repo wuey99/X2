@@ -927,7 +927,7 @@ package X.World.Logic {
 							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
 							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
 
-							if (y15 <= __x[x15]) {
+							if (y15 <= __x_LL225B[x15]) {
 								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225B[x15] - m_cx.top);
 							}
 	
