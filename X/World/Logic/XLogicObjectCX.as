@@ -423,9 +423,13 @@ package X.World.Logic {
 			collided = false;
 			
 			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
-				c = __x/m_submapWidth;
-				r = y1/m_submapHeight;
-				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = __x/m_submapWidth;
+//				r = y1/m_submapHeight;
+//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+				
+				c = __x >> 9;
+				r = y1 >> 9;
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((__x & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -528,9 +532,13 @@ package X.World.Logic {
 			collided = false;
 			
 			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
-				c = __x/m_submapWidth;
-				r = y2/m_submapHeight;
-				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = __x/m_submapWidth;
+//				r = y2/m_submapHeight;
+//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = __x >> 9;
+				r = y2 >> 9;
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((__x & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -633,9 +641,13 @@ package X.World.Logic {
 			collided = false;
 			
 			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
-				c = x1/m_submapWidth;
-				r = __y/m_submapHeight;
-				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x1/m_submapWidth;
+//				r = __y/m_submapHeight;
+//				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
+				c = x1 >> 9;
+				r = __y >> 9;
+				i = ( ((__y & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -738,9 +750,13 @@ package X.World.Logic {
 			collided = false;
 			
 			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
-				c = x2/m_submapWidth;
-				r = __y/m_submapHeight;
-				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x2/m_submapWidth;
+//				r = __y/m_submapHeight;
+//				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x2 >> 9;
+				r = __y >> 9;
+				i = ( ((__y & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -849,9 +865,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x2/m_submapWidth;
-				r = y1/m_submapHeight;
-				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x2/m_submapWidth;
+//				r = y1/m_submapHeight;
+//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x2 >> 9;
+				r = y1 >> 9;
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -995,9 +1015,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x2/m_submapWidth;
-				r = y2/m_submapHeight;
-				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x2/m_submapWidth;
+//				r = y2/m_submapHeight;
+//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x2 >> 9;
+				r = y2 >> 9;
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1156,9 +1180,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x1/m_submapWidth;
-				r = y1/m_submapHeight;
-				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x1/m_submapWidth;
+//				r = y1/m_submapHeight;
+//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x1 >> 9;
+				r = y1 >> 9;
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1301,9 +1329,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x1/m_submapWidth;
-				r = y2/m_submapHeight;
-				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x1/m_submapWidth;
+//				r = y2/m_submapHeight;
+//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x1 >> 9;
+				r = y2 >> 9
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1462,9 +1494,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x1/m_submapWidth;
-				r = y2/m_submapHeight;
-				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x1/m_submapWidth;
+//				r = y2/m_submapHeight;
+//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x1 >> 9;
+				r = y2 >> 9;
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1612,9 +1648,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x2/m_submapWidth;
-				r = y2/m_submapHeight;
-				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x2/m_submapWidth;
+//				r = y2/m_submapHeight;
+//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x2 >> 9;
+				r = y2 >> 9;
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1777,9 +1817,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x1/m_submapWidth;
-				r = y1/m_submapHeight;
-				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x1/m_submapWidth;
+//				r = y1/m_submapHeight;
+//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x1 >> 9;
+				r = y1 >> 9;
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) +  ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
@@ -1927,9 +1971,13 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-				c = x2/m_submapWidth;
-				r = y1/m_submapHeight;
-				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				c = x2/m_submapWidth;
+//				r = y1/m_submapHeight;
+//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+
+				c = x2 >> 9;
+				r = y1 >> 9;
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
