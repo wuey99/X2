@@ -408,8 +408,8 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function Ck_Collide_UP ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
 			
@@ -513,8 +513,8 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function Ck_Collide_DN ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
 			
@@ -618,8 +618,8 @@ package X.World.Logic {
 	
 //------------------------------------------------------------------------------------------
 		public function Ck_Collide_LF ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
 			
@@ -723,8 +723,8 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function Ck_Collide_RT ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var r:int, c:int;
 			
@@ -828,11 +828,13 @@ package X.World.Logic {
 				
 //------------------------------------------------------------------------------------------
 		public function Ck_Slope_RT ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var looking:Boolean = true;
 			var r:int, c:int;
+			var x15:int;
+			var y15:int;
 			
 			collided = false;
 			
@@ -877,8 +879,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x_LL45[x15]) {
 								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL45[x15] - m_cx.top);
@@ -906,8 +908,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x_LL225A[x15]) {
 								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225A[x15] - m_cx.top);
@@ -919,8 +921,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x_LL225B[x15]) {
 								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225B[x15] - m_cx.top);
@@ -1017,8 +1019,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x_UL45[x15]) {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL45[x15] - m_cx.bottom - 1);
@@ -1040,8 +1042,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x_UL225A[x15]) {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225A[x15] - m_cx.bottom - 1);
@@ -1053,8 +1055,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x_UL225B[x15]) {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225B[x15] - m_cx.bottom - 1);
@@ -1133,11 +1135,13 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function Ck_Slope_LF ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var looking:Boolean = true;
 			var r:int, c:int;
+			var x15:int;
+			var y15:int;
 			
 			collided = false;
 			
@@ -1185,8 +1189,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x_LR45[x15]) {
 								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR45[x15] - m_cx.top);
@@ -1216,8 +1220,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x_LR225A[x15]) {
 								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225A[x15] - m_cx.top);
@@ -1229,8 +1233,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 <= __x_LR225B[x15]) {
 								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225B[x15] - m_cx.top);
@@ -1324,8 +1328,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x_UR45[x15]) {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR45[x15] - m_cx.bottom - 1);
@@ -1350,8 +1354,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x_UR225A[x15]) {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225A[x15] - m_cx.bottom - 1);
@@ -1363,8 +1367,8 @@ package X.World.Logic {
 						// function ():void {	
 							var __x_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __x_UR225B[x15]) {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225B[x15] - m_cx.bottom - 1);
@@ -1437,11 +1441,13 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function Ck_Slope_DN ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:Number, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var looking:Boolean = true;
 			var r:int, c:int;
+			var x15:int;
+			var y15:int;
 			
 			collided = false;
 
@@ -1483,8 +1489,8 @@ package X.World.Logic {
 						// function ():void {				
 							var __y_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 						
 							if (x15 <= __y_UR45[y15]) {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR45[y15] - m_cx.left);
@@ -1510,8 +1516,8 @@ package X.World.Logic {
 							var __y_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							var __x_UR225A:Array = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 >= __y_UR225A[x15]) {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225A[y15] - m_cx.left);
@@ -1524,8 +1530,8 @@ package X.World.Logic {
 							var __y_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							var __x_UR225B:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 >= __y_UR225B[x15]) {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225B[y15] - m_cx.left);
@@ -1630,8 +1636,8 @@ package X.World.Logic {
 						// function ():void {				
 							var __y_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (x15 >= __y_UL45[y15]) {
 								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL45[y15] - m_cx.right - 1);
@@ -1654,8 +1660,8 @@ package X.World.Logic {
 							var __y_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							var __x_UL225A:Array = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __y_UL225A[x15]) {
 								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225A[y15] - m_cx.right - 1);
@@ -1668,8 +1674,8 @@ package X.World.Logic {
 							var __y_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							var __x_UL225B:Array = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y2 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y2 & CX_TILE_HEIGHT_MASK;
 
 							if (y15 >= __y_UL225B[x15]) {
 								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225B[y15] - m_cx.right - 1);
@@ -1750,11 +1756,13 @@ package X.World.Logic {
 	
 //------------------------------------------------------------------------------------------
 		public function Ck_Slope_UP ():Boolean {
-			var x1:Number, y1:Number, x2:Number, y2:Number;
-			var i:int, __x:Number, __y:Number;
+			var x1:int, y1:int, x2:int, y2:int;
+			var i:int, __x:int, __y:int;
 			var collided:Boolean;
 			var looking:Boolean = true;
 			var r:int, c:int;
+			var x15:int;
+			var y15:int;
 			
 			collided = false;
 
@@ -1802,8 +1810,8 @@ package X.World.Logic {
 						// function ():void {				
 							var __y_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 						
 							if (x15 <= __y_LR45[y15]) {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR45[y15] - m_cx.left);
@@ -1835,8 +1843,8 @@ package X.World.Logic {
 							var __y_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 							var __x_LR225A:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 							
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 <= __y_LR225A[x15]) {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225A[y15] - m_cx.left);
@@ -1849,8 +1857,8 @@ package X.World.Logic {
 							var __y_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 							var __x_LR225B:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 													
-							var x15:Number = x1 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x1 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 						
 							if (y15 <= __y_LR225B[x15]) {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225B[y15] - m_cx.left);
@@ -1949,8 +1957,8 @@ package X.World.Logic {
 						// function ():void {				
 							var __y_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 
 							if (x15 >= __y_LL45[y15]) {
 								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL45[y15] - m_cx.right - 1);
@@ -1979,8 +1987,8 @@ package X.World.Logic {
 							var __y_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 							var __x_LL225A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 	
 							if (y15 <= __y_LL225A[x15]) {		
 								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225A[y15] - m_cx.right - 1);
@@ -1993,8 +2001,8 @@ package X.World.Logic {
 							var __y_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 							var __x_LL225B:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
 							
-							var x15:Number = x2 & CX_TILE_WIDTH_MASK;
-							var y15:Number = y1 & CX_TILE_HEIGHT_MASK;
+							x15 = x2 & CX_TILE_WIDTH_MASK;
+							y15 = y1 & CX_TILE_HEIGHT_MASK;
 	
 							if (y15 <= __y_LL225B[x15]) {
 								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225B[y15] - m_cx.right - 1);
