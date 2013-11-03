@@ -411,7 +411,6 @@ package X.World.Logic {
 			var x1:Number, y1:Number, x2:Number, y2:Number;
 			var i:Number, __x:Number, __y:Number;
 			var collided:Boolean;
-			var cx:Number;
 			var r:int, c:int;
 			
 			x1 = Math.floor (oX) + m_cx.left;
@@ -427,8 +426,8 @@ package X.World.Logic {
 				c = __x/m_submapWidth;
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						break;
@@ -517,7 +516,6 @@ package X.World.Logic {
 			var x1:Number, y1:Number, x2:Number, y2:Number;
 			var i:Number, __x:Number, __y:Number;
 			var collided:Boolean;
-			var cx:Number;
 			var r:int, c:int;
 			
 			x1 = Math.floor (oX) + m_cx.left;
@@ -533,8 +531,8 @@ package X.World.Logic {
 				c = __x/m_submapWidth;
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						break;
@@ -623,7 +621,6 @@ package X.World.Logic {
 			var x1:Number, y1:Number, x2:Number, y2:Number;
 			var i:Number, __x:Number, __y:Number;
 			var collided:Boolean;
-			var cx:Number;
 			var r:int, c:int;
 			
 			x1 = Math.floor (oX) + m_cx.left;
@@ -639,8 +636,8 @@ package X.World.Logic {
 				c = x1/m_submapWidth;
 				r = __y/m_submapHeight;
 				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						break;
@@ -729,7 +726,6 @@ package X.World.Logic {
 			var x1:Number, y1:Number, x2:Number, y2:Number;
 			var i:Number, __x:Number, __y:Number;
 			var collided:Boolean;
-			var cx:Number;
 			var r:int, c:int;
 			
 			x1 = Math.floor (oX) + m_cx.left;
@@ -745,8 +741,8 @@ package X.World.Logic {
 				c = x2/m_submapWidth;
 				r = __y/m_submapHeight;
 				i = (Math.floor ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						break;
@@ -836,7 +832,6 @@ package X.World.Logic {
 			var i:Number, __x:Number, __y:Number;
 			var collided:Boolean;
 			var looking:Boolean = true;
-			var cx:Number;
 			var r:int, c:int;
 			
 			collided = false;
@@ -855,8 +850,8 @@ package X.World.Logic {
 				c = x2/m_submapWidth;
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
@@ -1001,8 +996,8 @@ package X.World.Logic {
 				c = x2/m_submapWidth;
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
@@ -1142,7 +1137,6 @@ package X.World.Logic {
 			var i:Number, __x:Number, __y:Number;
 			var collided:Boolean;
 			var looking:Boolean = true;
-			var cx:Number;
 			var r:int, c:int;
 			
 			collided = false;
@@ -1161,9 +1155,8 @@ package X.World.Logic {
 				c = x1/m_submapWidth;
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
 				
-				switch (cx) {
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
@@ -1307,8 +1300,8 @@ package X.World.Logic {
 				c = x1/m_submapWidth;
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
@@ -1448,7 +1441,6 @@ package X.World.Logic {
 			var i:Number, __x:Number, __y:Number;
 			var collided:Boolean;
 			var looking:Boolean = true;
-			var cx:Number;
 			var r:int, c:int;
 			
 			collided = false;
@@ -1467,8 +1459,8 @@ package X.World.Logic {
 				c = x1/m_submapWidth;
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
@@ -1617,8 +1609,8 @@ package X.World.Logic {
 				c = x2/m_submapWidth;
 				r = y2/m_submapHeight;
 				i = (Math.floor ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
@@ -1762,7 +1754,6 @@ package X.World.Logic {
 			var i:int, __x:Number, __y:Number;
 			var collided:Boolean;
 			var looking:Boolean = true;
-			var cx:Number;
 			var r:int, c:int;
 			
 			collided = false;
@@ -1781,8 +1772,8 @@ package X.World.Logic {
 				c = x1/m_submapWidth;
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
@@ -1931,8 +1922,8 @@ package X.World.Logic {
 				c = x2/m_submapWidth;
 				r = y1/m_submapHeight;
 				i = (Math.floor ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + Math.floor ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-				cx = m_XSubmaps[r][c].cmap[i];
-				switch (cx) {
+				
+				switch (m_XSubmaps[r][c].cmap[i]) {
 				// ([
 					case CX_EMPTY:
 						looking = false;
