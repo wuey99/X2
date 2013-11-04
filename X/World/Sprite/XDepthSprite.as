@@ -56,7 +56,11 @@ package X.World.Sprite {
 		public function replaceSprite (__sprite:DisplayObject):void {
 			clear ();
 			
+			m_sprite = __sprite;
+			
 			childList.addChild (__sprite);
+			
+			visible = true;
 		}
 		
 //------------------------------------------------------------------------------------------
