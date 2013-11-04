@@ -287,15 +287,11 @@ package X.World.Logic {
 		}
 		
 		public function set oDX (__value:Number):void {
-			var __vel:XPoint = getVel ();
-			__vel.x = __value;
-			setVel (__vel);
+			m_vel.x = __value;
 		}
 
 		public function set oDY (__value:Number):void {
-			var __vel:XPoint = getVel ();
-			__vel.y = __value;
-			setVel (__vel);
+			m_vel.y = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -304,11 +300,11 @@ package X.World.Logic {
 		}
 		 
 		public function get oDX ():Number {
-			return getVel ().x
+			return m_vel.x
 		}
 
 		public function get oDY ():Number {
-			return getVel ().y
+			return m_vel.y
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -317,15 +313,11 @@ package X.World.Logic {
 		}
 		
 		public function set oldX (__value:Number):void {
-			var __pos:XPoint = getOld ();
-			__pos.x = __value;
-			setOld (__pos);
+			m_oldPos.x = __value;
 		}
 
 		public function set oldY (__value:Number):void {
-			var __pos:XPoint = getOld ();
-			__pos.y = __value;
-			setOld (__pos);
+			m_oldPos.y = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -334,11 +326,11 @@ package X.World.Logic {
 		}
 		
 		public function get oldX ():Number {
-			return getOld ().x
+			return m_oldPos.x
 		}
 
 		public function get oldY ():Number {
-			return getOld ().y
+			return m_oldPos.y
 		}
 
 //------------------------------------------------------------------------------------------
