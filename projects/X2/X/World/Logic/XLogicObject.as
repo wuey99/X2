@@ -982,12 +982,12 @@ package X.World.Logic {
 		
 		[Inline]
 		public function set oX (__value:Number):void {
-			pos.x = __value;
+			m_pos.x = __value;
 		}
 
 		[Inline]
 		public function set oY (__value:Number):void {
-			pos.y = __value;
+			m_pos.y = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -1002,12 +1002,12 @@ package X.World.Logic {
 		
 		[Inline]
 		public function get oX ():Number {
-			return pos.x
+			return m_pos.x
 		}
 
 		[Inline]
 		public function get oY ():Number {
-			return pos.y
+			return m_pos.y
 		}
 		
 //------------------------------------------------------------------------------------------
