@@ -14,8 +14,8 @@ package X.World.Logic {
 	
 //------------------------------------------------------------------------------------------
 	public class XLogicObjectCX extends XLogicObject {
-		private var m_vel:XPoint;
-		private var m_oldPos:XPoint;
+		protected var m_vel:XPoint;
+		protected var m_oldPos:XPoint;
 		
 		protected var m_cx:XRect;
 		protected var m_namedCX:XDict;
@@ -31,7 +31,7 @@ package X.World.Logic {
 		private var m_cols:int;
 		private var m_rows:int;
 
-		private var m_CX_Collide_Flag:Number;
+		protected var m_CX_Collide_Flag:Number;
 	
 		public static const CX_COLLIDE_LF:int = 0x0001;
 		public static const CX_COLLIDE_RT:int = 0x0002;
