@@ -430,6 +430,7 @@ package X.World.Logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				
@@ -539,6 +540,7 @@ package X.World.Logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				
@@ -648,6 +650,7 @@ package X.World.Logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
@@ -757,6 +760,7 @@ package X.World.Logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
@@ -873,6 +877,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
@@ -1023,6 +1028,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
@@ -1188,6 +1194,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
@@ -1337,6 +1344,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
@@ -1502,6 +1510,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
@@ -1656,6 +1665,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
@@ -1825,6 +1835,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
@@ -1979,6 +1990,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOLID:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
