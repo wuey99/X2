@@ -75,7 +75,10 @@ package X.XMap {
 		public static const CX_SOFTUP:int = 26;
 		public static const CX_SOFTDN:int = 27;
 		
-		public static const CX_MAX:int = 28;
+		// special solids
+		public static const CX_SOLIDX001:int = 28;
+		
+		public static const CX_MAX:int = 29;
 		
 // collision tile width, height
 		public static const CX_TILE_WIDTH:int = 16;
