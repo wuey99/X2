@@ -6,6 +6,7 @@ package X.XMap {
 	import X.Geom.*;
 	import X.MVC.*;
 	import X.Utils.*;
+	import X.World.Collision.*;
 	import X.XML.*;
 	
 	import flash.events.*;
@@ -41,6 +42,8 @@ package X.XMap {
 		
 		private var m_persistentStorage:XDict;
 		
+		private var cx$:CX$;
+		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
 			super ();
@@ -56,6 +59,8 @@ package X.XMap {
 			var __row:Number;
 			var __col:Number;
 
+			cx$ = new CX$ ();
+			
 			m_submapRows = __submapRows;
 			m_submapCols = __submapCols;
 			m_submapWidth = __submapWidth;
@@ -474,8 +479,8 @@ package X.XMap {
 			var tiles:Array;
 
 // col, row divisor
-			var row32:int = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
+			var row32:int = m_submapHeight/cx$.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/cx$.CX_TILE_WIDTH;
 
 // col, row mask for the submap
 			var rowMask:int = row32-1;
@@ -510,8 +515,8 @@ package X.XMap {
 			c2:Number, r2:Number
 		):void {
 // col, row divisor
-			var row32:int = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
+			var row32:int = m_submapHeight/cx$.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/cx$.CX_TILE_WIDTH;
 
 // col, row mask for the submap
 			var rowMask:int = row32-1;
@@ -544,8 +549,8 @@ package X.XMap {
 			c2:Number, r2:Number
 		):void {
 // col, row divisor
-			var row32:int = m_submapHeight/XSubmapModel.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/XSubmapModel.CX_TILE_WIDTH;
+			var row32:int = m_submapHeight/cx$.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/cx$.CX_TILE_WIDTH;
 
 // col, row mask for the submap
 			var rowMask:int = row32-1;
@@ -564,7 +569,7 @@ package X.XMap {
 					var submapCol:int = col/col32;
 								
 					m_XSubmaps[submapRow][submapCol].setCXTile (
-						XSubmapModel.CX_EMPTY,
+						cx$.CX_EMPTY,
 						col & colMask, row & rowMask
 					);
 				}
@@ -848,6 +853,8 @@ package X.XMap {
 			m_imageClassNames = new XDict ();			
 
 			m_itemInuse = new Object ();
+			
+			cx$ = new CX$ ();
 			
 			m_items = new XDict ();
 			m_ids = new XDict ();
