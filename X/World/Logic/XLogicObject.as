@@ -974,6 +974,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function setPos (__pos:XPoint):void {
 			m_pos = __pos;
 		}
@@ -994,6 +995,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+		[Inline]
 		public function getPos ():XPoint {
 			return m_pos;
 		}
