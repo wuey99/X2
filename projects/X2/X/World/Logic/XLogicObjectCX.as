@@ -215,10 +215,12 @@ package X.World.Logic {
 			m_vel = __vel;
 		}
 		
+		[Inline]
 		public function set oDX (__value:Number):void {
 			m_vel.x = __value;
 		}
 
+		[Inline]
 		public function set oDY (__value:Number):void {
 			m_vel.y = __value;
 		}
@@ -228,10 +230,12 @@ package X.World.Logic {
 			return m_vel;
 		}
 		 
+		[Inline]
 		public function get oDX ():Number {
 			return m_vel.x
 		}
 
+		[Inline]
 		public function get oDY ():Number {
 			return m_vel.y
 		}
