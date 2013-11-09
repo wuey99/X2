@@ -84,6 +84,7 @@ package X.World.Logic {
 		public var m_isDead:Boolean;
 		public var m_autoCulling:Boolean;
 		public var m_poolClass:Class;
+		public var XTask$:XTASK$;
 		
 		public var m_iX:Number;
 		public var m_iY:Number;
@@ -126,6 +127,8 @@ package X.World.Logic {
 			iRelativeDepth = false;
 			iLayer = 0;
 			iClassName = "";
+		
+			XTask$ = new XTASK$ ();
 			
 			if (__xxx) {
 				xxx = __xxx;

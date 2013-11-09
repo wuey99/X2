@@ -76,6 +76,7 @@ package X.Task {
 		
 		protected var m_manager:XTaskManager;
 		
+// static versions of op-codes (for outside use)
 		public static const CALL:Number = 0;
 		public static const RETN:Number = 1;
 		public static const LOOP:Number = 2;
@@ -91,7 +92,23 @@ package X.Task {
 		public static const WAIT1000:Number = 12; 
 		public static const UNTIL:Number = 13;
 		
-		public static const FLAGS_EQ:Number = 1;
+// private versions of op-codes (for internal use)
+		public const _CALL:Number = 0;
+		public const _RETN:Number = 1;
+		public const _LOOP:Number = 2;
+		public const _NEXT:Number = 3;
+		public const _WAIT:Number = 4;
+		public const _LABEL:Number = 5;
+		public const _GOTO:Number = 6;
+		public const _BEQ:Number = 7;
+		public const _BNE:Number = 8;
+		public const _FLAGS:Number = 9;
+		public const _EXEC:Number = 10;
+		public const _FUNC:Number = 11;
+		public const _WAIT1000:Number = 12; 
+		public const _UNTIL:Number = 13;
+		
+		public const _FLAGS_EQ:Number = 1;
 		
 		protected var m_XTaskSubManager:XTaskSubManager;
 		
@@ -122,7 +139,7 @@ package X.Task {
 			m_loop = new Array (8);
 			m_stackPtr = 0;
 			m_ticks = 0x0100 + 0x0080;
-			m_flags = ~FLAGS_EQ;
+			m_flags = ~_FLAGS_EQ;
 			m_subTask = null;
 			m_isDead = false;
 			m_parent = null;
@@ -246,7 +263,7 @@ package X.Task {
 					x = value as Number;
 					
 					switch (x) {
-						case LABEL:
+						case _LABEL:
 							var __label:String = m_taskList[i++] as String;	
 							
 //							trace (": new Label: ", __label);
@@ -261,63 +278,63 @@ package X.Task {
 							
 							break;	
 						
-						case CALL:
+						case _CALL:
 							i++;
 							
 							break;
 						
-						case RETN:
+						case _RETN:
 							break;
 						
-						case LOOP:
+						case _LOOP:
 							i++;
 							
 							break;
 						
-						case NEXT:
+						case _NEXT:
 							break;
 						
-						case UNTIL:
+						case _UNTIL:
 							i++;
 							
 							break;
 						
-						case WAIT:
+						case _WAIT:
 							i++;
 							
 							break;
 						
-						case WAIT1000:
+						case _WAIT1000:
 							i++;
 							
 							break;
 						
-						case GOTO:
+						case _GOTO:
 							i++;
 							
 							break;
 						
-						case BEQ:
+						case _BEQ:
 							i++;
 							
 							break;
 						
-						case BNE:
+						case _BNE:
 							i++;
 							
 							break;
 						
-						case FLAGS:
+						case _FLAGS:
 							i++;
 							
 							break;
 						
-						case EXEC:
+						case _EXEC:
 							i++;
 							
 							break;
 						
-						case FUNC:
+						case _FUNC:
 							i++;
 							
 							break;
@@ -345,7 +362,7 @@ package X.Task {
 				//------------------------------------------------------------------------------------------
 				
 				//------------------------------------------------------------------------------------------
-				case LABEL:
+				case _LABEL:
 					//------------------------------------------------------------------------------------------
 					var __label:String = m_taskList[m_taskIndex++] as String;
 					
@@ -356,7 +373,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case WAIT:
+				case _WAIT:
 					//------------------------------------------------------------------------------------------
 					var __ticks:Number = __evalNumber ();
 					
@@ -369,7 +386,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case WAIT1000:
+				case _WAIT1000:
 					//------------------------------------------------------------------------------------------
 					if (!m_WAIT1000) {
 						m_time = m_XTaskSubManager.getManager ().getXApp ().getTime ();
@@ -398,7 +415,7 @@ package X.Task {
 					return false;
 					
 				//------------------------------------------------------------------------------------------					
-				case LOOP:
+				case _LOOP:
 					//------------------------------------------------------------------------------------------
 					var __loopCount:Number = __evalNumber ();
 					
@@ -408,7 +425,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case NEXT:
+				case _NEXT:
 					//------------------------------------------------------------------------------------------
 					//		trace (": ", m_loop[m_stackPtr-1]);
 					
@@ -425,13 +442,13 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case UNTIL:
+				case _UNTIL:
 					//------------------------------------------------------------------------------------------
 					var __funcUntil:Function = m_taskList[m_taskIndex++] as Function;
 					
 					__funcUntil (self);
 					
-					if (!(m_flags & FLAGS_EQ)) {	
+					if (!(m_flags & _FLAGS_EQ)) {	
 						m_taskIndex = m_stack[m_stackPtr-1];
 					}
 					else
@@ -442,7 +459,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case GOTO:
+				case _GOTO:
 					//------------------------------------------------------------------------------------------
 					var __gotoLabel:String = m_taskList[m_taskIndex] as String;
 					
@@ -455,7 +472,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case CALL:
+				case _CALL:
 					//------------------------------------------------------------------------------------------
 					var __callLabel:String = m_taskList[m_taskIndex++] as String;
 					
@@ -470,7 +487,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case RETN:
+				case _RETN:
 					//------------------------------------------------------------------------------------------					
 					m_stackPtr--;
 					
@@ -483,7 +500,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case BEQ:
+				case _BEQ:
 					//------------------------------------------------------------------------------------------	
 					var __beqLabel:String = m_taskList[m_taskIndex++] as String;
 					
@@ -491,14 +508,14 @@ package X.Task {
 						throw (Error ("goto: unable to find label: " + __beqLabel));
 					}
 					
-					if (m_flags & FLAGS_EQ) {
+					if (m_flags & _FLAGS_EQ) {
 						m_taskIndex = m_labels[__beqLabel]
 					}
 					
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case BNE:
+				case _BNE:
 					//------------------------------------------------------------------------------------------
 					var __bneLabel:String = m_taskList[m_taskIndex++] as String;
 					
@@ -506,14 +523,14 @@ package X.Task {
 						throw (Error ("goto: unable to find label: " + __bneLabel));
 					}
 					
-					if (!(m_flags & FLAGS_EQ)) {
+					if (!(m_flags & _FLAGS_EQ)) {
 						m_taskIndex = m_labels[__bneLabel]
 					}
 					
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case FLAGS:
+				case _FLAGS:
 					//------------------------------------------------------------------------------------------
 					var __funcFlags:Function = m_taskList[m_taskIndex++] as Function;
 					
@@ -522,7 +539,7 @@ package X.Task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case FUNC:
+				case _FUNC:
 					//------------------------------------------------------------------------------------------
 					var __funcTask:Function = m_taskList[m_taskIndex++] as Function;
 					
@@ -533,7 +550,7 @@ package X.Task {
 				//------------------------------------------------------------------------------------------
 				// launch a sub-task and wait for it to finish before proceeding
 				//------------------------------------------------------------------------------------------
-				case EXEC:
+				case _EXEC:
 					if (m_subTask == null) {
 						// get new XTask Array run it immediately
 						m_subTask = m_XTaskSubManager.addTask ((m_taskList[m_taskIndex] as Array), true);
@@ -594,12 +611,12 @@ package X.Task {
 		
 		//------------------------------------------------------------------------------------------
 		public function setFlagsEQ ():void {
-			m_flags |= FLAGS_EQ;
+			m_flags |= _FLAGS_EQ;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function setFlagsNE ():void {
-			m_flags &= ~FLAGS_EQ;
+			m_flags &= ~_FLAGS_EQ;
 		}
 		
 		//------------------------------------------------------------------------------------------
