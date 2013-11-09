@@ -23,13 +23,13 @@ package X.World.Logic {
 		public var m_XMapModel:XMapModel;
 		public var m_XMapView:XMapView;
 		public var m_XMapLayerModel:XMapLayerModel;
-		private var m_XSubmaps:Vector.<Vector.<XSubmapModel>>;
-		private var m_submapWidth:int;
-		private var m_submapHeight:int;
-		private var m_submapWidthMask:int;
-		private var m_submapHeightMask:int;
-		private var m_cols:int;
-		private var m_rows:int;
+		public var m_XSubmaps:Vector.<Vector.<XSubmapModel>>;
+		public var m_submapWidth:int;
+		public var m_submapHeight:int;
+		public var m_submapWidthMask:int;
+		public var m_submapHeightMask:int;
+		public var m_cols:int;
+		public var m_rows:int;
 
 		protected var m_CX_Collide_Flag:Number;
 	
