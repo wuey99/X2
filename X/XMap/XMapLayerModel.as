@@ -408,9 +408,9 @@ package X.XMap {
 							  __y2 < b.top + __y || __y1 > b.bottom + __y)
 							) {
 								
-							if (!(item in dst_items)) {
+//							if (!(item in dst_items)) {
 								dst_items.push (item);
-							}
+//							}
 						}
 					}
 				);
@@ -451,9 +451,9 @@ package X.XMap {
 						__y2 < b.top + __y || __y1 > b.bottom + __y)
 					) {
 							
-						if (!(item in dst_items)) {
+//						if (!(item in dst_items)) {
 							dst_items.push (item);
-						}
+//						}
 					}
 				}
 			}
