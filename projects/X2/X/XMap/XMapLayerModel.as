@@ -409,8 +409,6 @@ package X.XMap {
 							) {
 								
 							if (!(item in dst_items)) {
-	//							trace (": item: ", item);
-								
 								dst_items.push (item);
 							}
 						}
@@ -454,8 +452,6 @@ package X.XMap {
 					) {
 							
 						if (!(item in dst_items)) {
-	//							trace (": item: ", item);
-								
 							dst_items.push (item);
 						}
 					}
