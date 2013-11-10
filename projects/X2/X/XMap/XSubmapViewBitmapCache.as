@@ -99,15 +99,19 @@ package X.XMap {
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
+
 			
+/* don't clear the buffer since in theory it will be totally overdrawn by tiles
 			m_bitmap.bitmapData.fillRect (
 				tempRect, 0x00000000
 			);
+*/
 			
-			__vline (0);
-			__vline (m_submapModel.width-1);
-			__hline (0);
-			__hline (m_submapModel.height-1);
+// used only for debugging.  commented out to improve performance
+//			__vline (0);
+//			__vline (m_submapModel.width-1);
+//			__hline (0);
+//			__hline (m_submapModel.height-1);
 			
 			var __items:XDict = m_submapModel.items ();
 			var __item:XMapItemModel;

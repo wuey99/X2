@@ -76,7 +76,7 @@ package X.Task {
 		
 		protected var m_manager:XTaskManager;
 		
-// static versions of op-codes (for outside use)
+// static versions of op-codes (for external use.  TODO: look for a solution to speed-up static access i.e. XTask.LOOP)
 		public static const CALL:Number = 0;
 		public static const RETN:Number = 1;
 		public static const LOOP:Number = 2;
