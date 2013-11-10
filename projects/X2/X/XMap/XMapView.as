@@ -310,19 +310,19 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function createModelFromXML (__xml:XSimpleXMLNode):void {
+		public function createModelFromXML (__xml:XSimpleXMLNode, __useArrayItems:Boolean=false):void {
 			var __model:XMapModel = new XMapModel ();
 			
-			__model.deserializeAll (__xml);	
+			__model.deserializeAllNormal (__xml, __useArrayItems);	
 			
 			setModel (__model);		
 		}
 
 //------------------------------------------------------------------------------------------
-		public function createModelFromXMLReadOnly (__xml:XSimpleXMLNode):void {
+		public function createModelFromXMLReadOnly (__xml:XSimpleXMLNode, __useArrayItems:Boolean=false):void {
 			var __model:XMapModel = new XMapModel ();
 			
-			__model.deserializeAllReadOnly (__xml);	
+			__model.deserializeAllReadOnly (__xml, __useArrayItems);	
 			
 			setModel (__model);		
 		}

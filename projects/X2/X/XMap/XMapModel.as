@@ -20,17 +20,20 @@ package X.XMap {
 		private var m_layers:Array;
 		private var m_allClassNames:Array;
 		private var m_currLayer:Number;
+		private var m_useArrayItems:Boolean;
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapModel () {
 			super ();
 			
 			m_allClassNames = new Array ();
+			m_useArrayItems = false;
 		}	
 
 //------------------------------------------------------------------------------------------
 		public function setup (
-			__layers:Array = null
+			__layers:Array = null,
+			__useArrayItems:Boolean = false
 			):void {
 				
 			if (!__layers) {
@@ -40,6 +43,7 @@ package X.XMap {
 			m_numLayers = __layers.length;	
 			m_layers = new Array (m_numLayers);
 			m_currLayer = 0;
+			m_useArrayItems = __useArrayItems;
 			
 			var i:Number;
 			
@@ -55,6 +59,11 @@ package X.XMap {
 			for (i=0; i<m_numLayers; i++) {
 				m_layers[i].cleanup ();
 			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public function get useArrayItems ():Boolean {
+			return m_useArrayItems;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -165,14 +174,21 @@ package X.XMap {
 		public override function deserializeAll (__xml:XSimpleXMLNode):void {
 			trace (": [XMap] deserializeAll: ");
 			
-			deserialize (__xml);
+			deserialize (__xml, false);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function deserializeAllReadOnly (__xml:XSimpleXMLNode):void {
+		public function deserializeAllNormal (__xml:XSimpleXMLNode, __useArrayItems:Boolean=false):void {
 			trace (": [XMap] deserializeAll: ");
 			
-			deserialize (__xml, true);
+			deserialize (__xml, false, __useArrayItems);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function deserializeAllReadOnly (__xml:XSimpleXMLNode, __useArrayItems:Boolean=false):void {
+			trace (": [XMap] deserializeAll: ");
+			
+			deserialize (__xml, true, __useArrayItems);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -202,7 +218,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		private function deserialize (__xml:XSimpleXMLNode, __readonly:Boolean=false):void {
+		private function deserialize (__xml:XSimpleXMLNode, __readonly:Boolean=false, __useArrayItems:Boolean=false):void {
 			trace (": [XMap] deserialize: ");
 			
 			var __xmlList:Array = __xml.child ("XLayers")[0].child ("XLayer");
@@ -214,7 +230,7 @@ package X.XMap {
 			
 			for (i=0; i<__xmlList.length; i++) {
 				m_layers[i] = new XMapLayerModel ();
-				
+				m_layers[i].setParent (this);
 				m_layers[i].deserialize (__xmlList[i], __readonly);
 			}
 		}
