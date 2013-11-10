@@ -391,9 +391,8 @@ package X.XMap {
 			var x:*;
 			var item:XMapItemModel;
 			
-//			trace (": ---------------------: ");	
-//			trace (": getItemsAt: ");
-//			trace (": ---------------------: ");
+			var __x:Number, __y:Number;
+			var b:XRect;
 						
 			for (i=0; i<submaps.length; i++) {
 				src_items = submaps[i].items ();
@@ -402,12 +401,11 @@ package X.XMap {
 					function (x:*):void {
 						item = x as XMapItemModel;
 						
-						var b:XRect = item.boundingRect.cloneX ();
-						b.offset (item.x, item.y);
+						b = item.boundingRect; __x = item.x; __y = item.y;
 						
 						if (
-							!(__x2 < b.left || __x1 > b.right ||
-							  __y2 < b.top || __y1 > b.bottom)
+							!(__x2 < b.left + __x || __x1 > b.right + __x ||
+							  __y2 < b.top + __y || __y1 > b.bottom + __y)
 							) {
 								
 							if (!(item in dst_items)) {
