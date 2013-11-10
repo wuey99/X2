@@ -43,6 +43,9 @@ package X.XMap {
 		private var m_persistentStorage:XDict;
 		
 		private var cx$:CX$;
+
+		private var m_retrievedSubmaps:Array;
+		private var m_retrievedItems:Array;
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
@@ -74,7 +77,9 @@ package X.XMap {
 			m_visible = true;
 			m_name = "layer" + __layer;
 			m_grid = false;
-
+			m_retrievedSubmaps = new Array ();
+			m_retrievedItems = new Array ();
+	
 			for (__row=0; __row<__submapRows; __row++) {
 				m_XSubmaps[__row] = new Vector.<XSubmapModel> (__submapCols);
 
@@ -361,7 +366,8 @@ package X.XMap {
 
 			var __row:int, __col:int;
 						
-			var __submaps:Array = new Array ();
+//			var __submaps:Array = new Array ();
+			m_retrievedSubmaps.length = 0;
 			
 			__c1 = Math.max (__c1, 0);
 			__c2 = Math.min (__c2, m_submapCols-1);
@@ -370,11 +376,11 @@ package X.XMap {
 									
 			for (__row = __r1; __row <= __r2; __row++) {
 				for (__col = __c1; __col <= __c2; __col++) {
-					__submaps.push ( m_XSubmaps[__row][__col] );
+					m_retrievedSubmaps.push ( m_XSubmaps[__row][__col] );
 				}
 			}
 												
-			return __submaps;
+			return m_retrievedSubmaps;
 		}	
 		
 //------------------------------------------------------------------------------------------
@@ -387,7 +393,8 @@ package X.XMap {
 			
 			var i:Number;
 			var src_items:XDict;
-			var dst_items:Array = new Array ();
+//			var dst_items:Array = new Array ();
+			m_retrievedItems.length = 0;
 			var x:*;
 			var item:XMapItemModel;
 			
@@ -409,14 +416,14 @@ package X.XMap {
 							) {
 								
 //							if (!(item in dst_items)) {
-								dst_items.push (item);
+								m_retrievedItems.push (item);
 //							}
 						}
 					}
 				);
 			}
 			
-			return dst_items;		
+			return m_retrievedItems;		
 		}
 
 //------------------------------------------------------------------------------------------
@@ -429,7 +436,8 @@ package X.XMap {
 			
 			var i:Number;
 			var src_items:Vector.<XMapItemModel>;
-			var dst_items:Array = new Array ();
+//			var dst_items:Array = new Array ();
+			m_retrievedItems.length = 0;
 			var item:XMapItemModel;
 			
 			var __length:int;
@@ -452,13 +460,13 @@ package X.XMap {
 					) {
 							
 //						if (!(item in dst_items)) {
-							dst_items.push (item);
+							m_retrievedItems.push (item);
 //						}
 					}
 				}
 			}
 			
-			return dst_items;		
+			return m_retrievedItems;		
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -897,6 +905,8 @@ package X.XMap {
 			m_items = new XDict ();
 			m_ids = new XDict ();
 			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (m_submapRows);
+			m_retrievedSubmaps = new Array ();
+			m_retrievedItems = new Array ();
 			
 			deserializeImageClassNames (__xml);
 			m_classNames.deserialize (__xml);
