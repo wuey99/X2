@@ -92,7 +92,13 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
-			dictRefresh ();
+			if (m_submapModel.useArrayItems) {
+				arrayRefresh ();
+			}
+			else
+			{
+				dictRefresh ();
+			}
 		}
 		
 //------------------------------------------------------------------------------------------

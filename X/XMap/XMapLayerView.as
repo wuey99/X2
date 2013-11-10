@@ -72,11 +72,21 @@ package X.XMap {
 						
 			var __items:Array;
 			
-			__items = m_XMapModel.getItemsAt (
-				m_currLayer,
-				__view.left, __view.top,
-				__view.right, __view.bottom
-			);	
+			if (m_XMapModel.useArrayItems) {
+				__items = m_XMapModel.getArrayItemsAt (
+					m_currLayer,
+					__view.left, __view.top,
+					__view.right, __view.bottom
+				);
+			}
+			else
+			{
+				__items = m_XMapModel.getItemsAt (
+					m_currLayer,
+					__view.left, __view.top,
+					__view.right, __view.bottom
+				);				
+			}
 			
 //------------------------------------------------------------------------------------------
 			var __item:XMapItemModel;

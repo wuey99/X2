@@ -108,6 +108,11 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getXMapModel ():XMapModel {
+			return m_XMap;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function setViewPort (__viewPort:XRect):void {
 			m_viewPort = __viewPort;
 		}

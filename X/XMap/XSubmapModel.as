@@ -143,6 +143,11 @@ package X.XMap {
 		}	
 
 //------------------------------------------------------------------------------------------
+		public function get useArrayItems ():Boolean {
+			return m_XMapLayer.getXMapModel ().useArrayItems;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function get cmap ():Vector.<int> {
 			return m_cmap;
 		}
@@ -416,7 +421,10 @@ package X.XMap {
 					);
 					
 					addItem (__item);
-					addArrayItem (__item);
+					
+					if (useArrayItems) {
+						addArrayItem (__item);
+					}
 					
 					m_XMapLayer.trackItem (__item);
 			}
