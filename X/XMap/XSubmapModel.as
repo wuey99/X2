@@ -30,6 +30,9 @@ package X.XMap {
 		
 		private var m_src:XRect;
 		private var m_dst:XRect;
+
+		private var m_items:XDict;
+		private var m_arrayItems:Vector.<XMapItemModel>;
 		
 // empty
 		public static const CX_EMPTY:int = 0;
@@ -99,9 +102,7 @@ package X.XMap {
 		
 		public static const TX_TILE_WIDTH_UNMASK:int = 0xffffffc0;
 		public static const TX_TILE_HEIGHT_UNMASK:int = 0xffffffc0;
-		
-		private var m_items:XDict;
-		
+
 		private static var CXToChar:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		
 //------------------------------------------------------------------------------------------	
@@ -135,6 +136,7 @@ package X.XMap {
 			}
 			
 			m_items = new XDict ();
+			m_arrayItems = new Vector.<XMapItemModel> ();
 
 			m_src = new XRect ();
 			m_dst = new XRect ();
@@ -227,6 +229,20 @@ package X.XMap {
 					
 			return __item;
 		}
+		
+//------------------------------------------------------------------------------------------
+		public function addArrayItem (
+			__item:XMapItemModel
+		):XMapItemModel {
+			
+			trace (": XSubmapModel: additemarray: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
+			
+			if (!(__item in m_arrayItems)) {
+				m_arrayItems.push (__item);
+			}
+			
+			return __item;
+		}		
 
 //------------------------------------------------------------------------------------------
 		public function replaceItems (
@@ -279,6 +295,11 @@ package X.XMap {
 			return m_items;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function arrayItems ():Vector.<XMapItemModel> {
+			return m_arrayItems;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function serializeRowCol (__row:Number, __col:Number):XSimpleXMLNode {	
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
@@ -395,6 +416,7 @@ package X.XMap {
 					);
 					
 					addItem (__item);
+					addArrayItem (__item);
 					
 					m_XMapLayer.trackItem (__item);
 			}
