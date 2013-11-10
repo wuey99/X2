@@ -9,7 +9,6 @@ package X.XMap {
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	
-//	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
@@ -90,9 +89,14 @@ package X.XMap {
 			
 			refresh ();
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
+			arrayRefresh ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function dictRefresh ():void {
 			m_bitmap.bitmapData.lock ();
 	
 			tempRect.x = 0;
@@ -100,7 +104,6 @@ package X.XMap {
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 
-			
 /* don't clear the buffer since in theory it will be totally overdrawn by tiles
 			m_bitmap.bitmapData.fillRect (
 				tempRect, 0x00000000
@@ -166,6 +169,51 @@ package X.XMap {
 					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
 				}
 			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function arrayRefresh ():void {
+			m_bitmap.bitmapData.lock ();
+			
+			tempRect.x = 0;
+			tempRect.y = 0;
+			tempRect.width = m_submapModel.width;
+			tempRect.height = m_submapModel.height;
+			
+			var __items:Vector.<XMapItemModel> = m_submapModel.arrayItems ();
+			var __item:XMapItemModel;
+			var __bitmap:XBitmap;
+			
+			tempRect.x = 0;
+			tempRect.y = 0;
+			
+			var i:int, __length:int = __items.length;
+			
+			for (i=0; i<__length; i++) {
+				__item = __items[i];
+					
+				__bitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
+					
+				trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+					
+				if (__bitmap != null) {
+					if (__item.frame != 0) {
+						__bitmap.goto (__item.frame);
+					}
+						
+					tempPoint.x = __item.x - m_submapModel.x;
+					tempPoint.y = __item.y - m_submapModel.y;
+						
+					tempRect.width = __item.boundingRect.width;
+					tempRect.height = __item.boundingRect.height;
+						
+					m_bitmap.bitmapData.copyPixels (
+						__bitmap.bitmapData, tempRect, tempPoint, null, null, true
+					);
+				}
+			}
+			
+			m_bitmap.bitmapData.unlock ();
 		}
 		
 //------------------------------------------------------------------------------------------

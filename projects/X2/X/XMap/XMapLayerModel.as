@@ -424,6 +424,45 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getArrayItemsAt (
+			__x1:Number, __y1:Number,
+			__x2:Number, __y2:Number
+		):Array {
+			
+			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
+			
+			var i:Number;
+			var src_items:Vector.<XMapItemModel>;
+			var dst_items:Array = new Array ();
+			var item:XMapItemModel;
+			
+			for (i=0; i<submaps.length; i++) {
+				src_items = submaps[i].arrayItems ();
+				
+				for (var x:int = 0; x<src_items.length; x++) {
+					item = src_items[x];
+						
+					var b:XRect = item.boundingRect.cloneX ();
+					b.offset (item.x, item.y);
+						
+					if (
+						!(__x2 < b.left || __x1 > b.right ||
+						__y2 < b.top || __y1 > b.bottom)
+					) {
+							
+						if (!(item in dst_items)) {
+	//							trace (": item: ", item);
+								
+							dst_items.push (item);
+						}
+					}
+				}
+			}
+			
+			return dst_items;		
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getItemsAtCX (
 				__x1:Number, __y1:Number,
 				__x2:Number, __y2:Number

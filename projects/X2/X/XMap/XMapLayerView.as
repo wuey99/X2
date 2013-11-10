@@ -80,9 +80,9 @@ package X.XMap {
 			
 //------------------------------------------------------------------------------------------
 			var __item:XMapItemModel;
-			var i:Number;
+			var i:int, __length:int = __items.length;
 									
-			for (i=0; i<__items.length; i++) {
+			for (i=0; i<__length; i++) {
 				__item = __items[i] as XMapItemModel;
 						
 				updateXMapItemModel (__item);
