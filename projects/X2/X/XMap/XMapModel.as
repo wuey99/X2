@@ -137,6 +137,16 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getArrayItemsAt (
+			__layer:Number,
+			__x1:Number, __y1:Number,
+			__x2:Number, __y2:Number
+		):Array {
+			
+			return m_layers[__layer].getArrayItemsAt (__x1, __y1, __x2, __y2);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getItemsAtCX (
 			__layer:Number,
 			__x1:Number, __y1:Number,
