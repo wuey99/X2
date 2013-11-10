@@ -225,6 +225,7 @@ package X.XMap {
 			
 			m_numLayers = __xmlList.length;
 			m_layers = new Array (m_numLayers);
+			m_useArrayItems = __useArrayItems;
 			
 			var i:Number;
 			
