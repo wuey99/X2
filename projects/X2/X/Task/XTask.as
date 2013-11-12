@@ -120,6 +120,9 @@ package X.Task {
 			
 			m_XTaskSubManager = createXTaskSubManager ();
 			
+			m_stack = new Array (8);
+			m_loop = new Array (8);
+			
 			m_isDead = true;
 		}
 		
@@ -134,9 +137,9 @@ package X.Task {
 		private function __reset (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			m_taskList = __taskList;
 			m_taskIndex = 0;
-			m_labels = new Object ();
-			m_stack = new Array (8);
-			m_loop = new Array (8);
+			m_labels = {};
+//			m_stack = new Array (8);
+//			m_loop = new Array (8);
 			m_stackPtr = 0;
 			m_ticks = 0x0100 + 0x0080;
 			m_flags = ~_FLAGS_EQ;
