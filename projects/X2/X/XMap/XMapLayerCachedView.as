@@ -111,11 +111,11 @@ package X.XMap {
 			
 			if (CONFIG::starling) {
 				var __logicObject:XSubmapViewImageCache =
-					xxx.getXLogicManager ().initXLogicObject (
+					xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
 						m_XMapView,
-						// logicClassName
-						new XSubmapViewImageCache as XLogicObject,
+						// class
+						XSubmapViewImageCache,
 						// item, layer, depth
 						null, m_currLayer, __depth,
 						// x, y, z
@@ -129,11 +129,11 @@ package X.XMap {
 			else
 			{
 				var __logicObject:XSubmapViewBitmapCache =
-					xxx.getXLogicManager ().initXLogicObject (
+					xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
 						m_XMapView,
-						// logicClassName
-						new XSubmapViewBitmapCache as XLogicObject,
+						// class
+						XSubmapViewBitmapCache,
 						// item, layer, depth
 						null, m_currLayer, __depth,
 						// x, y, z
