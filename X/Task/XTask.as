@@ -60,7 +60,7 @@ package X.Task {
 		private var m_ticks:int;
 		private var m_stack:Array;
 		private var m_loop:Array;
-		private var m_stackPtr:Number;
+		private var m_stackPtr:int;
 		private var m_parent:*;
 		private var m_flags:Number;
 		private var m_subTask:XTask;
