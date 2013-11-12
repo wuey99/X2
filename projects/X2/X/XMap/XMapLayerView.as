@@ -138,11 +138,11 @@ package X.XMap {
 					__logicObject = null;
 				}
 				else {
-					__logicObject = xxx.getXLogicManager ().initXLogicObject (
+					__logicObject = xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
 						m_XMapView,
-						// logicObject
-						new (__object as Class) () as XLogicObject,
+						// class
+						__object as Class,
 						// item, layer, depth
 						__item, m_currLayer, __depth,
 						// x, y, z
