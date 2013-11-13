@@ -125,7 +125,7 @@ package X.Pool {
 		
 //------------------------------------------------------------------------------------------
 		public function borrowObject ():Object {
-			if (m_freeObjects.length == 0) {
+			if (m_numFreeObjects == 0) {
 				addMoreObjects (m_overflow);
 			}
 			
