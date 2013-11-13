@@ -16,7 +16,7 @@ package X.World {
 		private var xxx:XWorld;
 		private var m_XLogicObjects:XDict;
 		private var m_XLogicObjectsTopLevel:XDict;
-		private var m_killQueue:Array;
+		private var m_killQueue:XDict;
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicManager (__xxx:XWorld) {
@@ -25,7 +25,7 @@ package X.World {
 			m_XLogicObjects = new XDict ();
 			m_XLogicObjectsTopLevel = new XDict ();
 			
-			m_killQueue = new Array ();
+			m_killQueue = new XDict ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -246,24 +246,24 @@ package X.World {
 		public function killLater (__object:XLogicObject):void {
 //			trace (": kill? ", __object);
 			
-			if (m_killQueue.indexOf (__object) == -1) {
-				m_killQueue.push (__object);
+			if (!m_killQueue.exists (__object)) {
+				m_killQueue.put (__object, 0);
 			}
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function emptyKillQueue ():void {
-			var i:Number;
+		public function emptyKillQueue ():void {	
+			m_killQueue.forEach (
+				function (x:*):void {
+					var __logicObject:XLogicObject = x as XLogicObject;
 					
-			for (i=0; i<m_killQueue.length; i++) {
-				var x:XLogicObject = m_killQueue[i] as XLogicObject;
-				
-				x.cleanup ();
-				
-				removeXLogicObject (x);
-			}
-			
-			m_killQueue = new Array ();
+					__logicObject.cleanup ();
+					
+					removeXLogicObject (__logicObject);
+					
+					m_killQueue.remove (__logicObject);
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------

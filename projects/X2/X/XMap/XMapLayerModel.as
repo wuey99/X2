@@ -408,11 +408,11 @@ package X.XMap {
 			var __x:Number, __y:Number;
 			var b:XRect;
 						
+			var push:int= 0;
+			
 			for (i=0; i<submaps.length; i++) {
 				src_items = submaps[i].items ();
-							
-				var push:int= 0;
-				
+											
 				src_items.forEach (
 					function (x:*):void {
 						item = x as XMapItemModel;
