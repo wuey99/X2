@@ -5,7 +5,8 @@ package X.Pool {
 	
 //------------------------------------------------------------------------------------------	
 	public class XObjectPoolManager extends Object {
-		private var m_freeObjects:Array;
+		public var m_freeObjects:Array;
+		public var m_numFreeObjects:int;
 		private var m_inuseObjects:XDict;
 		private var m_newObject:Function;
 		private var m_cloneObject:Function;
@@ -29,6 +30,7 @@ package X.Pool {
 			m_overflow = __overflow;
 			m_cleanup = __cleanup;
 			
+			m_numFreeObjects = 0;
 			m_numberOfBorrowedObjects = 0;
 			
 			addMoreObjects (__numObjects);
@@ -54,7 +56,7 @@ package X.Pool {
 			var i:Number;
 			
 			for (i=0; i<__numObjects; i++) {
-				m_freeObjects.push (m_newObject ());
+				m_freeObjects[m_numFreeObjects++] = (m_newObject ());
 			}
 		}
 
@@ -62,7 +64,7 @@ package X.Pool {
 		public function get freeObjects ():Array {
 			return m_freeObjects;
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function totalNumberOfObjects ():Number {
 			return m_freeObjects.length + m_numberOfBorrowedObjects;	
@@ -102,7 +104,7 @@ package X.Pool {
 //------------------------------------------------------------------------------------------
 		public function returnObject (__object:Object):void {
 			if (m_inuseObjects.exists (__object)) {
-				m_freeObjects.push (__object);
+				m_freeObjects[m_numFreeObjects++] = (__object);
 				
 				m_inuseObjects.remove (__object);
 				
@@ -113,7 +115,7 @@ package X.Pool {
 //------------------------------------------------------------------------------------------
 		public function returnObjectTo (__pool:XObjectPoolManager, __object:Object):void {
 			if (m_inuseObjects.exists (__object)) {
-				__pool.freeObjects.push (__object);
+				__pool.m_freeObjects[__pool.m_numFreeObjects++] = (__object);
 				
 				m_inuseObjects.remove (__object);
 				
@@ -131,6 +133,7 @@ package X.Pool {
 				
 			m_inuseObjects.put (__object, 0);
 			
+			m_numFreeObjects--;
 			m_numberOfBorrowedObjects++;
 			
 			return __object;

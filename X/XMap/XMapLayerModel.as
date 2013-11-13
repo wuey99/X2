@@ -379,9 +379,11 @@ package X.XMap {
 			__r1 = Math.max (__r1, 0);
 			__r2 = Math.min (__r2, m_submapRows-1);
 									
+			var push:int = 0;
+			
 			for (__row = __r1; __row <= __r2; __row++) {
 				for (__col = __c1; __col <= __c2; __col++) {
-					m_retrievedSubmaps.push ( m_XSubmaps[__row][__col] );
+					m_retrievedSubmaps[push++] = ( m_XSubmaps[__row][__col] );
 				}
 			}
 												
@@ -409,6 +411,8 @@ package X.XMap {
 			for (i=0; i<submaps.length; i++) {
 				src_items = submaps[i].items ();
 							
+				var push:int= 0;
+				
 				src_items.forEach (
 					function (x:*):void {
 						item = x as XMapItemModel;
@@ -421,7 +425,7 @@ package X.XMap {
 							) {
 								
 //							if (!(item in dst_items)) {
-								m_retrievedItems.push (item);
+								m_retrievedItems[push++] = (item);
 //							}
 						}
 					}
@@ -449,6 +453,8 @@ package X.XMap {
 			var __x:Number, __y:Number;
 			var b:XRect;
 			
+			var push:int = 0;
+			
 			for (i=0; i<submaps.length; i++) {
 				src_items = submaps[i].arrayItems ();
 				
@@ -465,7 +471,7 @@ package X.XMap {
 					) {
 							
 //						if (!(item in dst_items)) {
-							m_retrievedItems.push (item);
+							m_retrievedItems[push++] = (item);
 //						}
 					}
 				}
