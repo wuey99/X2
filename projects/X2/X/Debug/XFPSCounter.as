@@ -28,9 +28,9 @@ package X.Debug  {
 			
 			setupText (
 				// width
-				0,
+				700,
 				// height
-				0,
+				32,
 				// text
 				"FPS",
 				// font name
@@ -40,12 +40,14 @@ package X.Debug  {
 				// color
 				0xe0e0e0,
 				// bold
-				false
+				true
 			);
+			
+			oX = oY = 8;
 		}
 
 //------------------------------------------------------------------------------------------
-		protected function __addSpriteAt (__sprite:XTextSprite, __dx:Number=0, __dy:Number=0):XDepthSprite {
+		protected override function __addSpriteAt (__sprite:XTextSprite, __dx:Number=0, __dy:Number=0):XDepthSprite {
 			return addSpriteToHudAt (__sprite, __dx, __dy);	
 		}
 		
