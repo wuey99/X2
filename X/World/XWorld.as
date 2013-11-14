@@ -245,6 +245,19 @@ package X.World {
 				dbgDraw.m_drawFlags = b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit;
 				m_world.SetDebugDraw(dbgDraw);
 			}
+			
+			var __logicObject:XFPSCounter = getXLogicManager ().initXLogicObject (
+				// parent
+				null,
+				// logicObject
+				new XFPSCounter () as XLogicObject,
+				// item, layer, depth
+				null, -1, 1000000,
+				// x, y, z
+				0, 0, 0,
+				// scale, rotation
+				1.0, 0
+			) as XFPSCounter;
 		}
 		
 //------------------------------------------------------------------------------------------
