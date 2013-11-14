@@ -86,11 +86,16 @@ package X.Text {
 				__bold
 			);
 			
-			x_text = addSpriteAt (m_text, 0, 0);
+			x_text = __addSpriteAt (m_text, 0, 0);
 			
 			show ();			
 		}
 
+		//------------------------------------------------------------------------------------------
+		protected function __addSpriteAt (__sprite:XTextSprite, __dx:Number=0, __dy:Number=0):XDepthSprite {
+			return addSpriteAt (__sprite, __dx, __dy);	
+		}
+		
 		//------------------------------------------------------------------------------------------
 		public function get text ():XTextSprite {
 			return m_text;
