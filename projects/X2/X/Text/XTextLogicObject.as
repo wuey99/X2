@@ -66,7 +66,7 @@ package X.Text {
 		):void {
 			
 			if (x_text) {
-				removeSprite (x_text);
+				__removeSprite (x_text);
 			}
 			
 			m_text = createXTextSprite (
@@ -91,6 +91,11 @@ package X.Text {
 			show ();			
 		}
 
+		//------------------------------------------------------------------------------------------
+		protected function __removeSprite (__sprite:XDepthSprite):void {
+			removeSprite (__sprite);
+		}
+		
 		//------------------------------------------------------------------------------------------
 		protected function __addSpriteAt (__sprite:XTextSprite, __dx:Number=0, __dy:Number=0):XDepthSprite {
 			return addSpriteAt (__sprite, __dx, __dy);	

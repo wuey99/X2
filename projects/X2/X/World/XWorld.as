@@ -72,6 +72,10 @@ package X.World {
 		public var m_mouseX:Number;
 		public var m_mouseY:Number;
 		public var m_timer:Timer;
+		public var m_timer1000:Timer;
+		public var m_timer1000Signal:XSignal;
+		public var m_frameCount:Number;
+		public var m_FPS:Number;
 		
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
@@ -143,7 +147,9 @@ package X.World {
 			m_timer.start ();
 			m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
 			m_inuse_ENTER_FRAME = 0;
-
+			m_frameCount = 0;
+			m_FPS = 0;
+					
 			if (CONFIG::flash) {
 				addEventListener(Event.RENDER, onRenderFrame);
 				m_inuse_RENDER_FRAME = 0;
@@ -172,7 +178,12 @@ package X.World {
 			m_XSignalManager = new XSignalManager (__XApp);
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
 			m_XLogicObjectPoolManager = new XLogicObjectPoolManager (this);
-				
+			
+			m_timer1000 = new Timer (1000, 0);
+			m_timer1000.start ();
+			m_timer1000.addEventListener (TimerEvent.TIMER, onUpdateTimer1000);
+			m_timer1000Signal = getXSignalManager ().createXSignal ();
+			
 			m_XMapModel = null;
 						
 			m_XWorldLayers = new Array ();
@@ -261,10 +272,36 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function onEnterFrame(e:Event):void {
+		public function onEnterFrame (e:Event):void {
+			m_frameCount++;
+			
 			__onEnterFrame ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function onUpdateTimer1000 (e:Event):void {	
+			m_FPS = m_frameCount;
+			
+			m_frameCount = 0;
+			
+			m_timer1000Signal.fireSignal ();
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getFPS ():Number {
+			return m_FPS;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function addTimer1000Listener (__listener:Function):void {
+			m_timer1000Signal.addListener (__listener);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function removeTimer1000Listener (__listener:Function):void {
+			m_timer1000Signal.removeListener (__listener);
+		}
+		
 //------------------------------------------------------------------------------------------
 		protected function __onEnterFrame ():void {
 			if (m_inuse_ENTER_FRAME) {
