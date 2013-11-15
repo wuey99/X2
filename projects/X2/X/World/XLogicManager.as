@@ -176,7 +176,8 @@ package X.World {
 			__logicObject.setScale (__scale);
 			__logicObject.setRotation (__rotation);
 			__logicObject.setParent (__parent);
-
+			__logicObject.oAlpha = 1.0;
+			
 			if (__class) {
 				__logicObject.setPoolClass (__class);
 			}
@@ -224,6 +225,7 @@ package X.World {
 			__logicObject.setScale (__scale);
 			__logicObject.setRotation (__rotation);
 			__logicObject.setParent (__parent);
+			__logicObject.oAlpha = 1.0;
 			
 			if (__class) {
 				__logicObject.setPoolClass (__class);
