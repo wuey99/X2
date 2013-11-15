@@ -142,6 +142,8 @@ package X.World {
 				mouseChildren = true;
 			}
 			
+			addEventListener (Event.ENTER_FRAME, onFPSCounter);
+			
 			// Add event for main loop
 			m_timer = new Timer (__timerInterval, 0);
 			m_timer.start ();
@@ -270,11 +272,14 @@ package X.World {
 				1.0, 0
 			) as XFPSCounter;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function onFPSCounter (e:Event):void {
+			m_frameCount++;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function onEnterFrame (e:Event):void {
-			m_frameCount++;
-			
 			__onEnterFrame ();
 		}
 
