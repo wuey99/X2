@@ -429,7 +429,9 @@ package X.World.Logic {
 							oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
 			
 							collided = true;
-						break; // },
+						break;
+					default:
+						break;
 				} // ])[cx] ();
 				
 				if (collided) {
@@ -537,8 +539,10 @@ package X.World.Logic {
 							oY = (y2 - (m_cx.bottom) - 1);
 										
 							collided = true;
-						break; // },
+						break;
 					case CX_SOFTDN:
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -645,10 +649,12 @@ package X.World.Logic {
 								oX = (x1 + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
-							break; // },
+							break; 
 					case CX_SOFTUP:
 						break;
 					case CX_SOFTDN:
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -753,12 +759,14 @@ package X.World.Logic {
 							oX = (x2 - (m_cx.right) - 1);
 			
 							collided = true;
-						break; // },
+						break;
 					case CX_SOFTRT:
 						break;
 					case CX_SOFTUP:
 						break;
 					case CX_SOFTDN:
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -925,7 +933,9 @@ package X.World.Logic {
 							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
 							
 							looking = false;
-						break; // },
+						break;
+					default:
+						break;
 				} // ])[cx] ();
 				
 				if (collided) {
@@ -1073,9 +1083,11 @@ package X.World.Logic {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 								
 								looking = false;								
-							break; // },
+							break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1241,7 +1253,9 @@ package X.World.Logic {
 							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
 							
 							looking = false;
-						break; // },
+						break;
+					default:
+						break;
 				} // ])[cx] ();
 				
 				if (collided) {
@@ -1389,9 +1403,11 @@ package X.World.Logic {
 								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 								
 								looking = false;								
-							break; // },
+							break; 
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1556,12 +1572,14 @@ package X.World.Logic {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
-							break; // },
+							break;
 					case CX_SOFTUP:
 						looking = false;
 						break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1708,7 +1726,7 @@ package X.World.Logic {
 							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 			
 							collided = true;
-						break; // },
+						break;
 					case CX_SOFTRT:
 						looking = false;
 						break;
@@ -1717,6 +1735,8 @@ package X.World.Logic {
 						break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1881,12 +1901,14 @@ package X.World.Logic {
 								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
-							break; // },
+							break;
 					case CX_SOFTUP:
 						looking = false;
 						break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
@@ -2033,7 +2055,7 @@ package X.World.Logic {
 							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 			
 							collided = true;
-						break; // },
+						break; 
 					case CX_SOFTRT:
 						looking = false;
 						break;
@@ -2042,6 +2064,8 @@ package X.World.Logic {
 						break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					default:
 						break;
 				} // ])[cx] ();
 				
