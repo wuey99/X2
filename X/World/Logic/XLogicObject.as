@@ -594,6 +594,8 @@ package X.World.Logic {
 			var __bitmap:XBitmap = xxx.getXBitmapPoolManager ().borrowObject () as XBitmap;
 			__bitmap.setup ();
 			__bitmap.initWithClassName (xxx, null, __name);
+			__bitmap.alpha = 1.0;
+			__bitmap.scaleX = __bitmap.scaleY = 1.0;
 			
 			m_bitmaps.put (__name, __bitmap);
 			

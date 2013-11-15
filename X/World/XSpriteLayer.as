@@ -40,10 +40,12 @@ package X.World {
 			var __depthSprite:XDepthSprite = xxx.getXDepthSpritePoolManager ().borrowObject () as XDepthSprite;
 			
 			__depthSprite.visible2 = true;
+			__depthSprite.alpha = 1.0;
 			__depthSprite.clear ();
 			__depthSprite.addSprite (__sprite, __depth, this);
 			__depthSprite.visible = __visible;
 			__depthSprite.xxx = xxx;
+			__depthSprite.scaleX = __depthSprite.scaleY = 1.0;
 			
 			addChild (__depthSprite);
 				
