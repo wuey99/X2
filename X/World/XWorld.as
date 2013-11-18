@@ -35,7 +35,6 @@ package X.World {
 	import X.XMap.*;
 	
 	include "..\\flash.h";
-	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
@@ -56,6 +55,7 @@ package X.World {
 		public var m_parent:*;	
 		public var m_XApp:XApp
 		public var m_XLogicManager:XLogicManager;
+		public var m_XLogicManager2:XLogicManager;
 		public var m_XTaskManager:XTaskManager;
 		public var m_XTaskManagerCX:XTaskManager;
 		public var m_renderManager:XTaskManager;
@@ -76,6 +76,7 @@ package X.World {
 		public var m_timer1000Signal:XSignal;
 		public var m_frameCount:Number;
 		public var m_FPS:Number;
+		public var m_paused:Boolean;
 		
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
@@ -151,7 +152,8 @@ package X.World {
 			m_inuse_ENTER_FRAME = 0;
 			m_frameCount = 0;
 			m_FPS = 0;
-					
+			m_paused = false;
+			
 			if (CONFIG::flash) {
 				addEventListener(Event.RENDER, onRenderFrame);
 				m_inuse_RENDER_FRAME = 0;
@@ -173,9 +175,13 @@ package X.World {
 			
 			m_ticks = 0;
 			
-			m_XLogicManager = new XLogicManager (this);
+			m_XLogicManager = new XLogicManager (__XApp, this);
+			m_XLogicManager2 = new XLogicManager (__XApp, this);
+
+// deprecate this?
 			m_XTaskManager = new XTaskManager (__XApp);
 			m_XTaskManagerCX = new XTaskManager (__XApp);
+			
 			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager (__XApp);
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
@@ -223,8 +229,13 @@ package X.World {
 		public override function cleanup ():void {
 			super.cleanup ();
 			
+			m_XLogicManager.cleanup ();
+			m_XLogicManager2.cleanup ();
+			
+// deprecate this?
 			m_XTaskManager.removeAllTasks ();
 			m_XTaskManagerCX.removeAllTasks ();
+			
 			m_renderManager.removeAllTasks ();
 			m_XSignalManager.removeAllXSignals ();
 			m_XBulletCollisionManager.cleanup ();
@@ -259,7 +270,7 @@ package X.World {
 				m_world.SetDebugDraw(dbgDraw);
 			}
 			
-			var __logicObject:XFPSCounter = getXLogicManager ().initXLogicObject (
+			var __logicObject:XFPSCounter = getXLogicManager2 ().initXLogicObject (
 				// parent
 				null,
 				// logicObject
@@ -318,24 +329,42 @@ package X.World {
 			m_inuse_ENTER_FRAME++;
 			
 			getXLogicManager ().emptyKillQueue ();
+			getXLogicManager2 ().emptyKillQueue ();
 			
 			getXLogicManager ().updateLogic ();
+			getXLogicManager2 ().updateLogic ();
+			
+// will soon be deprecated?
 			getXTaskManager ().updateTasks ();
 			getXTaskManagerCX ().updateTasks ();
-//			getXLogicManager ().updatePhysics ();
-			getXLogicManager ().cullObjects ();
-			if (CONFIG::flash) {
-				m_world.Step (m_timeStep, m_iterations);
+			
+			if (!m_paused) {
+				getXLogicManager ().updateTasks ();
 			}
+			getXLogicManager2 ().updateTasks ();
+			
+//			getXLogicManager ().updatePhysics ();
+			
+			getXLogicManager ().cullObjects ();
+			getXLogicManager2 ().cullObjects ();
+			
+			if (CONFIG::flash) {
+//				m_world.Step (m_timeStep, m_iterations);
+			}
+			
 			getXLogicManager ().setValues ();
+			getXLogicManager2 ().setValues ();
 			
 			getXLogicManager ().emptyKillQueue ();
+			getXLogicManager2 ().emptyKillQueue ();
 			
 			m_XBulletCollisionManager.clearCollisions ();
 			
 			getXLogicManager ().setCollisions ();
+			getXLogicManager2 ().setCollisions ();
 			
 			getXLogicManager ().updateDisplay ();
+			getXLogicManager2 ().updateDisplay ();
 			
 			for (var i:Number=0; i<MAX_LAYERS; i++) {
 				if (getXWorldLayer (i).forceSort) {
@@ -347,6 +376,16 @@ package X.World {
 			getXHudLayer ().depthSort ();
 			
 			m_inuse_ENTER_FRAME--;			
+		}
+
+//------------------------------------------------------------------------------------------
+		public function pause ():void {
+			m_paused = true;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function unpause ():void {
+			m_paused = false;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -469,6 +508,11 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getXLogicManager2 ():XLogicManager {
+			return m_XLogicManager2;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getXBulletCollisionManager ():XBulletCollisionManager {
 			return  m_XBulletCollisionManager;
 		}
@@ -484,10 +528,14 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
+// deprecate and instead return XTaskManager from m_XLogicManager?
+//------------------------------------------------------------------------------------------		
 		public function getXTaskManager ():XTaskManager {
 			return m_XTaskManager;
 		}
 
+//------------------------------------------------------------------------------------------
+// deprecate and instead return XTaskManager from m_XLogicManager?
 //------------------------------------------------------------------------------------------
 		public function getXTaskManagerCX ():XTaskManager {
 			return m_XTaskManagerCX;

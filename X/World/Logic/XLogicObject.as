@@ -46,6 +46,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 	public class XLogicObject extends XSprite0 implements XRegistration {
 //		public var xxx:XWorld;
+		public var m_XLogicManager:XLogicManager;
 		public var m_parent:XLogicObject;
 		public var m_item:XMapItemModel;
 		public var m_xml:XSimpleXMLNode;
@@ -142,8 +143,8 @@ package X.World.Logic {
 				m_movieClips = new XDict ();
 				m_textSprites = new XDict ();
 				m_XSignals = new XDict ();
-				m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
-				m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());	
+				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
+				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	
 				m_killSignal = createXSignal ();
 				m_killSignalWithLogic = createXSignal ();
 			}
@@ -173,8 +174,8 @@ package X.World.Logic {
 				m_movieClips = new XDict ();
 				m_textSprites = new XDict ();
 				m_XSignals = new XDict ();
-				m_XTaskSubManager = new XTaskSubManager (getXTaskManager ());
-				m_XTaskSubManagerCX = new XTaskSubManager (getXTaskManagerCX ());	
+				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
+				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	
 				m_killSignal = createXSignal ();
 				m_killSignalWithLogic = createXSignal ();
 			}
@@ -263,7 +264,7 @@ package X.World.Logic {
 		public function killLater ():void {
 			isDead = true;
 			
-			xxx.getXLogicManager ().killLater (this);
+			getXLogicManager ().killLater (this);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -272,7 +273,7 @@ package X.World.Logic {
 		public function kill ():void {
 			isDead = true;
 			
-			xxx.getXLogicManager ().killLater (this);
+			getXLogicManager ().killLater (this);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -964,6 +965,16 @@ package X.World.Logic {
 		public function collisionCallback ():void {	
 		}
 
+//------------------------------------------------------------------------------------------
+		public function set XLogicManager (__value:XLogicManager):void {
+			m_XLogicManager = __value;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXLogicManager ():XLogicManager {
+			return m_XLogicManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		[Inline]
 		public function set boundingRect (__value:XRect):void {

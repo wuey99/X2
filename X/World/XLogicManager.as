@@ -5,6 +5,7 @@ package X.World {
 	import X.*;
 	import X.Collections.*;
 	import X.Geom.*;
+	import X.Task.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	import X.XMap.*;
@@ -14,20 +15,31 @@ package X.World {
 //------------------------------------------------------------------------------------------	
 	public class XLogicManager extends Object {
 		private var xxx:XWorld;
+		private var m_XTaskManager:XTaskManager;
+		private var m_XTaskManagerCX:XTaskManager;
 		private var m_XLogicObjects:XDict;
 		private var m_XLogicObjectsTopLevel:XDict;
 		private var m_killQueue:XDict;
+		private var m_paused:Boolean;
 		
 //------------------------------------------------------------------------------------------
-		public function XLogicManager (__xxx:XWorld) {
+		public function XLogicManager (__XApp:XApp, __xxx:XWorld) {
 			xxx = __xxx;
 			
 			m_XLogicObjects = new XDict ();
 			m_XLogicObjectsTopLevel = new XDict ();
+			m_XTaskManager = new XTaskManager (__XApp);
+			m_XTaskManagerCX = new XTaskManager (__XApp);
 			
 			m_killQueue = new XDict ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+			m_XTaskManager.removeAllTasks ();
+			m_XTaskManagerCX.removeAllTasks ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function createXLogicObjectFromClassName (
 			__parent:XLogicObject,
@@ -159,6 +171,7 @@ package X.World {
 
 			xxx.addChild (__logicObject);
 			
+			__logicObject.XLogicManager = this;
 			__logicObject.setDepth (__depth);
 			__logicObject.setRelativeDepthFlag (false);
 			__logicObject.setLayer (__layer);
@@ -208,6 +221,7 @@ package X.World {
 
 			xxx.addChild (__logicObject);
 			
+			__logicObject.XLogicManager = this;
 			__logicObject.setDepth (__depth);
 			__logicObject.setRelativeDepthFlag (__relative);
 			__logicObject.setLayer (__layer);
@@ -296,6 +310,22 @@ package X.World {
 			return m_XLogicObjects;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function updateTasks ():void {
+			m_XTaskManager.updateTasks ();
+			m_XTaskManagerCX.updateTasks ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXTaskManager ():XTaskManager {
+			return m_XTaskManager;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getXTaskManagerCX ():XTaskManager {
+			return m_XTaskManagerCX;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setCollisions ():void {
 			m_XLogicObjects.forEach (
