@@ -324,7 +324,7 @@ package X.World.Logic {
 			var itemPos:XPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			
 			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (r);
-			r.inflate (256, 256);
+			r.inflate (cullWidth (), cullHeight ());
 						
 			m_item.boundingRect.copy2 (i);
 			itemPos.x = m_item.x;
@@ -376,7 +376,7 @@ package X.World.Logic {
 			var i:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
 
 			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (r);
-			r.inflate (512, 512);
+			r.inflate (autoCullWidth (), autoCullHeight ());
 			
 			m_boundingRect.copy2 (i);
 			i.offsetPoint (getPos ());
@@ -399,6 +399,26 @@ package X.World.Logic {
 				xxx.getXRectPoolManager ().returnObject (r);
 				xxx.getXRectPoolManager ().returnObject (i);
 			}
+		}
+
+//------------------------------------------------------------------------------------------
+		public function cullWidth ():Number {
+			return 256;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function cullHeight ():Number {
+			return 256;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function autoCullWidth ():Number {
+			return 512;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function autoCullHeight ():Number {
+			return 512;
 		}
 		
 //------------------------------------------------------------------------------------------
