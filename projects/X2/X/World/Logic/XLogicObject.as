@@ -731,6 +731,10 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function addSpriteAt (__sprite:DisplayObject, __dx:Number, __dy:Number, __relative:Boolean = false):XDepthSprite {
+			if (m_layer == -1) {
+				return addSpriteToHudAt (__sprite, __dx, __dy);
+			}
+			
 			var __depthSprite:XDepthSprite;
 			
 			if (__relative || getRelativeDepthFlag ()) {
