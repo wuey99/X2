@@ -143,7 +143,7 @@ package X.World {
 				mouseChildren = true;
 			}
 			
-			addEventListener (Event.ENTER_FRAME, onFPSCounter);
+//			addEventListener (Event.ENTER_FRAME, onFPSCounter);
 			
 			// Add event for main loop
 			m_timer = new Timer (__timerInterval, 0);
