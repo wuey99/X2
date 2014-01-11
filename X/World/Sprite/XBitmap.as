@@ -277,6 +277,10 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
+				public static function setXApp (__XApp:XApp):void {
+				}
+				
+				//------------------------------------------------------------------------------------------
 				public function disposeBitmapByName (__name:String):void {
 				}
 				
