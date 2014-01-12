@@ -104,6 +104,17 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
+			if (m_submapModel.useArrayItems) {
+				arrayRefresh ();
+			}
+			else
+			{
+				dictRefresh ();
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function dictRefresh ():void {
 			var __renderTexture:RenderTexture = m_image.getTexture ();
 			
 			__renderTexture.drawBundled (
@@ -160,6 +171,71 @@ package X.XMap {
 				}
 			);
 
+			function __vline (x:Number):void {
+				var y:Number;
+			}
+			
+			function __hline (y:Number):void {
+				var x:Number;
+			}
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function arrayRefresh ():void {
+			var __renderTexture:RenderTexture = m_image.getTexture ();
+			
+			__renderTexture.drawBundled (
+				function ():void {
+					tempRect.x = 0;
+					tempRect.y = 0;
+					tempRect.width = m_submapModel.width;
+					tempRect.height = m_submapModel.height;
+					
+					__vline (0);
+					__vline (m_submapModel.width-1);
+					__hline (0);
+					__hline (m_submapModel.height-1);
+					
+					var __items:Vector.<XMapItemModel> = m_submapModel.arrayItems ();
+					var __item:XMapItemModel;
+					var __movieClip:XMovieClip;
+					
+					tempRect.x = 0;
+					tempRect.y = 0;
+					
+					var i:int, __length:int = __items.length;
+					
+					for (i=0; i<__length; i++) {
+							__item = __items[i];
+							
+							__movieClip = xxx.getMovieClipCacheManager ().get (__item.imageClassName);
+							
+							trace (": imageClassName: ", __item.imageClassName, __movieClip, xxx.getMovieClipCacheManager ().isQueued (__item.imageClassName), __movieClip.getMovieClip (), __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+							
+							trace (": movieClip: numFrames: ", __movieClip.getMovieClip ().numFrames);
+							
+							if (CONFIG::starling) {
+								if (__movieClip != null) {
+									if (__item.frame != 0) {
+										__movieClip.gotoAndStop (__item.frame);
+									}
+									
+									tempPoint.x = __item.x - m_submapModel.x;
+									tempPoint.y = __item.y - m_submapModel.y;
+									
+									tempRect.width = __item.boundingRect.width;
+									tempRect.height = __item.boundingRect.height;
+									
+									__movieClip.x = tempPoint.x;
+									__movieClip.y = tempPoint.y;
+									
+									__renderTexture.draw (__movieClip);
+								}
+							}
+					}
+				}
+			);
+			
 			function __vline (x:Number):void {
 				var y:Number;
 			}
