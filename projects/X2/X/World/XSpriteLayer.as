@@ -26,8 +26,8 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setup (__xxx:XWorld):void {		
-		 		xxx = __xxx;
+		public override function setup ():void {		
+		 	super.setup ();
 		}
 				
 //------------------------------------------------------------------------------------------
@@ -39,6 +39,7 @@ package X.World {
 		public function addSprite (__sprite:DisplayObject, __depth:Number, __visible:Boolean = false):XDepthSprite {
 			var __depthSprite:XDepthSprite = xxx.getXDepthSpritePoolManager ().borrowObject () as XDepthSprite;
 			
+			__depthSprite.setup ();
 			__depthSprite.visible2 = true;
 			__depthSprite.alpha = 1.0;
 			__depthSprite.clear ();
@@ -64,8 +65,10 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function removeSprite (__depthSprite:Sprite):void {
+		public function removeSprite (__depthSprite:XDepthSprite):void {
 			if (m_XDepthSpriteMap.exists (__depthSprite)) {
+				__depthSprite.cleanup ();
+				
 				if (CONFIG::starling) {
 					removeChild (__depthSprite, true);
 				}
@@ -81,7 +84,7 @@ package X.World {
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function moveSprite (__depthSprite:Sprite):void {
+		public function moveSprite (__depthSprite:XDepthSprite):void {
 			if (m_XDepthSpriteMap.exists (__depthSprite)) {
 				removeChild (__depthSprite);
 				

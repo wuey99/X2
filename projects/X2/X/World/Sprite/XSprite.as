@@ -24,17 +24,20 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------
 		public function XSprite () {
 			super ();
-		
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setup ():void {
 			m_pos = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
 			m_rect = g_XApp.getXRectPoolManager ().borrowObject () as XRect;
-			rp = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
+			rp = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;	
 			
 			setRegistration ();
 			
 			m_scale = 1.0;
 			m_visible = true;
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {	
 			g_XApp.getXPointPoolManager ().returnObject (m_pos);

@@ -33,6 +33,13 @@ package X.XMap {
 		public override function setup (__xxx:XWorld, args:Array):void {
 			super.setup (__xxx, args);
 		}
+
+		//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+			super.cleanup ();
+			
+			m_bitmap.cleanup ();
+		}
 		
 		//------------------------------------------------------------------------------------------
 		// create sprite

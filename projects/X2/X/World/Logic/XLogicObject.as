@@ -626,6 +626,9 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function createXMovieClip (__name:String):XMovieClip {
 			var __xmovieClip:XMovieClip = new XMovieClip ();
+			
+			__xmovieClip.setup ();
+			
 			__xmovieClip.initWithClassName (xxx, null, __name);
 			
 			m_movieClips.put (__name, __xmovieClip);
@@ -776,7 +779,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // remove a sprite from the World
 //------------------------------------------------------------------------------------------	
-		public function removeSprite (__sprite:Sprite):void {
+		public function removeSprite (__sprite:XDepthSprite):void {
 			if (m_worldSprites.exists (__sprite)) {
 				m_worldSprites.remove (__sprite);
 				
@@ -823,7 +826,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // remove a sprite from the HUD
 //------------------------------------------------------------------------------------------	
-		public function removeSpriteFromHud (__sprite:Sprite):void {
+		public function removeSpriteFromHud (__sprite:XDepthSprite):void {
 			if (m_hudSprites.exists (__sprite)) {
 				m_hudSprites.remove (__sprite);
 				

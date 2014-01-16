@@ -10,7 +10,7 @@ package X.World.UI {
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	
-	include "..\\..\\events.h";
+	import flash.events.*;
 	import flash.text.*;
 	import flash.utils.*;
 
@@ -158,69 +158,29 @@ package X.World.UI {
 		}
 		
 //------------------------------------------------------------------------------------------
-		if (CONFIG::starling) {
-			public function onMouseOver (e:TouchEvent):void {
-				__onMouseOver ();
-			}
-		}
-		else
-		{
 			public function onMouseOver (e:MouseEvent):void {
 				__onMouseOver ();
 			}			
-		}
 
 //------------------------------------------------------------------------------------------
-		if (CONFIG::starling) {
-			public function onMouseDown (e:TouchEvent):void {
-				__onMouseDown ();
-			}
-		}
-		else
-		{
 			public function onMouseDown (e:MouseEvent):void {
 				__onMouseDown ();
 			}			
-		}
 
 //------------------------------------------------------------------------------------------
-		if (CONFIG::starling) {
-			public function onMouseUp (e:TouchEvent):void {
-				__onMouseUp ();
-			}
-		}
-		else
-		{
 			public function onMouseUp (e:MouseEvent):void {
 				__onMouseUp ();
 			}			
-		}
 
 //------------------------------------------------------------------------------------------
-		if (CONFIG::starling) {
-			public function onMouseMove (e:TouchEvent):void {	
-				__onMouseMove ();
-			}
-		}
-		else
-		{
 			public function onMouseMove (e:MouseEvent):void {	
 				__onMouseMove ();
 			}			
-		}
 		
 //------------------------------------------------------------------------------------------	
-		if (CONFIG::starling) {
-			public function onMouseOut (e:TouchEvent):void {
-				__onMouseOut ();
-			}
-		}
-		else
-		{
 			public function onMouseOut (e:MouseEvent):void {
 				__onMouseOut ();
 			}			
-		}
 
 //------------------------------------------------------------------------------------------
 		public function setNormalState ():void {
