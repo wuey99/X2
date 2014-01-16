@@ -24,6 +24,8 @@ package X.World.Sprite {
 			__color:int=0x000000,
 			__bold:Boolean=false
 		) {
+			setup ();
+			
 			if (CONFIG::starling) {
 				m_text = new TextField (__width, __height, __text, __fontName, __fontSize, __color, __bold);
 			}
@@ -45,7 +47,8 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setup ():void {
+		public override function setup ():void {
+			super.setup ();
 		}
 
 //------------------------------------------------------------------------------------------

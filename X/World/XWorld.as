@@ -45,6 +45,7 @@ package X.World {
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.events.EnterFrameEvent;
 	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
@@ -130,6 +131,8 @@ package X.World {
 		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32){
 			super ();
 			
+			setup ();
+			
 			m_parent = __parent;
 			m_XApp = __XApp;
 			
@@ -149,6 +152,9 @@ package X.World {
 			m_timer = new Timer (__timerInterval, 0);
 			m_timer.start ();
 			m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
+			
+//			addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrameStarling);
+			
 			m_inuse_ENTER_FRAME = 0;
 			m_frameCount = 0;
 			m_FPS = 0;
@@ -199,14 +205,16 @@ package X.World {
 			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
 //			for (var i:Number = 0; i<MAX_LAYERS; i++) {
 				m_XWorldLayers[i] = new XSpriteLayer ();
-				m_XWorldLayers[i].setup (this);
+				m_XWorldLayers[i].setup ();
+				m_XWorldLayers[i].xxx = this;
 				addChild (m_XWorldLayers[i]);
 				m_XWorldLayers[i].mouseEnabled = true;
 				m_XWorldLayers[i].mouseChildren = true;
 			}
 
 			m_XHudLayer = new XSpriteLayer ();
-			m_XHudLayer.setup (this);
+			m_XHudLayer.setup ();
+			m_XHudLayer.xxx = this;
 			addChild (m_XHudLayer);
 
 			if (CONFIG::flash) {
@@ -294,6 +302,11 @@ package X.World {
 			__onEnterFrame ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function onEnterFrameStarling (e:EnterFrameEvent):void {
+			__onEnterFrame ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function onUpdateTimer1000 (e:Event):void {	
 			m_FPS = m_frameCount;
@@ -417,7 +430,7 @@ package X.World {
 						m_mouseX = __location.x;
 						m_mouseY = __location.y;
 						
-						trace (": mouseX, mouseY: ", m_mouseX, m_mouseY);
+						trace (": XWorld (mouseX, mouseY): ", m_mouseX, m_mouseY);
 					}
 				}
 			}

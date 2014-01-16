@@ -57,6 +57,9 @@ package X.Texture {
 		private function __createXMovieClip (__className:String):XMovieClip {
 			if (CONFIG::starling) {
 				var __xmovieClip:XMovieClip = new XMovieClip ();
+				
+				__xmovieClip.setup ();
+				
 				__xmovieClip.initWithClassName (null, m_XApp, __className);
 				
 				m_movieClips.put (__className, __xmovieClip);

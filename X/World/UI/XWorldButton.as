@@ -96,10 +96,10 @@ package X.World.UI {
 			xxx.getXTaskManager ().addTask ([
 				function ():void {
 //					xxx.getParent ().stage.addEventListener (xxx.MOUSE_OVER, onMouseOver);
-					xxx.getParent ().stage.addEventListener (xxx.MOUSE_DOWN, onMouseDown);
-					xxx.getParent ().stage.addEventListener (xxx.MOUSE_MOVE, onMouseMove);
-					xxx.getParent ().stage.addEventListener (xxx.MOUSE_UP, onMouseUp);
-					xxx.getParent ().stage.addEventListener (xxx.MOUSE_OUT, onMouseOut);
+					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
+					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
+					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
+					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_OUT, onMouseOut);
 				},
 				
 				XTask.RETN,
@@ -131,6 +131,8 @@ package X.World.UI {
 			var __dx:Number = __mouse.x - __button.x;
 			var __dy:Number = __mouse.y - __button.y;
 	
+			trace (": XWorldButton (mouseX, mouseY): ", xxx.mouseX, xxx.mouseY, __mouse.x, __mouse.y, __button.x, __button.y);
+			
 			if (__dx < 0 || __dx > m_width) {
 				return false;
 			}
