@@ -146,14 +146,18 @@ package X.World {
 				mouseChildren = true;
 			}
 			
-//			addEventListener (Event.ENTER_FRAME, onFPSCounter);
+			if (CONFIG::starling) {
+				addEventListener (EnterFrameEvent.ENTER_FRAME, onFPSCounterStarling);
+			}
+			else
+			{
+				addEventListener (Event.ENTER_FRAME, onFPSCounter);
+			}
 			
 			// Add event for main loop
 			m_timer = new Timer (__timerInterval, 0);
 			m_timer.start ();
 			m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
-			
-//			addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrameStarling);
 			
 			m_inuse_ENTER_FRAME = 0;
 			m_frameCount = 0;
@@ -296,17 +300,17 @@ package X.World {
 		public function onFPSCounter (e:Event):void {
 			m_frameCount++;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function onFPSCounterStarling (e:EnterFrameEvent):void {
+			m_frameCount++;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function onEnterFrame (e:Event):void {
 			__onEnterFrame ();
 		}
 
-//------------------------------------------------------------------------------------------
-		public function onEnterFrameStarling (e:EnterFrameEvent):void {
-			__onEnterFrame ();
-		}
-		
 //------------------------------------------------------------------------------------------
 		public function onUpdateTimer1000 (e:Event):void {	
 			m_FPS = m_frameCount;
