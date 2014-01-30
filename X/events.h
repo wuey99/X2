@@ -1,1 +1,1 @@
-	import starling.events.*;
+	import flash.events.*;
