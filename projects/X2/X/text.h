@@ -1,1 +1,1 @@
-	import starling.text.*;
+	import flash.text.*;
