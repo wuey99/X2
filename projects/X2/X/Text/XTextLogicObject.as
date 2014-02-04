@@ -66,6 +66,8 @@ package X.Text {
 		):void {
 			
 			if (x_text) {
+				removeXTextSprite (m_text);
+				
 				__removeSprite (x_text);
 			}
 			
@@ -94,6 +96,8 @@ package X.Text {
 		//------------------------------------------------------------------------------------------
 		protected function __removeSprite (__sprite:XDepthSprite):void {
 			removeSprite (__sprite);
+			
+			removeSpriteFromHud (__sprite);
 		}
 		
 		//------------------------------------------------------------------------------------------
