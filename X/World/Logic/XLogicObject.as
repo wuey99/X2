@@ -697,6 +697,15 @@ package X.World.Logic {
 			
 			m_movieClips.removeAll ();
 		}
+
+//------------------------------------------------------------------------------------------
+		public function removeXTextSprite (__textSprite:XTextSprite):void {
+			if (m_textSprites.exists (__textSprite)) {
+				__textSprite.cleanup();
+				
+				m_textSprites.remove (__textSprite);
+			}
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function removeAllXTextSprites ():void {
