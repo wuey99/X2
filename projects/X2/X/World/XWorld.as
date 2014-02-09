@@ -384,7 +384,8 @@ package X.World {
 			getXLogicManager2 ().updateDisplay ();
 			
 			for (var i:Number=0; i<MAX_LAYERS; i++) {
-				if (getXWorldLayer (i).forceSort) {
+//				if (getXWorldLayer (i).forceSort) {
+				if (true) {
 					getXWorldLayer (i).depthSort ();
 					getXWorldLayer (i).forceSort = false;
 				}
