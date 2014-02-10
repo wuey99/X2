@@ -430,6 +430,8 @@ package X.World.Logic {
 			
 							collided = true;
 						break;
+					case CX_DEATH:
+						break;
 					default:
 						break;
 				} // ])[cx] ();
@@ -541,6 +543,8 @@ package X.World.Logic {
 							collided = true;
 						break;
 					case CX_SOFTDN:
+						break;
+					case CX_DEATH:
 						break;
 					default:
 						break;
@@ -654,6 +658,8 @@ package X.World.Logic {
 						break;
 					case CX_SOFTDN:
 						break;
+					case CX_DEATH:
+						break;
 					default:
 						break;
 				} // ])[cx] ();
@@ -765,6 +771,8 @@ package X.World.Logic {
 					case CX_SOFTUP:
 						break;
 					case CX_SOFTDN:
+						break;
+					case CX_DEATH:
 						break;
 					default:
 						break;
@@ -934,6 +942,8 @@ package X.World.Logic {
 							
 							looking = false;
 						break;
+					case CX_DEATH:
+						break;
 					default:
 						break;
 				} // ])[cx] ();
@@ -1086,6 +1096,8 @@ package X.World.Logic {
 							break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					case CX_DEATH:
 						break;
 					default:
 						break;
@@ -1254,6 +1266,8 @@ package X.World.Logic {
 							
 							looking = false;
 						break;
+					case CX_DEATH:
+						break;
 					default:
 						break;
 				} // ])[cx] ();
@@ -1406,6 +1420,8 @@ package X.World.Logic {
 							break; 
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					case CX_DEATH:
 						break;
 					default:
 						break;
@@ -1579,6 +1595,8 @@ package X.World.Logic {
 					case CX_SOFTDN:
 						looking = false;
 						break;
+					case CX_DEATH:
+						break;
 					default:
 						break;
 				} // ])[cx] ();
@@ -1735,6 +1753,8 @@ package X.World.Logic {
 						break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					case CX_DEATH:
 						break;
 					default:
 						break;
@@ -1908,6 +1928,8 @@ package X.World.Logic {
 					case CX_SOFTDN:
 						looking = false;
 						break;
+					case CX_DEATH:
+						break;
 					default:
 						break;
 				} // ])[cx] ();
@@ -2064,6 +2086,8 @@ package X.World.Logic {
 						break;
 					case CX_SOFTDN:
 						looking = false;
+						break;
+					case CX_DEATH:
 						break;
 					default:
 						break;

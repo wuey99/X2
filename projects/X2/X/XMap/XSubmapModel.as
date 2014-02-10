@@ -81,7 +81,10 @@ package X.XMap {
 		// special solids
 		public static const CX_SOLIDX001:int = 28;
 		
-		public static const CX_MAX:int = 29;
+		// death
+		public static const CX_DEATH:int = 29;
+		
+		public static const CX_MAX:int = 30;
 		
 // collision tile width, height
 		public static const CX_TILE_WIDTH:int = 16;
