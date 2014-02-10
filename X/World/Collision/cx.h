@@ -53,7 +53,10 @@
 		// special solids
 		public const CX_SOLIDX001:int = 28;
 		
-		public const CX_MAX:int = 29;
+		// death
+		public const CX_DEATH:int = 29;
+		
+		public const CX_MAX:int = 30;
 		
 		// collision tile width, height
 		public const CX_TILE_WIDTH:int = 16;
