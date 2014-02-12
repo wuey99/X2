@@ -943,6 +943,7 @@ package X.World.Logic {
 							looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
@@ -1098,6 +1099,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
@@ -1267,6 +1269,7 @@ package X.World.Logic {
 							looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
@@ -1422,6 +1425,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
@@ -1596,6 +1600,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
@@ -1755,6 +1760,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
@@ -1929,6 +1935,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
@@ -2088,6 +2095,7 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_DEATH:
+						looking = false;
 						break;
 					default:
 						break;
