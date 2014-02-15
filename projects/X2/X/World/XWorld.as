@@ -712,6 +712,11 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function realDistance (dx:Number, dy:Number):Number {
+			return Math.sqrt (dx*dx + dy*dy);		
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function globalToWorld (__layer:Number, __p:XPoint):XPoint {
 			var __x:Point;
 			
