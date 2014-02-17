@@ -131,7 +131,7 @@ package X.World.UI {
 			var __dx:Number = __mouse.x - __button.x;
 			var __dy:Number = __mouse.y - __button.y;
 	
-			trace (": XWorldButton (mouseX, mouseY): ", xxx.mouseX, xxx.mouseY, __mouse.x, __mouse.y, __button.x, __button.y);
+//			trace (": XWorldButton (mouseX, mouseY): ", xxx.mouseX, xxx.mouseY, __mouse.x, __mouse.y, __button.x, __button.y);
 			
 			if (__dx < 0 || __dx > m_width) {
 				return false;
