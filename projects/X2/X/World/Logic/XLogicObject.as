@@ -145,8 +145,6 @@ package X.World.Logic {
 				m_XSignals = new XDict ();
 				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
 				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	
-				m_killSignal = createXSignal ();
-				m_killSignalWithLogic = createXSignal ();
 			}
 		}
 		
@@ -176,9 +174,10 @@ package X.World.Logic {
 				m_XSignals = new XDict ();
 				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
 				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	
-				m_killSignal = createXSignal ();
-				m_killSignalWithLogic = createXSignal ();
 			}
+			
+			m_killSignal = createXSignal ();
+			m_killSignalWithLogic = createXSignal ();
 			
 			m_pos = xxx.getXPointPoolManager ().borrowObject () as XPoint;
 			rp = xxx.getXPointPoolManager ().borrowObject () as XPoint;
