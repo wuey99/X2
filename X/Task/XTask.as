@@ -91,6 +91,7 @@ package X.Task {
 		public static const FUNC:Number = 11;
 		public static const WAIT1000:Number = 12; 
 		public static const UNTIL:Number = 13;
+		public static const POP:Number = 14;
 		
 // private versions of op-codes (for internal use)
 		public const _CALL:Number = 0;
@@ -107,6 +108,7 @@ package X.Task {
 		public const _FUNC:Number = 11;
 		public const _WAIT1000:Number = 12; 
 		public const _UNTIL:Number = 13;
+		public const _POP:Number = 14;
 		
 		public const _FLAGS_EQ:Number = 1;
 		
@@ -341,6 +343,11 @@ package X.Task {
 							i++;
 							
 							break;
+						
+						case _POP:
+							i++;
+							
+							break;
 					}
 				}
 			}
@@ -500,6 +507,13 @@ package X.Task {
 					
 					m_taskIndex = m_stack[m_stackPtr];
 					
+					break;
+				
+				//------------------------------------------------------------------------------------------					
+				case _POP:
+				//------------------------------------------------------------------------------------------					
+					m_stackPtr--;
+
 					break;
 				
 				//------------------------------------------------------------------------------------------
