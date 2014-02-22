@@ -39,7 +39,7 @@ package X.Text {
 			
 			gravity.gotoTask (getPhysicsTask$ (0.25));
 			
-			Idle_Script ();
+			initScript ();
 			
 			addTask ([
 				XTask.LABEL, "loop",
@@ -54,6 +54,11 @@ package X.Text {
 			]);
 		}
 
+		//------------------------------------------------------------------------------------------
+		public function initScript ():void {
+			Idle_Script ();
+		}
+		
 		//------------------------------------------------------------------------------------------
 		public function setupText (
 			__width:Number=32,
