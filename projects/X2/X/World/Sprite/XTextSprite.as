@@ -190,11 +190,19 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public override function get width ():Number {
+			return m_text.width;
+		}
+		
 		public override function set width (__value:Number):void {
 			m_text.width = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
+		public override function get height ():Number {
+			return m_text.height;
+		}
+		
 		public override function set height (__value:Number):void {
 			m_text.height = __value;
 		}
@@ -224,7 +232,17 @@ package X.World.Sprite {
 //------------------------------------------------------------------------------------------
 		public function autoCalcSize ():void {
 			width =	textWidth + 8;
-			height = textHeight;
+			height = textHeight + 8;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function autoCalcWidth ():void {
+			width =	textWidth + 8;
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function autoCalcHeight ():void {
+			height = textHeight + 8;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -263,7 +281,7 @@ package X.World.Sprite {
 			}
 			else
 			{
-				m_text.multiline = __value
+				m_text.multiline = __value; __format ();
 			}
 		}
 		
@@ -273,7 +291,7 @@ package X.World.Sprite {
 			}
 			else
 			{
-				m_text.wordWrap = __value;
+				m_text.wordWrap = __value; __format ();
 			}
 		}
 

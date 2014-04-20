@@ -121,16 +121,22 @@ package X.Text {
 		}
 
 		//------------------------------------------------------------------------------------------
+		public function autoCalcWidth ():void {
+			m_text.autoCalcWidth ();
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function autoCalcHeight ():void {
+			m_text.autoCalcHeight ();
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public function centerOnX (__x:Number, __width:Number):void {	
-			autoCalcSize ();
-			
 			oX = __x + (__width - m_text.width)/2;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function centerOnY (__y:Number, __height:Number):void {
-			autoCalcSize ();
-			
 			oY = __y + (__height - m_text.height)/2;
 		}
 		
