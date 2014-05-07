@@ -39,7 +39,7 @@
 // http://creativecommons.org/licenses/by-nc-sa/3.0/legalcode
 //
 // The "X-Engine" is free for non-commerical use.
-// For commercial use, you will need to provide additional credits.
+// For commercial use, you will need to provide proper credits.
 // Please contact me @ wuey99[dot]gmail[dot]com for more details.
 // <$end$/>
 //------------------------------------------------------------------------------------------
