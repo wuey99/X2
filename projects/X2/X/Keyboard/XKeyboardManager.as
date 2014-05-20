@@ -141,6 +141,8 @@ package X.Keyboard {
 				
 				m_parent.stage.removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
 				m_parent.stage.removeEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
+				m_parent.stage.removeEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
+				m_parent.stage.removeEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
 				
 				m_focus = null;
 			}
