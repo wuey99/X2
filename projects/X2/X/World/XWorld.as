@@ -170,6 +170,7 @@ package X.World {
 		public var m_XMovieClipCacheManager:XMovieClipCacheManager;
 		public var m_XTextLogicObject:XTextLogicObject;
 		public var m_GUID:GUID;
+		public var m_Domain:Domain;
 		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32){
