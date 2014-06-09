@@ -14,9 +14,9 @@ package X.Utils {
 		
 		//------------------------------------------------------------------------------------------
 		public static function getDomain (__root:Sprite):String {
-			var __urlString:String	= __root.loaderInfo.url;
-			var __urlArray:Array	= __urlString.split("://");
-			var __fullDomainString:String	= __urlArray[1].split("/")[0];
+			var __urlString:String = __root.loaderInfo.url;
+			var __urlArray:Array = __urlString.split("://");
+			var __fullDomainString:String = __urlArray[1].split("/")[0];
 			
 			var __domainParts:Array = __fullDomainString.split (".");
 			
