@@ -148,7 +148,7 @@ package X.World.UI {
 					*/
 					
 					xxx.addMouseDownListener (onMouseDown);
-					xxx.addMouseMoveListener (onMouseMove);
+					xxx.addPolledMouseMoveListener (onPolledMouseMove);
 					xxx.addMouseUpListener (onMouseUp);
 					xxx.addMouseOutListener (onMouseOut);
 				},
@@ -163,6 +163,11 @@ package X.World.UI {
 			xxx.removeMouseMoveListener (onMouseMove);
 			xxx.removeMouseUpListener (onMouseUp);
 			xxx.removeMouseOutListener (onMouseOut);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function onPolledMouseMove (__point:XPoint):void {
+			__onMouseMove ();
 		}
 		
 		//------------------------------------------------------------------------------------------

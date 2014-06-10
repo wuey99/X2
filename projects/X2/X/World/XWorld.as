@@ -125,6 +125,7 @@ package X.World {
 		public var m_mouseOverSignal:XSignal;
 		public var m_mouseDownSignal:XSignal;
 		public var m_mouseMoveSignal:XSignal;
+		public var m_polledMouseMoveSignal:XSignal;
 		public var m_mouseUpSignal:XSignal;
 		public var m_mouseOutSignal:XSignal;
 		
@@ -515,9 +516,15 @@ package X.World {
 			m_mouseOverSignal = new XSignal ();
 			m_mouseDownSignal = new XSignal ();
 			m_mouseMoveSignal = new XSignal ();
+			m_polledMouseMoveSignal = new XSignal ();
 			m_mouseUpSignal = new XSignal ();
 			m_mouseOutSignal = new XSignal ();
 						
+			var __point:XPoint = new XPoint;
+			
+			var __oldX:Number;
+			var __oldY:Number;
+			
 			getXTaskManager ().addTask ([
 				XTask.WAIT, 0x0100,
 				
@@ -527,11 +534,24 @@ package X.World {
 					getFlashStage ().addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
 					getFlashStage ().addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
 					getFlashStage ().addEventListener (MouseEvent.MOUSE_OUT, onMouseOut);
+					
+					__oldX = mouseX;
+					__oldY = mouseY;
 				},
 				
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,
-					
+						function ():void {
+							if (__oldX != mouseX || __oldY != mouseY) {
+								__point.x = mouseX;
+								__point.y = mouseY;
+								
+								m_polledMouseMoveSignal.fireSignal (__point);
+								
+								__oldX = mouseX; __oldY = mouseY;
+							}
+						},
+						
 					XTask.GOTO, "loop",
 					
 				XTask.RETN,
@@ -542,6 +562,7 @@ package X.World {
 		public function quitMouseScript ():void {
 			m_mouseOverSignal.removeAllListeners ();
 			m_mouseMoveSignal.removeAllListeners ();
+			m_polledMouseMoveSignal.removeAllListeners ();
 			m_mouseUpSignal.removeAllListeners ();
 			m_mouseOutSignal.removeAllListeners ();
 		}
@@ -583,6 +604,15 @@ package X.World {
 
 		public function removeMouseMoveListener (__listener:Function):void {
 			m_mouseMoveSignal.removeListener (__listener);
+		}
+
+//------------------------------------------------------------------------------------------		
+		public function addPolledMouseMoveListener (__listener:Function):void {
+			m_polledMouseMoveSignal.addListener (__listener);
+		}
+		
+		public function removePolledMouseMoveListener (__listener:Function):void {
+			m_polledMouseMoveSignal.removeListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
