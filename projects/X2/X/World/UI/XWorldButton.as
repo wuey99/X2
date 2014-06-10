@@ -171,7 +171,7 @@ package X.World.UI {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		private function getWorldCoordinates ():XPoint {
+		protected function getWorldCoordinates ():XPoint {
 			var __logicObject:XLogicObject = this.getParent ();
 			
 			var __x:Number = oX, __y:Number = oY;
