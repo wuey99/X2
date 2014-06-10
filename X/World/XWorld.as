@@ -142,6 +142,7 @@ package X.World {
 		public var m_XDocument:XDocument;
 		public var m_XButton:XButton;
 		public var m_XWorldButton:XWorldButton;
+		public var m_XWorldButton4:XWorldButton4;
 		public var m_XSprite:XSprite;
 		public var m_XTask:XTask;
 		public var m_XDatasource:XDatasource;
