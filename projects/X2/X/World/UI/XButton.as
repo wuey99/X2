@@ -279,7 +279,7 @@ package X.World.UI {
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {			
 			m_sprite = createXMovieClip (m_buttonClassName);
-			x_sprite = addSpriteToHud (m_sprite);
+			x_sprite = addSpriteAt (m_sprite, 0, 0);
 			
 			__gotoState (NORMAL_STATE);
 			
