@@ -78,7 +78,6 @@ package X.World {
 	import X.XML.*;
 	import X.XMap.*;
 	
-	include "..\\flash.h";
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
@@ -86,10 +85,10 @@ package X.World {
 	import flash.system.*;
 	import flash.utils.Timer;
 	
+	import starling.events.EnterFrameEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.events.EnterFrameEvent;
 	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
@@ -122,6 +121,12 @@ package X.World {
 		public var m_frameCount:Number;
 		public var m_FPS:Number;
 		public var m_paused:Boolean;
+
+		public var m_mouseOverSignal:XSignal;
+		public var m_mouseDownSignal:XSignal;
+		public var m_mouseMoveSignal:XSignal;
+		public var m_mouseUpSignal:XSignal;
+		public var m_mouseOutSignal:XSignal;
 		
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
@@ -247,6 +252,8 @@ package X.World {
 			m_timer1000.addEventListener (TimerEvent.TIMER, onUpdateTimer1000);
 			m_timer1000Signal = getXSignalManager ().createXSignal ();
 			
+			initMouseScript ();
+			
 			m_XMapModel = null;
 						
 			m_XWorldLayers = new Array ();
@@ -286,6 +293,8 @@ package X.World {
 		public override function cleanup ():void {
 			super.cleanup ();
 			
+			quitMouseScript ();
+			
 			m_XLogicManager.cleanup ();
 			m_XLogicManager2.cleanup ();
 			
@@ -313,6 +322,8 @@ package X.World {
 			// set debug draw
 			
 			if (CONFIG::flash) {	
+				import flash.display.Sprite;
+				
 //				var dbgDraw:b2DebugDraw = new b2DebugDraw();
 				var dbgDraw:XDebugDraw = new XDebugDraw(this);
 				var dbgSprite:Sprite = new Sprite ();
@@ -499,6 +510,87 @@ package X.World {
 			}
 		}
 
+//------------------------------------------------------------------------------------------
+		public function initMouseScript ():void {
+			m_mouseOverSignal = new XSignal ();
+			m_mouseDownSignal = new XSignal ();
+			m_mouseMoveSignal = new XSignal ();
+			m_mouseUpSignal = new XSignal ();
+			m_mouseOutSignal = new XSignal ();
+						
+			getXTaskManager ().addTask ([
+				XTask.WAIT, 0x0100,
+				
+				function ():void {
+					// xxx.getParent ().stage.addEventListener (xxx.MOUSE_OVER, onMouseOver);
+					getFlashStage ().addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
+					getFlashStage ().addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
+					getFlashStage ().addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
+					getFlashStage ().addEventListener (MouseEvent.MOUSE_OUT, onMouseOut);
+				},
+				
+				XTask.LABEL, "loop",
+					XTask.WAIT, 0x0100,
+					
+					XTask.GOTO, "loop",
+					
+				XTask.RETN,
+			]);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function quitMouseScript ():void {
+			m_mouseOverSignal.removeAllListeners ();
+			m_mouseMoveSignal.removeAllListeners ();
+			m_mouseUpSignal.removeAllListeners ();
+			m_mouseOutSignal.removeAllListeners ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onMouseOver (e:MouseEvent):void {
+			m_mouseOverSignal.fireSignal (e);
+		}
+		
+		public function addMouseOverListener (__listener:Function):void {
+			m_mouseOverSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onMouseDown (e:MouseEvent):void {	
+			m_mouseDownSignal.fireSignal (e);
+		}
+		
+		public function addMouseDownListener (__listener:Function):void {
+			m_mouseDownSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onMouseMove (e:MouseEvent):void {	
+			m_mouseMoveSignal.fireSignal (e);
+		}
+		
+		public function addMouseMoveListener (__listener:Function):void {
+			m_mouseMoveSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onMouseUp (e:MouseEvent):void {	
+			m_mouseUpSignal.fireSignal (e);
+		}
+		
+		public function addMouseUpListener (__listener:Function):void {
+			m_mouseUpSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onMouseOut (e:MouseEvent):void {	
+			m_mouseOutSignal.fireSignal (e);
+		}
+		
+		public function addMouseOutListener (__listener:Function):void {
+			m_mouseOutSignal.addListener (__listener);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public override function get mouseX ():Number {
 			if (CONFIG::starling) {
