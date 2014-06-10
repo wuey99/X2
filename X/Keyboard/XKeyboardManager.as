@@ -46,6 +46,7 @@
 package X.Keyboard {
 	
 	import X.World.*;
+	import X.Geom.*
 	import X.Task.*;
 	import X.Collections.*;
 	
@@ -97,14 +98,14 @@ package X.Keyboard {
 			if (m_focus == null) {
 				m_parent.stage.addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
 				m_parent.stage.addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
-				m_parent.stage.addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
-				m_parent.stage.addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
+				xxx.addMouseDownListener (onMouseDown);
+//				xxx.addPolledMouseMoveListener (onMouseMove);
 				
 				takeStageFocus ();
 				
 				m_focus = xxx.getXTaskManager ().addTask ([
 					XTask.LABEL, "loop",
-						XTask.WAIT, 0x0100,
+						XTask.WAIT, 0x0800,
 						
 						function ():void {
 							takeStageFocus ();
@@ -130,7 +131,7 @@ package X.Keyboard {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function onMouseMove (e:MouseEvent):void {
+		public function onMouseMove (__point:XPoint):void {
 			takeStageFocus ();
 		}
 		
@@ -141,8 +142,8 @@ package X.Keyboard {
 				
 				m_parent.stage.removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
 				m_parent.stage.removeEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
-				m_parent.stage.removeEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
-				m_parent.stage.removeEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
+				xxx.removeMouseDownListener (onMouseDown);
+//				xxx.removePolledMouseMoveListener (onMouseMove);
 				
 				m_focus = null;
 			}
