@@ -139,15 +139,30 @@ package X.World.UI {
 		public override function setupListeners ():void {	
 			xxx.getXTaskManager ().addTask ([
 				function ():void {
+					/*
 //					xxx.getParent ().stage.addEventListener (xxx.MOUSE_OVER, onMouseOver);
 					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
 					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_MOVE, onMouseMove);
 					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
 					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_OUT, onMouseOut);
+					*/
+					
+					xxx.addMouseDownListener (onMouseDown);
+					xxx.addMouseMoveListener (onMouseMove);
+					xxx.addMouseUpListener (onMouseUp);
+					xxx.addMouseOutListener (onMouseOut);
 				},
 				
 				XTask.RETN,
 			]);
+		}
+
+		//------------------------------------------------------------------------------------------
+		public override function cleanupListeners ():void {
+			xxx.removeMouseDownListener (onMouseDown);
+			xxx.removeMouseMoveListener (onMouseMove);
+			xxx.removeMouseUpListener (onMouseUp);
+			xxx.removeMouseOutListener (onMouseOut);
 		}
 		
 		//------------------------------------------------------------------------------------------

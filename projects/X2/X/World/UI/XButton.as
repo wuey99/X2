@@ -111,6 +111,8 @@ package X.World.UI {
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup ();
+			
+			cleanupListeners ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -126,6 +128,15 @@ package X.World.UI {
 				
 				XTask.RETN,
 			]);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function cleanupListeners ():void {
+			m_sprite.removeEventListener (xxx.MOUSE_OVER, onMouseOver);
+			m_sprite.removeEventListener (xxx.MOUSE_DOWN, onMouseDown);
+			m_sprite.removeEventListener (xxx.MOUSE_MOVE, onMouseMove);
+			m_sprite.removeEventListener (xxx.MOUSE_UP, onMouseUp);
+			m_sprite.removeEventListener (xxx.MOUSE_OUT, onMouseOut);			
 		}
 		
 //------------------------------------------------------------------------------------------

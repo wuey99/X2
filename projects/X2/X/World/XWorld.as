@@ -554,6 +554,10 @@ package X.World {
 		public function addMouseOverListener (__listener:Function):void {
 			m_mouseOverSignal.addListener (__listener);
 		}
+
+		public function removeMouseOverListener (__listener:Function):void {
+			m_mouseOverSignal.removeListener (__listener);
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function onMouseDown (e:MouseEvent):void {	
@@ -562,6 +566,10 @@ package X.World {
 		
 		public function addMouseDownListener (__listener:Function):void {
 			m_mouseDownSignal.addListener (__listener);
+		}
+
+		public function removeMouseDownListener (__listener:Function):void {
+			m_mouseDownSignal.removeListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -572,6 +580,10 @@ package X.World {
 		public function addMouseMoveListener (__listener:Function):void {
 			m_mouseMoveSignal.addListener (__listener);
 		}
+
+		public function removeMouseMoveListener (__listener:Function):void {
+			m_mouseMoveSignal.removeListener (__listener);
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function onMouseUp (e:MouseEvent):void {	
@@ -581,6 +593,10 @@ package X.World {
 		public function addMouseUpListener (__listener:Function):void {
 			m_mouseUpSignal.addListener (__listener);
 		}
+
+		public function removeMouseUpListener (__listener:Function):void {
+			m_mouseUpSignal.removeListener (__listener);
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function onMouseOut (e:MouseEvent):void {	
@@ -589,6 +605,10 @@ package X.World {
 		
 		public function addMouseOutListener (__listener:Function):void {
 			m_mouseOutSignal.addListener (__listener);
+		}
+
+		public function removeMouseOutListener (__listener:Function):void {
+			m_mouseOutSignal.removeListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
