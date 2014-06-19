@@ -508,7 +508,7 @@ package X.World {
 			}
 			else
 			{
-				return stage;
+				return getParent ().stage;
 			}
 		}
 
@@ -649,7 +649,7 @@ package X.World {
 			}
 			else
 			{
-				return stage.mouseX;
+				return getFlashStage ().stage.mouseX;
 			}
 		}
 		
@@ -659,7 +659,7 @@ package X.World {
 			}
 			else
 			{
-				return stage.mouseY;
+				return getFlashStage ().stage.mouseY;
 			}
 		}
 
