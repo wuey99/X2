@@ -206,6 +206,10 @@ package X.Sound {
 			//-- EXTRACT SAMPLES
 			var read: int = _mp3.extract( _target, need, positionInt );
 			
+			if (_target.bytesAvailable == 0) {
+				return;
+			}
+			
 			var n: int = read == need ? BLOCK_SIZE : read / _rate;
 			
 			var l0: Number;
