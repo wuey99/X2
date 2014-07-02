@@ -121,7 +121,8 @@ package X.World {
 		public var m_frameCount:Number;
 		public var m_FPS:Number;
 		public var m_paused:Boolean;
-
+		public var m_soundManager:XSoundManager;
+		
 		public var m_mouseOverSignal:XSignal;
 		public var m_mouseDownSignal:XSignal;
 		public var m_mouseMoveSignal:XSignal;
@@ -248,6 +249,8 @@ package X.World {
 			m_XSignalManager = new XSignalManager (__XApp);
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
 			m_XLogicObjectPoolManager = new XLogicObjectPoolManager (this);
+
+			m_soundManager = new XSoundManager (m_XApp);
 			
 			m_timer1000 = new Timer (1000, 0);
 			m_timer1000.start ();
@@ -706,6 +709,11 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public function getXLogicObjectPoolManager ():XLogicObjectPoolManager {
 			return m_XLogicObjectPoolManager;
+		}
+
+//------------------------------------------------------------------------------------------		
+		public function getSoundManager ():XSoundManager {
+			return m_soundManager;
 		}
 		
 //------------------------------------------------------------------------------------------
