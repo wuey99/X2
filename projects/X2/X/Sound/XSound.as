@@ -37,27 +37,42 @@ package X.Sound {
 		
 		private var _mp3:Sound;
 		
+		private var m_XApp:XApp;
+		
 		//------------------------------------------------------------------------------------------
-		public function XSound(xApp:XApp, resourceName:String):void
+		public function XSound(__XApp:XApp):void
 		{
+			m_XApp = __XApp;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function setupFromClassName (__className:String):void {	
+			setupFromClass (m_XApp.getClass (__className));
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function setupFromClass (__class:Class):void {
 			_target = new ByteArray();
 			
 			_position = 0.0;
 			_rate = 1.0;
 			
-			_mp3 = new (xApp.getClass (resourceName)) ();
+			_mp3 = new (__class) ();
 			_sound = new Sound();
-			_sound.addEventListener( SampleDataEvent.SAMPLE_DATA, sampleData );
+			_sound.addEventListener( SampleDataEvent.SAMPLE_DATA, sampleData );	
 		}
 		
+		//------------------------------------------------------------------------------------------
 		/**
 		 * @return Boolean Whether the sound is currently playing
 		 */
+		//------------------------------------------------------------------------------------------
 		public function get playing():Boolean
 		{
 			return _playing;
 		}
 		
+		//------------------------------------------------------------------------------------------
 		public function play(start:Number = 0, loops:int = 0, transform:SoundTransform = null):SoundChannel
 		{
 			if (_channel)
@@ -66,18 +81,22 @@ package X.Sound {
 			_channel = _sound.play();
 			_channel.addEventListener(Event.SOUND_COMPLETE, soundComplete);
 			_playing = true;
+			
 			return _channel;
 		}
 		
+		//------------------------------------------------------------------------------------------
 		/**
 		 * Loops the sound after it finishes playing indefinitely.
 		 */
+		//------------------------------------------------------------------------------------------
 		public function loop():SoundChannel
 		{
 			_looping = true;
 			return play();
 		}
 		
+		//------------------------------------------------------------------------------------------
 		public function set paused(value:Boolean):void
 		{
 			if (value)
@@ -86,10 +105,12 @@ package X.Sound {
 				resume();
 		}
 		
+		//------------------------------------------------------------------------------------------
 		/**
 		 * Stops the music keeping track of its current position. Use resume
 		 * to play the music from where it was left off.
 		 */
+		//------------------------------------------------------------------------------------------
 		private function pause():void
 		{
 			if (!_channel)
@@ -101,10 +122,12 @@ package X.Sound {
 			_channel.stop();
 		}
 		
+		//------------------------------------------------------------------------------------------
 		/**
 		 * Plays the music from wherever it was left off when paused. This
 		 * can't be called unless the music has been paused.
 		 */
+		//------------------------------------------------------------------------------------------
 		private function resume():SoundChannel
 		{
 			if (!_channel || _playing)
@@ -117,10 +140,12 @@ package X.Sound {
 			return _channel;
 		}
 		
+		//------------------------------------------------------------------------------------------
 		/**
 		 * Stops the music disposing of its sound channel. Use play to restart
 		 * the track.
 		 */
+		//------------------------------------------------------------------------------------------
 		public function stop():void
 		{
 			if (!_channel)
@@ -134,6 +159,7 @@ package X.Sound {
 			_channel = null;
 		}
 		
+		//------------------------------------------------------------------------------------------
 		private function soundComplete(e:Event):void
 		{
 			_playing = false;
@@ -144,11 +170,13 @@ package X.Sound {
 				play(0, 0, transform);
 		}
 		
+		//------------------------------------------------------------------------------------------
 		public function get rate(): Number
 		{
 			return _rate;
 		}
 		
+		//------------------------------------------------------------------------------------------
 		public function set rate( value: Number ): void
 		{
 			if( value < 0.0 )
@@ -156,6 +184,7 @@ package X.Sound {
 			_rate = value;
 		}
 		
+		//------------------------------------------------------------------------------------------
 		private function sampleData( event: SampleDataEvent ): void
 		{
 			//-- REUSE INSTEAD OF RECREATION
@@ -217,5 +246,9 @@ package X.Sound {
 			//-- INCREASE SOUND POSITION
 			_position += scaledBlockSize;
 		}
+		
+	//------------------------------------------------------------------------------------------
 	}
+	
+//------------------------------------------------------------------------------------------
 }

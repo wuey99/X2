@@ -79,23 +79,12 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function replaceSound (
-			__sound:Sound,
+		public function playSoundFromClass (
+			__class:Class,
 			__completeListener:Function = null
 			):Number {
 				
-			removeAllSounds ();
-			
-			return playSound (__sound, __completeListener);
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function playSound (
-			__sound:Sound,
-			__completeListener:Function = null
-			):Number {
-				
-			var __guid:Number = m_soundManager.playSound (__sound, __complete);
+			var __guid:Number = m_soundManager.playSoundFromClass (__class, __complete);
 			
 			m_soundChannels.put (__guid, 0);
 			
@@ -115,8 +104,20 @@ package X.Sound {
 			__className:String,
 			__completeListener:Function = null
 			):Number {
+			
+			var __guid:Number = m_soundManager.playSoundFromClassName (__className, __complete);
+			
+			m_soundChannels.put (__guid, 0);
+			
+			function __complete ():void {
+				if (__completeListener != null) {
+					__completeListener ();
+				}
 				
-			return 0;
+				m_soundChannels.remove (__guid);
+			}
+			
+			return __guid;
 		}
 		
 //------------------------------------------------------------------------------------------

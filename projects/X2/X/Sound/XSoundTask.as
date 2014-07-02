@@ -85,21 +85,12 @@ package X.Sound {
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function replaceSound (
-			__sound:Sound,
+		public function playSoundFromClass (
+			__class:Class,
 			__completeListener:Function = null
 			):Number {
 				
-			return m_XSoundTaskManager.replaceSound (__sound, __completeListener);
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function playSound (
-			__sound:Sound,
-			__completeListener:Function = null
-			):Number {
-				
-			return m_XSoundTaskManager.playSound (__sound, __completeListener);
+			return m_XSoundTaskManager.playSoundFromClass (__class, __completeListener);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -108,7 +99,7 @@ package X.Sound {
 			__completeListener:Function = null
 			):Number {
 				
-			return 0;
+			return m_XSoundTaskManager.playSoundFromClassName (__className, __completeListener);
 		}
 		
 //------------------------------------------------------------------------------------------
