@@ -68,7 +68,7 @@ package X.Sound {
 
 //------------------------------------------------------------------------------------------
 		private function __playSound (
-			__sound:XSound,
+			__sound:Sound,
 			__completeListener:Function = null
 			):Number {
 				
@@ -99,8 +99,7 @@ package X.Sound {
 			__completeListener:Function = null
 		):Number {
 			
-			var __sound:XSound = new XSound (m_XApp);
-			__sound.setupFromClass (__class);
+			var __sound:Sound = new (__class) ();
 			
 			return __playSound (__sound, __completeListener);
 		}
@@ -111,8 +110,7 @@ package X.Sound {
 			__completeListener:Function = null
 			):Number {
 			
-			var __sound:XSound = new XSound (m_XApp);
-			__sound.setupFromClassName (__className);
+			var __sound:Sound = new (m_XApp.getClass (__className)) ();
 			
 			return __playSound (__sound, __completeListener);
 		}
