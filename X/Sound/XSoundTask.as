@@ -87,19 +87,21 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClass (
 			__class:Class,
+			__loops:Number = 0,
 			__completeListener:Function = null
 			):Number {
 				
-			return m_XSoundTaskManager.playSoundFromClass (__class, __completeListener);
+			return m_XSoundTaskManager.playSoundFromClass (__class, __loops, __completeListener);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClassName (
 			__className:String,
+			__loops:Number = 0,
 			__completeListener:Function = null
 			):Number {
 				
-			return m_XSoundTaskManager.playSoundFromClassName (__className, __completeListener);
+			return m_XSoundTaskManager.playSoundFromClassName (__className, __loops, __completeListener);
 		}
 		
 //------------------------------------------------------------------------------------------

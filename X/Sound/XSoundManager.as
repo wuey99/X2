@@ -69,10 +69,11 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		private function __playSound (
 			__sound:Sound,
+			__loops:Number = 0,
 			__completeListener:Function = null
 			):Number {
 				
-			var __soundChannel:SoundChannel = __sound.play ();
+			var __soundChannel:SoundChannel = __sound.play (0, __loops);
 			var __guid:Number = g_GUID++;
 			m_soundChannels.put (__guid, __soundChannel);
 			
@@ -96,23 +97,25 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClass (
 			__class:Class,
+			__loops:Number = 0,
 			__completeListener:Function = null
 		):Number {
 			
 			var __sound:Sound = new (__class) ();
 			
-			return __playSound (__sound, __completeListener);
+			return __playSound (__sound, __loops, __completeListener);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClassName (
 			__className:String,
+			__loops:Number = 0,
 			__completeListener:Function = null
 			):Number {
 			
 			var __sound:Sound = new (m_XApp.getClass (__className)) ();
 			
-			return __playSound (__sound, __completeListener);
+			return __playSound (__sound, __loops, __completeListener);
 		}
 
 //------------------------------------------------------------------------------------------
