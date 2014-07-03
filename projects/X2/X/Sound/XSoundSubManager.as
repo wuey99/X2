@@ -44,45 +44,39 @@
 // <$end$/>
 //------------------------------------------------------------------------------------------
 package X.Sound {
-	
+
+	import X.*;
+	import X.Collections.*;
 	import X.Task.*;
 	
 	import flash.media.*;
-	import flash.system.*;
 	import flash.utils.*;
 	
-//------------------------------------------------------------------------------------------
-	public class XSoundTask extends XTask {
-		protected var m_XSoundTaskManager:XSoundTaskManager;
+//------------------------------------------------------------------------------------------	
+	public class XSoundSubManager extends XTaskSubManager {
+		public var m_soundManager:XSoundManager;
+		public var m_soundChannels:XDict;
 		
 //------------------------------------------------------------------------------------------
-		public function XSoundTask () {
-			super ();
-		}
-
-//------------------------------------------------------------------------------------------
-		public override function setup (__taskList:Array, __findLabelsFlag:Boolean = true):void {
-			super.setup (__taskList, __findLabelsFlag);
-		}
-		
-//------------------------------------------------------------------------------------------
-		public override function createXTaskSubManager ():XTaskSubManager {
-			m_XSoundTaskManager = new XSoundTaskManager (null, null);
+		public function XSoundSubManager (__manager:XTaskManager, __soundManager:XSoundManager) {
+			m_soundManager = __soundManager;
 			
-			return m_XSoundTaskManager;
+			super (__manager);
+			
+			m_soundChannels = new XDict ();
+		}
+			
+//------------------------------------------------------------------------------------------
+		public override function cleanup ():void {
+			super.cleanup ();
+			
+			removeAllSounds ();
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function setSoundManager (__soundManager:XSoundManager):void {
-			m_XSoundTaskManager.setSoundManager (__soundManager);
+			m_soundManager = __soundManager;
 		}
-		
-//------------------------------------------------------------------------------------------
-		public override function kill ():void {
-			m_XSoundTaskManager.removeAllSounds ();
-			
-			removeAllTasks ();
-		}	
 
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClass (
@@ -91,36 +85,126 @@ package X.Sound {
 			__completeListener:Function = null
 			):Number {
 				
-			return m_XSoundTaskManager.playSoundFromClass (__class, __loops, __completeListener);
+			var __guid:Number = m_soundManager.playSoundFromClass (__class, __loops, __complete);
+			
+			m_soundChannels.put (__guid, 0);
+			
+			function __complete ():void {
+				if (__completeListener != null) {
+					__completeListener ();
+				}
+				
+				m_soundChannels.remove (__guid);
+			}
+			
+			return __guid;
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClassName (
 			__className:String,
 			__loops:Number = 0,
 			__completeListener:Function = null
 			):Number {
+			
+			var __guid:Number = m_soundManager.playSoundFromClassName (__className, __loops, __complete);
+			
+			m_soundChannels.put (__guid, 0);
+			
+			function __complete ():void {
+				if (__completeListener != null) {
+					__completeListener ();
+				}
 				
-			return m_XSoundTaskManager.playSoundFromClassName (__className, __loops, __completeListener);
+				m_soundChannels.remove (__guid);
+			}
+			
+			return __guid;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function stopSound (__guid:Number):void {
-			m_XSoundTaskManager.stopSound (__guid);
+			removeSound (__guid);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeSound (__guid:Number):void {
-			m_XSoundTaskManager.removeSound (__guid);
+			if (m_soundChannels.exists (__guid)) {
+				m_soundChannels.remove (__guid);
+			}
+			
+			m_soundManager.removeSound (__guid);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllSounds ():void {
-			m_XSoundTaskManager.removeAllSounds ();
+			m_soundChannels.forEach (
+				function (__guid:*):void {
+					removeSound (__guid as Number);
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function addTask (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+
+			var __task0:XSoundTask = new XSoundTask ();
+			__task0.setup (__taskList, __findLabelsFlag);
+			
+			var __task:XSoundTask = addXTask (__task0) as XSoundTask;
+			
+			__task.setSoundManager (m_soundManager);
+			
+			return __task;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function replaceAllSoundTasks (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+				
+			removeAllTasks ();
+			
+			return addSoundTask (__taskList, __findLabelsFlag);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function addSoundTask (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+				
+			var __task0:XSoundTask = new XSoundTask ();
+			__task0.setup (__taskList, __findLabelsFlag);
+			
+			var __task:XSoundTask = addXTask (__task0) as XSoundTask;
+			
+			__task.setSoundManager (m_soundManager);
+			
+			return __task;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function changeTask (
+			__oldTask:XTask,
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+			):XTask {
+				
+			var __task0:XSoundTask = new XSoundTask ();
+			__task0.setup (__taskList, __findLabelsFlag);
+			
+			var __task:XSoundTask = changeXTask (__oldTask, __task0) as XSoundTask;
+			
+			return __task;
 		}
 		
 //------------------------------------------------------------------------------------------
 	}
-
+	
 //------------------------------------------------------------------------------------------
 }
