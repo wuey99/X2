@@ -65,7 +65,12 @@ package X.Sound {
 
 			m_soundChannels = new XDict ();
 		}
-
+		
+//------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+			removeAllSounds ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		private function __playSound (
 			__sound:Sound,
