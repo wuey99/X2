@@ -60,7 +60,7 @@ package X.Sound {
 		public var m_numChannels:Number;
 		
 //------------------------------------------------------------------------------------------
-		public function XSoundSubManager (__manager:XTaskManager, __soundManager:XSoundManager) {
+		public function XSoundSubManager (__soundManager:XSoundManager) {
 			m_soundManager = __soundManager;
 
 			m_soundChannels = new XDict ();
