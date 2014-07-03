@@ -53,23 +53,19 @@ package X.Sound {
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
-	public class XSoundSubManager extends XTaskSubManager {
+	public class XSoundSubManager extends Object {
 		public var m_soundManager:XSoundManager;
 		public var m_soundChannels:XDict;
 		
 //------------------------------------------------------------------------------------------
 		public function XSoundSubManager (__manager:XTaskManager, __soundManager:XSoundManager) {
 			m_soundManager = __soundManager;
-			
-			super (__manager);
-			
+
 			m_soundChannels = new XDict ();
 		}
 			
 //------------------------------------------------------------------------------------------
-		public override function cleanup ():void {
-			super.cleanup ();
-			
+		public function cleanup ():void {
 			removeAllSounds ();
 		}
 		
@@ -144,65 +140,7 @@ package X.Sound {
 				}
 			);
 		}
-		
-//------------------------------------------------------------------------------------------
-		public override function addTask (
-			__taskList:Array,
-			__findLabelsFlag:Boolean = true
-			):XTask {
 
-			var __task0:XSoundTask = new XSoundTask ();
-			__task0.setup (__taskList, __findLabelsFlag);
-			
-			var __task:XSoundTask = addXTask (__task0) as XSoundTask;
-			
-			__task.setSoundManager (m_soundManager);
-			
-			return __task;
-		}
-
-//------------------------------------------------------------------------------------------
-		public function replaceAllSoundTasks (
-			__taskList:Array,
-			__findLabelsFlag:Boolean = true
-			):XTask {
-				
-			removeAllTasks ();
-			
-			return addSoundTask (__taskList, __findLabelsFlag);
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function addSoundTask (
-			__taskList:Array,
-			__findLabelsFlag:Boolean = true
-			):XTask {
-				
-			var __task0:XSoundTask = new XSoundTask ();
-			__task0.setup (__taskList, __findLabelsFlag);
-			
-			var __task:XSoundTask = addXTask (__task0) as XSoundTask;
-			
-			__task.setSoundManager (m_soundManager);
-			
-			return __task;
-		}
-		
-//------------------------------------------------------------------------------------------
-		public override function changeTask (
-			__oldTask:XTask,
-			__taskList:Array,
-			__findLabelsFlag:Boolean = true
-			):XTask {
-				
-			var __task0:XSoundTask = new XSoundTask ();
-			__task0.setup (__taskList, __findLabelsFlag);
-			
-			var __task:XSoundTask = changeXTask (__oldTask, __task0) as XSoundTask;
-			
-			return __task;
-		}
-		
 //------------------------------------------------------------------------------------------
 	}
 	
