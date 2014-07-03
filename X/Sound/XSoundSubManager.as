@@ -56,6 +56,8 @@ package X.Sound {
 	public class XSoundSubManager extends Object {
 		public var m_soundManager:XSoundManager;
 		public var m_soundChannels:XDict;
+		public var m_maxChannels:Number;
+		public var m_numChannels:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function XSoundSubManager (__manager:XTaskManager, __soundManager:XSoundManager) {
@@ -63,7 +65,13 @@ package X.Sound {
 
 			m_soundChannels = new XDict ();
 		}
-			
+
+//------------------------------------------------------------------------------------------
+		public function setup (__maxChannels:Number):void {
+			m_maxChannels = __maxChannels;
+			m_numChannels = 0;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 			removeAllSounds ();
@@ -77,20 +85,27 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClass (
 			__class:Class,
+			__priority:Number = 1.0,
 			__loops:Number = 0,
 			__completeListener:Function = null
 			):Number {
+			
+			if (!channelAvailable (__priority)) {
+				return -1;
+			}
 				
 			var __guid:Number = m_soundManager.playSoundFromClass (__class, __loops, __complete);
 			
-			m_soundChannels.put (__guid, 0);
+			m_soundChannels.put (__guid, __priority);
+			m_numChannels++;
 			
 			function __complete ():void {
 				if (__completeListener != null) {
 					__completeListener ();
 				}
 				
-				m_soundChannels.remove (__guid);
+				m_soundChannels.remove (__guid);	
+				m_numChannels--;
 			}
 			
 			return __guid;
@@ -99,23 +114,66 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClassName (
 			__className:String,
+			__priority:Number = 1.0,
 			__loops:Number = 0,
 			__completeListener:Function = null
 			):Number {
 			
+			if (!channelAvailable (__priority)) {
+				return -1;
+			}
+			
 			var __guid:Number = m_soundManager.playSoundFromClassName (__className, __loops, __complete);
 			
-			m_soundChannels.put (__guid, 0);
+			m_soundChannels.put (__guid, __priority);
+			m_numChannels++;
 			
 			function __complete ():void {
 				if (__completeListener != null) {
 					__completeListener ();
 				}
 				
-				m_soundChannels.remove (__guid);
+				m_soundChannels.remove (__guid);	
+				m_numChannels--;
 			}
 			
 			return __guid;
+		}
+
+//------------------------------------------------------------------------------------------
+		private function channelAvailable (__priority:Number):Boolean {
+			if (m_numChannels < m_maxChannels) {
+				return true;
+			}
+			
+			var __firstChoice:Number = -1
+			var __secondChoice:Number = -1;
+			
+			m_soundChannels.forEach (
+				function (__targetGuid:Number):void {
+					var __targetPriority:Number = m_soundChannels.get (__targetGuid);
+					
+					if (__priority > __targetPriority) {
+						__firstChoice = __targetGuid
+					}
+					
+					if (__priority == __targetPriority) {
+						__secondChoice = __targetGuid;
+					}
+				}
+			);
+			
+			if (__firstChoice != -1) {
+				removeSound (__firstChoice);
+				
+				return true;
+			}
+			
+			if (__secondChoice != -1) {
+				removeSound (__secondChoice);
+			}
+			
+			return false;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -127,6 +185,7 @@ package X.Sound {
 		public function removeSound (__guid:Number):void {
 			if (m_soundChannels.exists (__guid)) {
 				m_soundChannels.remove (__guid);
+				m_numChannels--;
 			}
 			
 			m_soundManager.removeSound (__guid);
