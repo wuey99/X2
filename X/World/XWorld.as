@@ -172,7 +172,6 @@ package X.World {
 		public var m_XControllerBase:XControllerBase;
 		public var m_XMapItemCachedView:XMapItemCachedView;
 		public var m_XMapItemXBitmapView:XMapItemXBitmapView;
-		public var m_XSound:XSound;
 		public var m_XTextureManager:XTextureManager;
 		public var m_XSubTextureManager:XSubTextureManager;
 		public var m_XMovieClipCacheManager:XMovieClipCacheManager;
