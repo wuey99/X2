@@ -64,6 +64,9 @@ package X.Sound {
 			m_soundManager = __soundManager;
 
 			m_soundChannels = new XDict ();
+			
+			m_maxChannels = 8;
+			m_numChannels = 0;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -87,6 +90,7 @@ package X.Sound {
 			__class:Class,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
+			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
 			
@@ -99,9 +103,13 @@ package X.Sound {
 			m_soundChannels.put (__guid, __priority);
 			m_numChannels++;
 			
+			if (__successListener != null) {
+				__successListener (__guid);
+			}
+			
 			function __complete ():void {
 				if (__completeListener != null) {
-					__completeListener ();
+					__completeListener (__guid);
 				}
 				
 				m_soundChannels.remove (__guid);	
@@ -116,6 +124,7 @@ package X.Sound {
 			__className:String,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
+			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
 			
@@ -128,9 +137,13 @@ package X.Sound {
 			m_soundChannels.put (__guid, __priority);
 			m_numChannels++;
 			
+			if (__successListener != null) {
+				__successListener (__guid);
+			}
+			
 			function __complete ():void {
 				if (__completeListener != null) {
-					__completeListener ();
+					__completeListener (__guid);
 				}
 				
 				m_soundChannels.remove (__guid);	
