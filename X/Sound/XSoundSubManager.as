@@ -192,6 +192,8 @@ package X.Sound {
 			
 			if (__secondChoice != -1) {
 				removeSound (__secondChoice);
+				
+				return true;
 			}
 			
 			return false;
