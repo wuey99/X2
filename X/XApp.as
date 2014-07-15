@@ -314,7 +314,7 @@ package X {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getXSoundManager ():XSoundManager {
+		public function getSoundManager ():XSoundManager {
 			return m_XSoundManager;
 		}
 				
