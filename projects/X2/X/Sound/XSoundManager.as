@@ -86,10 +86,6 @@ package X.Sound {
 				Event.SOUND_COMPLETE,
 						
 				function (e:Event):void {
-					if (__completeListener != null) {
-						__completeListener ();
-					}
-					
 					if (m_soundChannels.exists (__guid)) {
 						m_soundChannels.remove (__guid);
 					}
@@ -134,13 +130,11 @@ package X.Sound {
 				var __soundChannel:SoundChannel = m_soundChannels.get (__guid)[0];
 				__soundChannel.stop ();
 				
-				/*
 				var __completeListener:Function = m_soundChannels.get (__guid)[1];
 				
 				if (__completeListener != null) {
 					__completeListener ();
 				}
-				*/
 				
 				m_soundChannels.remove (__guid);
 			}
