@@ -98,25 +98,29 @@ package X.Sound {
 				return -1;
 			}
 				
-			var __guid:Number = m_soundManager.playSoundFromClass (__class, __loops, __complete);
-			
-			m_soundChannels.put (__guid, __priority);
-			m_numChannels++;
-			
-			if (__successListener != null) {
-				__successListener (__guid);
-			}
-			
-			function __complete ():void {
-				if (__completeListener != null) {
-					__completeListener (__guid);
-				}
+			return m_soundManager.playSoundFromClass (
+				__class,
+				__priority,
+				__loops,
 				
-				m_soundChannels.remove (__guid);	
-				m_numChannels--;
-			}
-			
-			return __guid;
+				function (__guid:Number):void {
+					m_soundChannels.put (__guid, __priority);
+					m_numChannels++;
+					
+					if (__successListener != null) {
+						__successListener (__guid);
+					}					
+				},
+				
+				function (__guid:Number):void {
+					if (__completeListener != null) {
+						__completeListener (__guid);
+					}
+					
+					m_soundChannels.remove (__guid);	
+					m_numChannels--;
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -132,25 +136,29 @@ package X.Sound {
 				return -1;
 			}
 			
-			var __guid:Number = m_soundManager.playSoundFromClassName (__className, __loops, __complete);
-			
-			m_soundChannels.put (__guid, __priority);
-			m_numChannels++;
-			
-			if (__successListener != null) {
-				__successListener (__guid);
-			}
-			
-			function __complete ():void {
-				if (__completeListener != null) {
-					__completeListener (__guid);
-				}
+			return m_soundManager.playSoundFromClassName (
+				__className,
+				__priority,
+				__loops,
 				
-				m_soundChannels.remove (__guid);	
-				m_numChannels--;
-			}
-			
-			return __guid;
+				function (__guid:Number):void {					
+					m_soundChannels.put (__guid, __priority);
+					m_numChannels++;
+
+					if (__successListener != null) {
+						__successListener (__guid);
+					}					
+				},
+				
+				function (__guid:Number):void {
+					if (__completeListener != null) {
+						__completeListener (__guid);
+					}
+					
+					m_soundChannels.remove (__guid);	
+					m_numChannels--;
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------
