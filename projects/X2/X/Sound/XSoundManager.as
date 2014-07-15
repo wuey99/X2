@@ -75,12 +75,15 @@ package X.Sound {
 		private function __playSound (
 			__sound:Sound,
 			__loops:Number = 0,
+			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
 				
 			var __soundChannel:SoundChannel = __sound.play (0, __loops);
 			var __guid:Number = g_GUID++;
 			m_soundChannels.put (__guid, [__soundChannel, __completeListener]);
+			
+			__successListener (__guid);
 			
 			__soundChannel.addEventListener (
 				Event.SOUND_COMPLETE,
@@ -98,25 +101,39 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClass (
 			__class:Class,
+			__priority:Number,
 			__loops:Number = 0,
+			__successListener:Function = null,
 			__completeListener:Function = null
 		):Number {
 			
 			var __sound:Sound = new (__class) ();
 			
-			return __playSound (__sound, __loops, __completeListener);
+			return __playSound (
+				__sound,
+				__loops,
+				__successListener,
+				__completeListener
+			);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClassName (
 			__className:String,
+			__priority:Number,
 			__loops:Number = 0,
+			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
 			
 			var __sound:Sound = new (m_XApp.getClass (__className)) ();
 			
-			return __playSound (__sound, __loops, __completeListener);
+			return __playSound (
+				__sound,
+				__loops,
+				__successListener,
+				__completeListener
+			);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -133,7 +150,7 @@ package X.Sound {
 				var __completeListener:Function = m_soundChannels.get (__guid)[1];
 				
 				if (__completeListener != null) {
-					__completeListener ();
+					__completeListener (__guid);
 				}
 				
 				m_soundChannels.remove (__guid);
@@ -141,13 +158,9 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeAllSounds ():void {
-			trace (": removeAllSounds: ");
-			
+		public function removeAllSounds ():void {	
 			m_soundChannels.forEach (
 				function (__guid:Number):void {
-					trace (": guid: ", __guid);
-					
 					removeSound (__guid);
 				}
 			);
