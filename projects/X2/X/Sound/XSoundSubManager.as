@@ -117,8 +117,10 @@ package X.Sound {
 						__completeListener (__guid);
 					}
 					
-					m_soundChannels.remove (__guid);	
-					m_numChannels--;
+					if (m_soundChannels.exists (__guid)) {
+						m_soundChannels.remove (__guid);	
+						m_numChannels--;
+					}
 				}
 			);
 		}
@@ -155,8 +157,10 @@ package X.Sound {
 						__completeListener (__guid);
 					}
 					
-					m_soundChannels.remove (__guid);	
-					m_numChannels--;
+					if (m_soundChannels.exists (__guid)) {
+						m_soundChannels.remove (__guid);	
+						m_numChannels--;
+					}
 				}
 			);
 		}
@@ -207,11 +211,8 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function removeSound (__guid:Number):void {
 			if (m_soundChannels.exists (__guid)) {
-				m_soundChannels.remove (__guid);
-				m_numChannels--;
+				m_soundManager.removeSound (__guid);
 			}
-			
-			m_soundManager.removeSound (__guid);
 		}
 
 //------------------------------------------------------------------------------------------
