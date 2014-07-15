@@ -90,6 +90,12 @@ package X.Sound {
 						
 				function (e:Event):void {
 					if (m_soundChannels.exists (__guid)) {
+						var __completeListener:Function = m_soundChannels.get (__guid)[1];
+						
+						if (__completeListener != null) {
+							__completeListener (__guid);
+						}
+						
 						m_soundChannels.remove (__guid);
 					}
 				}
