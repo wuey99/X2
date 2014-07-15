@@ -248,8 +248,6 @@ package X.World {
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
 			m_XLogicObjectPoolManager = new XLogicObjectPoolManager (this);
 
-			m_soundManager = new XSoundManager (m_XApp);
-			
 			m_timer1000 = new Timer (1000, 0);
 			m_timer1000.start ();
 			m_timer1000.addEventListener (TimerEvent.TIMER, onUpdateTimer1000);
@@ -711,7 +709,7 @@ package X.World {
 
 //------------------------------------------------------------------------------------------		
 		public function getSoundManager ():XSoundManager {
-			return m_soundManager;
+			return m_XApp.getSoundManager ();
 		}
 		
 //------------------------------------------------------------------------------------------

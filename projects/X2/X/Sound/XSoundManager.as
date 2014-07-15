@@ -80,7 +80,7 @@ package X.Sound {
 				
 			var __soundChannel:SoundChannel = __sound.play (0, __loops);
 			var __guid:Number = g_GUID++;
-			m_soundChannels.put (__guid, __soundChannel);
+			m_soundChannels.put (__guid, [__soundChannel, __completeListener]);
 			
 			__soundChannel.addEventListener (
 				Event.SOUND_COMPLETE,
@@ -131,8 +131,16 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function removeSound (__guid:Number):void {
 			if (m_soundChannels.exists (__guid)) {
-				var __soundChannel:SoundChannel = m_soundChannels.get (__guid);
+				var __soundChannel:SoundChannel = m_soundChannels.get (__guid)[0];
 				__soundChannel.stop ();
+				
+				/*
+				var __completeListener:Function = m_soundChannels.get (__guid)[1];
+				
+				if (__completeListener != null) {
+					__completeListener ();
+				}
+				*/
 				
 				m_soundChannels.remove (__guid);
 			}
@@ -140,9 +148,13 @@ package X.Sound {
 
 //------------------------------------------------------------------------------------------
 		public function removeAllSounds ():void {
+			trace (": removeAllSounds: ");
+			
 			m_soundChannels.forEach (
-				function (__guid:*):void {
-					removeSound (__guid as Number);
+				function (__guid:Number):void {
+					trace (": guid: ", __guid);
+					
+					removeSound (__guid);
 				}
 			);
 		}
