@@ -89,7 +89,7 @@ package X.Debug  {
 						0xe0e0e0,
 						// bold
 						true
-					);					
+					);
 				}
 			);
 		}

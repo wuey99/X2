@@ -120,9 +120,10 @@ package X.World {
 		public var m_timer1000Signal:XSignal;
 		public var m_frameCount:Number;
 		public var m_FPS:Number;
+		public var m_FPSCounterObject:XFPSCounter;
 		public var m_paused:Boolean;
 		public var m_soundManager:XSoundManager;
-		
+
 		public var m_mouseOverSignal:XSignal;
 		public var m_mouseDownSignal:XSignal;
 		public var m_mouseMoveSignal:XSignal;
@@ -281,8 +282,6 @@ package X.World {
 			
 			m_XKeyboardManager = new XKeyboardManager (this);
 					
-			setupDebug ();
-			
 			m_mouseX = m_mouseY = 0;
 			
 			if (CONFIG::starling) {
@@ -322,6 +321,7 @@ package X.World {
 		public function setupDebug ():void {
 			// set debug draw
 			
+			/*
 			if (CONFIG::flash) {	
 				import flash.display.Sprite;
 				
@@ -338,8 +338,9 @@ package X.World {
 				dbgDraw.m_drawFlags = b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit;
 				m_world.SetDebugDraw(dbgDraw);
 			}
+			*/
 			
-			var __logicObject:XFPSCounter = getXLogicManager2 ().initXLogicObject (
+			m_FPSCounterObject = getXLogicManager2 ().initXLogicObject (
 				// parent
 				null,
 				// logicObject
@@ -362,7 +363,7 @@ package X.World {
 		public function onFPSCounterStarling (e:EnterFrameEvent):void {
 			m_frameCount++;
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function onEnterFrame (e:Event):void {
 			__onEnterFrame ();
