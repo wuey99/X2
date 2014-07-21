@@ -63,10 +63,11 @@ package X.World.Sprite {
 			__width:Number=32,
 			__height:Number=32,
 			__text:String="",
-			__fontName:String="Verdana",
+			__fontName:String="Aller",
 			__fontSize:Number=12,
 			__color:int=0x000000,
-			__bold:Boolean=false
+			__bold:Boolean=false,
+			__embedFonts:Boolean = true
 		) {
 			setup ();
 			
@@ -85,6 +86,7 @@ package X.World.Sprite {
 				this.size = __fontSize;
 				this.color = __color;
 				this.bold = __bold;
+				this.embedFonts = __embedFonts;
 			}
 			
 			addChild (m_text);
@@ -357,7 +359,7 @@ package X.World.Sprite {
 			}
 			else
 			{
-				m_text.embedFonts = __value;
+				m_text.embedFonts = __value; __format ();
 			}
 		}
 				

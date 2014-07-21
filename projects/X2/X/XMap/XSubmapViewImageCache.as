@@ -333,7 +333,7 @@ package X.XMap {
 				x_sprite.setDepth (getDepth ());
 
 				/*
-				m_text = createXTextSprite (96, 32, ": " + m_image.id, "Verdana", 24, 0xffffff, true);
+				m_text = createXTextSprite (96, 32, ": " + m_image.id, "Aller", 24, 0xffffff, true);
 				var __depthSprite:XDepthSprite = addSpriteAt (m_text, 0, 0);
 				__depthSprite.setDepth (getDepth () + 1001);
 	

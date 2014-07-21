@@ -684,7 +684,7 @@ package X.World.Logic {
 			__width:Number=32,
 			__height:Number=32,
 			__text:String="",
-			__fontName:String="Verdana",
+			__fontName:String="Aller",
 			__fontSize:Number=12,
 			__color:int=0x000000,
 			__bold:Boolean=false
