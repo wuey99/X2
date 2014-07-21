@@ -56,7 +56,7 @@ package X {
 	import X.Debug.XDebug;
 	import X.Geom.*;
 	import X.MVC.*;
-	import X.Pool.XObjectPoolManager;
+	import X.Pool.*;
 	import X.Resource.Manager.*;
 	import X.Signals.*;
 	import X.Sound.*;
@@ -90,6 +90,7 @@ package X {
 		private var m_XBitmapPoolManager:XObjectPoolManager;
 		private var m_XTextureManager:XTextureManager;
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
+		private var m_XClassPoolManager:XClassPoolManager;
 		private var m_allClassNames:XDict;
 			
 //------------------------------------------------------------------------------------------
@@ -105,6 +106,7 @@ package X {
 			m_XBitmapDataAnimManager = new XBitmapDataAnimManager (this);
 			m_XTextureManager = new XTextureManager (this);
 			m_XMovieClipCacheManager = new XMovieClipCacheManager (this);
+			m_XClassPoolManager = new XClassPoolManager ();
 			
 			XBitmap.setXApp (this);
 			XImage.setXApp (this);
@@ -313,6 +315,11 @@ package X {
 			return m_XSignalManager;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getClassPoolManager ():XClassPoolManager {
+			return m_XClassPoolManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getSoundManager ():XSoundManager {
 			return m_XSoundManager;
