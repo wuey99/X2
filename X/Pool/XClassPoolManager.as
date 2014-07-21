@@ -86,7 +86,7 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function preAllocate (__class:Class, __numObjects):void {
+		public function preAllocate (__class:Class, __numObjects:Number):void {
 			var __pool:XObjectPoolManager;
 			
 			if (!m_pools.exists (__class)) {
