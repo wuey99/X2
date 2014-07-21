@@ -63,6 +63,29 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function setupPool (
+			__class:Class,
+			__numObjects:Number,
+			__overflow:Number
+		):XObjectPoolManager {
+			
+			return new XObjectPoolManager (
+				function ():* {
+					return new __class ();
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__numObjects, __overflow,
+				
+				function (x:*):void {
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function returnAllObjects (__class:Class = null):void {
 			var __pool:XObjectPoolManager;
 			
@@ -101,20 +124,7 @@ package X.Pool {
 			var __pool:XObjectPoolManager;
 			
 			if (!m_pools.exists (__class)) {
-				__pool = new XObjectPoolManager (
-					function ():* {
-						return new __class ();
-					},
-					
-					function (__src:*, __dst:*):* {
-						return null;
-					},
-					
-					16, 16,
-					
-					function (x:*):void {
-					}
-				);
+				__pool = setupPool (__class, 16, 16);
 				
 				m_pools.put (__class, __pool);
 			}
