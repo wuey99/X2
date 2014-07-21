@@ -121,6 +121,7 @@ package X.World {
 		public var m_FPSCounterObject:XFPSCounter;
 		public var m_paused:Boolean;
 		public var m_soundManager:XSoundManager;
+		public var m_XLogicObjectPoolManager:XClassPoolManager;
 
 		public var m_mouseOverSignal:XSignal;
 		public var m_mouseDownSignal:XSignal;
@@ -246,6 +247,8 @@ package X.World {
 			m_XSignalManager = new XSignalManager (__XApp);
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
 
+			m_XLogicObjectPoolManager = new XClassPoolManager ();
+			
 			m_timer1000 = new Timer (1000, 0);
 			m_timer1000.start ();
 			m_timer1000.addEventListener (TimerEvent.TIMER, onUpdateTimer1000);
@@ -702,7 +705,7 @@ package X.World {
 
 //------------------------------------------------------------------------------------------
 		public function getXLogicObjectPoolManager ():XClassPoolManager {
-			return m_XApp.getClassPoolManager ();
+			return m_XLogicObjectPoolManager;
 		}
 
 //------------------------------------------------------------------------------------------		
