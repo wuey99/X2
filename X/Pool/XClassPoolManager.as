@@ -84,6 +84,27 @@ package X.Pool {
 				}
 			);
 		}
+
+//------------------------------------------------------------------------------------------
+		public function preAllocate (__class:Class, __numObjects):void {
+			var __pool:XObjectPoolManager;
+			
+			if (!m_pools.exists (__class)) {
+				__pool = setupPool (__class, 16, 16);
+				
+				m_pools.put (__class, __pool);
+			}	
+			
+			__pool = m_pools.get (__class);
+			
+			var i:Number;
+			
+			for (i=0; i<__numObjects; i++) {
+				__pool.borrowObject ();
+			}
+			
+			returnAllObjects (__class);
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function returnAllObjects (__class:Class = null):void {
