@@ -687,7 +687,8 @@ package X.World.Logic {
 			__fontName:String="Aller",
 			__fontSize:Number=12,
 			__color:int=0x000000,
-			__bold:Boolean=false
+			__bold:Boolean=false,
+			__embedFonts:Boolean=true
 			):XTextSprite {
 			
 			var __textSprite:XTextSprite = new XTextSprite (
@@ -697,7 +698,8 @@ package X.World.Logic {
 				__fontName,
 				__fontSize,
 				__color,
-				__bold
+				__bold,
+				__embedFonts
 			);
 
 			m_textSprites.put (__textSprite, 0);
