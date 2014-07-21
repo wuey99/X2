@@ -46,6 +46,7 @@
 package X.Sound {
 	
 	import X.Collections.*;
+	import X.Pool.*;
 	import X.Task.*;
 	import X.XApp;
 	
@@ -58,12 +59,14 @@ package X.Sound {
 		public var m_XApp:XApp;
 		public var m_soundChannels:XDict;
 		private static var g_GUID:Number = 0;
+		private var m_soundClassPoolManager:XClassPoolManager;
 		
 //------------------------------------------------------------------------------------------
 		public function XSoundManager (__XApp:XApp) {
 			m_XApp = __XApp;
 
 			m_soundChannels = new XDict ();
+			m_soundClassPoolManager = new XClassPoolManager ();
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -73,6 +76,7 @@ package X.Sound {
 		
 //------------------------------------------------------------------------------------------
 		private function __playSound (
+			__class:Class,
 			__sound:Sound,
 			__loops:Number = 0,
 			__successListener:Function = null,
@@ -81,7 +85,7 @@ package X.Sound {
 				
 			var __soundChannel:SoundChannel = __sound.play (0, __loops);
 			var __guid:Number = g_GUID++;
-			m_soundChannels.put (__guid, [__soundChannel, __completeListener]);
+			m_soundChannels.put (__guid, [__soundChannel, __completeListener, __class, __sound]);
 			
 			__successListener (__guid);
 			
@@ -91,10 +95,14 @@ package X.Sound {
 				function (e:Event):void {
 					if (m_soundChannels.exists (__guid)) {
 						var __completeListener:Function = m_soundChannels.get (__guid)[1];
+						var __class:Class = m_soundChannels.get (__guid)[2];
+						var __sound:Sound = m_soundChannels.get (__guid)[3];
 						
 						if (__completeListener != null) {
 							__completeListener (__guid);
 						}
+						
+						m_soundClassPoolManager.returnObject (__class, __sound);
 						
 						m_soundChannels.remove (__guid);
 					}
@@ -113,9 +121,10 @@ package X.Sound {
 			__completeListener:Function = null
 		):Number {
 			
-			var __sound:Sound = new (__class) ();
+			var __sound:Sound = m_soundClassPoolManager.borrowObject (__class) as Sound;
 			
 			return __playSound (
+				__class,
 				__sound,
 				__loops,
 				__successListener,
@@ -132,9 +141,11 @@ package X.Sound {
 			__completeListener:Function = null
 			):Number {
 			
-			var __sound:Sound = new (m_XApp.getClass (__className)) ();
+			var __class:Class = m_XApp.getClass (__className);
+			var __sound:Sound = m_soundClassPoolManager.borrowObject (__class) as Sound;
 			
 			return __playSound (
+				__class,
 				__sound,
 				__loops,
 				__successListener,
@@ -158,6 +169,10 @@ package X.Sound {
 				if (__completeListener != null) {
 					__completeListener (__guid);
 				}
+
+				var __class:Class = m_soundChannels.get (__guid)[2];
+				var __sound:Sound = m_soundChannels.get (__guid)[3];
+				m_soundClassPoolManager.returnObject (__class, __sound);
 				
 				m_soundChannels.remove (__guid);
 			}
