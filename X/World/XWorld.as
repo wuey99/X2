@@ -60,8 +60,7 @@ package X.World {
 	import X.Geom.*;
 	import X.Keyboard.*;
 	import X.MVC.*;
-	import X.Pool.XObjectPoolManager;
-	import X.Pool.XSubObjectPoolManager;
+	import X.Pool.*;
 	import X.Resource.*;
 	import X.Resource.Manager.*;
 	import X.Signals.*;
@@ -103,7 +102,7 @@ package X.World {
 		public var m_XTaskManager:XTaskManager;
 		public var m_XTaskManagerCX:XTaskManager;
 		public var m_renderManager:XTaskManager;
-		public var m_XLogicObjectPoolManager:XLogicObjectPoolManager;
+		public var m_XLogicObjectPoolManager:XClassPoolManager;
 		public var m_XMapModel:XMapModel;
 		public var m_XWorldLayers:Array;
 		public var m_XHudLayer:XSpriteLayer;
@@ -247,7 +246,7 @@ package X.World {
 			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager (__XApp);
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
-			m_XLogicObjectPoolManager = new XLogicObjectPoolManager (this);
+			m_XLogicObjectPoolManager = new XClassPoolManager ();
 
 			m_timer1000 = new Timer (1000, 0);
 			m_timer1000.start ();
@@ -704,7 +703,7 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getXLogicObjectPoolManager ():XLogicObjectPoolManager {
+		public function getXLogicObjectPoolManager ():XClassPoolManager {
 			return m_XLogicObjectPoolManager;
 		}
 
