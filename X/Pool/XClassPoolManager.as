@@ -43,7 +43,7 @@
 // Please contact me @ wuey99[dot]gmail[dot]com for more details.
 // <$end$/>
 //------------------------------------------------------------------------------------------
-package X.World.Pool {
+package X.Pool {
 	
 	import X.Pool.*;
 	import X.Collections.*;
