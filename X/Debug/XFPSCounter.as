@@ -82,7 +82,7 @@ package X.Debug  {
 						// text
 						"FPS: " + xxx.getFPS (),
 						// font name
-						"Verdana",
+						"Allert",
 						// font size
 						16,
 						// color
