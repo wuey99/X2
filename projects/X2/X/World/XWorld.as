@@ -377,6 +377,13 @@ package X.World {
 			
 			m_timer1000Signal.fireSignal ();
 		}
+		
+//------------------------------------------------------------------------------------------
+		public function setFPS (__value:Number):void {
+			m_FPS = __value;
+			
+			m_frameCount = 0;
+		}
 
 //------------------------------------------------------------------------------------------
 		public function getFPS ():Number {
