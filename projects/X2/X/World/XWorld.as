@@ -179,7 +179,7 @@ package X.World {
 		public var m_Domain:Domain;
 		
 //------------------------------------------------------------------------------------------
-		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32){
+		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32, __useOnEnterFrame:Boolean=true){
 			super ();
 			
 			setup ();
@@ -208,7 +208,13 @@ package X.World {
 			// Add event for main loop
 			m_timer = new Timer (__timerInterval, 0);
 			m_timer.start ();
-			m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
+			if (!__useOnEnterFrame) {
+				m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
+			}
+			else
+			{
+				addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrame);
+			}
 			
 			m_inuse_ENTER_FRAME = 0;
 			m_frameCount = 0;
