@@ -60,6 +60,7 @@ package X.Sound {
 		public var m_soundChannels:XDict;
 		private static var g_GUID:Number = 0;
 		private var m_soundClassPoolManager:XClassPoolManager;
+		private var m_SFXVolume:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function XSoundManager (__XApp:XApp) {
@@ -67,6 +68,7 @@ package X.Sound {
 
 			m_soundChannels = new XDict ();
 			m_soundClassPoolManager = new XClassPoolManager ();
+			m_SFXVolume = 1;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -82,8 +84,8 @@ package X.Sound {
 			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
-				
-			var __soundChannel:SoundChannel = __sound.play (0, __loops);
+		
+			var __soundChannel:SoundChannel = __sound.play (0, __loops, new SoundTransform (getSFXVolume (), 0));
 			var __guid:Number = g_GUID++;
 			m_soundChannels.put (__guid, [__soundChannel, __completeListener, __class, __sound]);
 			
@@ -153,6 +155,16 @@ package X.Sound {
 			);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function setSFXVolume (__state:Number):void {
+			m_SFXVolume = __state;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getSFXVolume ():Number {
+			return m_SFXVolume;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function stopSound (__guid:Number):void {
 			removeSound (__guid);
