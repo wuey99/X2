@@ -45,16 +45,19 @@
 //------------------------------------------------------------------------------------------
 package X.Resource.Types {
 
-	import X.Resource.*;
-	import X.Resource.Manager.*;
-	
-	import flash.display.*;
-	import flash.events.*;
+	import flash.display.Loader;
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.HTTPStatusEvent;
+	import flash.events.IEventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
-	import flash.system.*;
-	import flash.utils.*;
+	import flash.system.LoaderContext;
+	
+	import X.Resource.Manager.XSubResourceManager;
 	
 //------------------------------------------------------------------------------------------		
 	public class XSWFURLResource extends XSWFResource {
@@ -70,7 +73,7 @@ package X.Resource.Types {
 			__resourceManager:XSubResourceManager
 			):void {
 				
-			m_resourcePath = __resourcePath;
+			m_resourcePath = __fixPath (__resourcePath);
 			m_resourceXML = __resourceXML;
 			m_parent = __parent;
 			m_loader = null;
@@ -163,6 +166,30 @@ package X.Resource.Types {
 */
 
 //------------------------------------------------------------------------------------------
+		public function __fixPath (__path:String):String {
+			var __newPath:String = "";
+			var __previous:Boolean = false;
+			var i:Number;
+			
+			for (i=0; i<__path.length; i++) {
+				
+				if (__path.charAt (i) == "\\") {
+					if (!__previous) {
+						__newPath += __path.charAt (i);
+					}
+					__previous = true;
+				}
+				else
+				{
+					__newPath += __path.charAt (i);
+					__previous = false;
+				}
+			}
+			
+			return __newPath;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public override function loadResource ():void {		
 			m_loader = new Loader();
 
@@ -183,7 +210,7 @@ package X.Resource.Types {
 		
 	//------------------------------------------------------------------------------------------
 			function __onIOError(event:Event):void {
-				throw (Error ("I/O Error reading: " + m_resourcePath));
+				throw (Error ("I/O Error reading: " + event + ", " + m_resourcePath));
 			}
 			
 	//------------------------------------------------------------------------------------------
