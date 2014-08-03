@@ -167,7 +167,7 @@ package X.World.Tiles {
 							
 				for (__row=0; __row < m_submapModel.rows; __row++) {
 					for (__col=0; __col < m_submapModel.cols; __col++) {
-						cx_bitmap.goto (m_submapModel.getCXTile (__col, __row)+1);
+						cx_bitmap.gotoAndStop (m_submapModel.getCXTile (__col, __row)+1);
 																					
 						tempPoint.x = __col << 4;
 						tempPoint.y = __row << 4;
