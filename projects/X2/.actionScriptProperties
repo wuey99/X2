@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<actionScriptProperties mainApplicationPath="X.as" version="3">
-<compiler additionalCompilerArguments="" copyDependentFiles="false" enableModuleDebug="true" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersion="9.0.28" htmlPlayerVersionCheck="true" outputFolderPath="bin" strict="true" useApolloConfig="false" verifyDigests="true" warn="true">
-<compilerSourcePath/>
-<libraryPath defaultLinkType="1">
-<libraryPathEntry kind="4" path=""/>
-<libraryPathEntry kind="3" linkType="1" path="/Box2D/bin/Box2D.swc" useDefaultLinkType="false"/>
-</libraryPath>
-<sourceAttachmentPath/>
-</compiler>
-<applications>
-<application path="X.as"/>
-</applications>
-<modules>
-<module application="X.as" destPath="X/UI/XResizeGripImage.swf" optimize="true" sourcePath="X/UI/XResizeGripImage.mxml"/>
-</modules>
-<buildCSSFiles/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<actionScriptProperties analytics="false" mainApplicationPath="X.as" projectUUID="493ac010-aae0-4610-9387-ddc7ccb9b08f" version="10">
+  <compiler additionalCompilerArguments="-define=CONFIG::starling,false -define+=CONFIG::flash,true" autoRSLOrdering="true" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" removeUnusedRSL="true" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+    <compilerSourcePath/>
+    <libraryPath defaultLinkType="1">
+      <libraryPathEntry kind="4" path=""/>
+      <libraryPathEntry kind="3" linkType="1" path="C:/Documents and Settings/Jimmy Huey/Desktop/PrimaryFeather-Starling-Framework-v1.3-0-g0ac3592/PrimaryFeather-Starling-Framework-0ac3592/starling/bin/starling.swc" useDefaultLinkType="false"/>
+    </libraryPath>
+    <sourceAttachmentPath/>
+  </compiler>
+  <applications>
+    <application path="X.as"/>
+  </applications>
+  <modules>
+    <module application="X.as" destPath="X/UI/XResizeGripImage.swf" optimize="true" sourcePath="X/UI/XResizeGripImage.mxml"/>
+  </modules>
+  <buildCSSFiles/>
+  <flashCatalyst validateFlashCatalystCompatibility="false"/>
 </actionScriptProperties>
