@@ -134,7 +134,7 @@ package X.World.Sprite {
 					m_bitmapDataAnim = m_bitmapDataAnimManager.add (__className);
 					
 					if (m_bitmapDataAnim) {
-						goto (1);
+						__goto (1);
 					}
 					else
 					{
@@ -203,11 +203,11 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function gotoAndStop (__frame:Number):void {
-					goto (__frame);
+					__goto (__frame);
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function goto (__frame:Number):void {
+				private function __goto (__frame:Number):void {
 					m_frame = __frame-1;
 					
 					if (m_bitmapDataAnim) {
@@ -360,7 +360,7 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function goto (__frame:Number):void {
+				private function __goto (__frame:Number):void {
 					gotoAndStop (__frame);
 				}
 				

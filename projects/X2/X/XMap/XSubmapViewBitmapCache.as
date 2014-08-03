@@ -184,7 +184,7 @@ package X.XMap {
 					
 					if (__bitmap != null) {
 						if (__item.frame != 0) {
-							__bitmap.goto (__item.frame);
+							__bitmap.gotoAndStop (__item.frame);
 						}
 						
 						tempPoint.x = __item.x - m_submapModel.x;
@@ -250,7 +250,7 @@ package X.XMap {
 					
 				if (__bitmap != null) {
 					if (__item.frame != 0) {
-						__bitmap.goto (__item.frame);
+						__bitmap.gotoAndStop (__item.frame);
 					}
 						
 					tempPoint.x = __item.x - m_submapModel.x;
