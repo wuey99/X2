@@ -1,21 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<flexLibProperties version="1">
-<includeClasses>
-<classEntry path="X.MVC.XControllerBase"/>
-<classEntry path="X.MVC.XModelEvents"/>
-<classEntry path="X.XApp"/>
-<classEntry path="X.MVC.XModelBase"/>
-<classEntry path="X.XMap.XSubmapModel"/>
-<classEntry path="X.Resource.IResourceManager"/>
-<classEntry path="X.UI.XImageSprite"/>
-<classEntry path="X.MVC.XViewBase"/>
-<classEntry path="X.XMap.XMapModel"/>
-<classEntry path="X.XMap.XMapLayerModel"/>
-<classEntry path="X.Resource.XResourceManager"/>
-<classEntry path="X.UI.XResizeGripImage"/>
-<classEntry path="X.World.Logic.XLogicObject"/>
-<classEntry path="X.World.Logic.XLogicObjectBox2D"/>
-</includeClasses>
-<includeResources/>
-<namespaceManifests/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="1">
+  <includeClasses>
+    <classEntry path="X.Collections.XDict"/>
+    <classEntry path="X.Debug.XDebugConsole"/>
+    <classEntry path="X.Document.XDocument"/>
+    <classEntry path="X.Geom.XPoint"/>
+    <classEntry path="X.Geom.XRect"/>
+    <classEntry path="X.MVC.XControllerBase"/>
+    <classEntry path="X.Resource.XResourceName"/>
+    <classEntry path="X.Signals.XSignal"/>
+    <classEntry path="X.Sound.XSoundManager"/>
+    <classEntry path="X.Task.XNumber"/>
+    <classEntry path="X.Task.XTask"/>
+    <classEntry path="X.Task.XTaskSubManager"/>
+    <classEntry path="X.Utils.XClassNameToIndex"/>
+    <classEntry path="X.World.Camera.XCamera"/>
+    <classEntry path="X.World.Logic.XLogicObject"/>
+    <classEntry path="X.World.Logic.XLogicObjectCX"/>
+    <classEntry path="X.World.Sprite.XBitmap"/>
+    <classEntry path="X.World.Sprite.XDepthSprite"/>
+    <classEntry path="X.World.Sprite.XRegistration"/>
+    <classEntry path="X.World.Tiles.XSubmapTiles"/>
+    <classEntry path="X.World.XLogicManager"/>
+    <classEntry path="X.World.XSpriteLayer"/>
+    <classEntry path="X.World.XWorld"/>
+    <classEntry path="X.XApp"/>
+    <classEntry path="X.XML.XSimpleXMLDocument"/>
+    <classEntry path="X.XML.XSimpleXMLNode"/>
+    <classEntry path="X.XMap.XMapItemModel"/>
+    <classEntry path="X.XMap.XMapItemView"/>
+    <classEntry path="X.XMap.XMapLayerCachedView"/>
+    <classEntry path="X.XMap.XMapLayerView"/>
+    <classEntry path="X.XMap.XMapModel"/>
+    <classEntry path="X.XMap.XMapView"/>
+    <classEntry path="X.XMap.XSubmapBitmap"/>
+    <classEntry path="X.XMap.XSubmapModel"/>
+    <classEntry path="X.XMap.XSubmapViewBitmapCache"/>
+    <classEntry path="X.g$"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
 </flexLibProperties>
