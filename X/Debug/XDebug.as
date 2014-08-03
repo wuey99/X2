@@ -48,8 +48,8 @@ package X.Debug {
 // X classes
 	import X.XApp;
 	
-	import com.mattism.http.xmlrpc.*;
-	import com.mattism.http.xmlrpc.util.*;
+//	import com.mattism.http.xmlrpc.*;
+//	import com.mattism.http.xmlrpc.util.*;
 	
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
@@ -106,6 +106,7 @@ package X.Debug {
 			
 //------------------------------------------------------------------------------------------
 		public function print2 (__output:String):void {
+			/*
 			if (m_disabled) {
 				return;
 			}
@@ -150,6 +151,7 @@ package X.Debug {
 				__connection.removeEventListener (Event.COMPLETE, __onCompleteHandler);
 				__connection.removeEventListener (ErrorEvent.ERROR, __onErrorHandler);
 			}
+			*/
 		}
 
 //------------------------------------------------------------------------------------------		
