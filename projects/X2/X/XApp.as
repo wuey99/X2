@@ -44,12 +44,6 @@
 // <$end$/>
 //------------------------------------------------------------------------------------------
 package X {
-
-// Box2D classes
-	import Box2D.Collision.*;
-	import Box2D.Collision.Shapes.*;
-	import Box2D.Common.Math.*;
-	import Box2D.Dynamics.*;
 	
 	import X.Bitmap.*;
 	import X.Collections.*;

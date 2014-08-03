@@ -46,10 +46,12 @@
 package X.World {
 
 // Box2D classes
+	/*
 	import Box2D.Collision.*;
 	import Box2D.Collision.Shapes.*;
 	import Box2D.Common.Math.*;
 	import Box2D.Dynamics.*;
+	*/
 	
 	import X.*;
 	import X.Bitmap.*;
@@ -92,7 +94,7 @@ package X.World {
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
 		public var m_ticks:Number;
-		public var m_world:b2World;
+//		public var m_world:b2World;
 		public var m_iterations:int = 20;
 		public var m_timeStep:Number = 1.0/30.0;
 		public var m_parent:*;	
@@ -133,12 +135,6 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
 		public var m_XLogicObject:XLogicObject;
-		public var m_XLogicObjectCX0:XLogicObjectCX0;
-		public var m_XLogicObjectCX:XLogicObjectCX;
-		public var m_XLogicObjectBox2D:XLogicObjectBox2D;
-		public var m_XShape:XShape;
-		public var m_XShapeRect:XShapeRect;
-		public var m_XShapeCircle:XShapeCircle;
 		public var m_XMapItemModel:XMapItemModel;
 		public var m_XDocument:XDocument;
 		public var m_XButton:XButton;
@@ -225,7 +221,8 @@ package X.World {
 				addEventListener(Event.RENDER, onRenderFrame);
 				m_inuse_RENDER_FRAME = 0;
 			}
-			
+	
+			/*
 			// Create world AABB
 			var worldAABB:b2AABB = new b2AABB ();
 			worldAABB.lowerBound.Set (-100.0, -100.0);
@@ -239,6 +236,7 @@ package X.World {
 			
 			// Construct a world object
 			m_world = new b2World (worldAABB, gravity, doSleep);
+			*/
 			
 			m_ticks = 0;
 			
@@ -697,10 +695,12 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/*
 		public function getWorld ():b2World {
 			return m_world;
 		}
-
+		*/
+		
 //------------------------------------------------------------------------------------------
 		public function getMaxLayers ():Number {
 			return MAX_LAYERS;

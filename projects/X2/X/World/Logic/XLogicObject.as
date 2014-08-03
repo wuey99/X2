@@ -45,12 +45,6 @@
 //------------------------------------------------------------------------------------------
 package X.World.Logic {
 
-// Box2D classes
-	import Box2D.Collision.*;
-	import Box2D.Collision.Shapes.*;
-	import Box2D.Common.Math.*;
-	import Box2D.Dynamics.*;
-	
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.MVC.*;

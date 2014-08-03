@@ -35,13 +35,7 @@
 // http://creativecommons.org/licenses/by-sa/3.0/us/legalcode
 //------------------------------------------------------------------------------------------
 package X.XMap {
-	
-	//  Box2D classes
-	import Box2D.Collision.*;
-	import Box2D.Collision.Shapes.*;
-	import Box2D.Common.Math.*;
-	import Box2D.Dynamics.*;
-	
+		
 	// X classes
 	import X.*;
 	import X.World.*;

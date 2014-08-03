@@ -108,7 +108,8 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
-			x_sprite.removeChild (m_image);
+// TODO figure out coercion issue
+//			x_sprite.removeChild (m_image);
 			
 			if (CONFIG::starling) {
 				dispose ();
