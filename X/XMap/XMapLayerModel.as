@@ -155,6 +155,11 @@ package X.XMap {
 		public function getXMapModel ():XMapModel {
 			return m_XMap;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function get useArrayItems ():Boolean {
+			return m_XMap.useArrayItems;
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function setViewPort (__viewPort:XRect):void {
@@ -361,9 +366,9 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function removeItem (__item:XMapItemModel):void {		
-			if (!m_items.exists (__item)) {
-				return;
-			}
+//			if (!m_items.exists (__item)) {
+//				return;
+//			}
 			
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 		
@@ -439,6 +444,10 @@ package X.XMap {
 				__x1:Number, __y1:Number,
 				__x2:Number, __y2:Number
 				):Array {
+			
+			if (useArrayItems) {
+				return getArrayItemsAt (__x1, __y1, __x2, __y2);
+			}
 			
 			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
@@ -530,6 +539,10 @@ package X.XMap {
 				__x2:Number, __y2:Number
 				):Array {
 			
+			if (useArrayItems) {
+				return getArrayItemsAtCX (__x1, __y1, __x2, __y2);
+			}
+			
 			__x2--; __y2--;
 			
 			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
@@ -570,6 +583,54 @@ package X.XMap {
 			return dst_items;		
 		}
 
+		
+//------------------------------------------------------------------------------------------
+		public function getArrayItemsAtCX (
+			__x1:Number, __y1:Number,
+			__x2:Number, __y2:Number
+		):Array {
+			
+			__x2--; __y2--;
+			
+			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
+			
+			var i:Number;
+			var src_items:Vector.<XMapItemModel>;
+			var dst_items:Array = new Array ();
+			var item:XMapItemModel;
+
+			var __length:int;
+			
+			trace (": ---------------------: ");	
+			trace (": getItemsAt: submaps: ", submaps.length);
+			trace (": ---------------------: ");
+			
+			for (i=0; i<submaps.length; i++) {
+				src_items = submaps[i].arrayItems ();
+				
+				__length = src_items.length;
+				
+				for (var x:int = 0; x<__length; x++) {	
+					item = src_items[x];
+					
+					var cx:XRect = item.collisionRect.cloneX ();
+					cx.offset (item.x, item.y);
+						
+					if (
+						!(__x2 < cx.left || __x1 > cx.right - 1 ||
+						__y2 < cx.top || __y1 > cx.bottom - 1)
+					) {
+							
+						if (dst_items.indexOf (item) == -1) {
+							dst_items.push (item);
+						}
+					}
+				}
+			}
+			
+			return dst_items;		
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getCXTiles (
 			c1:Number, r1:Number,
@@ -689,7 +750,7 @@ package X.XMap {
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function items ():XDict {
+		public function items0 ():XDict {
 			return m_items;
 		}
 		
@@ -704,24 +765,24 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getItemId (__item:XMapItemModel):Number {
+		public function ___getItemId___ (__item:XMapItemModel):Number {
 			return m_items.get (__item);
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function getIdItem(__id:Number):XMapItemModel {
+		public function ___getIdItem___ (__id:Number):XMapItemModel {
 			return m_ids.get (__id);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function trackItem (__item:XMapItemModel):void {
-			m_items.put (__item, __item.id);
+//			m_items.put (__item, __item.id);
 			m_ids.put (__item.id, __item);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function untrackItem (__item:XMapItemModel):void {
-			m_items.remove (__item);
+//			m_items.remove (__item);
 			m_ids.remove (__item.id);
 		}
 		
@@ -762,18 +823,41 @@ package X.XMap {
 			if (__list == null) {
 				var __list:XDict = new XDict ();
 			}
-			
-			for (__row=0; __row<m_submapRows; __row++) {
-				for (__col=0; __col<m_submapCols; __col++) {
-					m_XSubmaps[__row][__col].items ().forEach (
-						function (x:*):void {
-							var __item:XMapItemModel = x as XMapItemModel;
-							
-							if (__item.XMapItem == __itemName) {
-								__list.put (__item.id, __item);
-							}
+		
+			if (useArrayItems) {
+				var src_items:Vector.<XMapItemModel>;
+				var __length:int;
+				
+				for (__row=0; __row<m_submapRows; __row++) {
+					for (__col=0; __col<m_submapCols; __col++) {
+						src_items = m_XSubmaps[__row][__col].arrayItems ();
+						
+						__length = src_items.length;
+						
+						for (var __index:int = 0; __index<__length; __index++) {
+								var __item:XMapItemModel = src_items[__index] as XMapItemModel;
+								
+								if (__item.XMapItem == __itemName) {
+									__list.put (__item.id, __item);
+								}
 						}
-					);
+					}
+				}				
+			}
+			else
+			{
+				for (__row=0; __row<m_submapRows; __row++) {
+					for (__col=0; __col<m_submapCols; __col++) {
+						m_XSubmaps[__row][__col].items ().forEach (
+							function (x:*):void {
+								var __item:XMapItemModel = x as XMapItemModel;
+								
+								if (__item.XMapItem == __itemName) {
+									__list.put (__item.id, __item);
+								}
+							}
+						);
+					}
 				}
 			}
 			
@@ -1025,22 +1109,48 @@ package X.XMap {
 				
 				m_XSubmaps[__row][__col].deserializeRowCol (__submapXML);
 			}
-	
+
+//------------------------------------------------------------------------------------------
+// we're going to assume that we won't need clean-up with using ArrayItems
+//------------------------------------------------------------------------------------------
+			if (useArrayItems) {
+				return;
+			}
+			
 //------------------------------------------------------------------------------------------	
 // add items to the layer's dictionary
 //------------------------------------------------------------------------------------------
 			trace (": adding items: ");
 			
-			for (__row=0; __row<m_submapRows; __row++) {
-				for (__col=0; __col<m_submapCols; __col++) {
-					m_XSubmaps[__row][__col].items ().forEach (
-						function (__item:*):void {
-							trackItem (__item);
+			if (useArrayItems) {
+				var src_items:Vector.<XMapItemModel>;
+				var __length:int;
+				
+				for (__row=0; __row<m_submapRows; __row++) {
+					for (__col=0; __col<m_submapCols; __col++) {
+						src_items = m_XSubmaps[__row][__col].arrayItems ();
+						
+						__length = src_items.length;
+						
+						for (var x:int = 0; x<__length; x++) {
+							trackItem (src_items[x]);
 						}
-					);
+					}
+				}				
+			}
+			else
+			{
+				for (__row=0; __row<m_submapRows; __row++) {
+					for (__col=0; __col<m_submapCols; __col++) {
+						m_XSubmaps[__row][__col].items ().forEach (
+							function (__item:*):void {
+								trackItem (__item);
+							}
+						);
+					}
 				}
 			}
-
+			
 //------------------------------------------------------------------------------------------
 			cullUnneededItems ();
 		}
