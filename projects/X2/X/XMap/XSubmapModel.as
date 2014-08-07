@@ -309,7 +309,7 @@ package X.XMap {
 			m_src.offset (__item.x, __item.y);
 			
 			m_items.forEach (
-				function (x:*) {
+				function (x:*):void {
 					var __dstItem:XMapItemModel = x as XMapItemModel;
 					
 					__dstItem.boundingRect.copy2 (m_dst);
@@ -466,13 +466,17 @@ package X.XMap {
 // __params
 					__xml.child ("params")[0].toXMLString ()
 					);
-					
+	
 					addItem (__item);
 					
 					if (useArrayItems) {
 						addArrayItem (__item);
 					}
-					
+					else
+					{
+//						addItem (__item);
+					}
+	
 					m_XMapLayer.trackItem (__item);
 			}
 		}
