@@ -173,6 +173,7 @@ package X.World {
 		public var m_XTextLogicObject:XTextLogicObject;
 		public var m_GUID:GUID;
 		public var m_Domain:Domain;
+		public var m_timely:Timely;
 		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32){
