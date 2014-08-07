@@ -467,14 +467,14 @@ package X.XMap {
 					__xml.child ("params")[0].toXMLString ()
 					);
 	
-					addItem (__item);
+//					addItem (__item);
 					
 					if (useArrayItems) {
 						addArrayItem (__item);
 					}
 					else
 					{
-//						addItem (__item);
+						addItem (__item);
 					}
 	
 					m_XMapLayer.trackItem (__item);
