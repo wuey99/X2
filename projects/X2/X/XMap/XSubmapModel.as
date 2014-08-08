@@ -49,6 +49,7 @@ package X.XMap {
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.MVC.*;
+	import X.Pool.XSubObjectPoolManager;
 	import X.Utils.XReferenceNameToIndex;
 	import X.XML.*;
 	
@@ -77,6 +78,10 @@ package X.XMap {
 
 		private var m_items:XDict;
 		private var m_arrayItems:Vector.<XMapItemModel>;
+		private var m_arrayItemIndex:int;
+		
+		private var m_XMapItemModelPoolManager:XSubObjectPoolManager;
+		private var m_XRectPoolManager:XSubObjectPoolManager;
 		
 // empty
 		public static const CX_EMPTY:int = 0;
@@ -181,12 +186,16 @@ package X.XMap {
 			for (var i:int = 0; i< m_cmap.length; i++) {
 				m_cmap[i] = CX_EMPTY;
 			}
-			
+
 			m_items = new XDict ();
 			m_arrayItems = new Vector.<XMapItemModel> ();
+			m_arrayItemIndex = 0;
 
 			m_src = new XRect ();
 			m_dst = new XRect ();
+			
+			m_XMapItemModelPoolManager = m_XMapLayer.getXMapModel ().getXMapItemModelPoolManager ();
+			m_XRectPoolManager = m_XMapLayer.getXMapModel ().getXRectPoolManager ();
 		}	
 
 //------------------------------------------------------------------------------------------
@@ -287,11 +296,11 @@ package X.XMap {
 			__item:XMapItemModel
 		):XMapItemModel {
 			
-			trace (": XSubmapModel: additemarray: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
+//			trace (": XSubmapModel: additemarray: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
 			
-			if (!(__item in m_arrayItems)) {
-				m_arrayItems.push (__item);
-			}
+//			if (!(__item in m_arrayItems)) {
+				m_arrayItems[m_arrayItemIndex++] = __item;
+//			}
 			
 			return __item;
 		}		
@@ -418,11 +427,15 @@ package X.XMap {
 			
 //------------------------------------------------------------------------------------------
 			__xmlList = __xml.child ("XMapItem");
-						
+
+			if (useArrayItems) {
+				m_arrayItems = new Vector.<XMapItemModel> (__xmlList.length);
+			}
+			
 			for (i=0; i<__xmlList.length; i++) {
 				var __xml:XSimpleXMLNode = __xmlList[i];
 				
-				trace (": deserializeRowCol: ", m_col, m_row);
+//				trace (": deserializeRowCol: ", m_col, m_row);
 
 				var __id:Number = __xml.getAttribute ("id");
 				var __item:XMapItemModel = m_XMapLayer.ids ().get (__id);
@@ -432,7 +445,7 @@ package X.XMap {
 				}
 				else
 				{
-					__item = new XMapItemModel ();
+					__item = m_XMapItemModelPoolManager.borrowObject () as XMapItemModel;
 				}
 
 				var __classNameToIndex:XReferenceNameToIndex = m_XMapLayer.getClassNames ();
@@ -440,9 +453,15 @@ package X.XMap {
 				var __logicClassIndex:Number = __xml.getAttribute ("logicClassIndex");
 				var __imageClassIndex:Number = __xml.getAttribute ("imageClassIndex");
 				
-				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex), __classNameToIndex.getReferenceNameCount (__logicClassIndex));
-				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex),  __classNameToIndex.getReferenceNameCount (__imageClassIndex));
+//				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex), __classNameToIndex.getReferenceNameCount (__logicClassIndex));
+//				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex),  __classNameToIndex.getReferenceNameCount (__imageClassIndex));
 								
+				var __collisionRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
+				var __boundingRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
+				
+				__collisionRect.setRect (__xml.getAttribute ("cx"), __xml.getAttribute ("cy"), __xml.getAttribute ("cw"), __xml.getAttribute ("ch"));
+				__boundingRect.setRect (__xml.getAttribute ("bx"), __xml.getAttribute ("by"), __xml.getAttribute ("bw"), __xml.getAttribute ("bh"));
+					
 				__item.setup (
 					m_XMapLayer,
 // __logicClassName
@@ -460,17 +479,15 @@ package X.XMap {
 // __scale, __rotation, __depth
 					__xml.getAttribute ("scale"), __xml.getAttribute ("rotation"), __xml.getAttribute ("depth"),
 // __collisionRect,
-					new XRect (__xml.getAttribute ("cx"), __xml.getAttribute ("cy"), __xml.getAttribute ("cw"), __xml.getAttribute ("ch")),
+					__collisionRect,
 // __boundingRect,
-					new XRect (__xml.getAttribute ("bx"), __xml.getAttribute ("by"), __xml.getAttribute ("bw"), __xml.getAttribute ("bh")),
+					__boundingRect,
 // __params
 					__xml.child ("params")[0].toXMLString ()
 					);
-	
-//					addItem (__item);
-					
+
 					if (useArrayItems) {
-						addArrayItem (__item);
+						m_arrayItems[m_arrayItemIndex++] = __item;
 					}
 					else
 					{

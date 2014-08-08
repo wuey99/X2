@@ -48,6 +48,7 @@ package X.XMap {
 // X classes	
 	import X.Geom.*;
 	import X.MVC.*;
+	import X.Pool.*;
 	import X.XApp;
 	import X.XML.*;
 	
@@ -65,6 +66,10 @@ package X.XMap {
 		private var m_allClassNames:Array;
 		private var m_currLayer:Number;
 		private var m_useArrayItems:Boolean;
+		private var m_XSubXMapItemModelPoolManager:XSubObjectPoolManager;
+		private var m_XSubXRectPoolManager:XSubObjectPoolManager;
+		private var m_XApp:XApp;
+		public static var g_XApp:XApp;
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapModel () {
@@ -72,6 +77,8 @@ package X.XMap {
 			
 			m_allClassNames = new Array ();
 			m_useArrayItems = false;
+			
+			m_XApp = g_XApp;
 		}	
 
 //------------------------------------------------------------------------------------------
@@ -88,6 +95,8 @@ package X.XMap {
 			m_layers = new Array (m_numLayers);
 			m_currLayer = 0;
 			m_useArrayItems = __useArrayItems;
+			m_XSubXMapItemModelPoolManager = new XSubObjectPoolManager (m_XApp.getXMapItemModelPoolManager ());
+			m_XSubXRectPoolManager = new XSubObjectPoolManager (m_XApp.getXRectPoolManager ());
 			
 			var i:Number;
 			
@@ -103,8 +112,26 @@ package X.XMap {
 			for (i=0; i<m_numLayers; i++) {
 				m_layers[i].cleanup ();
 			}
+			
+			m_XSubXMapItemModelPoolManager.returnAllObjects ();
+			m_XSubXRectPoolManager.returnAllObjects ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public static function setXApp (__XApp:XApp):void {
+			g_XApp = __XApp;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getXMapItemModelPoolManager ():XSubObjectPoolManager {
+			return m_XSubXMapItemModelPoolManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXRectPoolManager ():XSubObjectPoolManager {
+			return m_XSubXRectPoolManager;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function get useArrayItems ():Boolean {
 			return m_useArrayItems;
@@ -270,6 +297,8 @@ package X.XMap {
 			m_numLayers = __xmlList.length;
 			m_layers = new Array (m_numLayers);
 			m_useArrayItems = __useArrayItems;
+			m_XSubXMapItemModelPoolManager = new XSubObjectPoolManager (m_XApp.getXMapItemModelPoolManager ());
+			m_XSubXRectPoolManager = new XSubObjectPoolManager (m_XApp.getXRectPoolManager ());
 			
 			var i:Number;
 			

@@ -787,6 +787,11 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function getXMapItemModelPoolManager ():XObjectPoolManager {
+			return m_XApp.getXMapItemModelPoolManager ();
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getMovieClipCacheManager ():XMovieClipCacheManager {
 			return m_XApp.getMovieClipCacheManager ();
 		}
