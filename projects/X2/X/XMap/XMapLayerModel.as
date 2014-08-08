@@ -776,13 +776,13 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function trackItem (__item:XMapItemModel):void {
-//			m_items.put (__item, __item.id);
+			m_items.put (__item, __item.id);
 			m_ids.put (__item.id, __item);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function untrackItem (__item:XMapItemModel):void {
-//			m_items.remove (__item);
+			m_items.remove (__item);
 			m_ids.remove (__item.id);
 		}
 		
