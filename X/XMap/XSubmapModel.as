@@ -360,6 +360,26 @@ package X.XMap {
 		public function arrayItems ():Vector.<XMapItemModel> {
 			return m_arrayItems;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function iterateAllItems (__callback:Function):void {
+			if (useArrayItems) {
+				var __items:Vector.<XMapItemModel>;
+				var __length:int;
+				
+				__items = arrayItems ();
+				
+				__length = __items.length;
+				
+				for (var i:int = 0; i<__length; i++) {
+					__callback (__items[i]);
+				}
+			}
+			else
+			{
+				items ().forEach (__callback);		
+			}
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function serializeRowCol (__row:Number, __col:Number):XSimpleXMLNode {	
