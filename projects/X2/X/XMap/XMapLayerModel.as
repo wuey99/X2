@@ -824,31 +824,9 @@ package X.XMap {
 				var __list:XDict = new XDict ();
 			}
 		
-			if (useArrayItems) {
-				var src_items:Vector.<XMapItemModel>;
-				var __length:int;
-				
 				for (__row=0; __row<m_submapRows; __row++) {
 					for (__col=0; __col<m_submapCols; __col++) {
-						src_items = m_XSubmaps[__row][__col].arrayItems ();
-						
-						__length = src_items.length;
-						
-						for (var __index:int = 0; __index<__length; __index++) {
-								var __item:XMapItemModel = src_items[__index] as XMapItemModel;
-								
-								if (__item.XMapItem == __itemName) {
-									__list.put (__item.id, __item);
-								}
-						}
-					}
-				}				
-			}
-			else
-			{
-				for (__row=0; __row<m_submapRows; __row++) {
-					for (__col=0; __col<m_submapCols; __col++) {
-						m_XSubmaps[__row][__col].items ().forEach (
+						m_XSubmaps[__row][__col].iterateAllItems (
 							function (x:*):void {
 								var __item:XMapItemModel = x as XMapItemModel;
 								
@@ -859,7 +837,6 @@ package X.XMap {
 						);
 					}
 				}
-			}
 			
 			return __list;	
 		}
