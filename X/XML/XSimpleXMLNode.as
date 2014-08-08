@@ -49,7 +49,7 @@ package X.XML {
 	public class XSimpleXMLNode extends Object {
 		private var m_tag:String;
 		private var m_attribs:Array;
-		private var m_attribsMap:Object;
+		private var m_attribsMap:Array;
 		private var m_text:String;
 		private var m_children:Array;
 		private var m_parent:XSimpleXMLNode;
@@ -59,7 +59,7 @@ package X.XML {
 			super ();
 			
 			m_attribs = new Array ();
-			m_attribsMap = new Object ();
+			m_attribsMap = new Array ();
 			m_children = new Array ();
 			m_parent = null;
 		}
@@ -94,7 +94,7 @@ package X.XML {
 	
 //------------------------------------------------------------------------------------------
 			m_attribs = new Array ();
-			m_attribsMap = new Object ();
+			m_attribsMap = new Array ();
 			
 			__xmlList = __xml.attributes ();
 			

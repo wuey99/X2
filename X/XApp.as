@@ -82,6 +82,7 @@ package X {
 		private var m_XPointPoolManager:XObjectPoolManager;
 		private var m_XDepthSpritePoolManager:XObjectPoolManager;
 		private var m_XBitmapPoolManager:XObjectPoolManager;
+		private var m_XMapItemModelPoolManager:XObjectPoolManager;
 		private var m_XTextureManager:XTextureManager;
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
 		private var m_XClassPoolManager:XClassPoolManager;
@@ -105,6 +106,7 @@ package X {
 			XBitmap.setXApp (this);
 			XImage.setXApp (this);
 			XSprite.setXApp (this);
+			XMapModel.setXApp (this);
 			
 			__initPoolManagers (__poolSettings);
 			
@@ -128,7 +130,8 @@ package X {
 				XRect: {init: 25000, overflow: 1000},				
 				XPoint: {init: 25000, overflow: 1000},
 				XDepthSprite: {init: 4000, overflow: 1000},
-				XBitmap: {init: 4000, overflow: 1000}
+				XBitmap: {init: 4000, overflow: 1000},
+				XMapItemModel: {init: 12288, overflow: 2048}
 			};
 		}
 		
@@ -139,7 +142,8 @@ package X {
 				XRect: {init: 2500, overflow: 1000},				
 				XPoint: {init: 2500, overflow: 1000},
 				XDepthSprite: {init: 2000, overflow: 1000},
-				XBitmap: {init: 2000, overflow: 1000}
+				XBitmap: {init: 2000, overflow: 1000},
+				XMapItemModel: {init: 12288, overflow: 2048}
 			};
 		}
 		
@@ -240,6 +244,23 @@ package X {
 				
 				__poolSettings.XBitmap.init, __poolSettings.XBitmap.overflow
 			);
+			
+//------------------------------------------------------------------------------------------
+// XMapItemModel
+//------------------------------------------------------------------------------------------
+			m_XMapItemModelPoolManager = new XObjectPoolManager (
+				function ():* {
+					var __xmapItem:XMapItemModel = new XMapItemModel ();
+					
+					return __xmapItem;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__poolSettings.XMapItemModel.init, __poolSettings.XMapItemModel.overflow
+			);
 		}
 			
 //------------------------------------------------------------------------------------------
@@ -297,6 +318,11 @@ package X {
 //------------------------------------------------------------------------------------------
 		public function getXBitmapPoolManager ():XObjectPoolManager {
 			return m_XBitmapPoolManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXMapItemModelPoolManager ():XObjectPoolManager {
+			return m_XMapItemModelPoolManager;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -443,7 +469,7 @@ package X {
 						}
 					}
 				}
-			}c
+			}
 			
 		//------------------------------------------------------------------------------------------
 		}
