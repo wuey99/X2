@@ -102,6 +102,7 @@ package X.XMap {
 			
 			for (i=0; i<m_numLayers; i++) {
 				m_layers[i] = __layers[i]
+				m_layers[i].setParent (this);
 			}
 		}				
 
