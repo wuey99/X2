@@ -539,8 +539,13 @@ package X.World {
 			var __oldY:Number;
 			
 			getXTaskManager ().addTask ([
-				XTask.WAIT, 0x0100,
-				
+				XTask.LABEL, "wait",
+					XTask.WAIT, 0x0100,
+	
+					XTask.FLAGS, function (__task:XTask):void {
+						__task.ifTrue (getFlashStage () && getFlashStage ().stage);			
+					}, XTask.BNE, "wait",
+					
 				function ():void {
 					// xxx.getParent ().stage.addEventListener (xxx.MOUSE_OVER, onMouseOver);
 					getFlashStage ().addEventListener (MouseEvent.MOUSE_DOWN, onMouseDown);
@@ -555,7 +560,7 @@ package X.World {
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,
 						function ():void {
-							if (__oldX != mouseX || __oldY != mouseY) {
+							if (getFlashStage () && (__oldX != mouseX || __oldY != mouseY)) {
 								__point.x = mouseX;
 								__point.y = mouseY;
 								
