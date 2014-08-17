@@ -553,8 +553,7 @@ package X.World {
 					getFlashStage ().addEventListener (MouseEvent.MOUSE_UP, onMouseUp);
 					getFlashStage ().addEventListener (MouseEvent.MOUSE_OUT, onMouseOut);
 					
-					__oldX = mouseX;
-					__oldY = mouseY;
+					__oldX = mouseX; __oldY = mouseY;
 				},
 				
 				XTask.LABEL, "loop",
