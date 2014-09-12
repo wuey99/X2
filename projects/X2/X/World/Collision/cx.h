@@ -100,7 +100,11 @@
 		// death
 		public const CX_DEATH:int = 29;
 		
-		public const CX_MAX:int = 30;
+		// ice
+		public const CX_ICE:int = 30;
+		
+		// max
+		public const CX_MAX:int = 31;
 		
 		// collision tile width, height
 		public const CX_TILE_WIDTH:int = 16;
