@@ -133,7 +133,11 @@ package X.XMap {
 		// death
 		public static const CX_DEATH:int = 29;
 		
-		public static const CX_MAX:int = 30;
+		// ice
+		public static const CX_ICE:int = 30;
+		
+		// max
+		public static const CX_MAX:int = 31;
 		
 // collision tile width, height
 		public static const CX_TILE_WIDTH:int = 16;
