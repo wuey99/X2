@@ -43,99 +43,85 @@
 // Please contact me @ wuey99[dot]gmail[dot]com for more details.
 // <$end$/>
 //------------------------------------------------------------------------------------------
-package X.Collections {
+package X.World.Collision {
 	
-	import flash.utils.Dictionary;
+	import X.Collections.*;
+	import X.Geom.*;
+	import X.Pool.*;
+	import X.World.Logic.*;
+	import X.World.XWorld;
+	import X.XMap.*;
 	
 //------------------------------------------------------------------------------------------
-	public class XDict extends Object {
-		private var m_dict:Dictionary;
+	public class XObjectCollisionList extends Object {
+		protected var xxx:XWorld;
+		protected var m_rects:Array;
+		protected var m_XSubRectPoolManager:XSubObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
-		public function XDict () {
+		public function XObjectCollisionList () {
 			super ();
 			
-			m_dict = new Dictionary ();
+			xxx = null;
 		}
-
+		
 //------------------------------------------------------------------------------------------
-		public function setup ():void {
+		public function setup (__xxx:XWorld):void {
+			xxx = __xxx;		
+			m_rects = new Array ();
+			
+			var i:Number;
+			
+			for (i=0; i < xxx.getMaxLayers (); i++) {
+				m_rects[i] = new XDict ();
+			}
+			
+			m_XSubRectPoolManager = new XSubObjectPoolManager (xxx.getXRectPoolManager ());
+			
+			clear ();
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			clear ();
 		}
 
-//------------------------------------------------------------------------------------------
-		[Inline]
-		public function exists (__key:*):Boolean {
-			return __key in m_dict;
-		}
+//------------------------------------------------------------------------------------------		
+		public function clear ():void {
+			var i:Number;
 
-//------------------------------------------------------------------------------------------
-		[Inline]
-		public function get (__key:*):* {
-			return m_dict[__key];
+			for (i=0; i < xxx.getMaxLayers (); i++) {
+				m_rects[i].removeAll ();
+			}
+			
+			m_XSubRectPoolManager.returnAllObjects ();
 		}
 	
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function put (__key:*, __value:*):void {
-			m_dict[__key] = __value;
-		}	
+		public function addCollision (
+			__layer:Number,
+			__logicObject:XLogicObject,
+			__srcPoint:XPoint, __srcRect:XRect
+			):void {
+
+			var __rect:XRect = m_XSubRectPoolManager.borrowObject () as XRect;
+			__srcRect.copy2 (__rect); __rect.offsetPoint (__srcPoint);
+			m_rects[__layer].put (__logicObject, __rect);
+		}
+
 		
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function remove (__key:*):void {
-			delete m_dict[__key];
+		public function getRects (__layer:Number):XDict {
+			return m_rects[__layer];
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeAll ():void {
-			var __key:*;
-			
-			for (__key in m_dict) {
-				remove (__key);
-			}
-		}
-
-//------------------------------------------------------------------------------------------
-		public function dict ():Dictionary {
-			return m_dict;
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function length ():Number {
-			return m_dict.length;
-		}
-
-//------------------------------------------------------------------------------------------
-		public function forEach (__callback:Function):void {
-			var __key:*;
-			
-			for (__key in m_dict) {
-				__callback (__key);
-			}
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function doWhile (__callback:Function):void {
-			var __key:*;
-			
-			for (__key in m_dict) {
-				if (!__callback (__key)) {
-					return;
-				}
-			}
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function __hash (__key:Object):String {
-			return "";
+		public function getList (__layer:Number):XDict {
+			return m_rects[__layer];
 		}
 		
 //------------------------------------------------------------------------------------------
 	}
-	
+
 //------------------------------------------------------------------------------------------
 }

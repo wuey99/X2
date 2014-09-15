@@ -43,95 +43,82 @@
 // Please contact me @ wuey99[dot]gmail[dot]com for more details.
 // <$end$/>
 //------------------------------------------------------------------------------------------
-package X.Collections {
+package X.World.Collision {
 	
-	import flash.utils.Dictionary;
+	import X.Collections.*;
+	import X.Geom.*;
+	import X.Pool.*;
+	import X.World.XWorld;
+	import X.XMap.*;
 	
 //------------------------------------------------------------------------------------------
-	public class XDict extends Object {
-		private var m_dict:Dictionary;
+	public class XObjectCollisionManager extends Object {
+		protected var xxx:XWorld;
+		protected var m_collisionLists:XDict;
 		
 //------------------------------------------------------------------------------------------
-		public function XDict () {
+		public function XObjectCollisionManager (__xxx:XWorld) {
 			super ();
 			
-			m_dict = new Dictionary ();
+			xxx = __xxx;
+			
+			m_collisionLists = new XDict ();
 		}
-
+		
 //------------------------------------------------------------------------------------------
 		public function setup ():void {
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			removeAllCollisionLists ();
 		}
 
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function exists (__key:*):Boolean {
-			return __key in m_dict;
+		public function createCollisionList ():XObjectCollisionList {
+			return new XObjectCollisionList ();	
 		}
-
+		
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function get (__key:*):* {
-			return m_dict[__key];
+		public function clearCollisions ():void {
+			m_collisionLists.forEach (
+				function (x:*):void {
+					var __collisionList:XObjectCollisionList = x as XObjectCollisionList;
+					
+					__collisionList.clear ();
+				}
+			);
 		}
 	
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function put (__key:*, __value:*):void {
-			m_dict[__key] = __value;
-		}	
-		
-//------------------------------------------------------------------------------------------
-		[Inline]
-		public function remove (__key:*):void {
-			delete m_dict[__key];
+		public function addCollisionList ():XObjectCollisionList {
+			var __collisionList:XObjectCollisionList = createCollisionList ();
+			
+			__collisionList.setup (xxx);
+			
+			m_collisionLists.put (__collisionList, 0);
+			
+			return __collisionList;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeAll ():void {
-			var __key:*;
+		public function removeCollisionList (__collisionList:XObjectCollisionList):void {
+			__collisionList.cleanup ();
 			
-			for (__key in m_dict) {
-				remove (__key);
-			}
-		}
-
-//------------------------------------------------------------------------------------------
-		public function dict ():Dictionary {
-			return m_dict;
+			m_collisionLists.remove (__collisionList);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function length ():Number {
-			return m_dict.length;
-		}
-
-//------------------------------------------------------------------------------------------
-		public function forEach (__callback:Function):void {
-			var __key:*;
-			
-			for (__key in m_dict) {
-				__callback (__key);
-			}
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function doWhile (__callback:Function):void {
-			var __key:*;
-			
-			for (__key in m_dict) {
-				if (!__callback (__key)) {
-					return;
+		public function removeAllCollisionLists ():void {
+			m_collisionLists.forEach (
+				function (x:*):void {
+					var __collisionList:XObjectCollisionList = x as XObjectCollisionList;
+					
+					__collisionList.cleanup ();
+					
+					m_collisionLists.remove (x);
 				}
-			}
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function __hash (__key:Object):String {
-			return "";
+			);			
 		}
 		
 //------------------------------------------------------------------------------------------
