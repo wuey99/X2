@@ -113,6 +113,8 @@ package X.World {
 		public var m_XKeyboardManager:XKeyboardManager;
 		protected var m_viewRect:XRect;
 		private var m_XBulletCollisionManager:XBulletCollisionManager;
+		private var m_XObjectCollisionManager:XObjectCollisionManager;
+		private var m_collisionList:XObjectCollisionList;
 		public var m_mouseX:Number;
 		public var m_mouseY:Number;
 		public var m_timer:Timer;
@@ -251,7 +253,9 @@ package X.World {
 			m_renderManager = new XTaskManager (__XApp);
 			m_XSignalManager = new XSignalManager (__XApp);
 			m_XBulletCollisionManager = new XBulletCollisionManager (this);
-
+			m_XObjectCollisionManager = new XObjectCollisionManager (this);
+			m_collisionList = m_XObjectCollisionManager.addCollisionList ();
+			
 			m_XLogicObjectPoolManager = new XClassPoolManager ();
 			
 			m_timer1000 = new Timer (1000, 0);
@@ -745,7 +749,17 @@ package X.World {
 		public function getXBulletCollisionManager ():XBulletCollisionManager {
 			return  m_XBulletCollisionManager;
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function getXObjectCollisionManager ():XObjectCollisionManager {
+			return  m_XObjectCollisionManager;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getCollisionList ():XObjectCollisionList {
+			return  m_collisionList;
+		}
+				
 //------------------------------------------------------------------------------------------
 		public function createXSignal ():XSignal {
 			return  m_XSignalManager.createXSignal ();

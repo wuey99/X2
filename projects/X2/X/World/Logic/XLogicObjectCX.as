@@ -49,6 +49,7 @@ package X.World.Logic {
 	import X.Geom.*;
 	import X.Task.*;
 	import X.World.*;
+	import X.World.Collision.*;
 	import X.World.Sprite.*;
 	import X.XMap.*;
 	
@@ -2156,7 +2157,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function Ck_Obj_LF ():Boolean {
 			return __collide (
-				function (__rect:XRect):void {
+				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oX = __rect.right;
 				}
 			);
@@ -2165,7 +2166,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function Ck_Obj_RT ():Boolean {
 			return __collide (
-				function (__rect:XRect):void {
+				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oX = __rect.left - (m_cx.right - m_cx.left);
 				}
 			);
@@ -2174,7 +2175,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function Ck_Obj_UP ():Boolean {
 			return __collide (
-				function (__rect:XRect):void {
+				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oY = __rect.bottom;
 				}
 			);
@@ -2183,12 +2184,17 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function Ck_Obj_DN ():Boolean {
 			return __collide (
-				function (__rect:XRect):void {
+				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oY = __rect.top - (m_cx.bottom - m_cx.top);
 				}
 			);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getObjectCollisionList ():XDict {
+			return xxx.getCollisionList ().getRects (getLayer ());	
+		}
+		
 //------------------------------------------------------------------------------------------
 		private function __collide (__callback:Function):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
@@ -2202,7 +2208,7 @@ package X.World.Logic {
 			var __rect:XRect;
 			
 			var __layer:Number = getLayer ();
-			var __rects:XDict; // = ???
+			var __rects:XDict = getObjectCollisionList ();
 			
 			__rects[__layer].doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
@@ -2212,7 +2218,7 @@ package X.World.Logic {
 						return true;
 					}
 					
-					__callback (__rect);
+					__callback (__logicObject, __rect);
 					
 					__collided = true;
 					
