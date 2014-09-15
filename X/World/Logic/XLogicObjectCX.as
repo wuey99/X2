@@ -2152,8 +2152,78 @@ package X.World.Logic {
 
 			return false;		
 		}
+				
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_LF ():Boolean {
+			return __collide (
+				function (__rect:XRect):void {
+					oX = __rect.right;
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_RT ():Boolean {
+			return __collide (
+				function (__rect:XRect):void {
+					oX = __rect.left - (m_cx.right - m_cx.left);
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_UP ():Boolean {
+			return __collide (
+				function (__rect:XRect):void {
+					oY = __rect.bottom;
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_DN ():Boolean {
+			return __collide (
+				function (__rect:XRect):void {
+					oY = __rect.top - (m_cx.bottom - m_cx.top);
+				}
+			);
+		}
 
 //------------------------------------------------------------------------------------------
+		private function __collide (__callback:Function):Boolean {
+			var x1:int, y1:int, x2:int, y2:int;
+			
+			x1 = int (oX) + m_cx.left;
+			x2 = int (oX) + m_cx.right;
+			y1 = int (oY) + m_cx.top;
+			y2 = int (oY) + m_cx.bottom;
+			
+			var __collided:Boolean = false;
+			var __rect:XRect;
+			
+			var __layer:Number = getLayer ();
+			var __rects:XDict; // = ???
+			
+			__rects[__layer].doWhile (
+				function (__logicObject:XLogicObjectCX):Boolean {
+					__rect = __rects[__layer].get (__logicObject) as XRect;;
+					
+					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
+						return true;
+					}
+					
+					__callback (__rect);
+					
+					__collided = true;
+					
+					return false;
+				}
+			);	
+				
+			return __collided;
+		}
+		
+	//------------------------------------------------------------------------------------------
 	}
 	
 //------------------------------------------------------------------------------------------
