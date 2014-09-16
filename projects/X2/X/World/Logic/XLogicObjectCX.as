@@ -2209,10 +2209,10 @@ package X.World.Logic {
 			
 			var __layer:Number = getLayer ();
 			var __rects:XDict = getObjectCollisionList ();
-			
-			__rects[__layer].doWhile (
+
+			__rects.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					__rect = __rects[__layer].get (__logicObject) as XRect;;
+					__rect = __rects.get (__logicObject) as XRect;;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
 						return true;
