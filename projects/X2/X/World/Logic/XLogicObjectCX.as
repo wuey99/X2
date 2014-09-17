@@ -2158,7 +2158,7 @@ package X.World.Logic {
 		public function Ck_Obj_LF ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oX = __rect.right;
+					oX = __rect.right - m_cx.left + 1;
 				}
 			);
 		}
@@ -2167,7 +2167,7 @@ package X.World.Logic {
 		public function Ck_Obj_RT ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oX = __rect.left - (m_cx.right - m_cx.left);
+					oX = __rect.left - m_cx.right - 1;
 				}
 			);
 		}
@@ -2176,7 +2176,7 @@ package X.World.Logic {
 		public function Ck_Obj_UP ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oY = __rect.bottom;
+					oY = __rect.bottom - m_cx.top + 1;
 				}
 			);
 		}
@@ -2185,7 +2185,7 @@ package X.World.Logic {
 		public function Ck_Obj_DN ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oY = __rect.top - (m_cx.bottom - m_cx.top);
+					oY = __rect.top - m_cx.bottom - 1;
 				}
 			);
 		}
@@ -2207,12 +2207,11 @@ package X.World.Logic {
 			var __collided:Boolean = false;
 			var __rect:XRect;
 			
-			var __layer:Number = getLayer ();
 			var __rects:XDict = getObjectCollisionList ();
 
 			__rects.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					__rect = __rects.get (__logicObject) as XRect;;
+					__rect = __rects.get (__logicObject) as XRect;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
 						return true;
@@ -2224,7 +2223,7 @@ package X.World.Logic {
 					
 					return false;
 				}
-			);	
+			);
 				
 			return __collided;
 		}
