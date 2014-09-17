@@ -77,6 +77,8 @@ package X.World.Logic {
 		public var m_rows:int;
 
 		protected var m_CX_Collide_Flag:Number;
+		
+		protected var m_objectCollisionList:XDict;
 	
 		include "..\\..\\World\\Collision\\cx.h";
 		
@@ -126,6 +128,8 @@ package X.World.Logic {
 			m_cx.y = 0;
 			m_cx.width = 0;
 			m_cx.height = 0;
+			
+			m_objectCollisionList = null;
 					
 			m_namedCX = new XDict ();
 		}
@@ -2159,6 +2163,8 @@ package X.World.Logic {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oX = __rect.right - m_cx.left + 1;
+					
+					m_CX_Collide_Flag |= CX_COLLIDE_LF;
 				}
 			);
 		}
@@ -2168,6 +2174,8 @@ package X.World.Logic {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oX = __rect.left - m_cx.right - 1;
+					
+					m_CX_Collide_Flag |= CX_COLLIDE_RT;
 				}
 			);
 		}
@@ -2177,6 +2185,8 @@ package X.World.Logic {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oY = __rect.bottom - m_cx.top + 1;
+					
+					m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				}
 			);
 		}
@@ -2186,6 +2196,8 @@ package X.World.Logic {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oY = __rect.top - m_cx.bottom - 1;
+					
+					m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				}
 			);
 		}
@@ -2207,11 +2219,13 @@ package X.World.Logic {
 			var __collided:Boolean = false;
 			var __rect:XRect;
 			
-			var __rects:XDict = getObjectCollisionList ();
-
-			__rects.doWhile (
+			if (m_objectCollisionList == null) {
+				m_objectCollisionList = getObjectCollisionList ();
+			}
+			
+			m_objectCollisionList.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					__rect = __rects.get (__logicObject) as XRect;
+					__rect = m_objectCollisionList.get (__logicObject) as XRect;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
 						return true;
