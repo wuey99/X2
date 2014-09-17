@@ -1041,6 +1041,10 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function objectCollisionCallback ():void {	
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function set XLogicManager (__value:XLogicManager):void {
 			m_XLogicManager = __value;
 		}

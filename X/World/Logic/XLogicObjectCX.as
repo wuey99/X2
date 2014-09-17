@@ -2217,7 +2217,6 @@ package X.World.Logic {
 			y2 = int (oY) + m_cx.bottom;
 			
 			var __collided:Boolean = false;
-			var __rect:XRect;
 			
 			if (m_objectCollisionList == null) {
 				m_objectCollisionList = getObjectCollisionList ();
@@ -2225,7 +2224,7 @@ package X.World.Logic {
 			
 			m_objectCollisionList.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					__rect = m_objectCollisionList.get (__logicObject) as XRect;
+					var __rect:XRect = m_objectCollisionList.get (__logicObject) as XRect;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
 						return true;
