@@ -1039,10 +1039,6 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function collisionCallback ():void {	
 		}
-
-//------------------------------------------------------------------------------------------
-		public function objectCollisionCallback ():void {	
-		}
 		
 //------------------------------------------------------------------------------------------
 		public function set XLogicManager (__value:XLogicManager):void {
