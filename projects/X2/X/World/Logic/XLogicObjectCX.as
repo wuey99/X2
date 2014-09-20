@@ -332,6 +332,15 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function objectCollisionCallback (__logicObject:XLogicObject):void {	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get objectCollisionJumpThru ():Boolean {
+			return false;	
+		}
+				
+//------------------------------------------------------------------------------------------
 		public override function updatePhysics ():void {
 			handleCX ();	
 		}
@@ -2162,9 +2171,13 @@ package X.World.Logic {
 		public function Ck_Obj_LF ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oX = __rect.right - m_cx.left + 1;
+					if (!objectCollisionJumpThru) {
+						oX = __rect.right - m_cx.left + 1;
 					
-					m_CX_Collide_Flag |= CX_COLLIDE_LF;
+						__logicObject.objectCollisionCallback (self);
+						
+						m_CX_Collide_Flag |= CX_COLLIDE_LF;
+					}
 				}
 			);
 		}
@@ -2173,9 +2186,13 @@ package X.World.Logic {
 		public function Ck_Obj_RT ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oX = __rect.left - m_cx.right - 1;
+					if (!objectCollisionJumpThru) {
+						oX = __rect.left - m_cx.right - 1;
 					
-					m_CX_Collide_Flag |= CX_COLLIDE_RT;
+						__logicObject.objectCollisionCallback (self);
+						
+						m_CX_Collide_Flag |= CX_COLLIDE_RT;
+					}
 				}
 			);
 		}
@@ -2184,9 +2201,13 @@ package X.World.Logic {
 		public function Ck_Obj_UP ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oY = __rect.bottom - m_cx.top + 1;
+					if (!objectCollisionJumpThru) {
+						oY = __rect.bottom - m_cx.top + 1;
 					
-					m_CX_Collide_Flag |= CX_COLLIDE_UP;
+						__logicObject.objectCollisionCallback (self);
+						
+						m_CX_Collide_Flag |= CX_COLLIDE_UP;
+					}
 				}
 			);
 		}
@@ -2196,6 +2217,8 @@ package X.World.Logic {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
 					oY = __rect.top - m_cx.bottom - 1;
+					
+					__logicObject.objectCollisionCallback (self);
 					
 					m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				}
