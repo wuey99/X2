@@ -844,7 +844,7 @@ package X.World.Logic {
 			return false;
 		}
 				
-//------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------
 		public function Ck_Slope_RT ():Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			var i:int, __x:int, __y:int;
@@ -856,42 +856,42 @@ package X.World.Logic {
 			
 			collided = false;
 			
-//------------------------------------------------------------------------------------------
-// top
-//------------------------------------------------------------------------------------------
+			//------------------------------------------------------------------------------------------
+			// top
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
 			y2 = int (oY) + m_cx.bottom;
-		
+			
 			looking = true;
 			
 			while (looking) {
-//				c = x2/m_submapWidth;
-//				r = y1/m_submapHeight;
-//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x2/m_submapWidth;
+				//				r = y1/m_submapHeight;
+				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x2 >> 9;
 				r = y1 >> 9;
-				i = ( ((y1 & 496) << 1)) + ((x2 & 511) >> 4);
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
+						y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-						
+					
 					case CX_UL45:
 						looking = false;
 						break;
@@ -900,16 +900,16 @@ package X.World.Logic {
 						break;
 					case CX_LL45:
 						// function ():void {	
-							var __x_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 <= __x_LL45[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL45[x15] - m_cx.top);
-							}
-	
-							looking = false;
+						var __x_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __x_LL45[x15]) {
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL45[x15] - m_cx.top);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LR45:
 						looking = false;
@@ -929,29 +929,29 @@ package X.World.Logic {
 						break;
 					case CX_LL225A:
 						// function ():void {	
-							var __x_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 <= __x_LL225A[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225A[x15] - m_cx.top);
-							}
-	
-							looking = false;
+						var __x_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __x_LL225A[x15]) {
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225A[x15] - m_cx.top);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LL225B:
 						// function ():void {	
-							var __x_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 <= __x_LL225B[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225B[x15] - m_cx.top);
-							}
-	
-							looking = false;
+						var __x_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __x_LL225B[x15]) {
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225B[x15] - m_cx.top);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LR225A:
 						looking = false;
@@ -972,19 +972,43 @@ package X.World.Logic {
 					case CX_UR675B:
 						looking = false;
 						break;
-					case CX_LL675A:
+					case CX_LL675A: // new
+						// function ():void {								
+						var __x_LL675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_LL675A:Array = [0, 2, 4, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_LL675A[y15]) {
+							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LL675A[x15] - m_cx.top);
+						}
+						
 						looking = false;
+						
 						break;
-					case CX_LL675B:
+					case CX_LL675B: // new
+						// function ():void {							
+						var __x_LL675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_LL675B:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_LL675B[y15]) {
+							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LL675B[x15] - m_cx.top);
+						}
+						
 						looking = false;
-						break;
+						
+						break;	
 					case CX_LR675A:
 						looking = false;
 						break;
 					case CX_LR675B:
 						looking = false;
 						break;
-						
+					
 					case CX_SOFTLF:
 						looking = false;
 						break;
@@ -996,14 +1020,12 @@ package X.World.Logic {
 						break;
 					case CX_SOFTDN:
 						// function ():void {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
-							
-							looking = false;
-						break;
+						oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
+						
+						looking = false;
+						break; // },
 					case CX_DEATH:
 						looking = false;
-						break;
-					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1012,9 +1034,9 @@ package X.World.Logic {
 				}
 			}
 			
-//------------------------------------------------------------------------------------------
-// bottom
-//------------------------------------------------------------------------------------------
+			//------------------------------------------------------------------------------------------
+			// bottom
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
@@ -1023,43 +1045,43 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-//				c = x2/m_submapWidth;
-//				r = y2/m_submapHeight;
-//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x2/m_submapWidth;
+				//				r = y2/m_submapHeight;
+				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x2 >> 9;
 				r = y2 >> 9;
-				i = ( ((y2 & 496) << 1)) + ((x2 & 511) >> 4);
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
+						y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-						
+					
 					case CX_UL45:
 						// function ():void {	
-							var __x_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __x_UL45[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL45[x15] - m_cx.bottom - 1);
-							}
-	
-							looking = false;
+						var __x_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __x_UL45[x15]) {
+							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL45[x15] - m_cx.bottom - 1);
+						}
+						
+						looking = false;
 						break; // },			
 					case CX_UR45:
 						looking = false;
@@ -1073,29 +1095,29 @@ package X.World.Logic {
 					
 					case CX_UL225A:
 						// function ():void {	
-							var __x_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __x_UL225A[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225A[x15] - m_cx.bottom - 1);
-							}
-	
-							looking = false;
+						var __x_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __x_UL225A[x15]) {
+							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225A[x15] - m_cx.bottom - 1);
+						}
+						
+						looking = false;
 						break; // },	
 					case CX_UL225B:
 						// function ():void {	
-							var __x_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __x_UL225B[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225B[x15] - m_cx.bottom - 1);
-							}
-	
-							looking = false;
+						var __x_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __x_UL225B[x15]) {
+							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225B[x15] - m_cx.bottom - 1);
+						}
+						
+						looking = false;
 						break; // },	
 					case CX_UR225A:
 						looking = false;
@@ -1116,12 +1138,36 @@ package X.World.Logic {
 						looking = false;
 						break;
 					
-					case CX_UL675A:
+					case CX_UL675A: // new
+						// function ():void {								
+						var __x_UL675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_UL675A:Array = [0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 10, 8, 6, 4, 2, 0];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_UL675A[y15]) {
+							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UL675A[x15] - m_cx.bottom - 1);
+						}
+						
 						looking = false;
+						
 						break;
-					case CX_UL675B:
+					case CX_UL675B: // new
+						// function ():void {							
+						var __x_UL675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_UL675B:Array = [14, 12, 10, 8, 6, 4, 2, 0, -2, -4, -6, -8, -10, -12, -14, -16];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_UL675B[y15]) {
+							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UL675B[x15] - m_cx.bottom - 1);
+						}
+						
 						looking = false;
-						break;
+						
+						break;	
 					case CX_UR675A:
 						looking = false;
 						break;
@@ -1140,7 +1186,7 @@ package X.World.Logic {
 					case CX_LR675B:
 						looking = false;
 						break;
-						
+					
 					case CX_SOFTLF:
 						looking = false;
 						break;
@@ -1148,18 +1194,16 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOFTUP:
-							// function ():void {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
-								
-								looking = false;								
-							break;
+						// function ():void {
+						oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
+						
+						looking = false;								
+						break; // },
 					case CX_SOFTDN:
 						looking = false;
 						break;
 					case CX_DEATH:
 						looking = false;
-						break;
-					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1171,7 +1215,7 @@ package X.World.Logic {
 			return false;
 		}
 		
-//------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------
 		public function Ck_Slope_LF ():Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			var i:int, __x:int, __y:int;
@@ -1183,9 +1227,9 @@ package X.World.Logic {
 			
 			collided = false;
 			
-//------------------------------------------------------------------------------------------
-// top
-//------------------------------------------------------------------------------------------
+			//------------------------------------------------------------------------------------------
+			// top
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
@@ -1194,31 +1238,31 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-//				c = x1/m_submapWidth;
-//				r = y1/m_submapHeight;
-//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x1/m_submapWidth;
+				//				r = y1/m_submapHeight;
+				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x1 >> 9;
 				r = y1 >> 9;
-				i = ( ((y1 & 496) << 1)) + ((x1 & 511) >> 4);
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
+						y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-						
+					
 					case CX_UL45:
 						looking = false;
 						break;
@@ -1230,16 +1274,16 @@ package X.World.Logic {
 						break;
 					case CX_LR45:
 						// function ():void {	
-							var __x_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 <= __x_LR45[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR45[x15] - m_cx.top);
-							}
-	
-							looking = false;
+						var __x_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __x_LR45[x15]) {
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR45[x15] - m_cx.top);
+						}
+						
+						looking = false;
 						break; // },			
 					case CX_UL225A:
 						looking = false;
@@ -1261,29 +1305,29 @@ package X.World.Logic {
 						break;
 					case CX_LR225A:
 						// function ():void {	
-							var __x_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 <= __x_LR225A[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225A[x15] - m_cx.top);
-							}
-	
-							looking = false;
+						var __x_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __x_LR225A[x15]) {
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225A[x15] - m_cx.top);
+						}
+						
+						looking = false;
 						break; // },		
 					case CX_LR225B:
 						// function ():void {	
-							var __x_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 <= __x_LR225B[x15]) {
-								oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225B[x15] - m_cx.top);
-							}
-	
-							looking = false;
+						var __x_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __x_LR225B[x15]) {
+							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225B[x15] - m_cx.top);
+						}
+						
+						looking = false;
 						break; // },		
 					
 					case CX_UL675A:
@@ -1315,7 +1359,7 @@ package X.World.Logic {
 						if (x15 <= __x_LR675A[y15]) {
 							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LR675A[x15] - m_cx.top);
 						}
-
+						
 						looking = false;
 						
 						break;
@@ -1330,10 +1374,11 @@ package X.World.Logic {
 						if (x15 <= __x_LR675B[y15]) {
 							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LR675B[x15] - m_cx.top);
 						}
-
+						
 						looking = false;
 						
-						break;						
+						break;	
+					
 					case CX_SOFTLF:
 						looking = false;
 						break;
@@ -1345,14 +1390,12 @@ package X.World.Logic {
 						break;
 					case CX_SOFTDN:
 						// function ():void {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
-							
-							looking = false;
-						break;
+						oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
+						
+						looking = false;
+						break; // },
 					case CX_DEATH:
 						looking = false;
-						break;
-					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1361,9 +1404,9 @@ package X.World.Logic {
 				}
 			}
 			
-//------------------------------------------------------------------------------------------
-// bottom
-//------------------------------------------------------------------------------------------
+			//------------------------------------------------------------------------------------------
+			// bottom
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
@@ -1372,46 +1415,46 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-//				c = x1/m_submapWidth;
-//				r = y2/m_submapHeight;
-//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x1/m_submapWidth;
+				//				r = y2/m_submapHeight;
+				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x1 >> 9;
 				r = y2 >> 9
-				i = ( ((y2 & 496) << 1)) + ((x1 & 511) >> 4);
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
+						y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-						
+					
 					case CX_UL45:
 						looking = false;
 						break;
 					case CX_UR45:
 						// function ():void {	
-							var __x_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __x_UR45[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR45[x15] - m_cx.bottom - 1);
-							}
-	
-							looking = false;
+						var __x_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __x_UR45[x15]) {
+							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR45[x15] - m_cx.bottom - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LL45:
 						looking = false;
@@ -1428,29 +1471,29 @@ package X.World.Logic {
 						break;
 					case CX_UR225A:
 						// function ():void {	
-							var __x_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __x_UR225A[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225A[x15] - m_cx.bottom - 1);
-							}
-	
-							looking = false;
+						var __x_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __x_UR225A[x15]) {
+							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225A[x15] - m_cx.bottom - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_UR225B:
 						// function ():void {	
-							var __x_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __x_UR225B[x15]) {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225B[x15] - m_cx.bottom - 1);
-							}
-	
-							looking = false;
+						var __x_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __x_UR225B[x15]) {
+							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225B[x15] - m_cx.bottom - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LL225A:
 						looking = false;
@@ -1471,12 +1514,34 @@ package X.World.Logic {
 					case CX_UL675B:
 						looking = false;
 						break;
-					case CX_UR675A:
+					case CX_UR675A: //new
+						// function ():void {				
+						var __x_UR675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_UR675A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_UR675A[y15]) {
+							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UR675A[x15] - m_cx.bottom - 1);
+						}
+						
 						looking = false;
-						break;
-					case CX_UR675B:
+						break; // },
+					case CX_UR675B: // new
+						// function ():void {				
+						var __x_UR675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_UR675B:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_UR675B[y15]) {
+							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UR675B[x15] - m_cx.bottom - 1);
+						}
+						
 						looking = false;
-						break;
+						break; // },
 					case CX_LL675A:
 						looking = false;
 						break;
@@ -1489,7 +1554,7 @@ package X.World.Logic {
 					case CX_LR675B:
 						looking = false;
 						break;
-						
+					
 					case CX_SOFTLF:
 						looking = false;
 						break;
@@ -1497,18 +1562,16 @@ package X.World.Logic {
 						looking = false;
 						break;
 					case CX_SOFTUP:
-							// function ():void {
-								oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
-								
-								looking = false;								
-							break; 
+						// function ():void {
+						oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
+						
+						looking = false;								
+						break; // },
 					case CX_SOFTDN:
 						looking = false;
 						break;
 					case CX_DEATH:
 						looking = false;
-						break;
-					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1520,7 +1583,7 @@ package X.World.Logic {
 			return false;
 		}
 		
-//------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------
 		public function Ck_Slope_DN ():Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			var i:int, __x:int, __y:int;
@@ -1531,10 +1594,10 @@ package X.World.Logic {
 			var y15:int;
 			
 			collided = false;
-
-//------------------------------------------------------------------------------------------
-// left
-//------------------------------------------------------------------------------------------
+			
+			//------------------------------------------------------------------------------------------
+			// left
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
@@ -1543,46 +1606,46 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-//				c = x1/m_submapWidth;
-//				r = y2/m_submapHeight;
-//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x1/m_submapWidth;
+				//				r = y2/m_submapHeight;
+				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x1 >> 9;
 				r = y2 >> 9;
-				i = ( ((y2 & 496) << 1)) + ((x1 & 511) >> 4);
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
+						x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-			
+					
 					case CX_UL45:
 						looking = false;
 						break;
 					case CX_UR45:
 						// function ():void {				
-							var __y_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
+						var __y_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
-							if (x15 <= __y_UR45[y15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR45[y15] - m_cx.left);
-							}
-	
-							looking = false;
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __y_UR45[y15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR45[y15] - m_cx.left);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LL45:
 						looking = false;
@@ -1599,31 +1662,31 @@ package X.World.Logic {
 						break;
 					case CX_UR225A:
 						// function ():void {				
-							var __y_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-							var __x_UR225A:Array = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
+						var __y_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_UR225A:Array = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
 						
-							if (y15 >= __y_UR225A[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225A[y15] - m_cx.left);
-							}
-	
-							looking = false;
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __y_UR225A[x15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225A[y15] - m_cx.left);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_UR225B:
 						// function ():void {				
-							var __y_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-							var __x_UR225B:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
+						var __y_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_UR225B:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
 						
-							if (y15 >= __y_UR225B[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225B[y15] - m_cx.left);
-							}
-	
-							looking = false;
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __y_UR225B[x15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225B[y15] - m_cx.left);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LL225A:
 						looking = false;
@@ -1644,12 +1707,38 @@ package X.World.Logic {
 					case CX_UL675B:
 						looking = false;
 						break;
-					case CX_UR675A:
+					
+					case CX_UR675A: // new
+						// function ():void {								
+						var __x_UR675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_UR675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_UR675A[y15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR675A[y15] - m_cx.left);
+						}
+						
 						looking = false;
+						
 						break;
-					case CX_UR675B:
+					case CX_UR675B: // new
+						// function ():void {							
+						var __x_UR675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_UR675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_UR675B[y15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR675B[y15] - m_cx.left);
+						}
+						
 						looking = false;
-						break;
+						
+						break;	
+					
 					case CX_LL675A:
 						looking = false;
 						break;
@@ -1662,18 +1751,18 @@ package X.World.Logic {
 					case CX_LR675B:
 						looking = false;
 						break;
-						
+					
 					case CX_SOFTLF:
 						looking = false;
 						break;
 					case CX_SOFTRT:
-							// function ():void {
-								m_CX_Collide_Flag |= CX_COLLIDE_LF;
-			
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
-				
-								collided = true;
-							break;
+						// function ():void {
+						m_CX_Collide_Flag |= CX_COLLIDE_LF;
+						
+						oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
+						
+						collided = true;
+						break; // },
 					case CX_SOFTUP:
 						looking = false;
 						break;
@@ -1682,8 +1771,6 @@ package X.World.Logic {
 						break;
 					case CX_DEATH:
 						looking = false;
-						break;
-					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1692,9 +1779,9 @@ package X.World.Logic {
 				}
 			}
 			
-//------------------------------------------------------------------------------------------
-// right
-//------------------------------------------------------------------------------------------
+			//------------------------------------------------------------------------------------------
+			// right
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
@@ -1703,43 +1790,43 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-//				c = x2/m_submapWidth;
-//				r = y2/m_submapHeight;
-//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x2/m_submapWidth;
+				//				r = y2/m_submapHeight;
+				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x2 >> 9;
 				r = y2 >> 9;
-				i = ( ((y2 & 496) << 1)) + ((x2 & 511) >> 4);
+				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
+						x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-			
+					
 					case CX_UL45:
 						// function ():void {				
-							var __y_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (x15 >= __y_UL45[y15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL45[y15] - m_cx.right - 1);
-							}
-	
-							looking = false;
+						var __y_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __y_UL45[y15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL45[y15] - m_cx.right - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_UR45:
 						looking = false;
@@ -1753,31 +1840,31 @@ package X.World.Logic {
 					
 					case CX_UL225A:
 						// function ():void {				
-							var __y_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-							var __x_UL225A:Array = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __y_UL225A[x15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225A[y15] - m_cx.right - 1);
-							}
-	
-							looking = false;
+						var __y_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_UL225A:Array = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __y_UL225A[x15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225A[y15] - m_cx.right - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_UL225B:
 						// function ():void {				
-							var __y_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-							var __x_UL225B:Array = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y2 & CX_TILE_HEIGHT_MASK;
-
-							if (y15 >= __y_UL225B[x15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225B[y15] - m_cx.right - 1);
-							}
-	
-							looking = false;
+						var __y_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_UL225B:Array = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 >= __y_UL225B[x15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225B[y15] - m_cx.right - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_UR225A:
 						looking = false;
@@ -1798,12 +1885,37 @@ package X.World.Logic {
 						looking = false;
 						break;
 					
-					case CX_UL675A:
+					case CX_UL675A: // new
+						// function ():void {								
+						var __x_UL675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_UL675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_UL675A[y15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL675A[y15] - m_cx.bottom - 1);
+						}
+						
 						looking = false;
+						
 						break;
-					case CX_UL675B:
+					case CX_UL675B: // new
+						// function ():void {							
+						var __x_UL675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_UL675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_UL675B[y15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL675B[y15] - m_cx.bottom - 1);
+						}
+						
 						looking = false;
+						
 						break;
+					
 					case CX_UR675A:
 						looking = false;
 						break;
@@ -1822,15 +1934,15 @@ package X.World.Logic {
 					case CX_LR675B:
 						looking = false;
 						break;
-						
+					
 					case CX_SOFTLF:
 						// function ():void {
-							m_CX_Collide_Flag |= CX_COLLIDE_RT;
-		
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
-			
-							collided = true;
-						break;
+						m_CX_Collide_Flag |= CX_COLLIDE_RT;
+						
+						oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
+						
+						collided = true;
+						break; // },
 					case CX_SOFTRT:
 						looking = false;
 						break;
@@ -1842,8 +1954,6 @@ package X.World.Logic {
 						break;
 					case CX_DEATH:
 						looking = false;
-						break;
-					default:
 						break;
 				} // ])[cx] ();
 				
@@ -1854,8 +1964,8 @@ package X.World.Logic {
 			
 			return false;		
 		}
-	
-//------------------------------------------------------------------------------------------
+		
+		//------------------------------------------------------------------------------------------
 		public function Ck_Slope_UP ():Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			var i:int, __x:int, __y:int;
@@ -1866,10 +1976,10 @@ package X.World.Logic {
 			var y15:int;
 			
 			collided = false;
-
-//------------------------------------------------------------------------------------------
-// left
-//------------------------------------------------------------------------------------------
+			
+			//------------------------------------------------------------------------------------------
+			// left
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
@@ -1878,31 +1988,31 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-//				c = x1/m_submapWidth;
-//				r = y1/m_submapHeight;
-//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x1/m_submapWidth;
+				//				r = y1/m_submapHeight;
+				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x1 >> 9;
 				r = y1 >> 9;
-				i = ( ((y1 & 496) << 1)) +  ((x1 & 511) >> 4);
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) +  ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
+						x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-			
+					
 					case CX_UL45:
 						looking = false;
 						break;
@@ -1914,16 +2024,16 @@ package X.World.Logic {
 						break;
 					case CX_LR45:
 						// function ():void {				
-							var __y_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
+						var __y_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
-							if (x15 <= __y_LR45[y15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR45[y15] - m_cx.left);
-							}
-	
-							looking = false;
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __y_LR45[y15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR45[y15] - m_cx.left);
+						}
+						
+						looking = false;
 						break; // },
 					
 					case CX_UL225A:
@@ -1946,31 +2056,31 @@ package X.World.Logic {
 						break;
 					case CX_LR225A:
 						// function ():void {								
-							var __y_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-							var __x_LR225A:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
-							
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
+						var __y_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_LR225A:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 						
-							if (y15 <= __y_LR225A[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225A[y15] - m_cx.left);
-							}
-	
-							looking = false;
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __y_LR225A[x15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225A[y15] - m_cx.left);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LR225B:
 						// function ():void {							
-							var __y_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-							var __x_LR225B:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
-													
-							x15 = x1 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
+						var __y_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_LR225B:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 						
-							if (y15 <= __y_LR225B[x15]) {
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225B[y15] - m_cx.left);
-							}
-	
-							looking = false;
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __y_LR225B[x15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225B[y15] - m_cx.left);
+						}
+						
+						looking = false;
 						break; // },
 					
 					case CX_UL675A:
@@ -1991,24 +2101,49 @@ package X.World.Logic {
 					case CX_LL675B:
 						looking = false;
 						break;
-					case CX_LR675A:
-						looking = false;
-						break;
-					case CX_LR675B:
-						looking = false;
-						break;
+					
+					case CX_LR675A: // new
+						// function ():void {								
+						var __x_LR675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_LR675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_LR675A[y15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR675A[y15] - m_cx.left);
+						}
+						
+						looking = false;
+						
+						break;
+					case CX_LR675B: // new
+						// function ():void {							
+						var __x_LR675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_LR675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_LR675B[y15]) {
+							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR675B[y15] - m_cx.left);
+						}
+						
+						looking = false;
+						
+						break;	
+					
 					case CX_SOFTLF:
 						looking = false;
 						break;
 					case CX_SOFTRT:
-							// function ():void {
-								m_CX_Collide_Flag |= CX_COLLIDE_LF;
-			
-								oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
-				
-								collided = true;
-							break;
+						// function ():void {
+						m_CX_Collide_Flag |= CX_COLLIDE_LF;
+						
+						oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
+						
+						collided = true;
+						break; // },
 					case CX_SOFTUP:
 						looking = false;
 						break;
@@ -2018,8 +2153,6 @@ package X.World.Logic {
 					case CX_DEATH:
 						looking = false;
 						break;
-					default:
-						break;
 				} // ])[cx] ();
 				
 				if (collided) {
@@ -2027,9 +2160,9 @@ package X.World.Logic {
 				}
 			}
 			
-//------------------------------------------------------------------------------------------
-// right
-//------------------------------------------------------------------------------------------
+			//------------------------------------------------------------------------------------------
+			// right
+			//------------------------------------------------------------------------------------------
 			x1 = int (oX) + m_cx.left;
 			x2 = int (oX) + m_cx.right;
 			y1 = int (oY) + m_cx.top;
@@ -2038,31 +2171,31 @@ package X.World.Logic {
 			looking = true;
 			
 			while (looking) {
-//				c = x2/m_submapWidth;
-//				r = y1/m_submapHeight;
-//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
-
+				//				c = x2/m_submapWidth;
+				//				r = y1/m_submapHeight;
+				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				
 				c = x2 >> 9;
 				r = y1 >> 9;
-				i = ( ((y1 & 496) << 1)) + ((x2 & 511) >> 4);
+				i = ( ((y1 & m_submapHeightMask) >> 4) * m_cols) + ((x2 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
-				// ([
+					// ([
 					case CX_EMPTY:
+					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOLID:
-					case CX_SOLIDX001:
 						looking = false;
 						break;
 					case CX_SOFT:
 						// function ():void {
-							x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
+						x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
 						break; // },
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-			
+					
 					case CX_UL45:
 						looking = false;
 						break;
@@ -2071,16 +2204,16 @@ package X.World.Logic {
 						break;
 					case CX_LL45:
 						// function ():void {				
-							var __y_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-
-							if (x15 >= __y_LL45[y15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL45[y15] - m_cx.right - 1);
-							}
-	
-							looking = false;
+						var __y_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __y_LL45[y15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL45[y15] - m_cx.right - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LR45:
 						looking = false;
@@ -2100,31 +2233,31 @@ package X.World.Logic {
 						break;
 					case CX_LL225A:
 						// function ():void {					
-							var __y_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-							var __x_LL225A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-	
-							if (y15 <= __y_LL225A[x15]) {		
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225A[y15] - m_cx.right - 1);
-							}
-	
-							looking = false;
+						var __y_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_LL225A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __y_LL225A[x15]) {		
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225A[y15] - m_cx.right - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LL225B:
 						// function ():void {				
-							var __y_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-							var __x_LL225B:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
-							
-							x15 = x2 & CX_TILE_WIDTH_MASK;
-							y15 = y1 & CX_TILE_HEIGHT_MASK;
-	
-							if (y15 <= __y_LL225B[x15]) {
-								oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225B[y15] - m_cx.right - 1);
-							}
-	
-							looking = false;
+						var __y_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_LL225B:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (y15 <= __y_LL225B[x15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225B[y15] - m_cx.right - 1);
+						}
+						
+						looking = false;
 						break; // },
 					case CX_LR225A:
 						looking = false;
@@ -2145,27 +2278,53 @@ package X.World.Logic {
 					case CX_UR675B:
 						looking = false;
 						break;
-					case CX_LL675A:
+					
+					case CX_LL675A: // new
+						// function ():void {								
+						var __x_LL675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_LL675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_LL675A[y15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL675A[y15] - m_cx.right - 1);
+						}
+						
 						looking = false;
+						
 						break;
-					case CX_LL675B:
+					case CX_LL675B: // new
+						// function ():void {							
+						var __x_LL675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_LL675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						
+						x15 = x2 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 >= __x_LL675B[y15]) {
+							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL675B[y15] - m_cx.right - 1);
+						}
+						
 						looking = false;
-						break;
+						
+						break;	
+					
 					case CX_LR675A:
 						looking = false;
 						break;
 					case CX_LR675B:
 						looking = false;
 						break;
-						
+					
 					case CX_SOFTLF:
 						// function ():void {
-							m_CX_Collide_Flag |= CX_COLLIDE_RT;
-		
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
-			
-							collided = true;
-						break; 
+						m_CX_Collide_Flag |= CX_COLLIDE_RT;
+						
+						oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
+						
+						collided = true;
+						break; // },
 					case CX_SOFTRT:
 						looking = false;
 						break;
@@ -2178,18 +2337,16 @@ package X.World.Logic {
 					case CX_DEATH:
 						looking = false;
 						break;
-					default:
-						break;
 				} // ])[cx] ();
 				
 				if (collided) {
 					return true;
 				}
 			}
-
+			
 			return false;		
 		}
-				
+		
 //------------------------------------------------------------------------------------------
 		public function Ck_Obj_LF ():Boolean {
 			return __collide (
