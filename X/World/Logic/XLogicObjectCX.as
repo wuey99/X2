@@ -975,7 +975,7 @@ package X.World.Logic {
 					case CX_LL675A: // new
 						// function ():void {								
 						var __x_LL675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-						var __y_LL675A:Array = [0, 2, 4, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
+						var __y_LL675A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
