@@ -1304,13 +1304,36 @@ package X.World.Logic {
 					case CX_LL675B:
 						looking = false;
 						break;
-					case CX_LR675A:
-						looking = false;
-						break;
-					case CX_LR675B:
-						looking = false;
-						break;
+					case CX_LR675A: // new
+						// function ():void {								
+						var __x_LR675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_LR675A:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_LR675A[y15]) {
+							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LR675A[x15] - m_cx.top);
+						}
+
+						looking = false;
+						
+						break;
+					case CX_LR675B: // new
+						// function ():void {							
+						var __x_LR675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_LR675B:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
+						
+						x15 = x1 & CX_TILE_WIDTH_MASK;
+						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						
+						if (x15 <= __x_LR675B[y15]) {
+							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LR675B[x15] - m_cx.top);
+						}
+
+						looking = false;
+						
+						break;						
 					case CX_SOFTLF:
 						looking = false;
 						break;
