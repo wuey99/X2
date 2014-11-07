@@ -140,7 +140,7 @@ package X.Game {
 			__srcPoint:XPoint,
 			__srcRect:XRect
 			):Array {
-
+	
 			var __logicObjects:Array = new Array ();
 
 			var __rect:XRect = m_XSubRectPoolManager.borrowObject () as XRect;
