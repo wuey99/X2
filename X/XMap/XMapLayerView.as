@@ -164,6 +164,8 @@ package X.XMap {
 					__logicObject = null;
 				}
 				else {
+					__depth = __item.depth;
+					
 					__logicObject = xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
 						m_XMapView,

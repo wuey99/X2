@@ -79,6 +79,7 @@ package X.World {
 //		public var m_world:b2World;
 		public var m_iterations:int = 20;
 		public var m_timeStep:Number = 1.0/30.0;
+		public var self:*;
 		public var m_parent:*;	
 		public var m_XApp:XApp
 		public var m_XLogicManager:XLogicManager;
@@ -167,6 +168,7 @@ package X.World {
 			
 			m_parent = __parent;
 			m_XApp = __XApp;
+			self = this;
 			
 			MAX_LAYERS = __layers;
 			
@@ -249,18 +251,21 @@ package X.World {
 			
 			m_XMapModel = null;
 						
-			m_XWorldLayers = new Array ();
+			m_XWorldLayers = new Array (MAX_LAYERS);
 							
 			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
-//			for (var i:Number = 0; i<MAX_LAYERS; i++) {
+				createLayer (i);
+			}
+		
+			function createLayer (i:Number):void {
 				m_XWorldLayers[i] = new XSpriteLayer ();
 				m_XWorldLayers[i].setup ();
-				m_XWorldLayers[i].xxx = this;
+				m_XWorldLayers[i].xxx = self;
 				addChild (m_XWorldLayers[i]);
 				m_XWorldLayers[i].mouseEnabled = true;
 				m_XWorldLayers[i].mouseChildren = true;
 			}
-
+			
 			m_XHudLayer = new XSpriteLayer ();
 			m_XHudLayer.setup ();
 			m_XHudLayer.xxx = this;
