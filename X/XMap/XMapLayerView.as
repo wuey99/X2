@@ -164,6 +164,7 @@ package X.XMap {
 					__logicObject = null;
 				}
 				else {
+					// use XMapItemModel's depth
 					__depth = __item.depth;
 					
 					__logicObject = xxx.getXLogicManager ().initXLogicObjectFromPool (

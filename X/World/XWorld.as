@@ -254,10 +254,10 @@ package X.World {
 			m_XWorldLayers = new Array (MAX_LAYERS);
 							
 			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
-				createLayer (i);
+				__createLayer (i);
 			}
 		
-			function createLayer (i:Number):void {
+			function __createLayer (i:Number):void {
 				m_XWorldLayers[i] = new XSpriteLayer ();
 				m_XWorldLayers[i].setup ();
 				m_XWorldLayers[i].xxx = self;
