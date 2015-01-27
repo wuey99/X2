@@ -132,7 +132,7 @@ package X.XMap {
 					// item
 					__item,
 					// depth
-					0
+					__item.depth
 				);
 			}
 			else
@@ -164,9 +164,6 @@ package X.XMap {
 					__logicObject = null;
 				}
 				else {
-					// use XMapItemModel's depth
-					__depth = __item.depth;
-					
 					__logicObject = xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
 						m_XMapView,
