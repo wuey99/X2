@@ -432,7 +432,7 @@ package X.Task {
 				//------------------------------------------------------------------------------------------					
 				case _WAIT:
 				//------------------------------------------------------------------------------------------
-					var __ticks:Number = __evalNumber () * getXApp ().getFramerateScale ();
+					var __ticks:Number = __evalNumber () * getXApp ().getFrameRateScale ();
 					
 					m_ticks += __ticks;
 					

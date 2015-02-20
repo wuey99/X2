@@ -69,7 +69,7 @@ package X {
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
 		private var m_XClassPoolManager:XClassPoolManager;
 		private var m_allClassNames:XDict;
-		private var m_FramerateScale:Number;
+		private var m_FrameRateScale:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
@@ -92,7 +92,7 @@ package X {
 			XMapModel.setXApp (this);
 			XTask.setXApp (this);
 			
-			m_FramerateScale = 1.0;
+			m_FrameRateScale = 1.0;
 			
 			__initPoolManagers (__poolSettings);
 			
@@ -277,13 +277,13 @@ package X {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getFramerateScale ():Number {
-			return m_FramerateScale;
+		public function getFrameRateScale ():Number {
+			return m_FrameRateScale;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setFramerateScale (__value:Number) {
-			m_FramerateScale = __value;
+		public function setFrameRateScale (__value:Number):void {
+			m_FrameRateScale = __value;
 		}
 		
 //------------------------------------------------------------------------------------------
