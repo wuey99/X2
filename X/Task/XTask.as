@@ -27,6 +27,7 @@
 //------------------------------------------------------------------------------------------
 package X.Task {
 	
+	import X.*;
 	import X.Pool.*;
 	
 	import flash.system.*;
@@ -102,6 +103,9 @@ package X.Task {
 		
 		protected var m_manager:XTaskManager;
 		
+		public static var g_XApp:XApp;
+		public var m_XApp:XApp;
+		
 // static versions of op-codes (for external use.  TODO: look for a solution to speed-up static access i.e. XTask.LOOP)
 		public static const CALL:Number = 0;
 		public static const RETN:Number = 1;
@@ -118,6 +122,7 @@ package X.Task {
 		public static const WAIT1000:Number = 12; 
 		public static const UNTIL:Number = 13;
 		public static const POP:Number = 14;
+		public static const WAITX:Number = 15;
 		
 // private versions of op-codes (for internal use)
 		public const _CALL:Number = 0;
@@ -135,6 +140,7 @@ package X.Task {
 		public const _WAIT1000:Number = 12; 
 		public const _UNTIL:Number = 13;
 		public const _POP:Number = 14;
+		public const _WAITX:Number = 15;
 		
 		public const _FLAGS_EQ:Number = 1;
 		
@@ -220,6 +226,16 @@ package X.Task {
 			m_manager = __manager;
 			
 			m_XTaskSubManager.setManager (__manager);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public static function setXApp (__XApp:XApp):void {
+			g_XApp = __XApp;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getXApp ():XApp {
+			return g_XApp;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -374,6 +390,11 @@ package X.Task {
 							i++;
 							
 							break;
+						
+						case _WAITX:
+							i++;
+							
+							break;
 					}
 				}
 			}
@@ -411,9 +432,22 @@ package X.Task {
 				//------------------------------------------------------------------------------------------					
 				case _WAIT:
 				//------------------------------------------------------------------------------------------
-					var __ticks:Number = __evalNumber ();
+					var __ticks:Number = __evalNumber () * getXApp ().getFramerateScale ();
 					
 					m_ticks += __ticks;
+					
+					if (m_ticks > 0x0080) {
+						return false;
+					}
+					
+					break;
+				
+				//------------------------------------------------------------------------------------------					
+				case _WAITX:
+					//------------------------------------------------------------------------------------------
+					var __ticksx:Number = __evalNumber ();
+					
+					m_ticks += __ticksx;
 					
 					if (m_ticks > 0x0080) {
 						return false;

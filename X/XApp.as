@@ -69,7 +69,8 @@ package X {
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
 		private var m_XClassPoolManager:XClassPoolManager;
 		private var m_allClassNames:XDict;
-			
+		private var m_FramerateScale:Number;
+		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
 		}
@@ -89,6 +90,9 @@ package X {
 			XImage.setXApp (this);
 			XSprite.setXApp (this);
 			XMapModel.setXApp (this);
+			XTask.setXApp (this);
+			
+			m_FramerateScale = 1.0;
 			
 			__initPoolManagers (__poolSettings);
 			
@@ -270,6 +274,16 @@ package X {
 			var __date:Date = new Date ();
 			
 			return __date.time;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getFramerateScale ():Number {
+			return m_FramerateScale;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setFramerateScale (__value:Number) {
+			m_FramerateScale = __value;
 		}
 		
 //------------------------------------------------------------------------------------------

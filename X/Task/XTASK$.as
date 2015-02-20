@@ -43,6 +43,8 @@ package X.Task {
 		public const FUNC:Number = 11;
 		public const WAIT1000:Number = 12; 
 		public const UNTIL:Number = 13;
+		public const POP:Number = 14;
+		public const WAITX:Number = 15;
 		
 		public const FLAGS_EQ:Number = 1;
 		
