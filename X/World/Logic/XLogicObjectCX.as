@@ -515,6 +515,7 @@ package X.World.Logic {
 						break;
 					case CX_SOLID:
 					case CX_SOLIDX001:
+					case CX_JUMP_THRU:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				
@@ -524,8 +525,8 @@ package X.World.Logic {
 						break; // },
 					case CX_SOFT:
 						break;
-					case CX_JUMP_THRU:
-						break;
+//					case CX_JUMP_THRU:
+//						break;
 						
 					case CX_UL45:
 						break;
