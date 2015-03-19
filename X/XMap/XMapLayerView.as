@@ -84,18 +84,23 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public override function setupX ():void {
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function updateFromXMapModel ():void {
+			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
+				xxx.getViewRect ().width, xxx.getViewRect ().height
+			);
+			
+			updateFromXMapModelAtRect (__view);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function updateFromXMapModelAtRect (__view:XRect):void {
 			if (!m_XMapView.areImageClassNamesCached ()) {
 				return;
 			}
 			
-//------------------------------------------------------------------------------------------
-			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
-				xxx.getViewRect ().width, xxx.getViewRect ().height
-			);
-						
+//------------------------------------------------------------------------------------------		
 			var __items:Array;
 			
 			if (m_XMapModel.useArrayItems) {

@@ -76,7 +76,16 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function updateFromXMapModel ():void {
+		public function updateFromXMapModel ():void {		
+			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
+				xxx.getViewRect ().width, xxx.getViewRect ().height
+			);
+
+			updateFromXMapModelAtRect (__view);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function updateFromXMapModelAtRect (__view:XRect):void {
 			if (!m_XMapView.areImageClassNamesCached ()) {
 				return;
 			}
@@ -86,29 +95,24 @@ package X.XMap {
 				
 				return;
 			}
-			
-//------------------------------------------------------------------------------------------		
-			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
-				xxx.getViewRect ().width, xxx.getViewRect ().height
-			);
 
 //------------------------------------------------------------------------------------------						
 			var __submaps:Array;
-						
+			
 			__submaps = m_XMapModel.getSubmapsAt (
 				m_currLayer,
 				__view.left, __view.top,
 				__view.right, __view.bottom
-				);
+			);
 			
 //------------------------------------------------------------------------------------------
 			var __submap:XSubmapModel;
 			
 			var i:Number;
-									
+			
 			for (i=0; i<__submaps.length; i++) {
 				__submap = __submaps[i] as XSubmapModel;
-						
+				
 				updateXSubmapModel (__submap);
 			}
 		}

@@ -35,6 +35,7 @@ package X.XMap {
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	
+	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
@@ -216,33 +217,38 @@ package X.XMap {
 			
 			var __items:Vector.<XMapItemModel> = m_submapModel.arrayItems ();
 			var __item:XMapItemModel;
-			var __bitmap:XBitmap;
+			var __srcBitmap:XBitmap;
+			var __dstBitmapData:BitmapData;
+			var __submapX:Number = m_submapModel.x;
+			var __submapY:Number = m_submapModel.y;
 			
-			tempRect.x = 0;
-			tempRect.y = 0;
+//			tempRect.x = 0;
+//			tempRect.y = 0;
 			
 			var i:int, __length:int = __items.length;
+			
+			__dstBitmapData = m_bitmap.bitmapData;
 			
 			for (i=0; i<__length; i++) {
 				__item = __items[i];
 					
-				__bitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
+				__srcBitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
 					
-				trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+//				trace (": imageClassName: ", __item.imageClassName, __srcBitmap, __srcBitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 					
-				if (__bitmap != null) {
+				if (__srcBitmap != null) {
 					if (__item.frame != 0) {
-						__bitmap.gotoAndStop (__item.frame);
+						__srcBitmap.gotoAndStop (__item.frame);
 					}
 						
-					tempPoint.x = __item.x - m_submapModel.x;
-					tempPoint.y = __item.y - m_submapModel.y;
+					tempPoint.x = __item.x - __submapX;
+					tempPoint.y = __item.y - __submapY;
 						
 					tempRect.width = __item.boundingRect.width;
 					tempRect.height = __item.boundingRect.height;
 						
-					m_bitmap.bitmapData.copyPixels (
-						__bitmap.bitmapData, tempRect, tempPoint, null, null, true
+					__dstBitmapData.copyPixels (
+						__srcBitmap.bitmapData, tempRect, tempPoint, null, null, true
 					);
 				}
 			}
