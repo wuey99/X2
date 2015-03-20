@@ -67,7 +67,9 @@ package X.XMap {
 	
 		private var tempRect:XRect;
 		private var tempPoint:XPoint;
-					
+
+		private var m_delay:Number;
+		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewBitmapCache () {
 			m_submapModel = null;
@@ -83,6 +85,8 @@ package X.XMap {
 			
 			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
 			tempPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			
+			m_delay = 4;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -260,7 +264,12 @@ package X.XMap {
 // cull this object if it strays outside the current viewPort
 //------------------------------------------------------------------------------------------	
 		public override function cullObject ():void {
-
+			if (m_delay) {
+				m_delay--;
+				
+				return;
+			}
+			
 // determine whether this object is outside the current viewPort
 			var v:XRect = xxx.getViewRect ();
 
