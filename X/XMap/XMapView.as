@@ -378,11 +378,11 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function beginUpdateScroll ():void {	
+		public function prepareUpdateScroll ():void {	
 		}
 
 //------------------------------------------------------------------------------------------
-		public function finalizeUpdateScroll ():void {	
+		public function finishUpdateScroll ():void {	
 		}
 						
 //------------------------------------------------------------------------------------------
