@@ -272,26 +272,17 @@ package X.XMap {
 			
 // determine whether this object is outside the current viewPort
 			var v:XRect = xxx.getViewRect ();
-
-			var r:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;	
-			var i:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
-										
-			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (r);
-			r.inflate (256, 256);
+						
+			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (m_viewPortRect);
+			m_viewPortRect.inflate (256, 256);
 			
-			m_boundingRect.copy2 (i);
-			i.offsetPoint (getPos ());
+			m_boundingRect.copy2 (m_selfRect);
+			m_selfRect.offsetPoint (getPos ());
 			
-			if (r.intersects (i)) {
-				xxx.getXRectPoolManager ().returnObject (r);
-				xxx.getXRectPoolManager ().returnObject (i);
-				
+			if (m_viewPortRect.intersects (m_selfRect)) {
 				return;
 			}
-			
-			xxx.getXRectPoolManager ().returnObject (r);
-			xxx.getXRectPoolManager ().returnObject (i);
-					
+
 // yep, kill it
 //			trace (": ---------------------------------------: ");
 //			trace (": cull: ", this);

@@ -106,6 +106,10 @@ package X.World.Logic {
 		public var m_autoCulling:Boolean;
 		public var m_poolClass:Class;
 		public var XTask$:XTASK$;
+		public var m_viewPortRect:XRect;
+		public var m_selfRect:XRect;
+		public var m_itemRect:XRect;
+		public var m_itemPos:XPoint;
 		
 		public var m_iX:Number;
 		public var m_iY:Number;
@@ -204,6 +208,11 @@ package X.World.Logic {
 			
 			setRegistration ();
 			
+			m_viewPortRect = xxx.getXRectPoolManager ().borrowObject () as XRect;	
+			m_selfRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			m_itemRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
+			m_itemPos = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			
 			setVisible (false);			
 			visible = false;
 			
@@ -242,8 +251,13 @@ package X.World.Logic {
 			}
 			
 			xxx.getXPointPoolManager ().returnObject (m_pos);
-			xxx.getXPointPoolManager ().returnObject (rp);			
-				
+			xxx.getXPointPoolManager ().returnObject (rp);
+			
+			xxx.getXRectPoolManager ().returnObject (m_viewPortRect);
+			xxx.getXRectPoolManager ().returnObject (m_selfRect);
+			xxx.getXRectPoolManager ().returnObject (m_itemRect);
+			xxx.getXPointPoolManager ().returnObject (m_itemPos);
+			
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
 // to a the "kill" event.
@@ -338,46 +352,25 @@ package X.World.Logic {
 // determine whether this object is outside the current viewPort
 			var v:XRect = xxx.getViewRect();
 			
-			var r:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;	
-			var i:XRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
-			var itemPos:XPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (m_viewPortRect);
+			m_viewPortRect.inflate (cullWidth (), cullHeight ());
 			
-			xxx.getXWorldLayer (m_layer).viewPort (v.width, v.height).copy2 (r);
-			r.inflate (cullWidth (), cullHeight ());
-						
-			m_item.boundingRect.copy2 (i);
-			itemPos.x = m_item.x;
-			itemPos.y = m_item.y;
-			i.offsetPoint (itemPos);
-			
-			if (r.intersects (i)) {
-				__dealloc ();
-				
+			if (m_viewPortRect.intersects (m_itemRect)) {
 				return;
 			}
 			
-			m_boundingRect.copy2 (i);
-			i.offsetPoint (getPos ());
+			m_boundingRect.copy2 (m_selfRect);
+			m_selfRect.offsetPoint (getPos ());
 			
-			if (r.intersects (i)) {
-				__dealloc ();
-				
+			if (m_viewPortRect.intersects (m_selfRect)) {
 				return;
 			}
-			
-			__dealloc ();
 				
 // yep, kill it
 			trace (": ---------------------------------------: ");
 			trace (": cull: ", this);
 			
 			killLater ();
-			
-			function __dealloc ():void {
-				xxx.getXRectPoolManager ().returnObject (r);
-				xxx.getXRectPoolManager ().returnObject (i);
-				xxx.getXPointPoolManager ().returnObject (itemPos);
-			}
 		}
 
 		//------------------------------------------------------------------------------------------
@@ -938,6 +931,11 @@ package X.World.Logic {
 			
 			if (m_item != null) {
 				m_boundingRect = __item.boundingRect.cloneX ();
+				
+				m_item.boundingRect.copy2 (m_itemRect);
+				m_itemPos.x = m_item.x;
+				m_itemPos.y = m_item.y;
+				m_itemRect.offsetPoint (m_itemPos);
 			}
 		}
 
