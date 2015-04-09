@@ -28,6 +28,7 @@
 package X.XMap {
 
 	import X.*;
+	import X.Bitmap.XBitmapCacheManager;
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.World.*;
@@ -70,6 +71,8 @@ package X.XMap {
 
 		private var m_delay:Number;
 		
+		private var m_bitmapCacheManager:XBitmapCacheManager;
+		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewBitmapCache () {
 			m_submapModel = null;
@@ -85,6 +88,8 @@ package X.XMap {
 			
 			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
 			tempPoint = xxx.getXPointPoolManager ().borrowObject () as XPoint;
+			
+			m_bitmapCacheManager = xxx.getBitmapCacheManager ();
 			
 			m_delay = 4;
 		}
@@ -236,7 +241,7 @@ package X.XMap {
 			for (i=0; i<__length; i++) {
 				__item = __items[i];
 					
-				__srcBitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
+				__srcBitmap = m_bitmapCacheManager.get (__item.imageClassName);
 					
 //				trace (": imageClassName: ", __item.imageClassName, __srcBitmap, __srcBitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 					
@@ -247,12 +252,9 @@ package X.XMap {
 						
 					tempPoint.x = __item.x - __submapX;
 					tempPoint.y = __item.y - __submapY;
-						
-					tempRect.width = __item.boundingRect.width;
-					tempRect.height = __item.boundingRect.height;
-						
+
 					__dstBitmapData.copyPixels (
-						__srcBitmap.bitmapData, tempRect, tempPoint, null, null, true
+						__srcBitmap.bitmapData, __item.boundingRect, tempPoint, null, null, true
 					);
 				}
 			}
