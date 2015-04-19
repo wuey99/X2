@@ -318,10 +318,25 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function get objectCollisionJumpThru ():Boolean {
-			return false;	
+		public function get allowLFCollisions ():Boolean {
+			return true;
 		}
-				
+
+//------------------------------------------------------------------------------------------
+		public function get allowRTCollisions ():Boolean {
+			return true;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get allowUPCollisions ():Boolean {
+			return true;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function get allowDNCollisions ():Boolean {
+			return true;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public override function updatePhysics ():void {
 			handleCX ();	
@@ -2334,7 +2349,7 @@ package X.World.Logic {
 		public function Ck_Obj_LF ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					if (!objectCollisionJumpThru) {
+					if (__logicObject.allowLFCollisions) {
 						oX = __rect.right - m_cx.left + 1;
 					
 						__logicObject.objectCollisionCallback (self);
@@ -2349,7 +2364,7 @@ package X.World.Logic {
 		public function Ck_Obj_RT ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					if (!objectCollisionJumpThru) {
+					if (__logicObject.allowRTCollisions) {
 						oX = __rect.left - m_cx.right - 1;
 					
 						__logicObject.objectCollisionCallback (self);
@@ -2364,7 +2379,7 @@ package X.World.Logic {
 		public function Ck_Obj_UP ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					if (!objectCollisionJumpThru) {
+					if (__logicObject.allowUPCollisions) {
 						oY = __rect.bottom - m_cx.top + 1;
 					
 						__logicObject.objectCollisionCallback (self);
@@ -2379,11 +2394,13 @@ package X.World.Logic {
 		public function Ck_Obj_DN ():Boolean {
 			return __collide (
 				function (__logicObject:XLogicObjectCX, __rect:XRect):void {
-					oY = __rect.top - m_cx.bottom - 1;
-					
-					__logicObject.objectCollisionCallback (self);
-					
-					m_CX_Collide_Flag |= CX_COLLIDE_DN;
+					if (__logicObject.allowDNCollisions) {
+						oY = __rect.top - m_cx.bottom - 1;
+						
+						__logicObject.objectCollisionCallback (self);
+						
+						m_CX_Collide_Flag |= CX_COLLIDE_DN;
+					}
 				}
 			);
 		}
