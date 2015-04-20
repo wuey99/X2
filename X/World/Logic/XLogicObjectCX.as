@@ -2372,7 +2372,7 @@ package X.World.Logic {
 					
 					__collided = true;
 					
-					return false;
+					return true;
 				}
 			);
 			
@@ -2416,7 +2416,7 @@ package X.World.Logic {
 					
 					__collided = true;
 					
-					return false;
+					return true;
 				}
 			);
 			
@@ -2460,7 +2460,7 @@ package X.World.Logic {
 					
 					__collided = true;
 					
-					return false;
+					return true;
 				}
 			);
 			
@@ -2504,7 +2504,7 @@ package X.World.Logic {
 					
 					__collided = true;
 					
-					return false;
+					return true;
 				}
 			);
 			
