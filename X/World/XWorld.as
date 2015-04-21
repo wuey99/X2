@@ -437,6 +437,7 @@ package X.World {
 			getXLogicManager2 ().emptyKillQueue ();
 			
 			m_XBulletCollisionManager.clearCollisions ();
+			m_XObjectCollisionManager.clearCollisions ();
 			
 			getXLogicManager ().setCollisions ();
 			getXLogicManager2 ().setCollisions ();
