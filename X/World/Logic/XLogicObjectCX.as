@@ -2344,9 +2344,45 @@ package X.World.Logic {
 			
 			return false;		
 		}
+
+//------------------------------------------------------------------------------------------		
+		public function Ck_Obj_LF ():Boolean {
+			if (m_objectCollisionList == null) {
+				m_objectCollisionList = getObjectCollisionList ();
+			}
+			
+			return Ck_Obj_LF9 (m_objectCollisionList);
+		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_LF ():Boolean {
+		public function Ck_Obj_RT ():Boolean {
+			if (m_objectCollisionList == null) {
+				m_objectCollisionList = getObjectCollisionList ();
+			}
+			
+			return Ck_Obj_RT9 (m_objectCollisionList);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_UP ():Boolean {
+			if (m_objectCollisionList == null) {
+				m_objectCollisionList = getObjectCollisionList ();
+			}
+			
+			return Ck_Obj_UP9 (m_objectCollisionList);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_DN ():Boolean {
+			if (m_objectCollisionList == null) {
+				m_objectCollisionList = getObjectCollisionList ();
+			}
+			
+			return Ck_Obj_DN9 (m_objectCollisionList);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_LF9 (__objectCollisionList:XDict):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;
@@ -2356,13 +2392,9 @@ package X.World.Logic {
 			
 			var __collided:Boolean = false;
 			
-			if (m_objectCollisionList == null) {
-				m_objectCollisionList = getObjectCollisionList ();
-			}
-			
-			m_objectCollisionList.doWhile (
+			__objectCollisionList.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					var __rect:XRect = m_objectCollisionList.get (__logicObject) as XRect;
+					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
 						return true;
@@ -2390,7 +2422,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_RT ():Boolean {
+		public function Ck_Obj_RT9 (__objectCollisionList:XDict):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;
@@ -2400,13 +2432,9 @@ package X.World.Logic {
 			
 			var __collided:Boolean = false;
 			
-			if (m_objectCollisionList == null) {
-				m_objectCollisionList = getObjectCollisionList ();
-			}
-			
-			m_objectCollisionList.doWhile (
+			__objectCollisionList.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					var __rect:XRect = m_objectCollisionList.get (__logicObject) as XRect;
+					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
 						return true;
@@ -2434,7 +2462,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_UP ():Boolean {
+		public function Ck_Obj_UP9 (__objectCollisionList:XDict):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;
@@ -2443,14 +2471,10 @@ package X.World.Logic {
 			y2 = int (oY) + m_cx.bottom;
 			
 			var __collided:Boolean = false;
-			
-			if (m_objectCollisionList == null) {
-				m_objectCollisionList = getObjectCollisionList ();
-			}
-			
-			m_objectCollisionList.doWhile (
+
+			__objectCollisionList.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					var __rect:XRect = m_objectCollisionList.get (__logicObject) as XRect;
+					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
 						return true;
@@ -2478,7 +2502,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_DN ():Boolean {
+		public function Ck_Obj_DN9 (__objectCollisionList:XDict):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;
@@ -2488,13 +2512,9 @@ package X.World.Logic {
 			
 			var __collided:Boolean = false;
 			
-			if (m_objectCollisionList == null) {
-				m_objectCollisionList = getObjectCollisionList ();
-			}
-			
-			m_objectCollisionList.doWhile (
+			__objectCollisionList.doWhile (
 				function (__logicObject:XLogicObjectCX):Boolean {
-					var __rect:XRect = m_objectCollisionList.get (__logicObject) as XRect;
+					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
 					
 					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom || y2 > __rect.bottom) {
 						return true;
@@ -2525,41 +2545,7 @@ package X.World.Logic {
 		public function getObjectCollisionList ():XDict {
 			return xxx.getObjectCollisionList ().getRects (getLayer ());	
 		}
-		
-//------------------------------------------------------------------------------------------
-		private function __collide (__callback:Function):Boolean {
-			var x1:int, y1:int, x2:int, y2:int;
-			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
-			
-			var __collided:Boolean = false;
-			
-			if (m_objectCollisionList == null) {
-				m_objectCollisionList = getObjectCollisionList ();
-			}
-			
-			m_objectCollisionList.doWhile (
-				function (__logicObject:XLogicObjectCX):Boolean {
-					var __rect:XRect = m_objectCollisionList.get (__logicObject) as XRect;
-					
-					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
-						return true;
-					}
-					
-					__callback (__logicObject, __rect);
-					
-					__collided = true;
-					
-					return false;
-				}
-			);
 				
-			return __collided;
-		}
-		
 	//------------------------------------------------------------------------------------------
 	}
 	
