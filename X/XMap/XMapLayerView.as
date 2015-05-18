@@ -227,7 +227,7 @@ package X.XMap {
 			
 			__logicObject.addKillListener (removeXMapItem);
 
-			__logicObject.show ();
+//			__logicObject.show ();
 			
 			return __logicObject;
 		}

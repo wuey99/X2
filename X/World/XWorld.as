@@ -109,7 +109,9 @@ package X.World {
 		public var m_paused:Boolean;
 		public var m_soundManager:XSoundManager;
 		public var m_XLogicObjectPoolManager:XClassPoolManager;
-
+		public var m_beforeFrameSignal:XSignal;
+		public var m_afterFrameSignal:XSignal;
+		
 		public var m_mouseOverSignal:XSignal;
 		public var m_mouseDownSignal:XSignal;
 		public var m_mouseMoveSignal:XSignal;
@@ -246,6 +248,9 @@ package X.World {
 			m_timer1000.start ();
 			m_timer1000.addEventListener (TimerEvent.TIMER, onUpdateTimer1000);
 			m_timer1000Signal = getXSignalManager ().createXSignal ();
+			
+			m_beforeFrameSignal = getXSignalManager ().createXSignal ();
+			m_afterFrameSignal = getXSignalManager ().createXSignal ();
 			
 			initMouseScript ();
 			
@@ -406,6 +411,8 @@ package X.World {
 			
 			m_inuse_ENTER_FRAME++;
 			
+			m_beforeFrameSignal.fireSignal ();
+			
 			getXLogicManager ().emptyKillQueue ();
 			getXLogicManager2 ().emptyKillQueue ();
 			
@@ -445,6 +452,8 @@ package X.World {
 			getXLogicManager ().updateDisplay ();
 			getXLogicManager2 ().updateDisplay ();
 			
+			m_afterFrameSignal.fireSignal ();
+			
 			for (var i:Number=0; i<MAX_LAYERS; i++) {
 //				if (getXWorldLayer (i).forceSort) {
 				if (true) {
@@ -466,6 +475,26 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public function unpause ():void {
 			m_paused = false;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function addBeforeFrameListener (__listener:Function):void {
+			m_beforeFrameSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeBeforeFrameListener (__listener:Function):void {
+			m_beforeFrameSignal.removeListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function addAfterFrameListener (__listener:Function):void {
+			m_afterFrameSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeAfterFrameListener (__listener:Function):void {
+			m_afterFrameSignal.removeListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------

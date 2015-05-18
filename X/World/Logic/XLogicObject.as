@@ -100,6 +100,7 @@ package X.World.Logic {
 		public var self:XLogicObject;
 		public var m_killSignal:XSignal;
 		public var m_killSignalWithLogic:XSignal;
+		public var m_XTaskSubManager0:XTaskSubManager;
 		public var m_XTaskSubManager:XTaskSubManager;
 		public var m_XTaskSubManagerCX:XTaskSubManager;
 		public var m_isDead:Boolean;
@@ -167,6 +168,7 @@ package X.World.Logic {
 				m_movieClips = new XDict ();
 				m_textSprites = new XDict ();
 				m_XSignals = new XDict ();
+				m_XTaskSubManager0 = new XTaskSubManager (getXLogicManager ().getXTaskManager0 ());
 				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
 				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	
 			}
@@ -196,6 +198,7 @@ package X.World.Logic {
 				m_movieClips = new XDict ();
 				m_textSprites = new XDict ();
 				m_XSignals = new XDict ();
+				m_XTaskSubManager0 = new XTaskSubManager (getXLogicManager ().getXTaskManager0 ());
 				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
 				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	
 			}
@@ -1462,8 +1465,70 @@ package X.World.Logic {
 				}
 			);
 		}
-				
+
 //------------------------------------------------------------------------------------------
+// XTaskManager0
+//------------------------------------------------------------------------------------------	
+//		public function getXTaskManager0 ():XTaskManager {
+//			return xxx.getXTaskManager0 ();
+//		}
+		
+//------------------------------------------------------------------------------------------
+		public function addTask0 (
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+		):XTask {
+			
+			var __task:XTask = m_XTaskSubManager0.addTask (__taskList, __findLabelsFlag);
+			
+			__task.setParent (this);
+			
+			return __task;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function changeTask0 (
+			__task:XTask,
+			__taskList:Array,
+			__findLabelsFlag:Boolean = true
+		):XTask {
+			
+			return m_XTaskSubManager0.changeTask (__task, __taskList, __findLabelsFlag);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function isTask0 (__task:XTask):Boolean {
+			return m_XTaskSubManager0.isTask (__task);
+		}		
+		
+//------------------------------------------------------------------------------------------
+		public function removeTask0 (__task:XTask):void {
+			m_XTaskSubManager0.removeTask (__task);	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeAllTasks0 ():void {
+			m_XTaskSubManager0.removeAllTasks ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function addEmptyTask0 ():XTask {
+			return m_XTaskSubManager0.addEmptyTask ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getEmptyTask0$ ():Array {
+			return m_XTaskSubManager0.getEmptyTask$ ();
+		}	
+		
+//------------------------------------------------------------------------------------------
+		public function gotoLogic0 (__logic:Function):void {
+			m_XTaskSubManager0.gotoLogic (__logic);
+		}
+		
+//------------------------------------------------------------------------------------------
+// XTaskManager
+//------------------------------------------------------------------------------------------		
 		public function getXTaskManager ():XTaskManager {
 			return xxx.getXTaskManager ();
 		}
@@ -1522,6 +1587,8 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+// XTaskManagerCX
+//------------------------------------------------------------------------------------------			
 		public function getXTaskManagerCX ():XTaskManager {
 			return xxx.getXTaskManagerCX ();
 		}

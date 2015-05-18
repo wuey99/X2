@@ -41,6 +41,7 @@ package X.World {
 //------------------------------------------------------------------------------------------	
 	public class XLogicManager extends Object {
 		private var xxx:XWorld;
+		private var m_XTaskManager0:XTaskManager;
 		private var m_XTaskManager:XTaskManager;
 		private var m_XTaskManagerCX:XTaskManager;
 		private var m_XLogicObjects:XDict;
@@ -54,6 +55,7 @@ package X.World {
 			
 			m_XLogicObjects = new XDict ();
 			m_XLogicObjectsTopLevel = new XDict ();
+			m_XTaskManager0 = new XTaskManager (__XApp);
 			m_XTaskManager = new XTaskManager (__XApp);
 			m_XTaskManagerCX = new XTaskManager (__XApp);
 			
@@ -62,6 +64,7 @@ package X.World {
 
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			m_XTaskManager0.removeAllTasks ();
 			m_XTaskManager.removeAllTasks ();
 			m_XTaskManagerCX.removeAllTasks ();
 		}
@@ -338,10 +341,16 @@ package X.World {
 
 //------------------------------------------------------------------------------------------
 		public function updateTasks ():void {
+			m_XTaskManager0.updateTasks ();
 			m_XTaskManager.updateTasks ();
 			m_XTaskManagerCX.updateTasks ();
 		}
-		
+
+//------------------------------------------------------------------------------------------
+		public function getXTaskManager0 ():XTaskManager {
+			return m_XTaskManager0;
+		}
+
 //------------------------------------------------------------------------------------------
 		public function getXTaskManager ():XTaskManager {
 			return m_XTaskManager;
