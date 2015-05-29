@@ -146,7 +146,87 @@ package X.Sound {
 				}
 			);
 		}
-
+		
+		//------------------------------------------------------------------------------------------
+		public function playPitchSoundFromClass (
+			__class:Class,
+			__priority:Number = 1.0,
+			__loops:Number = 0,
+			__successListener:Function = null,
+			__completeListener:Function = null
+		):Number {
+			
+			if (!channelAvailable (__priority)) {
+				return -1;
+			}
+			
+			return m_soundManager.playPitchSoundFromClass (
+				__class,
+				__priority,
+				__loops,
+				
+				function (__guid:Number):void {
+					m_soundChannels.put (__guid, __priority);
+					m_numChannels++;
+					
+					if (__successListener != null) {
+						__successListener (__guid);
+					}					
+				},
+				
+				function (__guid:Number):void {
+					if (__completeListener != null) {
+						__completeListener (__guid);
+					}
+					
+					if (m_soundChannels.exists (__guid)) {
+						m_soundChannels.remove (__guid);	
+						m_numChannels--;
+					}
+				}
+			);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function playPitchSoundFromClassName (
+			__className:String,
+			__priority:Number = 1.0,
+			__loops:Number = 0,
+			__successListener:Function = null,
+			__completeListener:Function = null
+		):Number {
+			
+			if (!channelAvailable (__priority)) {
+				return -1;
+			}
+			
+			return m_soundManager.playPitchSoundFromClassName (
+				__className,
+				__priority,
+				__loops,
+				
+				function (__guid:Number):void {					
+					m_soundChannels.put (__guid, __priority);
+					m_numChannels++;
+					
+					if (__successListener != null) {
+						__successListener (__guid);
+					}					
+				},
+				
+				function (__guid:Number):void {
+					if (__completeListener != null) {
+						__completeListener (__guid);
+					}
+					
+					if (m_soundChannels.exists (__guid)) {
+						m_soundChannels.remove (__guid);	
+						m_numChannels--;
+					}
+				}
+			);
+		}
+		
 //------------------------------------------------------------------------------------------
 		private function channelAvailable (__priority:Number):Boolean {
 			if (m_numChannels < m_maxChannels) {
@@ -206,6 +286,11 @@ package X.Sound {
 			);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function getSoundChannel (__guid:Number):MP3Sound {
+			return m_soundManager.getSoundChannel (__guid);
+		}
+		
 //------------------------------------------------------------------------------------------
 	}
 	

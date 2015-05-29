@@ -62,20 +62,22 @@ package X.Sound {
 		private function __playSound (
 			__class:Class,
 			__sound:Sound,
+			__type:Class,
 			__loops:Number = 0,
 			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
 		
-			var __soundChannel:SoundChannel = __sound.play (0, __loops, new SoundTransform (getSFXVolume (), 0));
+			var __mp3Sound:MP3Sound = new __type ();
+			__mp3Sound.setup (__sound);
+			__mp3Sound.play (0, __loops, new SoundTransform (getSFXVolume (), 0));
+			
 			var __guid:Number = g_GUID++;
-			m_soundChannels.put (__guid, [__soundChannel, __completeListener, __class, __sound]);
+			m_soundChannels.put (__guid, [__mp3Sound, __completeListener, __class, __sound]);
 			
 			__successListener (__guid);
 			
-			__soundChannel.addEventListener (
-				Event.SOUND_COMPLETE,
-						
+			__mp3Sound.addCompleteListener (
 				function (e:Event):void {
 					if (m_soundChannels.exists (__guid)) {
 						var __completeListener:Function = m_soundChannels.get (__guid)[1];
@@ -110,6 +112,7 @@ package X.Sound {
 			return __playSound (
 				__class,
 				__sound,
+				MP3Normal,
 				__loops,
 				__successListener,
 				__completeListener
@@ -131,12 +134,56 @@ package X.Sound {
 			return __playSound (
 				__class,
 				__sound,
+				MP3Normal,
 				__loops,
 				__successListener,
 				__completeListener
 			);
 		}
 
+		//------------------------------------------------------------------------------------------
+		public function playPitchSoundFromClass (
+			__class:Class,
+			__priority:Number,
+			__loops:Number = 0,
+			__successListener:Function = null,
+			__completeListener:Function = null
+		):Number {
+			
+			var __sound:Sound = m_soundClassPoolManager.borrowObject (__class) as Sound;
+			
+			return __playSound (
+				__class,
+				__sound,
+				MP3Pitch,
+				__loops,
+				__successListener,
+				__completeListener
+			);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function playPitchSoundFromClassName (
+			__className:String,
+			__priority:Number,
+			__loops:Number = 0,
+			__successListener:Function = null,
+			__completeListener:Function = null
+		):Number {
+			
+			var __class:Class = m_XApp.getClass (__className);
+			var __sound:Sound = m_soundClassPoolManager.borrowObject (__class) as Sound;
+			
+			return __playSound (
+				__class,
+				__sound,
+				MP3Pitch,
+				__loops,
+				__successListener,
+				__completeListener
+			);
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setSFXVolume (__state:Number):void {
 			m_SFXVolume = __state;
@@ -155,8 +202,8 @@ package X.Sound {
 //------------------------------------------------------------------------------------------
 		public function removeSound (__guid:Number):void {
 			if (m_soundChannels.exists (__guid)) {
-				var __soundChannel:SoundChannel = m_soundChannels.get (__guid)[0];
-				__soundChannel.stop ();
+				var __mp3Sound:MP3Sound = m_soundChannels.get (__guid)[0];
+				__mp3Sound.stop ();
 				
 				var __completeListener:Function = m_soundChannels.get (__guid)[1];
 				
@@ -182,16 +229,16 @@ package X.Sound {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getSoundChannel (__guid:Number):SoundChannel {
+		public function getSoundChannel (__guid:Number):MP3Sound {
 			if (m_soundChannels.exists (__guid)) {
-				return m_soundChannels.get (__guid);
+				return m_soundChannels.get (__guid)[0];
 			}
 			else
 			{
 				return null;
 			}
 		}	
-
+		
 //------------------------------------------------------------------------------------------
 	}
 	
