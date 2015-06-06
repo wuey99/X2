@@ -271,7 +271,7 @@ package X.Sound {
 					var __soundChannel:MP3Sound = getSoundChannel (__guid);
 					
 					if (__soundChannel) {
-						__soundChannel.pause ();
+						__soundChannel.resume ();
 					}
 				}
 			);
