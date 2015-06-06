@@ -40,6 +40,9 @@ package X.Sound {
 	public class MP3Normal extends MP3Sound  {
 		public var m_soundChannel:SoundChannel;
 		public var m_function:Function;
+		public var m_loops:Number;
+		public var m_soundTransform:SoundTransform;
+		public var m_position:int;
 		
 //------------------------------------------------------------------------------------------
 		public function MP3Normal () {
@@ -52,6 +55,9 @@ package X.Sound {
 		
 //------------------------------------------------------------------------------------------
 		public override function play (__startTime:Number, __loops:Number, __soundTransform:SoundTransform):void {
+			m_loops = __loops;
+			m_soundTransform = __soundTransform;
+			
 			m_soundChannel = m_mp3.play (__startTime, __loops, __soundTransform);
 		}
 
@@ -60,6 +66,18 @@ package X.Sound {
 			m_soundChannel.stop ();
 			
 			m_soundChannel.removeEventListener(Event.SOUND_COMPLETE, m_function);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function pause ():void {
+			m_position = m_soundChannel.position;
+			
+			m_soundChannel.stop ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function resume ():void {
+			m_soundChannel = m_mp3.play (m_position, m_loops, m_soundTransform);
 		}
 		
 //------------------------------------------------------------------------------------------

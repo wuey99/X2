@@ -250,6 +250,32 @@ package X.Sound {
 				return null;
 			}
 		}	
+
+//------------------------------------------------------------------------------------------
+		public function pause ():void {
+			m_soundChannels.forEach (
+				function (__guid:Number):void {
+					var __soundChannel:MP3Sound = getSoundChannel (__guid);
+					
+					if (__soundChannel) {
+						__soundChannel.pause ();
+					}
+				}
+			);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function resume ():void {	
+			m_soundChannels.forEach (
+				function (__guid:Number):void {
+					var __soundChannel:MP3Sound = getSoundChannel (__guid);
+					
+					if (__soundChannel) {
+						__soundChannel.pause ();
+					}
+				}
+			);
+		}
 		
 //------------------------------------------------------------------------------------------
 	}
