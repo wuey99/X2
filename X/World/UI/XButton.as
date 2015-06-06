@@ -157,7 +157,7 @@ package X.World.UI {
 						m_sprite.gotoAndStop (m_label);
 					},
 									
-					XTask.GOTO, "__loop",
+				XTask.GOTO, "__loop",
 			]);
 		}
 		
