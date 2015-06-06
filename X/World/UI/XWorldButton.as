@@ -133,6 +133,7 @@ package X.World.UI {
 					xxx.addPolledMouseMoveListener (onPolledMouseMove);
 					xxx.addMouseUpListener (onMouseUp);
 					xxx.addMouseOutListener (onMouseOut);
+					xxx.getFlashStage ().addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);	
 				},
 				
 				XTask.RETN,
@@ -145,6 +146,7 @@ package X.World.UI {
 			xxx.removeMouseMoveListener (onMouseMove);
 			xxx.removeMouseUpListener (onMouseUp);
 			xxx.removeMouseOutListener (onMouseOut);
+			xxx.getFlashStage ().removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);	
 		}
 		
 		//------------------------------------------------------------------------------------------

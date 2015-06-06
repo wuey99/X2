@@ -62,6 +62,7 @@ package X.World {
 	import X.XMap.*;
 	
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
@@ -118,6 +119,10 @@ package X.World {
 		public var m_polledMouseMoveSignal:XSignal;
 		public var m_mouseUpSignal:XSignal;
 		public var m_mouseOutSignal:XSignal;
+		public var m_keyboardDownSignal:XSignal;
+		public var m_keyboardUpSignal:XSignal;
+		public var m_focusInSignal:XSignal;
+		public var m_focusOutSignal:XSignal;
 		
 //------------------------------------------------------------------------------------------
 		public var m_XWorld:XWorld;
@@ -553,7 +558,16 @@ package X.World {
 			m_polledMouseMoveSignal = new XSignal ();
 			m_mouseUpSignal = new XSignal ();
 			m_mouseOutSignal = new XSignal ();
+			m_keyboardDownSignal = new XSignal ();
+			m_keyboardUpSignal = new XSignal ();
+			m_focusInSignal = new XSignal ();
+			m_focusOutSignal = new XSignal ();
 						
+			getFlashStage ().addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
+			getFlashStage ().addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
+			getFlashStage ().addEventListener (Event.ACTIVATE, onFocusInEvent);
+			getFlashStage ().addEventListener (Event.DEACTIVATE, onFocusOutEvent);
+			
 			var __point:XPoint = new XPoint;
 			
 			var __oldX:Number;
@@ -603,6 +617,43 @@ package X.World {
 			m_polledMouseMoveSignal.removeAllListeners ();
 			m_mouseUpSignal.removeAllListeners ();
 			m_mouseOutSignal.removeAllListeners ();
+			m_keyboardDownSignal.removeAllListeners ();
+			m_keyboardUpSignal.removeAllListeners ();
+			m_focusInSignal.removeAllListeners ();
+			m_focusOutSignal.removeAllListeners ();
+			
+			getFlashStage ().removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
+			getFlashStage ().removeEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
+			getFlashStage ().removeEventListener (Event.ACTIVATE, onFocusInEvent)
+			getFlashStage ().removeEventListener (Event.DEACTIVATE, onFocusOutEvent);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onKeyboardDown (e:KeyboardEvent):void {	
+			m_keyboardDownSignal.fireSignal (e);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onKeyboardUp (e:KeyboardEvent):void {
+			m_keyboardUpSignal.fireSignal (e);
+		}
+		
+//------------------------------------------------------------------------------------------		
+		public function addKeyboardDownListener (__listener:Function):void {
+			m_keyboardDownSignal.addListener (__listener);
+		}
+		
+		public function removeKeyboardDownListener (__listener:Function):void {
+			m_keyboardDownSignal.removeListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------		
+		public function addKeyboardUpListener (__listener:Function):void {
+			m_keyboardUpSignal.addListener (__listener);
+		}
+		
+		public function removeKeyboardUpListener (__listener:Function):void {
+			m_keyboardUpSignal.removeListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -700,6 +751,45 @@ package X.World {
 			}
 		}
 
+//------------------------------------------------------------------------------------------	
+		public function onFocusInEvent (e:Event):void {
+		}
+		
+//------------------------------------------------------------------------------------------	
+		public function onFocusOutEvent (e:Event):void {
+			fireFocusOutSignal ();	
+		}
+	
+//------------------------------------------------------------------------------------------		
+		public function addFocusInListener (__listener:Function):void {
+			m_focusInSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeFocusInListener (__listener:Function):void {
+			m_focusInSignal.removeListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function fireFocusInSignal ():void {
+			m_focusInSignal.fireSignal ();
+		}
+		
+//------------------------------------------------------------------------------------------		
+		public function addFocusOutListener (__listener:Function):void {
+			m_focusOutSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function removeFocusOutListener (__listener:Function):void {
+			m_focusOutSignal.removeListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function fireFocusOutSignal ():void {
+			m_focusOutSignal.fireSignal ();
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getParent ():* {
 			return m_parent;

@@ -68,8 +68,18 @@ package X.Sound {
 			
 			m_soundChannel.addEventListener (Event.SOUND_COMPLETE, m_function);
 		}
+
+//------------------------------------------------------------------------------------------
+		public function getSoundTransform ():SoundTransform {
+			return m_soundChannel.soundTransform;		
+		}
 		
 //------------------------------------------------------------------------------------------
+		public function setSoundTransform (__transform:SoundTransform):void {
+			m_soundChannel.soundTransform = __transform;
+		}
+		
+	//------------------------------------------------------------------------------------------
 	}
 	
 //------------------------------------------------------------------------------------------

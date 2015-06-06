@@ -64,13 +64,17 @@ package X.Sound {
 			__sound:Sound,
 			__type:Class,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
 		
+			if (__transform == null) {
+				__transform = new SoundTransform (getSFXVolume (), 0);
+			}
 			var __mp3Sound:MP3Sound = new __type ();
 			__mp3Sound.setup (__sound);
-			__mp3Sound.play (0, __loops, new SoundTransform (getSFXVolume (), 0));
+			__mp3Sound.play (0, __loops, __transform);
 			
 			var __guid:Number = g_GUID++;
 			m_soundChannels.put (__guid, [__mp3Sound, __completeListener, __class, __sound]);
@@ -103,6 +107,7 @@ package X.Sound {
 			__class:Class,
 			__priority:Number,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 		):Number {
@@ -114,6 +119,7 @@ package X.Sound {
 				__sound,
 				MP3Normal,
 				__loops,
+				__transform,
 				__successListener,
 				__completeListener
 			);
@@ -124,6 +130,7 @@ package X.Sound {
 			__className:String,
 			__priority:Number,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
@@ -136,6 +143,7 @@ package X.Sound {
 				__sound,
 				MP3Normal,
 				__loops,
+				__transform,
 				__successListener,
 				__completeListener
 			);
@@ -146,6 +154,7 @@ package X.Sound {
 			__class:Class,
 			__priority:Number,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 		):Number {
@@ -157,6 +166,7 @@ package X.Sound {
 				__sound,
 				MP3Pitch,
 				__loops,
+				__transform,
 				__successListener,
 				__completeListener
 			);
@@ -167,6 +177,7 @@ package X.Sound {
 			__className:String,
 			__priority:Number,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 		):Number {
@@ -179,6 +190,7 @@ package X.Sound {
 				__sound,
 				MP3Pitch,
 				__loops,
+				__transform,
 				__successListener,
 				__completeListener
 			);

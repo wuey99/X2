@@ -48,6 +48,8 @@ package X.World.UI {
 		protected var m_mouseDownSignal:XSignal;
 		protected var m_mouseUpSignal:XSignal;
 		protected var m_mouseOutSignal:XSignal;
+		protected var m_keyboardDownSignal:XSignal;
+		protected var m_keyboardUpSignal:XSignal;
 
 		public var NORMAL_STATE:Number = 1;
 		public var OVER_STATE:Number = 2;
@@ -72,6 +74,8 @@ package X.World.UI {
 			m_mouseDownSignal = createXSignal ();	
 			m_mouseOutSignal = createXSignal ();
 			m_mouseUpSignal = createXSignal ();
+			m_keyboardDownSignal = createXSignal ();
+			m_keyboardUpSignal = createXSignal ();
 			
 			createSprites ();
 			
@@ -106,6 +110,7 @@ package X.World.UI {
 					m_sprite.addEventListener (xxx.MOUSE_MOVE, onMouseMove);
 					m_sprite.addEventListener (xxx.MOUSE_UP, onMouseUp);
 					m_sprite.addEventListener (xxx.MOUSE_OUT, onMouseOut);
+					xxx.addKeyboardDownListener (onKeyboardDown);	
 				},
 				
 				XTask.RETN,
@@ -118,7 +123,28 @@ package X.World.UI {
 			m_sprite.removeEventListener (xxx.MOUSE_DOWN, onMouseDown);
 			m_sprite.removeEventListener (xxx.MOUSE_MOVE, onMouseMove);
 			m_sprite.removeEventListener (xxx.MOUSE_UP, onMouseUp);
-			m_sprite.removeEventListener (xxx.MOUSE_OUT, onMouseOut);			
+			m_sprite.removeEventListener (xxx.MOUSE_OUT, onMouseOut);
+			xxx.removeKeyboardDownListener (onKeyboardDown);	
+		}
+
+//------------------------------------------------------------------------------------------
+		public function onKeyboardDown (e:KeyboardEvent):void {
+			m_keyboardDownSignal.fireSignal (e);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function onKeyboardUp (e:KeyboardEvent):void {
+			m_keyboardUpSignal.fireSignal (e);
+		}
+
+//------------------------------------------------------------------------------------------
+		public function addKeyboardDownListener (__listener:Function):void {
+			m_keyboardDownSignal.addListener (__listener);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function addKeyboardUpListener (__listener:Function):void {
+			m_keyboardUpSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------

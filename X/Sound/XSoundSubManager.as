@@ -72,6 +72,7 @@ package X.Sound {
 			__class:Class,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
@@ -84,6 +85,7 @@ package X.Sound {
 				__class,
 				__priority,
 				__loops,
+				__transform,
 				
 				function (__guid:Number):void {
 					m_soundChannels.put (__guid, __priority);
@@ -112,6 +114,7 @@ package X.Sound {
 			__className:String,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 			):Number {
@@ -124,6 +127,7 @@ package X.Sound {
 				__className,
 				__priority,
 				__loops,
+				__transform,
 				
 				function (__guid:Number):void {					
 					m_soundChannels.put (__guid, __priority);
@@ -152,6 +156,7 @@ package X.Sound {
 			__class:Class,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 		):Number {
@@ -164,6 +169,7 @@ package X.Sound {
 				__class,
 				__priority,
 				__loops,
+				__transform,
 				
 				function (__guid:Number):void {
 					m_soundChannels.put (__guid, __priority);
@@ -192,6 +198,7 @@ package X.Sound {
 			__className:String,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
+			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
 		):Number {
@@ -204,6 +211,7 @@ package X.Sound {
 				__className,
 				__priority,
 				__loops,
+				__transform,
 				
 				function (__guid:Number):void {					
 					m_soundChannels.put (__guid, __priority);
