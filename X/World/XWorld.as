@@ -566,11 +566,13 @@ package X.World {
 			m_keyboardUpSignal = new XSignal ();
 			m_focusInSignal = new XSignal ();
 			m_focusOutSignal = new XSignal ();
-						
+				
+			/*
 			getFlashStage ().addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
 			getFlashStage ().addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
 			getFlashStage ().addEventListener (Event.ACTIVATE, onFocusInEvent);
 			getFlashStage ().addEventListener (Event.DEACTIVATE, onFocusOutEvent);
+			*/
 			
 			var __point:XPoint = new XPoint;
 			
@@ -578,6 +580,15 @@ package X.World {
 			var __oldY:Number;
 			
 			getXTaskManager ().addTask ([
+				XTask.WAIT, 0x0100,
+				
+				function ():void {
+					getFlashStage ().addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
+					getFlashStage ().addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
+					getFlashStage ().addEventListener (Event.ACTIVATE, onFocusInEvent);
+					getFlashStage ().addEventListener (Event.DEACTIVATE, onFocusOutEvent);
+				},
+				
 				XTask.LABEL, "wait",
 					XTask.WAIT, 0x0100,
 	
