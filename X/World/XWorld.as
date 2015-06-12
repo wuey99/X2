@@ -106,6 +106,8 @@ package X.World {
 		public var m_timer1000Signal:XSignal;
 		public var m_frameCount:Number;
 		public var m_FPS:Number;
+		public var m_minimumFPS:Number;
+		public var m_idealFPS:Number;
 		public var m_FPSCounterObject:XFPSCounter;
 		public var m_paused:Boolean;
 		public var m_soundManager:XSoundManager;
@@ -209,8 +211,10 @@ package X.World {
 			m_inuse_ENTER_FRAME = 0;
 			m_frameCount = 0;
 			m_FPS = 0;
+			m_minimumFPS = 20;
+			m_idealFPS = 30;
 			m_paused = false;
-			
+		
 			if (CONFIG::flash) {
 				addEventListener(Event.RENDER, onRenderFrame);
 				m_inuse_RENDER_FRAME = 0;
@@ -293,6 +297,8 @@ package X.World {
 			if (CONFIG::starling) {
 				addEventListener (TouchEvent.TOUCH, onTouchEvent);
 			}
+			
+//			setupDebug ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -394,6 +400,26 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public function getFPS ():Number {
 			return m_FPS;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setMinimumFPS (__value:Number):void {
+			m_minimumFPS = __value;	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getMinimumFPS ():Number {
+			return m_minimumFPS;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setIdealFPS (__value:Number):void {
+			m_idealFPS = __value;	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getIdealFPS ():Number {
+			return m_idealFPS;
 		}
 		
 //------------------------------------------------------------------------------------------
