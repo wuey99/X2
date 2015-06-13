@@ -63,7 +63,7 @@ package X.World.Sprite {
 			super.cleanup ();
 			
 			if (CONFIG::starling) {
-				if (m_movieClip) {
+				if (m_movieClip != null) {
 					m_movieClip.removeFromParent (true);
 			
 					m_movieClip.dispose ();
@@ -130,7 +130,7 @@ package X.World.Sprite {
 			{
 				var __class:Class = __xxx.getClass (__className);
 				
-				if (__class) {
+				if (__class != null) {
 					__movieClip = new (__class) ();
 				}
 				else
@@ -181,7 +181,7 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:Number):void {
 			if (CONFIG::starling) {
-				if (m_movieClip) {
+				if (m_movieClip != null) {
 					if (__frame > m_movieClip.numFrames) {
 						trace (": XMovieClip: ", m_className, " gotoAndPlay out of range @: ", __frame - 1);
 						return;
@@ -192,7 +192,7 @@ package X.World.Sprite {
 			}
 			else
 			{
-				if (m_movieClip) {
+				if (m_movieClip != null) {
 					m_movieClip.gotoAndPlay (__frame);
 				}
 			}
@@ -211,7 +211,7 @@ package X.World.Sprite {
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:Number):void {
 			if (CONFIG::starling) {
-				if (m_movieClip) {
+				if (m_movieClip != null) {
 					if (__frame > m_movieClip.numFrames) {
 						trace (": XMovieClip: ", m_className, " gotoAndStop out of range @: ", __frame - 1);
 						return;
@@ -222,7 +222,7 @@ package X.World.Sprite {
 			}
 			else
 			{
-				if (m_movieClip) {
+				if (m_movieClip != null) {
 					m_movieClip.gotoAndStop (__frame);
 				}
 			}
@@ -230,21 +230,21 @@ package X.World.Sprite {
 
 		//------------------------------------------------------------------------------------------
 		public function play ():void {
-			if (m_movieClip) {
+			if (m_movieClip != null) {
 				m_movieClip.play ();
 			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function stop ():void {
-			if (m_movieClip) {
+			if (m_movieClip != null) {
 				m_movieClip.stop ();
 			}
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function set rotation (__value:Number):void {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return;
 			}
 			
@@ -258,7 +258,7 @@ package X.World.Sprite {
 		}
 		
 		public override function get rotation ():Number {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return 0.0;
 			}
 			
@@ -273,7 +273,7 @@ package X.World.Sprite {
 
 		//------------------------------------------------------------------------------------------
 		public override function set alpha (__value:Number):void {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return;
 			}
 			
@@ -297,7 +297,7 @@ package X.World.Sprite {
 		else
 		{
 			public override function get graphics ():Graphics {
-				if (!m_movieClip) {
+				if (m_movieClip == null) {
 					return null;
 				}
 				
@@ -317,7 +317,7 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public override function set scaleX (__value:Number):void {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return;
 			}
 			
@@ -325,7 +325,7 @@ package X.World.Sprite {
 		}
 		
 		public override function get scaleX ():Number {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return 1.0;
 			}
 			
@@ -334,7 +334,7 @@ package X.World.Sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public override function set scaleY (__value:Number):void {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return;
 			}
 			
@@ -342,7 +342,7 @@ package X.World.Sprite {
 		}
 		
 		public override function get scaleY ():Number {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return 1.0;
 			}
 			

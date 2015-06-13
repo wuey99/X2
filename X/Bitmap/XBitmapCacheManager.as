@@ -70,7 +70,7 @@ package X.Bitmap {
 										__bitmap = __createBitmap (__className, __class);
 									}								
 									
-									if (__bitmap.getBitmapDataAnim ()) {
+									if (__bitmap.getBitmapDataAnim () != null) {
 										m_queue.remove (__className);
 									}
 									
@@ -113,7 +113,7 @@ package X.Bitmap {
 			
 			trace (": queuing: ", __className);
 			
-			if (__class) {
+			if (__class != null) {
 				var __bitmap:XBitmap = __createBitmap (__className, __class);
 				
 				m_XApp.unloadClass (__className);

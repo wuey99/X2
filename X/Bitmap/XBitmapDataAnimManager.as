@@ -109,7 +109,7 @@ package X.Bitmap {
 							
 			trace (": XBitmapDataAnimManager: caching: ", __className, __class);
 							
-			if (__class) {
+			if (__class != null) {
 				var __bitmapDataAnim:XBitmapDataAnim = __createBitmapAnim (__className, __class);
 				
 				m_XApp.unloadClass (__className);

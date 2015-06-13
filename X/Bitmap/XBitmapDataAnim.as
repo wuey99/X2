@@ -110,7 +110,7 @@ package X.Bitmap {
 					}, 
 
 					function ():void {
-						if (m_bitmaps && m_bitmaps[__index]) {
+						if (m_bitmaps != null && m_bitmaps[__index] != null) {
 							__rect = __movieClip.getBounds (__movieClip);
 							var __matrix:Matrix = new Matrix ();
 							__matrix.scale (__scaleX, __scaleY);

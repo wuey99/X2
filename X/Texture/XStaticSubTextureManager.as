@@ -55,12 +55,12 @@ package X.Texture {
 		public override function reset ():void {
 			var i:Number;
 			
-			if (m_currentBitmap) {
+			if (m_currentBitmap != null) {
 				m_currentBitmap.dispose ();	
 				m_currentBitmap = null;
 			}
 			
-			if (m_atlases) {				
+			if (m_atlases != null) {				
 				for (i=0; i<m_atlases.length; i++) {
 					m_atlases[i].dispose ();
 				}
@@ -199,7 +199,7 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		protected override function __end ():void {
-			if (m_currentBitmap) {
+			if (m_currentBitmap != null) {
 				m_currentAtlasText = '<TextureAtlas imagePath="atlas.png">' + m_currentAtlasText + "</TextureAtlas>";
 				var __atlasXML:XML = new XML (m_currentAtlasText);
 				

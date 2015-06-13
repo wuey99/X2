@@ -129,7 +129,7 @@ package X.World.Sprite {
 					
 					m_bitmapDataAnim = m_bitmapDataAnimManager.add (__className);
 					
-					if (m_bitmapDataAnim) {
+					if (m_bitmapDataAnim != null) {
 						__goto (1);
 					}
 					else
@@ -177,7 +177,7 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function getNumBitmaps ():Number {
-					if (m_bitmapDataAnim) {
+					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.getNumBitmaps ();
 					}
 					else
@@ -193,7 +193,7 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function getBitmap (__frame:Number):BitmapData {
-					if (m_bitmapDataAnim) {
+					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.getBitmap (__frame);
 					}
 					else
@@ -217,7 +217,7 @@ package X.World.Sprite {
 				private function __goto (__frame:Number):void {
 					m_frame = __frame-1;
 					
-					if (m_bitmapDataAnim) {
+					if (m_bitmapDataAnim != null) {
 						bitmapData = m_bitmapDataAnim.getBitmap (m_frame);
 					}
 				}
@@ -240,7 +240,7 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function get dx ():Number {
-					if (m_bitmapDataAnim) {
+					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.dx;
 					}
 					else
@@ -251,7 +251,7 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function get dy ():Number {
-					if (m_bitmapDataAnim) {
+					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.dy;
 					}
 					else

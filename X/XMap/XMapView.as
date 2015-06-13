@@ -78,15 +78,15 @@ package X.XMap {
 			
 			uncacheImageClassNames ();
 			
-			if (m_subTextureManager) {
+			if (m_subTextureManager != null) {
 				xxx.getTextureManager ().removeSubManager (m_textureManagerName);
 			}
 			
-			if (m_submapBitmapPoolManager) {
+			if (m_submapBitmapPoolManager != null) {
 				m_submapBitmapPoolManager.cleanup ();
 			}
 			
-			if (m_submapImagePoolManager) {
+			if (m_submapImagePoolManager != null) {
 				m_submapImagePoolManager.cleanup ();
 			}
 		}

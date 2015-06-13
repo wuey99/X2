@@ -92,7 +92,7 @@ package X.Pool {
 		public function returnAllObjects (__class:Class = null):void {
 			var __pool:XObjectPoolManager;
 			
-			if (__class) {
+			if (__class != null) {
 				if (m_pools.exists (__class)) {
 					__pool = m_pools.get (__class);
 					

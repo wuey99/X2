@@ -69,7 +69,7 @@ package X.XMap {
 			__useArrayItems:Boolean = false
 			):void {
 				
-			if (!__layers) {
+			if (__layers == null) {
 				return;
 			}
 			

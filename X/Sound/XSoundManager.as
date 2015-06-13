@@ -257,7 +257,7 @@ package X.Sound {
 				function (__guid:Number):void {
 					var __soundChannel:MP3Sound = getSoundChannel (__guid);
 					
-					if (__soundChannel) {
+					if (__soundChannel != null) {
 						__soundChannel.pause ();
 					}
 				}
@@ -270,7 +270,7 @@ package X.Sound {
 				function (__guid:Number):void {
 					var __soundChannel:MP3Sound = getSoundChannel (__guid);
 					
-					if (__soundChannel) {
+					if (__soundChannel != null) {
 						__soundChannel.resume ();
 					}
 				}

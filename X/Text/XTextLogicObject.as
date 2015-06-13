@@ -96,7 +96,7 @@ package X.Text {
 			__bold:Boolean=false
 		):void {
 			
-			if (x_text) {
+			if (x_text != null) {
 				removeXTextSprite (m_text);
 				
 				__removeSprite (x_text);

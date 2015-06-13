@@ -81,7 +81,7 @@ package X.World.Sprite {
 			g_XApp.getXPointPoolManager ().returnObject (m_rect);
 			g_XApp.getXPointPoolManager ().returnObject (rp);
 			
-			if (texture) {
+			if (texture != null) {
 				texture.dispose ();
 			}
 			

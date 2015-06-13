@@ -129,7 +129,7 @@ package X.Sound {
 			exitSoundCompleteListeners();
 			_length = m_mp3.length * 44.1;
 			dispatchEvent(new Event(Event.COMPLETE));
-			if (m_function) {
+			if (m_function != null) {
 				m_function ();
 			}
 		}
