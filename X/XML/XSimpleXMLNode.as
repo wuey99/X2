@@ -30,7 +30,7 @@ package X.XML {
 //------------------------------------------------------------------------------------------
 	public class XSimpleXMLNode extends Object {
 		private var m_tag:String;
-		private var m_attribs:Array; // <Dynamic>
+		private var m_attribs:Array; // <String>
 		private var m_attribsMap:Array; // <Dynamic>
 		private var m_text:String;
 		private var m_children:Array;
@@ -40,7 +40,7 @@ package X.XML {
 		public function XSimpleXMLNode () {
 			super ();
 			
-			m_attribs = new Array (); // <Dynamic>
+			m_attribs = new Array (); // <String>
 			m_attribsMap = new Array (); // <Dynamic>
 			m_children = new Array (); // <XSimpleXMLNode>
 			m_parent = null;
@@ -75,7 +75,7 @@ package X.XML {
 			m_text = __xml.text ();
 	
 //------------------------------------------------------------------------------------------
-			m_attribs = new Array (); // <Dynamic>
+			m_attribs = new Array (); // <String>
 			m_attribsMap = new Array (); // <Dynamic>
 			
 			__xmlList = __xml.attributes ();

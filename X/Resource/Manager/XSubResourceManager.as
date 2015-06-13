@@ -620,17 +620,15 @@ package X.Resource.Manager {
 		private function __resolveXClass (__className:String):XClass {
 			var	__XClass:XClass;
 			
-			var __c:* = m_classMap.get (__className);
+//			trace (": XResourceManager:__resolveXClass (): ", __className);
 			
-			//			trace (": XResourceManager:__resolveXClass (): ", __className);
-			
-			if (__c == undefined) {
+			if (!m_classMap.exists (__className)) {
 				var __match:Array = __lookUpResourcePathByClassName (__className);
 				
 				var __resourceXML:XML = __match[0];
 				var __resourcePath:String = __match[1];
 				
-				//				trace ("$ __resolveXClass: ", __className, __resourcePath);
+//				trace ("$ __resolveXClass: ", __className, __resourcePath);
 				
 				__XClass = new XClass (__className, __resourcePath, __resourceXML);
 				__XClass.setClass (null);
@@ -638,7 +636,7 @@ package X.Resource.Manager {
 			}
 			else
 			{
-				__XClass = __c as XClass;
+				__XClass = m_classMap.get (__className) as XClass;
 			}
 			
 			return __XClass;
