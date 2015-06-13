@@ -70,8 +70,8 @@ package X.XMap {
 		
 		private var cx$:CX$;
 
-		private var m_retrievedSubmaps:Array;
-		private var m_retrievedItems:Array;
+		private var m_retrievedSubmaps:Array; // <XSubmapModel>
+		private var m_retrievedItems:Array; // <XMapItemModel>
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
@@ -103,8 +103,8 @@ package X.XMap {
 			m_visible = true;
 			m_name = "layer" + __layer;
 			m_grid = false;
-			m_retrievedSubmaps = new Array ();
-			m_retrievedItems = new Array ();
+			m_retrievedSubmaps = new Array (); // <XSubmapModel>
+			m_retrievedItems = new Array (); // <XMapItemModel>
 	
 			for (__row=0; __row<__submapRows; __row++) {
 				m_XSubmaps[__row] = new Vector.<XSubmapModel> (__submapCols);
@@ -307,7 +307,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function replaceItems (__item:XMapItemModel):Array {
+		public function replaceItems (__item:XMapItemModel):Array /* <XMapItemModel> */ {
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 			
 			var __id:Number = __item.getID ();
@@ -319,7 +319,7 @@ package X.XMap {
 				__item.setID (__id);
 			}
 			
-			var __removedItems:Array = new Array ();
+			var __removedItems:Array /* <XMapItemModel> */ = new Array (); // <XMapItemModel>
 			
 			var r:XRect = __item.boundingRect.cloneX ();
 			r.offset (__item.x, __item.y);
@@ -359,7 +359,7 @@ package X.XMap {
 			
 			return __removedItems;
 			
-			function __extend (__items:Array):void {
+			function __extend (__items:Array /* <XMapItemModel> */):void {
 				for each (var __item:XMapItemModel in __items) {
 					if (__removedItems.indexOf (__item) == -1) {
 						__removedItems.push (__item);
@@ -411,7 +411,7 @@ package X.XMap {
 		public function getSubmapsAt (
 				__x1:Number, __y1:Number,
 				__x2:Number, __y2:Number
-				):Array {
+				):Array /* <XSubmapModel> */ {
 					
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 	
@@ -447,13 +447,13 @@ package X.XMap {
 		public function getItemsAt (
 				__x1:Number, __y1:Number,
 				__x2:Number, __y2:Number
-				):Array {
+				):Array /* <XMapItemModel> */ {
 			
 			if (useArrayItems) {
 				return getArrayItemsAt (__x1, __y1, __x2, __y2);
 			}
 			
-			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
+			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
 			var i:Number;
 			var src_items:XDict;
@@ -496,9 +496,9 @@ package X.XMap {
 		public function getArrayItemsAt (
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
-		):Array {
+		):Array /* <XMapItemModel> */ {
 			
-			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
+			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
 			var i:Number;
 			var src_items:Vector.<XMapItemModel>;
@@ -541,7 +541,7 @@ package X.XMap {
 		public function getItemsAtCX (
 				__x1:Number, __y1:Number,
 				__x2:Number, __y2:Number
-				):Array {
+				):Array /* <XMapItemModel> */ {
 			
 			if (useArrayItems) {
 				return getArrayItemsAtCX (__x1, __y1, __x2, __y2);
@@ -549,11 +549,11 @@ package X.XMap {
 			
 			__x2--; __y2--;
 			
-			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
+			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 							
 			var i:Number;
 			var src_items:XDict;
-			var dst_items:Array = new Array ();
+			var dst_items:Array /* <XSubmapModel> */ = new Array () /* <XSubmapMOdel> */ ;
 			var x:*;
 			var item:XMapItemModel;
 
@@ -587,20 +587,19 @@ package X.XMap {
 			return dst_items;		
 		}
 
-		
 //------------------------------------------------------------------------------------------
 		public function getArrayItemsAtCX (
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
-		):Array {
+		):Array /* <XMapItemModel> */ {
 			
 			__x2--; __y2--;
 			
-			var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
+			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
 			var i:Number;
 			var src_items:Vector.<XMapItemModel>;
-			var dst_items:Array = new Array ();
+			var dst_items:Array /* <XMapItemModel */ = new Array () /* <XMapItemModel */;
 			var item:XMapItemModel;
 
 			var __length:int;
@@ -639,10 +638,10 @@ package X.XMap {
 		public function getCXTiles (
 			c1:Number, r1:Number,
 			c2:Number, r2:Number
-		):Array {
+		):Array /* <Int> */ {
 			
 // tile array to return
-			var tiles:Array;
+			var tiles:Array; // <Int>
 
 // col, row divisor
 			var row32:int = m_submapHeight/cx$.CX_TILE_HEIGHT;
@@ -656,7 +655,7 @@ package X.XMap {
 			var cols:int = c2-c1+1;
 			var rows:int = r2-r1+1;
 
-			tiles = new Array (cols * rows);
+			tiles = new Array (cols * rows); // <Int>
 			
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = row/row32;
@@ -676,7 +675,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function setCXTiles (
-			tiles:Array,
+			tiles:Array /* <Int> */,
 			c1:Number, r1:Number,
 			c2:Number, r2:Number
 		):void {
@@ -710,7 +709,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function eraseWithCXTiles (
-			tiles:Array,
+			tiles:Array /* <Int> */,
 			c1:Number, r1:Number,
 			c2:Number, r2:Number
 		):void {
@@ -806,7 +805,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getAllClassNames ():Array {
+		public function getAllClassNames ():Array /* <String> */ {
 			return m_classNames.getAllReferenceNames ();
 		}
 
@@ -858,7 +857,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function serialize (__xml:XSimpleXMLNode):XSimpleXMLNode {
-			var __attribs:Array = [
+			var __attribs:Array /* <Dynamic */ = [
 				"vx",			viewPort.x,
 				"vy",			viewPort.y,
 				"vw",			viewPort.width,
@@ -912,7 +911,7 @@ package X.XMap {
 					__x1 = __col * m_submapWidth;
 					__x2 = __x1 + m_submapWidth-1;
 					
-					var submaps:Array = getSubmapsAt (__x1, __y1, __x2, __y2);
+					var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 					
 					if (submaps.length == 1) {
 						var submap:XSubmapModel = submaps[0] as XSubmapModel;
@@ -948,7 +947,7 @@ package X.XMap {
 					
 			__imageClassNames.forEach (
 				function (__imageClassName:*):void {
-					var __attribs:Array = [
+					var __attribs:Array /* <Dynamic */ = [
 						"name",	__imageClassName as String,					
 					];
 					
@@ -1025,8 +1024,8 @@ package X.XMap {
 			m_items = new XDict (); // <XMapItemModel, Float>
 			m_ids = new XDict (); // <Float, XMapItemModel>
 			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (m_submapRows);
-			m_retrievedSubmaps = new Array ();
-			m_retrievedItems = new Array ();
+			m_retrievedSubmaps = new Array (); // <XSubmapModel>
+			m_retrievedItems = new Array (); // <XMapItemModel>
 			
 			deserializeImageClassNames (__xml);
 			m_classNames.deserialize (__xml);
@@ -1073,7 +1072,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 			trace (": deserializing XSubmaps: ");
 			
-			var __xmlList:Array;
+			var __xmlList:Array; // <XSimpleXMLNode>
 			var i:Number;
 			
 			__xmlList = __xml.child ("XSubmaps")[0].child ("XSubmap");
@@ -1142,7 +1141,7 @@ package X.XMap {
 				return;
 			}
 
-			var __xmlList:Array = __xml.child ("imageClassNames")[0].child ("imageClassName");
+			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("imageClassNames")[0].child ("imageClassName");
 
 			var __name:String;	
 			var i:Number;

@@ -33,15 +33,15 @@ package X.Utils {
 // this class maps a list of classNames to unique indexes
 //------------------------------------------------------------------------------------------
 	public class XClassNameToIndex  {
-		private var m_classNamesStrings:Array;
-		private var m_classNamesCounts:Array;
-		private var m_freeClassNameIndexes:Array;
+		private var m_classNamesStrings:Array; // <String>
+		private var m_classNamesCounts:Array; // <Float>
+		private var m_freeClassNameIndexes:Array; // <Float> 
 		
 //------------------------------------------------------------------------------------------	
 		public function XClassNameToIndex () {
-			m_classNamesStrings = new Array ();
-			m_classNamesCounts = new Array ();
-			m_freeClassNameIndexes = new Array ();
+			m_classNamesStrings = new Array (); // <String>
+			m_classNamesCounts = new Array (); // <Float>
+			m_freeClassNameIndexes = new Array (); // <Float>
 		}	
 
 //------------------------------------------------------------------------------------------

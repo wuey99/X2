@@ -30,7 +30,7 @@ package X.XML {
 //------------------------------------------------------------------------------------------
 	public class XSimpleXMLNode extends Object {
 		private var m_tag:String;
-		private var m_attribs:Array;
+		private var m_attribs:Array; // <Dynamic>
 		private var m_attribsMap:Array;
 		private var m_text:String;
 		private var m_children:Array;

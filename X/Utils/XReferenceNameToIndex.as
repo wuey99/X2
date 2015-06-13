@@ -33,15 +33,15 @@ package X.Utils {
 	// this class maps a list of ReferenceNames to unique indexes
 	//------------------------------------------------------------------------------------------
 	public class XReferenceNameToIndex  {
-		private var m_referenceNamesStrings:Array;
-		private var m_referenceNamesCounts:Array;
-		private var m_freeReferenceNameIndexes:Array;
+		private var m_referenceNamesStrings:Array; // <String>
+		private var m_referenceNamesCounts:Array; // <Float>
+		private var m_freeReferenceNameIndexes:Array; // <Float>
 		
 		//------------------------------------------------------------------------------------------	
 		public function XReferenceNameToIndex () {
-			m_referenceNamesStrings = new Array ();
-			m_referenceNamesCounts = new Array ();
-			m_freeReferenceNameIndexes = new Array ();
+			m_referenceNamesStrings = new Array (); // <String>
+			m_referenceNamesCounts = new Array (); // <Float>
+			m_freeReferenceNameIndexes = new Array (); // <Float>
 		}	
 		
 		//------------------------------------------------------------------------------------------
