@@ -53,7 +53,7 @@ package X.Resource.Manager {
 		private var m_loaderContextFactory:Function;
 		private var m_subResourceManagers:Array;
 		private var m_callback:Function;
-		private var m_embeddedResources:XDict;
+		private var m_embeddedResources:XDict; // <String, Class>
 				
 //------------------------------------------------------------------------------------------		
 		public function XProjectManager (__XApp:XApp) {
@@ -62,7 +62,7 @@ package X.Resource.Manager {
 			m_XApp = __XApp;
 			m_loadComplete = true;
 			m_projectXML = null;
-			m_embeddedResources = new XDict ();
+			m_embeddedResources = new XDict (); // <String, Class>
 		}
 
 //------------------------------------------------------------------------------------------

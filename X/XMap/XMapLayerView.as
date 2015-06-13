@@ -50,7 +50,7 @@ package X.XMap {
 // removed from the XMapModel.
 //------------------------------------------------------------------------------------------
 	public class XMapLayerView extends XLogicObject {
-		private var m_XMapItemToXLogicObject:XDict;
+		private var m_XMapItemToXLogicObject:XDict; // <XMapItemModel, XLogicObject>
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
 		private var m_XMapLayerModel:XMapLayerModel;
@@ -73,7 +73,7 @@ package X.XMap {
 			
 			m_XMapLayerModel = m_XMapModel.getLayer (m_currLayer);
 			
-			m_XMapItemToXLogicObject = new XDict ();
+			m_XMapItemToXLogicObject = new XDict (); // <XMapItemModel, XLogicObject>
 		}
 
 //------------------------------------------------------------------------------------------

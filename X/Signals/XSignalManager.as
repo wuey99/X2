@@ -34,13 +34,13 @@ package X.Signals {
 	public class XSignalManager extends Object {
 		private var m_XApp:XApp;
 		
-		private var m_XSignals:XDict;
+		private var m_XSignals:XDict; // <XSignal, Int>
 		
 //------------------------------------------------------------------------------------------
 		public function XSignalManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
-			m_XSignals = new XDict ();
+			m_XSignals = new XDict (); // <XSignal, Int>
 		}
 
 //------------------------------------------------------------------------------------------

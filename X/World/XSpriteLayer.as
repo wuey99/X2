@@ -34,7 +34,7 @@ package X.World {
 	
 //------------------------------------------------------------------------------------------	
 	public class XSpriteLayer extends XSprite {
-		private var m_XDepthSpriteMap:XDict;
+		private var m_XDepthSpriteMap:XDict; // <XDepthSprite, Int>
 		
 		public var forceSort:Boolean;
 		
@@ -44,7 +44,7 @@ package X.World {
 		public function XSpriteLayer () {
 			super ();
 			
-			m_XDepthSpriteMap = new XDict ();
+			m_XDepthSpriteMap = new XDict (); // <XDepthSprite, Int>
 			
 			list = new Vector.<XDepthSprite> (2000);
 			

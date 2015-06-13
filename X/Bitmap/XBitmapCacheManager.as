@@ -40,17 +40,17 @@ package X.Bitmap {
 //------------------------------------------------------------------------------------------	
 	public class XBitmapCacheManager extends Object {
 		private var m_XApp:XApp;
-		private var m_bitmaps:XDict;
-		private var m_count:XDict;
-		private var m_queue:XDict;
+		private var m_bitmaps:XDict; // <String, XBitmap>
+		private var m_count:XDict; // <String, Float>
+		private var m_queue:XDict; // <String, Float>
 		
 //------------------------------------------------------------------------------------------
 		public function XBitmapCacheManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
-			m_bitmaps = new XDict ();
-			m_count = new XDict ();
-			m_queue = new XDict ();
+			m_bitmaps = new XDict (); // <String, XBitmap>
+			m_count = new XDict (); // <String, Float>
+			m_queue = new XDict (); // <String, Float>
 			
 // checked queued images and cache the ones that have loaded.
 			m_XApp.getXTaskManager ().addTask ([

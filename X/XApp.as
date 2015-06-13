@@ -68,7 +68,7 @@ package X {
 		private var m_XTextureManager:XTextureManager;
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
 		private var m_XClassPoolManager:XClassPoolManager;
-		private var m_allClassNames:XDict;
+		private var m_allClassNames:XDict; // <String, Int>
 		private var m_FrameRateScale:Number;
 		
 //------------------------------------------------------------------------------------------
@@ -402,7 +402,7 @@ package X {
 	
 			trace (": cacheAllClasses: ");
 			
-			m_allClassNames = new XDict ();
+			m_allClassNames = new XDict (); // <String, Int>
 			
 			__cacheAllClasses (true, __project.child ("*"));
 			

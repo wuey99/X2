@@ -52,11 +52,11 @@ package X.XMap {
 		
 		private var m_currID:Number;
 
-		private var m_items:XDict;
-		private var m_ids:XDict;
+		private var m_items:XDict; // <XMapItemModel, Float>
+		private var m_ids:XDict; // <Float, XMapItemModel>
 
 		private var m_classNames:XReferenceNameToIndex;
-		private var m_imageClassNames:XDict;
+		private var m_imageClassNames:XDict; // <String, Int>
 		
 		private var m_viewPort:XRect;
 		
@@ -64,9 +64,9 @@ package X.XMap {
 		private var m_name:String;
 		private var m_grid:Boolean
 		
-		private var m_itemInuse:XDict;
+		private var m_itemInuse:XDict; // <Float, Int>
 		
-		private var m_persistentStorage:XDict;
+		private var m_persistentStorage:XDict; // <Float, Object>
 		
 		private var cx$:CX$;
 
@@ -96,8 +96,8 @@ package X.XMap {
 			m_submapHeight = __submapHeight;
 
 			m_currID = 0;
-			m_items = new XDict ();
-			m_ids = new XDict ();
+			m_items = new XDict ();  // <XMapItemModel, Float>
+			m_ids = new XDict ();  // <Float, XMapItemModel>
 			m_layer = __layer;
 			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (__submapRows);
 			m_visible = true;
@@ -114,12 +114,12 @@ package X.XMap {
 				}
 			}
 			
-			m_persistentStorage = new XDict ();
+			m_persistentStorage = new XDict ();  // <Float, Object>
 			
 			m_classNames = new XReferenceNameToIndex ();
-			m_imageClassNames = new XDict ();
+			m_imageClassNames = new XDict ();  // <String, Int>
 			
-			m_itemInuse = new XDict ();
+			m_itemInuse = new XDict ();  // <Float, Int>
 			
 			m_viewPort = new XRect ();
 		}
@@ -825,7 +825,7 @@ package X.XMap {
 			var __row:Number, __col:Number;
 			
 			if (__list == null) {
-				var __list:XDict = new XDict ();
+				var __list:XDict = new XDict (); // <Float, XMapItemModel>
 			}
 		
 				for (__row=0; __row<m_submapRows; __row++) {
@@ -1013,17 +1013,17 @@ package X.XMap {
 				m_grid = false;
 			}	
 			
-			m_persistentStorage = new XDict ();
+			m_persistentStorage = new XDict ();  // <Float, Object>
 			
 			m_classNames = new XReferenceNameToIndex ();
-			m_imageClassNames = new XDict ();			
+			m_imageClassNames = new XDict (); // <String, Int>
 
-			m_itemInuse = new XDict ();
+			m_itemInuse = new XDict ();  // <Float, Int>
 			
 			cx$ = new CX$ ();
 			
-			m_items = new XDict ();
-			m_ids = new XDict ();
+			m_items = new XDict (); // <XMapItemModel, Float>
+			m_ids = new XDict (); // <Float, XMapItemModel>
 			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (m_submapRows);
 			m_retrievedSubmaps = new Array ();
 			m_retrievedItems = new Array ();

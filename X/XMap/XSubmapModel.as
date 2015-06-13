@@ -58,7 +58,7 @@ package X.XMap {
 		private var m_src:XRect;
 		private var m_dst:XRect;
 
-		private var m_items:XDict;
+		private var m_items:XDict; // <XMapItemModel, Float>
 		private var m_arrayItems:Vector.<XMapItemModel>;
 		private var m_arrayItemIndex:int;
 		
@@ -173,7 +173,7 @@ package X.XMap {
 				m_cmap[i] = CX_EMPTY;
 			}
 
-			m_items = new XDict ();
+			m_items = new XDict ();  // <XMapItemModel, Float>
 			m_arrayItems = new Vector.<XMapItemModel> ();
 			m_arrayItemIndex = 0;
 

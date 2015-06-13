@@ -85,18 +85,18 @@ package X.World.Logic {
 		public var m_rotation:Number;
 		public var m_masterRotation:Number;
 		public var m_delayed:Number;
-		public var m_XLogicObjects:XDict;
-		public var m_worldSprites:XDict;
-		public var m_hudSprites:XDict;
-		public var m_childSprites:XDict;
-		public var m_detachedSprites:XDict;
-		public var m_bitmaps:XDict;
-		public var m_movieClips:XDict;
-		public var m_textSprites:XDict;
+		public var m_XLogicObjects:XDict; // <XLogicObject, Int>
+		public var m_worldSprites:XDict; // <XDepthSprite, Int>
+		public var m_hudSprites:XDict; // <XDepthSprite, Int>
+		public var m_childSprites:XDict; // <XDepthSprite, Int>
+		public var m_detachedSprites:XDict;  // <XDepthSprite, Int>
+		public var m_bitmaps:XDict; // <String, XBitmap>
+		public var m_movieClips:XDict; // <String, XMovieClip>
+		public var m_textSprites:XDict; // <XTextSprite, Int>
 		public var m_GUID:Number;
 		public var m_alpha:Number;
 		public var m_masterAlpha:Number;
-		public var m_XSignals:XDict;
+		public var m_XSignals:XDict; // <XSignal, Int>
 		public var self:XLogicObject;
 		public var m_killSignal:XSignal;
 		public var m_killSignalWithLogic:XSignal;
@@ -159,15 +159,15 @@ package X.World.Logic {
 			if (__xxx) {
 				xxx = __xxx;
 				
-				m_XLogicObjects = new XDict ();
-				m_worldSprites = new XDict ();
-				m_hudSprites = new XDict ();
-				m_childSprites = new XDict ();
-				m_detachedSprites = new XDict ();
-				m_bitmaps = new XDict ();
-				m_movieClips = new XDict ();
-				m_textSprites = new XDict ();
-				m_XSignals = new XDict ();
+				m_XLogicObjects = new XDict (); // <XLogicObject, Int>
+				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
+				m_hudSprites = new XDict (); // <XDepthSprite, Int>
+				m_childSprites = new XDict (); // <XDepthSprite, Int>
+				m_detachedSprites = new XDict (); // <XDepthSprite, Int>
+				m_bitmaps = new XDict (); // <String, XBitmap> 
+				m_movieClips = new XDict (); // <String, XMovieClip>
+				m_textSprites = new XDict (); // <XTextSprite, Int>
+				m_XSignals = new XDict (); // <XSignal, Int>
 				m_XTaskSubManager0 = new XTaskSubManager (getXLogicManager ().getXTaskManager0 ());
 				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
 				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	
@@ -189,15 +189,15 @@ package X.World.Logic {
 			if (xxx == null) {
 				xxx = __xxx;
 		
-				m_XLogicObjects = new XDict ();
-				m_worldSprites = new XDict ();
-				m_hudSprites = new XDict ();
-				m_childSprites = new XDict ();
-				m_detachedSprites = new XDict ();
-				m_bitmaps = new XDict ();
-				m_movieClips = new XDict ();
-				m_textSprites = new XDict ();
-				m_XSignals = new XDict ();
+				m_XLogicObjects = new XDict (); // <XLogicObject, Int>
+				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
+				m_hudSprites = new XDict (); // <XDepthSprite, Int>
+				m_childSprites = new XDict (); // <XDepthSprite, Int>
+				m_detachedSprites = new XDict (); // <XDepthSprite, Int>
+				m_bitmaps = new XDict (); // <String, XBitmap> 
+				m_movieClips = new XDict (); // <String, XMovieClip>
+				m_textSprites = new XDict (); // <XTextSprite, Int>
+				m_XSignals = new XDict (); // <XSignal, Int>
 				m_XTaskSubManager0 = new XTaskSubManager (getXLogicManager ().getXTaskManager0 ());
 				m_XTaskSubManager = new XTaskSubManager (getXLogicManager ().getXTaskManager ());
 				m_XTaskSubManagerCX = new XTaskSubManager (getXLogicManager ().getXTaskManagerCX ());	

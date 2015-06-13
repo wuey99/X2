@@ -42,7 +42,7 @@ package X.Keyboard {
 		private var xxx:XWorld;
 		private var m_focus:XTask;
 		private var m_text:TextField;
-		private var m_keyCodes:XDict;
+		private var m_keyCodes:XDict; // <Int, Int>
 		private var m_parent:Sprite;
 		
 //------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ package X.Keyboard {
 			m_parent = xxx.getParent () as Sprite;
 			
 			m_focus = null;
-			m_keyCodes = new XDict ();
+			m_keyCodes = new XDict (); // <Int, Int>
 			
 			createSprites ();
 		}

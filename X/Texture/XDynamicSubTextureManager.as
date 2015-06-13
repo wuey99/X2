@@ -67,7 +67,7 @@ package X.Texture {
 		public override function start ():void {
 			reset ();
 			
-			m_movieClips = new XDict ();
+			m_movieClips = new XDict ();  // <String, Array>
 			m_textures = new Array ();
 			m_atlases = new Array ();
 			

@@ -53,14 +53,14 @@ package X.Resource.Manager {
 	public class XSubResourceManager extends IResourceManager {
 		private var m_manifestXML:XML;
 		private var m_projectManager:XProjectManager;
-		private var m_resourceMap:XDict;
-		private var m_classMap:XDict;
+		private var m_resourceMap:XDict; // <String, XResource>
+		private var m_classMap:XDict; // <String, XClass>
 		private var m_parent:Sprite;
 		private var m_rootPath:String;
 		private var m_manifestName:String;
 		private var m_loadComplete:Boolean;
 		private var m_loaderContextFactory:Function;
-		private var m_cachedClassName:XDict;
+		private var m_cachedClassName:XDict; // <String, XML>
 		
 		public static var CLASS_TYPE:String = "classX";
 		public static var RESOURCE_TYPE:String = "resource";
@@ -70,9 +70,9 @@ package X.Resource.Manager {
 		public function XSubResourceManager () {
 			super ();
 			
-			m_resourceMap = new XDict ();
-			m_classMap = new XDict ();
-			m_cachedClassName = new XDict ();
+			m_resourceMap = new XDict (); // <String, XResource>
+			m_classMap = new XDict (); // <String, XClass>
+			m_cachedClassName = new XDict (); // <String, XML>
 			
 			m_loaderContextFactory = null;
 			

@@ -38,14 +38,14 @@ package X.Texture {
 //------------------------------------------------------------------------------------------	
 	public class XMovieClipCacheManager extends Object {
 		private var m_XApp:XApp;
-		private var m_movieClips:XDict;
+		private var m_movieClips:XDict;  // <String, XMovieClip>
 		private var m_count:XDict;
 		
 //------------------------------------------------------------------------------------------
 		public function XMovieClipCacheManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
-			m_movieClips = new XDict ();
+			m_movieClips = new XDict ();  // <String, XMovieClip>
 			m_count = new XDict ();
 		}
 

@@ -42,7 +42,7 @@ package X.XMap {
 	
 //------------------------------------------------------------------------------------------
 	public class XMapLayerCachedView extends XLogicObject {
-		private var m_XSubmapToXLogicObject:XDict;
+		private var m_XSubmapToXLogicObject:XDict; // <XSubmapModel, XLogicObject>
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
 		private var m_currLayer:Number;
@@ -61,7 +61,7 @@ package X.XMap {
 			m_XMapModel = getArg (args, 1);
 			m_currLayer = getArg (args, 2);
 
-			m_XSubmapToXLogicObject = new XDict ();
+			m_XSubmapToXLogicObject = new XDict (); // <XSubmapModel, XLogicObject>
 			
 			m_delay = 1;
 		}

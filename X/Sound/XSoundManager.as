@@ -39,7 +39,7 @@ package X.Sound {
 //------------------------------------------------------------------------------------------	
 	public class XSoundManager extends Object {
 		public var m_XApp:XApp;
-		public var m_soundChannels:XDict;
+		public var m_soundChannels:XDict; // <Float, Array>
 		private static var g_GUID:Number = 0;
 		private var m_soundClassPoolManager:XClassPoolManager;
 		private var m_SFXVolume:Number;
@@ -48,7 +48,7 @@ package X.Sound {
 		public function XSoundManager (__XApp:XApp) {
 			m_XApp = __XApp;
 
-			m_soundChannels = new XDict ();
+			m_soundChannels = new XDict (); // <Float, Array>
 			m_soundClassPoolManager = new XClassPoolManager ();
 			m_SFXVolume = 1;
 		}

@@ -36,7 +36,7 @@ package X.World.Collision {
 //------------------------------------------------------------------------------------------
 	public class XObjectCollisionManager extends Object {
 		protected var xxx:XWorld;
-		protected var m_collisionLists:XDict;
+		protected var m_collisionLists:XDict; // <XObjectCollisionList, Int>
 		
 //------------------------------------------------------------------------------------------
 		public function XObjectCollisionManager (__xxx:XWorld) {
@@ -44,7 +44,7 @@ package X.World.Collision {
 			
 			xxx = __xxx;
 			
-			m_collisionLists = new XDict ();
+			m_collisionLists = new XDict (); // <XObjectCollisionList, Int>
 		}
 		
 //------------------------------------------------------------------------------------------

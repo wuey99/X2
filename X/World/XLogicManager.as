@@ -44,22 +44,22 @@ package X.World {
 		private var m_XTaskManager0:XTaskManager;
 		private var m_XTaskManager:XTaskManager;
 		private var m_XTaskManagerCX:XTaskManager;
-		private var m_XLogicObjects:XDict;
-		private var m_XLogicObjectsTopLevel:XDict;
-		private var m_killQueue:XDict;
+		private var m_XLogicObjects:XDict; // <XLogicObject, Int>
+		private var m_XLogicObjectsTopLevel:XDict; // <XLogicObject, Int>
+		private var m_killQueue:XDict; // <XLogicObject, Int>
 		private var m_paused:Boolean;
 		
 //------------------------------------------------------------------------------------------
 		public function XLogicManager (__XApp:XApp, __xxx:XWorld) {
 			xxx = __xxx;
 			
-			m_XLogicObjects = new XDict ();
-			m_XLogicObjectsTopLevel = new XDict ();
+			m_XLogicObjects = new XDict (); // <XLogicObject, Int>
+			m_XLogicObjectsTopLevel = new XDict (); // <XLogicObject, Int>
 			m_XTaskManager0 = new XTaskManager (__XApp);
 			m_XTaskManager = new XTaskManager (__XApp);
 			m_XTaskManagerCX = new XTaskManager (__XApp);
 			
-			m_killQueue = new XDict ();
+			m_killQueue = new XDict (); // <XLogicObject, Int>
 		}
 
 //------------------------------------------------------------------------------------------

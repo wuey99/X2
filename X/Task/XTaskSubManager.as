@@ -35,7 +35,7 @@ package X.Task {
 	public class XTaskSubManager extends Object {
 		public var m_manager:XTaskManager;
 		
-		private var m_XTasks:XDict;
+		private var m_XTasks:XDict;  // <XTask, Int>
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskSubManager (__manager:XTaskManager) {
@@ -43,7 +43,7 @@ package X.Task {
 			
 			m_manager = __manager;
 			
-			m_XTasks = new XDict ();
+			m_XTasks = new XDict ();  // <XTask, Int>
 		}
 
 //------------------------------------------------------------------------------------------

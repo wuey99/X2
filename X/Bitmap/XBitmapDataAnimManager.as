@@ -38,17 +38,17 @@ package X.Bitmap {
 //------------------------------------------------------------------------------------------	
 	public class XBitmapDataAnimManager extends Object {
 		private var m_XApp:XApp;
-		private var m_bitmapAnims:XDict;
-		private var m_count:XDict;
-		private var m_queue:XDict;
+		private var m_bitmapAnims:XDict; // <String, XBitmapDataAnim>
+		private var m_count:XDict; // <String, Float>
+		private var m_queue:XDict; // <String, Float>
 		
 //------------------------------------------------------------------------------------------
 		public function XBitmapDataAnimManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
-			m_bitmapAnims = new XDict ();
-			m_count = new XDict ();
-			m_queue = new XDict ();
+			m_bitmapAnims = new XDict (); // <String, XBitmapDataAnim>
+			m_count = new XDict (); // <String, Float>
+			m_queue = new XDict (); // <String, Float>
 			
 			// checked queued images and cache the ones that have loaded.
 			m_XApp.getXTaskManager ().addTask ([

@@ -33,7 +33,7 @@ package X.Pool {
 	public class XObjectPoolManager extends Object {
 		public var m_freeObjects:Array;
 		public var m_numFreeObjects:int;
-		private var m_inuseObjects:XDict;
+		private var m_inuseObjects:XDict; // <Object, Int>
 		private var m_newObject:Function;
 		private var m_cloneObject:Function;
 		private var m_overflow:Number;
@@ -50,7 +50,7 @@ package X.Pool {
 		) {
 				
 			m_freeObjects = new Array ();
-			m_inuseObjects = new XDict ();
+			m_inuseObjects = new XDict (); // <Object, Int>
 			m_newObject = __newObject;
 			m_cloneObject = __cloneObject;
 			m_overflow = __overflow;

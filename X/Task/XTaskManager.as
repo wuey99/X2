@@ -34,7 +34,7 @@ package X.Task {
 	
 //------------------------------------------------------------------------------------------	
 	public class XTaskManager extends Object {
-		protected var m_XTasks:XDict;
+		protected var m_XTasks:XDict; // <XTask, Int>
 		protected var m_paused:Number;
 		protected var m_XApp:XApp;
 		protected var m_pools:Array;
@@ -48,7 +48,7 @@ package X.Task {
 		public function XTaskManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
-			m_XTasks = new XDict ();
+			m_XTasks = new XDict (); // <XTask, Int>
 			
 			m_paused = 0;
 			

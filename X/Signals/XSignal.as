@@ -31,14 +31,14 @@ package X.Signals {
 	
 //------------------------------------------------------------------------------------------
 	public class XSignal extends Object {
-		private var m_listeners:XDict;
+		private var m_listeners:XDict; // <Function, Int>
 		private var m_parent:*;
 		
 //------------------------------------------------------------------------------------------
 		public function XSignal () {
 			super();
 			
-			m_listeners = new XDict ();
+			m_listeners = new XDict (); // <Function, Int>
 		}
 
 //------------------------------------------------------------------------------------------

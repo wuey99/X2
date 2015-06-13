@@ -45,7 +45,7 @@ package X.World.Logic {
 		protected var m_oldPos:XPoint;
 		
 		protected var m_cx:XRect;
-		protected var m_namedCX:XDict;
+		protected var m_namedCX:XDict; // <String, XRect>
 	
 		public var m_XMapModel:XMapModel;
 		public var m_XMapView:XMapView;
@@ -113,7 +113,7 @@ package X.World.Logic {
 			
 			m_objectCollisionList = null;
 					
-			m_namedCX = new XDict ();
+			m_namedCX = new XDict (); // <String, XRect>
 		}
 
 //------------------------------------------------------------------------------------------

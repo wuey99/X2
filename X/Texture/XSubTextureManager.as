@@ -45,7 +45,7 @@ package X.Texture {
 	public class XSubTextureManager extends Object {
 		protected var m_XApp:XApp;
 		
-		protected var m_movieClips:XDict;
+		protected var m_movieClips:XDict; // <String, Array>
 		 
 		protected var m_atlases:Array;
 		protected var m_currentAtlas:TextureAtlas;
@@ -55,7 +55,7 @@ package X.Texture {
 		protected var TEXTURE_WIDTH:Number = 2048;
 		protected var TEXTURE_HEIGHT:Number = 2048;
 			
-		protected var m_queue:XDict;
+		protected var m_queue:XDict; // <String, Int>
 		
 		protected var m_count:Number;
 		
@@ -68,7 +68,7 @@ package X.Texture {
 			
 			m_count = 0;
 			
-			m_queue = new XDict ();
+			m_queue = new XDict ();  // <String, Int>
 			
 			m_XApp.getXTaskManager ().addTask ([
 				XTask.LABEL, "loop",

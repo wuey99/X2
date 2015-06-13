@@ -47,7 +47,7 @@ package X.World.Sprite {
 				public var m_bitmapDataAnimManager:XBitmapDataAnimManager;
 				public var m_bitmapDataAnim:XBitmapDataAnim;
 				public var m_className:String;
-				public var m_bitmapNames:XDict;
+				public var m_bitmapNames:XDict; // <String, BitmapData>
 				public var m_frame:Number;
 				public var m_scale:Number;
 				public var m_visible:Boolean;
@@ -76,7 +76,7 @@ package X.World.Sprite {
 					m_scale = 1.0;
 					m_visible = true;
 					
-					m_bitmapNames = new XDict ();
+					m_bitmapNames = new XDict (); // <String, BitmapData>
 					
 					m_bitmapDataAnimManager = null;
 				}

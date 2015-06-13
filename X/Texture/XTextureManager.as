@@ -45,13 +45,13 @@ package X.Texture {
 	public class XTextureManager extends Object {
 		private var m_XApp:XApp;
 		
-		private var m_subManagers:XDict;
+		private var m_subManagers:XDict; // <String, XSubTextureManager>
 			
 		//------------------------------------------------------------------------------------------
 		public function XTextureManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
-			m_subManagers = new XDict ();
+			m_subManagers = new XDict (); // <String, XSubTextureManager>
 		}
 
 		//------------------------------------------------------------------------------------------

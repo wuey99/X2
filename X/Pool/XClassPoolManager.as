@@ -33,11 +33,11 @@ package X.Pool {
 	
 //------------------------------------------------------------------------------------------	
 	public class XClassPoolManager extends Object {
-		private var m_pools:XDict;
+		private var m_pools:XDict; // <Class, XObjectPoolManager>
 		
 //------------------------------------------------------------------------------------------
 		public function XClassPoolManager () {
-			m_pools = new XDict ();
+			m_pools = new XDict (); // <Class, XObjectPoolManager>
 		}
 
 //------------------------------------------------------------------------------------------
