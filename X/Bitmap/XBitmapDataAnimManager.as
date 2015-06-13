@@ -39,7 +39,7 @@ package X.Bitmap {
 	public class XBitmapDataAnimManager extends Object {
 		private var m_XApp:XApp;
 		private var m_bitmapAnims:XDict;
-		private var m_count:Object;
+		private var m_count:XDict;
 		private var m_queue:XDict;
 		
 //------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ package X.Bitmap {
 			m_XApp = __XApp;
 			
 			m_bitmapAnims = new XDict ();
-			m_count = new Object ();
+			m_count = new XDict ();
 			m_queue = new XDict ();
 			
 			// checked queued images and cache the ones that have loaded.
@@ -89,13 +89,18 @@ package X.Bitmap {
 //------------------------------------------------------------------------------------------
 		public function add (__className:String):XBitmapDataAnim {
 			if (m_bitmapAnims.exists (__className)) {
-				m_count[__className]++;
-								
+//				m_count[__className]++;
+				var __count:Number = m_count.get (__className);
+				__count++;
+				m_count.put (__className, __count);
+				
 				// this could return null if the image is still loading.	
 				return m_bitmapAnims.get (__className);
 			}
 							
-			m_count[__className] = 1;
+//			m_count[__className] = 1;
+			m_count.put (__className, 1);
+			
 			m_bitmapAnims.put (__className, null);
 	
 			trace (": queuing: ", __className);
@@ -149,9 +154,13 @@ package X.Bitmap {
 //------------------------------------------------------------------------------------------
 		public function remove (__className:String):void {
 			if (m_bitmapAnims.exists (__className)) {
-				m_count[__className]--;
-								
-				if (m_count[__className] == 0) {
+//				m_count[__className]--;
+				var __count:Number = m_count.get (__className);
+				__count--;
+				m_count.put (__className, __count);
+				
+//				if (m_count[__className] == 0) {
+				if (__count == 0) {
 					var __XBitmapDataAnim:XBitmapDataAnim = m_bitmapAnims.get (__className);
 									
 					__XBitmapDataAnim.cleanup ();

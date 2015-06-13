@@ -28,6 +28,7 @@
 package X.World.Sprite {
 	
 	import X.*;
+	import X.Collections.*;
 	import X.Bitmap.*;
 	import X.Geom.*;
 	import X.Task.*;
@@ -46,7 +47,7 @@ package X.World.Sprite {
 				public var m_bitmapDataAnimManager:XBitmapDataAnimManager;
 				public var m_bitmapDataAnim:XBitmapDataAnim;
 				public var m_className:String;
-				public var m_bitmapNames:Object;
+				public var m_bitmapNames:XDict;
 				public var m_frame:Number;
 				public var m_scale:Number;
 				public var m_visible:Boolean;
@@ -75,7 +76,7 @@ package X.World.Sprite {
 					m_scale = 1.0;
 					m_visible = true;
 					
-					m_bitmapNames = new Object ();
+					m_bitmapNames = new XDict ();
 					
 					m_bitmapDataAnimManager = null;
 				}
@@ -90,15 +91,28 @@ package X.World.Sprite {
 						m_bitmapDataAnimManager.remove (m_className);
 					}
 					
+					/*
 					var i:Number;
-					
+		
 					var __name:String;
-					
+		
 					for (__name in m_bitmapNames) {
 						m_bitmapNames[__name].dispose ();
 						
 						delete m_bitmapNames[__name];
 					}
+					*/
+					
+					m_bitmapNames.forEach (
+						function (x:*):void {
+							var __name:String = x as String;
+							
+							var __bitmapData:BitmapData = m_bitmapNames.get (__name);
+							__bitmapData.dispose ();
+							
+							m_bitmapNames.remove (__name);
+						}
+					);
 				}
 				
 				//------------------------------------------------------------------------------------------
@@ -139,16 +153,26 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function disposeBitmapByName (__name:String):void {
+					/*
 					if (__name in m_bitmapNames) {
 						m_bitmapNames[__name].dispose ();
 						
 						delete m_bitmapNames[__name];
 					}
+					*/
+					
+					if (m_bitmapNames.exists (__name)) {
+						var __bitmapData:BitmapData = m_bitmapNames.get (__name);
+						__bitmapData.dispose ();
+						
+						m_bitmapNames.remove (__name);
+					}
 				}
 				
 				//------------------------------------------------------------------------------------------
 				public function nameInBitmapNames (__name:String):Boolean {
-					return __name in m_bitmapNames;
+//					return __name in m_bitmapNames;
+					return m_bitmapNames.exists (__name);
 				}		
 				
 				//------------------------------------------------------------------------------------------
@@ -180,7 +204,8 @@ package X.World.Sprite {
 				
 				//------------------------------------------------------------------------------------------
 				public function getBitmapByName (__name:String):BitmapData {
-					return m_bitmapNames[__name];
+//					return m_bitmapNames[__name];
+					return m_bitmapNames.get (__name);
 				}
 				
 				//------------------------------------------------------------------------------------------
@@ -201,14 +226,16 @@ package X.World.Sprite {
 				public function createBitmap (__name:String, __width:Number, __height:Number):void {
 					var __bitmap:BitmapData = new BitmapData (__width, __height);
 					
-					m_bitmapNames[__name] = __bitmap;
+//					m_bitmapNames[__name] = __bitmap;
+					m_bitmapNames.put (__name, __bitmap);
 					
 					gotoX (__name);
 				}
 				
 				//------------------------------------------------------------------------------------------
 				public function gotoX (__name:String):void {
-					bitmapData = m_bitmapNames[__name];
+//					bitmapData = m_bitmapNames[__name];
+					bitmapData = m_bitmapNames.get (__name);
 				}
 				
 				//------------------------------------------------------------------------------------------

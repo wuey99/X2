@@ -64,7 +64,7 @@ package X.XMap {
 		private var m_name:String;
 		private var m_grid:Boolean
 		
-		private var m_itemInuse:Object;
+		private var m_itemInuse:XDict;
 		
 		private var m_persistentStorage:XDict;
 		
@@ -119,7 +119,7 @@ package X.XMap {
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();
 			
-			m_itemInuse = new Object ();
+			m_itemInuse = new XDict ();
 			
 			m_viewPort = new XRect ();
 		}
@@ -210,15 +210,24 @@ package X.XMap {
 	
 //------------------------------------------------------------------------------------------
 		public function getItemInuse (__id:Number):Number {
+			/*
 			if (m_itemInuse[__id] == null) {
 				m_itemInuse[__id] = 0;
 			}
 
 			return m_itemInuse[__id];
+			*/
+			
+			if (!m_itemInuse.exists (__id)) {
+				m_itemInuse.put (__id, 0);
+			}
+			
+			return m_itemInuse.get (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function setItemInuse (__id:Number, __inuse:Number):void {
+			/*
 			if (m_itemInuse[__id] == null) {
 				m_itemInuse[__id] = 0;
 			}
@@ -229,6 +238,19 @@ package X.XMap {
 			else
 			{
 				m_itemInuse[__id] = __inuse;
+			}
+			*/
+			
+			if (!m_itemInuse.exists (__id)) {
+				m_itemInuse.put (__id, 0);
+			}
+			
+			if (__inuse == 0) {
+				m_itemInuse.remove (__id);
+			}
+			else
+			{
+				m_itemInuse.put (__id, __inuse);
 			}
 		}
 		
@@ -996,7 +1018,7 @@ package X.XMap {
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();			
 
-			m_itemInuse = new Object ();
+			m_itemInuse = new XDict ();
 			
 			cx$ = new CX$ ();
 			

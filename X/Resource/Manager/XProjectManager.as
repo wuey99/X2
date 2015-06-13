@@ -27,6 +27,7 @@
 //------------------------------------------------------------------------------------------
 package X.Resource.Manager {
 	
+	import X.Collections.*;
 	import X.Task.*;
 	import X.XApp;
 	import X.Resource.*;
@@ -52,7 +53,7 @@ package X.Resource.Manager {
 		private var m_loaderContextFactory:Function;
 		private var m_subResourceManagers:Array;
 		private var m_callback:Function;
-		private var m_embeddedResources:Object;
+		private var m_embeddedResources:XDict;
 				
 //------------------------------------------------------------------------------------------		
 		public function XProjectManager (__XApp:XApp) {
@@ -61,7 +62,7 @@ package X.Resource.Manager {
 			m_XApp = __XApp;
 			m_loadComplete = true;
 			m_projectXML = null;
-			m_embeddedResources = new Object ();
+			m_embeddedResources = new XDict ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -284,12 +285,12 @@ package X.Resource.Manager {
 
 //------------------------------------------------------------------------------------------
 		public function addEmbeddedResource (__resourcePath:String, __swfBytes:Class):void {
-			m_embeddedResources[__resourcePath] = __swfBytes;
+			m_embeddedResources.put (__resourcePath, __swfBytes);
 		}
 
 //------------------------------------------------------------------------------------------
 		public function findEmbeddedResource (__resourcePath:String):Class {
-			return m_embeddedResources[__resourcePath] as Class;
+			return m_embeddedResources.get (__resourcePath) as Class;
 		}
 					
 //------------------------------------------------------------------------------------------
