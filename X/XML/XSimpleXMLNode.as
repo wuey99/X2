@@ -203,7 +203,7 @@ package X.XML {
 			__string += __tab (__indent) + "<" + m_tag;
 					
 			m_attribsMap.forEach (
-				function (x:*) {
+				function (x:*):void {
 					var __key:String = x as String;
 					__string += " " + __key + "=" + "\"" + m_attribsMap.get (__key) + "\"";	
 				}
