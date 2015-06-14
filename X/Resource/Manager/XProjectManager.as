@@ -51,7 +51,7 @@ package X.Resource.Manager {
 		private var m_loadComplete:Boolean;
 		private var m_projectXML:XML;
 		private var m_loaderContextFactory:Function;
-		private var m_subResourceManagers:Array; // <XSubResourceManager>
+		private var m_subResourceManagers:Array;
 		private var m_callback:Function;
 		private var m_embeddedResources:XDict; // <String, Class>
 				
@@ -97,7 +97,7 @@ package X.Resource.Manager {
 			):void {
 				
 			m_parent = __parent;
-			m_subResourceManagers = new Array (); // <XSubResourceManager>
+			m_subResourceManagers = new Array ();
 			setBothPaths (__rootPath, __projectName);
 			m_loaderContextFactory = __loaderContextFactory;
 			loadProjectFromURL (__rootPath, __projectName, __callback);
@@ -192,7 +192,7 @@ package X.Resource.Manager {
 			):void {
 				
 			m_parent = __parent;
-			m_subResourceManagers = new Array (); // <XSubResourceManager>
+			m_subResourceManagers = new Array ();
 			m_loaderContextFactory = __loaderContextFactory;
 			loadProjectFromXML (__rootPath, __xml, __callback);
 		}
@@ -336,7 +336,7 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function resourceManagers ():Array /* <XSubResourceManager */ {
+		public function resourceManagers ():Array {
 			return m_subResourceManagers;
 		}
 

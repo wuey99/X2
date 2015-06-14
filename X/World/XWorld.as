@@ -89,7 +89,7 @@ package X.World {
 		public var m_XTaskManagerCX:XTaskManager;
 		public var m_renderManager:XTaskManager;
 		public var m_XMapModel:XMapModel;
-		public var m_XWorldLayers:Array; // <XSpriteLayer>
+		public var m_XWorldLayers:Array;
 		public var m_XHudLayer:XSpriteLayer;
 		public var MAX_LAYERS:Number;
 		public var m_inuse_ENTER_FRAME:Number;
@@ -265,7 +265,7 @@ package X.World {
 			
 			m_XMapModel = null;
 						
-			m_XWorldLayers = new Array (MAX_LAYERS); // <XSpriteLayer>
+			m_XWorldLayers = new Array (MAX_LAYERS);
 							
 			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
 				__createLayer (i);

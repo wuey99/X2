@@ -44,8 +44,8 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 	public class XMapModel extends XModelBase {
 		private var m_numLayers:Number;
-		private var m_layers:Array; // <XMapLayerModel>
-		private var m_allClassNames:Array; // <String>
+		private var m_layers:Array;
+		private var m_allClassNames:Array;
 		private var m_currLayer:Number;
 		private var m_useArrayItems:Boolean;
 		private var m_XSubXMapItemModelPoolManager:XSubObjectPoolManager;
@@ -57,7 +57,7 @@ package X.XMap {
 		public function XMapModel () {
 			super ();
 			
-			m_allClassNames = new Array (); // <String>
+			m_allClassNames = new Array ();
 			m_useArrayItems = false;
 			
 			m_XApp = g_XApp;
@@ -74,7 +74,7 @@ package X.XMap {
 			}
 			
 			m_numLayers = __layers.length;	
-			m_layers = new Array (m_numLayers); // <XMapLayerModel>
+			m_layers = new Array (m_numLayers);
 			m_currLayer = 0;
 			m_useArrayItems = __useArrayItems;
 			m_XSubXMapItemModelPoolManager = new XSubObjectPoolManager (m_XApp.getXMapItemModelPoolManager ());
@@ -278,7 +278,7 @@ package X.XMap {
 			var __xmlList:Array = __xml.child ("XLayers")[0].child ("XLayer");
 			
 			m_numLayers = __xmlList.length;
-			m_layers = new Array (m_numLayers); // <XMapLayerModel>
+			m_layers = new Array (m_numLayers);
 			m_useArrayItems = __useArrayItems;
 			m_XSubXMapItemModelPoolManager = new XSubObjectPoolManager (m_XApp.getXMapItemModelPoolManager ());
 			m_XSubXRectPoolManager = new XSubObjectPoolManager (m_XApp.getXRectPoolManager ());

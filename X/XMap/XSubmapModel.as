@@ -173,7 +173,7 @@ package X.XMap {
 				m_cmap[i] = CX_EMPTY;
 			}
 
-			m_items = new XDict (); // <XMapItemModel, Float>
+			m_items = new XDict ();  // <XMapItemModel, Float>
 			m_arrayItems = new Vector.<XMapItemModel> ();
 			m_arrayItemIndex = 0;
 
@@ -294,11 +294,11 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function replaceItems (
 			__item:XMapItemModel
-			):Array /* <XMapItemModel> */ {
+			):Array {
 	
 			trace (": XSubmapModel: replaceitem: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
 			
-			var __removedItems:Array /* <XSimpleXMLNode> */ = new Array (); // <XSimpleXMLNode>
+			var __removedItems:Array = new Array ();
 			
 			__item.boundingRect.copy2 (m_src);
 			m_src.offset (__item.x, __item.y);
@@ -371,7 +371,7 @@ package X.XMap {
 		public function serializeRowCol (__row:Number, __col:Number):XSimpleXMLNode {	
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			var __attribs:Array /* <Dynamic> */ = [
+			var __attribs:Array = [
 				"row",	__row,
 				"col",	__col
 			];
@@ -421,7 +421,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function deserializeRowCol (__xml:XSimpleXMLNode):void {
-			var __xmlList:Array; // <XSimpleXMLNode>
+			var __xmlList:Array;
 			var i:Number;
 
 //------------------------------------------------------------------------------------------			
@@ -506,7 +506,7 @@ package X.XMap {
 		
 //----------------------------------------------------------------------------------------
 		public function deserializeCXTiles (__cx:XSimpleXMLNode):void {
-			var __xmlList:Array /* <XSimpleXMLNode> */ = __cx.child ("row");
+			var __xmlList:Array = __cx.child ("row");
 			var __row:Number, __col:Number;
 			
 			for (__row=0; __row<__xmlList.length; __row++) {

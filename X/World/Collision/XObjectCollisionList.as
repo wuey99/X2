@@ -37,7 +37,7 @@ package X.World.Collision {
 //------------------------------------------------------------------------------------------
 	public class XObjectCollisionList extends Object {
 		protected var xxx:XWorld;
-		protected var m_rects:Array; // <<XLogicObject, XRect>>
+		protected var m_rects:Array;
 		protected var m_XSubRectPoolManager:XSubObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
@@ -50,12 +50,12 @@ package X.World.Collision {
 //------------------------------------------------------------------------------------------
 		public function setup (__xxx:XWorld):void {
 			xxx = __xxx;		
-			m_rects = new Array (); // <<XLogicObject, XRect>>
+			m_rects = new Array ();
 			
 			var i:Number;
 			
 			for (i=0; i < xxx.getMaxLayers (); i++) {
-				m_rects[i] = new XDict (); // <XLogicObject, XRect>
+				m_rects[i] = new XDict ();
 			}
 			
 			m_XSubRectPoolManager = new XSubObjectPoolManager (xxx.getXRectPoolManager ());
@@ -93,12 +93,12 @@ package X.World.Collision {
 
 		
 //------------------------------------------------------------------------------------------
-		public function getRects (__layer:Number):XDict /* <XLogicObject, XRect> */ {
+		public function getRects (__layer:Number):XDict {
 			return m_rects[__layer];
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getList (__layer:Number):XDict /* <XLogicObject, XRect> */ {
+		public function getList (__layer:Number):XDict {
 			return m_rects[__layer];
 		}
 		

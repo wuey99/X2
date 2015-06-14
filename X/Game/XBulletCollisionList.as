@@ -37,7 +37,7 @@ package X.Game {
 //------------------------------------------------------------------------------------------
 	public class XBulletCollisionList extends Object {
 		private var xxx:XWorld;
-		private var m_rects:Array; // <<XLogicObject, XRect>>
+		private var m_rects:Array;
 		private var m_XSubRectPoolManager:XSubObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
@@ -50,12 +50,12 @@ package X.Game {
 //------------------------------------------------------------------------------------------
 		public function setup (__xxx:XWorld):void {
 			xxx = __xxx;		
-			m_rects = new Array ();  // <<XLogicObject, XRect>>
+			m_rects = new Array ();
 			
 			var i:Number;
 			
 			for (i=0; i < xxx.getMaxLayers (); i++) {
-				m_rects[i] = new XDict () // <XLogicObject, XRect>;
+				m_rects[i] = new XDict ();
 			}
 			
 			m_XSubRectPoolManager = new XSubObjectPoolManager (xxx.getXRectPoolManager ());

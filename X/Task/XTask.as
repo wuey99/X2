@@ -81,12 +81,12 @@ package X.Task {
 	// 3) efficiently organizing operations that have to be executed in a particular order
 	//------------------------------------------------------------------------------------------
 	public class XTask extends Object {
-		private var m_taskList:Array; // <Dynamic>
+		private var m_taskList:Array;
 		private var m_taskIndex:int;
 		private var m_labels:Object;
 		private var m_ticks:int;
-		private var m_stack:Array; // <Float>
-		private var m_loop:Array; // <Float>
+		private var m_stack:Array;
+		private var m_loop:Array;
 		private var m_stackPtr:int;
 		private var m_parent:*;
 		private var m_flags:Number;
@@ -154,21 +154,21 @@ package X.Task {
 			
 			m_XTaskSubManager = createXTaskSubManager ();
 			
-			m_stack = new Array (8); // <Float>
-			m_loop = new Array (8); // <Float>
+			m_stack = new Array (8);
+			m_loop = new Array (8);
 			
 			m_isDead = true;
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function setup (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = true):void {
+		public function setup (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			__reset (__taskList, __findLabelsFlag);
 			
 			m_id = ++g_id;
 		}
 		
 		//------------------------------------------------------------------------------------------
-		private function __reset (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = true):void {
+		private function __reset (__taskList:Array, __findLabelsFlag:Boolean = true):void {
 			m_taskList = __taskList;
 			m_taskIndex = 0;
 			m_labels = {};
@@ -630,7 +630,7 @@ package X.Task {
 				case _EXEC:
 					if (m_subTask == null) {
 						// get new XTask Array run it immediately
-						m_subTask = m_XTaskSubManager.addTask ((m_taskList[m_taskIndex] as Array /* <Dynamic> */), true);
+						m_subTask = m_XTaskSubManager.addTask ((m_taskList[m_taskIndex] as Array), true);
 						m_subTask.tag = tag;
 						m_subTask.setManager (m_manager);
 						m_subTask.setParent (self);
@@ -712,7 +712,7 @@ package X.Task {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function gotoTask (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = false):void {
+		public function gotoTask (__taskList:Array, __findLabelsFlag:Boolean = false):void {
 			kill ();
 			
 			__reset (__taskList, __findLabelsFlag);
@@ -722,7 +722,7 @@ package X.Task {
 		
 		//------------------------------------------------------------------------------------------
 		public function addTask (
-			__taskList:Array /* <Dynamic> */,
+			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 		):XTask {
 			
@@ -732,7 +732,7 @@ package X.Task {
 		//------------------------------------------------------------------------------------------
 		public function changeTask (
 			__task:XTask,
-			__taskList:Array /* <Dynamic> */,
+			__taskList:Array,
 			__findLabelsFlag:Boolean = true
 		):XTask {
 			
@@ -760,7 +760,7 @@ package X.Task {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getEmptyTask$ ():Array /* <Dynamic> */ {
+		public function getEmptyTask$ ():Array {
 			return m_XTaskSubManager.getEmptyTask$ ();
 		}	
 		

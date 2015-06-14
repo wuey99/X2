@@ -31,9 +31,9 @@ package X.Pool {
 	
 //------------------------------------------------------------------------------------------	
 	public class XObjectPoolManager extends Object {
-		public var m_freeObjects:Array; // <Dynamic>
+		public var m_freeObjects:Array;
 		public var m_numFreeObjects:int;
-		private var m_inuseObjects:XDict; // <Dynamic, Int>
+		private var m_inuseObjects:XDict; // <Object, Int>
 		private var m_newObject:Function;
 		private var m_cloneObject:Function;
 		private var m_overflow:Number;
@@ -49,8 +49,8 @@ package X.Pool {
 			__cleanup:Function = null
 		) {
 				
-			m_freeObjects = new Array (); // <Dynamic>
-			m_inuseObjects = new XDict (); // <Dynamic, Int>
+			m_freeObjects = new Array ();
+			m_inuseObjects = new XDict (); // <Object, Int>
 			m_newObject = __newObject;
 			m_cloneObject = __cloneObject;
 			m_overflow = __overflow;

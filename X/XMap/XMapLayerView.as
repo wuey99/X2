@@ -101,7 +101,7 @@ package X.XMap {
 			}
 			
 //------------------------------------------------------------------------------------------		
-			var __items:Array; // <XMapItemModel>
+			var __items:Array;
 			
 			if (m_XMapModel.useArrayItems) {
 				__items = m_XMapModel.getArrayItemsAt (

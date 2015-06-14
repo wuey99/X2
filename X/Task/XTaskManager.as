@@ -37,7 +37,7 @@ package X.Task {
 		protected var m_XTasks:XDict; // <XTask, Int>
 		protected var m_paused:Number;
 		protected var m_XApp:XApp;
-		protected var m_pools:Array; // <XObjectPoolManager>
+		protected var m_pools:Array;
 		protected var m_currentPool:Number;
 		protected var m_poolCycle:Number;
 
@@ -52,7 +52,7 @@ package X.Task {
 			
 			m_paused = 0;
 			
-			m_pools = new Array (NUM_POOLS); // <XObjectPoolManager>
+			m_pools = new Array (NUM_POOLS);
 			
 			for (var i:Number=0; i<NUM_POOLS; i++) {
 				m_pools[i] = new XObjectPoolManager (
@@ -110,7 +110,7 @@ package X.Task {
 		}		
 		
 //------------------------------------------------------------------------------------------
-		public function addTask (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = true):XTask {
+		public function addTask (__taskList:Array, __findLabelsFlag:Boolean = true):XTask {
 			var __pool:XObjectPoolManager = m_pools[m_currentPool];
 			
 			var __task:XTask = __pool.borrowObject () as XTask;

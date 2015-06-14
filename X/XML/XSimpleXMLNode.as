@@ -30,24 +30,24 @@ package X.XML {
 //------------------------------------------------------------------------------------------
 	public class XSimpleXMLNode extends Object {
 		private var m_tag:String;
-		private var m_attribs:Array; // <String>
-		private var m_attribsMap:Array; // <Dynamic>
+		private var m_attribs:Array;
+		private var m_attribsMap:Array;
 		private var m_text:String;
 		private var m_children:Array;
-		private var m_parent:XSimpleXMLNode; // <XSimpleXMLNode>
+		private var m_parent:XSimpleXMLNode;
 		
 //------------------------------------------------------------------------------------------
 		public function XSimpleXMLNode () {
 			super ();
 			
-			m_attribs = new Array (); // <String>
-			m_attribsMap = new Array (); // <Dynamic>
-			m_children = new Array (); // <XSimpleXMLNode>
+			m_attribs = new Array ();
+			m_attribsMap = new Array ();
+			m_children = new Array ();
 			m_parent = null;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setupWithParams (__tag:String, __text:String, __attribs:Array /* <Dynamic> */):void {
+		public function setupWithParams (__tag:String, __text:String, __attribs:Array):void {
 			m_tag = __tag;
 			m_text = __text;
 			var i:Number;
@@ -75,8 +75,8 @@ package X.XML {
 			m_text = __xml.text ();
 	
 //------------------------------------------------------------------------------------------
-			m_attribs = new Array (); // <String>
-			m_attribsMap = new Array (); // <Dynamic>
+			m_attribs = new Array ();
+			m_attribsMap = new Array ();
 			
 			__xmlList = __xml.attributes ();
 			
@@ -91,10 +91,10 @@ package X.XML {
 		}
 
 //------------------------------------------------------------------------------------------
-		private function __getXMLChildren (__xml:XML):Array /* <XSimpleXMLNode> */ {
+		private function __getXMLChildren (__xml:XML):Array {
 			var i:Number;
 			var __xmlList:XMLList;
-			var __children:Array /* <XSimpleXMLNode> */ = new Array (); // <XSimpleXMLNode>
+			var __children:Array = new Array ();
 				
 //------------------------------------------------------------------------------------------
 			__xmlList = __xml.children ();
@@ -114,7 +114,7 @@ package X.XML {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addChildWithParams (__tag:String, __text:String, __attribs:Array /* <Dynamic> */):XSimpleXMLNode {
+		public function addChildWithParams (__tag:String, __text:String, __attribs:Array):XSimpleXMLNode {
 			var __xmlNode:XSimpleXMLNode = new XSimpleXMLNode ();
 			__xmlNode.setupWithParams (__tag, __text, __attribs);
 			
@@ -151,7 +151,7 @@ package X.XML {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getChildren ():Array /* <XSimpleXMLNode> */ {
+		public function getChildren ():Array {
 			return m_children;
 		}
 		
@@ -254,12 +254,12 @@ package X.XML {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function child (__tag:String):Array /* <XSimpleXMLNode> */ {
+		public function child (__tag:String):Array {
 			if (__tag == "*") {
 				return m_children;
 			}
 			
-			var __list:Array /* <XSimpleXMLNode> */ = new Array (); // <XSimpleXMLNode>
+			var __list:Array = new Array ();
 			
 			var i:Number;
 			
