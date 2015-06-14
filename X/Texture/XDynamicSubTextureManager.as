@@ -44,7 +44,7 @@ package X.Texture {
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
 	public class XDynamicSubTextureManager extends XSubTextureManager {
-		protected var m_textures:Array;
+		protected var m_textures:Array; // <RenderTexture>
 		protected var m_currentTexture:RenderTexture;
 		
 		//------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ package X.Texture {
 		public override function reset ():void {
 			var i:Number;
 			
-			if (m_atlases) {				
+			if (m_atlases != null) {				
 				for (i=0; i<m_atlases.length; i++) {
 					m_atlases[i].dispose ();
 				}
@@ -68,7 +68,7 @@ package X.Texture {
 			reset ();
 			
 			m_movieClips = new XDict ();  // <String, Array>
-			m_textures = new Array ();
+			m_textures = new Array (); // <RenderTexture>
 			m_atlases = new Array ();
 			
 			__begin ();

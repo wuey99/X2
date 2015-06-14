@@ -38,7 +38,7 @@ package X.Bitmap {
 	
 	//------------------------------------------------------------------------------------------	
 	public class XBitmapDataAnim extends Object {
-		public var m_bitmaps:Array;
+		public var m_bitmaps:Array; // <BitmapData>
 		public var m_dx:Number;
 		public var m_dy:Number;
 		public var m_ready:Boolean;
@@ -47,7 +47,7 @@ package X.Bitmap {
 		public function XBitmapDataAnim () {
 			super ();
 
-			m_bitmaps = new Array ();
+			m_bitmaps = new Array (); // <BitmapData>
 			
 			m_ready = false;
 		}

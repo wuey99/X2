@@ -32,13 +32,13 @@ package X.Pool {
 //------------------------------------------------------------------------------------------	
 	public class XSubObjectPoolManager extends Object {
 		private var m_manager:XObjectPoolManager;
-		private var m_inuseObjects:XDict;  // <Object, Int>
+		private var m_inuseObjects:XDict;  // <Dynamic, Int>
 		
 //------------------------------------------------------------------------------------------
 		public function XSubObjectPoolManager (__manager:XObjectPoolManager) {
 			m_manager = __manager;
 			
-			m_inuseObjects = new XDict ();  // <Object, Int>
+			m_inuseObjects = new XDict ();  // <Dynamic, Int>
 		}
 		
 //------------------------------------------------------------------------------------------

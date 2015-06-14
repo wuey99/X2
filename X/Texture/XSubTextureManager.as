@@ -47,7 +47,7 @@ package X.Texture {
 		
 		protected var m_movieClips:XDict; // <String, Array>
 		 
-		protected var m_atlases:Array;
+		protected var m_atlases:Array; // <TextureAtlas>
 		protected var m_currentAtlas:TextureAtlas;
 		
 		protected var m_packer:MaxRectPacker;
