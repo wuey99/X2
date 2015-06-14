@@ -1518,7 +1518,12 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function getEmptyTask0$ ():Array {
-			return m_XTaskSubManager0.getEmptyTask$ ();
+			return m_XTaskSubManager0.getEmptyTaskX ();
+		}	
+		
+//------------------------------------------------------------------------------------------
+		public function getEmptyTask0X ():Array {
+			return m_XTaskSubManager0.getEmptyTaskX ();
 		}	
 		
 //------------------------------------------------------------------------------------------
@@ -1578,9 +1583,14 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function getEmptyTask$ ():Array {
-			return m_XTaskSubManager.getEmptyTask$ ();
+			return m_XTaskSubManager.getEmptyTaskX ();
 		}	
 			
+//------------------------------------------------------------------------------------------
+		public function getEmptyTaskX ():Array {
+			return m_XTaskSubManager.getEmptyTaskX ();
+		}	
+		
 //------------------------------------------------------------------------------------------
 		public function gotoLogic (__logic:Function):void {
 			m_XTaskSubManager.gotoLogic (__logic);
@@ -1638,7 +1648,12 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function getEmptyTaskCX$ ():Array {
-			return m_XTaskSubManagerCX.getEmptyTask$ ();
+			return m_XTaskSubManagerCX.getEmptyTaskX ();
+		}	
+		
+//------------------------------------------------------------------------------------------
+		public function getEmptyTaskCX ():Array {
+			return m_XTaskSubManagerCX.getEmptyTaskX ();
 		}	
 		
 //------------------------------------------------------------------------------------------

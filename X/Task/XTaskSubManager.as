@@ -159,6 +159,18 @@ package X.Task {
 		}	
 			
 //------------------------------------------------------------------------------------------
+		public function getEmptyTaskX ():Array {
+			return [
+				XTask.LABEL, "loop",
+					XTask.WAIT, 0x0100,
+					
+					XTask.GOTO, "loop",
+				
+				XTask.RETN,
+			];
+		}	
+		
+//------------------------------------------------------------------------------------------
 		public function gotoLogic (__logic:Function):void {
 			removeAllTasks ();
 			

@@ -63,7 +63,7 @@ package X.Text {
 			gravity = addEmptyTask ();
 			script = addEmptyTask ();
 			
-			gravity.gotoTask (getPhysicsTask$ (0.25));
+			gravity.gotoTask (getPhysicsTaskX (0.25));
 			
 			initScript ();
 			
@@ -173,7 +173,7 @@ package X.Text {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getPhysicsTask$ (DECCEL:Number):Array {
+		public function getPhysicsTaskX (DECCEL:Number):Array {
 			return [
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,

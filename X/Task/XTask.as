@@ -761,7 +761,12 @@ package X.Task {
 		
 		//------------------------------------------------------------------------------------------
 		public function getEmptyTask$ ():Array /* <Dynamic> */ {
-			return m_XTaskSubManager.getEmptyTask$ ();
+			return m_XTaskSubManager.getEmptyTaskX ();
+		}	
+		
+		//------------------------------------------------------------------------------------------
+		public function getEmptyTaskX ():Array /* <Dynamic> */ {
+			return m_XTaskSubManager.getEmptyTaskX ();
 		}	
 		
 		//------------------------------------------------------------------------------------------
