@@ -121,9 +121,9 @@ package X.Game {
 			__layer:Number,
 			__srcPoint:XPoint,
 			__srcRect:XRect
-			):Array {
+			):Array /* <XLogicObject> */ {
 	
-			var __logicObjects:Array = new Array ();
+			var __logicObjects:Array /* <XLogicObject> */ = new Array (); // <XLogicObject>
 
 			var __rect:XRect = m_XSubRectPoolManager.borrowObject () as XRect;
 			__srcRect.copy2 (__rect); __rect.offsetPoint (__srcPoint);

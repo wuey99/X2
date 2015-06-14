@@ -136,7 +136,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getAllClassNames ():Array {
+		public function getAllClassNames ():Array /* <String> */ {
 			var i:Number, j:Number;
 			
 			if (m_allClassNames.length == 0) {
@@ -155,7 +155,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getLayers ():Array {
+		public function getLayers ():Array /* <XMapLayerModel */ {
 			return m_layers;
 		}	
 				
@@ -170,7 +170,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function replaceItems (__layer:Number, __item:XMapItemModel):Array {
+		public function replaceItems (__layer:Number, __item:XMapItemModel):Array /* <XMapItemModel */ {
 			return m_layers[__layer].replaceItems (__item);
 		}
 		
@@ -184,7 +184,7 @@ package X.XMap {
 			__layer:Number,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
-			):Array {
+			):Array /* <XSubmapModel> */ {
 				
 			return m_layers[__layer].getSubmapsAt (__x1, __y1, __x2, __y2);
 		}
@@ -194,7 +194,7 @@ package X.XMap {
 			__layer:Number,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
-			):Array {
+			):Array /* <XSubmapItemModel> */ {
 				
 			return m_layers[__layer].getItemsAt (__x1, __y1, __x2, __y2);
 		}
@@ -204,7 +204,7 @@ package X.XMap {
 			__layer:Number,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
-		):Array {
+		):Array /* <XMapItemModel> */ {
 			
 			return m_layers[__layer].getArrayItemsAt (__x1, __y1, __x2, __y2);
 		}
@@ -214,7 +214,7 @@ package X.XMap {
 			__layer:Number,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
-			):Array {
+			):Array /* <XMapItemModel> */ {
 				
 			return m_layers[__layer].getItemsAtCX (__x1, __y1, __x2, __y2);
 		}

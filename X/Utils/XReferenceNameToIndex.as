@@ -111,8 +111,8 @@ package X.Utils {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getAllReferenceNames ():Array {
-			var __referenceNames:Array = new Array ();
+		public function getAllReferenceNames ():Array /* <String> */ {
+			var __referenceNames:Array /* <String> */ = new Array (); // <String>
 			var i:Number;
 			
 			for (i=0; i<m_referenceNamesStrings.length; i++) {

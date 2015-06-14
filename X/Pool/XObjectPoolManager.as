@@ -87,7 +87,7 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function get freeObjects ():Array {
+		public function get freeObjects ():Array /* <Dynamic> */ {
 			return m_freeObjects;
 		}
 

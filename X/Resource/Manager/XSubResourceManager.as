@@ -583,7 +583,7 @@ package X.Resource.Manager {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		private function __lookUpResourcePathByClassName (__fullName:String):Array {
+		private function __lookUpResourcePathByClassName (__fullName:String):Array /* <Dynamic> */ {
 			if (m_manifestXML == null) {
 				throw (Error ("manifest hasn't been loaded yet"));
 			}

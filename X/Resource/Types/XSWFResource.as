@@ -103,7 +103,7 @@ package X.Resource.Types {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function getAllClasses ():Array {
+		public override function getAllClasses ():Array /* <Class> */ {
 			if (m_loader == null) {
 				loadResource ();
 			}

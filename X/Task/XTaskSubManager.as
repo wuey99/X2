@@ -147,7 +147,7 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getEmptyTask$ ():Array {
+		public function getEmptyTask$ ():Array /* <Dynamic> */ {
 			return [
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,
@@ -159,7 +159,7 @@ package X.Task {
 		}	
 			
 //------------------------------------------------------------------------------------------
-		public function getEmptyTaskX ():Array {
+		public function getEmptyTaskX ():Array /* <Dynamic> */ {
 			return [
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,

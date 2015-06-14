@@ -111,8 +111,8 @@ package X.Utils {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getAllClassNames ():Array {
-			var __classNames:Array = new Array ();
+		public function getAllClassNames ():Array /* <String> */ {
+			var __classNames:Array /* <String> */ = new Array (); // <String>
 			var i:Number;
 			
 			for (i=0; i<m_classNamesStrings.length; i++) {

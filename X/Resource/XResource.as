@@ -84,10 +84,10 @@ package X.Resource {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getAllClassNames ():Array {
+		public function getAllClassNames ():Array /* <String> */ {
 			var __xmlList:XMLList = m_resourceXML.child ("*");
 			var i:Number;
-			var __classNames:Array = new Array ();
+			var __classNames:Array /* <String> */ = new Array (); // <String> 
 						
 			for (i=0; i<__xmlList.length (); i++) {
 				__classNames.push (__xmlList[i].@name);	
@@ -102,7 +102,7 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getAllClasses ():Array {
+		public function getAllClasses ():Array /* <Class> */ {
 			return null;
 		}
 		
