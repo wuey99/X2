@@ -338,7 +338,7 @@ package X.XMap {
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function items ():XDict {
+		public function items ():XDict /* <XMapItemModel, Float> */ {
 			return m_items;
 		}
 

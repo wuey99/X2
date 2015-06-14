@@ -27,21 +27,21 @@
 //------------------------------------------------------------------------------------------
 package X.XML {
 
+	import X.Collections.*;
+	
 //------------------------------------------------------------------------------------------
 	public class XSimpleXMLNode extends Object {
 		private var m_tag:String;
-		private var m_attribs:Array; // <String>
-		private var m_attribsMap:Array; // <Dynamic>
+		private var m_attribsMap:XDict; // <String, Dynamic>
 		private var m_text:String;
-		private var m_children:Array;
-		private var m_parent:XSimpleXMLNode; // <XSimpleXMLNode>
+		private var m_children:Array; // <XSimpleXMLNode>
+		private var m_parent:XSimpleXMLNode;
 		
 //------------------------------------------------------------------------------------------
 		public function XSimpleXMLNode () {
 			super ();
 			
-			m_attribs = new Array (); // <String>
-			m_attribsMap = new Array (); // <Dynamic>
+			m_attribsMap = new XDict (); // <String, Dynamic>
 			m_children = new Array (); // <XSimpleXMLNode>
 			m_parent = null;
 		}
@@ -50,11 +50,10 @@ package X.XML {
 		public function setupWithParams (__tag:String, __text:String, __attribs:Array /* <Dynamic> */):void {
 			m_tag = __tag;
 			m_text = __text;
-			var i:Number;
 			
+			var i:Number;
 			for (i=0; i<__attribs.length; i+=2) {
-				m_attribs.push (__attribs[i+0]);
-				m_attribsMap[__attribs[i+0]] = __attribs[i+1];
+				m_attribsMap.put (__attribs[i+0], __attribs[i+1]);
 			}
 		}
 
@@ -75,15 +74,13 @@ package X.XML {
 			m_text = __xml.text ();
 	
 //------------------------------------------------------------------------------------------
-			m_attribs = new Array (); // <String>
-			m_attribsMap = new Array (); // <Dynamic>
+			m_attribsMap = new XDict (); // <String, Dynamic>
 			
 			__xmlList = __xml.attributes ();
 			
 			for (i = 0; i<__xmlList.length (); i++) {
 				var __key:String = __xmlList[i].name ();
-				m_attribs.push (__key);
-				m_attribsMap[__key] = __xml.@[__key];
+				m_attribsMap.put (__key, __xml.@[__key]);
 			}
 		
 //------------------------------------------------------------------------------------------	
@@ -162,8 +159,7 @@ package X.XML {
 		
 //------------------------------------------------------------------------------------------
 		public function addAttribute (__name:String, __value:*):void {
-			m_attribs.push (__name);
-			m_attribsMap[__name] = __value;
+			m_attribsMap.put (__name, __value);
 		}	
 		
 //------------------------------------------------------------------------------------------
@@ -173,12 +169,12 @@ package X.XML {
 
 //-----------------------------------------------------------------------------------------
 		public function hasAttribute (__name:String):Boolean {
-			return m_attribsMap[__name] == undefined ? false : true;
+			return m_attribsMap.exists (__name);
 		}
 		
 //-----------------------------------------------------------------------------------------
 		public function getAttribute (__name:String):* {
-			return m_attribsMap[__name];
+			return m_attribsMap.get (__name);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -206,10 +202,12 @@ package X.XML {
 			
 			__string += __tab (__indent) + "<" + m_tag;
 					
-			for (i = 0; i<m_attribs.length; i++) {
-				var __key:String = m_attribs[i];	
-				__string += " " + __key + "=" + "\"" + m_attribsMap[__key] + "\"";	
-			}
+			m_attribsMap.forEach (
+				function (x:*) {
+					var __key:String = x as String;
+					__string += " " + __key + "=" + "\"" + m_attribsMap.get (__key) + "\"";	
+				}
+			);
 			
 			if (m_text != "" || m_children.length) {
 				__string += ">\n";

@@ -142,12 +142,12 @@ package X.Game {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getRects (__layer:Number):XDict {
+		public function getRects (__layer:Number):XDict /* <XLogicObject, XRect> */ {
 			return m_rects[__layer];
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getList (__layer:Number):XDict {
+		public function getList (__layer:Number):XDict /* <XLogicObject, XRect> */ {
 			return m_rects[__layer];
 		}
 		

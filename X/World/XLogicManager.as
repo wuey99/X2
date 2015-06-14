@@ -335,7 +335,7 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getXLogicObjects ():XDict {
+		public function getXLogicObjects ():XDict /* <XLogicObject, Int> */ {
 			return m_XLogicObjects;
 		}
 

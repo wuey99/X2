@@ -2542,7 +2542,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getObjectCollisionList ():XDict {
+		public function getObjectCollisionList ():XDict /* <XLogicObject, XRect> */ {
 			return xxx.getObjectCollisionList ().getRects (getLayer ());	
 		}
 				

@@ -142,7 +142,7 @@ package X.World.Sprite {
 							XTask.FLAGS, function (__task:XTask):void {
 								__class = __xxx.getClass (__className);
 								
-								__task.ifTrue (__class);
+								__task.ifTrue (__class != null);
 							}, XTask.BNE, "loop",
 						
 							function ():void {

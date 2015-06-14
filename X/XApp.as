@@ -471,7 +471,7 @@ package X {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getAllClassNames ():XDict {
+		public function getAllClassNames ():XDict /* <String, Int> */ {
 			return m_allClassNames;
 		}
 		

@@ -96,7 +96,7 @@ package X.Task {
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function getTasks ():XDict {
+		public function getTasks ():XDict /* <XTask, Int> */ {
 			return m_XTasks;
 		}
 

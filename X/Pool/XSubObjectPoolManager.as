@@ -47,7 +47,7 @@ package X.Pool {
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function getObjects ():XDict {
+		public function getObjects ():XDict /* <Dynamic, Int> */ {
 			return m_manager.getObjects ();
 		}
 

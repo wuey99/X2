@@ -184,7 +184,7 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getPersistentStorage ():XDict {
+		public function getPersistentStorage ():XDict /* <Float, Object> */ {
 			return m_persistentStorage;
 		}
 		
@@ -753,12 +753,12 @@ package X.XMap {
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function items0 ():XDict {
+		public function items0 ():XDict /* <XMapItemModel, Float> */ {
 			return m_items;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function ids ():XDict {
+		public function ids ():XDict /* <Float, XMapItemModel> */ {
 			return m_ids;
 		}
 		
@@ -815,12 +815,12 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getImageClassNames ():XDict {
+		public function getImageClassNames ():XDict /* <String, Int> */ {
 			return m_imageClassNames;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function lookForItem (__itemName:String, __list:XDict=null):XDict {
+		public function lookForItem (__itemName:String, __list:XDict=null):XDict /* <Float, XMapItemModel> */ {
 			var __row:Number, __col:Number;
 			
 			if (__list == null) {

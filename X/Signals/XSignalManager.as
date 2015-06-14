@@ -49,7 +49,7 @@ package X.Signals {
 		}	
 
 //------------------------------------------------------------------------------------------
-		public function getXSignals ():XDict {
+		public function getXSignals ():XDict /* <XSignal, Int> */{
 			return m_XSignals;
 		}
 

@@ -602,26 +602,26 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 // get a map of all our child sprites that live in the World
 //------------------------------------------------------------------------------------------	
-		public function getSprites ():XDict {
+		public function getSprites ():XDict /* <XDepthSprite, Int> */ {
 			return m_worldSprites;
 		}
 		
 //------------------------------------------------------------------------------------------	
-		public function sprites ():XDict {
+		public function sprites ():XDict /* <XDepthSprite, Int> */ {
 			return m_worldSprites;
 		}
 		
 //------------------------------------------------------------------------------------------
 // get a map of all our child sprites that live in the HUD
 //------------------------------------------------------------------------------------------	
-		public function getHudSprites ():XDict {
+		public function getHudSprites ():XDict /* <XDepthSprite, Int> */ {
 			return m_hudSprites;
 		}
 		
 //------------------------------------------------------------------------------------------
 // get a map of all the our child XLogicObjects
 //------------------------------------------------------------------------------------------	
-		public function getXLogicObjects ():XDict {
+		public function getXLogicObjects ():XDict /* <XLogicObject, Int> */ {
 			return m_XLogicObjects;
 		}
 
