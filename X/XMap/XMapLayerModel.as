@@ -68,7 +68,7 @@ package X.XMap {
 		
 		private var m_persistentStorage:XDict; // <Float, Object>
 		
-		private var cx$:CX$;
+		private var __CX:CX_CONSTANTS;
 
 		private var m_retrievedSubmaps:Array; // <XSubmapModel>
 		private var m_retrievedItems:Array; // <XMapItemModel>
@@ -88,7 +88,7 @@ package X.XMap {
 			var __row:Number;
 			var __col:Number;
 
-			cx$ = new CX$ ();
+			__CX = new CX_CONSTANTS ();
 			
 			m_submapRows = __submapRows;
 			m_submapCols = __submapCols;
@@ -644,8 +644,8 @@ package X.XMap {
 			var tiles:Array; // <Int>
 
 // col, row divisor
-			var row32:int = m_submapHeight/cx$.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/cx$.CX_TILE_WIDTH;
+			var row32:int = m_submapHeight/__CX.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/__CX.CX_TILE_WIDTH;
 
 // col, row mask for the submap
 			var rowMask:int = row32-1;
@@ -680,8 +680,8 @@ package X.XMap {
 			c2:Number, r2:Number
 		):void {
 // col, row divisor
-			var row32:int = m_submapHeight/cx$.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/cx$.CX_TILE_WIDTH;
+			var row32:int = m_submapHeight/__CX.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/__CX.CX_TILE_WIDTH;
 
 // col, row mask for the submap
 			var rowMask:int = row32-1;
@@ -714,8 +714,8 @@ package X.XMap {
 			c2:Number, r2:Number
 		):void {
 // col, row divisor
-			var row32:int = m_submapHeight/cx$.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/cx$.CX_TILE_WIDTH;
+			var row32:int = m_submapHeight/__CX.CX_TILE_HEIGHT;
+			var col32:int = m_submapWidth/__CX.CX_TILE_WIDTH;
 
 // col, row mask for the submap
 			var rowMask:int = row32-1;
@@ -734,7 +734,7 @@ package X.XMap {
 					var submapCol:int = col/col32;
 								
 					m_XSubmaps[submapRow][submapCol].setCXTile (
-						cx$.CX_EMPTY,
+						__CX.CX_EMPTY,
 						col & colMask, row & rowMask
 					);
 				}
@@ -1019,7 +1019,7 @@ package X.XMap {
 
 			m_itemInuse = new XDict ();  // <Float, Int>
 			
-			cx$ = new CX$ ();
+			__CX = new CX_CONSTANTS ();
 			
 			m_items = new XDict (); // <XMapItemModel, Float>
 			m_ids = new XDict (); // <Float, XMapItemModel>

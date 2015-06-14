@@ -106,7 +106,7 @@ package X.World.Logic {
 		public var m_isDead:Boolean;
 		public var m_autoCulling:Boolean;
 		public var m_poolClass:Class;
-		public var XTask$:XTASK$;
+		public var __XTask:XTask_CONSTANTS;
 		public var m_viewPortRect:XRect;
 		public var m_selfRect:XRect;
 		public var m_itemRect:XRect;
@@ -154,7 +154,7 @@ package X.World.Logic {
 			iLayer = 0;
 			iClassName = "";
 		
-			XTask$ = new XTASK$ ();
+			__XTask = new XTask_CONSTANTS ();
 			
 			if (__xxx) {
 				xxx = __xxx;
