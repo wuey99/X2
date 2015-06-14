@@ -145,18 +145,6 @@ package X.Task {
 		public function addEmptyTask ():XTask {
 			return addTask (getEmptyTaskX ());
 		}
-
-//------------------------------------------------------------------------------------------
-		public function getEmptyTask$ ():Array /* <Dynamic> */ {
-			return [
-				XTask.LABEL, "loop",
-					XTask.WAIT, 0x0100,
-				
-					XTask.GOTO, "loop",
-				
-				XTask.RETN,
-			];
-		}	
 			
 //------------------------------------------------------------------------------------------
 		public function getEmptyTaskX ():Array /* <Dynamic> */ {
