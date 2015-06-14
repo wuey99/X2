@@ -55,7 +55,7 @@ package X.Game {
 			var i:Number;
 			
 			for (i=0; i < xxx.getMaxLayers (); i++) {
-				m_rects[i] = new XDict () // <XLogicObject, XRect>;
+				m_rects[i] = new XDict (); // <XLogicObject, XRect>
 			}
 			
 			m_XSubRectPoolManager = new XSubObjectPoolManager (xxx.getXRectPoolManager ());
