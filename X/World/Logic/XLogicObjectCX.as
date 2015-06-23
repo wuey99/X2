@@ -898,7 +898,7 @@ package X.World.Logic {
 						break;
 					case CX_LL45:
 						// function ():void {	
-						var __x_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+						var __x_LL45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -927,7 +927,7 @@ package X.World.Logic {
 						break;
 					case CX_LL225A:
 						// function ():void {	
-						var __x_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_LL225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -940,7 +940,7 @@ package X.World.Logic {
 						break; // },
 					case CX_LL225B:
 						// function ():void {	
-						var __x_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_LL225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -972,8 +972,8 @@ package X.World.Logic {
 						break;
 					case CX_LL675A: // new
 						// function ():void {								
-						var __x_LL675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-						var __y_LL675A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
+						var __x_LL675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_LL675A:Array /* <Int> */ = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -987,8 +987,8 @@ package X.World.Logic {
 						break;
 					case CX_LL675B: // new
 						// function ():void {							
-						var __x_LL675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-						var __y_LL675B:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14];
+						var __x_LL675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_LL675B:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -1070,7 +1070,7 @@ package X.World.Logic {
 					
 					case CX_UL45:
 						// function ():void {	
-						var __x_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+						var __x_UL45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1093,7 +1093,7 @@ package X.World.Logic {
 					
 					case CX_UL225A:
 						// function ():void {	
-						var __x_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_UL225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1106,7 +1106,7 @@ package X.World.Logic {
 						break; // },	
 					case CX_UL225B:
 						// function ():void {	
-						var __x_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_UL225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1138,8 +1138,8 @@ package X.World.Logic {
 					
 					case CX_UL675A: // new
 						// function ():void {								
-						var __x_UL675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-						var __y_UL675A:Array = [0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 10, 8, 6, 4, 2, 0];
+						var __x_UL675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_UL675A:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 10, 8, 6, 4, 2, 0];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1153,8 +1153,8 @@ package X.World.Logic {
 						break;
 					case CX_UL675B: // new
 						// function ():void {							
-						var __x_UL675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-						var __y_UL675B:Array = [14, 12, 10, 8, 6, 4, 2, 0, -2, -4, -6, -8, -10, -12, -14, -16];
+						var __x_UL675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_UL675B:Array /* <Int> */ = [14, 12, 10, 8, 6, 4, 2, 0, -2, -4, -6, -8, -10, -12, -14, -16];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1272,7 +1272,7 @@ package X.World.Logic {
 						break;
 					case CX_LR45:
 						// function ():void {	
-						var __x_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+						var __x_LR45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -1303,7 +1303,7 @@ package X.World.Logic {
 						break;
 					case CX_LR225A:
 						// function ():void {	
-						var __x_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_LR225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -1316,7 +1316,7 @@ package X.World.Logic {
 						break; // },		
 					case CX_LR225B:
 						// function ():void {	
-						var __x_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_LR225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -1348,8 +1348,8 @@ package X.World.Logic {
 						break;
 					case CX_LR675A: // new
 						// function ():void {								
-						var __x_LR675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-						var __y_LR675A:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
+						var __x_LR675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_LR675A:Array /* <Int> */ = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -1363,8 +1363,8 @@ package X.World.Logic {
 						break;
 					case CX_LR675B: // new
 						// function ():void {							
-						var __x_LR675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-						var __y_LR675B:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
+						var __x_LR675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_LR675B:Array /* <Int> */ = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -1443,7 +1443,7 @@ package X.World.Logic {
 						break;
 					case CX_UR45:
 						// function ():void {	
-						var __x_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+						var __x_UR45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1469,7 +1469,7 @@ package X.World.Logic {
 						break;
 					case CX_UR225A:
 						// function ():void {	
-						var __x_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_UR225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1482,7 +1482,7 @@ package X.World.Logic {
 						break; // },
 					case CX_UR225B:
 						// function ():void {	
-						var __x_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_UR225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1514,8 +1514,8 @@ package X.World.Logic {
 						break;
 					case CX_UR675A: //new
 						// function ():void {				
-						var __x_UR675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-						var __y_UR675A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
+						var __x_UR675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_UR675A:Array /* <Int> */ = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1528,8 +1528,8 @@ package X.World.Logic {
 						break; // },
 					case CX_UR675B: // new
 						// function ():void {				
-						var __x_UR675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-						var __y_UR675B:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
+						var __x_UR675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_UR675B:Array /* <Int> */ = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1634,7 +1634,7 @@ package X.World.Logic {
 						break;
 					case CX_UR45:
 						// function ():void {				
-						var __y_UR45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+						var __y_UR45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1660,8 +1660,8 @@ package X.World.Logic {
 						break;
 					case CX_UR225A:
 						// function ():void {				
-						var __y_UR225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-						var __x_UR225A:Array = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
+						var __y_UR225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_UR225A:Array /* <Int> */ = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1674,8 +1674,8 @@ package X.World.Logic {
 						break; // },
 					case CX_UR225B:
 						// function ():void {				
-						var __y_UR225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-						var __x_UR225B:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
+						var __y_UR225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_UR225B:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1708,8 +1708,8 @@ package X.World.Logic {
 					
 					case CX_UR675A: // new
 						// function ():void {								
-						var __x_UR675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-						var __y_UR675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_UR675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_UR675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1723,8 +1723,8 @@ package X.World.Logic {
 						break;
 					case CX_UR675B: // new
 						// function ():void {							
-						var __x_UR675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-						var __y_UR675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_UR675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_UR675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1815,7 +1815,7 @@ package X.World.Logic {
 					
 					case CX_UL45:
 						// function ():void {				
-						var __y_UL45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+						var __y_UL45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1838,8 +1838,8 @@ package X.World.Logic {
 					
 					case CX_UL225A:
 						// function ():void {				
-						var __y_UL225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-						var __x_UL225A:Array = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
+						var __y_UL225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_UL225A:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1852,8 +1852,8 @@ package X.World.Logic {
 						break; // },
 					case CX_UL225B:
 						// function ():void {				
-						var __y_UL225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-						var __x_UL225B:Array = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
+						var __y_UL225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_UL225B:Array /* <Int> */ = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1885,8 +1885,8 @@ package X.World.Logic {
 					
 					case CX_UL675A: // new
 						// function ():void {								
-						var __x_UL675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-						var __y_UL675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_UL675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_UL675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -1900,8 +1900,8 @@ package X.World.Logic {
 						break;
 					case CX_UL675B: // new
 						// function ():void {							
-						var __x_UL675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-						var __y_UL675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_UL675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_UL675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y2 & CX_TILE_HEIGHT_MASK;
@@ -2022,7 +2022,7 @@ package X.World.Logic {
 						break;
 					case CX_LR45:
 						// function ():void {				
-						var __y_LR45:Array = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+						var __y_LR45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2054,8 +2054,8 @@ package X.World.Logic {
 						break;
 					case CX_LR225A:
 						// function ():void {								
-						var __y_LR225A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-						var __x_LR225A:Array = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
+						var __y_LR225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_LR225A:Array /* <Int> */ = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2068,8 +2068,8 @@ package X.World.Logic {
 						break; // },
 					case CX_LR225B:
 						// function ():void {							
-						var __y_LR225B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-						var __x_LR225B:Array = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
+						var __y_LR225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_LR225B:Array /* <Int> */ = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2102,8 +2102,8 @@ package X.World.Logic {
 					
 					case CX_LR675A: // new
 						// function ():void {								
-						var __x_LR675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
-						var __y_LR675A:Array = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __x_LR675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
+						var __y_LR675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2117,8 +2117,8 @@ package X.World.Logic {
 						break;
 					case CX_LR675B: // new
 						// function ():void {							
-						var __x_LR675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
-						var __y_LR675B:Array = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __x_LR675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
+						var __y_LR675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
 						x15 = x1 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2202,7 +2202,7 @@ package X.World.Logic {
 						break;
 					case CX_LL45:
 						// function ():void {				
-						var __y_LL45:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+						var __y_LL45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2231,8 +2231,8 @@ package X.World.Logic {
 						break;
 					case CX_LL225A:
 						// function ():void {					
-						var __y_LL225A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-						var __x_LL225A:Array = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
+						var __y_LL225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_LL225A:Array /* <Int> */ = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2245,8 +2245,8 @@ package X.World.Logic {
 						break; // },
 					case CX_LL225B:
 						// function ():void {				
-						var __y_LL225B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-						var __x_LL225B:Array = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
+						var __y_LL225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_LL225B:Array /* <Int> */ = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2279,8 +2279,8 @@ package X.World.Logic {
 					
 					case CX_LL675A: // new
 						// function ():void {								
-						var __x_LL675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
-						var __y_LL675A:Array = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __x_LL675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
+						var __y_LL675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
@@ -2294,8 +2294,8 @@ package X.World.Logic {
 						break;
 					case CX_LL675B: // new
 						// function ():void {							
-						var __x_LL675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
-						var __y_LL675B:Array = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __x_LL675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
+						var __y_LL675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
 						x15 = x2 & CX_TILE_WIDTH_MASK;
 						y15 = y1 & CX_TILE_HEIGHT_MASK;
