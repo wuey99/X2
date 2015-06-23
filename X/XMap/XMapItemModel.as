@@ -330,7 +330,7 @@ package X.XMap {
 		public function serialize ():XSimpleXMLNode {
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
-			var __attribs:Array = [
+			var __attribs:Array /* <Dynamic> */ = [
 				"logicClassIndex",	logicClassIndex,
 				"hasLogic",			hasLogic ? "true" : "false",
 				"name",				name,

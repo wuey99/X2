@@ -15,10 +15,10 @@ package X.Utils {
 		//------------------------------------------------------------------------------------------
 		public static function getDomain (__root:Sprite):String {
 			var __urlString:String = __root.loaderInfo.url;
-			var __urlArray:Array = __urlString.split("://");
+			var __urlArray:Array /* <String> */ = __urlString.split("://");
 			var __fullDomainString:String = __urlArray[1].split("/")[0];
 			
-			var __domainParts:Array = __fullDomainString.split (".");
+			var __domainParts:Array /* <String> */ = __fullDomainString.split (".");
 			
 			if (__domainParts.length > 2) {
 				return  __domainParts[1] + "." + __domainParts[2];

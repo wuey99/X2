@@ -138,7 +138,7 @@ package X.Utils {
 			var i:Number;
 			
 			for (i=0; i<m_referenceNamesStrings.length; i++) {
-				var __attribs:Array = [
+				var __attribs:Array /* <Dynamic> */ = [
 					"index",		i,
 					"name",			m_referenceNamesStrings[i],
 					"count",		m_referenceNamesCounts[i]					

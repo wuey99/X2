@@ -138,7 +138,7 @@ package X.Utils {
 			var i:Number;
 			
 			for (i=0; i<m_classNamesStrings.length; i++) {
-				var __attribs:Array = [
+				var __attribs:Array /* <Dynamic> */ = [
 					"index",		i,
 					"name",			m_classNamesStrings[i],
 					"count",		m_classNamesCounts[i]					
@@ -162,7 +162,7 @@ package X.Utils {
 			
 			trace (": XClassNameToIndex: deserialize: ");
 			
-			var __xmlList:Array = __xml.child ("classNames")[0].child ("className");
+			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("classNames")[0].child ("className");
 			
 			var i:Number;
 			var __name:String;

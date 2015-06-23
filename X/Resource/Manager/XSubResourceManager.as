@@ -410,7 +410,7 @@ package X.Resource.Manager {
 				}
 				else
 				{	
-					var __results:Array = __callback (__xmlList[i]);
+					var __results:Array /* XMLList */ = __callback (__xmlList[i]);
 					
 					if (__results[0]) {
 						__match = __results[1];

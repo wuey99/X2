@@ -65,7 +65,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function setup (
-			__layers:Array = null,
+			__layers:Array /* <XMapLayerModel> */ = null,
 			__useArrayItems:Boolean = false
 			):void {
 				
@@ -141,7 +141,7 @@ package X.XMap {
 			
 			if (m_allClassNames.length == 0) {
 				for (i=0; i<m_numLayers; i++) {
-					var __classNames:Array = m_layers[i].getAllClassNames ();
+					var __classNames:Array /* <String> */ = m_layers[i].getAllClassNames ();
 				
 					for (j=0; j<__classNames.length; j++) {
 						if (__classNames[j] != null && m_allClassNames.indexOf (__classNames[j]) == -1) {
@@ -275,7 +275,7 @@ package X.XMap {
 		private function deserialize (__xml:XSimpleXMLNode, __readonly:Boolean=false, __useArrayItems:Boolean=false):void {
 			trace (": [XMap] deserialize: ");
 			
-			var __xmlList:Array = __xml.child ("XLayers")[0].child ("XLayer");
+			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("XLayers")[0].child ("XLayer");
 			
 			m_numLayers = __xmlList.length;
 			m_layers = new Array (m_numLayers); // <XMapLayerModel>

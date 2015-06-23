@@ -113,8 +113,8 @@ package X.Resource.Types {
 			}
 			
 			var i:Number;
-			var __classNames:Array = getAllClassNames ();
-			var __classes:Array = new Array ();
+			var __classNames:Array /* <String> */ = getAllClassNames ();
+			var __classes:Array /* <Class> */ = new Array (); // <Class>
 			
 			for (i=0; i<__classNames.length; i++) {
 				var c:Class;

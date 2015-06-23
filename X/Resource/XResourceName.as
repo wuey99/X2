@@ -43,7 +43,7 @@ package X.Resource {
 		public function XResourceName (__fullName:String) {
 			super ();
 			
-			var s:Array = __fullName.split (":");
+			var s:Array /* <String> */ = __fullName.split (":");
 			
 			if (s.length == 1) {
 				m_manifestName = "";
