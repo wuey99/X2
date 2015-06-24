@@ -163,7 +163,7 @@ package X.Texture {
 				m_currentAtlas.addRegion (__className + "_" + __generateIndex (i), __rect, new Rectangle (0, 0, __rect.width, __rect.height));
 			}
 
-			var __movieClipMetadata:Array = new Array ();
+			var __movieClipMetadata:Array /* <Dynamic> */ = new Array ();
 			__movieClipMetadata.push (__realBounds);
 			
 			for (i=0; i < m_atlases.length; i++) {

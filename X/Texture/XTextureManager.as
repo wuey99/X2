@@ -109,7 +109,7 @@ package X.Texture {
 		public function createMovieClip (__className:String):starling.display.MovieClip {
 			var __movieClip:starling.display.MovieClip = null;
 			
-			var __dynamicSubManagers:Array = new Array ();
+			var __dynamicSubManagers:Array /* <XSubTextureManager> */ = new Array ();
 			
 // look for texture in static managers first
 			m_subManagers.forEach (

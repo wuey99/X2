@@ -39,7 +39,7 @@ package X.Task {
 	//
 	// example of use:
 	//
-	// var taskList:Array = [
+	// var taskList:Array /* <Dynamic> */= [
 	//	__moveUp,
 	//  __moveDn,
 	// ];
@@ -55,7 +55,7 @@ package X.Task {
 	// DELAYED EXECUTION:
 	// 	XTask.WAIT, <ticks>
 	//
-	// var taskList:Array = [
+	// var taskList:Array /* <Dynamic> */ = [
 	//  __moveUp,
 	//  XTask.WAIT, 0x0400,
 	//  __moveDn,

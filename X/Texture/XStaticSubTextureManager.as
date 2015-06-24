@@ -85,7 +85,7 @@ package X.Texture {
 				function (x:*):void {
 					var __className:String = x as String;
 					
-					var __movieClipMetadata:Array = m_movieClips.get (__className);
+					var __movieClipMetadata:Array /* <Dynanmic> */ = m_movieClips.get (__className);
 					
 					for (var i:Number = 0; i < m_atlases.length; i++) {
 						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
@@ -176,7 +176,7 @@ package X.Texture {
 				m_currentAtlasText = m_currentAtlasText + __subText;
 			}
 
-			var __movieClipMetadata:Array = new Array ();
+			var __movieClipMetadata:Array /* <Rectangle> */ = new Array ();
 			__movieClipMetadata.push (__realBounds);
 			
 			m_movieClips.put (__className, __movieClipMetadata);

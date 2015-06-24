@@ -35,8 +35,6 @@ package X.Bitmap {
 	
 	import flash.display.MovieClip;
 	
-	import mx.charts.chartClasses.NumericAxis;
-	
 //------------------------------------------------------------------------------------------	
 	public class XBitmapCacheManager extends Object {
 		private var m_XApp:XApp;

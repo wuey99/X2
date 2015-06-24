@@ -131,7 +131,7 @@ package X.Texture {
 		//------------------------------------------------------------------------------------------
 		public function movieClipExists (__className:String):Boolean {
 			if (m_movieClips.exists (__className)) {
-				var __movieClipMetadata:Array = m_movieClips.get (__className);
+				var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
 				
 				if (__movieClipMetadata.length == 0) {
 					return false;
@@ -157,7 +157,7 @@ package X.Texture {
 				return null;
 			}
 			
-			var __movieClipMetadata:Array = m_movieClips.get (__className);
+			var __movieClipMetadata:Array /* <Rectangle> */ = m_movieClips.get (__className);
 			
 			if (__movieClipMetadata.length == 0) {
 				return null;
@@ -228,8 +228,8 @@ package X.Texture {
 			{
 				// filters
 				var j:int = 0;
-				//var clipFilters:Array = clipChild.filters.concat();
-				var clipFilters:Array = clip.filters;
+				//var clipFilters:Array /* <Dynamic> */ = clipChild.filters.concat();
+				var clipFilters:Array /* <Dynamic> */ = clip.filters;
 				var clipFiltersLength:int = clipFilters.length;
 				var tmpBData:BitmapData;
 				var filterRect:Rectangle;

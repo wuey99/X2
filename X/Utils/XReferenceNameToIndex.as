@@ -166,7 +166,7 @@ package X.Utils {
 				return;
 			}
 			
-			var __xmlList:Array = __xml.child ("classNames")[0].child ("className");
+			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("classNames")[0].child ("className");
 			
 			var i:Number;
 			var __name:String;

@@ -623,7 +623,7 @@ package X.Resource.Manager {
 //			trace (": XResourceManager:__resolveXClass (): ", __className);
 			
 			if (!m_classMap.exists (__className)) {
-				var __match:Array = __lookUpResourcePathByClassName (__className);
+				var __match:Array /* <String> */ = __lookUpResourcePathByClassName (__className);
 				
 				var __resourceXML:XML = __match[0];
 				var __resourcePath:String = __match[1];
