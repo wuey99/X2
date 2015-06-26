@@ -22,14 +22,64 @@ class Update(object):
 		return None, None
 
 	#-----------------------------------------------------------------------------
+	def convertArrayOrMap (self, line, src, dst):
+		i = line.find(src)
+		 
+		if i == -1:
+			return line
+			
+		line = line[0:i] + dst + line[i + len(src):]
+			
+		return line
+		
+	#-----------------------------------------------------------------------------
+	# convert XDicts and Arrays to their respective HaXe types (Maps and Arrays w/ typing)
+	#-----------------------------------------------------------------------------	
+	def convertArraysAndMaps (self, line):
+
+# XDict (); // <key, type>
+#    --> Map ()<key, type>;
+		converted = self.convertArrayOrMap (line, "XDict ()", "Map ()");
+			
+		if converted != line:
+			return converted
+			
+# XDict; // <key, type>
+#    --> Map<key, type>;			
+# XDict /* <key, type> */
+#    --> Map<key, type>
+		converted = self.convertArrayOrMap (line, "XDict", "Map");
+		
+		if converted != line:
+			return converted
+			
+# Array (); // <type>
+#    --> Array ()<type>;
+		converted = self.convertArrayOrMap (line, "Array ()", "Array ()");
+		
+		if converted != line:
+			return converted
+			
+# Array; // <type>
+#    --> Array<type>;
+# Array /* <type> */
+#    --> Array<type>
+		converted = self.convertArrayOrMap (line, "Array", "Array");
+		
+		if converted != line:
+			return converted
+
+		return line
+		
+	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
+		line = self.convertArraysAndMaps(line)
+		
 		dst.write(line)
 
 	#-----------------------------------------------------------------------------
 	def processFile(self, src_file_path):
-		newRoot = "Y"
-
-		dst_file_path = newRoot + src_file_path[src_file_path.find(os.path.sep):]
+		dst_file_path = "Y" + src_file_path[src_file_path.find(os.path.sep):]
 
 		print ": src: ", src_file_path
 		print ": dst: ", dst_file_path
