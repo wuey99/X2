@@ -180,10 +180,12 @@ package X.XMap {
 						__item.x, __item.y, 0,
 						// scale, rotation
 						__item.scale, __item.rotation,
-						// imageClassName
-						__item.imageClassName,
-						// frame
-						__item.frame
+						[
+							// imageClassName
+							__item.imageClassName,
+							// frame
+							__item.frame
+						]
 					) as XLogicObjectCX;
 				}
 			}
@@ -205,10 +207,12 @@ package X.XMap {
 							__item.x, __item.y, 0,
 						// scale, rotation
 							__item.scale, __item.rotation,
-						// imageClassName
-							__item.imageClassName,
-						// frame
-							__item.frame
+						[
+							// imageClassName
+								__item.imageClassName,
+							// frame
+								__item.frame
+						]
 						) as XLogicObjectCX;
 				}
 			}

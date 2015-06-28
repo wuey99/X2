@@ -170,8 +170,10 @@ package X.XMap {
 						__submap.x, __submap.y, 0,
 						// scale, rotation
 						1.0, 0,
-						// XMapView
-						m_XMapView
+						[
+							// XMapView
+							m_XMapView
+						]
 					) as XSubmapViewBitmapCache;
 			}
 			

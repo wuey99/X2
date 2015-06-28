@@ -22,13 +22,30 @@ class Update(object):
 		return None, None
 
 	#-----------------------------------------------------------------------------
+	# convert as3 XDict's and Array's using comment-based annotations
+	# 
+	# i.e.:
+	#
+	# XDict; // <Int>		-->: Map<Int>
+	#-----------------------------------------------------------------------------
 	def convertArrayOrMap (self, line, src, dst):
 		i = line.find(src)
 		 
 		if i == -1:
 			return line
+		
+		j = line.find("//");
+		if j == -1:
+			j = line.find("/*")
+		if j == -1:
+			return line
 			
-		line = line[0:i] + dst + line[i + len(src):]
+		begin = line[j:].find("<")
+		end = line[j:].find(">")
+			
+		type = line[j+begin:j+end+1]
+		
+		line = line[0:i] + dst + type + line[i + len(src):]
 			
 		return line
 		
@@ -70,10 +87,40 @@ class Update(object):
 			return converted
 
 		return line
+
+	#-----------------------------------------------------------------------------
+	def convertBreaks(self, line):
+		line = line.replace("break;", "// break;")
 		
+		return line
+	
+	#-----------------------------------------------------------------------------
+	def convertClass(self, line):
+		i = line.find("public class")
+		if i == -1:
+			return line
+			
+		classNameBegin = i + len("public class") + 1
+		classNameEnd = classNameBegin + line[classNameBegin:].find(" ")
+		self._className = line[classNameBegin:classNameEnd]
+		print ": className: ", classNameBegin, classNameEnd, self._className
+		
+		line = line.replace("public class", "class")
+		
+		return line
+	
+	#-----------------------------------------------------------------------------
+	def convertConstructor(self, line):
+		line = line.replace("public function " + self._className + " (", "public function new (")
+		
+		return line
+					
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		line = self.convertArraysAndMaps(line)
+		line = self.convertBreaks(line)
+		line = self.convertClass(line)
+		line = self.convertConstructor(line)
 		
 		dst.write(line)
 
@@ -94,6 +141,8 @@ class Update(object):
 			os.mkdir(folder)
 
 		dst = open(dst_file_path, "w")
+		
+		self._className = ""
 		
 		for line in src:
 			self.processLine(line, dst)

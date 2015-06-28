@@ -76,9 +76,11 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			...args
+			args:Array = null
 			):XLogicObject {
 				
+			args = (args == null) ? args = [] : args;
+			
 			var __class:Class = xxx.getClass (__className);
 			
 			var __logicObject:XLogicObject = new (__class) () as XLogicObject;
@@ -100,8 +102,10 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			...args
+			args:Array = null
 		):XLogicObject {
+			
+			args = (args == null) ? args = [] : args;
 			
 			var __logicObject:XLogicObject = xxx.getXLogicObjectPoolManager ().borrowObject (__class) as XLogicObject;
 			
@@ -119,9 +123,11 @@ package X.World {
 		public function initXLogicObjectFromXML (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
-			...args
+			args:Array = null
 			):XLogicObject {
 				
+			args = (args == null) ? args = [] : args;
+			
 			if (__logicObject.iClassName != "") {
 				return __initXLogicObject (
 						__parent,
@@ -152,9 +158,11 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			...args
+			args:Array = null
 			):XLogicObject {
 
+			args = (args == null) ? args = [] : args;
+			
 			return __initXLogicObject (
 					__parent,
 					__logicObject,
@@ -173,9 +181,11 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			...args
+			args:Array = null
 			):XLogicObject {
 				
+			args = (args == null) ? args = [] : args;
+			
 			return __initXLogicObjectRel (
 					__parent,
 					__logicObject,
@@ -195,7 +205,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array
+			args:Array = null
 			):XLogicObject {
 
 			xxx.addChild (__logicObject);
@@ -245,7 +255,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array
+			args:Array = null
 			):XLogicObject {
 
 			xxx.addChild (__logicObject);
@@ -335,7 +345,7 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getXLogicObjects ():XDict /* <XLogicObject, Int> */ {
+		public function getXLogicObjects ():XDict /* t<XLogicObject, Int> */ {
 			return m_XLogicObjects;
 		}
 
