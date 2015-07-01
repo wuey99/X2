@@ -77,7 +77,7 @@ package X.Signals {
 			
 			__signal.setParent (this);
 			
-			m_XSignals.put (__signal, 0);
+			m_XSignals.set (__signal, 0);
 			
 			return __signal;	
 		}

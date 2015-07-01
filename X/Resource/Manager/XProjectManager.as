@@ -285,7 +285,7 @@ package X.Resource.Manager {
 
 //------------------------------------------------------------------------------------------
 		public function addEmbeddedResource (__resourcePath:String, __swfBytes:Class):void {
-			m_embeddedResources.put (__resourcePath, __swfBytes);
+			m_embeddedResources.set (__resourcePath, __swfBytes);
 		}
 
 //------------------------------------------------------------------------------------------

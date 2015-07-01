@@ -120,7 +120,7 @@ package X.Task {
 			__task.setParent (this);
 			__task.setPool (__pool);
 			
-			m_XTasks.put (__task, 0);
+			m_XTasks.set (__task, 0);
 			
 			return __task;
 		}
@@ -130,7 +130,7 @@ package X.Task {
 			__task.setManager (this);
 			__task.setParent (this);
 			
-			m_XTasks.put (__task, 0);
+			m_XTasks.set (__task, 0);
 			
 			return __task;
 		}

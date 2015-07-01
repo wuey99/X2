@@ -157,7 +157,7 @@ package X.Pool {
 			
 			var __object:Object = m_freeObjects.pop (); m_numFreeObjects--;
 				
-			m_inuseObjects.put (__object, 0);
+			m_inuseObjects.set (__object, 0);
 			
 			m_numberOfBorrowedObjects++;
 			

@@ -73,7 +73,7 @@ package X.Game {
 			
 			__collisionList.setup (xxx);
 			
-			m_collisionLists.put (__collisionList, 0);
+			m_collisionLists.set (__collisionList, 0);
 			
 			return __collisionList;
 		}

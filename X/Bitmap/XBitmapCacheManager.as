@@ -94,16 +94,16 @@ package X.Bitmap {
 //				m_count[__className]++;
 				var __count:Number = m_count.get (__className);
 				__count++;
-				m_count.put (__className, __count);
+				m_count.set (__className, __count);
 				
 // this could return null if the image is still loading.	
 				return m_bitmaps.get (__className);
 			}
 			
 //			m_count[__className] = 1;
-			m_count.put (__className, 1);
+			m_count.set (__className, 1);
 			
-			m_bitmaps.put (__className, null);
+			m_bitmaps.set (__className, null);
 					
 			var __class:Class = m_XApp.getClass (__className);
 			
@@ -121,7 +121,7 @@ package X.Bitmap {
 			else
 			{
 				// wait for image to load before caching it.
-				m_queue.put (__className, 0);	
+				m_queue.set (__className, 0);	
 			}
 			
 			return null;
@@ -143,7 +143,7 @@ package X.Bitmap {
 		
 			trace (": adding bitmap: ", __movieClip, __XBitmap, __XBitmap.bitmapData);
 	
-			m_bitmaps.put (__className, __XBitmap);
+			m_bitmaps.set (__className, __XBitmap);
 			
 			return __XBitmap;			
 		}
@@ -154,7 +154,7 @@ package X.Bitmap {
 //				m_count[__className]--
 				var __count:Number = m_count.get (__className);
 				__count--;
-				m_count.put (__className, __count);
+				m_count.set (__className, __count);
 				
 //				if (m_count[__className] == 0) {
 				if (__count == 0) {

@@ -26,7 +26,9 @@ class Update(object):
 	# 
 	# i.e.:
 	#
-	# XDict; // <Int>		-->: Map<Int>
+	# XDict; // <Int>
+	# -->
+	# Map<Int>
 	#-----------------------------------------------------------------------------
 	def convertArrayOrMap (self, line, src, dst):
 		i = line.find(src)
@@ -51,6 +53,22 @@ class Update(object):
 		
 	#-----------------------------------------------------------------------------
 	# convert XDicts and Arrays to their respective HaXe types (Maps and Arrays w/ typing)
+	#
+	# XDict (); // <key, type>
+	#    --> Map ()<key, type>;
+	#
+	# XDict; // <key, type>	
+	#    --> Map<key, type>;			
+	# XDict /* <key, type> */
+	#    --> Map<key, type>
+	#
+	# Array (); // <type>
+	#    --> Array ()<type>;
+	#
+	# Array; // <type>
+	#    --> Array<type>;
+	# Array /* <type> */
+	#    --> Array<type>		
 	#-----------------------------------------------------------------------------	
 	def convertArraysAndMaps (self, line):
 
@@ -89,16 +107,24 @@ class Update(object):
 		return line
 
 	#-----------------------------------------------------------------------------
+	# break;
+	#     --> // break;
+	#-----------------------------------------------------------------------------
 	def convertBreaks(self, line):
 		line = line.replace("break;", "// break;")
 		
 		return line
 	
 	#-----------------------------------------------------------------------------
+	# public <className>
+	#     --> <className>
+	#
+	# save <className> for use in convertConstructor
+	#-----------------------------------------------------------------------------
 	def convertClass(self, line):
 		i = line.find("public class")
 		if i == -1:
-			return line
+			return self.convertConstructor(line);
 			
 		classNameBegin = i + len("public class") + 1
 		classNameEnd = classNameBegin + line[classNameBegin:].find(" ")
@@ -110,19 +136,63 @@ class Update(object):
 		return line
 	
 	#-----------------------------------------------------------------------------
+	# public function <className> () {
+	#     --> public function new () {
+	#-----------------------------------------------------------------------------
 	def convertConstructor(self, line):
 		line = line.replace("public function " + self._className + " (", "public function new (")
 		
 		return line
+	
+	#-----------------------------------------------------------------------------
+	# // <HAXE>
+	# /* --
+	#	haxe code
+	# -- */
+	# // </HAXE>
+	# // <AS3>
+	#   as3 code
+	# // </AS3>
+	#-----------------------------------------------------------------------------
+	def convertHaXeBlock(self, line):
+		if self._haXeBlock:
+			if line.find("/* --") != -1 or line.find("-- */") != -1:
+				self._skipLine = True
+		
+			if line.find("<AS3>") != -1:
+				self._haXeBlock = False
+				self._as3Block = True
 					
+				self._skipLine = True
+			
+			if line.find("</HAXE>") != -1:
+				self._skipLine = True
+								
+		if self._as3Block:
+			if line.find("</AS3>") != -1:
+				self._haXeBlock = False
+				self._as3Block = False
+				
+			self._skipLine = True
+			
+		if line.find("<HAXE>") != -1:
+			self._haXeBlock = True
+			
+			self._skipLine = True
+			
+		return line
+						
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
+		self._skipLine = False
+		
 		line = self.convertArraysAndMaps(line)
 		line = self.convertBreaks(line)
 		line = self.convertClass(line)
-		line = self.convertConstructor(line)
+		line = self.convertHaXeBlock(line)
 		
-		dst.write(line)
+		if not self._skipLine:	
+			dst.write(line)
 
 	#-----------------------------------------------------------------------------
 	def processFile(self, src_file_path):
@@ -143,7 +213,9 @@ class Update(object):
 		dst = open(dst_file_path, "w")
 		
 		self._className = ""
-		
+		self._haXeBlock = False
+		self._as3Block = False
+				
 		for line in src:
 			self.processLine(line, dst)
 

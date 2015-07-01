@@ -62,7 +62,7 @@ package X.Collections {
 	
 //------------------------------------------------------------------------------------------
 		[Inline]
-		public function put (__key:*, __value:*):void {
+		public function set (__key:*, __value:*):void {
 			m_dict[__key] = __value;
 		}	
 		

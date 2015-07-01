@@ -28,17 +28,32 @@
 package X.Signals {
 
 	import X.Collections.*;
-	
+
 //------------------------------------------------------------------------------------------
 	public class XSignal extends Object {
 		private var m_listeners:XDict; // <Function, Int>
 		private var m_parent:*;
+// <HAXE>
+/* --
+		public var fireSignal:Function;
+-- */
+// </HAXE>
+// <AS3>
+// </AS3>
 		
 //------------------------------------------------------------------------------------------
 		public function XSignal () {
 			super();
 			
 			m_listeners = new XDict (); // <Function, Int>
+			
+// <HAXE>
+/* --
+			fireSignal = Reflect.makeVarArgs (__fireSignal);
+-- */
+// </HAXE>
+// <AS3>
+// </AS3>
 		}
 
 //------------------------------------------------------------------------------------------
@@ -53,9 +68,16 @@ package X.Signals {
 		
 //------------------------------------------------------------------------------------------
 		public function addListener (__listener:Function):void {
-			m_listeners.put (__listener, 0);
+			m_listeners.set (__listener, 0);
 		}
 
+//------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+		public function __fireSignal (args:Array<Dynamic>):Void {
+		}
+-- */	
+// <AS3>
 //------------------------------------------------------------------------------------------
 		public function fireSignal (...args):void {	
 			switch (args.length) {
@@ -87,6 +109,7 @@ package X.Signals {
 					break;
 			}
 		}
+// </AS3>
 		
 //------------------------------------------------------------------------------------------
 		public function removeListener (__listener:Function):void {

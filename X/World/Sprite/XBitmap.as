@@ -227,7 +227,7 @@ package X.World.Sprite {
 					var __bitmap:BitmapData = new BitmapData (__width, __height);
 					
 //					m_bitmapNames[__name] = __bitmap;
-					m_bitmapNames.put (__name, __bitmap);
+					m_bitmapNames.set (__name, __bitmap);
 					
 					gotoX (__name);
 				}

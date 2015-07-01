@@ -458,7 +458,7 @@ package X {
 									}
 									else
 									{
-										m_allClassNames.put (__fullName, 0);
+										m_allClassNames.set (__fullName, 0);
 									}
 								}
 							}

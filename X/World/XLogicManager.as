@@ -238,10 +238,10 @@ package X.World {
 						
 //			xxx.addChild (__logicObject);
 			
-			m_XLogicObjects.put (__logicObject, 0);
+			m_XLogicObjects.set (__logicObject, 0);
 			
 			if (__parent == null) {
-				m_XLogicObjectsTopLevel.put (__logicObject, 0);
+				m_XLogicObjectsTopLevel.set (__logicObject, 0);
 			}
 			
 			return __logicObject;
@@ -288,10 +288,10 @@ package X.World {
 						
 //			xxx.addChild (__logicObject);
 			
-			m_XLogicObjects.put (__logicObject, 0);
+			m_XLogicObjects.set (__logicObject, 0);
 			
 			if (__parent == null) {
-				m_XLogicObjectsTopLevel.put (__logicObject, 0);
+				m_XLogicObjectsTopLevel.set (__logicObject, 0);
 			}
 			
 			return __logicObject;
@@ -302,7 +302,7 @@ package X.World {
 //			trace (": kill? ", __object);
 			
 			if (!m_killQueue.exists (__object)) {
-				m_killQueue.put (__object, 0);
+				m_killQueue.set (__object, 0);
 			}
 		}
 		

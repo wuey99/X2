@@ -77,7 +77,7 @@ package X.Sound {
 			__mp3Sound.play (0, __loops, __transform);
 			
 			var __guid:Number = g_GUID++;
-			m_soundChannels.put (__guid, [__mp3Sound, __completeListener, __class, __sound]);
+			m_soundChannels.set (__guid, [__mp3Sound, __completeListener, __class, __sound]);
 			
 			__successListener (__guid);
 			

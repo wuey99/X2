@@ -74,7 +74,7 @@ package X.Task {
 			var __task:XTask = m_manager.addTask (__taskList, __findLabelsFlag);
 			
 			if (!(m_XTasks.exists (__task))) {
-				m_XTasks.put (__task, 0);
+				m_XTasks.set (__task, 0);
 			}
 			
 			return __task;
@@ -85,7 +85,7 @@ package X.Task {
 			var __task:XTask = m_manager.addXTask (__task);
 			
 			if (!m_XTasks.exists (__task)) {
-				m_XTasks.put(__task, 0);
+				m_XTasks.set (__task, 0);
 			}
 			
 			return __task;			

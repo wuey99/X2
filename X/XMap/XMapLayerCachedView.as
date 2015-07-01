@@ -181,7 +181,7 @@ package X.XMap {
 			
 			m_XMapView.addXLogicObject (__logicObject);
 			
-			m_XSubmapToXLogicObject.put (__submap, __logicObject);
+			m_XSubmapToXLogicObject.set (__submap, __logicObject);
 			
 			__logicObject.setModel (__submap);
 			

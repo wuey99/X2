@@ -74,7 +74,7 @@ package X.Pool {
 			if (!m_pools.exists (__class)) {
 				__pool = setupPool (__class, 16, 16);
 				
-				m_pools.put (__class, __pool);
+				m_pools.set (__class, __pool);
 			}	
 			
 			__pool = m_pools.get (__class);
@@ -129,7 +129,7 @@ package X.Pool {
 			if (!m_pools.exists (__class)) {
 				__pool = setupPool (__class, 16, 16);
 				
-				m_pools.put (__class, __pool);
+				m_pools.set (__class, __pool);
 			}
 			else
 			{

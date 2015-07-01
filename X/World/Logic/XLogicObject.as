@@ -633,7 +633,7 @@ package X.World.Logic {
 			__bitmap.alpha = 1.0;
 			__bitmap.scaleX = __bitmap.scaleY = 1.0;
 			
-			m_bitmaps.put (__name, __bitmap);
+			m_bitmaps.set (__name, __bitmap);
 			
 			return __bitmap;
 		}
@@ -646,7 +646,7 @@ package X.World.Logic {
 			
 			__xmovieClip.initWithClassName (xxx, null, __name);
 			
-			m_movieClips.put (__name, __xmovieClip);
+			m_movieClips.set (__name, __xmovieClip);
 			
 			return __xmovieClip;
 		}
@@ -674,7 +674,7 @@ package X.World.Logic {
 				__embedFonts
 			);
 
-			m_textSprites.put (__textSprite, 0);
+			m_textSprites.set (__textSprite, 0);
 			
 			return __textSprite;
 		}
@@ -751,7 +751,7 @@ package X.World.Logic {
 			__sprite.x = -__dx;
 			__sprite.y = -__dy;
 			
-			m_detachedSprites.put (__sprite, __sprite2);
+			m_detachedSprites.set (__sprite, __sprite2);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -768,7 +768,7 @@ package X.World.Logic {
 			__sprite.x = -__dx;
 			__sprite.y = -__dy;
 			
-			m_childSprites.put (__sprite, __sprite2);
+			m_childSprites.set (__sprite, __sprite2);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -797,7 +797,7 @@ package X.World.Logic {
 				
 			__depthSprite.setRegistration (__dx, __dy);
 			
-			m_worldSprites.put (__depthSprite, 0);
+			m_worldSprites.set (__depthSprite, 0);
 			
 			return __depthSprite;
 		}
@@ -844,7 +844,7 @@ package X.World.Logic {
 							
 			__depthSprite.setRegistration (__dx, __dy);
 			
-			m_hudSprites.put (__depthSprite, 0);
+			m_hudSprites.set (__depthSprite, 0);
 			
 			return __depthSprite;
 		}
@@ -873,7 +873,7 @@ package X.World.Logic {
 // add an XLogicObject to the World
 //------------------------------------------------------------------------------------------	
 		public function addXLogicObject (__XLogicObject:XLogicObject):XLogicObject {
-			m_XLogicObjects.put (__XLogicObject, 0);
+			m_XLogicObjects.set (__XLogicObject, 0);
 			
 			return __XLogicObject;
 		}
@@ -1440,7 +1440,7 @@ package X.World.Logic {
 			var __signal:XSignal = xxx.getXSignalManager ().createXSignal ();
 		
 			if (!(m_XSignals.exists (__signal))) {
-				m_XSignals.put (__signal, 0);
+				m_XSignals.set (__signal, 0);
 			}
 			
 			__signal.setParent (this);

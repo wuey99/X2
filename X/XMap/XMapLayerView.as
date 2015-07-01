@@ -225,7 +225,7 @@ package X.XMap {
 			
 			m_XMapView.addXLogicObject (__logicObject);
 			
-			m_XMapItemToXLogicObject.put (__item, __logicObject);
+			m_XMapItemToXLogicObject.set (__item, __logicObject);
 
 			__logicObject.setXMapModel (m_currLayer + 1, m_XMapModel, m_XMapView);
 			

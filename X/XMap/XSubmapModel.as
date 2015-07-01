@@ -271,7 +271,7 @@ package X.XMap {
 			trace (": XSubmapModel: additem: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
 			
 			if (!m_items.exists (__item)) {
-				m_items.put (__item, __item.id);
+				m_items.set (__item, __item.id);
 			}
 					
 			return __item;

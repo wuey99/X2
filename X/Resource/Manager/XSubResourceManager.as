@@ -549,7 +549,7 @@ package X.Resource.Manager {
 					if (__resourceName == __xmlList[i].@name) {
 						for (j=0; j<__xmlList[i].classX.@name.length (); j++) {		
 							if (!m_cachedClassName.exists (__xmlList[i].classX.@name[j])) {
-								m_cachedClassName.put (__xmlList[i].classX.@name[j], __xmlList[i]);
+								m_cachedClassName.set (__xmlList[i].classX.@name[j], __xmlList[i]);
 							}
 							
 							if (__xmlList[i].classX.@name[j] == __className) {
@@ -576,7 +576,7 @@ package X.Resource.Manager {
 				else
 				{
 					for (j=0; j<__xmlList[i].classX.@name.length (); j++) {						
-						m_cachedClassName.put (__xmlList[i].classX.@name[j], __xmlList[i]);
+						m_cachedClassName.set (__xmlList[i].classX.@name[j], __xmlList[i]);
 					}	
 				}
 			}
@@ -632,7 +632,7 @@ package X.Resource.Manager {
 				
 				__XClass = new XClass (__className, __resourcePath, __resourceXML);
 				__XClass.setClass (null);
-				m_classMap.put (__className, __XClass);				
+				m_classMap.set (__className, __XClass);				
 			}
 			else
 			{
@@ -680,7 +680,7 @@ package X.Resource.Manager {
 				
 				__XResource.loadResource ();
 				
-				m_resourceMap.put (__resourcePath, __XResource);
+				m_resourceMap.set (__resourcePath, __XResource);
 				
 				__r = __XResource;
 			}

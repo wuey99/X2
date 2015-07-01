@@ -53,7 +53,7 @@ package X.XML {
 			
 			var i:Number;
 			for (i=0; i<__attribs.length; i+=2) {
-				m_attribsMap.put (__attribs[i+0], __attribs[i+1]);
+				m_attribsMap.set (__attribs[i+0], __attribs[i+1]);
 			}
 		}
 
@@ -80,7 +80,7 @@ package X.XML {
 			
 			for (i = 0; i<__xmlList.length (); i++) {
 				var __key:String = __xmlList[i].name ();
-				m_attribsMap.put (__key, __xml.@[__key]);
+				m_attribsMap.set (__key, __xml.@[__key]);
 			}
 		
 //------------------------------------------------------------------------------------------	
@@ -159,7 +159,7 @@ package X.XML {
 		
 //------------------------------------------------------------------------------------------
 		public function addAttribute (__name:String, __value:*):void {
-			m_attribsMap.put (__name, __value);
+			m_attribsMap.set (__name, __value);
 		}	
 		
 //------------------------------------------------------------------------------------------

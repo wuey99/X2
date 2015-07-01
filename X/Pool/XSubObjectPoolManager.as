@@ -73,7 +73,7 @@ package X.Pool {
 		public function borrowObject ():Object {
 			var __object:Object = m_manager.borrowObject ();
 				
-			m_inuseObjects.put (__object, 0);
+			m_inuseObjects.set (__object, 0);
 			
 			return __object;
 		}

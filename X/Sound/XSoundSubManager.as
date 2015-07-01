@@ -88,7 +88,7 @@ package X.Sound {
 				__transform,
 				
 				function (__guid:Number):void {
-					m_soundChannels.put (__guid, __priority);
+					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 					
 					if (__successListener != null) {
@@ -130,7 +130,7 @@ package X.Sound {
 				__transform,
 				
 				function (__guid:Number):void {					
-					m_soundChannels.put (__guid, __priority);
+					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 
 					if (__successListener != null) {
@@ -172,7 +172,7 @@ package X.Sound {
 				__transform,
 				
 				function (__guid:Number):void {
-					m_soundChannels.put (__guid, __priority);
+					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 					
 					if (__successListener != null) {
@@ -214,7 +214,7 @@ package X.Sound {
 				__transform,
 				
 				function (__guid:Number):void {					
-					m_soundChannels.put (__guid, __priority);
+					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 					
 					if (__successListener != null) {

@@ -76,7 +76,7 @@ package X.World {
 			
 			addChild (__depthSprite);
 				
-			m_XDepthSpriteMap.put (__depthSprite, 0);
+			m_XDepthSpriteMap.set (__depthSprite, 0);
 			
 			return __depthSprite;
 		}	
@@ -85,7 +85,7 @@ package X.World {
 		public function addDepthSprite (__depthSprite:XDepthSprite):XDepthSprite {	
 			addChild (__depthSprite);
 				
-			m_XDepthSpriteMap.put (__depthSprite, 0);
+			m_XDepthSpriteMap.set (__depthSprite, 0);
 			
 			return __depthSprite;
 		}

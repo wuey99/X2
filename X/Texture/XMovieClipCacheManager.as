@@ -55,17 +55,17 @@ package X.Texture {
 //				m_count[__className]++;
 				var __count:Number = m_count.get (__className);
 				__count++;
-				m_count.put (__className, __count);
+				m_count.set (__className, __count);
 				
 				return m_movieClips.get (__className);
 			}
 			
 //			m_count[__className] = 1;
-			m_count.put (__className, 1);
+			m_count.set (__className, 1);
 			
 			var __movieClip:XMovieClip = __createXMovieClip (__className);
 			
-			m_movieClips.put (__className, __movieClip);
+			m_movieClips.set (__className, __movieClip);
 			
 			return __movieClip;
 		}
@@ -92,7 +92,7 @@ package X.Texture {
 				
 				__xmovieClip.initWithClassName (null, m_XApp, __className);
 				
-				m_movieClips.put (__className, __xmovieClip);
+				m_movieClips.set (__className, __xmovieClip);
 								
 				return __xmovieClip;
 			}
@@ -108,7 +108,7 @@ package X.Texture {
 //				m_count[__className]--;
 				var __count:Number = m_count.get (__className);
 				__count--;
-				m_count.put (__className, __count);
+				m_count.set (__className, __count);
 				
 //				if (m_count[__className] == 0) {
 				if (__count == 0) {

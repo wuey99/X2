@@ -137,7 +137,7 @@ package X.Keyboard {
 			
 			var __c:uint = e.keyCode;
 			
-			m_keyCodes.put (__c, 1);
+			m_keyCodes.set (__c, 1);
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ package X.Keyboard {
 			var __c:uint = e.keyCode;
 			
 			if (m_keyCodes.exists (__c)) {
-				m_keyCodes.put (__c, 0);
+				m_keyCodes.set (__c, 0);
 			}
 		}
 		

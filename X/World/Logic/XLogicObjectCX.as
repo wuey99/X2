@@ -178,7 +178,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function initItemStorage (__value:*):void {
 			if (!hasItemStorage ()) {
-				m_XMapLayerModel.getPersistentStorage ().put (item.id, __value);
+				m_XMapLayerModel.getPersistentStorage ().set (item.id, __value);
 			}
 		}
 		
@@ -226,7 +226,7 @@ package X.World.Logic {
 			__y2:Number
 			):void {
 				
-			m_namedCX.put (__name, new XRect (__x1, __y1, __x2-__x1+1, __y2-__y1+1));
+			m_namedCX.set (__name, new XRect (__x1, __y1, __x2-__x1+1, __y2-__y1+1));
 		}
 
 //------------------------------------------------------------------------------------------

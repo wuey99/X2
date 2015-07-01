@@ -109,7 +109,7 @@ package X.Texture {
 		public override function add (__className:String):void {
 			var __class:Class = m_XApp.getClass (__className);
 			
-			m_movieClips.put (__className, []);
+			m_movieClips.set (__className, []);
 			
 			if (__class != null) {
 				createTexture (__className, __class);
@@ -118,7 +118,7 @@ package X.Texture {
 			}
 			else
 			{
-				m_queue.put (__className, 0);
+				m_queue.set (__className, 0);
 			}
 		}
 		
@@ -179,7 +179,7 @@ package X.Texture {
 			var __movieClipMetadata:Array /* <Rectangle> */ = new Array ();
 			__movieClipMetadata.push (__realBounds);
 			
-			m_movieClips.put (__className, __movieClipMetadata);
+			m_movieClips.set (__className, __movieClipMetadata);
 		}	
 		
 		//------------------------------------------------------------------------------------------

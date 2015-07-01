@@ -88,7 +88,7 @@ package X.Game {
 
 			var __rect:XRect = m_XSubRectPoolManager.borrowObject () as XRect;
 			__srcRect.copy2 (__rect); __rect.offsetPoint (__srcPoint);
-			m_rects[__layer].put (__logicObject, __rect);
+			m_rects[__layer].set (__logicObject, __rect);
 		}
 
 //------------------------------------------------------------------------------------------

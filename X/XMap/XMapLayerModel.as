@@ -219,7 +219,7 @@ package X.XMap {
 			*/
 			
 			if (!m_itemInuse.exists (__id)) {
-				m_itemInuse.put (__id, 0);
+				m_itemInuse.set (__id, 0);
 			}
 			
 			return m_itemInuse.get (__id);
@@ -242,7 +242,7 @@ package X.XMap {
 			*/
 			
 			if (!m_itemInuse.exists (__id)) {
-				m_itemInuse.put (__id, 0);
+				m_itemInuse.set (__id, 0);
 			}
 			
 			if (__inuse == 0) {
@@ -250,7 +250,7 @@ package X.XMap {
 			}
 			else
 			{
-				m_itemInuse.put (__id, __inuse);
+				m_itemInuse.set (__id, __inuse);
 			}
 		}
 		
@@ -779,8 +779,8 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function trackItem (__item:XMapItemModel):void {
-			m_items.put (__item, __item.id);
-			m_ids.put (__item.id, __item);
+			m_items.set (__item, __item.id);
+			m_ids.set (__item.id, __item);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -834,7 +834,7 @@ package X.XMap {
 								var __item:XMapItemModel = x as XMapItemModel;
 								
 								if (__item.XMapItem == __itemName) {
-									__list.put (__item.id, __item);
+									__list.set (__item.id, __item);
 								}
 							}
 						);
@@ -936,7 +936,7 @@ package X.XMap {
 				for (__col=0; __col<m_submapCols; __col++) {
 					m_XSubmaps[__row][__col].items ().forEach (
 						function (__item:*):void {
-							__imageClassNames.put (__item.imageClassName, 0);
+							__imageClassNames.set (__item.imageClassName, 0);
 						}
 					);
 				}
@@ -1151,7 +1151,7 @@ package X.XMap {
 				
 				trace (": deserializeImageClassName: ", __name);
 				
-				m_imageClassNames.put (__name, 0);
+				m_imageClassNames.set (__name, 0);
 			}
 		}
 		
