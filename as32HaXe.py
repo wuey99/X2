@@ -269,6 +269,9 @@ class Update(object):
 		if self.isNewOrExtends(line, "Object"):
 			line = line.replace(" Object", " Dynamic /* Object */")
 			
+		if self.isType(line, "*"):
+			line = line.replace(":*", ":Dynamic /**/")
+			
 		return line
 		
 	#-----------------------------------------------------------------------------
@@ -323,8 +326,7 @@ class Update(object):
 	
 	#-----------------------------------------------------------------------------
 	# package <packageName> {
-	#    -->
-	# package <packageName;
+	#    --> package <packageName;
 	#-----------------------------------------------------------------------------
 	def convertPackage(self, line):
 		if line.find("}") >= 0 and self._lineNumber == self._numLines:
@@ -334,7 +336,32 @@ class Update(object):
 			line = line.replace(" {\n", ";\n")
 			
 		return line
+	
+	#-----------------------------------------------------------------------------
+	# = <value> as String;
+	#    --> = cast <value>;
+	#
+	# (<value> as String);
+	#    --> (cast <value>);
+	#
+	# ) as String;
+	#    --> ??? (probably need an annotation here)
+	#-----------------------------------------------------------------------------
+	def convertCasts(self, line):
+		return line
 		
+	#-----------------------------------------------------------------------------
+	#
+	#-----------------------------------------------------------------------------
+	def convertLoops(self, line):
+		return line
+	
+	#-----------------------------------------------------------------------------
+	#
+	#-----------------------------------------------------------------------------
+	def convertGettersAndSetters(self, line):
+		return line
+				
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
@@ -344,6 +371,9 @@ class Update(object):
 		line = self.convertBreaks(line)
 		line = self.convertClass(line)
 		line = self.convertTypes(line)
+		line = self.convertCasts(line)
+		line = self.convertGettersAndSetters(line)
+		line = self.convertLoops(line)
 		line = self.convertHaXeBlock(line)
 		line = self.convertPackage(line)		
 
