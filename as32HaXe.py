@@ -72,13 +72,15 @@ class Update(object):
 	#-----------------------------------------------------------------------------	
 	def convertArraysAndMaps (self, line):
 
+		"""
 # XDict (); // <key, type>
 #    --> Map ()<key, type>;
 		converted = self.convertArrayOrMap (line, "XDict ()", "Map ()");
 			
 		if converted != line:
 			return converted
-			
+		"""
+		
 # XDict; // <key, type>
 #    --> Map<key, type>;			
 # XDict /* <key, type> */
@@ -88,13 +90,15 @@ class Update(object):
 		if converted != line:
 			return converted
 			
+		"""
 # Array (); // <type>
 #    --> Array ()<type>;
 		converted = self.convertArrayOrMap (line, "Array ()", "Array ()");
 		
 		if converted != line:
 			return converted
-			
+		"""
+		
 # Array; // <type>
 #    --> Array<type>;
 # Array /* <type> */
@@ -181,16 +185,168 @@ class Update(object):
 			self._skipLine = True
 			
 		return line
-						
+	
+	#-----------------------------------------------------------------------------
+	def isType(self, line, typeName):	
+		if line.find(":" + typeName + ";") >= 0 \
+		or line.find(":" + typeName + " ") >= 0 \
+		or line.find(":" + typeName + ")") >= 0 \
+		or line.find(":" + typeName + ",") >= 0 \
+		or line.find(":" + typeName + "\n") >= 0:
+			return True
+		else:
+			return False				
+
+	#-----------------------------------------------------------------------------
+	def isNewOrExtends(self, line, typeName):
+		if line.find("extends " + typeName + " ") >= 0 \
+		or line.find("new " + typeName + " (") >= 0 \
+		or line.find("new " + typeName + "(") >= 0:
+			return True
+		else:
+			return False
+			
+	#-----------------------------------------------------------------------------
+	# :Function
+	#    --> :Dynamic
+	#-----------------------------------------------------------------------------
+	def convertFunction(self, line):
+		if self.isType(line, "Function"):
+			line = line.replace(":Function", ":Dynamic /* Function */")
+		
+		if self.isNewOrExtends(line, "Function"):
+			line = line.replace(" Function", " Dynamic /* Function */")
+			
+		return line
+	
+	#-----------------------------------------------------------------------------
+	# :Boolean
+	#    --> :Bool
+	#-----------------------------------------------------------------------------
+	def convertBoolean(self, line):
+		if self.isType(line, "Boolean"):
+			line = line.replace(":Boolean", ":Bool")
+
+		if self.isNewOrExtends(line, "Boolean"):
+			line = line.replace(" Boolean", " Bool")
+					
+		return line
+		
+	#-----------------------------------------------------------------------------
+	# :int
+	#    --> :Int
+	#-----------------------------------------------------------------------------
+	def convertInt(self, line):
+		if self.isType(line, "int"):
+			line = line.replace(":Boolean", ":Int")
+
+		if self.isNewOrExtends(line, "int"):
+			line = line.replace(" int", " Int")
+					
+		return line
+		
+	#-----------------------------------------------------------------------------
+	# :Number
+	#    --> :Float
+	#-----------------------------------------------------------------------------
+	def convertNumber(self, line):
+		if self.isType(line, "Number"):
+			line = line.replace(":Number", ":Float")
+		
+		if self.isNewOrExtends(line, "Number"):
+			line = line.replace(" Number", " Float")
+			
+		return line
+		
+	#-----------------------------------------------------------------------------
+	# :Object
+	#    --> :Dynamic /* Object */
+	#-----------------------------------------------------------------------------
+	def convertObject(self, line):
+		if self.isType(line, "Object"):
+			line = line.replace(":Object", ":Dynamic /* Object */")
+		
+		if self.isNewOrExtends(line, "Object"):
+			line = line.replace(" Object", " Dynamic /* Object */")
+			
+		return line
+		
+	#-----------------------------------------------------------------------------
+	# :void
+	#    --> :void
+	#-----------------------------------------------------------------------------
+	def convertVoid(self, line):
+		if self.isType(line, "void"):
+			line = line.replace(":void", ":Void")
+		
+		if self.isNewOrExtends(line, "void"):
+			line = line.replace(" void", " Void")
+			
+		return line
+		
+	#-----------------------------------------------------------------------------
+	# :Vector
+	#    --> :Array
+	#-----------------------------------------------------------------------------
+	def convertVector(self, line):
+		if self.isType(line, "Vector"):
+			line = line.replace(":Vector", ":Array /* Vector */")
+			
+		return line
+		
+	#-----------------------------------------------------------------------------
+	# :Boolean
+	#    --> :Bool
+	# :int
+	#    --> :Int
+	# :Number
+	#    --> :Float
+	# :Object
+	#    --> :Dynamic /* Object */
+	# :void
+	#    --> :Void
+	# :Vector
+	#    --> :Array /* Vector */
+	# :Function
+	#    --> :Dynamic /* Function */
+	#-----------------------------------------------------------------------------
+	def convertTypes(self, line):
+		line = self.convertBoolean(line)
+		line = self.convertInt(line)
+		line = self.convertNumber(line)
+		line = self.convertObject(line)
+		line = self.convertVoid(line)
+		line = self.convertVector(line)
+		line = self.convertFunction(line)
+		
+		return line
+	
+	#-----------------------------------------------------------------------------
+	# package <packageName> {
+	#    -->
+	# package <packageName;
+	#-----------------------------------------------------------------------------
+	def convertPackage(self, line):
+		if line.find("}") >= 0 and self._lineNumber == self._numLines:
+			line = line.replace ("}", "// }")
+			
+		if line.find("package ") >= 0 and line.endswith(" {\n"):
+			line = line.replace(" {\n", ";\n")
+			
+		return line
+		
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
+		self._lineNumber += 1
 		self._skipLine = False
 		
 		line = self.convertArraysAndMaps(line)
 		line = self.convertBreaks(line)
 		line = self.convertClass(line)
+		line = self.convertTypes(line)
 		line = self.convertHaXeBlock(line)
-		
+		line = self.convertPackage(line)		
+
 		if not self._skipLine:	
 			dst.write(line)
 
@@ -206,7 +362,12 @@ class Update(object):
 		print ": folder, name: ", folder, fileName, os.getcwd()
 
 		src = open(src_file_path)
-
+		self._numLines = 0
+		for line in src:
+			self._numLines += 1
+		src.close()
+		src = open(src_file_path)
+		
 		if not os.path.exists(folder):
 			os.mkdir(folder)
 
@@ -215,12 +376,15 @@ class Update(object):
 		self._className = ""
 		self._haXeBlock = False
 		self._as3Block = False
-				
+						
+		self._lineNumber = 0
 		for line in src:
 			self.processLine(line, dst)
 
-		src.close ()
-		dst.close ()
+		print ": ", self._numLines
+		
+		src.close()
+		dst.close()
 
 	#-----------------------------------------------------------------------------
 	def processDirectory(self, paths):
