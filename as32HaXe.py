@@ -22,6 +22,22 @@ class Update(object):
 		return None, None
 
 	#-----------------------------------------------------------------------------
+	# determines if the line is a // comment
+	#-----------------------------------------------------------------------------
+	def isComment(self, line):
+		if line.startswith("//"):
+			return True
+			
+		for i in xrange(0, len(line)):
+			if line[i] != " " and line [i] != "\t":
+				break
+		
+		if line[i:].startswith("//"):
+			return True
+			
+		return False
+			
+	#-----------------------------------------------------------------------------
 	# convert as3 XDict's and Array's using comment-based annotations
 	# 
 	# i.e.:
@@ -71,7 +87,9 @@ class Update(object):
 	#    --> Array<type>		
 	#-----------------------------------------------------------------------------	
 	def convertArraysAndMaps (self, line):
-
+		if self.isComment(line):
+			return line
+			
 		"""
 # XDict (); // <key, type>
 #    --> Map ()<key, type>;
@@ -115,6 +133,9 @@ class Update(object):
 	#     --> // break;
 	#-----------------------------------------------------------------------------
 	def convertBreaks(self, line):
+		if self.isComment(line):
+			return line
+			
 		line = line.replace("break;", "// break;")
 		
 		return line
@@ -126,6 +147,9 @@ class Update(object):
 	# save <className> for use in convertConstructor
 	#-----------------------------------------------------------------------------
 	def convertClass(self, line):
+		if self.isComment(line):
+			return line
+			
 		i = line.find("public class")
 		if i == -1:
 			return self.convertConstructor(line);
@@ -144,6 +168,9 @@ class Update(object):
 	#     --> public function new () {
 	#-----------------------------------------------------------------------------
 	def convertConstructor(self, line):
+		if self.isComment(line):
+			return line
+			
 		line = line.replace("public function " + self._className + " (", "public function new (")
 		
 		return line
@@ -314,6 +341,9 @@ class Update(object):
 	#    --> :Dynamic /* Function */
 	#-----------------------------------------------------------------------------
 	def convertTypes(self, line):
+		if self.isComment(line):
+			return line
+			
 		line = self.convertBoolean(line)
 		line = self.convertInt(line)
 		line = self.convertNumber(line)
@@ -329,6 +359,9 @@ class Update(object):
 	#    --> package <packageName;
 	#-----------------------------------------------------------------------------
 	def convertPackage(self, line):
+		if self.isComment(line):
+			return line
+			
 		if line.find("}") >= 0 and self._lineNumber == self._numLines:
 			line = line.replace ("}", "// }")
 			
@@ -338,16 +371,54 @@ class Update(object):
 		return line
 	
 	#-----------------------------------------------------------------------------
+	# attempt an automated translation as much as possible, but if the
+	# comment annotation /* @:cast */ is found skip the automatic translation
+	#
 	# = <value> as String;
-	#    --> = cast <value>;
+	#    --> = cast <value>; /* as String */
 	#
 	# (<value> as String);
-	#    --> (cast <value>);
+	#    --> (cast <value> /* as String */);
 	#
-	# ) as String;
-	#    --> ??? (probably need an annotation here)
+	# ) as <String>;
+	#    -->; /* as <String> */
+	#
+	# /* @:cast */
+	#    --> cast (remove " as ")
 	#-----------------------------------------------------------------------------
 	def convertCasts(self, line):
+		if self.isComment(line):
+			return line
+			
+		if line.find("/* @:cast */"):
+			line = line.replace ("/* @:cast */", "cast")
+			
+# look for " as "
+		as_token = line.find(" as ")
+		if as_token < 0:
+			return line
+			
+# = <value> as <type>;			
+		equals_token = line.find(" = ")
+		if equals_token >= 0 and equals_token < as_token:
+			line = line[:equals_token + 3] + "cast " + line[equals_token + 3:as_token] + "; /*" + line[as_token:-2] + " */\n"
+			
+			return line
+			
+# (<value> as <type>);
+		left_paren = line.find("(")
+		if left_paren > 0 and left_paren < as_token:
+			line = line[:left_paren + 1] + "cast " + line[left_paren + 1:as_token] +  " /*" + line[as_token:-3] + " */);\n"
+			
+			return line
+			
+# ) as <type>;
+		right_paren = line.find(")")
+		if right_paren >0 and right_paren < as_token:
+			line = line[:right_paren + 1] + "; /* " + line[as_token:-2] + " */\n"
+			
+			return line
+			 
 		return line
 		
 	#-----------------------------------------------------------------------------
