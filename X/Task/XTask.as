@@ -28,6 +28,7 @@
 package X.Task {
 	
 	import X.*;
+	import X.Collections.*;
 	import X.Pool.*;
 	
 	import flash.system.*;
@@ -83,7 +84,7 @@ package X.Task {
 	public class XTask extends Object {
 		private var m_taskList:Array; // <Dynamic>
 		private var m_taskIndex:int;
-		private var m_labels:Object;
+		private var m_labels:XDict; // <String, Int>
 		private var m_ticks:int;
 		private var m_stack:Array; // <Float>
 		private var m_loop:Array; // <Float>
@@ -156,6 +157,7 @@ package X.Task {
 			
 			m_stack = new Array (8); // <Float>
 			m_loop = new Array (8); // <Float>
+			m_labels = new XDict (); // <String, Int>
 			
 			m_isDead = true;
 		}
@@ -171,7 +173,7 @@ package X.Task {
 		private function __reset (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = true):void {
 			m_taskList = __taskList;
 			m_taskIndex = 0;
-			m_labels = {};
+			m_labels.removeAll ();
 //			m_stack = new Array (8);
 //			m_loop = new Array (8);
 			m_stackPtr = 0;
@@ -295,7 +297,7 @@ package X.Task {
 		// locate all labels in an XTask
 		//------------------------------------------------------------------------------------------
 		private function __findLabels ():void {
-			var i:Number;
+			var i:int;
 			var x:Number;
 			
 			i = 0;
@@ -315,8 +317,8 @@ package X.Task {
 							
 //							trace (": new Label: ", __label);
 							
-							if (!(__label in m_labels)) {
-								m_labels[__label] = i;
+							if (!(m_labels.exists (__label))) {
+								m_labels.set (__label, i);
 							}
 							else
 							{
@@ -415,7 +417,7 @@ package X.Task {
 			}
 			
 			//------------------------------------------------------------------------------------------
-			switch (/* @:safe_cast(Number) */ value as Number) {
+			switch (/* @:safe_cast */ value as Number) {
 				//------------------------------------------------------------------------------------------
 				
 				//------------------------------------------------------------------------------------------
@@ -423,8 +425,8 @@ package X.Task {
 				//------------------------------------------------------------------------------------------
 					var __label:String = m_taskList[m_taskIndex++] as String;
 					
-					if (!(__label in m_labels)) {
-						m_labels[__label] = m_taskIndex;
+					if (!(m_labels.exists (__label))) {
+						m_labels.set (__label, m_taskIndex);
 					}
 					
 					break;
@@ -445,9 +447,9 @@ package X.Task {
 				//------------------------------------------------------------------------------------------					
 				case _WAITX:
 				//------------------------------------------------------------------------------------------
-					var __ticksx:Number = __evalNumber ();
+					var __ticksX:Number = __evalNumber ();
 					
-					m_ticks += __ticksx;
+					m_ticks += __ticksX;
 					
 					if (m_ticks > 0x0080) {
 						return false;
@@ -533,11 +535,11 @@ package X.Task {
 				//------------------------------------------------------------------------------------------
 					var __gotoLabel:String = m_taskList[m_taskIndex] as String;
 					
-					if (!(__gotoLabel in m_labels)) {
+					if (!(m_labels.exists (__gotoLabel))) {
 						throw (Error ("goto: unable to find label: " + __gotoLabel));
 					}
 					
-					m_taskIndex = m_labels[__gotoLabel]
+					m_taskIndex = m_labels.get(__gotoLabel);
 					
 					break;
 				
@@ -548,11 +550,11 @@ package X.Task {
 					
 					m_stack[m_stackPtr++] = m_taskIndex;
 					
-					if (!(__callLabel in m_labels)) {
+					if (!(m_labels.exists(__callLabel))) {
 						throw (Error ("call: unable to find label: " + __callLabel));
 					}
 					
-					m_taskIndex = m_labels[__callLabel];
+					m_taskIndex = m_labels.get(__callLabel);
 					
 					break;
 				
@@ -581,12 +583,12 @@ package X.Task {
 				//------------------------------------------------------------------------------------------	
 					var __beqLabel:String = m_taskList[m_taskIndex++] as String;
 					
-					if (!(__beqLabel in m_labels)) {
+					if (!(m_labels.exists (__beqLabel))) {
 						throw (Error ("goto: unable to find label: " + __beqLabel));
 					}
 					
 					if (m_flags & _FLAGS_EQ) {
-						m_taskIndex = m_labels[__beqLabel]
+						m_taskIndex = m_labels.get(__beqLabel)
 					}
 					
 					break;
@@ -596,12 +598,12 @@ package X.Task {
 				//------------------------------------------------------------------------------------------
 					var __bneLabel:String = m_taskList[m_taskIndex++] as String;
 					
-					if (!(__bneLabel in m_labels)) {
+					if (!(m_labels.exists (__bneLabel))) {
 						throw (Error ("goto: unable to find label: " + __bneLabel));
 					}
 					
 					if (!(m_flags & _FLAGS_EQ)) {
-						m_taskIndex = m_labels[__bneLabel]
+						m_taskIndex = m_labels.get (__bneLabel);
 					}
 					
 					break;
@@ -630,7 +632,7 @@ package X.Task {
 				case _EXEC:
 					if (m_subTask == null) {
 						// get new XTask Array run it immediately
-						m_subTask = m_XTaskSubManager.addTask ((m_taskList[m_taskIndex] as Array /* <Dynamic> */), true);
+						m_subTask = m_XTaskSubManager.addTask ((/* @:safe_cast */ m_taskList[m_taskIndex] as Array /* <Dynamic> */), true);
 						m_subTask.tag = tag;
 						m_subTask.setManager (m_manager);
 						m_subTask.setParent (self);
