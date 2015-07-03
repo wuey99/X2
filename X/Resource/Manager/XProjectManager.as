@@ -28,9 +28,9 @@
 package X.Resource.Manager {
 	
 	import X.Collections.*;
+	import X.Resource.*;
 	import X.Task.*;
 	import X.XApp;
-	import X.Resource.*;
 	
 	import flash.display.*;
 	import flash.events.Event;

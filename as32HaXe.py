@@ -297,7 +297,7 @@ class Update(object):
 			line = line.replace(" Object", " Dynamic /* Object */")
 			
 		if self.isType(line, "*"):
-			line = line.replace(":*", ":Dynamic /**/")
+			line = line.replace(":*", ":Dynamic /* */")
 			
 		return line
 		
@@ -377,21 +377,67 @@ class Update(object):
 	# = <value> as String;
 	#    --> = cast <value>; /* as String */
 	#
-	# (<value> as String);
-	#    --> (cast <value> /* as String */);
-	#
 	# ) as <String>;
 	#    -->; /* as <String> */
 	#
 	# /* @:cast */
-	#    --> cast (remove " as ")
+	#    --> cast
+	#
+	# /* @:safe_cast(type) */
+	#    --> cast(label, type)
 	#-----------------------------------------------------------------------------
 	def convertCasts(self, line):
 		if self.isComment(line):
 			return line
 			
-		if line.find("/* @:cast */"):
+		def commentAs(line, as_token):
+			for i in xrange (as_token + 4, len(line)):
+				if line[i] == ")" or line[i] == ";" or line[i] == " " or line[i] == ",":
+					line = line.replace(line[as_token:i], " /*" + line[as_token:i] + " */")
+					
+					return line
+					
+			return line
+				
+		def findLabel(line, cast):
+			i = line[cast + 5:].find(" as ")
+			
+			return line[cast + 5: cast + 5 + i]
+			
+# look /* @:cast */		
+		if line.find("/* @:cast */") > 0:
 			line = line.replace ("/* @:cast */", "cast")
+			
+			as_token = line.find(" as ")
+			if as_token < 0:
+				return line
+			
+			line = commentAs(line, as_token)
+			
+			return line
+			
+# look for /* @safe_cast */
+		i = line.find("/* @:safe_cast")
+		
+		if i > 0:
+			def extract_type(i):
+				begin = line[i:].find("(") + i
+				end = line[begin:].find(")") + begin
+				type = line[begin+1:end]
+				
+				return type
+
+			j = line[i:].find (") */ ") + i
+		
+			label = findLabel(line, j)
+						
+			line = line.replace ("/* @:safe_cast(" + extract_type(i) + ") */", "cast(" + label + ", " + extract_type(i) + ")")			
+			
+			cast = extract_type(i).replace (",", " as")
+			
+			line = line.replace(cast, "/* " + cast + " */") 
+			
+			return line
 			
 # look for " as "
 		as_token = line.find(" as ")
@@ -404,14 +450,7 @@ class Update(object):
 			line = line[:equals_token + 3] + "cast " + line[equals_token + 3:as_token] + "; /*" + line[as_token:-2] + " */\n"
 			
 			return line
-			
-# (<value> as <type>);
-		left_paren = line.find("(")
-		if left_paren > 0 and left_paren < as_token:
-			line = line[:left_paren + 1] + "cast " + line[left_paren + 1:as_token] +  " /*" + line[as_token:-3] + " */);\n"
-			
-			return line
-			
+	
 # ) as <type>;
 		right_paren = line.find(")")
 		if right_paren >0 and right_paren < as_token:

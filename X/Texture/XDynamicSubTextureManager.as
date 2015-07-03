@@ -69,7 +69,7 @@ package X.Texture {
 			
 			m_movieClips = new XDict ();  // <String, Array>
 			m_textures = new Array (); // <RenderTexture>
-			m_atlases = new Array ();
+			m_atlases = new Array (); // <TextureAtlas>
 			
 			__begin ();
 		}

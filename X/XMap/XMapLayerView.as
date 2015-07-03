@@ -160,7 +160,7 @@ package X.XMap {
 			var __object:* = m_logicClassNameToClass (__item.logicClassName);
 				
 			if (__object is Function) {
-				__logicObject = (__object as Function) ();
+				__logicObject = (/* @:safe_cast(Function) */ __object as Function) ();
 			}
 			else if (__item.logicClassName.charAt (0) == "$") {
 				if (__object == null) {
@@ -169,11 +169,11 @@ package X.XMap {
 					__logicObject = null;
 				}
 				else {
-					__logicObject = xxx.getXLogicManager ().initXLogicObjectFromPool (
+					__logicObject = /* @:cast */ xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
 						m_XMapView,
 						// class
-						__object as Class,
+						/* @:cast */ __object as Class,
 						// item, layer, depth
 						__item, m_currLayer, __depth,
 						// x, y, z
@@ -196,7 +196,7 @@ package X.XMap {
 				}
 				else
 				{
-					__logicObject = xxx.getXLogicManager ().createXLogicObjectFromClassName (
+					__logicObject = /* @:cast */ xxx.getXLogicManager ().createXLogicObjectFromClassName (
 						// parent
 							m_XMapView,
 						// logicClassName

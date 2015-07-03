@@ -57,7 +57,7 @@ package X.Signals {
 		public function removeAllXSignals ():void {
 			m_XSignals.forEach (
 				function (__signal:*):void {
-					removeXSignal (__signal as XSignal);
+					removeXSignal (/* @:cast */ __signal as XSignal);
 				}
 			);
 		}		
