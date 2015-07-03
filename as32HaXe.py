@@ -459,7 +459,38 @@ class Update(object):
 			return line
 			 
 		return line
+	
+	#-----------------------------------------------------------------------------
+	#
+	#-----------------------------------------------------------------------------
+	def convertIs(self, line):
+		def stripSpacesAndTabs():
+			for i in xrange(0, len(line)):
+				if line[i] != "" and line[i] != "\t":
+					return line[i:]
+			
+			return line
+			
+		i = line.find(" is ")
+		if i < 0:
+			return line
+			
+		line0 = stripSpacesAndTabs()
+		if not line0.startswith("if ("):
+			return line
 		
+		begin = line0.find("(") + 1
+		end = line0.find(" is ")
+		label = line0[begin:end]
+		typePos = line0[end + 4:].find(")") + end + 4
+		type = line0[end + 4: typePos]
+		
+		line = line.replace("if (" + label + " is " + type + ")", "if (Std.is (" + label + ", " + type + "))")
+		
+		print ": ------>: ", label, type, line
+		
+		return line
+			
 	#-----------------------------------------------------------------------------
 	#
 	#-----------------------------------------------------------------------------
@@ -482,6 +513,7 @@ class Update(object):
 		line = self.convertClass(line)
 		line = self.convertTypes(line)
 		line = self.convertCasts(line)
+		line = self.convertIs(line)
 		line = self.convertGettersAndSetters(line)
 		line = self.convertLoops(line)
 		line = self.convertHaXeBlock(line)
