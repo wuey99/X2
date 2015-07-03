@@ -46,7 +46,7 @@ class Update(object):
 	# -->
 	# Map<Int>
 	#-----------------------------------------------------------------------------
-	def convertArrayOrMap (self, line, src, dst):
+	def convertArrayOrMap (self, line, src, dst, ext=""):
 		i = line.find(src)
 		 
 		if i == -1:
@@ -63,7 +63,7 @@ class Update(object):
 			
 		type = line[j+begin:j+end+1]
 		
-		line = line[0:i] + dst + type + line[i + len(src):]
+		line = line[0:i] + dst + type + ext + line[i + len(src):]
 			
 		return line
 		
@@ -71,7 +71,7 @@ class Update(object):
 	# convert XDicts and Arrays to their respective HaXe types (Maps and Arrays w/ typing)
 	#
 	# XDict (); // <key, type>
-	#    --> Map ()<key, type>;
+	#    --> Map<key, type> ();
 	#
 	# XDict; // <key, type>	
 	#    --> Map<key, type>;			
@@ -79,7 +79,7 @@ class Update(object):
 	#    --> Map<key, type>
 	#
 	# Array (); // <type>
-	#    --> Array ()<type>;
+	#    --> Array<type> ();
 	#
 	# Array; // <type>
 	#    --> Array<type>;
@@ -90,14 +90,12 @@ class Update(object):
 		if self.isComment(line):
 			return line
 			
-		"""
 # XDict (); // <key, type>
-#    --> Map ()<key, type>;
-		converted = self.convertArrayOrMap (line, "XDict ()", "Map ()");
+#    --> Map<key, type> ();
+		converted = self.convertArrayOrMap (line, "XDict ()", "Map", " ()");
 			
 		if converted != line:
 			return converted
-		"""
 		
 # XDict; // <key, type>
 #    --> Map<key, type>;			
@@ -108,14 +106,12 @@ class Update(object):
 		if converted != line:
 			return converted
 			
-		"""
 # Array (); // <type>
-#    --> Array ()<type>;
-		converted = self.convertArrayOrMap (line, "Array ()", "Array ()");
+#    --> Array<type> ();
+		converted = self.convertArrayOrMap (line, "Array ()", "Array", " ()");
 		
 		if converted != line:
 			return converted
-		"""
 		
 # Array; // <type>
 #    --> Array<type>;
