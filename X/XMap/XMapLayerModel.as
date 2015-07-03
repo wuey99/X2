@@ -948,7 +948,7 @@ package X.XMap {
 			__imageClassNames.forEach (
 				function (__imageClassName:*):void {
 					var __attribs:Array /* <Dynamic */ = [
-						"name",	/* @:safe_cast(String) */ __imageClassName as String,					
+						"name",	/* @:safe_cast */ __imageClassName as String,					
 					];
 					
 					var __className:XSimpleXMLNode = new XSimpleXMLNode ();				

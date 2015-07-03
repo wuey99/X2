@@ -160,7 +160,7 @@ package X.XMap {
 			var __object:* = m_logicClassNameToClass (__item.logicClassName);
 				
 			if (__object is Function) {
-				__logicObject = (/* @:safe_cast(Function) */ __object as Function) ();
+				__logicObject = (/* @:safe_cast */ __object as Function) ();
 			}
 			else if (__item.logicClassName.charAt (0) == "$") {
 				if (__object == null) {
