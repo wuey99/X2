@@ -315,8 +315,11 @@ class Update(object):
 	#    --> :Array
 	#-----------------------------------------------------------------------------
 	def convertVector(self, line):
-		if self.isType(line, "Vector"):
-			line = line.replace(":Vector", ":Array /* Vector */")
+		if line.find(":Vector.") >= 0:
+			line = line.replace(":Vector.", ":Array")
+			
+		if line.find("<Vector.") >= 0:
+			line = line.replace("<Vector.", "<Array")
 			
 		return line
 		
