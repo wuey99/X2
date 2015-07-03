@@ -400,9 +400,9 @@ class Update(object):
 			return line
 				
 		def findLabel(line, cast):
-			i = line[cast + 5:].find(" as ")
+			i = line[cast + 3:].find(" as ")
 			
-			return line[cast + 5: cast + 5 + i]
+			return line[cast + 3: cast + 3 + i]
 			
 # look /* @:cast */		
 		if line.find("/* @:cast */") > 0:
@@ -421,21 +421,25 @@ class Update(object):
 		
 		if i > 0:
 			def extract_type(i):
-				begin = line[i:].find("(") + i
-				end = line[begin:].find(")") + begin
-				type = line[begin+1:end]
+				begin = line[i:].find(" as ") + i
+				for i in xrange (begin+4, len(line)):
+					if line[i] == ")" or line[i] == "," or line[i] == ";":
+						return line[begin+4:i]
 				
-				return type
+				return ""
 
-			j = line[i:].find (") */ ") + i
+			j = line[i:].find ("*/ ") + i
 		
 			label = findLabel(line, j)
-						
-			line = line.replace ("/* @:safe_cast(" + extract_type(i) + ") */", "cast(" + label + ", " + extract_type(i) + ")")			
+			type = extract_type(i)
+									
+			print ": ----------->: ", label, type, line
 			
-			cast = extract_type(i).replace (",", " as")
+			cast = "cast(" + label + ", " + type + ")"
+			line = line.replace ("/* @:safe_cast */", cast)			
 			
-			line = line.replace(cast, "/* " + cast + " */") 
+			remove = label + " as " + type
+			line = line.replace(remove, "") 
 			
 			return line
 			
@@ -486,8 +490,6 @@ class Update(object):
 		type = line0[end + 4: typePos]
 		
 		line = line.replace("if (" + label + " is " + type + ")", "if (Std.is (" + label + ", " + type + "))")
-		
-		print ": ------>: ", label, type, line
 		
 		return line
 			
