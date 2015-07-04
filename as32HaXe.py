@@ -531,9 +531,26 @@ class Update(object):
 			
 			return line
 			
+		def overrideGetterSetterDefinition(pos, line):	
+			self._getterSetterMode = True
+			
+			pos += len("/* @:override get, set") + 1	
+			i = line[pos:].find(" ") + pos
+			self._getterSetterLabel = label = line[pos:i]
+			
+			pos = i+1
+			i = line[pos:].find(" ") + pos
+			self._getterSetterType = type = line[pos:i]	
+			
+			return line
+			
 		pos = line.find("/* @:get, set")
 		if pos >= 0:
 			return getterSetterDefinition(pos, line)
+			
+		pos = line.find("/* @:override get, set")
+		if pos >= 0:
+			return overrideGetterSetterDefinition(pos, line)
 			
 		if not self._getterSetterMode:
 			return line
