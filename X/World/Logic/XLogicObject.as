@@ -105,7 +105,7 @@ package X.World.Logic {
 		public var m_XTaskSubManagerCX:XTaskSubManager;
 		public var m_isDead:Boolean;
 		public var m_autoCulling:Boolean;
-		public var m_poolClass:Class /* <Dynamic> */;
+		public var m_poolClass:Class; // <Dynamic>
 		public var __XTask:XTask_CONSTANTS;
 		public var m_viewPortRect:XRect;
 		public var m_selfRect:XRect;
