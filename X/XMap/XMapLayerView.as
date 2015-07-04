@@ -173,7 +173,7 @@ package X.XMap {
 						// parent
 						m_XMapView,
 						// class
-						/* @:cast */ __object as Class,
+						/* @:safe_cast */ __object as Class /* <Dynamic> */,
 						// item, layer, depth
 						__item, m_currLayer, __depth,
 						// x, y, z

@@ -290,7 +290,7 @@ package X.Resource.Manager {
 
 //------------------------------------------------------------------------------------------
 		public function findEmbeddedResource (__resourcePath:String):Class /* <Dynamic> */ {
-			return m_embeddedResources.get (__resourcePath) as Class;
+			return /* @:cast */ m_embeddedResources.get (__resourcePath) as Class /* <Dynamic> */;
 		}
 					
 //------------------------------------------------------------------------------------------
