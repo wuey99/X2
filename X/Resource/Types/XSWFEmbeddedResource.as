@@ -27,6 +27,7 @@
 //------------------------------------------------------------------------------------------
 package X.Resource.Types {
 
+	import X.Type.*;
 	import X.Resource.*;
 	import X.Resource.Manager.*;
 	
@@ -90,7 +91,7 @@ package X.Resource.Types {
 
 					__loaderContext.allowCodeImport = true;
 					
-					m_loader.loadBytes (new (m_resourceManager.findEmbeddedResource (m_resourcePath)) (), __loaderContext);
+					m_loader.loadBytes (XType.createInstance (m_resourceManager.findEmbeddedResource (m_resourcePath)), __loaderContext);
  				}
  				catch (error:Error) {
 					throw (Error ("Load resource error: " + error));

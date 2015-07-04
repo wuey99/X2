@@ -30,6 +30,7 @@ package X.Texture {
 	// X classes
 	import X.Collections.*;
 	import X.Task.*;
+	import X.Type.*;
 	import X.World.Sprite.*;
 	import X.XApp;
 	
@@ -100,7 +101,7 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public override function createTexture (__className:String, __class:Class):void {	
-			var __movieClip:flash.display.MovieClip = new (__class) ();
+			var __movieClip:flash.display.MovieClip = XType.createInstance (__class);
 			
 			var __scaleX:Number = 1.0;
 			var __scaleY:Number = 1.0;

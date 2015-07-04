@@ -30,6 +30,7 @@ package X.World.Sprite {
 	import X.*;
 	import X.Geom.*;
 	import X.Task.*;
+	import X.Type.*;
 	import X.Texture.*;
 	import X.World.*;
 	import X.World.Sprite.*;
@@ -131,7 +132,7 @@ package X.World.Sprite {
 				var __class:Class = __xxx.getClass (__className);
 				
 				if (__class != null) {
-					__movieClip = new (__class) ();
+					__movieClip = XType.createInstance (__class);;
 				}
 				else
 				{
@@ -146,7 +147,7 @@ package X.World.Sprite {
 							}, XTask.BNE, "loop",
 						
 							function ():void {
-								__movieClip = new (__class) ();
+								__movieClip = XType.createInstance (__class);
 								
 								initWithMovieClip (__movieClip);
 								

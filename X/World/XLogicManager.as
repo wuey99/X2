@@ -32,6 +32,7 @@ package X.World {
 	import X.Collections.*;
 	import X.Geom.*;
 	import X.Task.*;
+	import X.Type.*;
 	import X.World.Logic.*;
 	import X.World.Sprite.*;
 	import X.XMap.*;
@@ -83,7 +84,7 @@ package X.World {
 			
 			var __class:Class = xxx.getClass (__className);
 			
-			var __logicObject:XLogicObject = new (__class) () as XLogicObject;
+			var __logicObject:XLogicObject = XType.createInstance(__class) as XLogicObject;
 				
 			return __initXLogicObject (
 				__parent,

@@ -29,6 +29,7 @@ package X.XMap {
 
 // X classes
 	import X.*;
+	import X.Type.*;
 	import X.World.*;
 	import X.World.Collision.*;
 	import X.World.Logic.*;
@@ -62,7 +63,7 @@ package X.XMap {
 // create sprite
 //------------------------------------------------------------------------------------------
 		protected function __createSprites (__spriteClassName:String):void {			
-			m_sprite = new (xxx.getClass (__spriteClassName)) ();
+			m_sprite = XType.createInstance (xxx.getClass (__spriteClassName));
 // !STARLING!
 			if (CONFIG::flash) {
 				x_sprite = addSprite (m_sprite);

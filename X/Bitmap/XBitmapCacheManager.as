@@ -30,6 +30,7 @@ package X.Bitmap {
 // X classes
 	import X.Collections.*;
 	import X.Task.*;
+	import X.Type.*;
 	import X.World.Sprite.XBitmap;
 	import X.XApp;
 	
@@ -134,7 +135,7 @@ package X.Bitmap {
 		
 //------------------------------------------------------------------------------------------
 		private function __createBitmap (__className:String, __class:Class):XBitmap {
-			var __movieClip:MovieClip = new (__class) ();
+			var __movieClip:MovieClip = XType.createInstance (__class);
 			__movieClip.stop ();
 			
 			var __XBitmap:XBitmap = new XBitmap ();
