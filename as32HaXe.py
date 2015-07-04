@@ -52,12 +52,14 @@ class Update(object):
 		if i == -1:
 			return line
 		
-		j = line.find("//");
+		j = line[i:].find("//");
 		if j == -1:
-			j = line.find("/*")
+			j = line[i:].find("/*")
 		if j == -1:
 			return line
 			
+		j += i
+		
 		begin = line[j:].find("<")
 		end = line[j:].find("*/")
 		if end >= 0:
