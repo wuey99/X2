@@ -55,27 +55,52 @@ package X.Sound {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function get rate(): Number {
+		/* @:get, set rate Float */
+
+		public function get rate():Number {
 			return 0;
 		}
 		
-		public function set rate( value: Number ): void {
+		public function set rate( value:Number ): /* @:set_type */ void {
+			/* @:set_return 0; */
 		}
+		/* @:end */
 		
-		public function get volume(): Number {
+//------------------------------------------------------------------------------------------
+		/* @:get, set volume Float */
+		
+		public function get volume():Number {
 			return 0;
 		}
 		
-		public function set volume( value: Number ): void {
+		public function set volume( value:Number ): /* @:set_type */ void {
+			/* @:set_return 0; */
 		}
+		/* @:end */
 		
-		public function get position(): Number {
+//------------------------------------------------------------------------------------------
+		/* @:get, set position Float */
+		
+		public function get position():Number {
+			return 0;
+		}
+
+		public function set position(value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set length Float */
+		
+		public function get length():Number {
 			return 0;
 		}
 		
-		public function get length(): Number {
-			return 0;
+		public function set length(value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function play (__startTime:Number, __loops:Number, __soundTransform:SoundTransform):void {

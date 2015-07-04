@@ -499,9 +499,64 @@ class Update(object):
 		return line
 	
 	#-----------------------------------------------------------------------------
+	# /* @:get, set rate Number */
+	#    --> public var rate (get, set):Number;
+	# 
+	# /* @:set_type */
+	#    --> replaced with parsed type
 	#
+	# /* @:set_return 0; */
+	#    --> return 0;
+	#
+	# /* @:end */
+	#    --> end of get/set block
 	#-----------------------------------------------------------------------------
 	def convertGettersAndSetters(self, line):
+	
+		def getterSetterDefinition(pos, line):	
+			self._getterSetterMode = True
+			
+			pos += len("/* @:get, set") + 1	
+			i = line[pos:].find(" ") + pos
+			self._getterSetterLabel = label = line[pos:i]
+			
+			pos = i+1
+			i = line[pos:].find(" ") + pos
+			self._getterSetterType = type = line[pos:i]	
+
+			line = line.replace ( \
+				"/* @:get, set " + label + " " + type + " */", \
+				"public var " + label + " (get, set):" + type + ";" \
+			)
+			
+			return line
+			
+		pos = line.find("/* @:get, set")
+		if pos >= 0:
+			return getterSetterDefinition(pos, line)
+			
+		if not self._getterSetterMode:
+			return line
+			
+		line = line.replace("function get " + self._getterSetterLabel, "function get_" + self._getterSetterLabel)
+		line = line.replace("function set " + self._getterSetterLabel, "function set_" + self._getterSetterLabel)
+		line = line.replace("/* @:set_type */", self._getterSetterType + " { //")
+		
+		pos = line.find("/* @:set_return")
+		if pos >= 0:
+			pos += len("/* @:set_return") + 1
+			
+			i = line[pos:].find(";") + pos
+			
+			returnValue = line[pos:i]
+			
+			line = line.replace("/* @:set_return " + returnValue + "; */", "return " + returnValue + ";")
+			
+			return line
+			
+		if line.find("/* @:end */") >= 0:
+			self._getterSetterMode = False
+			
 		return line
 				
 	#-----------------------------------------------------------------------------
@@ -549,6 +604,7 @@ class Update(object):
 		self._className = ""
 		self._haXeBlock = False
 		self._as3Block = False
+		self._getterSetterMode = False
 						
 		self._lineNumber = 0
 		for line in src:

@@ -47,11 +47,11 @@ package X.Sound {
 		
 		private var _target: ByteArray;
 		
-		private var _position: Number;
-		private var _rate: Number;
-		private var _volume: Number;
+		private var _position:Number;
+		private var _rate:Number;
+		private var _volume:Number;
 		
-		private var _length: Number;
+		private var _length:Number;
 		private var _isPlaying: Boolean;
 		
 		private var m_function:Function;
@@ -146,11 +146,11 @@ package X.Sound {
 			//-- SHORTCUT
 			var data: ByteArray = event.data;
 			
-			var scaledBlockSize: Number = BLOCK_SIZE * _rate;
+			var scaledBlockSize:Number = BLOCK_SIZE * _rate;
 			var positionInt: int = _position;
-			var alpha: Number = _position - positionInt;
+			var alpha:Number = _position - positionInt;
 			
-			var positionTargetNum: Number = alpha;
+			var positionTargetNum:Number = alpha;
 			
 			//-- COMPUTE NUMBER OF SAMPLES NEED TO PROCESS BLOCK (+2 FOR INTERPOLATION)
 			var need: int = Math.ceil( scaledBlockSize ) + 2;
@@ -195,10 +195,10 @@ package X.Sound {
 		private function writeData(data, alpha, n:uint, positionTargetNum:Number): void {
 			var positionTargetInt: int = -1;
 			
-			var l0: Number;
-			var r0: Number;
-			var l1: Number;
-			var r1: Number;
+			var l0:Number;
+			var r0:Number;
+			var l1:Number;
+			var r1:Number;
 			
 			for( var i: int = 0 ; i < n ; ++i )
 			{
@@ -244,38 +244,53 @@ package X.Sound {
 		//  Getters && Setters
 		//---------------------------------------------------------------------
 		
-		public override function get rate(): Number {
+		/* @:get, set rate Float */
+		
+		public override function get rate():Number {
 			return _rate;
 		}
 		
-		public override function set rate( value: Number ): void {
+		public override function set rate( value:Number ): /* @:set_type */ void {
 			if( value < 0.1 ) {
 				value = 0.1;
 			}
 			
 			_rate = value;
+			
+			/* @:set_return 0; */
 		}
+		/* @:end */
 		
-		public override function get volume(): Number {
+		/* @:get, set volume Float */
+		
+		public override function get volume():Number {
 			return _volume;
 		}
 		
-		public override function set volume( value: Number ): void {
+		public override function set volume( value:Number ): /* @:set_type */ void {
 			if( value < 0.0 ) {
 				value = 0;
 			}
 			
 			_volume = value;
+			
+			/* @:set_return 0; */
 		}
+		/* @:end */
 		
-		public override function get position(): Number {
+		/* @:get, set position Float */
+		
+		public override function get position():Number {
 			return _position;
 		}
+		/* @:end */
 		
-		public override function get length(): Number {
+		/* @:get, set length Float */
+		
+		public override function get length():Number {
 			return _length;
 		}
-		
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public override function play (__startTime:Number, __loops:Number, __soundTransform:SoundTransform):void {
