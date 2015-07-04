@@ -33,11 +33,11 @@ package X.Pool {
 	
 //------------------------------------------------------------------------------------------	
 	public class XClassPoolManager extends Object {
-		private var m_pools:XDict; // <Class, XObjectPoolManager>
+		private var m_pools:XDict; // <Class<Dynamic>, XObjectPoolManager>
 		
 //------------------------------------------------------------------------------------------
 		public function XClassPoolManager () {
-			m_pools = new XDict (); // <Class, XObjectPoolManager>
+			m_pools = new XDict (); // <Class<Dynamic>, XObjectPoolManager>
 		}
 
 //------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ package X.Pool {
 
 //------------------------------------------------------------------------------------------
 		public function setupPool (
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__numObjects:Number,
 			__overflow:Number
 		):XObjectPoolManager {
@@ -68,7 +68,7 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function preAllocate (__class:Class, __numObjects:Number):void {
+		public function preAllocate (__class:Class /* <Dynamic> */, __numObjects:Number):void {
 			var __pool:XObjectPoolManager;
 			
 			if (!m_pools.exists (__class)) {
@@ -89,7 +89,7 @@ package X.Pool {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function returnAllObjects (__class:Class = null):void {
+		public function returnAllObjects (__class:Class /* <Dynamic> */ = null):void {
 			var __pool:XObjectPoolManager;
 			
 			if (__class != null) {
@@ -112,7 +112,7 @@ package X.Pool {
 		}		
 		
 //------------------------------------------------------------------------------------------
-		public function returnObject (__class:Class, __object:Object):void {
+		public function returnObject (__class:Class /* <Dynamic> */, __object:Object):void {
 			var __pool:XObjectPoolManager;
 			
 			if (m_pools.exists (__class)) {
@@ -123,7 +123,7 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function borrowObject (__class:Class):Object {
+		public function borrowObject (__class:Class /* <Dynamic> */):Object {
 			var __pool:XObjectPoolManager;
 			
 			if (!m_pools.exists (__class)) {

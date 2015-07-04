@@ -53,7 +53,7 @@ package X.Resource.Manager {
 		private var m_loaderContextFactory:Function;
 		private var m_subResourceManagers:Array; // <XSubResourceManager>
 		private var m_callback:Function;
-		private var m_embeddedResources:XDict; // <String, Class>
+		private var m_embeddedResources:XDict; // <String, Class<Dynamic>>
 				
 //------------------------------------------------------------------------------------------		
 		public function XProjectManager (__XApp:XApp) {
@@ -62,7 +62,7 @@ package X.Resource.Manager {
 			m_XApp = __XApp;
 			m_loadComplete = true;
 			m_projectXML = null;
-			m_embeddedResources = new XDict (); // <String, Class>
+			m_embeddedResources = new XDict (); // <String, Class<Dynamic>>
 		}
 
 //------------------------------------------------------------------------------------------
@@ -284,12 +284,12 @@ package X.Resource.Manager {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addEmbeddedResource (__resourcePath:String, __swfBytes:Class):void {
+		public function addEmbeddedResource (__resourcePath:String, __swfBytes:Class /* <Dynamic> */):void {
 			m_embeddedResources.set (__resourcePath, __swfBytes);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function findEmbeddedResource (__resourcePath:String):Class {
+		public function findEmbeddedResource (__resourcePath:String):Class /* <Dynamic> */ {
 			return m_embeddedResources.get (__resourcePath) as Class;
 		}
 					
@@ -306,7 +306,7 @@ package X.Resource.Manager {
 			
 			var i:Number;
 			var r:XSubResourceManager;
-			var c:Class;
+			var c:Class; // <Dynamic>
 			
 			for (i=0; i<m_subResourceManagers.length; i++) {
 				r = m_subResourceManagers[i];
@@ -354,7 +354,7 @@ package X.Resource.Manager {
 //------------------------------------------------------------------------------------------
 // looks up Class based on the full class name
 //------------------------------------------------------------------------------------------
-		public function getClassByName (__className:String):Class {
+		public function getClassByName (__className:String):Class /* <Dynamic> */ {
 			if (!resourceManagerReady ()) {
 				return null;
 			}
@@ -367,7 +367,7 @@ package X.Resource.Manager {
 			
 			var i:Number;
 			var r:XSubResourceManager;
-			var c:Class;
+			var c:Class; // <Dynamic>
 			
 			for (i=0; i<m_subResourceManagers.length; i++) {
 				r = m_subResourceManagers[i];

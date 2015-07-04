@@ -59,7 +59,11 @@ class Update(object):
 			return line
 			
 		begin = line[j:].find("<")
-		end = line[j:].find(">")
+		end = line[j:].find("*/")
+		if end >= 0:
+			end -= 2
+		else:
+			end = line[j:].find("\n")-1
 			
 		type = line[j+begin:j+end+1]
 		
@@ -85,6 +89,11 @@ class Update(object):
 	#    --> Array<type>;
 	# Array /* <type> */
 	#    --> Array<type>		
+	#
+	# Class; // <type>
+	#    --> Class<type>;
+	# Class /* <type> */
+	#    --> Class<type>
 	#-----------------------------------------------------------------------------	
 	def convertArraysAndMaps (self, line):
 		if self.isComment(line):
@@ -122,6 +131,15 @@ class Update(object):
 		if converted != line:
 			return converted
 
+# Class; // <type>
+#    --> Class<type>;
+# Class /* <type> */
+#    --> Class<type>
+		converted = self.convertArrayOrMap (line, "Class", "Class");
+		
+		if converted != line:
+			return converted
+			
 		return line
 
 	#-----------------------------------------------------------------------------

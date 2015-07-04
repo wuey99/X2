@@ -377,12 +377,12 @@ package X {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getClass (__className:String):Class {
+		public function getClass (__className:String):Class /* <Dynamic> */ {
 			return getProjectManager ().getClassByName (__className);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getClassByName (__className:String):Class {
+		public function getClassByName (__className:String):Class /* <Dynamic> */ {
 			return getProjectManager ().getClassByName (__className);
 		}
 		

@@ -1008,7 +1008,7 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getClass (__className:String):Class {
+		public function getClass (__className:String):Class /* <Dynamic> */ {
 			return m_XApp.getClass (__className);
 		}					
 

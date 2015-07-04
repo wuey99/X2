@@ -66,7 +66,7 @@ package X.Resource.Types {
 		}
 
 //------------------------------------------------------------------------------------------
-		private function __getClassByName (__className:String, __resourceName:String=""):Class {
+		private function __getClassByName (__className:String, __resourceName:String=""):Class /* <Dynamic> */ {
 			var c:Class;
 			
 			try {
@@ -97,13 +97,13 @@ package X.Resource.Types {
 			var __resourceName:String = r.resourceName;
 			var __className:String = r.className;
 			
-			var c:Class = __getClassByName (__className, __resourceName);	
+			var c:Class /* <Dynamic> */ = __getClassByName (__className, __resourceName);	
 			
 			return c;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function getAllClasses ():Array /* <Class> */ {
+		public override function getAllClasses ():Array /* <Class<Dynamic>> */ {
 			if (m_loader == null) {
 				loadResource ();
 			}
@@ -114,10 +114,10 @@ package X.Resource.Types {
 			
 			var i:Number;
 			var __classNames:Array /* <String> */ = getAllClassNames ();
-			var __classes:Array /* <Class> */ = new Array (); // <Class>
+			var __classes:Array /* <Class> */ = new Array (); // <Class<Dynamic>>
 			
 			for (i=0; i<__classNames.length; i++) {
-				var c:Class;
+				var c:Class; // <Dynamic>
 				
 				c = __getClassByName (__classNames[i]);
 				

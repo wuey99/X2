@@ -78,7 +78,7 @@ package X.Texture {
 						m_queue.forEach (
 							function (x:*):void {
 								var __className:String = x as String;
-								var __class:Class = m_XApp.getClass (__className);
+								var __class:Class /* <Dynamic> */ = m_XApp.getClass (__className);
 							
 								if (__class != null) {
 									createTexture (__className, __class);
@@ -148,7 +148,7 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createTexture (__className:String, __class:Class):void {	
+		public function createTexture (__className:String, __class:Class /* <Dynamic> */):void {	
 		}
 		
 		//------------------------------------------------------------------------------------------

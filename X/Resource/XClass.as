@@ -29,7 +29,7 @@ package X.Resource {
 
 //------------------------------------------------------------------------------------------	
 	public class XClass extends Object {
-		private var m_class:Class = null;
+		private var m_class:Class /* <Dynamic> */ = null;
 		private var m_className:String;
 		private var m_resourcePath:String;
 		private var m_resourceXML:XML;
@@ -59,12 +59,12 @@ package X.Resource {
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function setClass (__class:Class):void {
+		public function setClass (__class:Class /* <Dynamic> */):void {
 			m_class = __class;
 		}
 		
 //------------------------------------------------------------------------------------------	
-		public function getClass ():Class {
+		public function getClass ():Class /* <Dynamic> */ {
 			return m_class;
 		}
 

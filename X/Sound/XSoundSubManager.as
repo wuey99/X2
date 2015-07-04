@@ -69,7 +69,7 @@ package X.Sound {
 
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClass (
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
 			__transform:SoundTransform = null,
@@ -153,7 +153,7 @@ package X.Sound {
 		
 		//------------------------------------------------------------------------------------------
 		public function playPitchSoundFromClass (
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__priority:Number = 1.0,
 			__loops:Number = 0,
 			__transform:SoundTransform = null,

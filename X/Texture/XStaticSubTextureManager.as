@@ -108,7 +108,7 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public override function add (__className:String):void {
-			var __class:Class = m_XApp.getClass (__className);
+			var __class:Class /* <Dynamic> */ = m_XApp.getClass (__className);
 			
 			m_movieClips.set (__className, []);
 			
@@ -124,7 +124,7 @@ package X.Texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function createTexture (__className:String, __class:Class):void {	
+		public override function createTexture (__className:String, __class:Class /* <Dynamic> */):void {	
 			var __movieClip:flash.display.MovieClip = XType.createInstance (__class);
 			
 			var __scaleX:Number = 1.0;

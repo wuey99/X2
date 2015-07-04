@@ -97,7 +97,7 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getClassByName (__className:String):Class {
+		public function getClassByName (__className:String):Class /* <Dynamic> */ {
 			return null;
 		}
 		

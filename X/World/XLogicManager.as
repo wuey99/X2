@@ -82,7 +82,7 @@ package X.World {
 				
 			args = (args == null) ? args = [] : args;
 			
-			var __class:Class = xxx.getClass (__className);
+			var __class:Class /* <Dynamic> */ = xxx.getClass (__className);
 			
 			var __logicObject:XLogicObject = XType.createInstance(__class) as XLogicObject;
 				
@@ -99,7 +99,7 @@ package X.World {
 //------------------------------------------------------------------------------------------
 		public function initXLogicObjectFromPool (
 			__parent:XLogicObject,
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
@@ -202,7 +202,7 @@ package X.World {
 		public function __initXLogicObject (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
@@ -252,7 +252,7 @@ package X.World {
 		public function __initXLogicObjectRel (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,

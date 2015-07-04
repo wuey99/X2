@@ -217,7 +217,7 @@ package X.Resource.Manager {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function findEmbeddedResource (__resourcePath:String):Class {
+		public function findEmbeddedResource (__resourcePath:String):Class /* <Dynamic> */ {
 			return m_projectManager.findEmbeddedResource (__resourcePath);
 		}
 		
@@ -311,7 +311,7 @@ package X.Resource.Manager {
 		//------------------------------------------------------------------------------------------
 		// looks up Class based on the full class name
 		//------------------------------------------------------------------------------------------
-		public override function getClassByName (__className:String):Class {
+		public override function getClassByName (__className:String):Class /* <Dynamic> */ {
 			if (!m_loadComplete) {
 				return null;
 			}
@@ -320,7 +320,7 @@ package X.Resource.Manager {
 			
 			var __XClass:XClass = __resolveXClass (__className);
 			
-			var __class:Class = __XClass.getClass ();
+			var __class:Class /* <Dynamic> */ = __XClass.getClass ();
 			
 			if (__class == null) {
 				__class = __resolveClass (__XClass);
@@ -351,7 +351,7 @@ package X.Resource.Manager {
 			
 			var __XClass:XClass = __resolveXClass (__className);
 			
-			var __class:Class = __XClass.getClass ();
+			var __class:Class /* <Dynamic> */ = __XClass.getClass ();
 			
 			if (__class == null) {
 				__class = __resolveClass (__XClass);
@@ -648,7 +648,7 @@ package X.Resource.Manager {
 		// note that XResource loads the resource asynchronously.  until the resource is completely
 		// loaded, this function will return null.
 		//------------------------------------------------------------------------------------------
-		private function __resolveClass (__XClass:XClass):Class {
+		private function __resolveClass (__XClass:XClass):Class /* <Dynamic> */ {
 			var	__resourcePath:String = __XClass.getResourcePath ();
 			var __resourceXML:XML = __XClass.getResourceXML ();
 			

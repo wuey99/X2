@@ -60,9 +60,9 @@ package X.Sound {
 		
 //------------------------------------------------------------------------------------------
 		private function __playSound (
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__sound:Sound,
-			__type:Class,
+			__type:Class /* <Dynamic> */,
 			__loops:Number = 0,
 			__transform:SoundTransform = null,
 			__successListener:Function = null,
@@ -85,7 +85,7 @@ package X.Sound {
 				function (e:Event):void {
 					if (m_soundChannels.exists (__guid)) {
 						var __completeListener:Function = m_soundChannels.get (__guid)[1];
-						var __class:Class = m_soundChannels.get (__guid)[2];
+						var __class:Class /* <Dynamic> */ = m_soundChannels.get (__guid)[2];
 						var __sound:Sound = m_soundChannels.get (__guid)[3];
 						
 						if (__completeListener != null) {
@@ -151,7 +151,7 @@ package X.Sound {
 
 		//------------------------------------------------------------------------------------------
 		public function playPitchSoundFromClass (
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__priority:Number,
 			__loops:Number = 0,
 			__transform:SoundTransform = null,
@@ -182,7 +182,7 @@ package X.Sound {
 			__completeListener:Function = null
 		):Number {
 			
-			var __class:Class = m_XApp.getClass (__className);
+			var __class:Class /* <Dynamic> */ = m_XApp.getClass (__className);
 			var __sound:Sound = m_soundClassPoolManager.borrowObject (__class) as Sound;
 			
 			return __playSound (
@@ -223,7 +223,7 @@ package X.Sound {
 					__completeListener (__guid);
 				}
 
-				var __class:Class = m_soundChannels.get (__guid)[2];
+				var __class:Class /* <Dynamic> */ = m_soundChannels.get (__guid)[2];
 				var __sound:Sound = m_soundChannels.get (__guid)[3];
 				m_soundClassPoolManager.returnObject (__class, __sound);
 				

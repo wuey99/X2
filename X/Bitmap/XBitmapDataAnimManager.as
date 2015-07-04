@@ -60,7 +60,7 @@ package X.Bitmap {
 						m_queue.forEach (
 							function (x:*):void {
 								var __className:String = x as String;
-								var __class:Class = m_XApp.getClass (__className);
+								var __class:Class /* <Dynamic> */ = m_XApp.getClass (__className);
 								
 								if (__class != null) {
 									var __bitmapAnim:XBitmapDataAnim = m_bitmapAnims.get (__className);
@@ -106,7 +106,7 @@ package X.Bitmap {
 	
 			trace (": queuing: ", __className);
 			
-			var __class:Class = m_XApp.getClass (__className);
+			var __class:Class /* <Dynamic> */ = m_XApp.getClass (__className);
 							
 			trace (": XBitmapDataAnimManager: caching: ", __className, __class);
 							
@@ -138,7 +138,7 @@ package X.Bitmap {
 		}
 						
 //------------------------------------------------------------------------------------------
-		private function __createBitmapAnim (__className:String, __class:Class):XBitmapDataAnim {
+		private function __createBitmapAnim (__className:String, __class:Class /* <Dynamic> */):XBitmapDataAnim {
 			var __movieClip:MovieClip = XType.createInstance (__class);
 			__movieClip.stop ();
 			
