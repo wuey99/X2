@@ -114,7 +114,7 @@ package X.Resource.Types {
 			
 			var i:Number;
 			var __classNames:Array /* <String> */ = getAllClassNames ();
-			var __classes:Array /* <Class<Dynamic>> */ = new Array (); // <Class<Dynamic>>
+			var __classes:Array /* <Class<Dynamic>> */ = new Array (); // <Class<Dynamic>> 
 			
 			for (i=0; i<__classNames.length; i++) {
 				var c:Class; // <Dynamic>
