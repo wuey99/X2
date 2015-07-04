@@ -47,10 +47,15 @@ class Update(object):
 	# Map<Int>
 	#-----------------------------------------------------------------------------
 	def convertArrayOrMap (self, line, src, dst, ext=""):
-		i = line.find(src)
+		i = line.find(" " + src)
 		 
 		if i == -1:
+			i = line.find(":" + src)
+			
+		if i == -1:
 			return line
+			
+		i += 1
 		
 		j = line[i:].find("//");
 		if j == -1:
