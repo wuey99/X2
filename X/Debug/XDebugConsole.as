@@ -51,7 +51,7 @@ package X.Debug  {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function setup (__xxx:XWorld, args:Array):void {
+		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
 
 			m_fontClass = getArg (args, 0);

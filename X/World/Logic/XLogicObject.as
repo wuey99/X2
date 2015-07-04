@@ -175,7 +175,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setup (__xxx:XWorld, args:Array):void {	
+		public function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {	
 			m_masterScaleX = m_masterScaleY = 1.0;
 			m_masterRotation = 0;
 			m_masterVisible = true;
@@ -1001,7 +1001,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getArg(__args:Array, i:Number):* {
+		public function getArg(__args:Array /* <Dynamic> */, i:Number):* {
 			return __args[i];
 		}
 		
@@ -1475,7 +1475,7 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function addTask0 (
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 		):XTask {
 			
@@ -1489,7 +1489,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function changeTask0 (
 			__task:XTask,
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 		):XTask {
 			
@@ -1540,7 +1540,7 @@ package X.World.Logic {
 
 //------------------------------------------------------------------------------------------
 		public function addTask (
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 
@@ -1554,7 +1554,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function changeTask (
 			__task:XTask,
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
@@ -1605,7 +1605,7 @@ package X.World.Logic {
 		
 //------------------------------------------------------------------------------------------
 		public function addTaskCX (
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 		):XTask {
 			
@@ -1619,7 +1619,7 @@ package X.World.Logic {
 //------------------------------------------------------------------------------------------
 		public function changeTaskCX (
 			__task:XTask,
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 		):XTask {
 			
