@@ -91,18 +91,6 @@ package X.World.Sprite {
 						m_bitmapDataAnimManager.remove (m_className);
 					}
 					
-					/*
-					var i:Number;
-		
-					var __name:String;
-		
-					for (__name in m_bitmapNames) {
-						m_bitmapNames[__name].dispose ();
-						
-						delete m_bitmapNames[__name];
-					}
-					*/
-					
 					m_bitmapNames.forEach (
 						function (x:*):void {
 							var __name:String = x as String;

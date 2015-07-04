@@ -244,7 +244,7 @@ package X.Sound {
 		//  Getters && Setters
 		//---------------------------------------------------------------------
 		
-		/* @:get, set rate Float */
+		/* @:override get, set rate Float */
 		
 		public override function get rate():Number {
 			return _rate;
@@ -261,7 +261,7 @@ package X.Sound {
 		}
 		/* @:end */
 		
-		/* @:get, set volume Float */
+		/* @:override get, set volume Float */
 		
 		public override function get volume():Number {
 			return _volume;
@@ -278,14 +278,14 @@ package X.Sound {
 		}
 		/* @:end */
 		
-		/* @:get, set position Float */
+		/* @:override get, set position Float */
 		
 		public override function get position():Number {
 			return _position;
 		}
 		/* @:end */
 		
-		/* @:get, set length Float */
+		/* @:override get, set length Float */
 		
 		public override function get length():Number {
 			return _length;
