@@ -106,7 +106,10 @@ class Update(object):
 		converted = self.convertArrayOrMap (line, "XDict ()", "Map", " ()");
 			
 		if converted != line:
-			line = converted
+			if line.count("XDict") > 1:
+				line = converted
+			else:
+				return converted
 		
 # XDict; // <key, type>
 #    --> Map<key, type>;			
@@ -122,8 +125,11 @@ class Update(object):
 		converted = self.convertArrayOrMap (line, "Array ()", "Array", " ()");
 		
 		if converted != line:
-			line = converted
-		
+			if line.count("Array") > 1:
+				line = converted
+			else:
+				return converted
+				
 # Array; // <type>
 #    --> Array<type>;
 # Array /* <type> */
