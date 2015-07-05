@@ -71,20 +71,41 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set manifestName String */
+		
 		public function get manifestName ():String {
 			return m_manifestName;
 		}
 		
+		public function set manifestName (__value:String): /* @:set_type */ void {
+			/* @:set_return ""; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
+		/* @:get, set resourceName String */
+		
 		public function get resourceName ():String {
 			return m_resourceName;
 		}
 		
+		public function set resourceName (__value:String): /* @:set_type */ void {
+			/* @:set_return ""; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
+		/* @:get, set className String */
+		
 		public function get className ():String {
 			return m_className;
 		}
 		
+		public function set className (__value:String): /* @:set_type */ void {
+			/* @:set_return ""; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
 	}
 

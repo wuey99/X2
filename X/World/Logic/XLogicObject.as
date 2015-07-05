@@ -916,17 +916,22 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function set autoCulling (__value:Boolean):void {
+		/* @:get, set autoCulling Bool */
+		
+		public function get autoCulling ():Boolean {
+			return m_autoCulling;
+		}
+		
+		public function set autoCulling (__value:Boolean): /* @:set_type */ void {
 			m_autoCulling = __value;
 			
 			if (autoCulling) {
 				boundingRect = new XRect (-32, -32, +64, +64);
 			}
+			
+			/* @:set_return true; */	
 		}
-		
-		public function get autoCulling ():Boolean {
-			return m_autoCulling;
-		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function setItem (__item:XMapItemModel):void {
@@ -943,9 +948,16 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set item XMapItemModel */
+		
 		public function get item ():XMapItemModel {
 			return m_item;
 		}
+		
+		public function set item (__value:XMapItemModel): /* @:set_type */ void {
+			/* @:set_return null; */	
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function setupItemParamsXML ():void {
@@ -1006,27 +1018,48 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set o Dynamic */
+			
 		public function get o ():Object {
 			return this as Object;
 		}	
 	
-//------------------------------------------------------------------------------------------		
+		public function set o (__value:*): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set isDead Bool */
+			
 		public function get isDead ():Boolean {
 			return m_isDead;
 		}
 		
-		public function set isDead (__value:Boolean):void {
+		public function set isDead (__value:Boolean): /* @:set_type */ void {
 			m_isDead = __value;
+			
+			/* @:set_return true; */			
 		}
-
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		public function collisionCallback ():void {	
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function set XLogicManager (__value:XLogicManager):void {
-			m_XLogicManager = __value;
+		/* @:get, set oXLogicManager XLogicManager */
+		
+		public function get oXLogicManager ():XLogicManager {
+			return m_XLogicManager;
 		}
+		
+		public function set oXLogicManager (__value:XLogicManager): /* @:set_type */ void {
+			m_XLogicManager = __value;
+			
+			/* @:set_return null; */	
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function getXLogicManager ():XLogicManager {
@@ -1034,47 +1067,39 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function set boundingRect (__value:XRect):void {
-			m_boundingRect = __value;
-		}
-		
+		/* @:get, set boundingRect XRect */
+
 		[Inline]
 		public function get boundingRect ():XRect {
 			return m_boundingRect;
 		}
 		
-//------------------------------------------------------------------------------------------
 		[Inline]
-		public function setPos (__pos:XPoint):void {
-			m_pos = __pos;
+		public function set boundingRect (__value:XRect): /* @:set_type */ void {
+			m_boundingRect = __value;
+			
+			/* @:set_return null; */			
 		}
-		
-		[Inline]
-		public function set pos (__pos:XPoint):void {
-			m_pos = __pos;
-		}
-		
-		[Inline]
-		public function set oX (__value:Number):void {
-			m_pos.x = __value;
-		}
-
-		[Inline]
-		public function set oY (__value:Number):void {
-			m_pos.y = __value;
-		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function getPos ():XPoint {
-			return m_pos;
-		}
+		/* @:get, set pos XPoint */
 		
 		[Inline]
 		public function get pos ():XPoint{
 			return m_pos;
 		}
+				
+		[Inline]
+		public function set pos (__pos:XPoint): /* @:set_type */ void {
+			m_pos = __pos;
+			
+			/* @:set_return null; */	
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oX Float */
 		
 		[Inline]
 		public function get oX ():Number {
@@ -1082,20 +1107,55 @@ package X.World.Logic {
 		}
 
 		[Inline]
+		public function set oX (__value:Number): /* @:set_type */ void {
+			m_pos.x = __value;
+			
+			/* @:set_return 0; */	
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oY Float */
+		
+		[Inline]
 		public function get oY ():Number {
 			return m_pos.y
+		}		
+
+		[Inline]
+		public function set oY (__value:Number): /* @:set_type */ void {
+			m_pos.y = __value;
+
+			/* @:set_return 0; */	
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		[Inline]
-		public function setAlpha (__alpha:Number):void {
-			m_alpha = __alpha;
+		public function getPos ():XPoint {
+			return m_pos;
+		}
+	
+		[Inline]
+		public function setPos (__pos:XPoint):void {
+			m_pos = __pos;
+		}
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oAlpha Float */
+		
+		[Inline]
+		public function get oAlpha ():Number {
+			return m_alpha
 		}
 		
 		[Inline]
-		public function set oAlpha (__alpha:Number):void {
+		public function set oAlpha (__alpha:Number): /* @:set_type */ void {
 			m_alpha = __alpha;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		[Inline]
@@ -1104,8 +1164,8 @@ package X.World.Logic {
 		}
 		
 		[Inline]
-		public function get oAlpha ():Number {
-			return m_alpha
+		public function setAlpha (__alpha:Number):void {
+			m_alpha = __alpha;
 		}
 
 //------------------------------------------------------------------------------------------		
@@ -1119,23 +1179,28 @@ package X.World.Logic {
 		}
 			
 //------------------------------------------------------------------------------------------
-		public function setVisible (__value:Boolean):void {
-			m_visible = __value;
+		/* @:get, set oVisible Bool */
+		
+		public function get oVisible ():Boolean {
+			return m_visible;
 		}
 		
-		public function set oVisible (__value:Boolean):void {
+		public function set oVisible (__value:Boolean): /* @:set_type */ void {
 			m_visible = __value;
+			
+			/* @:set_return true; */	
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function getVisible ():Boolean {
 			return m_visible;
 		}
-		
-		public function get oVisible ():Boolean {
-			return m_visible;
-		}
 
+		public function setVisible (__value:Boolean): /* @:set_type */ void {
+			m_visible = __value;
+		}
+		
 //------------------------------------------------------------------------------------------		
 		public function setMasterVisible (__visible:Boolean):void {
 			m_masterVisible = __visible;
@@ -1147,16 +1212,21 @@ package X.World.Logic {
 		}
 					
 //------------------------------------------------------------------------------------------
+		/* @:get, set oRotation Float */
+		
 		[Inline]
-		public function setRotation (__rotation:Number):void {
-			m_rotation = __rotation % 360;
+		public function get oRotation ():Number {
+			return m_rotation;
 		}
 		
 		[Inline]
-		public function set oRotation (__value:Number):void {
+		public function set oRotation (__value:Number): /* @:set_type */ void {
 			m_rotation = __value % 360;
+			
+			/* @:set_return 0; */	
 		}
-
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		[Inline]
 		public function getRotation ():Number {
@@ -1164,8 +1234,8 @@ package X.World.Logic {
 		}
 		
 		[Inline]
-		public function get oRotation ():Number {
-			return m_rotation;
+		public function setRotation (__rotation:Number):void {
+			m_rotation = __rotation % 360;
 		}
 		
 //------------------------------------------------------------------------------------------		
@@ -1179,15 +1249,20 @@ package X.World.Logic {
 		}
 				
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function setScale (__scale:Number):void {
-			m_scaleX  = m_scaleY = __scale;
-		}
+		/* @:get, set oScale Float */
 		
 		[Inline]
-		public function set oScale (__value:Number):void {
-			m_scaleX  = m_scaleY = __value;
+		public function get oScale ():Number {
+			return m_scaleX;
 		}
+
+		[Inline]
+		public function set oScale (__value:Number): /* @:set_type */ void {
+			m_scaleX  = m_scaleY = __value;
+			
+			/* @:set_return 0; */	
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		[Inline]
@@ -1196,43 +1271,53 @@ package X.World.Logic {
 		}
 		
 		[Inline]
-		public function get oScale ():Number {
-			return m_scaleX;
-		}
-
-//------------------------------------------------------------------------------------------
-		[Inline]
-		public function setScaleX (__scale:Number):void {
-			m_scaleX = __scale;
+		public function setScale (__scale:Number):void {
+			m_scaleX  = m_scaleY = __scale;
 		}
 		
-		[Inline]
-		public function set oScaleX (__value:Number):void {
-			m_scaleX = __value;
-		}
-
 //------------------------------------------------------------------------------------------
-		[Inline]
-		public function getScaleX ():Number {
-			return m_scaleX;
-		}
+		/* @:get, set oScaleX Float */
 		
 		[Inline]
 		public function get oScaleX ():Number {
 			return m_scaleX;
 		}
-
+		
+		[Inline]
+		public function set oScaleX (__value:Number): /* @:set_type */ void {
+			m_scaleX = __value;
+			
+			/* @:set_return 0; */	
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		[Inline]
-		public function setScaleY (__scale:Number):void {
-			m_scaleY = __scale;
+		public function getScaleX ():Number {
+			return m_scaleX;
+		}
+
+		[Inline]
+		public function setScaleX (__scale:Number):void {
+			m_scaleX = __scale;
+		}
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oScaleY Float */
+		
+		[Inline]
+		public function get oScaleY ():Number {
+			return m_scaleY;
 		}
 		
 		[Inline]
-		public function set oScaleY (__value:Number):void {
+		public function set oScaleY (__value:Number): /* @:set_type */ void {
 			m_scaleY = __value;
+			
+			/* @:set_return 0; */	
 		}
-
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		[Inline]
 		public function getScaleY ():Number {
@@ -1240,8 +1325,8 @@ package X.World.Logic {
 		}
 		
 		[Inline]
-		public function get oScaleY ():Number {
-			return m_scaleY;
+		public function setScaleY (__scale:Number):void {
+			m_scaleY = __scale;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -1692,86 +1777,131 @@ package X.World.Logic {
 //
 // for use by createXLogicObjectFromXML
 //------------------------------------------------------------------------------------------
-		public function set iX (__value:Number):void {
-			m_iX = __value;
-		}
+		/* @:get, set iX Float */
 		
 		public function get iX ():Number {
 			return m_iX;
 		}
 		
+		public function set iX (__value:Number): /* @:set_type */ void {
+			m_iX = __value;
+			
+			/* @:set_return 0; */	
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
-		public function set iY (__value:Number):void {
-			m_iY = __value;
-		}	
+		/* @:get, set iY Float */
 		
 		public function get iY ():Number {
 			return m_iY;
 		}
 		
+		public function set iY (__value:Number): /* @:set_type */ void {
+			m_iY = __value;
+			
+			/* @:set_return 0; */	
+		}	
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
-		public function set iScale (__value:Number):void {
-			m_iScale = __value;
-		}
-
+		/* @:get, set iScale Float */
+		
 		public function get iScale ():Number {
 			return m_iScale;
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function set iRotation (__value:Number):void {
-			m_iRotation = __value;
+		public function set iScale (__value:Number): /* @:set_type */ void {
+			m_iScale = __value;
+			
+			/* @:set_return 0; */	
 		}
-
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set iRotation Float */
+		
 		public function get iRotation ():Number {
 			return m_iRotation;
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function set iItem (__value:XMapItemModel):void {
-			m_iItem = __value;
+		public function set iRotation (__value:Number): /* @:set_type */ void {
+			m_iRotation = __value;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set iItem XMapItemModel */
 		
 		public function get iItem ():XMapItemModel {
 			return m_iItem;
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function set iLayer (__value:Number):void {
-			m_iLayer = __value;
+		public function set iItem (__value:XMapItemModel): /* @:set_type */ void {
+			m_iItem = __value;
+			
+			/* @:set_return null; */	
 		}
-
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set iLayer Float */
+		
 		public function get iLayer ():Number {
 			return m_iLayer;
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function set iDepth (__value:Number):void {
-			m_iDepth = __value;
+		public function set iLayer (__value:Number): /* @:set_type */ void {
+			m_iLayer = __value;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set iDepth Float */
 		
 		public function get iDepth ():Number {
 			return m_iDepth;
 		}
 
-//------------------------------------------------------------------------------------------
-		public function set iRelativeDepth (__value:Boolean):void {
-			m_iRelativeDepth = __value;
+		public function set iDepth (__value:Number): /* @:set_type */ void {
+			m_iDepth = __value;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set iRelativeDepth Bool */
 		
 		public function get iRelativeDepth ():Boolean {
 			return m_iRelativeDepth;
 		}
 
-//------------------------------------------------------------------------------------------
-		public function set iClassName (__value:String):void {
-			m_iClassName = __value;
+		public function set iRelativeDepth (__value:Boolean): /* @:set_type */ void {
+			m_iRelativeDepth = __value;
+			
+			/* @:set_return Bool; */	
 		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set iClassName String */
 		
 		public function get iClassName ():String {
 			return m_iClassName;
 		}
 				
+		public function set iClassName (__value:String): /* @:set_type */ void {
+			m_iClassName = __value;
+			
+			/* @:set_return ""; */	
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 	}
 	

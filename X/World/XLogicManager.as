@@ -211,7 +211,7 @@ package X.World {
 
 			xxx.addChild (__logicObject);
 			
-			__logicObject.XLogicManager = this;
+			__logicObject.oXLogicManager = this;
 			__logicObject.setDepth (__depth);
 			__logicObject.setRelativeDepthFlag (false);
 			__logicObject.setLayer (__layer);
@@ -261,7 +261,7 @@ package X.World {
 
 			xxx.addChild (__logicObject);
 			
-			__logicObject.XLogicManager = this;
+			__logicObject.oXLogicManager = this;
 			__logicObject.setDepth (__depth);
 			__logicObject.setRelativeDepthFlag (__relative);
 			__logicObject.setLayer (__layer);

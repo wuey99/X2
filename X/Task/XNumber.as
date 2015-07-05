@@ -37,14 +37,18 @@ package X.Task {
 		}
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set value Float */
+		
 		public function get value ():Number {
 			return  m_number;
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function set value (__value:Number):void {
+		public function set value (__value:Number): /* @:set_type */ void {
 			m_number = __value;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 	}

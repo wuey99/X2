@@ -150,15 +150,29 @@ package X.Bitmap {
 		}		
 
 		//------------------------------------------------------------------------------------------
+		/* @:get, set dx Float */
+		
 		public function get dx ():Number {
 			return m_dx;
 		}
 		
+		public function set dx (value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */	
+		}
+		/* @:end */
+		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set dy Float */
+		
 		public function get dy ():Number {
 			return m_dy;
 		}
 
+		public function set dy (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */	
+		}
+		/* @:end */
+		
 		//------------------------------------------------------------------------------------------
 	}
 	

@@ -87,10 +87,17 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set freeObjects Array<Dynamic> */
+		
 		public function get freeObjects ():Array /* <Dynamic> */ {
 			return m_freeObjects;
 		}
 
+		public function set freeObjects (__value:*): /* @:set_type */ void {
+			/* @:set_return null; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		public function totalNumberOfObjects ():Number {
 			return m_freeObjects.length + m_numberOfBorrowedObjects;	

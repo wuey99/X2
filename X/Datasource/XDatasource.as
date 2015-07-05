@@ -51,13 +51,16 @@ package X.Datasource {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function set position (__position:Number):void {
-		}
-	
-//------------------------------------------------------------------------------------------	
+		/* @:get, set position Float */
+		
 		public function get position ():Number {
 			return 0;
 		}
+		
+		public function set position (__position:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------	
 		public function readByte ():int {

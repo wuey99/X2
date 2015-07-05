@@ -62,40 +62,89 @@ package X.Geom {
 		}
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set determinant Float */
+		
 		public function get determinant ():Number {
 			return m_a * m_d - m_b * m_c;
 		}
 
+		public function set determinant (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set a Float */
+		
 		public function get a ():Number {
 			return m_a;
 		}
 
+		public function set a (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set b Float */
+		
 		public function get b ():Number {
 			return m_b;
 		}
 		
+		public function set b (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set c Float */
+		
 		public function get c ():Number {
 			return m_c;
 		}
 						
+		public function set c (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set d Float */
+		
 		public function get d ():Number {
 			return m_d;
 		}
 		
+		public function set d (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set tx Float */
+		
 		public function get tx ():Number {
 			return m_tx;
 		}
 
+		public function set tx (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set ty Float */
+		
 		public function get ty ():Number {
 			return m_ty;
 		}
 				
+		public function set ty (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		public static function createScaling (__sx:Number, __sy:Number):XMatrix {
 			return new XMatrix (__sx, 0, 0, __sy, 0, 0);

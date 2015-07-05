@@ -137,9 +137,16 @@ package X.Text {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set text XTextSprite */
+		
 		public function get text ():XTextSprite {
 			return m_text;
 		}
+		
+		public function set text (__value:XTextSprite):void {
+			/* @:set_return null; */			
+		}
+		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
 		public function autoCalcSize ():void {

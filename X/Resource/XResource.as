@@ -65,13 +65,18 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set count Float */
+		
 		public function get count ():Number {
 			return m_count;
 		}
 		
-		public function set count (__value:Number):void {
+		public function set count (__value:Number): /* @:set_type */ void {
 			m_count = __value;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function getResourcePath ():String {
