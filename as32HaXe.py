@@ -183,6 +183,10 @@ class Update(object):
 			
 		classNameBegin = i + len("public class") + 1
 		classNameEnd = classNameBegin + line[classNameBegin:].find(" ")
+		if classNameEnd < 0:
+			classNameEnd = classNameBegin + line[classNameBegin:].find("{")
+		if classNameEnd < 0:
+			classNameEnd = classNameBegin + line[classNameBegin:].find("\n")
 		self._className = line[classNameBegin:classNameEnd]
 		print ": className: ", classNameBegin, classNameEnd, self._className
 		
@@ -198,7 +202,8 @@ class Update(object):
 		if self.isComment(line):
 			return line
 			
-		line = line.replace("public function " + self._className + " (", "public function new (")
+		line = line.replace("function " + self._className + " (", "function new (")
+		line = line.replace("function " + self._className + "(", "function new (")
 		
 		return line
 	

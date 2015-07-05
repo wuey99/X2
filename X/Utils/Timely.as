@@ -12,8 +12,7 @@ package X.Utils {
 	 * @author Jackson Dunstan (http://JacksonDunstan.com)
 	 * @license MIT (http://opensource.org/licenses/MIT)
 	 */
-	public class Timely
-	{
+	public class Timely {
 		/** The number of "do{someInt++;}while(getTimer()<intVal)" iterations
 		 *** that can be run in one millisecond at the time that calibrate() was
 		 *** called. This is initially set to zero and therefore the timer is not
