@@ -77,7 +77,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array = null
+			args:Array /* <Dynamic> */ = null
 			):XLogicObject {
 				
 			args = (args == null) ? args = [] : args;
@@ -103,7 +103,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array = null
+			args:Array /* <Dynamic> */ = null
 		):XLogicObject {
 			
 			args = (args == null) ? args = [] : args;
@@ -124,7 +124,7 @@ package X.World {
 		public function initXLogicObjectFromXML (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
-			args:Array = null
+			args:Array /* <Dynamic> */ = null
 			):XLogicObject {
 				
 			args = (args == null) ? args = [] : args;
@@ -159,7 +159,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array = null
+			args:Array /* <Dynamic> */ = null
 			):XLogicObject {
 
 			args = (args == null) ? args = [] : args;
@@ -182,7 +182,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array = null
+			args:Array /* <Dynamic> */ = null
 			):XLogicObject {
 				
 			args = (args == null) ? args = [] : args;
@@ -206,7 +206,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array = null
+			args:Array /* <Dynamic> */ = null
 			):XLogicObject {
 
 			xxx.addChild (__logicObject);
@@ -256,7 +256,7 @@ package X.World {
 			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
-			args:Array = null
+			args:Array /* <Dynamic> */ = null
 			):XLogicObject {
 
 			xxx.addChild (__logicObject);

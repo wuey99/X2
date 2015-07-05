@@ -52,7 +52,7 @@ package X.World.UI {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function setup (__xxx:XWorld, args:Array):void {
+		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
 			
 			m_width = getArg (args, 1);

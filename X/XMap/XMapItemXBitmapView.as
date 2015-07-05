@@ -50,7 +50,7 @@ package X.XMap {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function setup (__xxx:XWorld, args:Array):void {
+		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
 		}
 
