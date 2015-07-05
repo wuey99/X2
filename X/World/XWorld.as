@@ -772,6 +772,8 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:override get, set mouseX Float */
+		
 		public override function get mouseX ():Number {
 			if (CONFIG::starling) {
 				return m_mouseX;
@@ -782,6 +784,14 @@ package X.World {
 			}
 		}
 		
+		public  function set mouseX (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set mouseY Float */
+		
 		public override function get mouseY ():Number {
 			if (CONFIG::starling) {
 				return m_mouseY;
@@ -791,6 +801,11 @@ package X.World {
 				return getFlashStage ().stage.mouseY;
 			}
 		}
+		
+		public function set mouseY (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------	
 		public function onFocusInEvent (e:Event):void {
@@ -1019,47 +1034,107 @@ package X.World {
 		
 //------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
+			/* @:get, set MOUSE_DOWN String */		
 			public function get MOUSE_DOWN ():String {
 				return TouchPhase.BEGAN;	
 			}
 			
+			public function set MOUSE_DOWN (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_UP String */	
 			public function get MOUSE_UP ():String {
 				return TouchPhase.BEGAN;	
 			}
 			
+			public function set MOUSE_UP (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_MOVE String */	
 			public function get MOUSE_MOVE ():String {
 				return TouchPhase.ENDED;	
 			}
-	
+			
+			public function set MOUSE_MOVE (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_OVER String */	
 			public function get MOUSE_OVER ():String {
 				return TouchPhase.HOVER;	
 			}
 			
+			public function set MOUSE_OVER (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_OUT String */	
 			public function get MOUSE_OUT ():String {
 				return TouchPhase.ENDED;	
 			}
+			
+			public function set MOUSE_OUT (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
 		}
 		else
 		{
+			/* @:get, set MOUSE_DOWN String */	
 			public function get MOUSE_DOWN ():String {
 				return MouseEvent.MOUSE_DOWN;	
 			}
 			
+			public function set MOUSE_DOWN (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_UP String */	
 			public function get MOUSE_UP ():String {
 				return MouseEvent.MOUSE_UP;	
 			}
 			
+			public function set MOUSE_UP (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_MOVE String */	
 			public function get MOUSE_MOVE ():String {
 				return MouseEvent.MOUSE_MOVE;	
 			}
 			
+			public function set MOUSE_MOVE (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_OVER String */	
 			public function get MOUSE_OVER ():String {
 				return MouseEvent.MOUSE_OVER;	
 			}
 			
+			public function set MOUSE_OVER (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
+			
+			/* @:get, set MOUSE_OUT String */	
 			public function get MOUSE_OUT ():String {
 				return MouseEvent.MOUSE_OUT;	
-			}	
+			}
+			
+			public function set MOUSE_OUT (__value:String): /* @:set_type */ void {
+				/* @:set_return ""; */			
+			}
+			/* @:end */
 		}
 		
 //------------------------------------------------------------------------------------------
