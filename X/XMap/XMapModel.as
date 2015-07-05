@@ -35,6 +35,8 @@ package X.XMap {
 	import X.XML.*;
 	
 	import flash.events.*;
+	
+	import starling.errors.AbstractClassError;
 				
 //------------------------------------------------------------------------------------------
 // XMapModel:
@@ -116,10 +118,17 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set useArrayItems Bool */
+		
 		public function get useArrayItems ():Boolean {
 			return m_useArrayItems;
 		}
 		
+		public function set useArrayItems (__value:Boolean): /* @:set_type */ void {
+			/* @:set_return true; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
 		public function getNumLayers ():Number {
 			return m_numLayers;

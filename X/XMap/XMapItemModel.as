@@ -166,165 +166,266 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set layerModel XMapLayerModel */
+		
 		public function get layerModel ():XMapLayerModel {
 			return m_layerModel;
 		}
 		
-		public function set layerModel (__layerModel:XMapLayerModel):void {
+		public function set layerModel (__layerModel:XMapLayerModel): /* @:set_type */ void {
 			m_layerModel = __layerModel;
+			
+			/* @:set_return null; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set inuse Float */
+		
 		public function get inuse ():Number {
 			return m_layerModel.getItemInuse (id);
 		}
 		
-		public function set inuse (__inuse:Number):void {
+		public function set inuse (__inuse:Number): /* @:set_type */ void {
 			m_layerModel.setItemInuse (id, __inuse);
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set id Float */
+		
 		public function get id ():Number {
 			return m_id;
 		}
 		
-		public function set id (__id:Number):void {
+		public function set id (__id:Number): /* @:set_type */ void {
 			m_id = __id;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set name String */
+		
 		public function get name ():String {
 			return m_name;
 		}
 		
-		public function set name (__name:String):void {
+		public function set name (__name:String): /* @:set_type */ void {
 			m_name = __name;
+			
+			/* @:set_return ""; */			
 		}
+		/* @:end */
 				
 //------------------------------------------------------------------------------------------
+		/* @:get, set logicClassIndex Int */
+		
 		public function get logicClassIndex ():int {
 			return m_logicClassIndex;
 		}
 		
-		public function set logicClassIndex (__value:int):void {
+		public function set logicClassIndex (__value:int): /* @:set_type */ void {
 			m_logicClassIndex = __value;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set logicClassName String */
 		
 		public function get logicClassName ():String {
 			return m_layerModel.getClassNameFromIndex (logicClassIndex);
 		}
 
+		public function set logicClassName (__value:String): /* @:set_type */ void {
+			/* @:set_return ""; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set hasLogic Bool */
+		
 		public function get hasLogic ():Boolean {
 			return m_hasLogic;
 		}
 		
-		public function set hasLogic (__value:Boolean):void {
+		public function set hasLogic (__value:Boolean): /* @:set_type */ void {
 			m_hasLogic = __value;
+			
+			/* @:set_return true;; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set XMapItem String */
+		
 		public function get XMapItem ():String {
 			return m_XMapItem;
 		}
 		
-		public function set XMapItem (__value:String):void {
+		public function set XMapItem (__value:String): /* @:set_type */ void {
 			m_XMapItem = __value;
+			
+			/* @:set_return ""; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set imageClassIndex Int */
+		
 		public function get imageClassIndex ():int {
 			return m_imageClassIndex;
 		}
 
-		public function set imageClassIndex (__value:int):void {
-			m_imageClassIndex = __value
+		public function set imageClassIndex (__value:int): /* @:set_type */ void {
+			m_imageClassIndex = __value;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set imageClassName String */
 		
 		public function get imageClassName ():String {
 			return m_layerModel.getClassNameFromIndex (imageClassIndex);
 		}
 
+		public function set imageClassName (__value:String): /* @:set_type */ void {
+			/* @:set_return ""; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
+		/* @:get, set frame Float */
+		
 		public function get frame ():Number {
 			return m_frame;
 		}
 
-		public function set frame (__frame:Number):void {
+		public function set frame (__frame:Number): /* @:set_type */ void {
 			m_frame = __frame;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 								
 //------------------------------------------------------------------------------------------
+		/* @:get, set x Float */
+		
 		public function get x ():Number {
 			return m_x;
 		}
 
-		public function set x (__x:Number):void {
+		public function set x (__x:Number): /* @:set_type */ void {
 			m_x = __x;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 				
 //------------------------------------------------------------------------------------------
+		/* @:get, set y Float */
+			
 		public function get y ():Number {
 			return m_y;
 		}
 
-		public function set y (__y:Number):void {
+		public function set y (__y:Number): /* @:set_type */ void {
 			m_y = __y;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set rotation Float */
+		
 		public function get rotation ():Number {
 			return m_rotation;
 		}
 	
-		public function set rotation (__rotation:Number):void {
+		public function set rotation (__rotation:Number): /* @:set_type */ void {
 			m_rotation = __rotation;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 			
 //------------------------------------------------------------------------------------------
+		/* @:get, set scale Float */
+		
 		public function get scale ():Number {
 			return m_scale;
 		}
 		
-		public function set scale (__scale:Number):void {
+		public function set scale (__scale:Number): /* @:set_type */ void {
 			m_scale = __scale;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set depth Float */
+		
 		public function get depth ():Number {
 			return m_depth;
 		}
 
-		public function set depth (__depth:Number):void {
+		public function set depth (__depth:Number): /* @:set_type */ void {
 			m_depth = __depth;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set boundingRect XRect */
+		
 		public function get boundingRect ():XRect {
 			return m_boundingRect;
 		}
 
-		public function set boundingRect (__rect:XRect):void {
+		public function set boundingRect (__rect:XRect): /* @:set_type */ void {
 			m_boundingRect = __rect;
+			
+			/* @:set_return null; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set collisionRect XRect */
+		
 		public function get collisionRect ():XRect {
 			return m_collisionRect;
 		}
 
-		public function set collisionRect (__rect:XRect):void {
+		public function set collisionRect (__rect:XRect): /* @:set_type */ void {
 			m_collisionRect = __rect;
+			
+			/* @:set_return null; */			
 		}
+		/* @:end */
 
-//------------------------------------------------------------------------------------------	
+//------------------------------------------------------------------------------------------
+		/* @:get, set params String */
+		
 		public function get params ():String {
 			return m_params;
 		}
 		
-		public function set params (__params:String):void {
+		public function set params (__params:String): /* @:set_type */ void {
 			m_params = __params;
+			
+			/* @:set_return ""; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
 		public function serialize ():XSimpleXMLNode {

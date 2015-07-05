@@ -37,6 +37,8 @@ package X.XMap {
 	
 	import flash.events.*;
 	
+	import starling.errors.AbstractClassError;
+	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapModel extends XModelBase {
 		private var m_XMapLayer:XMapLayerModel;
@@ -185,15 +187,29 @@ package X.XMap {
 		}	
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set useArrayItems Bool */
+		
 		public function get useArrayItems ():Boolean {
 			return m_XMapLayer.getXMapModel ().useArrayItems;
 		}
-		
+	
+		public function set useArrayItems (__value:Boolean): /* @:set_type */ void {
+			/* @:set_return true; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
+		/* @:get, set cmap Array<Int> */
+		
 		public function get cmap ():Vector.<int> {
 			return m_cmap;
 		}
 		
+		public function set cmap (__value:Vector.<int>): /* @:set_type */ void {
+			/* @:set_return null; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
 		public function setCXTile (__type:Number, __col:Number, __row:Number):void {
 			m_cmap[__row * m_cols + __col] = __type;
@@ -220,48 +236,104 @@ package X.XMap {
 		}	
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set inuse Float */
+		
 		public function get inuse ():Number {
 			return m_inuse;
 		}
 		
-		public function set inuse (__inuse:Number):void {
+		public function set inuse (__inuse:Number): /* @:set_type */ void {
 			m_inuse = __inuse;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set cols Float */
+		
 		public function get cols ():Number {
 			return m_cols;
 		}
 		
+		public function set cols (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
+		/* @:get, set rows Float */
+		
 		public function get rows ():Number {
 			return m_rows;
 		}
 		
+		public function set rows (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
+		/* @:get, set boundingRect XRect */
+		
 		public function get boundingRect ():XRect {
 			return m_boundingRect;
 		}
 		
+		public function set boundingRect (__value:XRect): /* @:set_type */ void {
+			m_boundingRect = __value;
+			
+			/* @:set_return null; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
+		/* @:get, set x Float */
+		
 		public function get x ():Number {
 			return m_col * m_submapWidth;
 		}		
 		
+		public function set x (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set y Float */
+		
 		public function get y ():Number {
 			return m_row * m_submapHeight;
 		}
 
+		public function set y (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set width Float */
+		
 		public function get width ():Number {
 			return m_submapWidth;
 		}
 		
+		public function set width (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set height Float */
+		
 		public function get height ():Number {
 			return  m_submapHeight;
 		}
+		
+		public function set height (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function addItem (

@@ -139,49 +139,77 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set useArrayItems Bool */
+		
 		public function get useArrayItems ():Boolean {
 			return m_XMap.useArrayItems;
 		}
 		
+		public function set useArrayItems (__value:Boolean): /* @:set_type */ void {
+			/* @:set_return true; */			
+		}
+		/* @:end */
+			
 //------------------------------------------------------------------------------------------
 		public function setViewPort (__viewPort:XRect):void {
 			m_viewPort = __viewPort;
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set viewPort XRect */
+		
 		public function get viewPort ():XRect {
 			return m_viewPort;
 		}
+		
+		public function set viewPort (__value:XRect): /* @:set_type */ void {
+			m_viewPort = __value;
+			
+			/* @:set_return null; */			
+		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set visible Bool */
+		
 		public function get visible ():Boolean {
 			return m_visible;
 		}
 
-//------------------------------------------------------------------------------------------
-		public function set visible (__value:Boolean):void {
+		public function set visible (__value:Boolean): /* @:set_type */ void {
 			m_visible = __value;
+			
+			/* @:set_return true; */			
 		}
+		/* @:end */
 	
 //------------------------------------------------------------------------------------------
+		/* @:get, set name String */
+		
 		public function get name ():String {
 			return m_name;
 		}
 
-//------------------------------------------------------------------------------------------
-		public function set name (__value:String):void {
+		public function set name (__value:String): /* @:set_type */ void {
 			m_name = __value;
+			
+			/* @:set_return ""; */			
 		}
+		/* @:end */
 	
 //------------------------------------------------------------------------------------------
+		/* @:get, set grid Bool */
+		
 		public function get grid ():Boolean {
 			return m_grid;
 		}
 
-//------------------------------------------------------------------------------------------
-		public function set grid (__value:Boolean):void {
+		public function set grid (__value:Boolean): /* @:set_type */ void {
 			m_grid = __value;
+			
+			/* @:set_return true; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
 		public function getPersistentStorage ():XDict /* <Float, Object> */ {
