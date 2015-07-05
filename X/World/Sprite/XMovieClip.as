@@ -170,14 +170,19 @@ package X.World.Sprite {
 		public function getMovieClip ():MovieClip {
 			return m_movieClip;
 		}
-		
-		public function set movieclip (__value:MovieClip):void {
-			m_movieClip = __value;
-		}
+			
+		/* @:get, set movieclip MovieClip */
 		
 		public function get movieclip ():MovieClip {
 			return m_movieClip;
 		}
+		
+		public function set movieclip (__value:MovieClip): /* @:set_type */ void {
+			m_movieClip = __value;
+			
+			/* @:set_return null; */			
+		}
+		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:Number):void {
@@ -244,19 +249,7 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function set rotation (__value:Number):void {
-			if (m_movieClip == null) {
-				return;
-			}
-			
-			if (CONFIG::starling) {
-				m_movieClip.rotation = __value * Math.PI/180;
-			}
-			else
-			{
-				m_movieClip.rotation = __value;
-			}
-		}
+		/* @:override get, set rotation Float */
 		
 		public override function get rotation ():Number {
 			if (m_movieClip == null) {
@@ -271,15 +264,26 @@ package X.World.Sprite {
 				return m_movieClip.rotation;
 			}
 		}
-
-		//------------------------------------------------------------------------------------------
-		public override function set alpha (__value:Number):void {
+		
+		public override function set rotation (__value:Number): /* @:set_type */ void {
 			if (m_movieClip == null) {
 				return;
 			}
 			
-			m_movieClip.alpha = __value;
+			if (CONFIG::starling) {
+				m_movieClip.rotation = __value * Math.PI/180;
+			}
+			else
+			{
+				m_movieClip.rotation = __value;
+			}
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
+
+		//------------------------------------------------------------------------------------------
+		/* @:override get, set alpha Float */
 		
 		public override function get alpha ():Number {
 			if (!m_movieClip) {
@@ -289,6 +293,17 @@ package X.World.Sprite {
 			return m_movieClip.alpha;
 		}
 		
+		public override function set alpha (__value:Number): /* @:set_type */ void {
+			if (m_movieClip == null) {
+				return;
+			}
+			
+			m_movieClip.alpha = __value;
+			
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+
 		//------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
 			public function get graphics ():Graphics {
@@ -297,6 +312,8 @@ package X.World.Sprite {
 		}
 		else
 		{
+			/* @:override get, set graphics Graphics */
+			
 			public override function get graphics ():Graphics {
 				if (m_movieClip == null) {
 					return null;
@@ -304,26 +321,40 @@ package X.World.Sprite {
 				
 				return m_movieClip.graphics;
 			}
+			
+			public function set graphics (__value:Graphics): /* @:set_type */ void {
+				
+				/* @:set_return null; */			
+			}
+			/* @:end */
 		}
 		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set dx Float */
+		
 		public function get dx ():Number {
 			return 0;
 		}
 		
+		public function set dx (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set dy Float */
+		
 		public function get dy ():Number {
 			return 0;
 		}
 		
-		//------------------------------------------------------------------------------------------
-		public override function set scaleX (__value:Number):void {
-			if (m_movieClip == null) {
-				return;
-			}
-			
-			m_movieClip.scaleX = __value;
+		public function set dy (__value): /* @:set_type */ void {
+			/* @:set_return 0; */			
 		}
+		/* @:end */
+		
+		//------------------------------------------------------------------------------------------
+		/* @:override get, set scaleX Float */
 		
 		public override function get scaleX ():Number {
 			if (m_movieClip == null) {
@@ -333,14 +364,19 @@ package X.World.Sprite {
 			return m_movieClip.scaleX;
 		}
 		
-		//------------------------------------------------------------------------------------------
-		public override function set scaleY (__value:Number):void {
+		public override function set scaleX (__value:Number): /* @:set_type */ void {
 			if (m_movieClip == null) {
 				return;
 			}
 			
-			m_movieClip.scaleY = __value;
+			m_movieClip.scaleX = __value;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
+		
+		//------------------------------------------------------------------------------------------
+		/* @:override get, set scaleY Float */
 		
 		public override function get scaleY ():Number {
 			if (m_movieClip == null) {
@@ -349,6 +385,17 @@ package X.World.Sprite {
 			
 			return m_movieClip.scaleY;
 		}		
+		
+		public override function set scaleY (__value:Number): /* @:set_type */ void {
+			if (m_movieClip == null) {
+				return;
+			}
+			
+			m_movieClip.scaleY = __value;
+			
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
 	}

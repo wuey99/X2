@@ -99,29 +99,66 @@ package X.World.Sprite {
 		}
 
 		//------------------------------------------------------------------------------------------
+		/* @:get, set id Float */
+		
 		public function get id ():Number {
 			return m_id;
 		}
+
+		public function set id (__value:Number): /* @:set_type */ void {
+			m_id = __value;
+			
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set mouseX Float */
+		
 		public function get mouseX ():Number {
 			return 0;
 		}
 		
+		public function set mouseX (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set mouseX Float */
+		
 		public function get mouseY ():Number {
 			return 0;
 		}
+
+		public function set mouseY (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set dx Float */
+		
 		public function get dx ():Number {
 			return 0;
 		}
 		
+		public function set dx (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 		//------------------------------------------------------------------------------------------
+		/* @:get, set dy Float */
+		
 		public function get dy ():Number {
 			return 0;
 		}
+		
+		public function set dy (__value:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
 		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):XRect {
@@ -161,15 +198,17 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------	
-		public function set visible2 (__visible:Boolean):void {
-			m_visible = __visible;
-		}
+		/* @:get, set visible2 Bool */
 		
-		//------------------------------------------------------------------------------------------			
 		public function get visible2 ():Boolean {
 			return m_visible;
 		}
 		
+		public function set visible2 (__visible:Boolean): /* @:set_type */ void {
+			/* @:set_return true; */			
+		}
+		/* @:end */
+
 		//------------------------------------------------------------------------------------------
 	}
 	

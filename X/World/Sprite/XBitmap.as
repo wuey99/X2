@@ -227,6 +227,8 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
+				/* @:get, set dx Float */
+				
 				public function get dx ():Number {
 					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.dx;
@@ -237,7 +239,14 @@ package X.World.Sprite {
 					}
 				}
 				
+				public function set dx (__value:Number): /* @:set_type */ void {
+					/* @:set_return 0; */			
+				}
+				/* @:end */
+				
 				//------------------------------------------------------------------------------------------
+				/* @:get, set dy Float */
+				
 				public function get dy ():Number {
 					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.dy;
@@ -247,6 +256,11 @@ package X.World.Sprite {
 						return 0;
 					}
 				}
+				
+				public function set dy (__value:Number): /* @:set_type */ void {
+					/* @:set_return 0; */			
+				}
+				/* @:end */
 				
 				//------------------------------------------------------------------------------------------
 				public function viewPort (__canvasWidth:Number, __canvasHeight:Number):XRect {
@@ -285,14 +299,15 @@ package X.World.Sprite {
 					return m_scale;
 				}
 				
-				//------------------------------------------------------------------------------------------	
-				public function set visible2 (__visible:Boolean):void {
-					m_visible = __visible;
-				}
+				//------------------------------------------------------------------------------------------
+				/* @:get, set visible2 Bool */
 				
-				//------------------------------------------------------------------------------------------			
 				public function get visible2 ():Boolean {
 					return m_visible;
+				}
+				
+				public function set visible2 (__visible:Boolean): /* @:set_type */ void {
+					m_visible = __visible;
 				}
 				
 				//------------------------------------------------------------------------------------------	
@@ -352,8 +367,13 @@ package X.World.Sprite {
 				}
 
 				//------------------------------------------------------------------------------------------
+				/* @:get, set bitmapData BitmapData */
+				
 				public function get bitmapData ():BitmapData {
 					return null;
+				}
+				
+				public function set bitmapData (__value:BitmapData): /* @:set_type */ void {
 				}
 				
 				//------------------------------------------------------------------------------------------

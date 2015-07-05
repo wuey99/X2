@@ -94,7 +94,9 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function set text (__text:String):void {
+		/* @:get, set text String */
+		
+		public function set text (__text:String): /* @:set_type */ void {
 			if (CONFIG::starling) {
 				m_text.text = __text;
 			}
@@ -105,18 +107,42 @@ package X.World.Sprite {
 		}
 
 //------------------------------------------------------------------------------------------
-		CONFIG::starling
-		public function set filters (__value:Array):void {
+		if (CONFIG::starling) {
+			/* @:get, set filters Array */
+				
+			public function get filters ():Array {
+				null
+			}
 			
+			public function set filters (__value:Array): /* @:set_type */ void {
+				/* @:set_return null; */			
+			}
+			/* @:end */
 		}
 		
-		CONFIG::flash
-		public override function set filters (__value:Array /* <Dynamic> */):void {
-			m_text.filters = __value;
+		if (CONFIG::flash) {
+			/* @:override get, set filters Array<Dynamic> */
+			
+			public override function get filters ():Array /* <Dynamic> */ {
+				return null;
+			}
+			
+			public override function set filters (__value:Array /* <Dynamic> */): /* @:set_type */ void {
+				m_text.filters = __value;
+				
+				/* @:set_return null; */			
+			}
+			/* @:end */
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function set color (__color:uint):void {
+		/* @:get, set color Int */
+		
+		public function get color ():uint {
+			return 0;
+		}
+		
+		public function set color (__color:uint): /* @:set_type */ void {
 			if (CONFIG::starling) {
 				m_text.color = __color;
 			}
@@ -124,10 +150,19 @@ package X.World.Sprite {
 			{
 				m_text.textColor = __color; __format ();
 			}
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function set bold (__value:Boolean):void {
+		/* @:get, set bold Bool */
+		
+		public function get bold ():Boolean {
+			return true;
+		}
+		
+		public function set bold (__value:Boolean): /* @:set_type */ void {
 			if (CONFIG::starling) {
 				m_text.bold = __value;
 			}
@@ -135,10 +170,19 @@ package X.World.Sprite {
 			{
 				m_textFormat.bold = __value; __format ();
 			}
+			
+			/* @:set_return true; */			
 		}
+		/* @:end */
 			
 //------------------------------------------------------------------------------------------
-		public function set font (__value:String):void {
+		/* @:get, set font String */
+		
+		public function get font ():String {
+			return "";
+		}
+		
+		public function set font (__value:String): /* @:set_type */ void {
 			if (CONFIG::starling) {
 				m_text.fontName = __value;
 			}
@@ -146,10 +190,19 @@ package X.World.Sprite {
 			{
 				m_textFormat.font = __value; __format ();
 			}
+			
+			/* @:set_return ""; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function set size (__value:Number):void {
+		/* @:get, set size Float */
+		
+		public function get size ():Number {
+			return 0;
+		}
+		
+		public function set size (__value:Number): /* @:set_type */ void {
 			if (CONFIG::starling) {
 				m_text.fontSize = __value;
 			}
@@ -157,15 +210,33 @@ package X.World.Sprite {
 			{
 				m_textFormat.size = __value; __format ();
 			}
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
-		public function set align (__value:String):void {
-			this.hAlign = __value;
+		/* @:get, set aligh String */
+		
+		public function get align ():String {
+			return "";
 		}
 		
+		public function set align (__value:String): /* @:set_type */ void {
+			this.hAlign = __value;
+			
+			/* @:set_return ""; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
-		public function set hAlign (__value:String):void {
+		/* @:get, set hAlign String */
+		
+		public function get hAlign ():String {
+			return "";
+		}
+		
+		public function set hAlign (__value:String): /* @:set_type */ void {
 			if (CONFIG::starling) {
 				switch (__value) {
 					case "left":
@@ -195,10 +266,19 @@ package X.World.Sprite {
 				
 				__format ();
 			}
+			
+			/* @:set_return ""; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function set vAlign (__value:String):void {
+		/* @:get, set vAlign String */
+		
+		public function get vAlign ():String {
+			return "";
+		}
+		
+		public function set vAlign (__value:String): /* @:set_type */ void {
 			if (CONFIG::starling) {
 				switch (__value) {
 					case "top":
@@ -215,27 +295,42 @@ package X.World.Sprite {
 			else
 			{
 			}
+			
+			/* @:set_return ""; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:override get, set width Float */
+		
 		public override function get width ():Number {
 			return m_text.width;
 		}
 		
-		public override function set width (__value:Number):void {
+		public override function set width (__value:Number): /* @:set_type */ void {
 			m_text.width = __value;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:override get, set height Float */
+		
 		public override function get height ():Number {
 			return m_text.height;
 		}
 		
-		public override function set height (__value:Number):void {
+		public override function set height (__value:Number): /* @:set_type */ void {
 			m_text.height = __value;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set textWidth Float */
+		
 		public function get textWidth ():Number {
 			if (CONFIG::starling) {
 				return m_text.textBounds.width;
@@ -246,7 +341,14 @@ package X.World.Sprite {
 			}
 		}
 		
+		public function setTextWidth (__value:Number):/* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set textHeight Float */
+		
 		public function get textHeight ():Number {
 			if (CONFIG::starling) {
 				return m_text.textBounds.height;
@@ -256,6 +358,11 @@ package X.World.Sprite {
 				return m_text.textHeight;
 			}
 		}
+		
+		public function setTextHeigt (__value:Number):/* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function autoCalcSize ():void {
@@ -274,76 +381,154 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function set letterSpacing (__value:Number):void {
+		/* @:get, set letterSpacing Float */
+		
+		public function get letterSpacing ():Number {
+			return 0;
+		}
+		
+		public function set letterSpacing (__value:Number): /* @:set_type */ void {
 			if (CONFIG::starling) {
 			}
 			else
 			{
 				m_textFormat.letterSpacing = __value; __format ();
 			}
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function set leading (__value:Number):void {
+		/* @:get, set leading Float */
+		
+		public function get leading ():Number {
+			return 0;
+		}
+		
+		public function set leading (__value:Number): /* @:set_type */ void {
 			if (CONFIG::starling) {
 			}
 			else
 			{
 				m_textFormat.leading = __value; __format ();
 			}
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
-		public function set selectable (__value:Boolean):void {
+		/* @:get, set selectable Bool */
+		
+		public function get selectable ():Boolean {
+			return true;
+		}
+		
+		public function set selectable (__value:Boolean): /* @:set_type */ void {
 			if (CONFIG::starling) {
 			}
 			else
 			{
 				m_text.selectable = __value;
 			}
+			
+			/* @:set_return true; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function set multiline (__value:Boolean):void {
+		/* @:get, set multiline Bool */
+		
+		public function get multiline ():Boolean {
+			return true;
+		}
+		
+		public function set multiline (__value:Boolean): /* @:set_type */ void {
 			if (CONFIG::starling) {	
 			}
 			else
 			{
 				m_text.multiline = __value; __format ();
 			}
+			
+			/* @:set_return true; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function set wordWrap (__value:Boolean):void {
+		/* @:get, set wordwrap Bool */
+		
+		public function get wordwrap ():Boolean {
+			return true;
+		}
+		
+		public function set wordWrap (__value:Boolean): /* @:set_type */ void {
 			if (CONFIG::starling) {
 			}
 			else
 			{
 				m_text.wordWrap = __value; __format ();
 			}
+			
+			/* @:set_return true; */			
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
-		public function set italic (__value:Boolean):void {
+		/* @:get, set italic Bool */
+		
+		public function get italic ():Boolean {
+			return true;
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function set kerning (__value:Boolean):void {	
+		public function set italic (__value:Boolean): /* @:set_type */ void {
+			/* @:set_return true; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function set underline (__value:Boolean):void {
+		/* @:get, set kerning Bool */
+		
+		public function get kerning ():Boolean {
+			return true;
 		}
 		
+		public function set kerning (__value:Boolean): /* @:set_type */ void {
+			/* @:set_return true; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
-		public function set embedFonts (__value:Boolean):void {
+		/* @:get, set underline Bool */
+		
+		public function get underline ():Boolean {
+			return true;
+		}
+		
+		public function set underline (__value:Boolean): /* @:set_type */ void {
+			/* @:set_return true; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set embedFonts Bool */
+		
+		public function get embedFonts ():Boolean {
+			return true;
+		}
+		
+		public function set embedFonts (__value:Boolean): /* @:set_type */ void {
 			if (CONFIG::starling) {
 			}
 			else
 			{
 				m_text.embedFonts = __value; __format ();
 			}
+			
+			/* @:set_return true; */			
 		}
+		/* @:end */
 				
 //------------------------------------------------------------------------------------------
 		private function __format ():void {

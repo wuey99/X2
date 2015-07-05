@@ -108,47 +108,60 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set depth Float */
+		
 		public function get depth ():Number {
 			return m_depth;
 		}
-
-//------------------------------------------------------------------------------------------		
-		public function set depth (__depth:Number): void {
+	
+		public function set depth (__depth:Number): /* @:set_type */ void {
 			m_depth = __depth;
 			depth2 = __depth;
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 
+//------------------------------------------------------------------------------------------
+		public function getRelativeDepthFlag ():Boolean {
+			return m_relativeDepthFlag;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function setRelativeDepthFlag (__relative:Boolean):void {
 			m_relativeDepthFlag = __relative;
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getRelativeDepthFlag ():Boolean {
-			return m_relativeDepthFlag;
-		}
-	
-//------------------------------------------------------------------------------------------
-		public function set relativeDepthFlag (__relative:Boolean):void {
-			m_relativeDepthFlag = __relative;
-		}
+		/* @:get, set relativeDepthFlag Boolean */
 		
-//------------------------------------------------------------------------------------------
 		public function get relativeDepthFlag ():Boolean {
 			return m_relativeDepthFlag;
 		}
 		
+		public function set relativeDepthFlag (__relative:Boolean): /* @:set_type */ void {
+			m_relativeDepthFlag = __relative;
+			
+			/* @:set_return true; */			
+		}
+		/* @:end */
+
 //------------------------------------------------------------------------------------------
+		/* @:get, set depth2 Int */
+		
 		public function get depth2 ():int {
 			return m_depth2;
 		}
 		
-		public function set depth2 (__depth:int): void {
+		public function set depth2 (__depth:int): /* @:set_type */ void {
 			if (__depth != m_depth2) {
 				m_depth2 = __depth;
 				x_layer.forceSort = true;
 			}
+			
+			/* @:set_return 0; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 	}

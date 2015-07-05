@@ -242,61 +242,83 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setVel (__vel:XPoint):void {
-			m_vel = __vel;
-		}
-		
-		[Inline]
-		public function set oDX (__value:Number):void {
-			m_vel.x = __value;
-		}
-
-		[Inline]
-		public function set oDY (__value:Number):void {
-			m_vel.y = __value;
-		}
-		
-//------------------------------------------------------------------------------------------
 		public function getVel ():XPoint {
 			return m_vel;
 		}
 		 
+		public function setVel (__vel:XPoint):void {
+			m_vel = __vel;
+		}
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oDX Float */
+		
 		[Inline]
 		public function get oDX ():Number {
 			return m_vel.x
 		}
 
 		[Inline]
+		public function set oDX (__value:Number): /* @:set_type */ void {
+			m_vel.x = __value;
+			
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oDY Float */
+		
+		[Inline]
 		public function get oDY ():Number {
 			return m_vel.y
 		}
 		
-//------------------------------------------------------------------------------------------
-		public function setOld (__pos:XPoint):void {
-			m_oldPos = __pos;
+		[Inline]
+		public function set oDY (__value:Number): /* @:set_type */ void {
+			m_vel.y = __value;
+			
+			/* @:set_return 0; */			
 		}
-		
-		public function set oldX (__value:Number):void {
-			m_oldPos.x = __value;
-		}
-
-		public function set oldY (__value:Number):void {
-			m_oldPos.y = __value;
-		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public function getOld ():XPoint {
 			return m_oldPos;
 		}
 		
+		public function setOld (__pos:XPoint):void {
+			m_oldPos = __pos;
+		}
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oldX Float */
+		
 		public function get oldX ():Number {
 			return m_oldPos.x
 		}
 
+		public function set oldX (__value:Number): /* @:set_type */ void {
+			m_oldPos.x = __value;
+			
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set oY Float */
+		
 		public function get oldY ():Number {
 			return m_oldPos.y
 		}
 
+		public function set oldY (__value:Number): /* @:set_type */ void {
+			m_oldPos.y = __value;
+			
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		public function collidesWithNamedCX (__name:String, __rectDst:XRect):Boolean {
 			var __rectSrc:XRect = getAdjustedNamedCX (__name);
@@ -305,10 +327,19 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set CX_Collide_FLag Float */
+		
 		public function get CX_Collide_Flag ():Number {
 			return m_CX_Collide_Flag;
 		}
 
+		public function set CX_Collide_Flag (__value:Number): /* @:set_type */ void {
+			m_CX_Collide_Flag = __value;
+			
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		public function handleCollision (__collider:XLogicObject):void {
 		}
@@ -318,24 +349,54 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set allowLFCollisions Boolean */
+		
 		public function get allowLFCollisions ():Boolean {
 			return true;
 		}
 
+		public function set allowLFCollisions (__value:Boolean): /* @:set_type */ void {
+			
+			/* @:set_return true; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		public function get allowRTCollisions ():Boolean {
 			return true;
 		}
 		
+		public function set allowRTCollisions (__value:Boolean): /* @:set_type */ void {
+			
+			/* @:set_return true; */			
+		}
+		/* @:end *
+		
 //------------------------------------------------------------------------------------------
+		/* @:get, set allowUPCollisions Boolean */
+		
 		public function get allowUPCollisions ():Boolean {
 			return true;
 		}
+	
+		public function set allowUPCollisions (__value:Boolean): /* @:set_type */ void {
+			
+			/* @:set_return true; */			
+		}
+		/* @:end *
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set allowDNCollisions Boolean */
+		
 		public function get allowDNCollisions ():Boolean {
 			return true;
 		}
+		
+		public function set allowDNCollisions (__value:Boolean): /* @:set_type */ void {
+			
+			/* @:set_return true; */			
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		public override function updatePhysics ():void {

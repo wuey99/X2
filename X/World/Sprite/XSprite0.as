@@ -50,59 +50,96 @@ package X.World.Sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set xxx XWorld */
+		
 		public function get xxx ():XWorld {
 			return m_xxx;
 		}
 		
-		public function set xxx (__XWorld:XWorld):void {
+		public function set xxx (__XWorld:XWorld): /* @:set_type */ void {
 			m_xxx = __XWorld;
+			
+			/* @:set_return null; */			
 		}
+		/* @:end */
 		
-//------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
+		/* @:get, set childList Sprite */
+	
 		public function get childList ():Sprite {
 			return this;
 		}
+		
+		public function set childList (__value:Sprite): /* @:set_type */ void {
+			
+			/* @:set_return null; */			
+		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		if (CONFIG::starling) {
 
 			//------------------------------------------------------------------------------------------
+			/* @:override get, set rotation Float */
+			
 			public override function get rotation ():Number {
 				return super.rotation * 180/Math.PI;
 			}
 			
-			//------------------------------------------------------------------------------------------
-			public override function set rotation (__value:Number):void {
+			public override function set rotation (__value:Number): /* @:set_type */ void {
 				super.rotation = __value * Math.PI/180;
+				
+				/* @:set_return 0; */			
 			}
+			/* @:end */
 			
 			//------------------------------------------------------------------------------------------
+			/* @:get, set mouseX Float */
+			
 			public function get mouseX ():Number {
 				return 0;
 			}
 			
+			public function set mouseX (__value:Number): /* @:set_type */ void {
+				/* @:set_return 0; */			
+			}
+			/* @:end */
+			
 			//------------------------------------------------------------------------------------------
+			/* @:get, set mouseY Float */
+			
 			public function get mouseY ():Number {
 				return 0;
 			}
 			
-			//------------------------------------------------------------------------------------------
-			public function set mouseEnabled (__value:Boolean):void {
+			public function set mouseY (__value:Number): /* @:set_type */ void {
+				/* @:set_return 0; */			
 			}
+			/* @:end */
 			
 			//------------------------------------------------------------------------------------------
+			/* @:get, set mouseEnabled Bool */
+			
 			public function get mouseEnabled ():Boolean {
 				return true;
 			}
 			
-			//------------------------------------------------------------------------------------------
-			public function set mouseChildren (__value:Boolean):void {
+			public function set mouseEnabled (__value:Boolean): /* @:set_type */ void {
+				/* @:set_return true; */			
 			}
-
+			/* @:end */
+		
 			//------------------------------------------------------------------------------------------
+			/* @:get, set mouseChildren Bool */
+			
 			public function get mouseChildren ():Boolean {
 				return true;
 			}
+			
+			public function set mouseChildren (__value:Boolean): /* @:set_type */ void {
+				/* @:set_return true; */			
+			}
+			/* @:end */
 		}
 		
 //------------------------------------------------------------------------------------------

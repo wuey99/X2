@@ -129,15 +129,19 @@ package X.World.Sprite {
 			return m_scale;
 		}
 
-//------------------------------------------------------------------------------------------	
-		public function set visible2 (__visible:Boolean):void {
-			m_visible = __visible;
-		}
-
-//------------------------------------------------------------------------------------------			
+//------------------------------------------------------------------------------------------
+		/* @:get, set visible2 Bool */
+		
 		public function get visible2 ():Boolean {
 			return m_visible;
 		}
+		
+		public function set visible2 (__visible:Boolean): /* @:set_type */ void {
+			m_visible = __visible;
+			
+			/* @:set_return true; */			
+		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
 	}
