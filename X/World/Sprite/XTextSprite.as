@@ -111,7 +111,7 @@ package X.World.Sprite {
 		}
 		
 		CONFIG::flash
-		public override function set filters (__value:Array):void {
+		public override function set filters (__value:Array /* <Dynamic> */):void {
 			m_text.filters = __value;
 		}
 		
