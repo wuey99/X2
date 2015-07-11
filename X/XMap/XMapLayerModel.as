@@ -374,6 +374,7 @@ package X.XMap {
 			__c2 = Math.min (__c2, m_submapCols-1);
 			__r1 = Math.min (__r1, m_submapRows-1);
 			__r2 = Math.min (__r2, m_submapRows-1);
+			
 			// ul
 			__extend (m_XSubmaps[__r1][__c1].replaceItems (__item));
 			// ur
