@@ -31,7 +31,7 @@ package X.Utils {
 				return binb2hex(core_sha1(str2binb(src), src.length*8));
 		}
 			
-		private static function core_sha1(x:Array, len:Number):Array {
+		private static function core_sha1(x:Array /* <Float> */, len:Number):Array /* <Float> */ {
 			x[len >> 5] |= 0x80 << (24-len%32);
 			x[((len+64 >> 9) << 4)+15] = len;
 			var w:Array = new Array(80), a:Number = 1732584193;

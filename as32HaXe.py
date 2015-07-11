@@ -347,8 +347,14 @@ class Update(object):
 		return line
 		
 	#-----------------------------------------------------------------------------
-	# :Vector
+	# :Vector.
 	#    --> :Array
+	#
+	# <Vector.
+	#    --> <Array
+	#
+	# new Vector.
+	#    --> new Array
 	#-----------------------------------------------------------------------------
 	def convertVector(self, line):
 		if line.find(":Vector.") >= 0:
@@ -356,6 +362,9 @@ class Update(object):
 			
 		if line.find("<Vector.") >= 0:
 			line = line.replace("<Vector.", "<Array")
+			
+		if line.find("new Vector.") >= 0:
+			line = line.replace("new Vector.", "new <Array")
 			
 		return line
 		
