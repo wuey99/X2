@@ -364,7 +364,7 @@ class Update(object):
 			line = line.replace("<Vector.", "<Array")
 			
 		if line.find("new Vector.") >= 0:
-			line = line.replace("new Vector.", "new <Array")
+			line = line.replace("new Vector.", "new Array")
 			
 		return line
 		
@@ -620,7 +620,13 @@ class Update(object):
 			self._getterSetterMode = False
 			
 		return line
-				
+	
+	#-----------------------------------------------------------------------------
+	def convertInline(self, line):
+		line = line.replace("[Inline]", "// [Inline]")
+		
+		return line
+		
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
@@ -635,7 +641,8 @@ class Update(object):
 		line = self.convertGettersAndSetters(line)
 		line = self.convertLoops(line)
 		line = self.convertHaXeBlock(line)
-		line = self.convertPackage(line)		
+		line = self.convertPackage(line)
+		line = self.convertInline(line)
 
 		if not self._skipLine:	
 			dst.write(line)
