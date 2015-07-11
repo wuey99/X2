@@ -388,7 +388,14 @@ package X.XMap {
 			return __removedItems;
 			
 			function __extend (__items:Array /* <XMapItemModel> */):void {
-				for each (var __item:XMapItemModel in __items) {
+				var __item:XMapItemModel;
+				
+				var i:Number;
+				
+//				for each (var __item:XMapItemModel in __items) {
+				for (i=0; i<__items.length; i++) {
+					__item = __items[i] as XMapItemModel;
+					
 					if (__removedItems.indexOf (__item) == -1) {
 						__removedItems.push (__item);
 					}

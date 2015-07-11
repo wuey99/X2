@@ -556,8 +556,15 @@ package X.World {
 			private function onTouchEvent (e:TouchEvent):void {
 				var __touches:Vector.<Touch> = e.getTouches(this);
 				
-				for each (var __touch:Touch in __touches)
+				var __touch:Touch;
+				
+				var i:Number;
+				
+//				for each (var __touch:Touch in __touches)
+				for (i=0; i<__touches.length; i++)
 				{
+					__touch = __touches[i] as Touch;
+					
 					if (__touch.phase == TouchPhase.HOVER )
 					{
 						var __location:Point = __touch.getLocation (this);
