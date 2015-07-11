@@ -31,12 +31,18 @@ package X.Utils {
 				return binb2hex(core_sha1(str2binb(src), src.length*8));
 		}
 			
-		private static function core_sha1(x:Array /* <Float> */, len:Number):Array /* <Float> */ {
+		private static function core_sha1(
+			x:Array /* <Float> */,
+			len:Number
+		):Array /* <Float> */ {
 			x[len >> 5] |= 0x80 << (24-len%32);
 			x[((len+64 >> 9) << 4)+15] = len;
-			var w:Array = new Array(80), a:Number = 1732584193;
-			var b:Number = -271733879, c:Number = -1732584194;
-			var d:Number = 271733878, e:Number = -1009589776;
+			var w:Array /* <Float> */ = new Array (80); // <Float>
+			var a:Number = 1732584193;
+			var b:Number = -271733879;
+			var c:Number = -1732584194;
+			var d:Number = 271733878;
+			var e:Number = -1009589776;
 			for (var i:Number = 0; i<x.length; i += 16) {
 				var olda:Number = a, oldb:Number = b;
 				var oldc:Number = c, oldd:Number = d, olde:Number = e;
@@ -54,7 +60,7 @@ package X.Utils {
 				d = safe_add(d, oldd);
 				e = safe_add(e, olde);
 			}
-			return new Array(a, b, c, d, e);
+			return new Array(a, b, c, d, e); // <Float>
 		}
 	
 		private static function sha1_ft(t:Number, b:Number, c:Number, d:Number):Number {
@@ -78,8 +84,8 @@ package X.Utils {
 			return (num << cnt) | (num >>> (32-cnt));
 		}
 	
-		private static function str2binb(str:String):Array {
-			var bin:Array = new Array();
+		private static function str2binb(str:String):Array /* <Float> */ {
+			var bin:Array /* <Float> */ = new Array (); // <Float>
 			var mask:Number = (1 << 8)-1;
 			for (var i:Number = 0; i<str.length*8; i += 8) {
 				bin[i >> 5] |= (str.charCodeAt(i/8) & mask) << (24-i%32);
@@ -87,7 +93,7 @@ package X.Utils {
 			return bin;
 		}
 	
-		private static function binb2hex(binarray:Array):String {
+		private static function binb2hex(binarray:Array /* <Float> */):String {
 			var str:String = new String("");
 			var tab:String = new String("0123456789abcdef");
 			for (var i:Number = 0; i<binarray.length*4; i++) {

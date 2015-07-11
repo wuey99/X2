@@ -297,7 +297,7 @@ class Update(object):
 	#-----------------------------------------------------------------------------
 	def convertInt(self, line):
 		if self.isType(line, "int"):
-			line = line.replace(":Boolean", ":Int")
+			line = line.replace(":int", ":Int")
 
 		if self.isNewOrExtends(line, "int"):
 			line = line.replace(" int", " Int")

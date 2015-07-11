@@ -51,7 +51,7 @@ package X.Utils {
 		 *                      slow compared to most operations.
 		 * @return The number of iterations per millisecond
 		 */
-		public function calibrate(msToCalibrate:int=10): Number
+		public function calibrate(msToCalibrate:int=10):Number
 		{
 			// Must spend at least one millisecond calibrating
 			if (msToCalibrate < 1)
@@ -96,7 +96,7 @@ package X.Utils {
 		 * @return The next millisecond time, which will be the current time at
 		 *         the end of this function
 		 */
-		public function begin(): int
+		public function begin():int
 		{
 			// Loop until getTimer starts the next millisecond
 			// The idea is to start as close to the beginning of the next
@@ -121,7 +121,7 @@ package X.Utils {
 		 *         iterationsPerMS is negative, the negation of the correct value
 		 *         is returned.
 		 */
-		public function end(): Number
+		public function end():Number
 		{
 			// Since we could be ending the timer at any point during the
 			// millisecond, we need to count iterations in the same way as
