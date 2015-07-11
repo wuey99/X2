@@ -257,7 +257,9 @@ package X.World {
 				
 			}
 			
-			for(j = 0; ++j < n;)
+			j = 0;
+//			for(j = 0; ++j < n;)
+			while(++j < n)
 			{
 				hold = m_a[j];
 				holdo = o[i=j];
