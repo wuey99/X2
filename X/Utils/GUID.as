@@ -43,7 +43,9 @@ package X.Utils {
 			var c:Number = -1732584194;
 			var d:Number = 271733878;
 			var e:Number = -1009589776;
-			for (var i:Number = 0; i<x.length; i += 16) {
+			var i:Number = 0;
+//			for (var i:Number = 0; i<x.length; i += 16) {
+			while (i<x.length) {
 				var olda:Number = a, oldb:Number = b;
 				var oldc:Number = c, oldd:Number = d, olde:Number = e;
 				for (var j:Number = 0; j<80; j++) {
@@ -59,6 +61,7 @@ package X.Utils {
 				c = safe_add(c, oldc);
 				d = safe_add(d, oldd);
 				e = safe_add(e, olde);
+				i += 16;
 			}
 			return new Array(a, b, c, d, e); // <Float>
 		}
@@ -87,8 +90,11 @@ package X.Utils {
 		private static function str2binb(str:String):Array /* <Float> */ {
 			var bin:Array /* <Float> */ = new Array (); // <Float>
 			var mask:Number = (1 << 8)-1;
-			for (var i:Number = 0; i<str.length*8; i += 8) {
+			var i:Number = 0;
+//			for (var i:Number = 0; i<str.length*8; i += 8) {
+			while (i<str.length*8) {
 				bin[i >> 5] |= (str.charCodeAt(i/8) & mask) << (24-i%32);
+				i += 8;
 			}
 			return bin;
 		}

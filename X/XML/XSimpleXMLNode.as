@@ -51,9 +51,12 @@ package X.XML {
 			m_tag = __tag;
 			m_text = __text;
 			
-			var i:Number;
-			for (i=0; i<__attribs.length; i+=2) {
+			var i:Number = 0;
+//			for (i=0; i<__attribs.length; i+=2) {
+			while (i<__attribs.length) {
 				m_attribsMap.set (__attribs[i+0], __attribs[i+1]);
+				
+				i += 2;
 			}
 		}
 

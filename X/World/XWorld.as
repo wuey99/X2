@@ -266,9 +266,13 @@ package X.World {
 			m_XMapModel = null;
 						
 			m_XWorldLayers = new Array (MAX_LAYERS); // <XSpriteLayer>
-							
-			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
+				
+			var i:Number = MAX_LAYERS-1;
+//			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
+			while (i >= 0) {
 				__createLayer (i);
+				
+				i--;
 			}
 		
 			function __createLayer (i:Number):void {

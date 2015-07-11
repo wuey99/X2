@@ -465,7 +465,9 @@ package X.World.Logic {
 			
 			collided = false;
 			
-			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
+			__x = (x1 & CX_TILE_WIDTH_UNMASK);
+//			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
+			while (__x <= (x2 & CX_TILE_WIDTH_UNMASK)) {
 //				c = __x/m_submapWidth;
 //				r = y1/m_submapHeight;
 //				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
@@ -555,6 +557,8 @@ package X.World.Logic {
 				if (collided) {
 					return true;
 				}
+				
+				__x += CX_TILE_WIDTH;
 			}
 			
 			return false;
@@ -579,7 +583,9 @@ package X.World.Logic {
 			
 			collided = false;
 			
-			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
+			__x = (x1 & CX_TILE_WIDTH_UNMASK);
+//			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
+			while (__x <= (x2 & CX_TILE_WIDTH_UNMASK)) {
 //				c = __x/m_submapWidth;
 //				r = y2/m_submapHeight;
 //				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
@@ -670,6 +676,8 @@ package X.World.Logic {
 				if (collided) {
 					return true;
 				}
+				
+				__x += CX_TILE_WIDTH;
 			}
 			
 			return false;
@@ -694,7 +702,9 @@ package X.World.Logic {
 			
 			collided = false;
 			
-			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
+			__y = (y1 & CX_TILE_HEIGHT_UNMASK);
+//			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
+			while (__y <= (y2 & CX_TILE_HEIGHT_UNMASK)) {
 //				c = x1/m_submapWidth;
 //				r = __y/m_submapHeight;
 //				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
@@ -784,6 +794,8 @@ package X.World.Logic {
 				if (collided) {
 					return true;
 				}
+				
+				__y += CX_TILE_HEIGHT;
 			}
 			
 			return false;
@@ -808,7 +820,9 @@ package X.World.Logic {
 			
 			collided = false;
 			
-			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
+			__y = (y1 & CX_TILE_HEIGHT_UNMASK);
+//			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
+			while (__y <= (y2 & CX_TILE_HEIGHT_UNMASK)) {
 //				c = x2/m_submapWidth;
 //				r = __y/m_submapHeight;
 //				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & 511)/CX_TILE_WIDTH);
@@ -898,6 +912,8 @@ package X.World.Logic {
 				if (collided) {
 					return true;
 				}
+				
+				__y += CX_TILE_HEIGHT;
 			}
 			
 			return false;

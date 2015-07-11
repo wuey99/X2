@@ -169,7 +169,9 @@ package X.World {
 			i =0;
 			
 			var kmin:int,kmax:int,kimin:int,kimax:int;
-			for (i=0; (i+=2) < n;)
+			i = 0;
+//			for (i=0; (i+=2) < n;)
+			while ((i+=2) < n)
 			{
 				m_a[i] = kmin = o[i][key];
 				m_a[i-1] = kmax = o[i-1][key];
@@ -201,13 +203,17 @@ package X.World {
 			
 			var c1:int = ((m - 1)<<13) / (anmax - anmin);
 			
-			for (i = -1; ++i < n;)
+			i = -1;
+//			for (i = -1; ++i < n;)
+			while(++i < n)
 			{
 				++m_l[(c1*(m_a[i] - anmin))>>13];
 			}
 			
 			lk = m_l[0];
-			for (k = 0; ++k < m;)
+			k = 0;
+//			for (k = 0; ++k < m;)
+			while(++k < m)
 			{
 				lk = (m_l[k] += lk);
 			}
