@@ -1197,7 +1197,7 @@ package X.World.Logic {
 			return m_visible;
 		}
 
-		public function setVisible (__value:Boolean): /* @:set_type */ void {
+		public function setVisible (__value:Boolean):void {
 			m_visible = __value;
 		}
 		
