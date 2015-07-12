@@ -538,9 +538,92 @@ class Update(object):
 		return line
 			
 	#-----------------------------------------------------------------------------
-	#
+	#  for (var i:int = 0; i < 10; i++) 
+	#    --> for (i in 0...10)
 	#-----------------------------------------------------------------------------
-	def convertLoops(self, line):
+	def convertForLoops(self, line):
+	
+		def getValue(index):
+			for i in range(index, len(line)):
+				if line[i] != " ":
+					break;
+					
+			end = len(line)-i
+			
+			j = line[i:].find(";")
+			if j >= 0:
+				end = min(end, j)
+						
+			return line[i:i+end]
+			
+		def getLabel(index):
+			for i in range(index, len(line)):
+				if line[i] != " ":
+					break;
+				
+			end = len(line)-i
+			
+			j = line[i:].find(" ")
+			if j >= 0:
+				end = min(end, j)
+			
+			j = line[i:].find("<")
+			if j >= 0:
+				end = min(end, j)
+						
+			return line[i:i+end]
+			
+		if self.isComment(line):
+			return line
+			
+		if line.find("for (") < 0:
+			return line
+			
+		i = line.find("=")
+		if i < 0:
+			return line
+		
+		begin = getValue(i+1)
+		
+		i = line.find(";")
+		if i < 0:
+			return line
+			
+		label = getLabel(i+1)
+		
+		i = line.find("<")
+		if i < 0:
+			return line
+			
+		i = line.find("<=")
+		if i < 0:
+			i = line.find("<")
+			le = ""
+			i += 1
+		else:
+			le = "+1"
+			i += 2
+			
+		end = getValue(i)
+		
+		bracket = False
+		if line.find("{") > 0:
+			bracket = True
+			
+		print ": ------------->: "
+		print line
+				
+		i = line.find("for (")
+		
+		line = line[:i] + "for (" + label + " in " + begin + " ... " + end + le + ")"
+		
+		if bracket:
+			line += " {"
+			
+		line += "\n"
+		
+		print line
+		
 		return line
 	
 	#-----------------------------------------------------------------------------
@@ -639,7 +722,7 @@ class Update(object):
 		line = self.convertCasts(line)
 		line = self.convertIs(line)
 		line = self.convertGettersAndSetters(line)
-		line = self.convertLoops(line)
+		line = self.convertForLoops(line)
 		line = self.convertHaXeBlock(line)
 		line = self.convertPackage(line)
 		line = self.convertInline(line)
