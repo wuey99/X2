@@ -44,7 +44,7 @@ package X.Type {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public static function createInstance (__class:Class):* {
+		public static function createInstance (__class:Class /* <Dynamic> */):* {
 			// <HAXE>
 			/* --
 				return Type.createInstance (__class, []);

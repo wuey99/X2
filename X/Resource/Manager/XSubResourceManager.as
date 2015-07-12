@@ -93,8 +93,8 @@ package X.Resource.Manager {
 		public function reset ():void {
 			
 			// unload .swf's here?
-			m_resourceMap = new XDict ();
-			m_classMap = new XDict ();
+			m_resourceMap = new XDict (); //  <String, XResource>
+			m_classMap = new XDict (); //  <String, XClass>
 		}
 		
 		//------------------------------------------------------------------------------------------

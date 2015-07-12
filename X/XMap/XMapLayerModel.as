@@ -964,7 +964,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function serializeImageClassNames ():XSimpleXMLNode {
-			var __imageClassNames:XDict = new XDict ();
+			var __imageClassNames:XDict /* <String, Float> */ = new XDict (); // <String, Float>
 			
 			var __row:Number, __col:Number;
 			
