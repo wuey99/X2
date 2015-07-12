@@ -106,15 +106,14 @@ class Update(object):
 		if self.isComment(line):
 			return line
 			
+		line = line.replace ("XDict ()", "__X$Dict__ ()")
+		line = line.replace ("Array ()", "__A$rray__ ()")
+		
 # XDict (); // <key, type>
 #    --> Map<key, type> ();
-		converted = self.convertArrayOrMap (line, "XDict ()", "Map", " ()");
+		converted = self.convertArrayOrMap (line, "__X$Dict__ ()", "__M$ap__", " ()");
 			
-		if converted != line:
-			if line.count("XDict") > 1:
-				line = converted
-			else:
-				return converted
+		line = converted
 		
 # XDict; // <key, type>
 #    --> Map<key, type>;			
@@ -122,18 +121,13 @@ class Update(object):
 #    --> Map<key, type>
 		converted = self.convertArrayOrMap (line, "XDict", "Map");
 		
-		if converted != line:
-			return converted
+		line = converted
 			
 # Array (); // <type>
 #    --> Array<type> ();
-		converted = self.convertArrayOrMap (line, "Array ()", "Array", " ()");
+		converted = self.convertArrayOrMap (line, "__A$rray__ ()", "__A$rray__", " ()");
 		
-		if converted != line:
-			if line.count("Array") > 1:
-				line = converted
-			else:
-				return converted
+		line = converted
 				
 # Array; // <type>
 #    --> Array<type>;
@@ -141,8 +135,7 @@ class Update(object):
 #    --> Array<type>
 		converted = self.convertArrayOrMap (line, "Array", "Array");
 		
-		if converted != line:
-			return converted
+		line = converted
 
 # Class; // <type>
 #    --> Class<type>;
@@ -150,9 +143,11 @@ class Update(object):
 #    --> Class<type>
 		converted = self.convertArrayOrMap (line, "Class", "Class");
 		
-		if converted != line:
-			return converted
+		line = converted
 			
+		line = line.replace("__M$ap__", "Map")
+		line = line.replace("__A$rray__", "Array")
+		
 		return line
 
 	#-----------------------------------------------------------------------------
