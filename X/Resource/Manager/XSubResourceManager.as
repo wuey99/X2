@@ -326,7 +326,7 @@ package X.Resource.Manager {
 				__class = __resolveClass (__XClass);
 			}
 			
-			if (__class) {
+			if (__class != null) {
 				__XClass.count++;
 				
 				var __r:XResource = m_resourceMap.get (__XClass.getResourcePath ()) as XResource;

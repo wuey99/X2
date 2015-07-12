@@ -281,7 +281,7 @@ package X.World {
 			__logicObject.setParent (__parent);
 			__logicObject.oAlpha = 1.0;
 			
-			if (__class) {
+			if (__class != null) {
 				__logicObject.setPoolClass (__class);
 			}
 			
