@@ -107,7 +107,7 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getAllClasses ():Array /* <Class> */ {
+		public function getAllClasses ():Array /* <Class<Dynamic>> */ {
 			return null;
 		}
 		
