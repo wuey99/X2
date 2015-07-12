@@ -665,10 +665,13 @@ class Update(object):
 			i = line[pos:].find(" ") + pos
 			self._getterSetterType = type = line[pos:i]	
 			
+# is this needed?!?!
+			'''
 			line = line.replace ( \
 				"/* @:override get, set " + label + " " + type + " */", \
 				"public var " + label + " (get, set):" + type + ";" \
 			)
+			'''
 			
 			return line
 			
