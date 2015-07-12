@@ -156,9 +156,9 @@ package X.Utils {
 
 //------------------------------------------------------------------------------------------
 		public function deserialize (__xml:XSimpleXMLNode):void {
-			m_classNamesStrings = new Array ();
-			m_classNamesCounts = new Array ();
-			m_freeClassNameIndexes = new Array ();
+			m_classNamesStrings = new Array (); // <String>
+			m_classNamesCounts = new Array (); // <Float>
+			m_freeClassNameIndexes = new Array (); // <Float>
 			
 			trace (": XClassNameToIndex: deserialize: ");
 			
