@@ -665,6 +665,11 @@ class Update(object):
 			i = line[pos:].find(" ") + pos
 			self._getterSetterType = type = line[pos:i]	
 			
+			line = line.replace ( \
+				"/* @:override get, set " + label + " " + type + " */", \
+				"public var " + label + " (get, set):" + type + ";" \
+			)
+			
 			return line
 			
 		pos = line.find("/* @:get, set")
@@ -704,7 +709,20 @@ class Update(object):
 		line = line.replace("[Inline]", "// [Inline]")
 		
 		return line
+
+	#-----------------------------------------------------------------------------
+	def convertConfigs(self, line):
+		if self.isComment(line):
+			return line
+			
+		if line.find("if (CONFIG::") < 0:
+			return line
+			
+		line = line.replace("CONFIG::flash", "true /* CONFIG::flash */")
+		line = line.replace("CONFIG::starling", "false /* CONFIG::starling */")
 		
+		return line
+				
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
@@ -721,6 +739,7 @@ class Update(object):
 		line = self.convertHaXeBlock(line)
 		line = self.convertPackage(line)
 		line = self.convertInline(line)
+		line = self.convertConfigs(line)
 
 		if not self._skipLine:	
 			dst.write(line)
