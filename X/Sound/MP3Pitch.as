@@ -200,7 +200,7 @@ package X.Sound {
 			var l1:Number;
 			var r1:Number;
 			
-			for( var i: int = 0 ; i < n ; ++i )
+			for (var i:int = 0; i < n; ++i )
 			{
 				//-- AVOID READING EQUAL SAMPLES, IF RATE < 1.0
 				if( int( positionTargetNum ) != positionTargetInt )

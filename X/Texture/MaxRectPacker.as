@@ -20,14 +20,13 @@ package X.Texture
 	
 	*/
 	
-	public class MaxRectPacker
-	{
+	public class MaxRectPacker {
 		public var freeRectangles:Vector.<Rectangle>;
 		
 		protected var binWidth:Number;
 		protected var binHeight:Number;
 		
-		public function MaxRectPacker(width:Number, height:Number):void {
+		public function MaxRectPacker (width:Number, height:Number):void {
 			init(width, height);
 		}
 		
