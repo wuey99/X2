@@ -725,12 +725,26 @@ class Update(object):
 		line = line.replace("CONFIG::starling", "false /* CONFIG::starling */")
 		
 		return line
+		
+	#-----------------------------------------------------------------------------
+	def convertExtendsObject(self, line):
+		if line.find("extends Object {") > 0:
+			line = line.replace("extends Object {", "{")
+			
+			self._extendsObject = True
+			
+		if self._extendsObject:
+			if line.find("super ();") > 0:
+				line = line.replace("super ();", "// super ();")
 				
+		return line
+	
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
 		self._skipLine = False
 		
+		line = self.convertExtendsObject(line)
 		line = self.convertArraysAndMaps(line)
 		line = self.convertBreaks(line)
 		line = self.convertClass(line)
@@ -774,6 +788,7 @@ class Update(object):
 		self._haXeBlock = False
 		self._as3Block = False
 		self._getterSetterMode = False
+		self._extendsObject = False
 						
 		self._lineNumber = 0
 		for line in src:
