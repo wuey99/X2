@@ -33,7 +33,8 @@ package X.Texture
 		public function init(width:Number, height:Number):void {
 			binWidth = width;
 			binHeight = height;
-			freeRectangles = new <Rectangle>[];
+//			freeRectangles = new <Rectangle>[];
+			freeRectangles = new Vector.<Rectangle> ();
 			freeRectangles.push(new Rectangle(0, 0, width, height));
 		}
 		
@@ -142,7 +143,7 @@ package X.Texture
 						freeRectangles.splice(i, 1);
 						--i;
 						--len;
-						break;
+						break; /* loop */
 					}
 					if (isContainedIn(tmpRect2,tmpRect)) {
 						freeRectangles.splice(j, 1);
