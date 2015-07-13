@@ -158,7 +158,8 @@ class Update(object):
 		if self.isComment(line):
 			return line
 			
-		line = line.replace("break;", "// break;")
+		if line.find("/* loop */") < 0:
+			line = line.replace("break;", "// break;")
 		
 		return line
 	
@@ -714,6 +715,12 @@ class Update(object):
 		return line
 
 	#-----------------------------------------------------------------------------
+	# CONFIG::flash
+	#    --> true
+	#
+	# CONFIG::starling
+	#    --> false
+	#-----------------------------------------------------------------------------
 	def convertConfigs(self, line):
 		if self.isComment(line):
 			return line
@@ -740,6 +747,13 @@ class Update(object):
 		return line
 	
 	#-----------------------------------------------------------------------------
+	def convertProtected(self, line):
+		line = line.replace ("protected var", "private var")
+		line = line.replace ("protected function", "private function")
+		
+		return line
+		
+	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
 		self._skipLine = False
@@ -757,6 +771,7 @@ class Update(object):
 		line = self.convertPackage(line)
 		line = self.convertInline(line)
 		line = self.convertConfigs(line)
+		line = self.convertProtected(line)
 
 		if not self._skipLine:	
 			dst.write(line)
