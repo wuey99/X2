@@ -728,11 +728,14 @@ class Update(object):
 		if self.isComment(line):
 			return line
 			
-		if line.find("if (CONFIG::") < 0:
+		if line.find("if (CONFIG::") >= 0:
+			line = line.replace("CONFIG::flash", "true /* CONFIG::flash */")
+			line = line.replace("CONFIG::starling", "false /* CONFIG::starling */")
+		
 			return line
 			
-		line = line.replace("CONFIG::flash", "true /* CONFIG::flash */")
-		line = line.replace("CONFIG::starling", "false /* CONFIG::starling */")
+		line = line.replace("CONFIG::flash", "/* CONFIG::flash */")
+		line = line.replace("CONFIG::starling", "/* CONFIG::starling */")
 		
 		return line
 		
