@@ -57,6 +57,9 @@ class Update(object):
 			
 		i += 1
 		
+		if line[i:].find(src + "<") >= 0:
+			return line
+			
 		j = line[i:].find("//");
 		if j == -1:
 			j = line[i:].find("/*")
@@ -747,18 +750,43 @@ class Update(object):
 		return line
 	
 	#-----------------------------------------------------------------------------
+	# protected
+	#    --> private
+	#-----------------------------------------------------------------------------	
 	def convertProtected(self, line):
 		line = line.replace ("protected var", "private var")
 		line = line.replace ("protected function", "private function")
 		
 		return line
+	
+	#-----------------------------------------------------------------------------
+	# public static const
+	#    --> public static inline
+	#
+	# private static const
+	#    --> private static inline
+	#
+	# public const
+	#    --> public static inline
+	#
+	# private const
+	#    --> private static inline
+	#-----------------------------------------------------------------------------
+	def convertConst(self, line):
+		line = line.replace("public static const", "public static inline")
+		line = line.replace("private static const", "private static inline")
+		line = line.replace("public const", "public static inline")
+		line = line.replace("private const", "private static inline")
 		
+		return line
+			
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
 		self._skipLine = False
 		
 		line = self.convertExtendsObject(line)
+		line = self.convertArraysAndMaps(line)
 		line = self.convertArraysAndMaps(line)
 		line = self.convertBreaks(line)
 		line = self.convertClass(line)
@@ -772,6 +800,7 @@ class Update(object):
 		line = self.convertInline(line)
 		line = self.convertConfigs(line)
 		line = self.convertProtected(line)
+		line = self.convertConst(line)
 
 		if not self._skipLine:	
 			dst.write(line)

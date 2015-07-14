@@ -60,7 +60,7 @@ package X.World.Logic {
 
 		protected var m_CX_Collide_Flag:Number;
 		
-		protected var m_objectCollisionList:XDict;
+		protected var m_objectCollisionList:XDict; // <XLogicObject, XRect>
 	
 		include "..\\..\\World\\Collision\\cx.h";
 		
@@ -2459,7 +2459,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_LF9 (__objectCollisionList:XDict):Boolean {
+		public function Ck_Obj_LF9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;
@@ -2499,7 +2499,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_RT9 (__objectCollisionList:XDict):Boolean {
+		public function Ck_Obj_RT9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;
@@ -2539,7 +2539,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_UP9 (__objectCollisionList:XDict):Boolean {
+		public function Ck_Obj_UP9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;
@@ -2579,7 +2579,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function Ck_Obj_DN9 (__objectCollisionList:XDict):Boolean {
+		public function Ck_Obj_DN9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
 			x1 = int (oX) + m_cx.left;

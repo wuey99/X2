@@ -177,7 +177,7 @@ package X.Texture {
 				m_currentAtlasText = m_currentAtlasText + __subText;
 			}
 
-			var __movieClipMetadata:Array /* <Rectangle> */ = new Array ();
+			var __movieClipMetadata:Array /* <Rectangle> */ = new Array (); // <Rectangle>
 			__movieClipMetadata.push (__realBounds);
 			
 			m_movieClips.set (__className, __movieClipMetadata);

@@ -492,7 +492,7 @@ package X.XMap {
 			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
 			var i:Number;
-			var src_items:XDict;
+			var src_items:XDict;  // <XMapItemModel, Float>
 //			var dst_items:Array = new Array ();
 			m_retrievedItems.length = 0;
 			var x:*;
@@ -588,7 +588,7 @@ package X.XMap {
 			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 							
 			var i:Number;
-			var src_items:XDict;
+			var src_items:XDict;  // <XMapItemModel, Float>
 			var dst_items:Array /* <XSubmapModel> */ = new Array () /* <XSubmapMOdel> */ ;
 			var x:*;
 			var item:XMapItemModel;

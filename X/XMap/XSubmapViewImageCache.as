@@ -160,7 +160,7 @@ package X.XMap {
 					__hline (0);
 					__hline (m_submapModel.height-1);
 					
-					var __items:XDict = m_submapModel.items ();
+					var __items:XDict /* <XMapItemModel, Float> */ = m_submapModel.items ();
 					var __item:XMapItemModel;
 					var __movieClip:XMovieClip;
 					
