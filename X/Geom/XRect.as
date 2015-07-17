@@ -62,7 +62,7 @@ package X.Geom {
 				
 //------------------------------------------------------------------------------------------
 		public function getRectangle ():Rectangle {
-			return this as Rectangle;
+			return /* @:cast */ this as Rectangle;
 		}
 		
 //------------------------------------------------------------------------------------------
