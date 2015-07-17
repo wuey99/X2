@@ -334,6 +334,25 @@ class Update(object):
 		return line
 		
 	#-----------------------------------------------------------------------------
+	# :uint
+	#    --> :UInt
+	#-----------------------------------------------------------------------------
+	def convertUInt(self, line):
+		if self.isType(line, "uint"):
+			line = line.replace(":uint", ":UInt")
+
+		if self.isNewOrExtends(line, "uint"):
+			line = line.replace(" uint", " UInt")
+			
+		if line.find("= uint (") >= 0:
+			line = line.replace("= uint (", "= Std.int (")
+			
+		if line.find("= uint(") >= 0:
+			line = line.replace("= uint(", "= Std.int (")
+					
+		return line
+		
+	#-----------------------------------------------------------------------------
 	# :Number
 	#    --> :Float
 	#-----------------------------------------------------------------------------
@@ -412,6 +431,8 @@ class Update(object):
 	#    --> :Bool
 	# :int
 	#    --> :Int
+	# :uint
+	#    --> :UInt
 	# :Number
 	#    --> :Float
 	# :Object
@@ -430,6 +451,7 @@ class Update(object):
 		line = self.convertBoolean(line)
 		line = self.convertString(line)
 		line = self.convertInt(line)
+		line = self.convertUInt(line)
 		line = self.convertNumber(line)
 		line = self.convertObject(line)
 		line = self.convertVoid(line)
