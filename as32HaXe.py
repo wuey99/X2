@@ -300,6 +300,12 @@ class Update(object):
 
 		if self.isNewOrExtends(line, "int"):
 			line = line.replace(" int", " Int")
+			
+		if line.find("= int (") >= 0:
+			line = line.replace("= int (", "= Std.int (")
+			
+		if line.find("= int(") >= 0:
+			line = line.replace("= int(", "= Std.int (")
 					
 		return line
 		
@@ -782,7 +788,95 @@ class Update(object):
 		line = line.replace("private const", "private static inline")
 		
 		return line
+	
+	#-----------------------------------------------------------------------------
+	# forEach
+	#
+	# <map>.forEach {
+	# 	function (key:*):void {
+	#	}
+	# );
+	#
+	#    -->:
+	#
+	# for (key in <map>.keys ()) {
+	#	function (key:Dynamic):Void {
+	#   } (key);
+	# }
+	#
+	#-----------------------------------------------------------------------------
+	# doWhile
+	#
+	# <map>.doWhile {
+	#	function (key:*):Boolean {
+	#		return true;
+	#	}
+	# );
+	#
+	#    -->:
+	#
+	# for (key in <map>.keys ()) {
+	#	if !function (key:Dynamic):Boolean {
+	#		return true;
+	#	} (key) break;
+	# }
+	#-----------------------------------------------------------------------------
+	def convertForEach(self, line):
+		if self.isComment(line):
+			return line
 			
+		startLoop = False
+		
+		if line.find(".forEach (") >= 0:
+			self._forEach = True
+			self._doWhile = False
+			self._loopLevel = 0
+			startLoop = True
+			
+		if line.find(".doWhile (") >= 0:
+			self._forEach = False
+			self._doWhile = True
+			self._loopLevel = 0
+			startLoop = True
+			
+		if startLoop:
+			for i in xrange(0, len(line)):
+				if line[i] != " " and line[i] != "\t":
+					break;
+		
+			end = line[i:].find(".")
+			label = line[i:end+i]	
+	
+			line = line[:i] + "for (__key__ in " + label + ".keys ()) {\n"
+		
+			return line
+			
+		if not (self._forEach or self._doWhile):
+			return line
+			
+		self._loopLevel += line.count("{")
+		self._loopLevel -= line.count("}")
+		
+		if self._loopLevel and line.find("function (") >=0 and self._doWhile:
+			line = line.replace ("function (", "if (!function (")
+			
+		if self._loopLevel == 0 and line.count("}") > 0:
+			if self._forEach:
+				line = line[:-1] + " (__key__);\n"
+			else:
+				line = line[:-1] + " (__key__)) break;\n"
+				
+			return line
+			
+		if self._loopLevel == 0 and line.endswith(");\n"):
+			line = line.replace(");", "}")
+			
+			self._forEach = False
+			self._doWhile = False
+			self._loopLevel = 0
+			
+		return line
+				
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
@@ -804,6 +898,7 @@ class Update(object):
 		line = self.convertConfigs(line)
 		line = self.convertProtected(line)
 		line = self.convertConst(line)
+		line = self.convertForEach(line)
 
 		if not self._skipLine:	
 			dst.write(line)
@@ -836,6 +931,9 @@ class Update(object):
 		self._as3Block = False
 		self._getterSetterMode = False
 		self._extendsObject = False
+		self._forEach = False
+		self._doWhile = False
+		self._loopLevel = 0
 						
 		self._lineNumber = 0
 		for line in src:
