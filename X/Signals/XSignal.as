@@ -31,7 +31,7 @@ package X.Signals {
 
 //------------------------------------------------------------------------------------------
 	public class XSignal extends Object {
-		private var m_listeners:XDict; // <Function, Int>
+		private var m_listeners:XDict; // <Dynamic, Int>
 		private var m_parent:*;
 // <HAXE>
 /* --
@@ -45,7 +45,7 @@ package X.Signals {
 		public function XSignal () {
 			super();
 			
-			m_listeners = new XDict (); // <Function, Int>
+			m_listeners = new XDict (); // <Dynamic, Int>
 			
 // <HAXE>
 /* --
@@ -75,6 +75,32 @@ package X.Signals {
 // <HAXE>
 /* --
 		public function __fireSignal (args:Array<Dynamic>):Void {
+			switch (args.length) {
+				case 0:
+					for (__listener in m_listeners.keys ()) {
+						__listener ();
+					}
+		
+				case 1:
+					for (__listener in m_listeners.keys ()) {
+						__listener (args[0]);
+					}
+		
+				case 2:
+					for (__listener in m_listeners.keys ()) {
+						__listener (args[0], args[1]);
+					}
+		
+				case 3:
+					for (__listener in m_listeners.keys ()) {
+						__listener (args[0], args[1], args[2]);
+					}
+		
+				case 4:
+					for (__listener in m_listeners.keys ()) {
+						__listener (args[0], args[1], args[2], args[3]);
+					}
+			}
 		}
 -- */	
 // <AS3>
