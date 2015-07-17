@@ -263,7 +263,15 @@ class Update(object):
 			return True
 		else:
 			return False
-			
+
+	#-----------------------------------------------------------------------------
+	def isIsOrAs(self, line, typeName):
+		if line.find(" is " + typeName) >= 0 \
+		or line.find(" as " + typeName) >= 0:
+			return True
+		else:
+			return False
+						
 	#-----------------------------------------------------------------------------
 	# :Function
 	#    --> :Dynamic
@@ -273,6 +281,9 @@ class Update(object):
 			line = line.replace(":Function", ":Dynamic /* Function */")
 		
 		if self.isNewOrExtends(line, "Function"):
+			line = line.replace(" Function", " Dynamic /* Function */")
+			
+		if self.isIsOrAs(line, "Function"):
 			line = line.replace(" Function", " Dynamic /* Function */")
 			
 		return line
@@ -289,7 +300,20 @@ class Update(object):
 			line = line.replace(" Boolean", " Bool")
 					
 		return line
-		
+
+	#-----------------------------------------------------------------------------
+	# = String (
+	#    --> = Std.string (
+	#-----------------------------------------------------------------------------
+	def convertString(self, line):
+		if line.find("= String (") >= 0:
+			line = line.replace("= String (", "= Std.string (")
+			
+		if line.find("= String(") >= 0:
+			line = line.replace("= String(", "= Std.string (")
+			
+		return line
+				
 	#-----------------------------------------------------------------------------
 	# :int
 	#    --> :Int
@@ -394,6 +418,7 @@ class Update(object):
 			return line
 			
 		line = self.convertBoolean(line)
+		line = self.convertString(line)
 		line = self.convertInt(line)
 		line = self.convertNumber(line)
 		line = self.convertObject(line)

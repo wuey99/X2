@@ -37,7 +37,7 @@ package X.Game {
 //------------------------------------------------------------------------------------------
 	public class XBulletCollisionList extends Object {
 		private var xxx:XWorld;
-		private var m_rects:Array; // <<XLogicObject, XRect>>
+		private var m_rects:Array; // <Map<XLogicObject, XRect>>
 		private var m_XSubRectPoolManager:XSubObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ package X.Game {
 //------------------------------------------------------------------------------------------
 		public function setup (__xxx:XWorld):void {
 			xxx = __xxx;		
-			m_rects = new Array ();  // <<XLogicObject, XRect>>
+			m_rects = new Array ();  // <Map<XLogicObject, XRect>>
 			
 			var i:Number;
 			

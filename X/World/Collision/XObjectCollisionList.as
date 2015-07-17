@@ -37,7 +37,7 @@ package X.World.Collision {
 //------------------------------------------------------------------------------------------
 	public class XObjectCollisionList extends Object {
 		protected var xxx:XWorld;
-		protected var m_rects:Array; // <<XLogicObject, XRect>>
+		protected var m_rects:Array; // <Map<XLogicObject, XRect>>
 		protected var m_XSubRectPoolManager:XSubObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ package X.World.Collision {
 //------------------------------------------------------------------------------------------
 		public function setup (__xxx:XWorld):void {
 			xxx = __xxx;		
-			m_rects = new Array (); // <<XLogicObject, XRect>>
+			m_rects = new Array (); // <Map<XLogicObject, XRect>>
 			
 			var i:Number;
 			
