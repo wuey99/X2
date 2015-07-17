@@ -398,6 +398,16 @@ class Update(object):
 		return line
 		
 	#-----------------------------------------------------------------------------
+	# ...args
+	#    --> args:Array<Dynamic>
+	#-----------------------------------------------------------------------------
+	def convertRestParameters(self, line):
+		if line.find("...args"):
+			line = line.replace("...args", "args:Array<Dynamic>")
+			
+		return line
+		
+	#-----------------------------------------------------------------------------
 	# :Boolean
 	#    --> :Bool
 	# :int
@@ -425,6 +435,7 @@ class Update(object):
 		line = self.convertVoid(line)
 		line = self.convertVector(line)
 		line = self.convertFunction(line)
+		line = self.convertRestParameters(line)
 		
 		return line
 	
