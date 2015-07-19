@@ -434,13 +434,18 @@ class Update(object):
 			end = line[begin:].find("\"") + begin
 			
 			includeFile = line[begin:end]
-			includeFile = os.path.join(self._src_folder, includeFile)
-			includeFile = os.path.normpath(includeFile)
+			includePath = os.path.join(self._src_folder, includeFile)
+			includePath = os.path.normpath(includePath)
 			
-			print ": include ===============================>: ", includeFile
+			print ": include ===============================>: ", includeFile, includePath
 
+			dst.write(line.replace("include", "// begin include"))
+			
 			o = Update()
-			o.processFile2(includeFile, dst)
+			o.processFile2(includePath, dst)
+			dst.write("\n")
+			
+			dst.write(line.replace("include", "// end include"))
 			
 			line = ""
 			
