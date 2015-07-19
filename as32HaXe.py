@@ -11,7 +11,8 @@ import shutil
 class Update(object):
 
 	def __init__(self):
-		pass
+		self._src_folder = ""
+		self._src_fileName = ""
 
 	#-----------------------------------------------------------------------------
 	def splitFolderAndFilename(self, fullPath):
@@ -437,7 +438,7 @@ class Update(object):
 			includeFile = os.path.normpath(includeFile)
 			
 			print ": include ===============================>: ", includeFile
-			
+
 			o = Update()
 			o.processFile2(includeFile, dst)
 			
@@ -953,7 +954,19 @@ class Update(object):
 			self._loopLevel = 0
 			
 		return line
-				
+
+	#-----------------------------------------------------------------------------
+	def convertXML(self, line):
+		if not self._src_folder.startswith("X\Resource"):
+			return line
+
+		line = line.replace(":XMLList", ":Array<XSimpleXMLNode>")
+		line = line.replace(".length ()", ".length")
+		line = line.replace(":XML", ":XSimpleXMLNode")
+		line = line.replace("new XML", "new XSimpleXMLNode")
+		
+		return line
+						
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
@@ -976,6 +989,7 @@ class Update(object):
 		line = self.convertProtected(line)
 		line = self.convertConst(line)
 		line = self.convertForEach(line)
+		line = self.convertXML(line)
 		line = self.convertIncludes(line, dst)
 
 		if not self._skipLine:	
