@@ -35,7 +35,7 @@ package X.XMap {
 	import X.World.Logic.*;
 	import X.World.Sprite.XDepthSprite;
 	
-	import flash.display.MovieClip;
+	import flash.display.*;
 	import flash.events.*;
 	import flash.text.*;
 	import flash.utils.*;

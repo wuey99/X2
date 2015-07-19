@@ -36,7 +36,7 @@ package X.XMap {
 	import X.XMap.*;
 	
 	// Flash classes
-	import flash.display.MovieClip;
+	import flash.display.*;
 	import flash.events.*;
 	import flash.text.*;
 	import flash.utils.*;
