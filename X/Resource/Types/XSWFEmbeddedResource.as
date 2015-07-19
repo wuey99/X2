@@ -45,7 +45,8 @@ package X.Resource.Types {
 
 //------------------------------------------------------------------------------------------
 		public override function setup (
-			__resourcePath:String, __resourceXML:XML,
+			__resourcePath:String,
+			__resourceXML:XML,
 			__parent:Sprite,
 			__resourceManager:XSubResourceManager
 			):void {

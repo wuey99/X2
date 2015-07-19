@@ -83,6 +83,7 @@ package X.XML {
 			
 			for (i = 0; i<__xmlList.length (); i++) {
 				var __key:String = __xmlList[i].name ();
+				
 				m_attribsMap.set (__key, __xml.@[__key]);
 			}
 		
@@ -182,6 +183,11 @@ package X.XML {
 //-----------------------------------------------------------------------------------------
 		public function hasAttribute (__name:String):Boolean {
 			return m_attribsMap.exists (__name);
+		}
+
+//-----------------------------------------------------------------------------------------
+		public function attribute (__name:String):* {
+			return m_attribsMap.get (__name);
 		}
 		
 //-----------------------------------------------------------------------------------------

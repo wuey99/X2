@@ -238,7 +238,7 @@ package X.Resource.Manager {
 						this,
 						m_parent,
 						getRootPath (),
-						__xmlList[i].@name,
+						__xmlList[i].attribute ("name"),
 						null,
 						loaderContextFactory ()
 						);
@@ -321,7 +321,14 @@ package X.Resource.Manager {
 
 //------------------------------------------------------------------------------------------
 		public function deleteManifest (__xml:XML):void {
+// <HAXE>
+/* --
+			not implemented in HaXe
+-- */
+// </HAXE>
+// <AS3>
 			delete __xml.parent ().(@name == __xml.@name)[0];
+// </AS3>
 		}		
 		
 //------------------------------------------------------------------------------------------
@@ -443,7 +450,7 @@ package X.Resource.Manager {
 				
 				trace (": resourceManager: ", r);
 				
-				r.cacheClassNames (r.getManifest ().folder.child ("*"));
+				r.cacheClassNames (r.getManifest ().child ("folder")[0].child ("*"));
 			}
 			
 			return true;

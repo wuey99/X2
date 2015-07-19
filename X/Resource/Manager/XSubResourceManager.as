@@ -264,10 +264,17 @@ package X.Resource.Manager {
 		
 		//------------------------------------------------------------------------------------------
 		public override function deleteResourceXML (__xml:XML):void {
-			//			delete __xml.parent ().resource.(@name == __xml.@name)[0];
+// <HAXE>
+/* --
+			not implemented in HaXe
+-- */
+// </HAXE>
+// <AS3>
+//			delete __xml.parent ().resource.(@name == __xml.@name)[0];
 			
-			// let it match any node name
+// let it match any node name
 			delete __xml.parent ().*.(@name == __xml.@name)[0];
+// </AS3>
 		}		
 		
 		//------------------------------------------------------------------------------------------
@@ -294,7 +301,7 @@ package X.Resource.Manager {
 			return findNodeFromResourceName (
 				null,
 				__resourceName,
-				m_manifestXML.folder.child ("*")
+				m_manifestXML.child ("folder")[0].child ("*")
 			);
 		}
 		
@@ -303,7 +310,7 @@ package X.Resource.Manager {
 			var __resourceXML:XML = findResourceXMLFromName (__resourceName);
 			
 			return __getXResourceFromPath (
-				__resourceXML.@path + "\\" +__resourceXML.@dst,
+				__resourceXML.attribute ("path") + "\\" +__resourceXML.attribute ("dst"),
 				__resourceXML
 			);
 		}
@@ -444,7 +451,7 @@ package X.Resource.Manager {
 				}
 				else
 				{				
-					if (__srcName == __xmlList[i].@src) {	
+					if (__srcName == __xmlList[i].attribute ("src")) {	
 						__match = __xmlList[i];
 					}
 				}
@@ -476,7 +483,7 @@ package X.Resource.Manager {
 				}
 				else
 				{
-					if (__resourceName == __xmlList[i].@name) {
+					if (__resourceName == __xmlList[i].attribute ("name")) {
 						__match = __xmlList[i];
 					}
 				}
@@ -546,13 +553,15 @@ package X.Resource.Manager {
 				}
 				else
 				{
-					if (__resourceName == __xmlList[i].@name) {
-						for (j=0; j<__xmlList[i].classX.@name.length (); j++) {		
-							if (!m_cachedClassName.exists (__xmlList[i].classX.@name[j])) {
-								m_cachedClassName.set (__xmlList[i].classX.@name[j], __xmlList[i]);
+					if (__resourceName == __xmlList[i].attribute ("name")) {
+						var __classList:XMLList = __xmlList[i].child ("classX");
+						
+						for (j=0; j<__classList.length (); j++) {		
+							if (!m_cachedClassName.exists (__classList[j].attribute ("name"))) {
+								m_cachedClassName.set (__classList[j].attribute ("name"), __xmlList[i]);
 							}
 							
-							if (__xmlList[i].classX.@name[j] == __className) {
+							if (__classList[j].attribute ("name") == __className) {
 								__match = __xmlList[i];
 							}
 						}	
@@ -568,15 +577,17 @@ package X.Resource.Manager {
 			var i:int, j:int;
 			
 			for (i = 0; i<__xmlList.length (); i++) {
-				//				trace (": caching: ", __xmlList[i].localName ());
+//				trace (": caching: ", __xmlList[i].localName ());
 				
 				if (__xmlList[i].localName () == "folder") {
 					cacheClassNames (__xmlList[i].child ("*"));
 				}
 				else
 				{
-					for (j=0; j<__xmlList[i].classX.@name.length (); j++) {						
-						m_cachedClassName.set (__xmlList[i].classX.@name[j], __xmlList[i]);
+					var __classList:XMLList = __xmlList[i].child ("classX");
+					
+					for (j=0; j<__classList.length (); j++) {						
+						m_cachedClassName.set (__classList[j].getAttribute ("name"), __xmlList[i]);
 					}	
 				}
 			}
@@ -603,14 +614,14 @@ package X.Resource.Manager {
 					null,
 					__resourceName,
 					__className,
-					m_manifestXML.folder.child ("*")
+					m_manifestXML.child ("folder")[0].child ("*")
 				);
 			
 			if (match == null) {
 				throw (Error ("className not found in manifest: " + __fullName));
 			}
 			
-			return [match, match.@path + "\\" + match.@dst];
+			return [match, match.attribute ("path") + "\\" + match.attribute ("dst")];
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -623,7 +634,7 @@ package X.Resource.Manager {
 //			trace (": XResourceManager:__resolveXClass (): ", __className);
 			
 			if (!m_classMap.exists (__className)) {
-				var __match:Array /* <String> */ = __lookUpResourcePathByClassName (__className);
+				var __match:Array /* <Dynamic> */ = __lookUpResourcePathByClassName (__className);
 				
 				var __resourceXML:XML = __match[0];
 				var __resourcePath:String = __match[1];

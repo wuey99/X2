@@ -95,7 +95,7 @@ package X.Resource {
 			var __classNames:Array /* <String> */ = new Array (); // <String> 
 						
 			for (i=0; i<__xmlList.length (); i++) {
-				__classNames.push (__xmlList[i].@name);	
+				__classNames.push (__xmlList[i].attribute ("name"));	
 			}
 			
 			return __classNames;
