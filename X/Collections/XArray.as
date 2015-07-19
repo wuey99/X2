@@ -35,7 +35,7 @@ package X.Collections {
 		public function XArray () {
 			super();
 			
-			m_array = new Array ();
+			m_array = new Array (); // <Dynamic>
 		}
 
 //------------------------------------------------------------------------------------------
