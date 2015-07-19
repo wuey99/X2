@@ -29,7 +29,7 @@ package X.Collections {
 
 //------------------------------------------------------------------------------------------
 	public class XArray extends Object {
-		private var m_array:Array;
+		private var m_array:Array; // <Dynamic>
 		
 //------------------------------------------------------------------------------------------
 		public function XArray () {

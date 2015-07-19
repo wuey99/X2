@@ -97,7 +97,7 @@ package X.XMap {
 			}
 
 //------------------------------------------------------------------------------------------						
-			var __submaps:Array;
+			var __submaps:Array; // <XSubmapModel>
 			
 			__submaps = m_XMapModel.getSubmapsAt (
 				m_currLayer,

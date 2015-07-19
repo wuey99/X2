@@ -1602,9 +1602,9 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getEmptyTask0$ ():Array /* <Dynamic> */ {
-			return m_XTaskSubManager0.getEmptyTaskX ();
-		}	
+//		public function getEmptyTask0$ ():Array /* <Dynamic> */ {
+//			return m_XTaskSubManager0.getEmptyTaskX ();
+//		}	
 		
 //------------------------------------------------------------------------------------------
 		public function getEmptyTask0X ():Array /* <Dynamic> */ {
@@ -1667,9 +1667,9 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getEmptyTask$ ():Array /* <Dynamic> */ {
-			return m_XTaskSubManager.getEmptyTaskX ();
-		}	
+//		public function getEmptyTask$ ():Array /* <Dynamic> */ {
+//			return m_XTaskSubManager.getEmptyTaskX ();
+//		}	
 			
 //------------------------------------------------------------------------------------------
 		public function getEmptyTaskX ():Array /* <Dynamic> */ {
@@ -1732,9 +1732,9 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getEmptyTaskCX$ ():Array /* <Dynamic> */ {
-			return m_XTaskSubManagerCX.getEmptyTaskX ();
-		}	
+//		public function getEmptyTaskCX$ ():Array /* <Dynamic> */ {
+//			return m_XTaskSubManagerCX.getEmptyTaskX ();
+//		}	
 		
 //------------------------------------------------------------------------------------------
 		public function getEmptyTaskCX ():Array /* <Dynamic> */ {
