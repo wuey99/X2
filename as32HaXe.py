@@ -427,6 +427,25 @@ class Update(object):
 		return line
 		
 	#-----------------------------------------------------------------------------
+	def convertIncludes(self, line, dst):
+		if line.find("include \"") >= 0:
+			begin = line.find("\"") + 1
+			end = line[begin:].find("\"") + begin
+			
+			includeFile = line[begin:end]
+			includeFile = os.path.join(self._src_folder, includeFile)
+			includeFile = os.path.normpath(includeFile)
+			
+			print ": include ===============================>: ", includeFile
+			
+			o = Update()
+			o.processFile2(includeFile, dst)
+			
+			line = ""
+			
+		return line
+		
+	#-----------------------------------------------------------------------------
 	# :Boolean
 	#    --> :Bool
 	# :int
@@ -957,33 +976,42 @@ class Update(object):
 		line = self.convertProtected(line)
 		line = self.convertConst(line)
 		line = self.convertForEach(line)
+		line = self.convertIncludes(line, dst)
 
 		if not self._skipLine:	
 			dst.write(line)
 
 	#-----------------------------------------------------------------------------
-	def processFile(self, src_file_path):
+	def processNewFile(self, src_file_path):
 		dst_file_path = "Y" + src_file_path[src_file_path.find(os.path.sep):]
 
 		print ": src: ", src_file_path
 		print ": dst: ", dst_file_path
 
-		folder, fileName = self.splitFolderAndFilename(dst_file_path);
+		self._src_folder, self._src_fileName = self.splitFolderAndFilename(src_file_path)
+		folder, fileName = self.splitFolderAndFilename(dst_file_path)
 
-		print ": folder, name: ", folder, fileName, os.getcwd()
+		print ": src folder, name: ", self._src_folder, self._src_fileName
+		print ": dst folder, name: ", folder, fileName, os.getcwd()
 
+		if not os.path.exists(folder):
+			os.mkdir(folder)
+
+		dst = open(dst_file_path, "w")
+
+		self.processFile2(src_file_path, dst)
+		
+		dst.close()
+
+	#-----------------------------------------------------------------------------
+	def processFile2(self, src_file_path, dst):
 		src = open(src_file_path)
 		self._numLines = 0
 		for line in src:
 			self._numLines += 1
 		src.close()
 		src = open(src_file_path)
-		
-		if not os.path.exists(folder):
-			os.mkdir(folder)
 
-		dst = open(dst_file_path, "w")
-		
 		self._className = ""
 		self._haXeBlock = False
 		self._as3Block = False
@@ -1000,8 +1028,7 @@ class Update(object):
 		print ": ", self._numLines
 		
 		src.close()
-		dst.close()
-
+		
 	#-----------------------------------------------------------------------------
 	def processDirectory(self, paths):
 
@@ -1015,7 +1042,7 @@ class Update(object):
 					if filenames[j].endswith(".as") or filenames[j].endswith(".h"):
 						file_path = path + os.path.sep + filenames[j]
 
-						self.processFile (file_path)
+						self.processNewFile (file_path)
 
 				for j in xrange(len(dirnames)):
 					dirnames[j] = path + os.path.sep + dirnames[j]
