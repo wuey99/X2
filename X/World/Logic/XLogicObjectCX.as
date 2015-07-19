@@ -370,7 +370,7 @@ package X.World.Logic {
 			
 			/* @:set_return true; */			
 		}
-		/* @:end *
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		/* @:get, set allowUPCollisions Boolean */
@@ -383,7 +383,7 @@ package X.World.Logic {
 			
 			/* @:set_return true; */			
 		}
-		/* @:end *
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------
 		/* @:get, set allowDNCollisions Boolean */
