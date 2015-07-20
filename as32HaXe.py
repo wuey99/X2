@@ -326,6 +326,9 @@ class Update(object):
 		if self.isNewOrExtends(line, "int"):
 			line = line.replace(" int", " Int")
 			
+		if line.find(" as int") >= 0:
+			line = line.replace(" as int", " as Int")
+			
 		if line.find("= int (") >= 0:
 			line = line.replace("= int (", "= Std.int (")
 			
