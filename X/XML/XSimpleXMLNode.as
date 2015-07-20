@@ -51,7 +51,7 @@ package X.XML {
 			m_tag = __tag;
 			m_text = __text;
 			
-			var i:Number = 0;
+			var i:int = 0;
 //			for (i=0; i<__attribs.length; i+=2) {
 			while (i<__attribs.length) {
 				m_attribsMap.set (__attribs[i+0], __attribs[i+1]);
@@ -59,7 +59,56 @@ package X.XML {
 				i += 2;
 			}
 		}
+		
+// <HAXE>
+/* --
+//------------------------------------------------------------------------------------------	
+		public function setupWithXMLString (__xmlString:String):void {
+			var __xml:Xml = Xml.parse (__xmlString);
+		
+			setupWithXML (__xml.firstElement ());													
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function setupWithXML (__xml:Xml):void {
+			m_tag = __xml.nodeName;
+		
+			if (__xml.firstChild ().nodeType == Xml.XmlType.Element) {
+				m_text = "";
+			}
+			else
+			{
+				m_text = __xml.firstChild ().nodeValue;
+			}
+		
+//------------------------------------------------------------------------------------------
+			m_attribsMap = new Map<String, Dynamic> ();
 
+			for (__key in __xml.attributes ()) {	
+				m_attribsMap.set (__key, __xml.get (__key));
+			}
+		
+//------------------------------------------------------------------------------------------	
+			m_children = __getXMLChildren (__xml);
+		}
+		
+//------------------------------------------------------------------------------------------
+		private function __getXMLChildren (__xml:Xml):Array<XSimpleXMLNode> {
+			var __children:Array<XSimpleXMLNode> = new Array<XSimpleXMLNode> ();
+			
+			//------------------------------------------------------------------------------------------	
+			for (__element in __xml.elements ()) {
+				var __xmlNode:XSimpleXMLNode = new XSimpleXMLNode ();
+				__xmlNode.setupWithXML (__element);
+				__children.push (__xmlNode);	
+			}
+			
+			//------------------------------------------------------------------------------------------
+			return __children;
+		}
+-- */
+// </HAXE>		
+// <AS3>		
 //------------------------------------------------------------------------------------------
 		public function setupWithXMLString (__xmlString:String):void {
 			var __xml:XML = new XML (__xmlString);
@@ -69,7 +118,7 @@ package X.XML {
 
 //------------------------------------------------------------------------------------------
 		public function setupWithXML (__xml:XML):void {
-			var i:Number;
+			var i:int;
 			var __xmlList:XMLList;
 			
 //------------------------------------------------------------------------------------------
@@ -93,7 +142,7 @@ package X.XML {
 
 //------------------------------------------------------------------------------------------
 		private function __getXMLChildren (__xml:XML):Array /* <XSimpleXMLNode> */ {
-			var i:Number;
+			var i:int;
 			var __xmlList:XMLList;
 			var __children:Array /* <XSimpleXMLNode> */ = new Array (); // <XSimpleXMLNode>
 				
@@ -109,7 +158,10 @@ package X.XML {
 //------------------------------------------------------------------------------------------
 			return __children;
 		}
-				
+		
+//------------------------------------------------------------------------------------------	
+// </AS3>
+	
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
 		}
@@ -201,8 +253,8 @@ package X.XML {
 		}
 			
 //------------------------------------------------------------------------------------------
-		protected function __tab (__indent:Number):String {
-			var i:Number;
+		protected function __tab (__indent:int):String {
+			var i:int;
 			var tabs:String = "";
 			
 			for (i=0; i<__indent; i++) {
@@ -213,8 +265,8 @@ package X.XML {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function toXMLString (__indent:Number = 0):String {
-			var i:Number;
+		public function toXMLString (__indent:int = 0):String {
+			var i:int;
 			
 			var __string:String = "";
 			
@@ -227,7 +279,7 @@ package X.XML {
 				}
 			);
 			
-			if (m_text != "" || m_children.length) {
+			if (m_text != "" || m_children.length != 0) {
 				__string += ">\n";
 				
 				if (m_text != "") {

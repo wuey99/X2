@@ -40,7 +40,7 @@ package X.XML {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function toXMLString (__indent:Number = 0):String {
+		public override function toXMLString (__indent:int = 0):String {
 			var __xmlString:String = "<?xml version='1.0' encoding='UTF-8'?>\n";
 			
 			__xmlString += __tab (__indent) + super.toXMLString (__indent);
