@@ -85,22 +85,22 @@ package X.Task {
 		private var m_taskList:Array; // <Dynamic>
 		private var m_taskIndex:int;
 		private var m_labels:XDict; // <String, Int>
-		private var m_ticks:int;
+		private var m_ticks:Number;
 		private var m_stack:Array; // <Float>
 		private var m_loop:Array; // <Float>
 		private var m_stackPtr:int;
 		private var m_parent:*;
-		private var m_flags:Number;
+		private var m_flags:int;
 		private var m_subTask:XTask;
 		private var m_time:Number;
 		private var m_WAIT1000:Boolean;
 		public var m_isDead:Boolean;
 		public var tag:String;
-		public var m_id:Number;
+		public var m_id:int;
 		public var self:XTask;
 		public var m_pool:XObjectPoolManager;
 		
-		public static var g_id:Number = 0;
+		public static var g_id:int = 0;
 		
 		protected var m_manager:XTaskManager;
 		
@@ -108,42 +108,42 @@ package X.Task {
 		public var m_XApp:XApp;
 		
 // static versions of op-codes (for external use.  TODO: look for a solution to speed-up static access i.e. XTask.LOOP)
-		public static const CALL:Number = 0;
-		public static const RETN:Number = 1;
-		public static const LOOP:Number = 2;
-		public static const NEXT:Number = 3;
-		public static const WAIT:Number = 4;
-		public static const LABEL:Number = 5;
-		public static const GOTO:Number = 6;
-		public static const BEQ:Number = 7;
-		public static const BNE:Number = 8;
-		public static const FLAGS:Number = 9;
-		public static const EXEC:Number = 10;
-		public static const FUNC:Number = 11;
-		public static const WAIT1000:Number = 12; 
-		public static const UNTIL:Number = 13;
-		public static const POP:Number = 14;
-		public static const WAITX:Number = 15;
+		public static const CALL:int = 0;
+		public static const RETN:int = 1;
+		public static const LOOP:int = 2;
+		public static const NEXT:int = 3;
+		public static const WAIT:int = 4;
+		public static const LABEL:int = 5;
+		public static const GOTO:int = 6;
+		public static const BEQ:int = 7;
+		public static const BNE:int = 8;
+		public static const FLAGS:int = 9;
+		public static const EXEC:int = 10;
+		public static const FUNC:int = 11;
+		public static const WAIT1000:int = 12; 
+		public static const UNTIL:int = 13;
+		public static const POP:int = 14;
+		public static const WAITX:int = 15;
 		
 // private versions of op-codes (for internal use)
-		public const _CALL:Number = 0;
-		public const _RETN:Number = 1;
-		public const _LOOP:Number = 2;
-		public const _NEXT:Number = 3;
-		public const _WAIT:Number = 4;
-		public const _LABEL:Number = 5;
-		public const _GOTO:Number = 6;
-		public const _BEQ:Number = 7;
-		public const _BNE:Number = 8;
-		public const _FLAGS:Number = 9;
-		public const _EXEC:Number = 10;
-		public const _FUNC:Number = 11;
-		public const _WAIT1000:Number = 12; 
-		public const _UNTIL:Number = 13;
-		public const _POP:Number = 14;
-		public const _WAITX:Number = 15;
+		public const _CALL:int = 0;
+		public const _RETN:int = 1;
+		public const _LOOP:int = 2;
+		public const _NEXT:int = 3;
+		public const _WAIT:int = 4;
+		public const _LABEL:int = 5;
+		public const _GOTO:int = 6;
+		public const _BEQ:int = 7;
+		public const _BNE:int = 8;
+		public const _FLAGS:int = 9;
+		public const _EXEC:int = 10;
+		public const _FUNC:int = 11;
+		public const _WAIT1000:int = 12; 
+		public const _UNTIL:int = 13;
+		public const _POP:int = 14;
+		public const _WAITX:int = 15;
 		
-		public const _FLAGS_EQ:Number = 1;
+		public const _FLAGS_EQ:int = 1;
 		
 		protected var m_XTaskSubManager:XTaskSubManager;
 		
@@ -298,7 +298,7 @@ package X.Task {
 		//------------------------------------------------------------------------------------------
 		private function __findLabels ():void {
 			var i:int;
-			var x:Number;
+			var x:int;
 			
 			i = 0;
 			
@@ -309,7 +309,7 @@ package X.Task {
 				}
 				else
 				{
-					x = value as Number;
+					x = value as int;
 					
 					switch (x) {
 						case _LABEL:
@@ -417,7 +417,7 @@ package X.Task {
 			}
 			
 			//------------------------------------------------------------------------------------------
-			switch (/* @:safe_cast */ value as Number) {
+			switch (/* @:safe_cast */ value as int) {
 				//------------------------------------------------------------------------------------------
 				
 				//------------------------------------------------------------------------------------------
@@ -489,7 +489,7 @@ package X.Task {
 				//------------------------------------------------------------------------------------------					
 				case _LOOP:
 				//------------------------------------------------------------------------------------------
-					var __loopCount:Number = __evalNumber ();
+					var __loopCount:int = __evalNumber () as int;
 					
 					m_loop[m_stackPtr] = __loopCount;
 					m_stack[m_stackPtr++] = m_taskIndex;

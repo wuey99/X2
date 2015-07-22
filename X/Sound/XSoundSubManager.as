@@ -38,8 +38,8 @@ package X.Sound {
 	public class XSoundSubManager extends Object {
 		public var m_soundManager:XSoundManager;
 		public var m_soundChannels:XDict; // <Float, Float>
-		public var m_maxChannels:Number;
-		public var m_numChannels:Number;
+		public var m_maxChannels:int;
+		public var m_numChannels:int;
 		
 //------------------------------------------------------------------------------------------
 		public function XSoundSubManager (__soundManager:XSoundManager) {
@@ -52,7 +52,7 @@ package X.Sound {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setup (__maxChannels:Number):void {
+		public function setup (__maxChannels:int):void {
 			m_maxChannels = __maxChannels;
 			m_numChannels = 0;
 		}
@@ -71,11 +71,11 @@ package X.Sound {
 		public function playSoundFromClass (
 			__class:Class /* <Dynamic> */,
 			__priority:Number = 1.0,
-			__loops:Number = 0,
+			__loops:int = 0,
 			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
-			):Number {
+			):int {
 			
 			if (!channelAvailable (__priority)) {
 				return -1;
@@ -87,7 +87,7 @@ package X.Sound {
 				__loops,
 				__transform,
 				
-				function (__guid:Number):void {
+				function (__guid:int):void {
 					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 					
@@ -96,7 +96,7 @@ package X.Sound {
 					}					
 				},
 				
-				function (__guid:Number):void {
+				function (__guid:int):void {
 					if (__completeListener != null) {
 						__completeListener (__guid);
 					}
@@ -113,11 +113,11 @@ package X.Sound {
 		public function playSoundFromClassName (
 			__className:String,
 			__priority:Number = 1.0,
-			__loops:Number = 0,
+			__loops:int = 0,
 			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
-			):Number {
+			):int {
 			
 			if (!channelAvailable (__priority)) {
 				return -1;
@@ -129,7 +129,7 @@ package X.Sound {
 				__loops,
 				__transform,
 				
-				function (__guid:Number):void {					
+				function (__guid:int):void {					
 					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 
@@ -138,7 +138,7 @@ package X.Sound {
 					}					
 				},
 				
-				function (__guid:Number):void {
+				function (__guid:int):void {
 					if (__completeListener != null) {
 						__completeListener (__guid);
 					}
@@ -155,11 +155,11 @@ package X.Sound {
 		public function playPitchSoundFromClass (
 			__class:Class /* <Dynamic> */,
 			__priority:Number = 1.0,
-			__loops:Number = 0,
+			__loops:int = 0,
 			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
-		):Number {
+		):int {
 			
 			if (!channelAvailable (__priority)) {
 				return -1;
@@ -171,7 +171,7 @@ package X.Sound {
 				__loops,
 				__transform,
 				
-				function (__guid:Number):void {
+				function (__guid:int):void {
 					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 					
@@ -180,7 +180,7 @@ package X.Sound {
 					}					
 				},
 				
-				function (__guid:Number):void {
+				function (__guid:int):void {
 					if (__completeListener != null) {
 						__completeListener (__guid);
 					}
@@ -197,11 +197,11 @@ package X.Sound {
 		public function playPitchSoundFromClassName (
 			__className:String,
 			__priority:Number = 1.0,
-			__loops:Number = 0,
+			__loops:int = 0,
 			__transform:SoundTransform = null,
 			__successListener:Function = null,
 			__completeListener:Function = null
-		):Number {
+		):int {
 			
 			if (!channelAvailable (__priority)) {
 				return -1;
@@ -213,7 +213,7 @@ package X.Sound {
 				__loops,
 				__transform,
 				
-				function (__guid:Number):void {					
+				function (__guid:int):void {					
 					m_soundChannels.set (__guid, __priority);
 					m_numChannels++;
 					
@@ -222,7 +222,7 @@ package X.Sound {
 					}					
 				},
 				
-				function (__guid:Number):void {
+				function (__guid:int):void {
 					if (__completeListener != null) {
 						__completeListener (__guid);
 					}
@@ -245,7 +245,7 @@ package X.Sound {
 			var __secondChoice:Number = -1;
 			
 			m_soundChannels.forEach (
-				function (__targetGuid:Number):void {
+				function (__targetGuid:int):void {
 					var __targetPriority:Number = m_soundChannels.get (__targetGuid);
 					
 					if (__priority > __targetPriority) {
@@ -274,12 +274,12 @@ package X.Sound {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function stopSound (__guid:Number):void {
+		public function stopSound (__guid:int):void {
 			removeSound (__guid);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeSound (__guid:Number):void {
+		public function removeSound (__guid:int):void {
 			if (m_soundChannels.exists (__guid)) {
 				m_soundManager.removeSound (__guid);
 			}
@@ -289,13 +289,13 @@ package X.Sound {
 		public function removeAllSounds ():void {
 			m_soundChannels.forEach (
 				function (__guid:*):void {
-					removeSound (__guid as Number);
+					removeSound (__guid as int);
 				}
 			);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getSoundChannel (__guid:Number):MP3Sound {
+		public function getSoundChannel (__guid:int):MP3Sound {
 			return m_soundManager.getSoundChannel (__guid);
 		}
 		

@@ -48,7 +48,7 @@ package X.World.Sprite {
 				public var m_bitmapDataAnim:XBitmapDataAnim;
 				public var m_className:String;
 				public var m_bitmapNames:XDict; // <String, BitmapData>
-				public var m_frame:Number;
+				public var m_frame:int;
 				public var m_scale:Number;
 				public var m_visible:Boolean;
 				public var m_pos:XPoint;
@@ -164,7 +164,7 @@ package X.World.Sprite {
 				}		
 				
 				//------------------------------------------------------------------------------------------
-				public function getNumBitmaps ():Number {
+				public function getNumBitmaps ():int {
 					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.getNumBitmaps ();
 					}
@@ -180,7 +180,7 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function getBitmap (__frame:Number):BitmapData {
+				public function getBitmap (__frame:int):BitmapData {
 					if (m_bitmapDataAnim != null) {
 						return m_bitmapDataAnim.getBitmap (__frame);
 					}
@@ -197,12 +197,12 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function gotoAndStop (__frame:Number):void {
+				public function gotoAndStop (__frame:int):void {
 					__goto (__frame);
 				}
 				
 				//------------------------------------------------------------------------------------------
-				private function __goto (__frame:Number):void {
+				private function __goto (__frame:int):void {
 					m_frame = __frame-1;
 					
 					if (m_bitmapDataAnim != null) {
@@ -355,7 +355,7 @@ package X.World.Sprite {
 				}		
 				
 				//------------------------------------------------------------------------------------------
-				public function getNumBitmaps ():Number {
+				public function getNumBitmaps ():int {
 					return 0;
 				}
 				
@@ -365,7 +365,7 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function getBitmap (__frame:Number):* {
+				public function getBitmap (__frame:int):* {
 					return null;
 				}		
 				
@@ -385,7 +385,7 @@ package X.World.Sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				private function __goto (__frame:Number):void {
+				private function __goto (__frame:int):void {
 					gotoAndStop (__frame);
 				}
 				

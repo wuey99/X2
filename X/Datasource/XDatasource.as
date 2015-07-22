@@ -51,13 +51,13 @@ package X.Datasource {
 		}
 
 //------------------------------------------------------------------------------------------
-		/* @:get, set position Float */
+		/* @:get, set position Int */
 		
-		public function get position ():Number {
+		public function get position ():int {
 			return 0;
 		}
 		
-		public function set position (__position:Number): /* @:set_type */ void {
+		public function set position (__position:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -68,7 +68,7 @@ package X.Datasource {
 		}
 		
 //------------------------------------------------------------------------------------------	
-		public function readBytes (__offset:Number, __length:Number):ByteArray {
+		public function readBytes (__offset:int, __length:int):ByteArray {
 			return null;
 		}
 		
@@ -77,11 +77,11 @@ package X.Datasource {
 		}
 		
 //------------------------------------------------------------------------------------------	
-		public function writeBytes (__bytes:ByteArray, __offset:Number, __length:Number):void {
+		public function writeBytes (__bytes:ByteArray, __offset:int, __length:int):void {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function readUTFBytes (__length:Number):String {
+		public function readUTFBytes (__length:int):String {
 			return null;
 		}
 

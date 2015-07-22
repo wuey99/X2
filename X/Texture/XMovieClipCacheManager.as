@@ -39,21 +39,21 @@ package X.Texture {
 	public class XMovieClipCacheManager extends Object {
 		private var m_XApp:XApp;
 		private var m_movieClips:XDict;  // <String, XMovieClip>
-		private var m_count:XDict; // <String, Float>
+		private var m_count:XDict; // <String, Int>
 		
 //------------------------------------------------------------------------------------------
 		public function XMovieClipCacheManager (__XApp:XApp) {
 			m_XApp = __XApp;
 			
 			m_movieClips = new XDict ();  // <String, XMovieClip>
-			m_count = new XDict (); // <String, Float>
+			m_count = new XDict (); // <String, Int>
 		}
 
 //------------------------------------------------------------------------------------------
 		public function add (__className:String):XMovieClip {
 			if (m_movieClips.exists (__className)) {
 //				m_count[__className]++;
-				var __count:Number = m_count.get (__className);
+				var __count:int = m_count.get (__className);
 				__count++;
 				m_count.set (__className, __count);
 				
@@ -106,7 +106,7 @@ package X.Texture {
 		public function remove (__className:String):void {
 			if (m_movieClips.exists (__className)) {
 //				m_count[__className]--;
-				var __count:Number = m_count.get (__className);
+				var __count:int = m_count.get (__className);
 				__count--;
 				m_count.set (__className, __count);
 				

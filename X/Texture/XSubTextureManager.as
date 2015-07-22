@@ -57,7 +57,7 @@ package X.Texture {
 			
 		protected var m_queue:XDict; // <String, Int>
 		
-		protected var m_count:Number;
+		protected var m_count:int;
 		
 		//------------------------------------------------------------------------------------------
 		public function XSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
@@ -170,7 +170,7 @@ package X.Texture {
 			var __textures:Vector.<Texture> = new Vector.<Texture> ();
 			var __atlas:TextureAtlas;
 			
-			for (var i:Number=1; i<=__movieClipMetadata.length-1; i++) {
+			for (var i:int=1; i<=__movieClipMetadata.length-1; i++) {
 				__atlas = __movieClipMetadata[i] as TextureAtlas;
 				 
 				__textures = __textures.concat (__atlas.getTextures (__className));

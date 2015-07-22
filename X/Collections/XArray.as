@@ -71,7 +71,7 @@ package X.Collections {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function length ():Number {
+		public function length ():int {
 			return m_array.length;
 		}
 			

@@ -55,7 +55,7 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public override function reset ():void {
-			var i:Number;
+			var i:int;
 			
 			if (m_atlases != null) {				
 				for (i=0; i<m_atlases.length; i++) {
@@ -109,7 +109,7 @@ package X.Texture {
 			var __rect:Rectangle;
 			var __realBounds:Rectangle;
 
-			var i:Number;
+			var i:int;
 			
 			trace (": XDynamicSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
 			

@@ -113,7 +113,7 @@ package X.Utils {
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array /* <String> */ {
 			var __classNames:Array /* <String> */ = new Array (); // <String>
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_classNamesStrings.length; i++) {
 				if (m_classNamesStrings[i] != "") {
@@ -125,7 +125,7 @@ package X.Utils {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getClassNameCount (__index:Number):Number {
+		public function getClassNameCount (__index:int):int {
 			return m_classNamesCounts[__index];
 		}
 		
@@ -135,7 +135,7 @@ package X.Utils {
 			
 			__xml.setupWithParams ("classNames", "", []);
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_classNamesStrings.length; i++) {
 				var __attribs:Array /* <Dynamic> */ = [
@@ -164,9 +164,9 @@ package X.Utils {
 			
 			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("classNames")[0].child ("className");
 			
-			var i:Number;
+			var i:int;
 			var __name:String;
-			var __count:Number;
+			var __count:int;
 			
 			for (i=0; i<__xmlList.length; i++) {
 				__name = __xmlList[i].getAttribute ("name");

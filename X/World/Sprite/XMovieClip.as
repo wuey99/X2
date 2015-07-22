@@ -185,7 +185,7 @@ package X.World.Sprite {
 		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
-		public function gotoAndPlay (__frame:Number):void {
+		public function gotoAndPlay (__frame:int):void {
 			if (CONFIG::starling) {
 				if (m_movieClip != null) {
 					if (__frame > m_movieClip.numFrames) {
@@ -215,7 +215,7 @@ package X.World.Sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function gotoAndStop (__frame:Number):void {
+		public function gotoAndStop (__frame:int):void {
 			if (CONFIG::starling) {
 				if (m_movieClip != null) {
 					if (__frame > m_movieClip.numFrames) {

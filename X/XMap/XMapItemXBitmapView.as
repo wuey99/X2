@@ -83,12 +83,12 @@ package X.XMap {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public override function getTotalFrames ():Number {
+		public override function getTotalFrames ():int {
 			return m_bitmap.getNumBitmaps ();	
 		}	
 		
 		//------------------------------------------------------------------------------------------
-		public override function gotoAndStop (__frame:Number):void {
+		public override function gotoAndStop (__frame:int):void {
 			m_bitmap.gotoAndStop (__frame);
 		}
 		

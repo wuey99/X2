@@ -29,24 +29,24 @@ package X.Task {
 	
 	//------------------------------------------------------------------------------------------	
 	public class XTask_CONSTANTS {
-		public const CALL:Number = 0;
-		public const RETN:Number = 1;
-		public const LOOP:Number = 2;
-		public const NEXT:Number = 3;
-		public const WAIT:Number = 4;
-		public const LABEL:Number = 5;
-		public const GOTO:Number = 6;
-		public const BEQ:Number = 7;
-		public const BNE:Number = 8;
-		public const FLAGS:Number = 9;
-		public const EXEC:Number = 10;
-		public const FUNC:Number = 11;
-		public const WAIT1000:Number = 12; 
-		public const UNTIL:Number = 13;
-		public const POP:Number = 14;
-		public const WAITX:Number = 15;
+		public const CALL:int = 0;
+		public const RETN:int = 1;
+		public const LOOP:int = 2;
+		public const NEXT:int = 3;
+		public const WAIT:int = 4;
+		public const LABEL:int = 5;
+		public const GOTO:int = 6;
+		public const BEQ:int = 7;
+		public const BNE:int = 8;
+		public const FLAGS:int = 9;
+		public const EXEC:int = 10;
+		public const FUNC:int = 11;
+		public const WAIT1000:int = 12; 
+		public const UNTIL:int = 13;
+		public const POP:int = 14;
+		public const WAITX:int = 15;
 		
-		public const FLAGS_EQ:Number = 1;
+		public const FLAGS_EQ:int = 1;
 		
 		//------------------------------------------------------------------------------------------
 		public function XTask_CONSTANTS () {

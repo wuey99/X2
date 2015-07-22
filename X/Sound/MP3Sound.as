@@ -103,7 +103,7 @@ package X.Sound {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function play (__startTime:Number, __loops:Number, __soundTransform:SoundTransform):void {
+		public function play (__startTime:Number, __loops:int, __soundTransform:SoundTransform):void {
 		}
 
 //------------------------------------------------------------------------------------------

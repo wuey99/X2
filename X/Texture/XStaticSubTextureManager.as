@@ -54,7 +54,7 @@ package X.Texture {
 		
 		//------------------------------------------------------------------------------------------
 		public override function reset ():void {
-			var i:Number;
+			var i:int;
 			
 			if (m_currentBitmap != null) {
 				m_currentBitmap.dispose ();	
@@ -88,7 +88,7 @@ package X.Texture {
 					
 					var __movieClipMetadata:Array /* <Dynanmic> */ = m_movieClips.get (__className);
 					
-					for (var i:Number = 0; i < m_atlases.length; i++) {
+					for (var i:int = 0; i < m_atlases.length; i++) {
 						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
 						
 						var __textures:Vector.<Texture> = __atlas.getTextures (__className);
@@ -133,7 +133,7 @@ package X.Texture {
 			var __rect:Rectangle;
 			var __realBounds:Rectangle;
 
-			var i:Number;
+			var i:int;
 			
 			trace (": XStaticSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
 			

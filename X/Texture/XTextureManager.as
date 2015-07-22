@@ -127,7 +127,7 @@ package X.Texture {
 				}
 			);
 
-			var i:Number;
+			var i:int;
 			
 // try and find one in a dynamic manager
 			if (__movieClip == null) {	

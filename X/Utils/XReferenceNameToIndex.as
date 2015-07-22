@@ -113,7 +113,7 @@ package X.Utils {
 		//------------------------------------------------------------------------------------------
 		public function getAllReferenceNames ():Array /* <String> */ {
 			var __referenceNames:Array /* <String> */ = new Array (); // <String>
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_referenceNamesStrings.length; i++) {
 				if (m_referenceNamesStrings[i] != "") {
@@ -125,7 +125,7 @@ package X.Utils {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getReferenceNameCount (__index:Number):Number {
+		public function getReferenceNameCount (__index:int):int {
 			return m_referenceNamesCounts[__index];
 		}
 		
@@ -135,7 +135,7 @@ package X.Utils {
 			
 			__xml.setupWithParams ("classNames", "", []);
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_referenceNamesStrings.length; i++) {
 				var __attribs:Array /* <Dynamic> */ = [
@@ -168,9 +168,9 @@ package X.Utils {
 			
 			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("classNames")[0].child ("className");
 			
-			var i:Number;
+			var i:int;
 			var __name:String;
-			var __count:Number;
+			var __count:int;
 			
 			for (i=0; i<__xmlList.length; i++) {
 				__name = __xmlList[i].getAttribute ("name");

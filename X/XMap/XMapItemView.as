@@ -79,17 +79,17 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getTotalFrames ():Number {
+		public function getTotalFrames ():int {
 			return m_sprite.totalFrames;	
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public override function gotoAndPlay (__frame:Number):void {
+		public override function gotoAndPlay (__frame:int):void {
 			m_sprite.gotoAndPlay (__frame);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function gotoAndStop (__frame:Number):void {
+		public override function gotoAndStop (__frame:int):void {
 			m_sprite.gotoAndStop (__frame);
 		}
 		

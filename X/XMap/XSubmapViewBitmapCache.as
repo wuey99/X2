@@ -69,7 +69,7 @@ package X.XMap {
 		private var tempRect:XRect;
 		private var tempPoint:XPoint;
 
-		private var m_delay:Number;
+		private var m_delay:int;
 		
 		private var m_bitmapCacheManager:XBitmapCacheManager;
 		
@@ -164,7 +164,7 @@ package X.XMap {
 			tempRect.x = 0;
 			tempRect.y = 0;
 			
-			var i:Number;
+			var i:int;
 			
 			__items.forEach (
 				function (x:*):void {

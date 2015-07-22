@@ -52,7 +52,7 @@ package X {
 		private var m_parent:Sprite;
 		private var m_XTaskManager:XTaskManager;
 		private var m_timer:Timer;
-		private var m_inuse_TIMER_FRAME:Number;
+		private var m_inuse_TIMER_FRAME:int;
 		private var m_XDebug:XDebug;
 		private var m_projectManager:XProjectManager;
 		private var m_XSignalManager:XSignalManager;
@@ -406,7 +406,7 @@ package X {
 			
 			__cacheAllClasses (true, __project.child ("*"));
 			
-			var i:Number;
+			var i:int;
 			
 			i = 0;
 			
@@ -510,7 +510,7 @@ package X {
 // report memory leaks
 //------------------------------------------------------------------------------------------
 		public function reportMemoryLeaks (m_XApp:XApp, xxx:XWorld):void {
-			var i:Number;
+			var i:int;
 			var x:*;
 
 			m_XApp.print ("------------------------------");

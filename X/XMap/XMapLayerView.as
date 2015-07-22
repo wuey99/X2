@@ -54,7 +54,7 @@ package X.XMap {
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
 		private var m_XMapLayerModel:XMapLayerModel;
-		private var m_currLayer:Number;
+		private var m_currLayer:int;
 		private var m_logicClassNameToClass:Function;
 		
 //------------------------------------------------------------------------------------------

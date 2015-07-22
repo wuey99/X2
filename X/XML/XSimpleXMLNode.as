@@ -73,7 +73,9 @@ package X.XML {
 		public function setupWithXML (__xml:Xml):void {
 			m_tag = __xml.nodeName;
 		
-			if (__xml.firstChild ().nodeType == Xml.XmlType.Element) {
+			var __type:Xml.XmlType = __xml.firstChild ().nodeType;
+		
+			if (__type == Xml.XmlType.Element || __type == Xml.XmlType.Document) {
 				m_text = "";
 			}
 			else
@@ -329,7 +331,7 @@ package X.XML {
 			
 			var __list:Array /* <XSimpleXMLNode> */ = new Array (); // <XSimpleXMLNode>
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_children.length; i++) {
 				if (m_children[i].tag == __tag) {

@@ -58,7 +58,7 @@ package X.World.Logic {
 		public var m_cols:int;
 		public var m_rows:int;
 
-		protected var m_CX_Collide_Flag:Number;
+		protected var m_CX_Collide_Flag:int;
 		
 		protected var m_objectCollisionList:XDict; // <XLogicObject, XRect>
 	
@@ -117,7 +117,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setXMapModel (__layer:Number, __XMapModel:XMapModel, __XMapView:XMapView=null):void {
+		public function setXMapModel (__layer:int, __XMapModel:XMapModel, __XMapView:XMapView=null):void {
 			m_XMapModel = __XMapModel;
 			m_XMapView = __XMapView;
 			
@@ -327,13 +327,13 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set CX_Collide_FLag Float */
+		/* @:get, set CX_Collide_FLag Int */
 		
-		public function get CX_Collide_Flag ():Number {
+		public function get CX_Collide_Flag ():int {
 			return m_CX_Collide_Flag;
 		}
 
-		public function set CX_Collide_Flag (__value:Number): /* @:set_type */ void {
+		public function set CX_Collide_Flag (__value:int): /* @:set_type */ void {
 			m_CX_Collide_Flag = __value;
 			
 			/* @:set_return 0; */			

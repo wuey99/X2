@@ -37,7 +37,7 @@ package X.Resource {
 	public class XResource extends Object {
 		protected var m_resourcePath:String;
 		protected var m_resourceXML:XML;
-		protected var m_count:Number;
+		protected var m_count:int;
 
 //------------------------------------------------------------------------------------------
 		public function XResource () {
@@ -65,13 +65,13 @@ package X.Resource {
 		}
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set count Float */
+		/* @:get, set count Int */
 		
-		public function get count ():Number {
+		public function get count ():int {
 			return m_count;
 		}
 		
-		public function set count (__value:Number): /* @:set_type */ void {
+		public function set count (__value:int): /* @:set_type */ void {
 			m_count = __value;
 			
 			/* @:set_return 0; */			
@@ -91,7 +91,7 @@ package X.Resource {
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array /* <String> */ {
 			var __xmlList:XMLList = m_resourceXML.child ("*");
-			var i:Number;
+			var i:int;
 			var __classNames:Array /* <String> */ = new Array (); // <String> 
 						
 			for (i=0; i<__xmlList.length (); i++) {

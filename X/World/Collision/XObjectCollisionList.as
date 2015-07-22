@@ -52,7 +52,7 @@ package X.World.Collision {
 			xxx = __xxx;		
 			m_rects = new Array (); // <Map<XLogicObject, XRect>>
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i < xxx.getMaxLayers (); i++) {
 				m_rects[i] = new XDict (); // <XLogicObject, XRect>
@@ -70,7 +70,7 @@ package X.World.Collision {
 
 //------------------------------------------------------------------------------------------		
 		public function clear ():void {
-			var i:Number;
+			var i:int;
 
 			for (i=0; i < xxx.getMaxLayers (); i++) {
 				m_rects[i].removeAll ();
@@ -81,7 +81,7 @@ package X.World.Collision {
 	
 //------------------------------------------------------------------------------------------
 		public function addCollision (
-			__layer:Number,
+			__layer:int,
 			__logicObject:XLogicObject,
 			__srcPoint:XPoint, __srcRect:XRect
 			):void {
@@ -93,12 +93,12 @@ package X.World.Collision {
 
 		
 //------------------------------------------------------------------------------------------
-		public function getRects (__layer:Number):XDict /* <XLogicObject, XRect> */ {
+		public function getRects (__layer:int):XDict /* <XLogicObject, XRect> */ {
 			return m_rects[__layer];
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getList (__layer:Number):XDict /* <XLogicObject, XRect> */ {
+		public function getList (__layer:int):XDict /* <XLogicObject, XRect> */ {
 			return m_rects[__layer];
 		}
 		

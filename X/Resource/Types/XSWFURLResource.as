@@ -152,7 +152,7 @@ package X.Resource.Types {
 		public function __fixPath (__path:String):String {
 			var __newPath:String = "";
 			var __previous:Boolean = false;
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<__path.length; i++) {
 				

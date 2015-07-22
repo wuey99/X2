@@ -42,13 +42,13 @@ package X.World.Sprite {
 	// starling equivalent of the XBitmap class.  Curently supports only a single texture.
 	//------------------------------------------------------------------------------------------
 	public class XImage extends Image implements XRegistration {
-		public var m_frame:Number;
+		public var m_frame:int;
 		public var m_scale:Number;
 		public var m_visible:Boolean;
 		public var m_pos:XPoint;
 		public var m_rect:XRect;
-		public var m_id:Number;
-		public static var g_id:Number = 0;
+		public var m_id:int;
+		public static var g_id:int = 0;
 		public var rp:XPoint;
 		public static var g_XApp:XApp;
 		
@@ -99,13 +99,13 @@ package X.World.Sprite {
 		}
 
 		//------------------------------------------------------------------------------------------
-		/* @:get, set id Float */
+		/* @:get, set id Int */
 		
-		public function get id ():Number {
+		public function get id ():int {
 			return m_id;
 		}
 
-		public function set id (__value:Number): /* @:set_type */ void {
+		public function set id (__value:int): /* @:set_type */ void {
 			m_id = __value;
 			
 			/* @:set_return 0; */			

@@ -76,7 +76,7 @@ package X.World {
 	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
-		public var m_ticks:Number;
+		public var m_ticks:int;
 //		public var m_world:b2World;
 		public var m_iterations:int = 20;
 		public var m_timeStep:Number = 1.0/30.0;
@@ -91,9 +91,9 @@ package X.World {
 		public var m_XMapModel:XMapModel;
 		public var m_XWorldLayers:Array; // <XSpriteLayer>
 		public var m_XHudLayer:XSpriteLayer;
-		public var MAX_LAYERS:Number;
-		public var m_inuse_ENTER_FRAME:Number;
-		public var m_inuse_RENDER_FRAME:Number;
+		public var MAX_LAYERS:int;
+		public var m_inuse_ENTER_FRAME:int;
+		public var m_inuse_RENDER_FRAME:int;
 		public var m_XKeyboardManager:XKeyboardManager;
 		protected var m_viewRect:XRect;
 		private var m_XBulletCollisionManager:XBulletCollisionManager;
@@ -170,7 +170,7 @@ package X.World {
 		public var m_timely:Timely;
 		
 //------------------------------------------------------------------------------------------
-		public function XWorld (__parent:*, __XApp:XApp, __layers:Number=8, __timerInterval:Number=32){
+		public function XWorld (__parent:*, __XApp:XApp, __layers:int=8, __timerInterval:Number=32){
 			super ();
 			
 			setup ();
@@ -267,7 +267,7 @@ package X.World {
 						
 			m_XWorldLayers = new Array (MAX_LAYERS); // <XSpriteLayer>
 				
-			var i:Number = MAX_LAYERS-1;
+			var i:int = MAX_LAYERS-1;
 //			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
 			while (i >= 0) {
 				__createLayer (i);
@@ -275,7 +275,7 @@ package X.World {
 				i--;
 			}
 		
-			function __createLayer (i:Number):void {
+			function __createLayer (i:int):void {
 				m_XWorldLayers[i] = new XSpriteLayer ();
 				m_XWorldLayers[i].setup ();
 				m_XWorldLayers[i].xxx = self;
@@ -489,7 +489,7 @@ package X.World {
 			
 			m_afterFrameSignal.fireSignal ();
 			
-			for (var i:Number=0; i<MAX_LAYERS; i++) {
+			for (var i:int=0; i<MAX_LAYERS; i++) {
 //				if (getXWorldLayer (i).forceSort) {
 				if (true) {
 					getXWorldLayer (i).depthSort ();
@@ -558,7 +558,7 @@ package X.World {
 				
 				var __touch:Touch;
 				
-				var i:Number;
+				var i:int;
 				
 //				for each (var __touch:Touch in __touches)
 				for (i=0; i<__touches.length; i++)
@@ -885,7 +885,7 @@ package X.World {
 		*/
 		
 //------------------------------------------------------------------------------------------
-		public function getMaxLayers ():Number {
+		public function getMaxLayers ():int {
 			return MAX_LAYERS;
 		}
 		
@@ -1024,7 +1024,7 @@ package X.World {
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function getXWorldLayer (__layer:Number):XSpriteLayer {
+		public function getXWorldLayer (__layer:int):XSpriteLayer {
 			return m_XWorldLayers[__layer];
 		}
 
@@ -1181,7 +1181,7 @@ package X.World {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function globalToWorld (__layer:Number, __p:XPoint):XPoint {
+		public function globalToWorld (__layer:int, __p:XPoint):XPoint {
 			var __x:Point;
 			
 			if (__layer < 0) {
@@ -1196,7 +1196,7 @@ package X.World {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function globalToWorld2 (__layer:Number, __src:XPoint, __dst:XPoint):XPoint {
+		public function globalToWorld2 (__layer:int, __src:XPoint, __dst:XPoint):XPoint {
 			var __x:Point;
 			
 			if (__layer < 0) {

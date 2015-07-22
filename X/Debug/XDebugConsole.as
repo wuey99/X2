@@ -42,7 +42,7 @@ package X.Debug  {
 	public class XDebugConsole extends XLogicObject {
 		private var m_textFormat:TextFormat;
 		private var m_textArea:XTextSprite;
-		private var m_disableOutput:Number;
+		private var m_disableOutput:int;
 		private var m_fontClass:Class;
 		
 //------------------------------------------------------------------------------------------

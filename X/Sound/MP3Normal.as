@@ -40,7 +40,7 @@ package X.Sound {
 	public class MP3Normal extends MP3Sound  {
 		public var m_soundChannel:SoundChannel;
 		public var m_function:Function;
-		public var m_loops:Number;
+		public var m_loops:int;
 		public var m_soundTransform:SoundTransform;
 		public var m_position:int;
 		
@@ -54,7 +54,7 @@ package X.Sound {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function play (__startTime:Number, __loops:Number, __soundTransform:SoundTransform):void {
+		public override function play (__startTime:Number, __loops:int, __soundTransform:SoundTransform):void {
 			m_loops = __loops;
 			m_soundTransform = __soundTransform;
 			

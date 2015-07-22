@@ -35,14 +35,14 @@ package X.Task {
 //------------------------------------------------------------------------------------------	
 	public class XTaskManager extends Object {
 		protected var m_XTasks:XDict; // <XTask, Int>
-		protected var m_paused:Number;
+		protected var m_paused:int;
 		protected var m_XApp:XApp;
 		protected var m_pools:Array; // <XObjectPoolManager>
-		protected var m_currentPool:Number;
-		protected var m_poolCycle:Number;
+		protected var m_currentPool:int;
+		protected var m_poolCycle:int;
 
-		public const NUM_POOLS:Number = 8;
-		public const POOL_MASK:Number = 7;
+		public const NUM_POOLS:int = 8;
+		public const POOL_MASK:int = 7;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskManager (__XApp:XApp) {
@@ -54,7 +54,7 @@ package X.Task {
 			
 			m_pools = new Array (NUM_POOLS); // <XObjectPoolManager>
 			
-			for (var i:Number=0; i<NUM_POOLS; i++) {
+			for (var i:int=0; i<NUM_POOLS; i++) {
 				m_pools[i] = new XObjectPoolManager (
 					function ():* {
 						return new XTask ();

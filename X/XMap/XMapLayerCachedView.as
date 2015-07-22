@@ -45,8 +45,8 @@ package X.XMap {
 		private var m_XSubmapToXLogicObject:XDict; // <XSubmapModel, XLogicObject>
 		private var m_XMapView:XMapView;
 		private var m_XMapModel:XMapModel;
-		private var m_currLayer:Number;
-		private var m_delay:Number;
+		private var m_currLayer:int;
+		private var m_delay:int;
 				
 //------------------------------------------------------------------------------------------
 		public function XMapLayerCachedView () {
@@ -108,7 +108,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 			var __submap:XSubmapModel;
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<__submaps.length; i++) {
 				__submap = __submaps[i] as XSubmapModel;

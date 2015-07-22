@@ -116,7 +116,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function areImageClassNamesCached ():Boolean {
 			var __flags:Boolean;
-			var i:Number;
+			var i:int;
 			
 			if (m_imageNamesCached) {
 				return true;
@@ -166,7 +166,7 @@ package X.XMap {
 			public function cacheImageClassNames ():void {
 				var __layer:XMapLayerModel;
 				
-				var i:Number;
+				var i:int;
 				
 				/*
 				m_subTextureManager.start ();
@@ -210,7 +210,7 @@ package X.XMap {
 		else
 		{
 			public function cacheImageClassNames ():void {
-				var i:Number;
+				var i:int;
 				
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
 					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
@@ -228,7 +228,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function uncacheImageClassNames ():void {
-			var i:Number;
+			var i:int;
 			
 			if (CONFIG::starling) {
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
@@ -274,7 +274,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function initSubmapBitmapPoolManager (
 			__width:Number=512, __height:Number=512,
-			__alloc:Number=64, __spill:Number=16
+			__alloc:int=64, __spill:int=16
 			):void {
 				
 			m_submapBitmapPoolManager = new XObjectPoolManager (
@@ -306,7 +306,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function initSubmapImagePoolManager (
 			__width:Number=512, __height:Number=512,
-			__alloc:Number=8, __spill:Number=1
+			__alloc:int=8, __spill:int=1
 			):void {
 			
 			m_submapImagePoolManager = new XObjectPoolManager (
@@ -366,7 +366,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function scrollTo (__layer:Number, __x:Number, __y:Number):void {
+		public function scrollTo (__layer:int, __x:Number, __y:Number):void {
 		}
 
 //------------------------------------------------------------------------------------------

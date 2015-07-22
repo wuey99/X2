@@ -42,9 +42,9 @@ package X.XMap {
 		private var m_logicClassIndex:int;
 		private var m_hasLogic:Boolean;
 		private var m_name:String;
-		private var m_id:Number;
+		private var m_id:int;
 		private var m_imageClassIndex:int;
-		private var m_frame:Number;
+		private var m_frame:int;
 		private var m_XMapItem:String;
 		private var m_x:Number, m_y:Number;
 		private var m_rotation:Number, m_scale:Number, m_depth:Number;
@@ -64,8 +64,8 @@ package X.XMap {
 			__layerModel:XMapLayerModel,
 			__logicClassName:String,
 			__hasLogic:Boolean,
-			__name:String, __id:Number,
-			__imageClassName:String, __frame:Number,
+			__name:String, __id:int,
+			__imageClassName:String, __frame:int,
 			__XMapItem:String,
 			__x:Number, __y:Number,
 			__scale:Number, __rotation:Number, __depth:Number,
@@ -156,12 +156,12 @@ package X.XMap {
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function getID ():Number {
+		public function getID ():int {
 			return m_id;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setID (__id:Number):void {
+		public function setID (__id:int):void {
 			m_id = __id;
 		}
 
@@ -180,13 +180,13 @@ package X.XMap {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set inuse Float */
+		/* @:get, set inuse Int */
 		
-		public function get inuse ():Number {
+		public function get inuse ():int {
 			return m_layerModel.getItemInuse (id);
 		}
 		
-		public function set inuse (__inuse:Number): /* @:set_type */ void {
+		public function set inuse (__inuse:int): /* @:set_type */ void {
 			m_layerModel.setItemInuse (id, __inuse);
 			
 			/* @:set_return 0; */			
@@ -194,13 +194,13 @@ package X.XMap {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set id Float */
+		/* @:get, set id Int */
 		
-		public function get id ():Number {
+		public function get id ():int {
 			return m_id;
 		}
 		
-		public function set id (__id:Number): /* @:set_type */ void {
+		public function set id (__id:int): /* @:set_type */ void {
 			m_id = __id;
 			
 			/* @:set_return 0; */			
@@ -302,13 +302,13 @@ package X.XMap {
 		/* @:end */
 			
 //------------------------------------------------------------------------------------------
-		/* @:get, set frame Float */
+		/* @:get, set frame Int */
 		
-		public function get frame ():Number {
+		public function get frame ():int {
 			return m_frame;
 		}
 
-		public function set frame (__frame:Number): /* @:set_type */ void {
+		public function set frame (__frame:int): /* @:set_type */ void {
 			m_frame = __frame;
 			
 			/* @:set_return 0; */			

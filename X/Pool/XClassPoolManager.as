@@ -47,8 +47,8 @@ package X.Pool {
 //------------------------------------------------------------------------------------------
 		public function setupPool (
 			__class:Class /* <Dynamic> */,
-			__numObjects:Number,
-			__overflow:Number
+			__numObjects:int,
+			__overflow:int
 		):XObjectPoolManager {
 			
 			return new XObjectPoolManager (
@@ -68,7 +68,7 @@ package X.Pool {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function preAllocate (__class:Class /* <Dynamic> */, __numObjects:Number):void {
+		public function preAllocate (__class:Class /* <Dynamic> */, __numObjects:int):void {
 			var __pool:XObjectPoolManager;
 			
 			if (!m_pools.exists (__class)) {
@@ -79,7 +79,7 @@ package X.Pool {
 			
 			__pool = m_pools.get (__class);
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<__numObjects; i++) {
 				__pool.borrowObject ();

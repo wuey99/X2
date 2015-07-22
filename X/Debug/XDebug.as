@@ -41,7 +41,7 @@ package X.Debug {
 		protected var m_XApp:XApp;
 		protected var m_disabled:Boolean;
 		protected var m_complete:Boolean;
-		protected static var CHUNK_SIZE:Number = 128;
+		protected static var CHUNK_SIZE:int = 128;
 								
 //------------------------------------------------------------------------------------------
 		public function XDebug () {	
@@ -77,9 +77,9 @@ package X.Debug {
 			
 			__output = "................................................................... " + __output;
 			
-			var __length:Number = Math.floor ((__output.length+CHUNK_SIZE)/CHUNK_SIZE);
+			var __length:int = Math.floor ((__output.length+CHUNK_SIZE)/CHUNK_SIZE);
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<__length; i++) {	
 				print2 (__output.substr (i*CHUNK_SIZE, Math.min (__output.length - i*CHUNK_SIZE, CHUNK_SIZE)));

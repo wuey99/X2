@@ -41,19 +41,19 @@ package X.XMap {
 	public class XMapLayerModel extends XModelBase {
 		private var m_XMap:XMapModel;
 		
-		private var m_layer:Number;
+		private var m_layer:int;
 		
 		private var m_XSubmaps:Vector.<Vector.<XSubmapModel>>;
 		
-		private var m_submapRows:Number;
-		private var m_submapCols:Number;
-		private var m_submapWidth:Number;
-		private var m_submapHeight:Number;
+		private var m_submapRows:int;
+		private var m_submapCols:int;
+		private var m_submapWidth:int;
+		private var m_submapHeight:int;
 		
-		private var m_currID:Number;
+		private var m_currID:int;
 
-		private var m_items:XDict; // <XMapItemModel, Float>
-		private var m_ids:XDict; // <Float, XMapItemModel>
+		private var m_items:XDict; // <XMapItemModel, Int>
+		private var m_ids:XDict; // <Int, XMapItemModel>
 
 		private var m_classNames:XReferenceNameToIndex;
 		private var m_imageClassNames:XDict; // <String, Int>
@@ -64,9 +64,9 @@ package X.XMap {
 		private var m_name:String;
 		private var m_grid:Boolean
 		
-		private var m_itemInuse:XDict; // <Float, Int>
+		private var m_itemInuse:XDict; // <Int, Int>
 		
-		private var m_persistentStorage:XDict; // <Float, Object>
+		private var m_persistentStorage:XDict; // <Int, Object>
 		
 		private var __CX:CX_CONSTANTS;
 
@@ -80,13 +80,13 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function setup (
-			__layer:Number,
-			__submapCols:Number, __submapRows:Number,
-			__submapWidth:Number, __submapHeight:Number
+			__layer:int,
+			__submapCols:int, __submapRows:int,
+			__submapWidth:int, __submapHeight:int
 			):void {
 
-			var __row:Number;
-			var __col:Number;
+			var __row:int;
+			var __col:int;
 
 			__CX = new CX_CONSTANTS ();
 			
@@ -96,8 +96,8 @@ package X.XMap {
 			m_submapHeight = __submapHeight;
 
 			m_currID = 0;
-			m_items = new XDict ();  // <XMapItemModel, Float>
-			m_ids = new XDict ();  // <Float, XMapItemModel>
+			m_items = new XDict ();  // <XMapItemModel, Int>
+			m_ids = new XDict ();  // <Int, XMapItemModel>
 			m_layer = __layer;
 			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (__submapRows);
 			m_visible = true;
@@ -114,12 +114,12 @@ package X.XMap {
 				}
 			}
 			
-			m_persistentStorage = new XDict ();  // <Float, Object>
+			m_persistentStorage = new XDict ();  // <Int, Object>
 			
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();  // <String, Int>
 			
-			m_itemInuse = new XDict ();  // <Float, Int>
+			m_itemInuse = new XDict ();  // <Int, Int>
 			
 			m_viewPort = new XRect ();
 		}
@@ -212,32 +212,32 @@ package X.XMap {
 		/* @:end */
 
 //------------------------------------------------------------------------------------------
-		public function getPersistentStorage ():XDict /* <Float, Object> */ {
+		public function getPersistentStorage ():XDict /* <Int, Object> */ {
 			return m_persistentStorage;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getSubmapRows ():Number {
+		public function getSubmapRows ():int {
 			return m_submapRows;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getSubmapCols ():Number {
+		public function getSubmapCols ():int {
 			return m_submapCols;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getSubmapWidth ():Number {
+		public function getSubmapWidth ():int {
 			return m_submapWidth;
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function getSubmapHeight ():Number {
+		public function getSubmapHeight ():int {
 			return m_submapHeight;
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function getItemInuse (__id:Number):Number {
+		public function getItemInuse (__id:int):int {
 			/*
 			if (m_itemInuse[__id] == null) {
 				m_itemInuse[__id] = 0;
@@ -254,7 +254,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setItemInuse (__id:Number, __inuse:Number):void {
+		public function setItemInuse (__id:int, __inuse:int):void {
 			/*
 			if (m_itemInuse[__id] == null) {
 				m_itemInuse[__id] = 0;
@@ -286,7 +286,7 @@ package X.XMap {
 		public function addItem (__item:XMapItemModel):XMapItemModel {
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 			
-			var __id:Number = __item.getID ();
+			var __id:int = __item.getID ();
 			
 			if (__id == -1) {
 // obtain unique ID for this item			
@@ -338,7 +338,7 @@ package X.XMap {
 		public function replaceItems (__item:XMapItemModel):Array /* <XMapItemModel> */ {
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 			
-			var __id:Number = __item.getID ();
+			var __id:int = __item.getID ();
 			
 			if (__id == -1) {
 				// obtain unique ID for this item			
@@ -391,7 +391,7 @@ package X.XMap {
 			function __extend (__items:Array /* <XMapItemModel> */):void {
 				var __item:XMapItemModel;
 				
-				var i:Number;
+				var i:int;
 				
 //				for each (var __item:XMapItemModel in __items) {
 				for (i=0; i<__items.length; i++) {
@@ -491,8 +491,8 @@ package X.XMap {
 			
 			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
-			var i:Number;
-			var src_items:XDict;  // <XMapItemModel, Float>
+			var i:int;
+			var src_items:XDict;  // <XMapItemModel, Int>
 //			var dst_items:Array = new Array ();
 			m_retrievedItems.length = 0;
 			var x:*;
@@ -536,7 +536,7 @@ package X.XMap {
 			
 			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
-			var i:Number;
+			var i:int;
 			var src_items:Vector.<XMapItemModel>;
 //			var dst_items:Array = new Array ();
 			m_retrievedItems.length = 0;
@@ -587,8 +587,8 @@ package X.XMap {
 			
 			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 							
-			var i:Number;
-			var src_items:XDict;  // <XMapItemModel, Float>
+			var i:int;
+			var src_items:XDict;  // <XMapItemModel, Int>
 			var dst_items:Array /* <XSubmapModel> */ = new Array () /* <XSubmapMOdel> */ ;
 			var x:*;
 			var item:XMapItemModel;
@@ -633,7 +633,7 @@ package X.XMap {
 			
 			var submaps:Array /* <XSubmapModel> */ = getSubmapsAt (__x1, __y1, __x2, __y2);
 			
-			var i:Number;
+			var i:int;
 			var src_items:Vector.<XMapItemModel>;
 			var dst_items:Array /* <XMapItemModel */ = new Array () /* <XMapItemModel */;
 			var item:XMapItemModel;
@@ -782,19 +782,19 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function generateID ():Number {
+		public function generateID ():int {
 			m_currID += 1;
 			
 			return m_currID;
 		}
 				
 //------------------------------------------------------------------------------------------
-		public function items0 ():XDict /* <XMapItemModel, Float> */ {
+		public function items0 ():XDict /* <XMapItemModel, Int> */ {
 			return m_items;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function ids ():XDict /* <Float, XMapItemModel> */ {
+		public function ids ():XDict /* <Int, XMapItemModel> */ {
 			return m_ids;
 		}
 		
@@ -804,7 +804,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function ___getItemId___ (__item:XMapItemModel):Number {
+		public function ___getItemId___ (__item:XMapItemModel):int {
 			return m_items.get (__item);
 		}	
 		
@@ -856,11 +856,11 @@ package X.XMap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function lookForItem (__itemName:String, __list:XDict=null):XDict /* <Float, XMapItemModel> */ {
+		public function lookForItem (__itemName:String, __list:XDict=null):XDict /* <Int, XMapItemModel> */ {
 			var __row:Number, __col:Number;
 			
 			if (__list == null) {
-				var __list:XDict = new XDict (); // <Float, XMapItemModel>
+				var __list:XDict = new XDict (); // <Int, XMapItemModel>
 			}
 		
 				for (__row=0; __row<m_submapRows; __row++) {
@@ -964,7 +964,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function serializeImageClassNames ():XSimpleXMLNode {
-			var __imageClassNames:XDict /* <String, Float> */ = new XDict (); // <String, Float>
+			var __imageClassNames:XDict /* <String, Int> */ = new XDict (); // <String, Int>
 			
 			var __row:Number, __col:Number;
 			
@@ -1048,17 +1048,17 @@ package X.XMap {
 				m_grid = false;
 			}	
 			
-			m_persistentStorage = new XDict ();  // <Float, Object>
+			m_persistentStorage = new XDict ();  // <Int, Object>
 			
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict (); // <String, Int>
 
-			m_itemInuse = new XDict ();  // <Float, Int>
+			m_itemInuse = new XDict ();  // <Int, Int>
 			
 			__CX = new CX_CONSTANTS ();
 			
-			m_items = new XDict (); // <XMapItemModel, Float>
-			m_ids = new XDict (); // <Float, XMapItemModel>
+			m_items = new XDict (); // <XMapItemModel, Int>
+			m_ids = new XDict (); // <Int, XMapItemModel>
 			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (m_submapRows);
 			m_retrievedSubmaps = new Array (); // <XSubmapModel>
 			m_retrievedItems = new Array (); // <XMapItemModel>

@@ -70,7 +70,7 @@ package X.World.Logic {
 		public var m_parent:XLogicObject;
 		public var m_item:XMapItemModel;
 		public var m_xml:XSimpleXMLNode;
-		public var m_layer:Number;
+		public var m_layer:int;
 		public var m_depth:Number;
 		public var m_boundingRect:XRect;
 		public var m_pos:XPoint;
@@ -84,7 +84,7 @@ package X.World.Logic {
 		public var m_masterScaleY:Number;
 		public var m_rotation:Number;
 		public var m_masterRotation:Number;
-		public var m_delayed:Number;
+		public var m_delayed:int;
 		public var m_XLogicObjects:XDict; // <XLogicObject, Int>
 		public var m_worldSprites:XDict; // <XDepthSprite, Int>
 		public var m_hudSprites:XDict; // <XDepthSprite, Int>
@@ -93,7 +93,7 @@ package X.World.Logic {
 		public var m_bitmaps:XDict; // <String, XBitmap>
 		public var m_movieClips:XDict; // <String, XMovieClip>
 		public var m_textSprites:XDict; // <XTextSprite, Int>
-		public var m_GUID:Number;
+		public var m_GUID:int;
 		public var m_alpha:Number;
 		public var m_masterAlpha:Number;
 		public var m_XSignals:XDict; // <XSignal, Int>
@@ -122,7 +122,7 @@ package X.World.Logic {
 		public var m_iRelativeDepth:Boolean;
 		public var m_iClassName:String;
 		
-		private static var g_GUID:Number = 0;
+		private static var g_GUID:int = 0;
 		
 		public var rp:XPoint;
 		
@@ -989,7 +989,7 @@ package X.World.Logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setLayer (__layer:Number):void {
+		public function setLayer (__layer:int):void {
 			if (__layer != m_layer && m_layer != -1) {
 				m_worldSprites.forEach (
 					function (x:*):void {
@@ -1003,7 +1003,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getLayer ():Number {
+		public function getLayer ():int {
 			return m_layer;
 		}
 		
@@ -1013,7 +1013,7 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getArg(__args:Array /* <Dynamic> */, i:Number):* {
+		public function getArg(__args:Array /* <Dynamic> */, i:int):* {
 			return __args[i];
 		}
 		
@@ -1513,11 +1513,11 @@ package X.World.Logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function gotoAndPlay (__frame:Number):void {
+		public function gotoAndPlay (__frame:int):void {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function gotoAndStop (__frame:Number):void {
+		public function gotoAndStop (__frame:int):void {
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -36,16 +36,16 @@ package X.Pool {
 		private var m_inuseObjects:XDict; // <Dynamic, Int>
 		private var m_newObject:Function;
 		private var m_cloneObject:Function;
-		private var m_overflow:Number;
+		private var m_overflow:int;
 		private var m_cleanup:Function;
-		private var m_numberOfBorrowedObjects:Number;
+		private var m_numberOfBorrowedObjects:int;
 		
 //------------------------------------------------------------------------------------------
 		public function XObjectPoolManager (
 			__newObject:Function,
 			__cloneObject:Function,
-			__numObjects:Number,
-			__overflow:Number,
+			__numObjects:int,
+			__overflow:int,
 			__cleanup:Function = null
 		) {
 				
@@ -70,7 +70,7 @@ package X.Pool {
 				return;
 			}
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_freeObjects.length; i++) {
 				m_cleanup (m_freeObjects[i]);
@@ -78,8 +78,8 @@ package X.Pool {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addMoreObjects (__numObjects:Number):void {
-			var i:Number;
+		public function addMoreObjects (__numObjects:int):void {
+			var i:int;
 			
 			for (i=0; i<__numObjects; i++) {
 				m_freeObjects[m_numFreeObjects++] = (m_newObject ());
@@ -99,12 +99,12 @@ package X.Pool {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public function totalNumberOfObjects ():Number {
+		public function totalNumberOfObjects ():int {
 			return m_freeObjects.length + m_numberOfBorrowedObjects;	
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function numberOfBorrowedObjects ():Number {
+		public function numberOfBorrowedObjects ():int {
 			return m_numberOfBorrowedObjects;
 		}	
 		

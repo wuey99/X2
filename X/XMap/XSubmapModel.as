@@ -53,7 +53,7 @@ package X.XMap {
 		private var m_row:int;
 		
 		private var m_cmap:Vector.<int>;
-		private var m_inuse:Number;
+		private var m_inuse:int;
 		
 		private var m_boundingRect:XRect;
 		
@@ -148,7 +148,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------	
 		public function XSubmapModel (
 			__XMapLayer:XMapLayerModel,
-			__col:Number, __row:Number,
+			__col:int, __row:int,
 			__width:Number, __height:Number
 			) {
 				
@@ -211,18 +211,18 @@ package X.XMap {
 		/* @:end */
 			
 //------------------------------------------------------------------------------------------
-		public function setCXTile (__type:Number, __col:Number, __row:Number):void {
+		public function setCXTile (__type:int, __col:int, __row:int):void {
 			m_cmap[__row * m_cols + __col] = __type;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getCXTile (__col:Number, __row:Number):Number {
+		public function getCXTile (__col:int, __row:int):int {
 			return m_cmap[__row * m_cols + __col];
 		}
 
 //------------------------------------------------------------------------------------------
 		public function hasCXTiles ():Boolean {
-			var __row:Number, __col:Number;
+			var __row:int, __col:int;
 			
 			for (__row = 0; __row < m_rows; __row++) {
 				for (__col = 0; __col < m_cols; __col++) {
@@ -236,13 +236,13 @@ package X.XMap {
 		}	
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set inuse Float */
+		/* @:get, set inuse Int */
 		
-		public function get inuse ():Number {
+		public function get inuse ():int {
 			return m_inuse;
 		}
 		
-		public function set inuse (__inuse:Number): /* @:set_type */ void {
+		public function set inuse (__inuse:int): /* @:set_type */ void {
 			m_inuse = __inuse;
 			
 			/* @:set_return 0; */			
@@ -250,25 +250,25 @@ package X.XMap {
 		/* @:end */
 
 //------------------------------------------------------------------------------------------
-		/* @:get, set cols Float */
+		/* @:get, set cols Int */
 		
-		public function get cols ():Number {
+		public function get cols ():int {
 			return m_cols;
 		}
 		
-		public function set cols (__value:Number): /* @:set_type */ void {
+		public function set cols (__value:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
 			
 //------------------------------------------------------------------------------------------
-		/* @:get, set rows Float */
+		/* @:get, set rows Int */
 		
-		public function get rows ():Number {
+		public function get rows ():int {
 			return m_rows;
 		}
 		
-		public function set rows (__value:Number): /* @:set_type */ void {
+		public function set rows (__value:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -440,7 +440,7 @@ package X.XMap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function serializeRowCol (__row:Number, __col:Number):XSimpleXMLNode {	
+		public function serializeRowCol (__row:int, __col:int):XSimpleXMLNode {	
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
 			var __attribs:Array /* <Dynamic> */ = [
@@ -472,7 +472,7 @@ package X.XMap {
 			var __xmlCX:XSimpleXMLNode = new XSimpleXMLNode ();			
 			__xmlCX.setupWithParams ("CX", "", []);
 			
-			var __row:Number, __col:Number;
+			var __row:int, __col:int;
 				
 			for (__row = 0; __row < m_rows; __row++) {
 				var __xmlRow:XSimpleXMLNode = new XSimpleXMLNode ();
@@ -494,7 +494,7 @@ package X.XMap {
 //------------------------------------------------------------------------------------------
 		public function deserializeRowCol (__xml:XSimpleXMLNode):void {
 			var __xmlList:Array; // <XSimpleXMLNode>
-			var i:Number;
+			var i:int;
 
 //------------------------------------------------------------------------------------------			
 			__xmlList = __xml.child ("CX");
@@ -515,7 +515,7 @@ package X.XMap {
 				
 //				trace (": deserializeRowCol: ", m_col, m_row);
 
-				var __id:Number = __xml.getAttribute ("id");
+				var __id:int = __xml.getAttribute ("id");
 				var __item:XMapItemModel = m_XMapLayer.ids ().get (__id);
 				
 				if (__item != null) {
@@ -528,8 +528,8 @@ package X.XMap {
 
 				var __classNameToIndex:XReferenceNameToIndex = m_XMapLayer.getClassNames ();
 				
-				var __logicClassIndex:Number = __xml.getAttribute ("logicClassIndex");
-				var __imageClassIndex:Number = __xml.getAttribute ("imageClassIndex");
+				var __logicClassIndex:int = __xml.getAttribute ("logicClassIndex");
+				var __imageClassIndex:int = __xml.getAttribute ("imageClassIndex");
 				
 //				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex), __classNameToIndex.getReferenceNameCount (__logicClassIndex));
 //				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex),  __classNameToIndex.getReferenceNameCount (__imageClassIndex));
@@ -579,7 +579,7 @@ package X.XMap {
 //----------------------------------------------------------------------------------------
 		public function deserializeCXTiles (__cx:XSimpleXMLNode):void {
 			var __xmlList:Array /* <XSimpleXMLNode> */ = __cx.child ("row");
-			var __row:Number, __col:Number;
+			var __row:int, __col:int;
 			
 			for (__row=0; __row<__xmlList.length; __row++) {
 				var __xml:XSimpleXMLNode = __xmlList[__row];

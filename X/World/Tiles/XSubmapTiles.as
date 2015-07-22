@@ -135,8 +135,8 @@ package X.World.Tiles {
 			m_bitmap.bitmapData.unlock ();
 				
 			function __tiles ():void {
-				var __col:Number;
-				var __row:Number;
+				var __col:int;
+				var __row:int;
 				var __rect:XRect;
 //				var __p:XPoint = new XPoint ();
 		

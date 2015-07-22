@@ -40,8 +40,8 @@ package X.Bitmap {
 	public class XBitmapDataAnimManager extends Object {
 		private var m_XApp:XApp;
 		private var m_bitmapAnims:XDict; // <String, XBitmapDataAnim>
-		private var m_count:XDict; // <String, Float>
-		private var m_queue:XDict; // <String, Float>
+		private var m_count:XDict; // <String, Int>
+		private var m_queue:XDict; // <String, Int>
 		
 //------------------------------------------------------------------------------------------
 		public function XBitmapDataAnimManager (__XApp:XApp) {
@@ -91,7 +91,7 @@ package X.Bitmap {
 		public function add (__className:String):XBitmapDataAnim {
 			if (m_bitmapAnims.exists (__className)) {
 //				m_count[__className]++;
-				var __count:Number = m_count.get (__className);
+				var __count:int = m_count.get (__className);
 				__count++;
 				m_count.set (__className, __count);
 				
@@ -156,7 +156,7 @@ package X.Bitmap {
 		public function remove (__className:String):void {
 			if (m_bitmapAnims.exists (__className)) {
 //				m_count[__className]--;
-				var __count:Number = m_count.get (__className);
+				var __count:int = m_count.get (__className);
 				__count--;
 				m_count.set (__className, __count);
 				

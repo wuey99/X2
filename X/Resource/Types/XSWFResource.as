@@ -112,7 +112,7 @@ package X.Resource.Types {
 				return null;
 			}
 			
-			var i:Number;
+			var i:int;
 			var __classNames:Array /* <String> */ = getAllClassNames ();
 			var __classes:Array /* <Class<Dynamic>> */ = new Array (); // <Class<Dynamic>> 
 			

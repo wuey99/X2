@@ -58,7 +58,7 @@ package X.Bitmap {
 		
 		//------------------------------------------------------------------------------------------
 		public function cleanup ():void {	
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_bitmaps.length; i++) {
 				m_bitmaps[i].dispose ();
@@ -97,7 +97,7 @@ package X.Bitmap {
 			m_dx = -__rect.x*__scaleX;
 			m_dy = -__rect.y*__scaleY;
 			
-			var __index:Number;
+			var __index:int;
 
 			__XApp.getXTaskManager ().addTask ([		
 				function ():void {
@@ -140,12 +140,12 @@ package X.Bitmap {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getNumBitmaps ():Number {
+		public function getNumBitmaps ():int {
 			return m_bitmaps.length;
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getBitmap (__frame:Number):BitmapData {
+		public function getBitmap (__frame:int):BitmapData {
 			return m_bitmaps[__frame];
 		}		
 

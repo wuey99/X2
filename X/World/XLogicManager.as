@@ -74,7 +74,7 @@ package X.World {
 		public function createXLogicObjectFromClassName (
 			__parent:XLogicObject,
 			__className:String,
-			__item:XMapItemModel, __layer:Number, __depth:Number,
+			__item:XMapItemModel, __layer:int, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
 			args:Array /* <Dynamic> */ = null
@@ -100,7 +100,7 @@ package X.World {
 		public function initXLogicObjectFromPool (
 			__parent:XLogicObject,
 			__class:Class /* <Dynamic> */,
-			__item:XMapItemModel, __layer:Number, __depth:Number,
+			__item:XMapItemModel, __layer:int, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
 			args:Array /* <Dynamic> */ = null
@@ -156,7 +156,7 @@ package X.World {
 		public function initXLogicObject (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
-			__item:XMapItemModel, __layer:Number, __depth:Number,
+			__item:XMapItemModel, __layer:int, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
 			args:Array /* <Dynamic> */ = null
@@ -179,7 +179,7 @@ package X.World {
 		public function initXLogicObjectRel (
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
-			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
+			__item:XMapItemModel, __layer:int, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
 			args:Array /* <Dynamic> */ = null
@@ -203,7 +203,7 @@ package X.World {
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
 			__class:Class /* <Dynamic> */,
-			__item:XMapItemModel, __layer:Number, __depth:Number,
+			__item:XMapItemModel, __layer:int, __depth:Number,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
 			args:Array /* <Dynamic> */ = null
@@ -253,7 +253,7 @@ package X.World {
 			__parent:XLogicObject,
 			__logicObject:XLogicObject,
 			__class:Class /* <Dynamic> */,
-			__item:XMapItemModel, __layer:Number, __depth:Number, __relative:Boolean,
+			__item:XMapItemModel, __layer:int, __depth:Number, __relative:Boolean,
 			__x:Number, __y:Number, __z:Number, 
 			__scale:Number, __rotation:Number,
 			args:Array /* <Dynamic> */ = null

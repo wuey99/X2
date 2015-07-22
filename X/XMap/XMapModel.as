@@ -45,10 +45,10 @@ package X.XMap {
 //		each submap is submapWidth pixels wide and submapHeight pixels high.
 //------------------------------------------------------------------------------------------
 	public class XMapModel extends XModelBase {
-		private var m_numLayers:Number;
+		private var m_numLayers:int;
 		private var m_layers:Array; // <XMapLayerModel>
 		private var m_allClassNames:Array; // <String>
-		private var m_currLayer:Number;
+		private var m_currLayer:int;
 		private var m_useArrayItems:Boolean;
 		private var m_XSubXMapItemModelPoolManager:XSubObjectPoolManager;
 		private var m_XSubXRectPoolManager:XSubObjectPoolManager;
@@ -82,7 +82,7 @@ package X.XMap {
 			m_XSubXMapItemModelPoolManager = new XSubObjectPoolManager (m_XApp.getXMapItemModelPoolManager ());
 			m_XSubXRectPoolManager = new XSubObjectPoolManager (m_XApp.getXRectPoolManager ());
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_numLayers; i++) {
 				m_layers[i] = __layers[i]
@@ -92,7 +92,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_numLayers; i++) {
 				m_layers[i].cleanup ();
@@ -130,23 +130,23 @@ package X.XMap {
 		/* @:end */
 			
 //------------------------------------------------------------------------------------------
-		public function getNumLayers ():Number {
+		public function getNumLayers ():int {
 			return m_numLayers;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setCurrLayer (__layer:Number):void {
+		public function setCurrLayer (__layer:int):void {
 			m_currLayer = __layer;
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function getCurrLayer ():Number {
+		public function getCurrLayer ():int {
 			return m_currLayer;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getAllClassNames ():Array /* <String> */ {
-			var i:Number, j:Number;
+			var i:int, j:int;
 			
 			if (m_allClassNames.length == 0) {
 				for (i=0; i<m_numLayers; i++) {
@@ -169,28 +169,28 @@ package X.XMap {
 		}	
 				
 //------------------------------------------------------------------------------------------
-		public function getLayer (__layer:Number):XMapLayerModel {
+		public function getLayer (__layer:int):XMapLayerModel {
 			return m_layers[__layer];
 		}		
 		
 //------------------------------------------------------------------------------------------
-		public function addItem (__layer:Number, __item:XMapItemModel):void {
+		public function addItem (__layer:int, __item:XMapItemModel):void {
 			m_layers[__layer].addItem (__item);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function replaceItems (__layer:Number, __item:XMapItemModel):Array /* <XMapItemModel */ {
+		public function replaceItems (__layer:int, __item:XMapItemModel):Array /* <XMapItemModel */ {
 			return m_layers[__layer].replaceItems (__item);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function removeItem (__layer:Number, __item:XMapItemModel):void {
+		public function removeItem (__layer:int, __item:XMapItemModel):void {
 			m_layers[__layer].removeItem (__item);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getSubmapsAt (
-			__layer:Number,
+			__layer:int,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
 			):Array /* <XSubmapModel> */ {
@@ -200,7 +200,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function getItemsAt (
-			__layer:Number,
+			__layer:int,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
 			):Array /* <XSubmapItemModel> */ {
@@ -210,7 +210,7 @@ package X.XMap {
 
 //------------------------------------------------------------------------------------------
 		public function getArrayItemsAt (
-			__layer:Number,
+			__layer:int,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
 		):Array /* <XMapItemModel> */ {
@@ -220,7 +220,7 @@ package X.XMap {
 		
 //------------------------------------------------------------------------------------------
 		public function getItemsAtCX (
-			__layer:Number,
+			__layer:int,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
 			):Array /* <XMapItemModel> */ {
@@ -271,7 +271,7 @@ package X.XMap {
 			
 			xml.setupWithParams ("XLayers", "", []);
 	
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<m_numLayers; i++) {
 				m_layers[i].serialize (xml);
@@ -292,7 +292,7 @@ package X.XMap {
 			m_XSubXMapItemModelPoolManager = new XSubObjectPoolManager (m_XApp.getXMapItemModelPoolManager ());
 			m_XSubXRectPoolManager = new XSubObjectPoolManager (m_XApp.getXRectPoolManager ());
 			
-			var i:Number;
+			var i:int;
 			
 			for (i=0; i<__xmlList.length; i++) {
 				m_layers[i] = new XMapLayerModel ();

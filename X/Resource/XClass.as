@@ -33,7 +33,7 @@ package X.Resource {
 		private var m_className:String;
 		private var m_resourcePath:String;
 		private var m_resourceXML:XML;
-		private var m_count:Number;
+		private var m_count:int;
 
 //------------------------------------------------------------------------------------------
 		public function XClass (__className:String, __resourcePath:String, __resourceXML:XML) {
@@ -69,13 +69,13 @@ package X.Resource {
 		}
 
 //------------------------------------------------------------------------------------------
-		/* @:get, set count Float */
+		/* @:get, set count Int */
 		
-		public function get count ():Number {
+		public function get count ():int {
 			return m_count;
 		}
 		
-		public function set count (__value:Number): /* @:set_type */ void {
+		public function set count (__value:int): /* @:set_type */ void {
 			m_count = __value;
 			
 			/* @:set_return 0; */			

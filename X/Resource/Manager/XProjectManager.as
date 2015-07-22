@@ -222,7 +222,7 @@ package X.Resource.Manager {
 		private function __importManifests ():void {	
 			var __xmlList:XMLList = m_projectXML.child ("manifest");
 			
-			var i:Number;
+			var i:int;
 				
 			for (i=0; i<__xmlList.length (); i++) {
 				var __subResourceManager:XSubResourceManager = new XSubResourceManager ();
@@ -304,7 +304,7 @@ package X.Resource.Manager {
 				return false;
 			}
 			
-			var i:Number;
+			var i:int;
 			var r:XSubResourceManager;
 			var c:Class; // <Dynamic>
 			
@@ -372,7 +372,7 @@ package X.Resource.Manager {
 				return XLogicObjectXMap;
 			}
 			
-			var i:Number;
+			var i:int;
 			var r:XSubResourceManager;
 			var c:Class; // <Dynamic>
 			
@@ -408,7 +408,7 @@ package X.Resource.Manager {
 				return false;
 			}
 			
-			var i:Number;
+			var i:int;
 			var r:XSubResourceManager;
 			var results:Boolean;
 			
@@ -442,7 +442,7 @@ package X.Resource.Manager {
 				return false;
 			}
 			
-			var i:Number;
+			var i:int;
 			var r:XSubResourceManager;
 			
 			for (i=0; i<m_subResourceManagers.length; i++) {

@@ -51,7 +51,7 @@ package X.Sound {
 		private var _rate:Number;
 		private var _volume:Number;
 		
-		private var _length:Number;
+		private var _length:int;
 		private var _isPlaying: Boolean;
 		
 		private var m_function:Function;
@@ -241,7 +241,7 @@ package X.Sound {
 		}
 		
 		//---------------------------------------------------------------------
-		//  Getters && Setters
+		//  Getters & Setters
 		//---------------------------------------------------------------------
 		
 		/* @:override get, set rate Float */
@@ -293,7 +293,7 @@ package X.Sound {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		public override function play (__startTime:Number, __loops:Number, __soundTransform:SoundTransform):void {
+		public override function play (__startTime:Number, __loops:int, __soundTransform:SoundTransform):void {
 			_loop = (__loops > 1);
 			
 			if  (!_isPlaying) {
