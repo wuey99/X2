@@ -38,12 +38,16 @@ package x.xml {
 		private var m_parent:XSimpleXMLNode;
 		
 //------------------------------------------------------------------------------------------
-		public function XSimpleXMLNode () {
+		public function XSimpleXMLNode (__xmlString:String = null) {
 			super ();
 			
 			m_attribsMap = new XDict (); // <String, Dynamic>
 			m_children = new Array (); // <XSimpleXMLNode>
 			m_parent = null;
+			
+			if (__xmlString != null) {
+				setupWithXMLString (__xmlString)
+			}
 		}
 
 //------------------------------------------------------------------------------------------

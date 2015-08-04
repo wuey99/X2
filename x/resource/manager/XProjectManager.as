@@ -198,6 +198,21 @@ package x.resource.manager {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function setupFromXMLString (
+			__parent:Sprite,
+			__rootPath:String,
+			__xmlString:String,
+			__callback:Function,
+			__loaderContextFactory:Function
+		):void {
+			
+			m_parent = __parent;
+			m_subResourceManagers = new Array (); // <XSubResourceManager>
+			m_loaderContextFactory = __loaderContextFactory;
+			loadProjectFromXML (__rootPath, new XML (__xmlString), __callback);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function loadProjectFromXML (
 			__rootPath:String,
 			__xml:XML,
@@ -323,7 +338,7 @@ package x.resource.manager {
 		public function deleteManifest (__xml:XML):void {
 // <HAXE>
 /* --
-			not implemented in HaXe
+//			not implemented in HaXe
 -- */
 // </HAXE>
 // <AS3>

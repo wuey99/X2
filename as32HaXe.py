@@ -965,7 +965,7 @@ class Update(object):
 
 	#-----------------------------------------------------------------------------
 	def convertXML(self, line):
-		if not self._src_folder.startswith("X\Resource"):
+		if not self._src_folder.startswith("x\\resource"):
 			return line
 
 		line = line.replace(":XMLList", ":Array<XSimpleXMLNode>")
@@ -974,12 +974,48 @@ class Update(object):
 		line = line.replace("new XML", "new XSimpleXMLNode")
 		
 		return line
-						
+
+	#-----------------------------------------------------------------------------
+	# expand XDict.removeAllKeys.
+	#
+	# HaXe Maps don't support a removeAllKeys method
+	#-----------------------------------------------------------------------------	
+	def convertRemoveAllKeys(self, line):
+#		if self.isComment(line):
+#			return line
+			
+		if line.find(".removeAllKeys") < 0:
+			return line
+			
+		for i in xrange(0, len(line)):
+			if line[i] != " " and line[i] != "\t":
+				break;
+		
+		end = line[i:].find(".")
+		label = line[i:end+i]	
+			
+		line = line[:i] + "for (__key__ in " + label + ".keys ()) { " + label + ".remove (__key__); } // removeAllKeys\n"
+					
+		return line
+			
+	#-----------------------------------------------------------------------------	
+	# import flash. 
+	#    --> import openfl.
+	#-----------------------------------------------------------------------------	
+	def convertImports(self, line):
+		if self.isComment(line):
+			return line
+			
+		line = line.replace("import flash.", "import openfl.")
+		
+		return line
+							
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
 		self._skipLine = False
 		
+		line = self.convertImports(line)
 		line = self.convertExtendsObject(line)
 		line = self.convertArraysAndMaps(line)
 		line = self.convertArraysAndMaps(line)
@@ -999,6 +1035,7 @@ class Update(object):
 		line = self.convertForEach(line)
 		line = self.convertXML(line)
 		line = self.convertIncludes(line, dst)
+		line = self.convertRemoveAllKeys(line)
 
 		if not self._skipLine:	
 			dst.write(line)
