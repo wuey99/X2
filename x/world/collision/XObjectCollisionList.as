@@ -73,7 +73,7 @@ package x.world.collision {
 			var i:int;
 
 			for (i=0; i < xxx.getMaxLayers (); i++) {
-				m_rects[i].removeAll ();
+				m_rects[i].removeAllKeys ();
 			}
 			
 			m_XSubRectPoolManager.returnAllObjects ();

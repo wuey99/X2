@@ -173,7 +173,7 @@ package x.task {
 		private function __reset (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = true):void {
 			m_taskList = __taskList;
 			m_taskIndex = 0;
-			m_labels.removeAll ();
+			m_labels.removeAllKeys ();
 //			m_stack = new Array (8);
 //			m_loop = new Array (8);
 			m_stackPtr = 0;

@@ -85,7 +85,7 @@ package x.collections {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeAll ():void {
+		public function removeAllKeys ():void {
 			var __key:*;
 			
 			for (__key in m_dict) {

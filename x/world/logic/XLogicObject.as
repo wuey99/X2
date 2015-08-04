@@ -691,7 +691,7 @@ package x.world.logic {
 				}
 			);
 			
-			m_bitmaps.removeAll ();
+			m_bitmaps.removeAllKeys ();
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -712,7 +712,7 @@ package x.world.logic {
 				}
 			);
 			
-			m_movieClips.removeAll ();
+			m_movieClips.removeAllKeys ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -734,7 +734,7 @@ package x.world.logic {
 				}
 			);
 			
-			m_textSprites.removeAll ();
+			m_textSprites.removeAllKeys ();
 		}
 		
 //------------------------------------------------------------------------------------------

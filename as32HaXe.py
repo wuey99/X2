@@ -1004,9 +1004,11 @@ class Update(object):
 			dst.write(line)
 
 	#-----------------------------------------------------------------------------
-	def processNewFile(self, src_file_path):
-		dst_file_path = "Y" + src_file_path[src_file_path.find(os.path.sep):]
+	def processNewFile(self, targetDir, src_file_path):
+		dst_file_path = targetDir + src_file_path[src_file_path.find(os.path.sep):]
 
+		dst_file_path = dst_file_path.replace(".as", ".hx")
+		
 		print ": src: ", src_file_path
 		print ": dst: ", dst_file_path
 
@@ -1052,7 +1054,7 @@ class Update(object):
 		src.close()
 		
 	#-----------------------------------------------------------------------------
-	def processDirectory(self, paths):
+	def processDirectory(self, targetDir, paths):
 
 	#-----------------------------------------------------------------------------
 		for i in xrange(len(paths)):
@@ -1064,15 +1066,18 @@ class Update(object):
 					if filenames[j].endswith(".as") or filenames[j].endswith(".h"):
 						file_path = path + os.path.sep + filenames[j]
 
-						self.processNewFile (file_path)
+						self.processNewFile (targetDir, file_path)
 
 				for j in xrange(len(dirnames)):
 					dirnames[j] = path + os.path.sep + dirnames[j]
 
 				if len(dirnames):
-					self.processDirectory(dirnames)
+					self.processDirectory(targetDir, dirnames)
 
 #-----------------------------------------------------------------------------
+targetDir = "_x"
+if os.path.exists(targetDir):
+	shutil.rmtree(targetDir)
 o = Update()
-o.processDirectory(["X"])
+o.processDirectory(targetDir, ["x"])
 
