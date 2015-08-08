@@ -46,7 +46,7 @@ package x.xml {
 			m_parent = null;
 			
 			if (__xmlString != null) {
-				setupWithXMLString (__xmlString)
+				setupWithXMLString (__xmlString);
 			}
 		}
 
