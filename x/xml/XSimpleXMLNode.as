@@ -309,6 +309,44 @@ package x.xml {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function toXMLStringEscaped (__indent:int = 0):String {
+			var i:int;
+			
+			var __string:String = "";
+			
+			__string += __tab (__indent) + "\"<" + m_tag;
+			
+			m_attribsMap.forEach (
+				function (x:*):void {
+					var __key:String = x as String;
+					__string += " " + __key + "=" + "\\\"" + m_attribsMap.get (__key) + "\\\"";	
+				}
+			);
+			
+			if (m_text != "" || m_children.length != 0) {
+				__string += ">\" +\n";
+				
+				if (m_text != "") {
+					__string += __tab (__indent+1) + m_text + "\n";
+				}
+				
+				if (m_children.length != 0) {	
+					for (i=0; i<m_children.length; i++) {
+						__string += m_children[i].toXMLStringEscaped (__indent+1);
+					}
+				}
+				
+				__string += __tab (__indent) + "\"</" + m_tag + ">\" +\n";
+			}
+			else
+			{
+				__string += "/>\" +\n";
+			}
+			
+			return __string ;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function parent ():XSimpleXMLNode {
 			return m_parent;
 		}
