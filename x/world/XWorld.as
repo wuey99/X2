@@ -82,7 +82,7 @@ package x.world {
 		public var m_timeStep:Number = 1.0/30.0;
 		public var self:*;
 		public var m_parent:*;	
-		public var m_XApp:XApp
+		public var m_XApp:XApp;
 		public var m_XLogicManager:XLogicManager;
 		public var m_XLogicManager2:XLogicManager;
 		public var m_XTaskManager:XTaskManager;

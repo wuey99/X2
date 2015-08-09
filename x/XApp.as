@@ -41,6 +41,7 @@ package x {
 	import x.world.*;
 	import x.world.sprite.*;
 	import x.xmap.*;
+	import x.xml.*;
 	
 	import flash.display.*;
 	import flash.events.*;

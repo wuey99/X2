@@ -249,7 +249,7 @@ package x.resource.manager {
 		
 		//------------------------------------------------------------------------------------------
 		public function getName ():String {
-			return getManifestName ().substr(0, getManifestName ().lastIndexOf('.'))
+			return getManifestName ().substr(0, getManifestName ().lastIndexOf('.'));
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ package x.resource.manager {
 		public override function deleteResourceXML (__xml:XML):void {
 // <HAXE>
 /* --
-			not implemented in HaXe
+//			not implemented in HaXe
 -- */
 // </HAXE>
 // <AS3>
@@ -696,7 +696,7 @@ package x.resource.manager {
 				__r = __XResource;
 			}
 			
-			return __r
+			return __r;
 		}
 		
 		//------------------------------------------------------------------------------------------
