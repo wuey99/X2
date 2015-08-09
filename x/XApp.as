@@ -503,7 +503,7 @@ package x {
 			return (
 //				getClass ("XLogicObjectXMap:XLogicObjectXMap") == null ||
 				getClass ("ErrorImages:undefinedClass") == null
-				)
+				);
 		}
 
 //------------------------------------------------------------------------------------------
