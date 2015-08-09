@@ -30,6 +30,7 @@ package x.resource.manager {
 	import x.collections.*;
 	import x.resource.*;
 	import x.task.*;
+	import x.xmap.*;
 	import x.XApp;
 	
 	import flash.display.*;
@@ -358,7 +359,7 @@ package x.resource.manager {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function resourceManagers ():Array /* <XSubResourceManager */ {
+		public function resourceManagers ():Array /* <XSubResourceManager> */ {
 			return m_subResourceManagers;
 		}
 
@@ -366,7 +367,7 @@ package x.resource.manager {
 		public function getResourceManagerByName (__name:String):XSubResourceManager {
 			for (var i:int = 0; i < m_subResourceManagers[i].length; i++) {
 				if (m_subResourceManagers[i].getName () == __name) {
-					return m_subResourceManagers[i] as XSubResourceManager;
+					return /* @:cast */ m_subResourceManagers[i] as XSubResourceManager;
 				}
 			}
 
@@ -382,8 +383,6 @@ package x.resource.manager {
 			}
 			
 			if (__className == "XLogicObjectXMap:XLogicObjectXMap") {
-				import x.xmap.*;
-				
 				return XLogicObjectXMap;
 			}
 			

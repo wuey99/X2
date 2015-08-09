@@ -30,6 +30,7 @@ package x.sound {
 	import x.collections.*;
 	import x.pool.*;
 	import x.task.*;
+	import x.type.*;
 	import x.XApp;
 	
 	import flash.events.Event;
@@ -72,7 +73,7 @@ package x.sound {
 			if (__transform == null) {
 				__transform = new SoundTransform (getSFXVolume (), 0);
 			}
-			var __mp3Sound:MP3Sound = new __type ();
+			var __mp3Sound:MP3Sound = XType.createInstance (__type);
 			__mp3Sound.setup (__sound);
 			__mp3Sound.play (0, __loops, __transform);
 			
