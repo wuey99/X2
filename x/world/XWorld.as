@@ -69,10 +69,16 @@ package x.world {
 	import flash.system.*;
 	import flash.utils.Timer;
 	
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 	import starling.events.EnterFrameEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+</AS3>
 	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
@@ -336,6 +342,11 @@ package x.world {
 		public function setupDebug ():void {
 			// set debug draw
 			
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 			/*
 			if (CONFIG::flash) {	
 				import flash.display.Sprite;
@@ -354,12 +365,13 @@ package x.world {
 				m_world.SetDebugDraw(dbgDraw);
 			}
 			*/
+// </AS3>
 			
 			m_FPSCounterObject = getXLogicManager2 ().initXLogicObject (
 				// parent
 				null,
 				// logicObject
-				new XFPSCounter () as XLogicObject,
+				/* @:cast */ new XFPSCounter () as XLogicObject,
 				// item, layer, depth
 				null, -1, 1000000,
 				// x, y, z
@@ -551,6 +563,11 @@ package x.world {
 		}	
 
 //------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		if (CONFIG::starling) {
 			private function onTouchEvent (e:TouchEvent):void {
 				var __touches:Vector.<Touch> = e.getTouches(this);
@@ -576,6 +593,7 @@ package x.world {
 				}
 			}
 		}
+// </AS3>
 		
 //------------------------------------------------------------------------------------------
 // returns the flash stage
@@ -610,7 +628,7 @@ package x.world {
 			getFlashStage ().addEventListener (Event.DEACTIVATE, onFocusOutEvent);
 			*/
 			
-			var __point:XPoint = new XPoint;
+			var __point:XPoint = new XPoint ();
 			
 			var __oldX:Number;
 			var __oldY:Number;
@@ -675,7 +693,7 @@ package x.world {
 			
 			getFlashStage ().removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
 			getFlashStage ().removeEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
-			getFlashStage ().removeEventListener (Event.ACTIVATE, onFocusInEvent)
+			getFlashStage ().removeEventListener (Event.ACTIVATE, onFocusInEvent);
 			getFlashStage ().removeEventListener (Event.DEACTIVATE, onFocusOutEvent);
 		}
 		
@@ -1043,6 +1061,11 @@ package x.world {
 		}	
 		
 //------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		if (CONFIG::starling) {
 			/* @:get, set MOUSE_DOWN String */		
 			public function get MOUSE_DOWN ():String {
@@ -1096,6 +1119,7 @@ package x.world {
 		}
 		else
 		{
+// </AS3>
 			/* @:get, set MOUSE_DOWN String */	
 			public function get MOUSE_DOWN ():String {
 				return MouseEvent.MOUSE_DOWN;	
@@ -1145,7 +1169,13 @@ package x.world {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		}
+// </AS3>
 		
 //------------------------------------------------------------------------------------------
 // http://www.flipcode.com/archives/Fast_Approximate_Distance_Functions.shtml
@@ -1221,7 +1251,7 @@ package x.world {
 
 //------------------------------------------------------------------------------------------	
 		public function getViewRect ():XRect {
-			return m_viewRect
+			return m_viewRect;
 		}
 		
 //------------------------------------------------------------------------------------------
