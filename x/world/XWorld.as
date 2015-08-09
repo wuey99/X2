@@ -151,7 +151,6 @@ package x.world {
 		public var m_XPoint:XPoint;
 		public var m_XRect:XRect;
 		public var m_XMatrix:XMatrix;
-		public var m_g$:g$;
 		public var m_XMapLayerView:XMapLayerView;
 		public var m_XMapView:XMapView;
 		public var m_XSubXRectPoolManager:XSubObjectPoolManager;
