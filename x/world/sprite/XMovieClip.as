@@ -132,7 +132,7 @@ package x.world.sprite {
 				var __class:Class /* <Dynamic> */ = __xxx.getClass (__className);
 				
 				if (__class != null) {
-					__movieClip = XType.createInstance (__class);;
+					__movieClip = XType.createInstance (__class);
 				}
 				else
 				{

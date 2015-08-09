@@ -115,7 +115,7 @@ package x.texture {
 			m_subManagers.forEach (
 				function (x:*):void {
 					if (__movieClip == null) {
-						var __subManager:XSubTextureManager = m_subManagers.get (x as String);
+						var __subManager:XSubTextureManager = m_subManagers.get (/* @:cast */ x as String);
 					
 						if (__subManager.isDynamic ()) {
 							__dynamicSubManagers.push (__subManager);

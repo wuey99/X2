@@ -1028,7 +1028,7 @@ package x.world.logic {
 		/* @:get, set o Dynamic */
 			
 		public function get o ():Object {
-			return this as Object;
+			return /* @:cast */ this as Object;
 		}	
 	
 		public function set o (__value:*): /* @:set_type */ void {
@@ -1110,7 +1110,7 @@ package x.world.logic {
 		
 		[Inline]
 		public function get oX ():Number {
-			return m_pos.x
+			return m_pos.x;
 		}
 
 		[Inline]
@@ -1126,7 +1126,7 @@ package x.world.logic {
 		
 		[Inline]
 		public function get oY ():Number {
-			return m_pos.y
+			return m_pos.y;
 		}		
 
 		[Inline]
@@ -1153,7 +1153,7 @@ package x.world.logic {
 		
 		[Inline]
 		public function get oAlpha ():Number {
-			return m_alpha
+			return m_alpha;
 		}
 		
 		[Inline]
@@ -1434,8 +1434,8 @@ package x.world.logic {
 					logicObject = i as XLogicObject;
 							
 					if (logicObject != null) {	
-						logicObject.x2 = __x
-						logicObject.y2 = __y
+						logicObject.x2 = __x;
+						logicObject.y2 = __y;
 						logicObject.rotation2 = __rotation;
 						logicObject.visible = __visible;
 						logicObject.scaleX2 = __scaleX;
@@ -1452,7 +1452,7 @@ package x.world.logic {
 						}
 						else
 						{
-							logicObject.setMasterDepth (logicObject.getDepth ())
+							logicObject.setMasterDepth (logicObject.getDepth ());
 						}
 						logicObject.setMasterAlpha (logicObject.getAlpha () * __alpha);
 						
@@ -1553,7 +1553,7 @@ package x.world.logic {
 		public function removeAllXSignals ():void {
 			m_XSignals.forEach (
 				function (x:*):void {
-					removeXSignal (x as XSignal);
+					removeXSignal (/* @:cast */ x as XSignal);
 				}
 			);
 		}
