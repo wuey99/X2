@@ -48,13 +48,13 @@
 		/* @:get, set x2 Float */
 				
 		public function get x2 ():Number {
-			var p:XPoint = globalToParent ();
+			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			return p.x;
 		}
 
 		public function set x2 (value:Number): /* @:set_type */ void {
-			var p:XPoint = globalToParent ();
+			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			this.x += value - p.x;
 			
