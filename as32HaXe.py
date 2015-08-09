@@ -965,9 +965,9 @@ class Update(object):
 
 	#-----------------------------------------------------------------------------
 	def convertXML(self, line):
-		if not self._src_folder.startswith("x\\resource"):
+		if not (self._src_folder.startswith("x\\resource") or self._src_fileName == "XApp.as"):
 			return line
-
+			
 		line = line.replace(":XMLList", ":Array<XSimpleXMLNode>")
 		line = line.replace(".length ()", ".length")
 		line = line.replace(":XML", ":XSimpleXMLNode")
