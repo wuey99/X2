@@ -195,6 +195,21 @@ class Update(object):
 		return line
 	
 	#-----------------------------------------------------------------------------
+	# public <interfaceName>
+	#     --> <interfaceName>
+	#-----------------------------------------------------------------------------
+	def convertInterface(self, line):
+		if self.isComment(line):
+			return line
+			
+		if line.find("public interface") < 0:
+			return line
+			
+		line = line.replace("public interface", "interface")
+		
+		return line
+		
+	#-----------------------------------------------------------------------------
 	# public function <className> () {
 	#     --> public function new () {
 	#-----------------------------------------------------------------------------
@@ -1042,6 +1057,7 @@ class Update(object):
 		line = self.convertArraysAndMaps(line)
 		line = self.convertBreaks(line)
 		line = self.convertClass(line)
+		line = self.convertInterface(line)
 		line = self.convertTypes(line)
 		line = self.convertCasts(line)
 		line = self.convertIs(line)
