@@ -439,13 +439,13 @@ package x {
 					}
 					else
 					{
-						var __resourceName:String = __xmlList[i].@name;		
-						var __resourceType:String = __xmlList[i].@type;
+						var __resourceName:String = __xmlList[i].attribute ("name");		
+						var __resourceType:String = __xmlList[i].attribute ("type");
 						var __classList:XMLList = __xmlList[i].child ("classX");
 						
-						if (__cacheAll || (!__cacheAll && __xmlList[i].@embed == "true")) {	
+						if (__cacheAll || (!__cacheAll && __xmlList[i].attribute ("embed") == "true")) {	
 							for (j = 0; j<__classList.length (); j++) {
-								var __fullName:String = __resourceName + ":" + __classList[j].@name;
+								var __fullName:String = __resourceName + ":" + __classList[j].attribute ("name");
 								
 								trace (": class: ", __fullName, m_allClassNames.exists (__fullName));
 								
