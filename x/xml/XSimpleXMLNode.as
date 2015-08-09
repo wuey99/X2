@@ -30,6 +30,8 @@ package x.xml {
 	import x.collections.*;
 	
 //------------------------------------------------------------------------------------------
+// http://try.haxe.org/#37419
+//------------------------------------------------------------------------------------------
 	public class XSimpleXMLNode extends Object {
 		private var m_tag:String;
 		private var m_attribsMap:XDict; // <String, Dynamic>
@@ -76,15 +78,18 @@ package x.xml {
 //------------------------------------------------------------------------------------------
 		public function setupWithXML (__xml:Xml):void {
 			m_tag = __xml.nodeName;
+			m_text = "";
 		
-			var __type:Xml.XmlType = __xml.firstChild ().nodeType;
-		
-			if (__type == Xml.XmlType.Element || __type == Xml.XmlType.Document) {
-				m_text = "";
-			}
-			else
-			{
-				m_text = __xml.firstChild ().nodeValue;
+			if (__xml.firstChild () != null) {
+				var __type:Xml.XmlType = __xml.firstChild ().nodeType;
+			
+				if (__type == Xml.Element || __type == Xml.Document) {
+					m_text = "";
+				}
+				else
+				{
+					m_text = __xml.firstChild ().nodeValue;
+				}
 			}
 		
 //------------------------------------------------------------------------------------------
