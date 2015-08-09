@@ -305,6 +305,11 @@ package x.world.sprite {
 		/* @:end */
 
 		//------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		if (CONFIG::starling) {
 			public function get graphics ():Graphics {
 				return null;
@@ -312,6 +317,7 @@ package x.world.sprite {
 		}
 		else
 		{
+// </AS3>
 			/* @:override get, set graphics Graphics */
 			
 			public override function get graphics ():Graphics {
@@ -327,7 +333,13 @@ package x.world.sprite {
 				/* @:set_return null; */			
 			}
 			/* @:end */
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		}
+// </AS3>
 		
 		//------------------------------------------------------------------------------------------
 		/* @:get, set dx Float */

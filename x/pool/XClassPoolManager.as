@@ -29,6 +29,7 @@ package x.pool {
 	
 	import x.pool.*;
 	import x.collections.*;
+	import x.type.*;
 	import x.world.*;
 	
 //------------------------------------------------------------------------------------------	
@@ -53,7 +54,7 @@ package x.pool {
 			
 			return new XObjectPoolManager (
 				function ():* {
-					return new __class ();
+					return XType.createInstance (__class);
 				},
 				
 				function (__src:*, __dst:*):* {
