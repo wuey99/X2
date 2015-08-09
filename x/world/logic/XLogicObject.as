@@ -447,6 +447,12 @@ package x.world.logic {
 		}
 
 //------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
+//------------------------------------------------------------------------------------------
 /*
 //------------------------------------------------------------------------------------------
 		public function findMovieClipByName (
@@ -593,7 +599,8 @@ package x.world.logic {
 			return __newPos;
 		}
 */
-
+// </AS3>
+		
 //------------------------------------------------------------------------------------------
 		public function setPoolClass (__class:Class /* <Dynamic> */):void {
 			m_poolClass = __class;
@@ -707,7 +714,7 @@ package x.world.logic {
 					{
 						__xmovieClip.cleanup ();
 						
-						xxx.unloadClass (__name as String);
+						xxx.unloadClass (/* @:cast */ __name as String);
 					}
 				}
 			);

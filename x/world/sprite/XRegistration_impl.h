@@ -44,23 +44,27 @@
 			return rp;
 		}
 				
-//------------------------------------------------------------------------------------------		
-		[Inline]
-		public function get x2():Number {
-			var p:Point = parent.globalToLocal (localToGlobal (rp));
+//------------------------------------------------------------------------------------------
+		/* @:get, set x2 Float */
+				
+		public function get x2 ():Number {
+			var p:XPoint = globalToParent ();
 			
 			return p.x;
 		}
 
-//------------------------------------------------------------------------------------------
-		[Inline]
-		public function set x2(value:Number):void {
-			var p:Point = parent.globalToLocal (localToGlobal (rp));
+		public function set x2 (value:Number): /* @:set_type */ void {
+			var p:XPoint = globalToParent ();
 			
 			this.x += value - p.x;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set y2 Float */
+		
 		[Inline]
 		public function get y2():Number {
 			var p:Point = parent.globalToLocal (localToGlobal (rp));
@@ -68,23 +72,26 @@
 			return p.y;
 		}
 
-//------------------------------------------------------------------------------------------
 		[Inline]
-		public function set y2(value:Number):void {
+		public function set y2(value:Number):  /* @:set_type */ void {
 			var p:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			this.y += value - p.y;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set scaleX2 Float */
+		
 		[Inline]
 		public function get scaleX2():Number {
 			return this.scaleX;
 		}
 
-//------------------------------------------------------------------------------------------
 		[Inline]
-		public function set scaleX2(value:Number):void {
+		public function set scaleX2(value:Number): /* @:set_type */ void {
 			var a:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			this.scaleX = value;
@@ -93,17 +100,21 @@
 
 			this.x -= b.x - a.x;
 			this.y -= b.y - a.y;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set scaleY2 Float */
+		
 		[Inline]
 		public function get scaleY2():Number {
 			return this.scaleY;
 		}
 
-//------------------------------------------------------------------------------------------
 		[Inline]
-		public function set scaleY2(value:Number):void {
+		public function set scaleY2(value:Number): /* @:set_type */ void {
 			var a:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			this.scaleY = value;
@@ -112,17 +123,21 @@
 
 			this.x -= b.x - a.x;
 			this.y -= b.y - a.y;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set rotation2 Float */
+		
 		[Inline]
 		public function get rotation2():Number {
 			return this.rotation;
 		}
 
-//------------------------------------------------------------------------------------------
 		[Inline]
-		public function set rotation2(value:Number):void {
+		public function set rotation2(value:Number): /* @:set_type */ void {
 			var a:Point = parent.globalToLocal (localToGlobal (rp));
 			
 			this.rotation = value;
@@ -131,18 +146,35 @@
 
 			this.x -= b.x - a.x;
 			this.y -= b.y - a.y;
+			
+			/* @:set_return 0; */	
 		}
+		/* @:end */
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set mouseX2 Float */
+		
 		public function get mouseX2():Number {
 			return Math.round (this.mouseX - rp.x);
 		}
+		
+		public function set mouseX2(value:Number): /* @:set_type */ void {	
+			/* @:set_return 0; */	
+		}
+		/* @:end */		
 
 //------------------------------------------------------------------------------------------
+		/* @:get, set mouseY2 Float */
+		
 		public function get mouseY2():Number {
 			return Math.round (this.mouseY - rp.y);
 		}
-
+		
+		public function set mouseY2(value:Number): /* @:set_type */ void {	
+			/* @:set_return 0; */	
+		}
+		/* @:end */	
+		
 //------------------------------------------------------------------------------------------
 		public function setProperty2(prop:String, n:Number):void {			
 // unused

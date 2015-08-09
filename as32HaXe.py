@@ -248,6 +248,7 @@ class Update(object):
 	#-----------------------------------------------------------------------------
 	def isType(self, line, typeName):	
 		if line.find(":" + typeName + ";") >= 0 \
+		or line.find(":" + typeName + "=") >= 0 \
 		or line.find(":" + typeName + " ") >= 0 \
 		or line.find(":" + typeName + ")") >= 0 \
 		or line.find(":" + typeName + ",") >= 0 \
@@ -850,28 +851,29 @@ class Update(object):
 	#-----------------------------------------------------------------------------	
 	def convertProtected(self, line):
 		line = line.replace ("protected var", "private var")
+		line = line.replace ("protected static var", "private static var")
 		line = line.replace ("protected function", "private function")
-		
+	
 		return line
 	
 	#-----------------------------------------------------------------------------
 	# public static const
-	#    --> public static inline
+	#    --> public static inline var
 	#
 	# private static const
-	#    --> private static inline
+	#    --> private static inline var
 	#
 	# public const
-	#    --> public static inline
+	#    --> public static inline var
 	#
 	# private const
-	#    --> private static inline
+	#    --> private static inline var
 	#-----------------------------------------------------------------------------
 	def convertConst(self, line):
-		line = line.replace("public static const", "public static inline")
-		line = line.replace("private static const", "private static inline")
-		line = line.replace("public const", "public static inline")
-		line = line.replace("private const", "private static inline")
+		line = line.replace("public static const", "public static inline var")
+		line = line.replace("private static const", "private static inline var")
+		line = line.replace("public const", "public static inline var")
+		line = line.replace("private const", "private static inline var")
 		
 		return line
 	
@@ -1009,13 +1011,32 @@ class Update(object):
 		line = line.replace("import flash.", "import openfl.")
 		
 		return line
-							
+
+	#----------------------------------------------------------------------------
+	# HaXe doesn't recognize + signs preceding numbers
+	#
+	# +64
+	#    --> 64							
+	#----------------------------------------------------------------------------
+	def convertPlusSigns(self, line):
+		if self.isComment(line):
+			return line
+			
+		if line.find("= ++") >= 0:
+			return line
+			
+		line = line.replace("= +", "= ")
+		line = line.replace(", +", ", ")
+		
+		return line
+			
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
 		self._skipLine = False
 		
 		line = self.convertImports(line)
+		line = self.convertPlusSigns(line)
 		line = self.convertExtendsObject(line)
 		line = self.convertArraysAndMaps(line)
 		line = self.convertArraysAndMaps(line)
