@@ -1030,6 +1030,18 @@ class Update(object):
 		
 		return line
 
+	#-----------------------------------------------------------------------------	
+	# e:Error) 
+	#    --> e:Dynamic
+	#-----------------------------------------------------------------------------	
+	def convertErrors(self, line):
+		if self.isComment(line):
+			return line
+			
+		line = line.replace("e:Error.", "e:Dynamic")
+		
+		return line
+		
 	#----------------------------------------------------------------------------
 	# HaXe doesn't recognize + signs preceding numbers
 	#
@@ -1054,6 +1066,7 @@ class Update(object):
 		self._skipLine = False
 		
 		line = self.convertImports(line)
+		line = self.convertErrors(line)
 		line = self.convertPlusSigns(line)
 		line = self.convertExtendsObject(line)
 		line = self.convertArraysAndMaps(line)
