@@ -135,7 +135,7 @@ package x.xmap {
 						}
 
 						if (CONFIG::starling) {
-							if (xxx.getMovieClipCacheManager ().isQueued (__name as String)) {
+							if (xxx.getMovieClipCacheManager ().isQueued (/* @:cast */ __name as String)) {
 								trace (": not cached: ", __name);
 								
 								__flags = false;
@@ -143,7 +143,7 @@ package x.xmap {
 						}
 						else
 						{
-							if (xxx.getBitmapCacheManager ().isQueued (__name as String)) {
+							if (xxx.getBitmapCacheManager ().isQueued (/* @:cast */ __name as String)) {
 								trace (": not cached: ", __name);
 								
 								__flags = false;
@@ -163,6 +163,11 @@ package x.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		if (CONFIG::starling) {
 			public function cacheImageClassNames ():void {
 				var __layer:XMapLayerModel;
@@ -202,7 +207,7 @@ package x.xmap {
 								return;
 							}
 							
-							xxx.getMovieClipCacheManager ().add (__name as String);
+							xxx.getMovieClipCacheManager ().add (/* @:cast */__name as String);
 						}
 					);
 				}	
@@ -210,6 +215,7 @@ package x.xmap {
 		}
 		else
 		{
+// </AS3>
 			public function cacheImageClassNames ():void {
 				var i:int;
 				
@@ -220,12 +226,18 @@ package x.xmap {
 						function (__name:*):void {
 							trace (": cacheImageClassName: ", __name);
 							
-							xxx.getBitmapCacheManager ().add (__name as String);
+							xxx.getBitmapCacheManager ().add (/* @:cast */ __name as String);
 						}
 					);
 				}			
-			}		
+			}	
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		}
+// </AS3>
 		
 //------------------------------------------------------------------------------------------
 		public function uncacheImageClassNames ():void {

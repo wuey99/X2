@@ -241,7 +241,7 @@ package x.sound {
 				return true;
 			}
 			
-			var __firstChoice:Number = -1
+			var __firstChoice:Number = -1;
 			var __secondChoice:Number = -1;
 			
 			m_soundChannels.forEach (
@@ -249,7 +249,7 @@ package x.sound {
 					var __targetPriority:Number = m_soundChannels.get (__targetGuid);
 					
 					if (__priority > __targetPriority) {
-						__firstChoice = __targetGuid
+						__firstChoice = __targetGuid;
 					}
 					
 					if (__priority == __targetPriority) {
@@ -289,7 +289,7 @@ package x.sound {
 		public function removeAllSounds ():void {
 			m_soundChannels.forEach (
 				function (__guid:*):void {
-					removeSound (__guid as int);
+					removeSound (/* @:cast */ __guid as int);
 				}
 			);
 		}

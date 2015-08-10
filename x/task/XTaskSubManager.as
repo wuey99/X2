@@ -136,7 +136,7 @@ package x.task {
 		public function removeAllTasks ():void {	
 			m_XTasks.forEach (
 				function (x:*):void {
-					removeTask (x as XTask);
+					removeTask (/* @:cast */ x as XTask);
 				}
 			);
 		}

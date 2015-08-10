@@ -37,8 +37,6 @@ package x.xmap {
 	
 	import flash.events.*;
 	
-	import starling.errors.AbstractClassError;
-	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapModel extends XModelBase {
 		private var m_XMapLayer:XMapLayerModel;

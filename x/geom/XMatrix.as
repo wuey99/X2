@@ -202,7 +202,7 @@ package x.geom {
 			var __c:Number = m_c;
 			var __d:Number = m_d;
 			var __tx:Number = m_tx;
-			var __ty:Number = m_ty
+			var __ty:Number = m_ty;
 			var __det:Number = 1/determinant;
 			
 			m_a = __d * __det;
