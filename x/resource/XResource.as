@@ -28,6 +28,7 @@
 package x.resource {
 
 	import x.resource.manager.*;
+	import x.xml.*;
 	
 	import flash.display.*;
 	import flash.events.*;

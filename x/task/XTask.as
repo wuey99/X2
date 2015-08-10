@@ -27,12 +27,12 @@
 //------------------------------------------------------------------------------------------
 package x.task {
 	
+	import flash.system.*;
+	import flash.utils.*;
+	
 	import x.*;
 	import x.collections.*;
 	import x.pool.*;
-	
-	import flash.system.*;
-	import flash.utils.*;
 	
 	//------------------------------------------------------------------------------------------
 	// XTask provides a mechanism to control the execution of functions.
@@ -155,9 +155,14 @@ package x.task {
 			
 			m_XTaskSubManager = createXTaskSubManager ();
 			
-			m_stack = new Array (8); // <Float>
-			m_loop = new Array (8); // <Float>
+			m_stack = new Array (); // <Float>
+			m_loop = new Array (); // <Float>
 			m_labels = new XDict (); // <String, Int>
+			
+			for (var i:int = 0; i < 8; i++) {
+				m_stack.push (0);
+				m_loop.push (0);
+			}
 			
 			m_isDead = true;
 		}

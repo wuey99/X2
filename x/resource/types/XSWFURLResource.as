@@ -27,6 +27,9 @@
 //------------------------------------------------------------------------------------------
 package x.resource.types {
 
+	import x.resource.manager.XSubResourceManager;
+	import x.xml.*;
+	
 	import flash.display.Loader;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -38,8 +41,6 @@ package x.resource.types {
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.system.LoaderContext;
-	
-	import x.resource.manager.XSubResourceManager;
 	
 //------------------------------------------------------------------------------------------		
 	public class XSWFURLResource extends XSWFResource {

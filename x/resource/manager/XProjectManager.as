@@ -32,6 +32,7 @@ package x.resource.manager {
 	import x.task.*;
 	import x.xmap.*;
 	import x.XApp;
+	import x.xml.*;
 	
 	import flash.display.*;
 	import flash.events.Event;

@@ -53,7 +53,11 @@ package x.task {
 			
 			m_paused = 0;
 			
-			m_pools = new Array (NUM_POOLS); // <XObjectPoolManager>
+			m_pools = new Array (); // <XObjectPoolManager>
+			
+			for (var i:int=0; i<NUM_POOLS; i++) {
+				m_pools.push (null);
+			}
 			
 			for (var i:int=0; i<NUM_POOLS; i++) {
 				m_pools[i] = new XObjectPoolManager (
@@ -149,7 +153,7 @@ package x.task {
 		
 //------------------------------------------------------------------------------------------
 		public function updateTasks ():void {	
-			if (m_paused) {
+			if (m_paused > 0) {
 				return;
 			}
 			
