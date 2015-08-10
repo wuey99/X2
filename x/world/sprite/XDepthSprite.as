@@ -90,11 +90,20 @@ package x.world.sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function set visible (__visible:Boolean):void {
+		/* @:override get, set visible Void */
+		
+		public override function get visible ():Boolean {
+			return super.visible;
+		}
+		
+		public override function set visible (__visible:Boolean): /* @:set_type */ void {
 			super.visible = __visible;
 			
 			m_sprite.visible = __visible;
+			
+			/* @:set_return null; */			
 		}
+		/* @:end */
 		
 //------------------------------------------------------------------------------------------	
 		public function setDepth (__depth:Number):void {
