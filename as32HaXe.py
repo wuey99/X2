@@ -953,7 +953,7 @@ class Update(object):
 				if line[i] != " " and line[i] != "\t":
 					break;
 		
-			end = line[i:].find(".")
+			end = line[i:].find(".forEach")
 			label = line[i:end+i]	
 	
 			line = line[:i] + "for (__key__ in " + label + ".keys ()) {\n"
@@ -966,7 +966,7 @@ class Update(object):
 		self._loopLevel += line.count("{")
 		self._loopLevel -= line.count("}")
 		
-		if self._loopLevel and line.find("function (") >=0 and self._doWhile:
+		if self._loopLevel and line.find("function (") >= 0 and self._doWhile:
 			line = line.replace ("function (", "if (!function (")
 			
 		if self._loopLevel == 0 and line.count("}") > 0:
