@@ -59,7 +59,7 @@ package x.type {
 		// <HAXE>
 		/* --
 		public static function createError (__message:String):String {
-			return __string;
+			return __message;
 		}
 		-- */
 		// </HAXE>

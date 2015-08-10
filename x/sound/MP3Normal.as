@@ -34,7 +34,7 @@ package x.sound {
 	
 	import flash.events.*;
 	import flash.media.*;
-	import flash.utils.*;;
+	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class MP3Normal extends MP3Sound  {
@@ -42,7 +42,7 @@ package x.sound {
 		public var m_function:Function;
 		public var m_loops:int;
 		public var m_soundTransform:SoundTransform;
-		public var m_position:int;
+		public var m_position:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function MP3Normal () {

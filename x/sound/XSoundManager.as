@@ -40,7 +40,7 @@ package x.sound {
 //------------------------------------------------------------------------------------------	
 	public class XSoundManager extends Object {
 		public var m_XApp:XApp;
-		public var m_soundChannels:XDict; // <Float, Array<Dynamic>>
+		public var m_soundChannels:XDict; // <Int, Array<Dynamic>>
 		private static var g_GUID:int = 0;
 		private var m_soundClassPoolManager:XClassPoolManager;
 		private var m_SFXVolume:Number;
@@ -49,7 +49,7 @@ package x.sound {
 		public function XSoundManager (__XApp:XApp) {
 			m_XApp = __XApp;
 
-			m_soundChannels = new XDict (); // <Float, Array<Dynamic>>
+			m_soundChannels = new XDict (); // <Int, Array<Dynamic>>
 			m_soundClassPoolManager = new XClassPoolManager ();
 			m_SFXVolume = 1;
 		}
@@ -105,7 +105,7 @@ package x.sound {
 
 //------------------------------------------------------------------------------------------
 		public function playSoundFromClass (
-			__class:Class,
+			__class:Class /* <Dynamic> */,
 			__priority:Number,
 			__loops:int = 0,
 			__transform:SoundTransform = null,
@@ -136,7 +136,7 @@ package x.sound {
 			__completeListener:Function = null
 			):int {
 			
-			var __class:Class = m_XApp.getClass (__className);
+			var __class:Class /* <Dynamic> */  = m_XApp.getClass (__className);
 			var __sound:Sound = m_soundClassPoolManager.borrowObject (__class) as Sound;
 			
 			return __playSound (

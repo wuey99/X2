@@ -34,7 +34,7 @@ package x.resource {
 	public class XResourceName extends Object {
 		private var m_className:String;
 		private var m_resourceName:String;
-		private var m_manifestName:String
+		private var m_manifestName:String;
 				
 //------------------------------------------------------------------------------------------
 // fullName examples:

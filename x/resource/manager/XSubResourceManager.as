@@ -62,7 +62,7 @@ package x.resource.manager {
 		private var m_manifestName:String;
 		private var m_loadComplete:Boolean;
 		private var m_loaderContextFactory:Function;
-		private var m_cachedClassName:XDict; // <String, XML>
+		private var m_cachedClassName:XDict; // <String, XSimpleXMLNode>
 		
 		public static var CLASS_TYPE:String = "classX";
 		public static var RESOURCE_TYPE:String = "resource";
@@ -74,7 +74,7 @@ package x.resource.manager {
 			
 			m_resourceMap = new XDict (); // <String, XResource>
 			m_classMap = new XDict (); // <String, XClass>
-			m_cachedClassName = new XDict (); // <String, XML>
+			m_cachedClassName = new XDict (); // <String, XSimpleXMLNode>
 			
 			m_loaderContextFactory = null;
 			

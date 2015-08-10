@@ -34,11 +34,11 @@ package x.sound {
 	
 	import flash.events.*;
 	import flash.media.*;
-	import flash.utils.*;;
+	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class MP3Pitch extends MP3Sound  {
-		private const BLOCK_SIZE: int = 3072;
+		private const BLOCK_SIZE:int = 3072;
 		
 		private var _loop: Boolean;
 		
@@ -124,7 +124,7 @@ package x.sound {
 		 * Handles a sound complete event.
 		 * @private
 		 */
-		private function soundCompleteHandler( event: Event ): void
+		private function soundCompleteHandler( event: Event ):void
 		{
 			exitSoundCompleteListeners();
 			_length = m_mp3.length * 44.1;
@@ -138,7 +138,7 @@ package x.sound {
 		 * Handles a sampleData event.
 		 * @private
 		 */
-		private function sampleDataHandler( event: SampleDataEvent ): void
+		private function sampleDataHandler( event: SampleDataEvent ):void
 		{
 			//-- REUSE INSTEAD OF RECREATION
 			_target.position = 0;
@@ -147,16 +147,16 @@ package x.sound {
 			var data: ByteArray = event.data;
 			
 			var scaledBlockSize:Number = BLOCK_SIZE * _rate;
-			var positionInt: int = _position;
+			var positionInt:int = _position;
 			var alpha:Number = _position - positionInt;
 			
 			var positionTargetNum:Number = alpha;
 			
 			//-- COMPUTE NUMBER OF SAMPLES NEED TO PROCESS BLOCK (+2 FOR INTERPOLATION)
-			var need: int = Math.ceil( scaledBlockSize ) + 2;
+			var need:int = Math.ceil( scaledBlockSize ) + 2;
 			
 			//-- EXTRACT SAMPLES
-			var read: int = m_mp3.extract( _target, need, positionInt );
+			var read:int = m_mp3.extract( _target, need, positionInt );
 			
 			var n:uint;
 			
@@ -192,8 +192,8 @@ package x.sound {
 			}
 		}
 		
-		private function writeData(data, alpha, n:uint, positionTargetNum:Number): void {
-			var positionTargetInt: int = -1;
+		private function writeData(data, alpha, n:uint, positionTargetNum:Number):void {
+			var positionTargetInt:int = -1;
 			
 			var l0:Number;
 			var r0:Number;

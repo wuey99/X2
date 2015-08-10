@@ -29,7 +29,7 @@ package x.task {
 	
 //------------------------------------------------------------------------------------------
 	public class XNumber extends Object {
-		private var m_number:Number
+		private var m_number:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function XNumber (__value:Number) {

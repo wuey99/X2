@@ -257,6 +257,24 @@ package x.task {
 		// execute the XTask, usually called by the XTaskManager.
 		//------------------------------------------------------------------------------------------
 		public function run ():void {
+			function __retn ():Boolean {
+				if (m_stackPtr < 0) {
+					if (m_parent && m_parent != m_manager) {
+						m_parent.removeTask (self);
+					}
+					else
+					{
+						m_manager.removeTask (self);
+					}
+					
+					return true;
+				}		
+				else
+				{
+					return false;
+				}
+			}
+			
 			// done execution?
 			if (m_isDead) {
 				return;
@@ -278,24 +296,6 @@ package x.task {
 			
 			while (__cont && !m_isDead) {
 				__cont = __evalInstructions ();
-			}
-			
-			function __retn ():Boolean {
-				if (m_stackPtr < 0) {
-					if (m_parent && m_parent != m_manager) {
-						m_parent.removeTask (self);
-					}
-					else
-					{
-						m_manager.removeTask (self);
-					}
-					
-					return true;
-				}		
-				else
-				{
-					return false;
-				}
 			}
 		}
 		
