@@ -55,7 +55,7 @@ package x.pool {
 		public function returnAllObjects ():void {
 			m_inuseObjects.forEach (
 				function (__object:*):void {
-					returnObject (__object as Object);
+					returnObject (/* @:cast */ __object as Object);
 				}
 			);
 		}		
