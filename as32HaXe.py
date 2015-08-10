@@ -385,7 +385,10 @@ class Update(object):
 		
 		if self.isNewOrExtends(line, "Number"):
 			line = line.replace(" Number", " Float")
-			
+		
+		line = line.replace ("is Number", "is Float")	
+		line = line.replace ("as Number", "as Float")
+		
 		return line
 		
 	#-----------------------------------------------------------------------------
@@ -1038,7 +1041,7 @@ class Update(object):
 		if self.isComment(line):
 			return line
 			
-		line = line.replace("e:Error.", "e:Dynamic")
+		line = line.replace("e:Error)", "e:Dynamic)")
 		
 		return line
 		
