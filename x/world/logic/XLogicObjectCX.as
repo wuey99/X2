@@ -255,7 +255,7 @@ package x.world.logic {
 		
 		[Inline]
 		public function get oDX ():Number {
-			return m_vel.x
+			return m_vel.x;
 		}
 
 		[Inline]
@@ -271,7 +271,7 @@ package x.world.logic {
 		
 		[Inline]
 		public function get oDY ():Number {
-			return m_vel.y
+			return m_vel.y;
 		}
 		
 		[Inline]
@@ -295,7 +295,7 @@ package x.world.logic {
 		/* @:get, set oldX Float */
 		
 		public function get oldX ():Number {
-			return m_oldPos.x
+			return m_oldPos.x;
 		}
 
 		public function set oldX (__value:Number): /* @:set_type */ void {
@@ -306,10 +306,10 @@ package x.world.logic {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set oY Float */
+		/* @:get, set oldY Float */
 		
 		public function get oldY ():Number {
-			return m_oldPos.y
+			return m_oldPos.y;
 		}
 
 		public function set oldY (__value:Number): /* @:set_type */ void {
@@ -327,7 +327,7 @@ package x.world.logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set CX_Collide_FLag Int */
+		/* @:get, set CX_Collide_Flag Int */
 		
 		public function get CX_Collide_Flag ():int {
 			return m_CX_Collide_Flag;
@@ -362,6 +362,8 @@ package x.world.logic {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		/* @:get, set allowRTCollisions Boolean */
+		
 		public function get allowRTCollisions ():Boolean {
 			return true;
 		}

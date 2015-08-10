@@ -95,7 +95,7 @@ package x.world.sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function getTexture ():RenderTexture {
-			return texture as RenderTexture;
+			return /* @:cast */ texture as RenderTexture;
 		}
 
 		//------------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ package x.world.sprite {
 		/* @:end */
 		
 		//------------------------------------------------------------------------------------------
-		/* @:get, set mouseX Float */
+		/* @:get, set mouseY Float */
 		
 		public function get mouseY ():Number {
 			return 0;

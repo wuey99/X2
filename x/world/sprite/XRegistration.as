@@ -51,31 +51,31 @@ package x.world.sprite {
 		function get_x2():Number;
 		
 		//------------------------------------------------------------------------------------------
-		function set_x2(value:Number):void;
+		function set_x2(value:Number):Number;
 		
 		//------------------------------------------------------------------------------------------
 		function get_y2():Number;
 		
 		//------------------------------------------------------------------------------------------
-		function set_y2(value:Number):void;
+		function set_y2(value:Number):Number;
 		
 		//------------------------------------------------------------------------------------------
 		function get_scaleX2():Number;
 		
 		//------------------------------------------------------------------------------------------
-		function set_scaleX2(value:Number):void;
+		function set_scaleX2(value:Number):Number;
 		
 		//------------------------------------------------------------------------------------------
 		function get_scaleY2():Number;
 		
 		//------------------------------------------------------------------------------------------
-		function set_scaleY2(value:Number):void;
+		function set_scaleY2(value:Number):Number;
 		
 		//------------------------------------------------------------------------------------------
 		function get_rotation2():Number;
 		
 		//------------------------------------------------------------------------------------------
-		function set_rotation2(value:Number):void;
+		function set_rotation2(value:Number):Number;
 		
 		//------------------------------------------------------------------------------------------
 		function get_mouseX2():Number;

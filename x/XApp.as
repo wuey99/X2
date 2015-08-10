@@ -514,82 +514,82 @@ package x {
 			var i:int;
 			var x:*;
 
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("active XSignals xxx");
+			trace ("------------------------------");
+			trace ("active XSignals xxx");
 			
 			i = 0;
 			
 			getXSignalManager ().getXSignals ().forEach (
 				function (x:XSignal):void {
-//					m_XApp.print (": signal: " + i + ": " + x + ", parent: " + x.getParent ());
+//					trace (": signal: " , i, ": ", x,  ", parent: ", x.getParent ());
 				}
 			);
 			
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("active XSignals XApp");
+			trace ("------------------------------");
+			trace ("active XSignals XApp");
 			
 			i = 0;
 			
 			m_XApp.getXSignalManager ().getXSignals ().forEach (
 				function (x:XSignal):void {
-//					m_XApp.print (": signal: " + i + ": " + x + ", parent: " + x.getParent ());
+//					trace (": signal: ", i, ": ", x,  ", parent: ", x.getParent ());
 				}
 			);
 									
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("active XLogicObjects");
+			trace ("------------------------------");
+			trace ("active XLogicObjects");
 
 			i = 0;
 				
 			xxx.getXLogicManager ().getXLogicObjects ().forEach (
 				function (x:*):void {
-					m_XApp.print (": XLogicObject: " + i + ": " + x);
+					trace (": XLogicObject: ", i,  ": ",  x);
 						
 					i++;
 				}
 			);
 							
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("active tasks xxx: ");
+			trace ("------------------------------");
+			trace ("active tasks xxx: ");
 				
 			i = 0;
 				
 			xxx.getXTaskManager ().getTasks ().forEach (
 				function (x:XSignal):void {
-//					m_XApp.print (": task: " + i + ": " + x + ", parent: " + x.getParent ());
+//					trace (": task: ",  i,  ": ",  x,  ", parent: ",  x.getParent ());
 					
 					i++;
 				}	
 			);
 
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("active tasks XApp: ");
+			trace ("------------------------------");
+			trace ("active tasks XApp: ");
 												
 			m_XApp.getXTaskManager ().getTasks ().forEach (
 				function (x:XSignal):void {
-//					m_XApp.print (": task: " + i + ": " + x + ", parent: " + x.getParent ());
+//					trace (": task: ",  i, ": ",  x,  ", parent: ", x.getParent ());
 				}
 			);
 			
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("XSignalPoolManager XApp: ");
+			trace ("------------------------------");
+			trace ("XSignalPoolManager XApp: ");
 			
-			m_XApp.print (": XSignalPoolManager: " + m_XSignalPoolManager.numberOfBorrowedObjects ());
+			trace (": XSignalPoolManager: ", m_XSignalPoolManager.numberOfBorrowedObjects ());
 			
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("XRectPoolManager XApp: ");
+			trace ("------------------------------");
+			trace ("XRectPoolManager XApp: ");
 			
-			m_XApp.print (": XRectPoolManager: " + m_XRectPoolManager.numberOfBorrowedObjects ());
+			trace (": XRectPoolManager: ", m_XRectPoolManager.numberOfBorrowedObjects ());
 
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("XPointPoolManager XApp: ");
+			trace ("------------------------------");
+			trace ("XPointPoolManager XApp: ");
 			
-			m_XApp.print (": XPointPoolManager: " + m_XPointPoolManager.numberOfBorrowedObjects ());		
+			trace (": XPointPoolManager: ", m_XPointPoolManager.numberOfBorrowedObjects ());		
 
-			m_XApp.print ("------------------------------");
-			m_XApp.print ("XDepthSpritePoolManager XApp: ");
+			trace ("------------------------------");
+			trace ("XDepthSpritePoolManager XApp: ");
 			
-			m_XApp.print (": XDepthSpritePoolManager: " + m_XDepthSpritePoolManager.numberOfBorrowedObjects ());
+			trace (": XDepthSpritePoolManager: ", m_XDepthSpritePoolManager.numberOfBorrowedObjects ());
 		}
 			
 //------------------------------------------------------------------------------------------
