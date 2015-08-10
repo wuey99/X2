@@ -101,7 +101,10 @@ package x.xmap {
 			m_items = new XDict ();  // <XMapItemModel, Int>
 			m_ids = new XDict ();  // <Int, XMapItemModel>
 			m_layer = __layer;
-			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (__submapRows);
+			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> ();
+			for (var i:int = 0; i < __submapRows; i++) {
+				m_XSubmaps.push (null);
+			}
 			m_visible = true;
 			m_name = "layer" + __layer;
 			m_grid = false;
@@ -109,8 +112,11 @@ package x.xmap {
 			m_retrievedItems = new Array (); // <XMapItemModel>
 	
 			for (__row=0; __row<__submapRows; __row++) {
-				m_XSubmaps[__row] = new Vector.<XSubmapModel> (__submapCols);
-
+				m_XSubmaps[__row] = new Vector.<XSubmapModel> ();
+				for (var i:int = 0; i < __submapCols; i++) {
+					m_XSubmaps[__row].push (null);
+				}
+				
 				for (__col=0; __col<__submapCols; __col++) {
 					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col, __row, m_submapWidth, m_submapHeight);
 				}
@@ -693,7 +699,10 @@ package x.xmap {
 			var cols:int = c2-c1+1;
 			var rows:int = r2-r1+1;
 
-			tiles = new Array (cols * rows); // <Int>
+			tiles = new Array (); // <Int>
+			for (var i:int = 0; i< cols * rows; i++) {
+				tiles.push (null);
+			}
 			
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = row/row32;

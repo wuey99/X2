@@ -401,7 +401,7 @@ package x.world {
 			*/
 // </AS3>
 			
-			m_FPSCounterObject = getXLogicManager2 ().initXLogicObject (
+			m_FPSCounterObject = /* @:cast */ getXLogicManager2 ().initXLogicObject (
 				// parent
 				null,
 				// logicObject
