@@ -252,7 +252,7 @@ package x {
 			
 //------------------------------------------------------------------------------------------
 		public function updateTimer (e:Event):void {
-			if (m_inuse_TIMER_FRAME) {
+			if (m_inuse_TIMER_FRAME > 0) {
 				trace (": overflow: TIMER_FRAME: ");
 				
 				return;
@@ -399,27 +399,10 @@ package x {
 
 //------------------------------------------------------------------------------------------
 		public function cacheAllClasses (__project:XML):Boolean {			
+
 			var ready:Boolean = true;
-	
+			
 			trace (": cacheAllClasses: ");
-			
-			m_allClassNames = new XDict (); // <String, Int>
-			
-			__cacheAllClasses (true, __project.child ("*"));
-			
-			var i:int;
-			
-			i = 0;
-			
-			m_allClassNames.forEach (
-				function (x:*):void {
-					var __fullName:String = x as String;
-					
-					trace (": fullName: ", i++, __fullName);
-				}
-			);
-			
-			return (ready);
 			
 			//------------------------------------------------------------------------------------------
 			function __cacheAllClasses (__cacheAll:Boolean, __xmlList:XMLList):void {
@@ -467,6 +450,25 @@ package x {
 					}
 				}
 			}
+			
+			//------------------------------------------------------------------------------------------			
+			m_allClassNames = new XDict (); // <String, Int>
+			
+			__cacheAllClasses (true, __project.child ("*"));
+			
+			var i:int;
+			
+			i = 0;
+			
+			m_allClassNames.forEach (
+				function (x:*):void {
+					var __fullName:String = x as String;
+					
+					trace (": fullName: ", i++, __fullName);
+				}
+			);
+			
+			return (ready);
 			
 		//------------------------------------------------------------------------------------------
 		}

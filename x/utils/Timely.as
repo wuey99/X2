@@ -150,5 +150,15 @@ package x.utils {
 			// was not used.
 			return targetMS - this.beginTime - portionNotUsed;
 		}
+		
+		// <HAXE>
+		/* --
+			public function getTimer():Int {
+				return 0;
+			}	
+		-- */
+		// </HAXE>
+		// <AS3>
+		// </AS3>
 	}
 }

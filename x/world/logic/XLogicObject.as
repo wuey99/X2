@@ -88,7 +88,7 @@ package x.world.logic {
 		public var m_XLogicObjects:XDict; // <XLogicObject, Int>
 		public var m_worldSprites:XDict; // <XDepthSprite, Int>
 		public var m_hudSprites:XDict; // <XDepthSprite, Int>
-		public var m_childSprites:XDict; // <XDepthSprite, Int>
+		public var m_childSprites:XDict; // <Sprite, Sprite>
 		public var m_detachedSprites:XDict;  // <XDepthSprite, Int>
 		public var m_bitmaps:XDict; // <String, XBitmap>
 		public var m_movieClips:XDict; // <String, XMovieClip>
@@ -162,7 +162,7 @@ package x.world.logic {
 				m_XLogicObjects = new XDict (); // <XLogicObject, Int>
 				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
 				m_hudSprites = new XDict (); // <XDepthSprite, Int>
-				m_childSprites = new XDict (); // <XDepthSprite, Int>
+				m_childSprites = new XDict (); // <Sprite, Sprite>
 				m_detachedSprites = new XDict (); // <XDepthSprite, Int>
 				m_bitmaps = new XDict (); // <String, XBitmap> 
 				m_movieClips = new XDict (); // <String, XMovieClip>
@@ -192,7 +192,7 @@ package x.world.logic {
 				m_XLogicObjects = new XDict (); // <XLogicObject, Int>
 				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
 				m_hudSprites = new XDict (); // <XDepthSprite, Int>
-				m_childSprites = new XDict (); // <XDepthSprite, Int>
+				m_childSprites = new XDict (); // <Sprite, Sprite>
 				m_detachedSprites = new XDict (); // <XDepthSprite, Int>
 				m_bitmaps = new XDict (); // <String, XBitmap> 
 				m_movieClips = new XDict (); // <String, XMovieClip>
@@ -1891,7 +1891,7 @@ package x.world.logic {
 		public function set iRelativeDepth (__value:Boolean): /* @:set_type */ void {
 			m_iRelativeDepth = __value;
 			
-			/* @:set_return Bool; */	
+			/* @:set_return true; */	
 		}
 		/* @:end */
 		

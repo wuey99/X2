@@ -110,30 +110,6 @@ package x.world.tiles {
 				
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
-			m_bitmap.bitmapData.lock ();
-
-			var __width:Number = m_submapModel.width;
-			var __height:Number = m_submapModel.height;
-						
-			tempRect.x = 0;
-			tempRect.y = 0;
-			tempRect.width = m_submapModel.width;
-			tempRect.height = m_submapModel.height;
-			
-			m_bitmap.bitmapData.fillRect (
-//				new XRect (0, 0, m_submapModel.width, m_submapModel.height), 0x00000000
-				tempRect, 0x00000000
-			);
-		
-			__vline (0);
-			__vline (__width-1);
-			__hline (0);
-			__hline (__height-1);
-		
-			__tiles ();
-		
-			m_bitmap.bitmapData.unlock ();
-				
 			function __tiles ():void {
 				var __col:int;
 				var __row:int;
@@ -176,6 +152,30 @@ package x.world.tiles {
 					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
 				}
 			}
+			
+			m_bitmap.bitmapData.lock ();
+			
+			var __width:Number = m_submapModel.width;
+			var __height:Number = m_submapModel.height;
+			
+			tempRect.x = 0;
+			tempRect.y = 0;
+			tempRect.width = m_submapModel.width;
+			tempRect.height = m_submapModel.height;
+			
+			m_bitmap.bitmapData.fillRect (
+				//				new XRect (0, 0, m_submapModel.width, m_submapModel.height), 0x00000000
+				tempRect, 0x00000000
+			);
+			
+			__vline (0);
+			__vline (__width-1);
+			__hline (0);
+			__hline (__height-1);
+			
+			__tiles ();
+			
+			m_bitmap.bitmapData.unlock ();
 		}
 		
 //------------------------------------------------------------------------------------------

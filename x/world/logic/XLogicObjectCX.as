@@ -1497,7 +1497,7 @@ package x.world.logic {
 				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
 				
 				c = x1 >> 9;
-				r = y2 >> 9
+				r = y2 >> 9;
 				i = ( ((y2 & m_submapHeightMask) >> 4) * m_cols) + ((x1 & m_submapWidthMask) >> 4);
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {

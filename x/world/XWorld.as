@@ -35,6 +35,14 @@ package x.world {
 	import Box2D.Dynamics.*;
 	*/
 	
+	import flash.events.Event;
+	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
+	import flash.geom.Point;
+	import flash.system.*;
+	import flash.utils.Timer;
+	
 	import x.*;
 	import x.bitmap.*;
 	import x.datasource.XDatasource;
@@ -58,27 +66,19 @@ package x.world {
 	import x.world.sprite.*;
 	import x.world.tiles.*;
 	import x.world.ui.*;
-	import x.xml.*;
 	import x.xmap.*;
+	import x.xml.*;
 	
-	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.geom.Point;
-	import flash.system.*;
-	import flash.utils.Timer;
-	
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.events.EnterFrameEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-// </AS3>
+	// </AS3>
 	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
@@ -194,13 +194,19 @@ package x.world {
 				mouseChildren = true;
 			}
 			
-			if (CONFIG::starling) {
-				addEventListener (EnterFrameEvent.ENTER_FRAME, onFPSCounterStarling);
-			}
-			else
-			{
+			if (CONFIG::flash) {
 				addEventListener (Event.ENTER_FRAME, onFPSCounter);
 			}
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
+			else
+			{
+				addEventListener (EnterFrameEvent.ENTER_FRAME, onFPSCounterStarling);
+			}
+			// </AS3>
 			
 			if (__timerInterval > 0) {
 				// Add event for main loop
@@ -210,7 +216,19 @@ package x.world {
 			}
 			else
 			{
-				addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrame);
+				if (CONFIG::flash) {
+					addEventListener (Event.ENTER_FRAME, onEnterFrame);		
+				}
+				// <HAXE>
+				/* --
+				-- */
+				// </HAXE>
+				// <AS3>
+				else
+				{
+					addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrame);
+				}
+				// </AS3>
 			}
 			
 			m_inuse_ENTER_FRAME = 0;
@@ -270,16 +288,12 @@ package x.world {
 			
 			m_XMapModel = null;
 						
-			m_XWorldLayers = new Array (MAX_LAYERS); // <XSpriteLayer>
-				
-			var i:int = MAX_LAYERS-1;
-//			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
-			while (i >= 0) {
-				__createLayer (i);
-				
-				i--;
-			}
+			m_XWorldLayers = new Array (); // <XSpriteLayer>
 		
+			for (var i:int = 0; i<MAX_LAYERS; i++) {
+				m_XWorldLayers.push (null);
+			}
+			
 			function __createLayer (i:int):void {
 				m_XWorldLayers[i] = new XSpriteLayer ();
 				m_XWorldLayers[i].setup ();
@@ -289,6 +303,14 @@ package x.world {
 				m_XWorldLayers[i].mouseChildren = true;
 			}
 			
+			var i:int = MAX_LAYERS-1;
+//			for (var i:Number = MAX_LAYERS-1; i>=0; i--) {
+			while (i >= 0) {
+				__createLayer (i);
+				
+				i--;
+			}
+		
 			m_XHudLayer = new XSpriteLayer ();
 			m_XHudLayer.setup ();
 			m_XHudLayer.xxx = this;
@@ -303,9 +325,15 @@ package x.world {
 					
 			m_mouseX = m_mouseY = 0;
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				addEventListener (TouchEvent.TOUCH, onTouchEvent);
 			}
+			// </AS3>
 			
 //			setupDebug ();
 		}
@@ -327,9 +355,15 @@ package x.world {
 			m_XSignalManager.removeAllXSignals ();
 			m_XBulletCollisionManager.cleanup ();
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				removeEventListener (TouchEvent.TOUCH, onTouchEvent);
 			}
+			// </AS3>
 			
 			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
@@ -455,7 +489,7 @@ package x.world {
 		
 //------------------------------------------------------------------------------------------
 		protected function __onEnterFrame ():void {
-			if (m_inuse_ENTER_FRAME) {
+			if (m_inuse_ENTER_FRAME > 0) {
 				trace (": overflow: ENTER_FRAME: ");
 				
 				return;
@@ -555,7 +589,7 @@ package x.world {
 		
 //------------------------------------------------------------------------------------------
 		public function onRenderFrame(e:Event):void {
-			if (m_inuse_RENDER_FRAME) {
+			if (m_inuse_RENDER_FRAME > 0) {
 				trace (": overflow: RENDER_FRAME: ");
 				
 				return;
@@ -1203,13 +1237,15 @@ package x.world {
 			}
 			
 			approx = ( max * 1007 ) + ( min * 441 );
-			if ( max < ( min << 4 ))
+//			if ( max < ( min << 4 ))
+			if ( max < ( min * 16 ))
 				approx -= ( max * 40 );
 			
 			// add 512 for proper rounding
-			return (( approx + 512 ) >> 10 );			
+//			return (( approx + 512 ) >> 10 );
+			return (( approx + 512 ) / 1024 );	
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function realDistance (dx:Number, dy:Number):Number {
 			return Math.sqrt (dx*dx + dy*dy);		
