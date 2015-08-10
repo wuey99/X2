@@ -30,6 +30,7 @@ package x.resource.types {
 	import x.type.*;
 	import x.resource.*;
 	import x.resource.manager.*;
+	import x.type.*;
 	import x.xml.*;
 	
 	import flash.display.*;
@@ -96,7 +97,7 @@ package x.resource.types {
 					m_loader.loadBytes (XType.createInstance (m_resourceManager.findEmbeddedResource (m_resourcePath)), __loaderContext);
  				}
  				catch (error:Error) {
-					throw (Error ("Load resource error: " + error));
+					throw (XType.createError ("Load resource error: " + error));
  				}
 			}
 			

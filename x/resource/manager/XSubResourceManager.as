@@ -30,6 +30,7 @@ package x.resource.manager {
 	import x.collections.*;
 	import x.resource.*;
 	import x.resource.types.*;
+	import x.type.*;
 	import x.xml.*;
 	
 	import flash.display.*;
@@ -161,7 +162,7 @@ package x.resource.manager {
 					setManifest (__xml);
 				}
 				catch (e:Error) {
-					throw (new Error ("Not a valid XML file"));
+					throw (XType.createError ("Not a valid XML file"));
 				}
 				
 				m_loadComplete = true;
@@ -597,7 +598,7 @@ package x.resource.manager {
 		//------------------------------------------------------------------------------------------
 		private function __lookUpResourcePathByClassName (__fullName:String):Array /* <Dynamic> */ {
 			if (m_manifestXML == null) {
-				throw (Error ("manifest hasn't been loaded yet"));
+				throw (XType.createError ("manifest hasn't been loaded yet"));
 			}
 			
 			var r:XResourceName = new XResourceName (__fullName);
@@ -607,7 +608,7 @@ package x.resource.manager {
 			var __className:String = r.className;
 			
 			if (__manifestName != "") {
-				throw (Error ("classname: " + __fullName + " is not valid"));
+				throw (XType.createError ("classname: " + __fullName + " is not valid"));
 			}
 			
 			var match:XML =
@@ -619,7 +620,7 @@ package x.resource.manager {
 				);
 			
 			if (match == null) {
-				throw (Error ("className not found in manifest: " + __fullName));
+				throw (XType.createError ("className not found in manifest: " + __fullName));
 			}
 			
 			return [match, match.attribute ("path") + "\\" + match.attribute ("dst")];

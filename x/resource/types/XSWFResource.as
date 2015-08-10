@@ -29,6 +29,7 @@ package x.resource.types {
 
 	import x.resource.*;
 	import x.resource.manager.*;
+	import x.type.*;
 	import x.xml.*;
 	
 	import flash.display.*;
@@ -77,7 +78,7 @@ package x.resource.types {
 			}
 			catch (e:Error) {
 // how should we handle this error?
-				throw (Error ("unable to resolve: " + __className + " in " + __resourceName + ", error: " + e));
+				throw (XType.createError ("unable to resolve: " + __className + " in " + __resourceName + ", error: " + e));
 			}	
 			
 			return c;

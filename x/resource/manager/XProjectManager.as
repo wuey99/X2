@@ -30,6 +30,7 @@ package x.resource.manager {
 	import x.collections.*;
 	import x.resource.*;
 	import x.task.*;
+	import x.type.*;
 	import x.xmap.*;
 	import x.XApp;
 	import x.xml.*;
@@ -151,7 +152,7 @@ package x.resource.manager {
 					__importManifests ();
      	   		}
      	   		catch (e:Error) {
-     	   			throw (new Error ("Not a valid XML file"));
+     	   			throw (XType.createError ("Not a valid XML file"));
      	   		}
      	   		
 				m_loadComplete = true;
@@ -412,7 +413,7 @@ package x.resource.manager {
 				return c;
 			}
 			
-			throw (Error ("className not found in any manifest: " + __className));
+			throw (XType.createError ("className not found in any manifest: " + __className));
 		}	
 
 //------------------------------------------------------------------------------------------
@@ -448,7 +449,7 @@ package x.resource.manager {
 				return results;
 			}
 			
-			throw (Error ("className not found in any manifest: " + __className));
+			throw (XType.createError ("className not found in any manifest: " + __className));
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -28,6 +28,7 @@
 package x.resource.types {
 
 	import x.resource.manager.XSubResourceManager;
+	import x.type.*;
 	import x.xml.*;
 	
 	import flash.display.Loader;
@@ -186,7 +187,7 @@ package x.resource.types {
 				__urlLoader.load(__urlReq);
 			}
 			catch (error:Error) {
-				throw (Error ("Load resource error: " + error));
+				throw (XType.createError ("Load resource error: " + error));
 			}			
 			
 			m_parent.addChild (m_loader);
@@ -194,7 +195,7 @@ package x.resource.types {
 		
 	//------------------------------------------------------------------------------------------
 			function __onIOError(event:Event):void {
-				throw (Error ("I/O Error reading: " + event + ", " + m_resourcePath));
+				throw (XType.createError ("I/O Error reading: " + event + ", " + m_resourcePath));
 			}
 			
 	//------------------------------------------------------------------------------------------
@@ -219,7 +220,7 @@ package x.resource.types {
 					m_loader.loadBytes(__urlLoader.data, __loaderContext);
  				}
  				catch (error:Error) {
-					throw (Error ("Load resource error: " + error));
+					throw (XType.createError ("Load resource error: " + error));
  				}
 			}
 			

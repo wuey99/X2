@@ -27,6 +27,7 @@
 //------------------------------------------------------------------------------------------
 package x.resource {
 	
+	import x.type.*;
 	import x.xml.*;
 	
 //------------------------------------------------------------------------------------------	
@@ -53,7 +54,7 @@ package x.resource {
 				m_className = ""
 			
 				if (m_resourceName.charAt (0) != "$") {
-					throw (Error ("className not valid: " + __fullName));					
+					throw (XType.createError ("className not valid: " + __fullName));					
 				}
 			}
 			else if (s.length == 2) {
@@ -68,7 +69,7 @@ package x.resource {
 			}
 			else
 			{
-				throw (Error ("className not valid: " + __fullName));				
+				throw (XType.createError ("className not valid: " + __fullName));				
 			}
 		}
 		

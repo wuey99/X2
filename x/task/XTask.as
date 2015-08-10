@@ -33,6 +33,7 @@ package x.task {
 	import x.*;
 	import x.collections.*;
 	import x.pool.*;
+	import x.type.*;
 	
 	//------------------------------------------------------------------------------------------
 	// XTask provides a mechanism to control the execution of functions.
@@ -327,7 +328,7 @@ package x.task {
 							}
 							else
 							{
-								throw (Error ("duplicate label: " + __label));
+								throw (XType.createError ("duplicate label: " + __label));
 							}
 							
 							break;	
@@ -542,7 +543,7 @@ package x.task {
 					var __gotoLabel:String = m_taskList[m_taskIndex] as String;
 					
 					if (!(m_labels.exists (__gotoLabel))) {
-						throw (Error ("goto: unable to find label: " + __gotoLabel));
+						throw (XType.createError ("goto: unable to find label: " + __gotoLabel));
 					}
 					
 					m_taskIndex = m_labels.get(__gotoLabel);
@@ -557,7 +558,7 @@ package x.task {
 					m_stack[m_stackPtr++] = m_taskIndex;
 					
 					if (!(m_labels.exists(__callLabel))) {
-						throw (Error ("call: unable to find label: " + __callLabel));
+						throw (XType.createError ("call: unable to find label: " + __callLabel));
 					}
 					
 					m_taskIndex = m_labels.get(__callLabel);
@@ -590,7 +591,7 @@ package x.task {
 					var __beqLabel:String = m_taskList[m_taskIndex++] as String;
 					
 					if (!(m_labels.exists (__beqLabel))) {
-						throw (Error ("goto: unable to find label: " + __beqLabel));
+						throw (XType.createError ("goto: unable to find label: " + __beqLabel));
 					}
 					
 					if (m_flags & _FLAGS_EQ) {
@@ -605,7 +606,7 @@ package x.task {
 					var __bneLabel:String = m_taskList[m_taskIndex++] as String;
 					
 					if (!(m_labels.exists (__bneLabel))) {
-						throw (Error ("goto: unable to find label: " + __bneLabel));
+						throw (XType.createError ("goto: unable to find label: " + __bneLabel));
 					}
 					
 					if (!(m_flags & _FLAGS_EQ)) {
