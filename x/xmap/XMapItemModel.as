@@ -46,8 +46,11 @@ package x.xmap {
 		private var m_imageClassIndex:int;
 		private var m_frame:int;
 		private var m_XMapItem:String;
-		private var m_x:Number, m_y:Number;
-		private var m_rotation:Number, m_scale:Number, m_depth:Number;
+		private var m_x:Number;
+		private var m_y:Number;
+		private var m_rotation:Number;
+		private var m_scale:Number;
+		private var m_depth:Number;
 		private var m_collisionRect:XRect;
 		private var m_boundingRect:XRect;
 		private var m_params:String;

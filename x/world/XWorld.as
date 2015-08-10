@@ -78,7 +78,7 @@ package x.world {
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-</AS3>
+// </AS3>
 	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {

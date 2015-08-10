@@ -284,7 +284,7 @@ package x.task {
 						m_manager.removeTask (self);
 					}
 					
-					return true;;
+					return true;
 				}		
 				else
 				{
@@ -516,7 +516,8 @@ package x.task {
 				//------------------------------------------------------------------------------------------
 				case _UNTIL:
 				//------------------------------------------------------------------------------------------
-					var __funcUntil:Function = m_taskList[m_taskIndex++] as Function;
+					var __funcUntil:Function =
+						/* @:cast */ m_taskList[m_taskIndex++] as Function;
 					
 					__funcUntil (self);
 					
@@ -588,7 +589,7 @@ package x.task {
 					}
 					
 					if (m_flags & _FLAGS_EQ) {
-						m_taskIndex = m_labels.get(__beqLabel)
+						m_taskIndex = m_labels.get(__beqLabel);
 					}
 					
 					break;
@@ -611,7 +612,8 @@ package x.task {
 				//------------------------------------------------------------------------------------------
 				case _FLAGS:
 				//------------------------------------------------------------------------------------------
-					var __funcFlags:Function = m_taskList[m_taskIndex++] as Function;
+					var __funcFlags:Function = 
+						/* @:cast */ m_taskList[m_taskIndex++] as Function;
 					
 					__funcFlags (self);
 					
@@ -620,7 +622,8 @@ package x.task {
 				//------------------------------------------------------------------------------------------
 				case _FUNC:
 				//------------------------------------------------------------------------------------------
-					var __funcTask:Function = m_taskList[m_taskIndex++] as Function;
+					var __funcTask:Function =
+						/* @:cast */ m_taskList[m_taskIndex++] as Function;
 					
 					__funcTask (self);
 					
@@ -703,7 +706,7 @@ package x.task {
 			var x:* = m_taskList[m_taskIndex++];
 			
 			if (x is Number) {
-				return x as Number;
+				return /* @:cast */ x as Number;
 			}
 			
 			if (x is XNumber) {

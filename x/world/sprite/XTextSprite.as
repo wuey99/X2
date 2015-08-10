@@ -33,7 +33,13 @@ package x.world.sprite {
 	import flash.filters.*;
 	import flash.text.TextFormat;
 	
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 	import starling.utils.*;
+// </AS3>
 	
 //------------------------------------------------------------------------------------------
 	public class XTextSprite extends XSprite {
@@ -107,6 +113,11 @@ package x.world.sprite {
 		}
 
 //------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		if (CONFIG::starling) {
 			/* @:get, set filters Array */
 				
@@ -119,8 +130,15 @@ package x.world.sprite {
 			}
 			/* @:end */
 		}
+// </AS3>
 		
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		if (CONFIG::flash) {
+// </AS3>
 			/* @:override get, set filters Array<Dynamic> */
 			
 			public override function get filters ():Array /* <Dynamic> */ {
@@ -133,7 +151,13 @@ package x.world.sprite {
 				/* @:set_return null; */			
 			}
 			/* @:end */
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		}
+// </AS3>
 		
 //------------------------------------------------------------------------------------------
 		/* @:get, set color Int */
@@ -216,7 +240,7 @@ package x.world.sprite {
 		/* @:end */
 
 //------------------------------------------------------------------------------------------
-		/* @:get, set aligh String */
+		/* @:get, set align String */
 		
 		public function get align ():String {
 			return "";
@@ -457,9 +481,9 @@ package x.world.sprite {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set wordwrap Bool */
+		/* @:get, set wordWrap Bool */
 		
-		public function get wordwrap ():Boolean {
+		public function get wordWrap ():Boolean {
 			return true;
 		}
 		

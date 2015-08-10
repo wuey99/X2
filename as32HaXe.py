@@ -871,7 +871,7 @@ class Update(object):
 		line = line.replace ("protected var", "private var")
 		line = line.replace ("protected static var", "private static var")
 		line = line.replace ("protected function", "private function")
-	
+		line = line.replace ("protected override function", "private override function")	
 		return line
 	
 	#-----------------------------------------------------------------------------

@@ -89,7 +89,7 @@ package x.world.ui {
 			
 			__gotoState (getNormalState ());
 			
-			m_currState = getNormalState ()
+			m_currState = getNormalState ();
 		
 			createHighlightTask ();	
 		}

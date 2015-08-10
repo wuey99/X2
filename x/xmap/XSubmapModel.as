@@ -435,7 +435,11 @@ package x.xmap {
 			}
 			else
 			{
-				items ().forEach (__callback);		
+				items ().forEach (
+					function (x:*):void {
+						__callback (x);
+					}
+				);		
 			}
 		}
 		
