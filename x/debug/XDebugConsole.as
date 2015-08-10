@@ -43,7 +43,7 @@ package x.debug  {
 		private var m_textFormat:TextFormat;
 		private var m_textArea:XTextSprite;
 		private var m_disableOutput:int;
-		private var m_fontClass:Class;
+		private var m_fontClass:Class; // <Dynamic>
 		
 //------------------------------------------------------------------------------------------
 		public function XDebugConsole () {

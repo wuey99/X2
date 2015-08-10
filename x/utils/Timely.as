@@ -1,6 +1,6 @@
 package x.utils {
 	
-	import flash.utils.getTimer;
+	import flash.utils.*;
 	
 	/**
 	 * A timer that gives sub-millisecond estimates that are more accurate than the

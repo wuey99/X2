@@ -90,7 +90,7 @@ package x.world.sprite {
 		}
 		
 //------------------------------------------------------------------------------------------
-		/* @:override get, set visible Void */
+		/* @:override get, set visible Bool */
 		
 		public override function get visible ():Boolean {
 			return super.visible;
@@ -142,7 +142,7 @@ package x.world.sprite {
 		}
 
 //------------------------------------------------------------------------------------------
-		/* @:get, set relativeDepthFlag Boolean */
+		/* @:get, set relativeDepthFlag Bool */
 		
 		public function get relativeDepthFlag ():Boolean {
 			return m_relativeDepthFlag;

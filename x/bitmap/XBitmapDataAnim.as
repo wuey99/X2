@@ -114,7 +114,7 @@ package x.bitmap {
 							__rect = __movieClip.getBounds (__movieClip);
 							var __matrix:Matrix = new Matrix ();
 							__matrix.scale (__scaleX, __scaleY);
-							__matrix.translate (-__rect.x*__scaleX, -__rect.y*__scaleY)
+							__matrix.translate (-__rect.x*__scaleX, -__rect.y*__scaleY);
 							m_bitmaps[__index].draw (__movieClip, __matrix);
 						}
 						__index += 1;

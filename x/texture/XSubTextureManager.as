@@ -46,7 +46,7 @@ package x.texture {
 	public class XSubTextureManager extends Object {
 		protected var m_XApp:XApp;
 		
-		protected var m_movieClips:XDict; // <String, Array>
+		protected var m_movieClips:XDict; // <String, Array<Dynamic>>
 		 
 		protected var m_atlases:Array; // <TextureAtlas>
 		protected var m_currentAtlas:TextureAtlas;

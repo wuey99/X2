@@ -64,11 +64,11 @@ package x.xmap {
 		
 		private var m_visible:Boolean;
 		private var m_name:String;
-		private var m_grid:Boolean
+		private var m_grid:Boolean;
 		
 		private var m_itemInuse:XDict; // <Int, Int>
 		
-		private var m_persistentStorage:XDict; // <Int, Object>
+		private var m_persistentStorage:XDict; // <Int, Dynamic>
 		
 		private var __CX:CX_CONSTANTS;
 
@@ -116,7 +116,7 @@ package x.xmap {
 				}
 			}
 			
-			m_persistentStorage = new XDict ();  // <Int, Object>
+			m_persistentStorage = new XDict ();  // <Int, Dynamic>
 			
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict ();  // <String, Int>
@@ -214,7 +214,7 @@ package x.xmap {
 		/* @:end */
 
 //------------------------------------------------------------------------------------------
-		public function getPersistentStorage ():XDict /* <Int, Object> */ {
+		public function getPersistentStorage ():XDict /* <Int, Dynamic> */ {
 			return m_persistentStorage;
 		}
 		
@@ -591,7 +591,7 @@ package x.xmap {
 							
 			var i:int;
 			var src_items:XDict;  // <XMapItemModel, Int>
-			var dst_items:Array /* <XSubmapModel> */ = new Array () /* <XSubmapMOdel> */ ;
+			var dst_items:Array /* <XSubmapModel> */ = new Array () /* <XSubmapModel> */ ;
 			var x:*;
 			var item:XMapItemModel;
 
@@ -637,7 +637,7 @@ package x.xmap {
 			
 			var i:int;
 			var src_items:Vector.<XMapItemModel>;
-			var dst_items:Array /* <XMapItemModel */ = new Array () /* <XMapItemModel */;
+			var dst_items:Array /* <XMapItemModel> */ = new Array () /* <XMapItemModel> */;
 			var item:XMapItemModel;
 
 			var __length:int;
@@ -895,7 +895,7 @@ package x.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function serialize (__xml:XSimpleXMLNode):XSimpleXMLNode {
-			var __attribs:Array /* <Dynamic */ = [
+			var __attribs:Array /* <Dynamic> */ = [
 				"vx",			viewPort.x,
 				"vy",			viewPort.y,
 				"vw",			viewPort.width,
@@ -985,7 +985,7 @@ package x.xmap {
 					
 			__imageClassNames.forEach (
 				function (__imageClassName:*):void {
-					var __attribs:Array /* <Dynamic */ = [
+					var __attribs:Array /* <Dynamic> */ = [
 						"name",	/* @:safe_cast */ __imageClassName as String,					
 					];
 					
@@ -1050,7 +1050,7 @@ package x.xmap {
 				m_grid = false;
 			}	
 			
-			m_persistentStorage = new XDict ();  // <Int, Object>
+			m_persistentStorage = new XDict ();  // <Int, Dynamic>
 			
 			m_classNames = new XReferenceNameToIndex ();
 			m_imageClassNames = new XDict (); // <String, Int>

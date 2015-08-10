@@ -33,13 +33,14 @@ package x.texture {
 	import x.type.*;
 	import x.world.sprite.*;
 	import x.XApp;
+	import x.texture.MaxRectPacker;
 	
 	import flash.display.BitmapData;
 	import flash.geom.*;
 	
 	import starling.display.*;
 	import starling.textures.*;
-	import x.texture.MaxRectPacker;
+
 	
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases

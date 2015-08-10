@@ -30,6 +30,7 @@ package x.resource.manager {
 	import x.collections.*;
 	import x.resource.*;
 	import x.resource.types.*;
+	import x.xml.*;
 	
 	import flash.display.*;
 	import flash.events.Event;

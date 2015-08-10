@@ -34,7 +34,7 @@ package x.sound {
 	
 	import flash.events.*;
 	import flash.media.*;
-	import flash.utils.*;;
+	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class MP3Sound extends EventDispatcher  {

@@ -201,7 +201,7 @@ package x.xmap {
 			__layer:int,
 			__x1:Number, __y1:Number,
 			__x2:Number, __y2:Number
-			):Array /* <XSubmapItemModel> */ {
+			):Array /* <XMapItemModel> */ {
 				
 			return m_layers[__layer].getItemsAt (__x1, __y1, __x2, __y2);
 		}

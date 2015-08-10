@@ -387,10 +387,16 @@ package x.world {
 		}
 
 //------------------------------------------------------------------------------------------
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 		public function onFPSCounterStarling (e:EnterFrameEvent):void {
 			m_frameCount++;
 		}
-
+// </AS3>
+	
 //------------------------------------------------------------------------------------------
 		public function onEnterFrame (e:Event):void {
 			__onEnterFrame ();
@@ -818,7 +824,7 @@ package x.world {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set mouseY Float */
+		/* @:override get, set mouseY Float */
 		
 		public override function get mouseY ():Number {
 			if (CONFIG::starling) {

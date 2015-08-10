@@ -67,7 +67,7 @@ package x.task {
 		
 //------------------------------------------------------------------------------------------
 		public function addTask (
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
@@ -94,7 +94,7 @@ package x.task {
 //------------------------------------------------------------------------------------------
 		public function changeTask (
 			__oldTask:XTask,
-			__taskList:Array,
+			__taskList:Array /* <Dynamic> */,
 			__findLabelsFlag:Boolean = true
 			):XTask {
 				
