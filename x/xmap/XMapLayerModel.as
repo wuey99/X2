@@ -34,10 +34,9 @@ package x.xmap {
 	import x.utils.*;
 	import x.world.collision.*;
 	import x.xml.*;
+	import x.xmap.*;
 	
 	import flash.events.*;
-	import x.xmap.XMapModel;
-	import x.xmap.XSubmapModel;
 			
 //------------------------------------------------------------------------------------------	
 	public class XMapLayerModel extends XModelBase {
@@ -307,11 +306,11 @@ package x.xmap {
 			r.offset (__item.x, __item.y);
 			
 // determine submaps that the item straddles
-			__c1 = r.left/m_submapWidth;
-			__r1 = r.top/m_submapHeight;
+			__c1 = int (r.left/m_submapWidth);
+			__r1 = int (r.top/m_submapHeight);
 			
-			__c2 = r.right/m_submapWidth;
-			__r2 = r.bottom/m_submapHeight;
+			__c2 = int (r.right/m_submapWidth);
+			__r2 = int (r.bottom/m_submapHeight);
 
 			trace (": -----------------------: ");
 			trace (": XXMapLayerModel: addItem: ", __id);
@@ -361,11 +360,11 @@ package x.xmap {
 			r.offset (__item.x, __item.y);
 			
 			// determine submaps that the item straddles
-			__c1 = r.left/m_submapWidth;
-			__r1 = r.top/m_submapHeight;
+			__c1 = int (r.left/m_submapWidth);
+			__r1 = int (r.top/m_submapHeight);
 			
-			__c2 = r.right/m_submapWidth;
-			__r2 = r.bottom/m_submapHeight;
+			__c2 = int (r.right/m_submapWidth);
+			__r2 = int (r.bottom/m_submapHeight);
 			
 			trace (": -----------------------: ");
 			trace (": XXMapLayerModel: replaceItems: ", __id);
@@ -424,11 +423,11 @@ package x.xmap {
 			r.offset (__item.x, __item.y);
 			
 // determine submaps that the item straddles
-			__c1 = r.left/m_submapWidth;
-			__r1 = r.top/m_submapHeight;
+			__c1 = int (r.left/m_submapWidth);
+			__r1 = int (r.top/m_submapHeight);
 			
-			__c2 = r.right/m_submapWidth;
-			__r2 = r.bottom/m_submapHeight;
+			__c2 = int (r.right/m_submapWidth);
+			__r2 = int (r.bottom/m_submapHeight);
 
 			__c1 = Math.max (__c1, 0);
 			__c2 = Math.max (__c2, 0);
@@ -460,11 +459,11 @@ package x.xmap {
 			var __c1:int, __r1:int, __c2:int, __r2:int;
 	
 // determine submaps that the rect straddles
-			__c1 = __x1/m_submapWidth;
-			__r1 = __y1/m_submapHeight;
+			__c1 = int (__x1/m_submapWidth);
+			__r1 = int (__y1/m_submapHeight);
 			
-			__c2 = __x2/m_submapWidth;
-			__r2 = __y2/m_submapHeight;
+			__c2 = int (__x2/m_submapWidth);
+			__r2 = int (__y2/m_submapHeight);
 
 			var __row:int, __col:int;
 						
@@ -680,20 +679,20 @@ package x.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function getCXTiles (
-			c1:Number, r1:Number,
-			c2:Number, r2:Number
+			c1:int, r1:int,
+			c2:int, r2:int
 		):Array /* <Int> */ {
 			
 // tile array to return
 			var tiles:Array; // <Int>
 
 // col, row divisor
-			var row32:int = m_submapHeight/__CX.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/__CX.CX_TILE_WIDTH;
+			var row32:int = int (m_submapHeight/__CX.CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/__CX.CX_TILE_WIDTH);
 
 // col, row mask for the submap
-			var rowMask:int = row32-1;
-			var colMask:int = col32-1;
+			var rowMask:int = int (row32-1);
+			var colMask:int = int (col32-1);
 			
 // total columns wide, rows high
 			var cols:int = c2-c1+1;
@@ -705,12 +704,12 @@ package x.xmap {
 			}
 			
 			for (var row:int=r1; row <= r2; row++) {
-				var submapRow:int = row/row32;
+				var submapRow:int = int (row/row32);
 				
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
-					var submapCol:int = col/col32;
+					var submapCol:int = int (col/col32);
 				
 					tiles[dstRow * cols + dstCol] =
 						m_XSubmaps[submapRow][submapCol].getCXTile (col & colMask, row & rowMask);
@@ -723,28 +722,28 @@ package x.xmap {
 //------------------------------------------------------------------------------------------
 		public function setCXTiles (
 			tiles:Array /* <Int> */,
-			c1:Number, r1:Number,
-			c2:Number, r2:Number
+			c1:int, r1:int,
+			c2:int, r2:int
 		):void {
 // col, row divisor
-			var row32:int = m_submapHeight/__CX.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/__CX.CX_TILE_WIDTH;
+			var row32:int = int (m_submapHeight/__CX.CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/__CX.CX_TILE_WIDTH);
 
 // col, row mask for the submap
-			var rowMask:int = row32-1;
-			var colMask:int = col32-1;
+			var rowMask:int = int (row32-1);
+			var colMask:int = int (col32-1);
 			
 // total columns wide, rows high
 			var cols:int = c2-c1+1;
 			var rows:int = r2-r1+1;
 	
 			for (var row:int=r1; row <= r2; row++) {
-				var submapRow:int = row/row32;
+				var submapRow:int = int (row/row32);
 				
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
-					var submapCol:int = col/col32;
+					var submapCol:int = int (col/col32);
 								
 					m_XSubmaps[submapRow][submapCol].setCXTile (
 						tiles[dstRow * cols + dstCol],
@@ -757,28 +756,28 @@ package x.xmap {
 //------------------------------------------------------------------------------------------
 		public function eraseWithCXTiles (
 			tiles:Array /* <Int> */,
-			c1:Number, r1:Number,
-			c2:Number, r2:Number
+			c1:int, r1:int,
+			c2:int, r2:int
 		):void {
 // col, row divisor
-			var row32:int = m_submapHeight/__CX.CX_TILE_HEIGHT;
-			var col32:int = m_submapWidth/__CX.CX_TILE_WIDTH;
+			var row32:int = int (m_submapHeight/__CX.CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/__CX.CX_TILE_WIDTH);
 
 // col, row mask for the submap
-			var rowMask:int = row32-1;
-			var colMask:int = col32-1;
+			var rowMask:int = int (row32-1);
+			var colMask:int = int (col32-1);
 					
 // total columns wide, rows high
 			var cols:int = c2-c1+1;
 			var rows:int = r2-r1+1;
 	
 			for (var row:int=r1; row <= r2; row++) {
-				var submapRow:int = row/row32;
+				var submapRow:int = int (row/row32);
 				
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
-					var submapCol:int = col/col32;
+					var submapCol:int = int (col/col32);
 								
 					m_XSubmaps[submapRow][submapCol].setCXTile (
 						__CX.CX_EMPTY,
@@ -820,7 +819,7 @@ package x.xmap {
 		}	
 		
 //------------------------------------------------------------------------------------------
-		public function ___getIdItem___ (__id:Number):XMapItemModel {
+		public function ___getIdItem___ (__id:int):XMapItemModel {
 			return m_ids.get (__id);
 		}
 
@@ -1091,27 +1090,27 @@ package x.xmap {
 //------------------------------------------------------------------------------------------
 			trace (": creating XSubmaps: ");
 			
-			var __row:Number;
-			var __col:Number;
+			var __row:int;
+			var __col:int;
 			
 			if (__readonly) {
 				var __empty:XSubmapModel = new XSubmapModel (this, 0, 0, m_submapWidth, m_submapHeight);
 
-				for (__row=0; __row<m_submapRows; __row++) {
-					m_XSubmaps[__row] = new Vector.<XSubmapModel> (m_submapCols);
+				for (__row=0; __row < m_submapRows; __row++) {
+					m_XSubmaps[__row] = new Vector.<XSubmapModel> ();
 					
 					for (__col=0; __col<m_submapCols; __col++) {
-						m_XSubmaps[__row][__col] = __empty;
+						m_XSubmaps[__row].push (__empty);
 					}
 				}
 			}
 			else
 			{
-				for (__row=0; __row<m_submapRows; __row++) {
-					m_XSubmaps[__row] = new Vector.<XSubmapModel> (m_submapCols);
+				for (__row=0; __row < m_submapRows; __row++) {
+					m_XSubmaps[__row] = new Vector.<XSubmapModel> ();
 	
 					for (__col=0; __col<m_submapCols; __col++) {
-						m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
+						m_XSubmaps[__row].push (new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight));
 					}
 				}
 			}
