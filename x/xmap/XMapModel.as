@@ -35,8 +35,6 @@ package x.xmap {
 	import x.xml.*;
 	
 	import flash.events.*;
-	
-	import starling.errors.AbstractClassError;
 				
 //------------------------------------------------------------------------------------------
 // XMapModel:
@@ -85,7 +83,7 @@ package x.xmap {
 			var i:int;
 			
 			for (i=0; i<m_numLayers; i++) {
-				m_layers[i] = __layers[i]
+				m_layers[i] = __layers[i];
 				m_layers[i].setParent (this);
 			}
 		}				
@@ -164,7 +162,7 @@ package x.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getLayers ():Array /* <XMapLayerModel */ {
+		public function getLayers ():Array /* <XMapLayerModel> */ {
 			return m_layers;
 		}	
 				
@@ -179,7 +177,7 @@ package x.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function replaceItems (__layer:int, __item:XMapItemModel):Array /* <XMapItemModel */ {
+		public function replaceItems (__layer:int, __item:XMapItemModel):Array /* <XMapItemModel> */ {
 			return m_layers[__layer].replaceItems (__item);
 		}
 		

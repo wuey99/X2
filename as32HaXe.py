@@ -350,6 +350,9 @@ class Update(object):
 			
 		if line.find("= int(") >= 0:
 			line = line.replace("= int(", "= Std.int (")
+			
+		if line.find("<int>") >= 0:
+			line = line.replace("<int>", "<Int>")
 					
 		return line
 		
@@ -971,7 +974,7 @@ class Update(object):
 				
 			return line
 			
-		if self._loopLevel == 0 and line.endswith(");\n"):
+		if self._loopLevel == 0 and line.find(");"):
 			line = line.replace(");", "}")
 			
 			self._forEach = False

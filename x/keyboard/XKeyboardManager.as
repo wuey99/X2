@@ -28,7 +28,7 @@
 package x.keyboard {
 	
 	import x.world.*;
-	import x.geom.*
+	import x.geom.*;
 	import x.task.*;
 	import x.collections.*;
 	
