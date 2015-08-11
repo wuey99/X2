@@ -132,25 +132,9 @@ package x.resource.manager {
 			__rootPath:String,
 			__manifestName:String,
 			__callback:Function):Boolean {
-			
-			if (!m_loadComplete) {
-				return false;
-			}
-			
-			if (__manifestName != null) {
-				m_loadComplete = false;
 				
-				m_rootPath = __rootPath;
-				
-				var __loader:URLLoader = __loadManifestFromURL (m_rootPath + __manifestName);
-				__loader.addEventListener (Event.COMPLETE, __completeHandler);
-			}
-			
-			if (__callback != null) {
-				__loader.addEventListener (Event.COMPLETE, __callback);
-			}
-			
-			return true;
+			//-----------------------------------------------------------------------------------------
+			var __loader:URLLoader;
 			
 			//------------------------------------------------------------------------------------------					
 			function __completeHandler(event:Event):void {
@@ -177,6 +161,26 @@ package x.resource.manager {
 				
 				return __loader;
 			}
+
+			//------------------------------------------------------------------------------------------
+			if (!m_loadComplete) {
+				return false;
+			}
+			
+			if (__manifestName != null) {
+				m_loadComplete = false;
+				
+				m_rootPath = __rootPath;
+				
+				__loader = __loadManifestFromURL (m_rootPath + __manifestName);
+				__loader.addEventListener (Event.COMPLETE, __completeHandler);
+			}
+			
+			if (__callback != null) {
+				__loader.addEventListener (Event.COMPLETE, __callback);
+			}
+			
+			return true;
 		}
 		
 		//------------------------------------------------------------------------------------------

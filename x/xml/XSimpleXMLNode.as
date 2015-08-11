@@ -371,6 +371,10 @@ package x.xml {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function appendChild (__src:XSimpleXMLNode):void {
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function child (__tag:String):Array /* <XSimpleXMLNode> */ {
 			if (__tag == "*") {
 				return m_children;

@@ -85,7 +85,7 @@ package x.resource.manager {
 				m_subResourceManagers[i].kill ();
 			}
 			
-			while (m_subResourceManagers.length) {
+			while (m_subResourceManagers.length > 0) {
 				m_subResourceManagers.pop ();
 			}
 		}
@@ -121,26 +121,7 @@ package x.resource.manager {
 			__rootPath:String,
 			__projectName:String,
 			__callback:Function):Boolean {
-				
-			if (!m_loadComplete) {
-				return false;
-			}
-			
-			reset ();
-			
-			if (__projectName != null) {
-				m_loadComplete = false;
-			
-				m_rootPath = __rootPath;
-			
-				var __loader:URLLoader = __loadProjectFromURL (m_rootPath + __projectName);
-				__loader.addEventListener (Event.COMPLETE, __completeHandler);
-			}
-			
-			m_callback = __callback;
-				
-			return true;
-						
+										
 //------------------------------------------------------------------------------------------					
      	   function __completeHandler(event:Event):void {
 				try {
@@ -167,6 +148,26 @@ package x.resource.manager {
 				
 				return __loader;
 			}
+		
+//------------------------------------------------------------------------------------------
+			if (!m_loadComplete) {
+				return false;
+			}
+			
+			reset ();
+			
+			if (__projectName != null) {
+				m_loadComplete = false;
+				
+				m_rootPath = __rootPath;
+				
+				var __loader:URLLoader = __loadProjectFromURL (m_rootPath + __projectName);
+				__loader.addEventListener (Event.COMPLETE, __completeHandler);
+			}
+			
+			m_callback = __callback;
+			
+			return true;
 		}
 
 //------------------------------------------------------------------------------------------	
@@ -247,7 +248,7 @@ package x.resource.manager {
 				
 				var __manifestList:XMLList = __xmlList[i].child ("*");
 				var __manifest:XML = null;
-				if (__manifestList.length ()) {
+				if (__manifestList.length () > 0) {
 					__manifest = __manifestList[0];	
 				}
 	
@@ -367,7 +368,7 @@ package x.resource.manager {
 
 //------------------------------------------------------------------------------------------
 		public function getResourceManagerByName (__name:String):XSubResourceManager {
-			for (var i:int = 0; i < m_subResourceManagers[i].length; i++) {
+			for (var i:int = 0; i < m_subResourceManagers.length; i++) {
 				if (m_subResourceManagers[i].getName () == __name) {
 					return /* @:cast */ m_subResourceManagers[i] as XSubResourceManager;
 				}
