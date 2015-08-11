@@ -92,7 +92,7 @@ package x.xmap {
 				return;
 			}
 			
-			if (m_delay) {
+			if (m_delay > 0) {
 				m_delay--;
 				
 				return;
@@ -121,7 +121,7 @@ package x.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function updateXSubmapModel (__submap:XSubmapModel):void {
-			if (!__submap.inuse) {
+			if (__submap.inuse == 0) {
 				addXSubmap (
 					// submap
 					__submap,
@@ -141,6 +141,11 @@ package x.xmap {
 		public function addXSubmap (__submap:XSubmapModel, __depth:Number):void {
 //			trace (": addXSubmap: ", __submap.x, __submap.y);
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				var __logicObject:XSubmapViewImageCache =
 					xxx.getXLogicManager ().initXLogicObjectFromPool (
@@ -155,11 +160,14 @@ package x.xmap {
 						// scale, rotation
 						1.0, 0,
 						// XMapView
-						m_XMapView
+						[
+							m_XMapView
+						]
 					) as XSubmapViewImageCache;
 			}
 			else
 			{
+			// </AS3>
 				var __logicObject:XSubmapViewBitmapCache =
 					xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
@@ -177,7 +185,13 @@ package x.xmap {
 							m_XMapView
 						]
 					) as XSubmapViewBitmapCache;
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>				
 			}
+			// </AS3>
 			
 			__submap.inuse++;
 			

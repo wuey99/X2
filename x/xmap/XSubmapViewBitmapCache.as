@@ -76,6 +76,8 @@ package x.xmap {
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewBitmapCache () {
+			super ();
+			
 			m_submapModel = null;
 		}
 
@@ -157,7 +159,7 @@ package x.xmap {
 //			__hline (0);
 //			__hline (m_submapModel.height-1);
 			
-			var __items:XDict /* <XMapItemModel, Float> */ = m_submapModel.items ();
+			var __items:XDict /* <XMapItemModel, Int> */ = m_submapModel.items ();
 			var __item:XMapItemModel;
 			var __bitmap:XBitmap;
 //			var __p:XPoint = new XPoint ();
@@ -196,7 +198,7 @@ package x.xmap {
 			m_bitmap.bitmapData.unlock ();
 			
 			function __vline (x:Number):void {
-				var y:Number;
+				var y:int;
 				
 				for (y=0; y<m_submapModel.height; y++) {
 					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
@@ -204,7 +206,7 @@ package x.xmap {
 			}
 			
 			function __hline (y:Number):void {
-				var x:Number;
+				var x:int;
 				
 				for (x=0; x<m_submapModel.width; x++) {
 					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
