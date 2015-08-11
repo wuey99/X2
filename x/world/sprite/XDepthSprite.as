@@ -50,7 +50,13 @@ package x.world.sprite {
 
 //------------------------------------------------------------------------------------------
 		public function clear ():void {
-			while (numChildren) {
+			while (numChildren > 0) {
+				// <HAXE>
+				/* --
+					removeChildAt (0);
+				-- */
+				// </HAXE>
+				// <AS3>
 				if (CONFIG::starling) {
 					removeChildAt (0, true);
 				}
@@ -58,6 +64,7 @@ package x.world.sprite {
 				{
 					removeChildAt (0);
 				}
+				// </AS3>
 			}
 		}
 			

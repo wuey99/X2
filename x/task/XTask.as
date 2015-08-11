@@ -87,8 +87,8 @@ package x.task {
 		private var m_taskIndex:int;
 		private var m_labels:XDict; // <String, Int>
 		private var m_ticks:Number;
-		private var m_stack:Array; // <Float>
-		private var m_loop:Array; // <Float>
+		private var m_stack:Array; // <Int>
+		private var m_loop:Array; // <Int>
 		private var m_stackPtr:int;
 		private var m_parent:*;
 		private var m_flags:int;
@@ -156,8 +156,8 @@ package x.task {
 			
 			m_XTaskSubManager = createXTaskSubManager ();
 			
-			m_stack = new Array (); // <Float>
-			m_loop = new Array (); // <Float>
+			m_stack = new Array (); // <Int>
+			m_loop = new Array (); // <Int>
 			m_labels = new XDict (); // <String, Int>
 			
 			for (var i:int = 0; i < 8; i++) {
@@ -509,7 +509,7 @@ package x.task {
 					
 					m_loop[m_stackPtr-1]--;
 					
-					if (m_loop[m_stackPtr-1]) {	
+					if (m_loop[m_stackPtr-1] > 0) {	
 						m_taskIndex = m_stack[m_stackPtr-1];
 					}
 					else
@@ -527,7 +527,7 @@ package x.task {
 					
 					__funcUntil (self);
 					
-					if (!(m_flags & _FLAGS_EQ)) {	
+					if ((m_flags & _FLAGS_EQ) == 0) {	
 						m_taskIndex = m_stack[m_stackPtr-1];
 					}
 					else
@@ -594,7 +594,7 @@ package x.task {
 						throw (XType.createError ("goto: unable to find label: " + __beqLabel));
 					}
 					
-					if (m_flags & _FLAGS_EQ) {
+					if ((m_flags & _FLAGS_EQ) != 0) {
 						m_taskIndex = m_labels.get(__beqLabel);
 					}
 					
@@ -609,7 +609,7 @@ package x.task {
 						throw (XType.createError ("goto: unable to find label: " + __bneLabel));
 					}
 					
-					if (!(m_flags & _FLAGS_EQ)) {
+					if ((m_flags & _FLAGS_EQ) == 0) {
 						m_taskIndex = m_labels.get (__bneLabel);
 					}
 					
