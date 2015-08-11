@@ -33,6 +33,7 @@ package x.xmap {
 	import x.mvc.*;
 	import x.utils.*;
 	import x.world.collision.*;
+	import x.type.*;
 	import x.xml.*;
 	import x.xmap.*;
 	
@@ -318,15 +319,15 @@ package x.xmap {
 			trace (": ", r.left, r.top, r.right, r.bottom);
 			trace (": ", __c1, __r1, __c2, __r2);
 			
-			__c1 = Math.max (__c1, 0);
-			__c2 = Math.max (__c2, 0);
-			__r1 = Math.max (__r1, 0);
-			__r2 = Math.max (__r2, 0);
+			__c1 = XType.max (__c1, 0);
+			__c2 = XType.max (__c2, 0);
+			__r1 = XType.max (__r1, 0);
+			__r2 = XType.max (__r2, 0);
 			
-			__c1 = Math.min (__c1, m_submapCols-1);
-			__c2 = Math.min (__c2, m_submapCols-1);
-			__r1 = Math.min (__r1, m_submapRows-1);
-			__r2 = Math.min (__r2, m_submapRows-1);
+			__c1 = XType.min (__c1, m_submapCols-1);
+			__c2 = XType.min (__c2, m_submapCols-1);
+			__r1 = XType.min (__r1, m_submapRows-1);
+			__r2 = XType.min (__r2, m_submapRows-1);
 // ul
 			m_XSubmaps[__r1][__c1].addItem (__item);
 // ur
@@ -372,15 +373,30 @@ package x.xmap {
 			trace (": ", r.left, r.top, r.right, r.bottom);
 			trace (": ", __c1, __r1, __c2, __r2);
 			
-			__c1 = Math.max (__c1, 0);
-			__c2 = Math.max (__c2, 0);
-			__r1 = Math.max (__r1, 0);
-			__r2 = Math.max (__r2, 0);
+			__c1 = XType.max (__c1, 0);
+			__c2 = XType.max (__c2, 0);
+			__r1 = XType.max (__r1, 0);
+			__r2 = XType.max (__r2, 0);
 			
-			__c1 = Math.min (__c1, m_submapCols-1);
-			__c2 = Math.min (__c2, m_submapCols-1);
-			__r1 = Math.min (__r1, m_submapRows-1);
-			__r2 = Math.min (__r2, m_submapRows-1);
+			__c1 = XType.min (__c1, m_submapCols-1);
+			__c2 = XType.min (__c2, m_submapCols-1);
+			__r1 = XType.min (__r1, m_submapRows-1);
+			__r2 = XType.min (__r2, m_submapRows-1);
+			
+			function __extend (__items:Array /* <XMapItemModel> */):void {
+				var __item:XMapItemModel;
+				
+				var i:int;
+				
+				//				for each (var __item:XMapItemModel in __items) {
+				for (i=0; i<__items.length; i++) {
+					__item = __items[i] as XMapItemModel;
+					
+					if (__removedItems.indexOf (__item) == -1) {
+						__removedItems.push (__item);
+					}
+				}
+			}
 			
 			// ul
 			__extend (m_XSubmaps[__r1][__c1].replaceItems (__item));
@@ -394,21 +410,6 @@ package x.xmap {
 			trackItem (__item);
 			
 			return __removedItems;
-			
-			function __extend (__items:Array /* <XMapItemModel> */):void {
-				var __item:XMapItemModel;
-				
-				var i:int;
-				
-//				for each (var __item:XMapItemModel in __items) {
-				for (i=0; i<__items.length; i++) {
-					__item = __items[i] as XMapItemModel;
-					
-					if (__removedItems.indexOf (__item) == -1) {
-						__removedItems.push (__item);
-					}
-				}
-			}
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -429,15 +430,15 @@ package x.xmap {
 			__c2 = int (r.right/m_submapWidth);
 			__r2 = int (r.bottom/m_submapHeight);
 
-			__c1 = Math.max (__c1, 0);
-			__c2 = Math.max (__c2, 0);
-			__r1 = Math.max (__r1, 0);
-			__r2 = Math.max (__r2, 0);
+			__c1 = XType.max (__c1, 0);
+			__c2 = XType.max (__c2, 0);
+			__r1 = XType.max (__r1, 0);
+			__r2 = XType.max (__r2, 0);
 			
-			__c1 = Math.min (__c1, m_submapCols-1);
-			__c2 = Math.min (__c2, m_submapCols-1);
-			__r1 = Math.min (__r1, m_submapRows-1);
-			__r2 = Math.min (__r2, m_submapRows-1);
+			__c1 = XType.min (__c1, m_submapCols-1);
+			__c2 = XType.min (__c2, m_submapCols-1);
+			__r1 = XType.min (__r1, m_submapRows-1);
+			__r2 = XType.min (__r2, m_submapRows-1);
 // ul
 			m_XSubmaps[__r1][__c1].removeItem (__item);
 // ur
@@ -470,10 +471,10 @@ package x.xmap {
 //			var __submaps:Array = new Array ();
 			m_retrievedSubmaps.length = 0;
 			
-			__c1 = Math.max (__c1, 0);
-			__c2 = Math.min (__c2, m_submapCols-1);
-			__r1 = Math.max (__r1, 0);
-			__r2 = Math.min (__r2, m_submapRows-1);
+			__c1 = XType.max (__c1, 0);
+			__c2 = XType.min (__c2, m_submapCols-1);
+			__r1 = XType.max (__r1, 0);
+			__r2 = XType.min (__r2, m_submapRows-1);
 									
 			var push:int = 0;
 			
