@@ -28,6 +28,7 @@
 package x.world {
 
 	import x.collections.*;
+	import x.type.*;
 	import x.world.sprite.*;
 	
 	include "..\\flash.h";
@@ -46,7 +47,10 @@ package x.world {
 			
 			m_XDepthSpriteMap = new XDict (); // <XDepthSprite, Int>
 			
-			list = new Vector.<XDepthSprite> (2000);
+			list = new Vector.<XDepthSprite> (/* 2000 */);
+			for (var i:int = 0; i < 2000; i++) {
+				list.push (null);
+			}
 			
 			forceSort = false;
 		}
@@ -95,6 +99,12 @@ package x.world {
 			if (m_XDepthSpriteMap.exists (__depthSprite)) {
 				__depthSprite.cleanup ();
 				
+				// <HAXE>
+				/* --
+					removeChild (__depthSprite);
+				-- */
+				// </HAXE>
+				// <AS3>
 				if (CONFIG::starling) {
 					removeChild (__depthSprite, true);
 				}
@@ -102,6 +112,7 @@ package x.world {
 				{
 					removeChild (__depthSprite);
 				}
+				// </AS3>
 				
 				xxx.getXDepthSpritePoolManager ().returnObject (__depthSprite);
 							
@@ -121,8 +132,15 @@ package x.world {
 //------------------------------------------------------------------------------------------	
 		public function depthSort ():void {
 			var length:int = 0;
-
-			list.length = 0;
+			
+			// <HAXE>
+			/* --
+				XType.clearArray (list);
+			-- */
+			// </HAXE>
+			// <AS3>
+				list.length = 0;
+			// </AS3>
 			
 			m_XDepthSpriteMap.forEach (
 				function (sprite:*):void {
@@ -130,6 +148,16 @@ package x.world {
 				}
 			);
 		
+			// <HAXE>
+			/* --
+				list.sort (
+					function (a:XDepthSprite, b:XDepthSprite):Int {
+						return a.depth2 - b.depth2;
+					}
+				);				
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (length < 20) {
 				list.sort (
 					function (a:XDepthSprite, b:XDepthSprite):int {
@@ -141,7 +169,8 @@ package x.world {
 			{
 				flashSortOn (list, "depth2");
 			}
-
+			// </AS3>
+			
 			var i:int;
 
 			for (i=0; i<length; i++) {
@@ -151,7 +180,12 @@ package x.world {
 		
 //------------------------------------------------------------------------------------------
 // see: http://guihaire.com/code/?p=894
-//------------------------------------------------------------------------------------------		
+//------------------------------------------------------------------------------------------	
+		// <HAXE>
+		/* --
+		-- */
+		// </HAXE>
+		// <AS3>
 		static public function flashSortOn(o:Vector.<XDepthSprite> , key:String , multiplier:Number = 0.43):void
 		{
 			var n:int = o.length;
@@ -275,6 +309,7 @@ package x.world {
 				}
 			}   
 		}
+		// </AS3>
 		
 //------------------------------------------------------------------------------------------
 	}
