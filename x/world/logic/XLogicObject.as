@@ -396,6 +396,11 @@ package x.world.logic {
 			m_boundingRect.copy2 (i);
 			i.offsetPoint (getPos ());
 			
+			function __dealloc ():void {
+				xxx.getXRectPoolManager ().returnObject (r);
+				xxx.getXRectPoolManager ().returnObject (i);
+			}
+			
 			if (r.intersects (i)) {
 				__dealloc ();
 				
@@ -409,11 +414,6 @@ package x.world.logic {
 			trace (": cull: ", this);
 			
 			killLater ();
-			
-			function __dealloc ():void {
-				xxx.getXRectPoolManager ().returnObject (r);
-				xxx.getXRectPoolManager ().returnObject (i);
-			}
 		}
 
 //------------------------------------------------------------------------------------------
@@ -1407,7 +1407,7 @@ package x.world.logic {
 // so that the depth sorting on each child can be controlled explicitly.
 //------------------------------------------------------------------------------------------	
 		public function updateDisplay ():void {
-			if (m_delayed) {
+			if (m_delayed > 0) {
 				m_delayed--;
 				
 				return;
