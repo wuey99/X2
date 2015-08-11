@@ -469,7 +469,8 @@ package x.xmap {
 			var __row:int, __col:int;
 						
 //			var __submaps:Array = new Array ();
-			m_retrievedSubmaps.length = 0;
+//			m_retrievedSubmaps.length = 0;
+			XType.clearArray (m_retrievedSubmaps);
 			
 			__c1 = XType.max (__c1, 0);
 			__c2 = XType.min (__c2, m_submapCols-1);
@@ -502,7 +503,8 @@ package x.xmap {
 			var i:int;
 			var src_items:XDict;  // <XMapItemModel, Int>
 //			var dst_items:Array = new Array ();
-			m_retrievedItems.length = 0;
+//			m_retrievedItems.length = 0;
+			XType.clearArray (m_retrievedItems);
 			var x:*;
 			var item:XMapItemModel;
 			
@@ -547,7 +549,8 @@ package x.xmap {
 			var i:int;
 			var src_items:Vector.<XMapItemModel>;
 //			var dst_items:Array = new Array ();
-			m_retrievedItems.length = 0;
+//			m_retrievedItems.length = 0;
+			XType.clearArray (m_retrievedItems);
 			var item:XMapItemModel;
 			
 			var __length:int;
@@ -597,7 +600,7 @@ package x.xmap {
 							
 			var i:int;
 			var src_items:XDict;  // <XMapItemModel, Int>
-			var dst_items:Array /* <XSubmapModel> */ = new Array () /* <XSubmapModel> */ ;
+			var dst_items:Array /* <XMapItemModel> */ = new Array () /* <XMapItemModel> */ ;
 			var x:*;
 			var item:XMapItemModel;
 
@@ -1070,7 +1073,10 @@ package x.xmap {
 			
 			m_items = new XDict (); // <XMapItemModel, Int>
 			m_ids = new XDict (); // <Int, XMapItemModel>
-			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> (m_submapRows);
+			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> ();
+			for (var i:int = 0; i < m_submapRows; i++) {
+				m_XSubmaps.push (null);
+			}
 			m_retrievedSubmaps = new Array (); // <XSubmapModel>
 			m_retrievedItems = new Array (); // <XMapItemModel>
 			
