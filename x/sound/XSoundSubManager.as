@@ -37,7 +37,7 @@ package x.sound {
 //------------------------------------------------------------------------------------------	
 	public class XSoundSubManager extends Object {
 		public var m_soundManager:XSoundManager;
-		public var m_soundChannels:XDict; // <Float, Float>
+		public var m_soundChannels:XDict; // <Int, Float>
 		public var m_maxChannels:int;
 		public var m_numChannels:int;
 		
@@ -45,7 +45,7 @@ package x.sound {
 		public function XSoundSubManager (__soundManager:XSoundManager) {
 			m_soundManager = __soundManager;
 
-			m_soundChannels = new XDict ();  // <Float, Float>
+			m_soundChannels = new XDict ();  // <Int, Float>
 			
 			m_maxChannels = 8;
 			m_numChannels = 0;
@@ -241,8 +241,8 @@ package x.sound {
 				return true;
 			}
 			
-			var __firstChoice:Number = -1;
-			var __secondChoice:Number = -1;
+			var __firstChoice:int = -1;
+			var __secondChoice:int = -1;
 			
 			m_soundChannels.forEach (
 				function (__targetGuid:int):void {
