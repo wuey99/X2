@@ -90,7 +90,7 @@ package x.bitmap {
 			}
 		 
 			for (i=0; i < __movieClip.totalFrames; i++) {
-				var __bitmap:BitmapData = new BitmapData (__width*__scaleX, __height*__scaleY, true, 0xffffff);
+				var __bitmap:BitmapData = new BitmapData (int (__width*__scaleX), int (__height*__scaleY), true, 0xffffff);
 				m_bitmaps.push (__bitmap);
 			}
 		

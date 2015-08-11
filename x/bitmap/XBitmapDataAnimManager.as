@@ -48,8 +48,8 @@ package x.bitmap {
 			m_XApp = __XApp;
 			
 			m_bitmapAnims = new XDict (); // <String, XBitmapDataAnim>
-			m_count = new XDict (); // <String, Float>
-			m_queue = new XDict (); // <String, Float>
+			m_count = new XDict (); // <String, Int>
+			m_queue = new XDict (); // <String, Int>
 			
 			// checked queued images and cache the ones that have loaded.
 			m_XApp.getXTaskManager ().addTask ([

@@ -51,7 +51,7 @@ package x.sound {
 
 			m_soundChannels = new XDict (); // <Int, Array<Dynamic>>
 			m_soundClassPoolManager = new XClassPoolManager ();
-			m_SFXVolume = 1;
+			m_SFXVolume = 1.0;
 		}
 		
 //------------------------------------------------------------------------------------------
