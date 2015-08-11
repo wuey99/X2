@@ -147,7 +147,7 @@ package x.xmap {
 		public function XSubmapModel (
 			__XMapLayer:XMapLayerModel,
 			__col:int, __row:int,
-			__width:Number, __height:Number
+			__width:int, __height:int
 			) {
 				
 			super ();
@@ -160,16 +160,19 @@ package x.xmap {
 			m_col = __col;
 			m_row = __row;
 		
-			m_cols = m_submapWidth/CX_TILE_WIDTH;
-			m_rows = m_submapHeight/CX_TILE_HEIGHT;
+			m_cols = int (m_submapWidth/CX_TILE_WIDTH);
+			m_rows = int (m_submapHeight/CX_TILE_HEIGHT);
 
 			m_boundingRect = new XRect (0, 0, m_submapWidth, m_submapHeight);
 			
-			m_cmap = new Vector.<int> (m_cols * m_rows);
+			m_cmap = new Vector.<int> ();
+			for (var i:int = 0; i < m_cols * m_rows; i++) {
+				m_cmap.push (0);
+			}
 			
 			m_inuse = 0;
 			
-			for (var i:int = 0; i< m_cmap.length; i++) {
+			for (var i:int = 0; i < m_cmap.length; i++) {
 				m_cmap[i] = CX_EMPTY;
 			}
 
@@ -368,7 +371,7 @@ package x.xmap {
 	
 			trace (": XSubmapModel: replaceitem: ",  m_col, m_row, __item.getID (), m_items.exists (__item));
 			
-			var __removedItems:Array /* <XSimpleXMLNode> */ = new Array (); // <XSimpleXMLNode>
+			var __removedItems:Array /* <XMapItemModel> */ = new Array (); // <XMapItemModel>
 			
 			__item.boundingRect.copy2 (m_src);
 			m_src.offset (__item.x, __item.y);
@@ -509,7 +512,10 @@ package x.xmap {
 			__xmlList = __xml.child ("XMapItem");
 
 			if (useArrayItems) {
-				m_arrayItems = new Vector.<XMapItemModel> (__xmlList.length);
+				m_arrayItems = new Vector.<XMapItemModel> (/* __xmlList.length */);	
+				for (var i:int = 0; i < __xmlList.length; i++) {
+					m_arrayItems.push (null);
+				}
 			}
 			
 			for (i=0; i<__xmlList.length; i++) {
