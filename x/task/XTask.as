@@ -495,7 +495,7 @@ package x.task {
 				//------------------------------------------------------------------------------------------					
 				case _LOOP:
 				//------------------------------------------------------------------------------------------
-					var __loopCount:int = __evalNumber () as int;
+					var __loopCount:int = int (__evalNumber ());
 					
 					m_loop[m_stackPtr] = __loopCount;
 					m_stack[m_stackPtr++] = m_taskIndex;
@@ -709,14 +709,16 @@ package x.task {
 		
 		//------------------------------------------------------------------------------------------
 		private function __evalNumber ():Number {
-			var x:* = m_taskList[m_taskIndex++];
+			var value:* = m_taskList[m_taskIndex++];
 			
-			if (x is Number) {
-				return /* @:cast */ x as Number;
+			if (value is Number) {
+				return /* @:cast */ value as Number;
 			}
 			
-			if (x is XNumber) {
-				return XNumber (x).value;
+			if (value is XNumber) {
+				var __number:XNumber = value as XNumber;
+				
+				return __number.value;
 			}
 			
 			return 0;
