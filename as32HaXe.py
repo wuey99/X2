@@ -351,6 +351,12 @@ class Update(object):
 		if line.find("= int(") >= 0:
 			line = line.replace("= int(", "= Std.int (")
 			
+		if line.find("(int (") >= 0:
+			line = line.replace("(int (", "(Std.int (")
+			
+		if line.find(", int (") >= 0:
+			line = line.replace(", int (", ", Std.int (")
+			
 		if line.find("<int>") >= 0:
 			line = line.replace("<int>", "<Int>")
 					
@@ -600,6 +606,16 @@ class Update(object):
 			
 			return line
 			
+		if line.find("xxx.getXLogicManager ().initXLogicObject") >= 0:
+			line = line.replace("xxx.getXLogicManager ().initXLogicObject", "cast xxx.getXLogicManager ().initXLogicObject")
+			
+			return line
+	
+		if line.find("xxx.XLogicManager ().createXLogicObject") >= 0:
+			line = line.replace("xxx.getXLogicManager ().createXLogicObject", "cast xxx.getXLogicManager ().createXLogicObject")
+			
+			return line
+					
 # look for " as "
 		as_token = line.find(" as ")
 		if as_token < 0:
@@ -954,6 +970,8 @@ class Update(object):
 					break;
 		
 			end = line[i:].find(".forEach")
+			if end < 0:
+				end = line[i:].find(".doWhile")
 			label = line[i:end+i]	
 	
 			line = line[:i] + "for (__key__ in " + label + ".keys ()) {\n"
