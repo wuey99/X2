@@ -43,6 +43,7 @@ package x.resource.types {
 
 //------------------------------------------------------------------------------------------
 		public function XSWFEmbeddedResource () {
+			super ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -72,10 +73,11 @@ package x.resource.types {
 			__onBytesLoaded ();
 			
 			m_parent.addChild (m_loader);
-			m_loader.visible = false;
+			m_loader.visible = false;	
+		}
 		
 	//------------------------------------------------------------------------------------------
-			function __onBytesLoaded():void {
+			private function __onBytesLoaded():void {
  				try {
  					trace (":-----------------");
  					trace (": ", m_resourcePath);
@@ -96,13 +98,13 @@ package x.resource.types {
 					
 					m_loader.loadBytes (XType.createInstance (m_resourceManager.findEmbeddedResource (m_resourcePath)), __loaderContext);
  				}
- 				catch (error:Error) {
-					throw (XType.createError ("Load resource error: " + error));
+ 				catch (e:Error) {
+					throw (XType.createError ("Load resource error: " + e));
  				}
 			}
 			
 	//------------------------------------------------------------------------------------------
-			function __configureListeners(dispatcher:IEventDispatcher):void {
+			private function __configureListeners(dispatcher:IEventDispatcher):void {
 				dispatcher.addEventListener (Event.COMPLETE, __completeHandler);
 				dispatcher.addEventListener (HTTPStatusEvent.HTTP_STATUS, __httpStatusHandler);
 				dispatcher.addEventListener (Event.INIT, __initHandler);
@@ -113,7 +115,7 @@ package x.resource.types {
 			}
 			
 	//------------------------------------------------------------------------------------------
-			function __removeListeners(dispatcher:IEventDispatcher):void {
+			private function __removeListeners(dispatcher:IEventDispatcher):void {
 				dispatcher.removeEventListener (Event.COMPLETE, __completeHandler);
 				dispatcher.removeEventListener (HTTPStatusEvent.HTTP_STATUS, __httpStatusHandler);
 				dispatcher.removeEventListener (Event.INIT, __initHandler);
@@ -124,7 +126,7 @@ package x.resource.types {
 			}
 
 	//------------------------------------------------------------------------------------------											
-     	   function __completeHandler(event:Event):void {
+     	   private function __completeHandler(event:Event):void {
         	    trace("completeHandler: " + event);
             
 				trace ("xxx url: ", m_loader.contentLoaderInfo.url);
@@ -136,17 +138,17 @@ package x.resource.types {
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __httpStatusHandler(event:HTTPStatusEvent):void {
+        	private function __httpStatusHandler(event:HTTPStatusEvent):void {
             	trace("httpStatusHandler: " + event);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __initHandler(event:Event):void {
+        	private function __initHandler(event:Event):void {
             	trace("initHandler: " + event);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __ioErrorHandler(event:IOErrorEvent):void {
+        	private function __ioErrorHandler(event:IOErrorEvent):void {
             	trace("ioErrorHandler: " + event);
         	}
 
@@ -164,12 +166,7 @@ package x.resource.types {
         	function __unLoadHandler(event:Event):void {
             	trace("unLoadHandler: " + event);
         	}
-        	
-//------------------------------------------------------------------------------------------
-// loadAsync2
-//------------------------------------------------------------------------------------------	
-		}
-		
+        			
 //------------------------------------------------------------------------------------------
 	}
 	

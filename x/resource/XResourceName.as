@@ -51,7 +51,7 @@ package x.resource {
 			if (s.length == 1) {
 				m_manifestName = "";
 				m_resourceName = s[0];
-				m_className = ""
+				m_className = "";
 			
 				if (m_resourceName.charAt (0) != "$") {
 					throw (XType.createError ("className not valid: " + __fullName));					

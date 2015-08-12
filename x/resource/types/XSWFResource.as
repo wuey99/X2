@@ -69,7 +69,7 @@ package x.resource.types {
 
 //------------------------------------------------------------------------------------------
 		private function __getClassByName (__className:String, __resourceName:String=""):Class /* <Dynamic> */ {
-			var c:Class;
+			var c:Class; // <Dynamic>
 			
 			try {
 				c = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
@@ -85,7 +85,7 @@ package x.resource.types {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function getClassByName (__fullName:String):Class {
+		public override function getClassByName (__fullName:String):Class /* <Dynamic> */ {
 			if (m_loader == null) {
 				loadResource ();
 			}

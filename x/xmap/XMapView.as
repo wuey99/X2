@@ -275,6 +275,12 @@ package x.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function initSubmapPoolManager ():void {
+// <HAXE>
+/* --
+			initSubmapBitmapPoolManager (512, 512);
+-- */
+// </HAXE>
+// <AS3>
 			if (CONFIG::starling) {
 				initSubmapImagePoolManager (512, 512);
 			}
@@ -282,11 +288,12 @@ package x.xmap {
 			{
 				initSubmapBitmapPoolManager (512, 512);
 			}
+// </AS3>
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function initSubmapBitmapPoolManager (
-			__width:Number=512, __height:Number=512,
+			__width:int=512, __height:int=512,
 			__alloc:int=64, __spill:int=16
 			):void {
 				
@@ -315,10 +322,16 @@ package x.xmap {
 		public function getSubmapBitmapPoolManager ():XObjectPoolManager {
 			return m_submapBitmapPoolManager;
 		}
-			
+	
+//------------------------------------------------------------------------------------------		
+// <HAXE>
+/* --
+-- */
+// </HAXE>
+// <AS3>
 //------------------------------------------------------------------------------------------
 		public function initSubmapImagePoolManager (
-			__width:Number=512, __height:Number=512,
+			__width:int=512, __height:int=512,
 			__alloc:int=8, __spill:int=1
 			):void {
 			
@@ -347,6 +360,9 @@ package x.xmap {
 		public function getSubmapImagePoolManager ():XObjectPoolManager {
 			return m_submapImagePoolManager;
 		}
+		
+//------------------------------------------------------------------------------------------		
+// </AS3>
 		
 //------------------------------------------------------------------------------------------
 		public function createModelFromXML (__xml:XSimpleXMLNode, __useArrayItems:Boolean=false):void {

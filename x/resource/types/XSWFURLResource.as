@@ -45,9 +45,12 @@ package x.resource.types {
 	
 //------------------------------------------------------------------------------------------		
 	public class XSWFURLResource extends XSWFResource {
+		var m_urlLoader:URLLoader;
+		var m_urlReq:URLRequest;
 		
 //------------------------------------------------------------------------------------------
 		public function XSWFURLResource () {
+			super ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -179,32 +182,33 @@ package x.resource.types {
 			m_loader = new Loader();
 
 			try {
-				var __urlLoader:URLLoader = new URLLoader();
-				var __urlReq:URLRequest = new URLRequest(m_resourcePath);
-				__urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
-				__urlLoader.addEventListener(Event.COMPLETE, __onBytesLoaded);
-				__urlLoader.addEventListener(IOErrorEvent.IO_ERROR, __onIOError);
-				__urlLoader.load(__urlReq);
+				m_urlLoader = new URLLoader();
+				m_urlReq = new URLRequest(m_resourcePath);
+				m_urlLoader.dataFormat = URLLoaderDataFormat.BINARY;
+				m_urlLoader.addEventListener(Event.COMPLETE, __onBytesLoaded);
+				m_urlLoader.addEventListener(IOErrorEvent.IO_ERROR, __onIOError);
+				m_urlLoader.load(m_urlReq);
 			}
-			catch (error:Error) {
-				throw (XType.createError ("Load resource error: " + error));
+			catch (e:Error) {
+				throw (XType.createError ("Load resource error: " + e));
 			}			
 			
 			m_parent.addChild (m_loader);
-			m_loader.visible = false;
+			m_loader.visible = false;	
+		}
 		
 	//------------------------------------------------------------------------------------------
-			function __onIOError(event:Event):void {
+			private function __onIOError(event:Event):void {
 				throw (XType.createError ("I/O Error reading: " + event + ", " + m_resourcePath));
 			}
 			
 	//------------------------------------------------------------------------------------------
-			function __onBytesLoaded(event:Event):void {
+			private function __onBytesLoaded(event:Event):void {
  				try {
  					trace (":-----------------");
  					trace (": ", m_resourcePath);
  					
-					__urlLoader.removeEventListener(Event.COMPLETE, __onBytesLoaded);		
+					m_urlLoader.removeEventListener(Event.COMPLETE, __onBytesLoaded);		
 					__configureListeners (m_loader.contentLoaderInfo);	
 
 					var __loaderContext:LoaderContext;
@@ -217,15 +221,15 @@ package x.resource.types {
 						__loaderContext = new LoaderContext();
 					}
 
-					m_loader.loadBytes(__urlLoader.data, __loaderContext);
+					m_loader.loadBytes(m_urlLoader.data, __loaderContext);
  				}
- 				catch (error:Error) {
-					throw (XType.createError ("Load resource error: " + error));
+ 				catch (e:Error) {
+					throw (XType.createError ("Load resource error: " + e));
  				}
 			}
 			
 	//------------------------------------------------------------------------------------------
-			function __configureListeners(dispatcher:IEventDispatcher):void {
+			private function __configureListeners(dispatcher:IEventDispatcher):void {
 				dispatcher.addEventListener (Event.COMPLETE, __completeHandler);
 				dispatcher.addEventListener (HTTPStatusEvent.HTTP_STATUS, __httpStatusHandler);
 				dispatcher.addEventListener (Event.INIT, __initHandler);
@@ -236,7 +240,7 @@ package x.resource.types {
 			}
 			
 	//------------------------------------------------------------------------------------------
-			function __removeListeners(dispatcher:IEventDispatcher):void {
+			private function __removeListeners(dispatcher:IEventDispatcher):void {
 				dispatcher.removeEventListener (Event.COMPLETE, __completeHandler);
 				dispatcher.removeEventListener (HTTPStatusEvent.HTTP_STATUS, __httpStatusHandler);
 				dispatcher.removeEventListener (Event.INIT, __initHandler);
@@ -247,7 +251,7 @@ package x.resource.types {
 			}
 
 	//------------------------------------------------------------------------------------------											
-     	   function __completeHandler(event:Event):void {
+     	   private function __completeHandler(event:Event):void {
         	    trace("completeHandler: " + event);
             
 				trace ("xxx url: ", m_loader.contentLoaderInfo.url);
@@ -259,40 +263,35 @@ package x.resource.types {
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __httpStatusHandler(event:HTTPStatusEvent):void {
+        	private function __httpStatusHandler(event:HTTPStatusEvent):void {
             	trace("httpStatusHandler: " + event);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __initHandler(event:Event):void {
+        	private function __initHandler(event:Event):void {
             	trace("initHandler: " + event);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __ioErrorHandler(event:IOErrorEvent):void {
+        	private function __ioErrorHandler(event:IOErrorEvent):void {
             	trace("ioErrorHandler: " + event);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __openHandler(event:Event):void {
+        	private function __openHandler(event:Event):void {
             	trace("openHandler: " + event);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __progressHandler(event:ProgressEvent):void {
+        	private function __progressHandler(event:ProgressEvent):void {
             	trace("progressHandler: bytesLoaded=" + event.bytesLoaded + " bytesTotal=" + event.bytesTotal);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __unLoadHandler(event:Event):void {
+        	private function __unLoadHandler(event:Event):void {
             	trace("unLoadHandler: " + event);
         	}
-        	
-//------------------------------------------------------------------------------------------
-// loadAsync2
-//------------------------------------------------------------------------------------------	
-		}
-				
+        		
 //------------------------------------------------------------------------------------------
 	}
 	
