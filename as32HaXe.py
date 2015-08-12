@@ -392,6 +392,12 @@ class Update(object):
 		if self.isNewOrExtends(line, "Number"):
 			line = line.replace(" Number", " Float")
 		
+		if line.find("= Number (") >= 0:
+			line = line.replace("= Number (", "= (")
+			
+		if line.find("= Number(") >= 0:
+			line = line.replace("= Number(", "= (")
+			
 		line = line.replace ("is Number", "is Float")	
 		line = line.replace ("as Number", "as Float")
 		
