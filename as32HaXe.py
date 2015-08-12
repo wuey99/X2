@@ -962,12 +962,18 @@ class Update(object):
 			self._forEach = True
 			self._doWhile = False
 			self._loopLevel = 0
+			self._loopCast = False
+			if line.find("/* @:castkey */") >= 0:
+				self._loopCast = True
 			startLoop = True
 			
 		if line.find(".doWhile (") >= 0:
 			self._forEach = False
 			self._doWhile = True
 			self._loopLevel = 0
+			self._loopCast = False
+			if line.find("/* @:castkey */") >= 0:
+				self._loopCast = True			
 			startLoop = True
 			
 		if startLoop:
@@ -995,9 +1001,15 @@ class Update(object):
 			
 		if self._loopLevel == 0 and line.count("}") > 0:
 			if self._forEach:
-				line = line[:-1] + " (__key__);\n"
+				if self._loopCast:
+					line = line[:-1] + " (cast __key__);\n"				
+				else:
+					line = line[:-1] + " (__key__);\n"
 			else:
-				line = line[:-1] + " (__key__)) break;\n"
+				if self._loopCast:
+					line = line[:-1] + " (cast __key__)) break;\n"
+				else:			
+					line = line[:-1] + " (__key__)) break;\n"
 				
 			return line
 			
@@ -1006,6 +1018,7 @@ class Update(object):
 			
 			self._forEach = False
 			self._doWhile = False
+			self._loopCast = False
 			self._loopLevel = 0
 			
 		return line
@@ -1161,6 +1174,7 @@ class Update(object):
 		self._forEach = False
 		self._doWhile = False
 		self._loopLevel = 0
+		self._loopCast = False
 						
 		self._lineNumber = 0
 		for line in src:

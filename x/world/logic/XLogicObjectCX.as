@@ -131,8 +131,8 @@ package x.world.logic {
 			m_submapWidthMask = m_submapWidth - 1;
 			m_submapHeightMask = m_submapHeight - 1;
 			
-			m_cols = m_submapWidth/CX_TILE_WIDTH;
-			m_rows = m_submapHeight/CX_TILE_HEIGHT;
+			m_cols = int (m_submapWidth/CX_TILE_WIDTH);
+			m_rows = int (m_submapHeight/CX_TILE_HEIGHT);
 
 			/*			
 			trace (": --------------------------------:");
@@ -456,10 +456,10 @@ package x.world.logic {
 			var r:int, c:int;
 			var submapRow:int, submapCol:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 						
 			y1 &= CX_TILE_HEIGHT_UNMASK;
 			r = y1 >> 9;
@@ -574,10 +574,10 @@ package x.world.logic {
 			var r:int, c:int;
 			var submapRow:int, submapCol:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 							
 			y2 &= CX_TILE_HEIGHT_UNMASK;
 			r = y2 >> 9;
@@ -693,10 +693,10 @@ package x.world.logic {
 			var r:int, c:int;
 			var submapRow:int, submapCol:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 	
 			x1 &= CX_TILE_WIDTH_UNMASK;
 			c = x1 >> 9;
@@ -811,10 +811,10 @@ package x.world.logic {
 			var r:int, c:int;
 			var submapRow:int, submapCol:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 						
 			x2 &= CX_TILE_WIDTH_UNMASK;
 			c = x2 >> 9;
@@ -936,10 +936,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// top
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -1114,10 +1114,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// bottom
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -1307,10 +1307,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// top
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -1484,10 +1484,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// bottom
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -1675,10 +1675,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// left
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -1859,10 +1859,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// right
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -2057,10 +2057,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// left
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -2240,10 +2240,10 @@ package x.world.logic {
 			//------------------------------------------------------------------------------------------
 			// right
 			//------------------------------------------------------------------------------------------
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			looking = true;
 			
@@ -2464,30 +2464,12 @@ package x.world.logic {
 		public function Ck_Obj_LF9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			var __collided:Boolean = false;
-			
-			__objectCollisionList.doWhile (
-				function (__logicObject:XLogicObjectCX):Boolean {
-					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
-					
-					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
-						return true;
-					}
-					
-					__callback (__logicObject, __rect);
-					
-					__collided = true;
-					
-					return true;
-				}
-			);
-			
-			return __collided;
 			
 			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
 				if (__logicObject.allowLFCollisions) {
@@ -2498,20 +2480,8 @@ package x.world.logic {
 					m_CX_Collide_Flag |= CX_COLLIDE_LF;
 				}
 			}
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function Ck_Obj_RT9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
-			var x1:int, y1:int, x2:int, y2:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
-			
-			var __collided:Boolean = false;
-			
-			__objectCollisionList.doWhile (
+			__objectCollisionList.doWhile ( /* @:castkey */
 				function (__logicObject:XLogicObjectCX):Boolean {
 					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
 					
@@ -2528,6 +2498,18 @@ package x.world.logic {
 			);
 			
 			return __collided;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_RT9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
+			var x1:int, y1:int, x2:int, y2:int;
+			
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
+			
+			var __collided:Boolean = false;
 			
 			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
 				if (__logicObject.allowRTCollisions) {
@@ -2538,20 +2520,8 @@ package x.world.logic {
 					m_CX_Collide_Flag |= CX_COLLIDE_RT;
 				}
 			}
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function Ck_Obj_UP9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
-			var x1:int, y1:int, x2:int, y2:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
-			
-			var __collided:Boolean = false;
-
-			__objectCollisionList.doWhile (
+			__objectCollisionList.doWhile ( /* @:castkey */
 				function (__logicObject:XLogicObjectCX):Boolean {
 					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
 					
@@ -2568,7 +2538,19 @@ package x.world.logic {
 			);
 			
 			return __collided;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function Ck_Obj_UP9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
+			var x1:int, y1:int, x2:int, y2:int;
 			
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
+			
+			var __collided:Boolean = false;
+
 			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
 				if (__logicObject.allowUPCollisions) {
 					oY = __rect.bottom - m_cx.top + 1;
@@ -2578,20 +2560,48 @@ package x.world.logic {
 					m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				}
 			}
+			
+			__objectCollisionList.doWhile ( /* @:castkey */
+				function (__logicObject:XLogicObjectCX):Boolean {
+					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
+					
+					if (x2 < __rect.left || x1 > __rect.right || y2 < __rect.top || y1 > __rect.bottom) {
+						return true;
+					}
+					
+					__callback (__logicObject, __rect);
+					
+					__collided = true;
+					
+					return true;
+				}
+			);
+			
+			return __collided;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function Ck_Obj_DN9 (__objectCollisionList:XDict /* <XLogicObject, XRect> */):Boolean {
 			var x1:int, y1:int, x2:int, y2:int;
 			
-			x1 = int (oX) + m_cx.left;
-			x2 = int (oX) + m_cx.right;
-			y1 = int (oY) + m_cx.top;
-			y2 = int (oY) + m_cx.bottom;
+			x1 = int (oX + m_cx.left);
+			x2 = int (oX + m_cx.right);
+			y1 = int (oY + m_cx.top);
+			y2 = int (oY + m_cx.bottom);
 			
 			var __collided:Boolean = false;
 			
-			__objectCollisionList.doWhile (
+			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
+				if (__logicObject.allowDNCollisions) {
+					oY = __rect.top - m_cx.bottom - 1;
+					
+					__logicObject.objectCollisionCallback (self);
+					
+					m_CX_Collide_Flag |= CX_COLLIDE_DN;
+				}
+			}
+			
+			__objectCollisionList.doWhile ( /* @:castkey */
 				function (__logicObject:XLogicObjectCX):Boolean {
 					var __rect:XRect = __objectCollisionList.get (__logicObject) as XRect;
 					
@@ -2608,16 +2618,6 @@ package x.world.logic {
 			);
 			
 			return __collided;
-			
-			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
-				if (__logicObject.allowDNCollisions) {
-					oY = __rect.top - m_cx.bottom - 1;
-					
-					__logicObject.objectCollisionCallback (self);
-					
-					m_CX_Collide_Flag |= CX_COLLIDE_DN;
-				}
-			}
 		}
 
 //------------------------------------------------------------------------------------------
