@@ -203,12 +203,12 @@ package x.xmap {
 				}
 			);
 
-			function __vline (x:Number):void {
-				var y:Number;
+			function __vline (x:int):void {
+				var y:int;
 			}
 			
-			function __hline (y:Number):void {
-				var x:Number;
+			function __hline (y:int):void {
+				var x:int;
 			}
 		}
 		

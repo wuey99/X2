@@ -313,25 +313,25 @@ package x.xmap {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set width Float */
+		/* @:get, set width Int */
 		
-		public function get width ():Number {
+		public function get width ():int {
 			return m_submapWidth;
 		}
 		
-		public function set width (__value:Number): /* @:set_type */ void {
+		public function set width (__value:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set height Float */
+		/* @:get, set height Int */
 		
-		public function get height ():Number {
+		public function get height ():int {
 			return  m_submapHeight;
 		}
 		
-		public function set height (__value:Number): /* @:set_type */ void {
+		public function set height (__value:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */

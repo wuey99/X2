@@ -197,7 +197,7 @@ package x.xmap {
 							
 			m_bitmap.bitmapData.unlock ();
 			
-			function __vline (x:Number):void {
+			function __vline (x:int):void {
 				var y:int;
 				
 				for (y=0; y<m_submapModel.height; y++) {
@@ -205,7 +205,7 @@ package x.xmap {
 				}
 			}
 			
-			function __hline (y:Number):void {
+			function __hline (y:int):void {
 				var x:int;
 				
 				for (x=0; x<m_submapModel.width; x++) {
