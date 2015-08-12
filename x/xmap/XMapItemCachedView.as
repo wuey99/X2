@@ -47,6 +47,7 @@ package x.xmap {
 		
 		//------------------------------------------------------------------------------------------
 		public function XMapItemCachedView () {
+			super ();
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -60,7 +61,7 @@ package x.xmap {
 				x_sprite = addSprite (m_sprite);
 			}
 			
-			if (m_frame) {
+			if (m_frame != 0) {
 				gotoAndStop (m_frame);
 			}
 			else

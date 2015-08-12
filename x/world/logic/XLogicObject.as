@@ -89,7 +89,7 @@ package x.world.logic {
 		public var m_worldSprites:XDict; // <XDepthSprite, Int>
 		public var m_hudSprites:XDict; // <XDepthSprite, Int>
 		public var m_childSprites:XDict; // <Sprite, Sprite>
-		public var m_detachedSprites:XDict;  // <XDepthSprite, Int>
+		public var m_detachedSprites:XDict;  // <Sprite, Sprite>
 		public var m_bitmaps:XDict; // <String, XBitmap>
 		public var m_movieClips:XDict; // <String, XMovieClip>
 		public var m_textSprites:XDict; // <XTextSprite, Int>
@@ -117,7 +117,7 @@ package x.world.logic {
 		public var m_iScale:Number;
 		public var m_iRotation:Number;
 		public var m_iItem:XMapItemModel;
-		public var m_iLayer:Number;
+		public var m_iLayer:int;
 		public var m_iDepth:Number;
 		public var m_iRelativeDepth:Boolean;
 		public var m_iClassName:String;
@@ -163,7 +163,7 @@ package x.world.logic {
 				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
 				m_hudSprites = new XDict (); // <XDepthSprite, Int>
 				m_childSprites = new XDict (); // <Sprite, Sprite>
-				m_detachedSprites = new XDict (); // <XDepthSprite, Int>
+				m_detachedSprites = new XDict (); // <Sprite, Sprite>
 				m_bitmaps = new XDict (); // <String, XBitmap> 
 				m_movieClips = new XDict (); // <String, XMovieClip>
 				m_textSprites = new XDict (); // <XTextSprite, Int>
@@ -193,7 +193,7 @@ package x.world.logic {
 				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
 				m_hudSprites = new XDict (); // <XDepthSprite, Int>
 				m_childSprites = new XDict (); // <Sprite, Sprite>
-				m_detachedSprites = new XDict (); // <XDepthSprite, Int>
+				m_detachedSprites = new XDict (); // <Sprite, Sprite>
 				m_bitmaps = new XDict (); // <String, XBitmap> 
 				m_movieClips = new XDict (); // <String, XMovieClip>
 				m_textSprites = new XDict (); // <XTextSprite, Int>
@@ -1854,13 +1854,13 @@ package x.world.logic {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set iLayer Float */
+		/* @:get, set iLayer Int */
 		
-		public function get iLayer ():Number {
+		public function get iLayer ():int {
 			return m_iLayer;
 		}
 		
-		public function set iLayer (__value:Number): /* @:set_type */ void {
+		public function set iLayer (__value:int): /* @:set_type */ void {
 			m_iLayer = __value;
 			
 			/* @:set_return 0; */	

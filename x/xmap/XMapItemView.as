@@ -44,10 +44,11 @@ package x.xmap {
 	public class XMapItemView extends XLogicObject {
 		protected var m_sprite:MovieClip;
 		protected var x_sprite:XDepthSprite;
-		protected var m_frame:Number;
+		protected var m_frame:int;
 		
 //------------------------------------------------------------------------------------------
 		public function XMapItemView () {
+			super ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -69,7 +70,7 @@ package x.xmap {
 				x_sprite = addSprite (m_sprite);
 			}
 			
-			if (m_frame) {
+			if (m_frame != 0) {
 				gotoAndStop (m_frame);
 			}
 			else

@@ -47,6 +47,7 @@ package x.xmap {
 		
 		//------------------------------------------------------------------------------------------
 		public function XMapItemXBitmapView () {
+			super ();
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -73,7 +74,7 @@ package x.xmap {
 				x_sprite = addSpriteAt (m_bitmap, m_bitmap.dx, m_bitmap.dy);
 			}
 			
-			if (m_frame) {
+			if (m_frame != 0) {
 				gotoAndStop (m_frame);
 			}
 			else

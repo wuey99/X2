@@ -137,16 +137,16 @@ package x.world.tiles {
 				}
 			}
 			
-			function __vline (x:Number):void {
-				var y:Number;
+			function __vline (x:int):void {
+				var y:int;
 				
 				for (y=0; y<__height; y++) {
 					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
 				}
 			}
 			
-			function __hline (y:Number):void {
-				var x:Number;
+			function __hline (y:int):void {
+				var x:int;
 				
 				for (x=0; x<__width; x++) {
 					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
@@ -155,8 +155,8 @@ package x.world.tiles {
 			
 			m_bitmap.bitmapData.lock ();
 			
-			var __width:Number = m_submapModel.width;
-			var __height:Number = m_submapModel.height;
+			var __width:int = m_submapModel.width;
+			var __height:int = m_submapModel.height;
 			
 			tempRect.x = 0;
 			tempRect.y = 0;

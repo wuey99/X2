@@ -269,7 +269,7 @@ package x.xmap {
 // cull this object if it strays outside the current viewPort
 //------------------------------------------------------------------------------------------	
 		public override function cullObject ():void {
-			if (m_delay) {
+			if (m_delay > 0) {
 				m_delay--;
 				
 				return;
