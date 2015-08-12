@@ -161,7 +161,14 @@ package x.xmap {
 			var __object:* = m_logicClassNameToClass (__item.logicClassName);
 				
 			if (__object is Function) {
-				__logicObject = (/* @:safe_cast */ __object as Function) ();
+				// <HAXE>
+				/* --
+				__logicObject = cast (__object ());
+				-- */
+				// </HAXE>
+				// <AS3>
+				__logicObject = (__object as Function) ();
+				// </AS3>
 			}
 			else if (__item.logicClassName.charAt (0) == "$") {
 				if (__object == null) {

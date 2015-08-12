@@ -51,7 +51,7 @@ package x.sound {
 		private var _rate:Number;
 		private var _volume:Number;
 		
-		private var _length:int;
+		private var _length:Number;
 		private var _isPlaying:Boolean;
 		
 		private var m_function:Function;
@@ -147,7 +147,7 @@ package x.sound {
 			var data: ByteArray = event.data;
 			
 			var scaledBlockSize:Number = BLOCK_SIZE * _rate;
-			var positionInt:int = _position;
+			var positionInt:int = int (_position);
 			var alpha:Number = _position - positionInt;
 			
 			var positionTargetNum:Number = alpha;
@@ -156,7 +156,7 @@ package x.sound {
 			var need:int = Math.ceil( scaledBlockSize ) + 2;
 			
 			//-- EXTRACT SAMPLES
-			var read:int = m_mp3.extract( _target, need, positionInt );
+			var read:int = int (m_mp3.extract( _target, need, positionInt ));
 			
 			var n:uint;
 			
@@ -164,7 +164,7 @@ package x.sound {
 				n = BLOCK_SIZE;
 			}
 			else {
-				n = read / _rate;
+				n = int (read / _rate);
 			}
 			
 			writeData(data, alpha, n, positionTargetNum);
@@ -192,7 +192,7 @@ package x.sound {
 			}
 		}
 		
-		private function writeData(data, alpha, n:uint, positionTargetNum:Number):void {
+		private function writeData(data:ByteArray, alpha:Number, n:uint, positionTargetNum:Number):void {
 			var positionTargetInt:int = -1;
 			
 			var l0:Number;
@@ -203,9 +203,9 @@ package x.sound {
 			for (var i:int = 0; i < n; ++i )
 			{
 				//-- AVOID READING EQUAL SAMPLES, IF RATE < 1.0
-				if( int( positionTargetNum ) != positionTargetInt )
+				if(int (positionTargetNum) != positionTargetInt )
 				{
-					positionTargetInt = positionTargetNum;
+					positionTargetInt = int (positionTargetNum);
 					
 					//-- SET TARGET READ POSITION
 					_target.position = positionTargetInt << 3;
@@ -217,7 +217,7 @@ package x.sound {
 						
 						l1 = _target.readFloat();
 						r1 = _target.readFloat();
-					} catch (errObject:Error) {
+					} catch (e:Error) {
 						// IF WE ENTER AN END_OF_FILE FILL REST OF STREAM WITH ZEROs
 						l0 = 0;
 						r0 = 0;

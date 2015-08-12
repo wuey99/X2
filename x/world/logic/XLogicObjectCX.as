@@ -349,7 +349,7 @@ package x.world.logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set allowLFCollisions Boolean */
+		/* @:get, set allowLFCollisions Bool */
 		
 		public function get allowLFCollisions ():Boolean {
 			return true;
@@ -362,7 +362,7 @@ package x.world.logic {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set allowRTCollisions Boolean */
+		/* @:get, set allowRTCollisions Bool */
 		
 		public function get allowRTCollisions ():Boolean {
 			return true;
@@ -375,7 +375,7 @@ package x.world.logic {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set allowUPCollisions Boolean */
+		/* @:get, set allowUPCollisions Bool */
 		
 		public function get allowUPCollisions ():Boolean {
 			return true;
@@ -388,7 +388,7 @@ package x.world.logic {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set allowDNCollisions Boolean */
+		/* @:get, set allowDNCollisions Bool */
 		
 		public function get allowDNCollisions ():Boolean {
 			return true;

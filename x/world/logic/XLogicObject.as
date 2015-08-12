@@ -156,7 +156,7 @@ package x.world.logic {
 		
 			__XTask = new XTask_CONSTANTS ();
 			
-			if (__xxx) {
+			if (__xxx != null) {
 				xxx = __xxx;
 				
 				m_XLogicObjects = new XDict (); // <XLogicObject, Int>
@@ -249,10 +249,16 @@ package x.world.logic {
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				dispose ();
 			}
-			
+			// </AS3>
+				
 			xxx.getXPointPoolManager ().returnObject (m_pos);
 			xxx.getXPointPoolManager ().returnObject (rp);
 			
@@ -278,7 +284,7 @@ package x.world.logic {
 			
 			removeAll ();
 
-			if (m_poolClass) {
+			if (m_poolClass != null) {
 				xxx.getXLogicObjectPoolManager ().returnObject (m_poolClass, this);
 			}
 			

@@ -152,7 +152,7 @@ package x.world {
 			/* --
 				list.sort (
 					function (a:XDepthSprite, b:XDepthSprite):Int {
-						return a.depth2 - b.depth2;
+						return Std.int (a.depth2 - b.depth2);
 					}
 				);				
 			-- */

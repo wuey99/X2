@@ -504,7 +504,7 @@ package x.xmap {
 //------------------------------------------------------------------------------------------			
 			__xmlList = __xml.child ("CX");
 			
-			if (__xmlList.length) {
+			if (__xmlList.length > 0) {
 				deserializeCXTiles (__xmlList[0]);
 			}
 			

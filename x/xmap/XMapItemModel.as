@@ -262,7 +262,7 @@ package x.xmap {
 		public function set hasLogic (__value:Boolean): /* @:set_type */ void {
 			m_hasLogic = __value;
 			
-			/* @:set_return true;; */			
+			/* @:set_return true; */			
 		}
 		/* @:end */
 		

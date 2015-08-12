@@ -38,6 +38,8 @@ package x.mvc {
 		
 //------------------------------------------------------------------------------------------	
 		public function XModelBase () {
+			super ();
+			
 			m_changedSignal = new XSignal ();
 		}
 
