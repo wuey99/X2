@@ -43,8 +43,6 @@ package x.signals {
 		
 //------------------------------------------------------------------------------------------
 		public function XSignal () {
-			super();
-			
 			m_listeners = new XDict (); // <Dynamic, Int>
 			
 // <HAXE>

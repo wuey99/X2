@@ -152,7 +152,9 @@ package x.xmap {
 // __boundingRect,
 				this.boundingRect.cloneX (),
 // __params
-				this.params
+				this.params,
+// args
+				[]
 				);
 			
 			return __item;

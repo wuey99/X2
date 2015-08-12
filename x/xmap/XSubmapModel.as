@@ -569,7 +569,9 @@ package x.xmap {
 // __boundingRect,
 					__boundingRect,
 // __params
-					__xml.child ("params")[0].toXMLString ()
+					__xml.child ("params")[0].toXMLString (),
+// args
+					[]
 					);
 
 					if (useArrayItems) {

@@ -62,6 +62,8 @@ package x.world.tiles {
 
 //------------------------------------------------------------------------------------------	
 		public function XSubmapTiles () {
+			super ();
+			
 			m_submapModel = null;
 		}
 
@@ -110,6 +112,9 @@ package x.world.tiles {
 				
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
+			var __width:int = m_submapModel.width;
+			var __height:int = m_submapModel.height;
+			
 			function __tiles ():void {
 				var __col:int;
 				var __row:int;
@@ -137,26 +142,23 @@ package x.world.tiles {
 				}
 			}
 			
-			function __vline (x:int):void {
-				var y:int;
+			function __vline (__x:int):void {
+				var __y:int;
 				
-				for (y=0; y<__height; y++) {
-					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
+				for (__y=0; __y<__height; __y++) {
+					m_bitmap.bitmapData.setPixel32 (__x, __y, 0xffff00ff);
 				}
 			}
 			
-			function __hline (y:int):void {
-				var x:int;
+			function __hline (__y:int):void {
+				var __x:int;
 				
-				for (x=0; x<__width; x++) {
-					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
+				for (x=0; __x<__width; __x++) {
+					m_bitmap.bitmapData.setPixel32 (__x, __y, 0xffff00ff);
 				}
 			}
 			
 			m_bitmap.bitmapData.lock ();
-			
-			var __width:int = m_submapModel.width;
-			var __height:int = m_submapModel.height;
 			
 			tempRect.x = 0;
 			tempRect.y = 0;

@@ -40,19 +40,19 @@ package x.sound {
 	public class MP3Pitch extends MP3Sound  {
 		private const BLOCK_SIZE:int = 3072;
 		
-		private var _loop: Boolean;
+		private var _loop:Boolean;
 		
 //		private var m_mp3: Sound;
-		private var _sound: Sound;
+		private var _sound:Sound;
 		
-		private var _target: ByteArray;
+		private var _target:ByteArray;
 		
 		private var _position:Number;
 		private var _rate:Number;
 		private var _volume:Number;
 		
 		private var _length:int;
-		private var _isPlaying: Boolean;
+		private var _isPlaying:Boolean;
 		
 		private var m_function:Function;
 		

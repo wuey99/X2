@@ -217,7 +217,7 @@ package x.world.sprite {
 				}
 				
 				//------------------------------------------------------------------------------------------
-				public function createBitmap (__name:String, __width:Number, __height:Number):void {
+				public function createBitmap (__name:String, __width:int, __height:int):void {
 					var __bitmap:BitmapData = new BitmapData (__width, __height);
 					
 //					m_bitmapNames[__name] = __bitmap;
