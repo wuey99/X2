@@ -69,11 +69,11 @@ package x.xmap {
 		private var m_itemInuse:XDict; // <Int, Int>
 		
 		private var m_persistentStorage:XDict; // <Int, Dynamic>
-		
-		private var __CX:CX_CONSTANTS;
 
 		private var m_retrievedSubmaps:Array; // <XSubmapModel>
 		private var m_retrievedItems:Array; // <XMapItemModel>
+		
+		include "..\\World\\Collision\\cx.h";
 		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
@@ -90,8 +90,6 @@ package x.xmap {
 			var __row:int;
 			var __col:int;
 
-			__CX = new CX_CONSTANTS ();
-			
 			m_submapRows = __submapRows;
 			m_submapCols = __submapCols;
 			m_submapWidth = __submapWidth;
@@ -691,8 +689,8 @@ package x.xmap {
 			var tiles:Array; // <Int>
 
 // col, row divisor
-			var row32:int = int (m_submapHeight/__CX.CX_TILE_HEIGHT);
-			var col32:int = int (m_submapWidth/__CX.CX_TILE_WIDTH);
+			var row32:int = int (m_submapHeight/CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/CX_TILE_WIDTH);
 
 // col, row mask for the submap
 			var rowMask:int = int (row32-1);
@@ -730,8 +728,8 @@ package x.xmap {
 			c2:int, r2:int
 		):void {
 // col, row divisor
-			var row32:int = int (m_submapHeight/__CX.CX_TILE_HEIGHT);
-			var col32:int = int (m_submapWidth/__CX.CX_TILE_WIDTH);
+			var row32:int = int (m_submapHeight/CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/CX_TILE_WIDTH);
 
 // col, row mask for the submap
 			var rowMask:int = int (row32-1);
@@ -764,8 +762,8 @@ package x.xmap {
 			c2:int, r2:int
 		):void {
 // col, row divisor
-			var row32:int = int (m_submapHeight/__CX.CX_TILE_HEIGHT);
-			var col32:int = int (m_submapWidth/__CX.CX_TILE_WIDTH);
+			var row32:int = int (m_submapHeight/CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/CX_TILE_WIDTH);
 
 // col, row mask for the submap
 			var rowMask:int = int (row32-1);
@@ -784,7 +782,7 @@ package x.xmap {
 					var submapCol:int = int (col/col32);
 								
 					m_XSubmaps[submapRow][submapCol].setCXTile (
-						__CX.CX_EMPTY,
+						CX_EMPTY,
 						col & colMask, row & rowMask
 					);
 				}
@@ -1068,8 +1066,6 @@ package x.xmap {
 			m_imageClassNames = new XDict (); // <String, Int>
 
 			m_itemInuse = new XDict ();  // <Int, Int>
-			
-			__CX = new CX_CONSTANTS ();
 			
 			m_items = new XDict (); // <XMapItemModel, Int>
 			m_ids = new XDict (); // <Int, XMapItemModel>
