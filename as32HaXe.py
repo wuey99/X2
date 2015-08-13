@@ -778,7 +778,8 @@ class Update(object):
 	
 		def getterSetterDefinition(pos, line):	
 			self._getterSetterMode = True
-			
+			self._getterSetterOverride2 = False
+						
 			pos += len("/* @:get, set") + 1	
 			i = line[pos:].find(" ") + pos
 			self._getterSetterLabel = label = line[pos:i]
@@ -796,8 +797,31 @@ class Update(object):
 			
 		def overrideGetterSetterDefinition(pos, line):	
 			self._getterSetterMode = True
-			
+			self._getterSetterOverride2 = False
+						
 			pos += len("/* @:override get, set") + 1	
+			i = line[pos:].find(" ") + pos
+			self._getterSetterLabel = label = line[pos:i]
+			
+			pos = i+1
+			i = line[pos:].find(" ") + pos
+			self._getterSetterType = type = line[pos:i]	
+			
+# is this needed?!?!
+			'''
+			line = line.replace ( \
+				"/* @:override get, set " + label + " " + type + " */", \
+				"public var " + label + " (get, set):" + type + ";" \
+			)
+			'''
+			
+			return line
+			
+		def override2GetterSetterDefinition(pos, line):	
+			self._getterSetterMode = True
+			self._getterSetterOverride2 = True
+						
+			pos += len("/* @:override2 get, set") + 1	
 			i = line[pos:].find(" ") + pos
 			self._getterSetterLabel = label = line[pos:i]
 			
@@ -823,13 +847,19 @@ class Update(object):
 		if pos >= 0:
 			return overrideGetterSetterDefinition(pos, line)
 			
+		pos = line.find("/* @:override2 get, set")
+		if pos >= 0:
+			return override2GetterSetterDefinition(pos, line)
+			
 		if not self._getterSetterMode:
 			return line
 			
 		line = line.replace("function get " + self._getterSetterLabel, "function get_" + self._getterSetterLabel)
 		line = line.replace("function set " + self._getterSetterLabel, "function set_" + self._getterSetterLabel)
 		line = line.replace("/* @:set_type */", self._getterSetterType + " { //")
-		
+		if not self._getterSetterOverride2:
+			line = line.replace("public override", "public")
+			
 		pos = line.find("/* @:set_return")
 		if pos >= 0:
 			pos += len("/* @:set_return") + 1
