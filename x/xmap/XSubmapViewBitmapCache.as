@@ -35,12 +35,12 @@ package x.xmap {
 	import x.world.collision.*;
 	import x.world.logic.*;
 	import x.world.sprite.*;
+	import x.xmap.*;
 	
 	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
-	import x.xmap.XSubmapModel;
 	
 //------------------------------------------------------------------------------------------	
 // instead of maintaining an XLogicObject for an XMapItemModel (for the view), maintain a 

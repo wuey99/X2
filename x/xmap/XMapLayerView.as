@@ -33,11 +33,11 @@ package x.xmap {
 	import x.world.*;
 	import x.world.logic.*;
 	import x.world.sprite.*;
+	import x.xmap.*;
 	
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
-	import x.xmap.XMapModel;
 	
 //------------------------------------------------------------------------------------------
 // represents the view for all Items in a XMap.

@@ -31,9 +31,10 @@ package x.xmap {
 	import x.world.*;
 	import x.world.sprite.*;
 	
-	import starling.textures.*;
 	import flash.geom.*;
 	import flash.utils.*;
+	
+	import starling.textures.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapImage extends XImage {

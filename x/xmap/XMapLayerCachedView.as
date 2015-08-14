@@ -34,14 +34,13 @@ package x.xmap {
 	import x.world.*;
 	import x.world.logic.*;
 	import x.world.sprite.*;
+	import x.xmap.*;
 	
 //	import flash.display.*;
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
-	import x.xmap.XMapModel;
-	import x.xmap.XSubmapModel;
-	
+
 //------------------------------------------------------------------------------------------
 	public class XMapLayerCachedView extends XLogicObject {
 		private var m_XSubmapToXLogicObject:XDict; // <XSubmapModel, XLogicObject>

@@ -37,14 +37,14 @@ package x.xmap {
 	import x.world.*;
 	import x.world.logic.*;
 	import x.world.sprite.*;
-	import x.xml.XSimpleXMLNode;
+	import x.xml.*;
+	import x.xmap.*;
 	
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
 	
 	import starling.textures.*;
-	import x.xmap.XMapModel;
 		
 //------------------------------------------------------------------------------------------	
 	public class XMapView extends XLogicObject {

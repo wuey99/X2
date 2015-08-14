@@ -34,14 +34,14 @@ package x.xmap {
 	import x.world.collision.*;
 	import x.world.logic.*;
 	import x.world.sprite.*;
+	import x.xmap.*;
 	
 	import flash.geom.*;
 	import flash.text.*;
 	import flash.utils.*;
 	
 	import starling.textures.*;
-	import x.xmap.XSubmapModel;
-	
+
 //------------------------------------------------------------------------------------------	
 // instead of maintaining an XLogicObject for an XMapItemModel (for the view), maintain a 
 // texture/view-cache for eash Submap.  On initialization, all XMapItemModel's that flagged
