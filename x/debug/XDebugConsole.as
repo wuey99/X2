@@ -47,6 +47,8 @@ package x.debug  {
 		
 //------------------------------------------------------------------------------------------
 		public function XDebugConsole () {
+			super ();
+			
 			m_disableOutput = 0;
 		}
 

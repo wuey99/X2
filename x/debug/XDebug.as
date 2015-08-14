@@ -29,6 +29,7 @@ package x.debug {
 	
 // X classes
 	import x.XApp;
+	import x.type.*;
 	
 //	import com.mattism.http.xmlrpc.*;
 //	import com.mattism.http.xmlrpc.util.*;
@@ -82,7 +83,7 @@ package x.debug {
 			var i:int;
 			
 			for (i=0; i<__length; i++) {	
-				print2 (__output.substr (i*CHUNK_SIZE, Math.min (__output.length - i*CHUNK_SIZE, CHUNK_SIZE)));
+				print2 (__output.substr (i*CHUNK_SIZE, XType.min (__output.length - i*CHUNK_SIZE, CHUNK_SIZE)));
 			}
 		}
 			

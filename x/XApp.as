@@ -37,6 +37,7 @@ package x {
 	import x.signals.*;
 	import x.sound.*;
 	import x.task.*;
+	import x.type.*;
 	import x.texture.*;
 	import x.world.*;
 	import x.world.sprite.*;
@@ -272,9 +273,9 @@ package x {
 		
 //------------------------------------------------------------------------------------------
 		public function getTime ():Number {
-			var __date:Date = new Date ();
+			var __date:Date = XType.getNowDate();
 			
-			return __date.time;
+			return __date.getTime ();
 		}
 
 //------------------------------------------------------------------------------------------
