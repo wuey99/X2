@@ -34,7 +34,13 @@ package x.xmap {
 	import flash.geom.*;
 	import flash.utils.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.textures.*;
+	// </AS3>
 	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapImage extends XImage {

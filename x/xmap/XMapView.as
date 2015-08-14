@@ -44,8 +44,14 @@ package x.xmap {
 	import flash.text.*;
 	import flash.utils.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.textures.*;
-		
+	// </AS3>
+	
 //------------------------------------------------------------------------------------------	
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;

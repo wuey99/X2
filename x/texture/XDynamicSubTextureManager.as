@@ -32,15 +32,21 @@ package x.texture {
 	import x.task.*;
 	import x.type.*;
 	import x.world.sprite.*;
+	import x.texture.*;
 	import x.XApp;
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.display.*;
 	import starling.textures.*;
-	import x.texture.MaxRectPacker;
+	// </AS3>
 	
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases

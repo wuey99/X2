@@ -35,8 +35,14 @@ package x.world.sprite {
 	import flash.geom.*;
 	import flash.utils.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.display.*;
 	import starling.textures.RenderTexture;
+	// </AS3>
 	
 	//------------------------------------------------------------------------------------------	
 	// starling equivalent of the XBitmap class.  Curently supports only a single texture.

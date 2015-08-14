@@ -37,10 +37,15 @@ package x.texture {
 	
 	import flash.display.BitmapData;
 	import flash.geom.*;
-	
+
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.display.*;
 	import starling.textures.*;
-
+	// </AS3>
 	
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
