@@ -40,7 +40,14 @@ package x.xmap {
 	import flash.text.*;
 	import flash.utils.*;
 	
+	// <HAXE>
+	/* --
+	import x.texture.starling.*;
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.textures.*;
+	// </AS3>
 
 //------------------------------------------------------------------------------------------	
 // instead of maintaining an XLogicObject for an XMapItemModel (for the view), maintain a 

@@ -36,6 +36,7 @@ package x.xmap {
 	
 	// <HAXE>
 	/* --
+	import x.texture.starling.*;
 	-- */
 	// </HAXE>
 	// <AS3>

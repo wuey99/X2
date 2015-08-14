@@ -46,6 +46,7 @@ package x.xmap {
 	
 	// <HAXE>
 	/* --
+	import x.texture.starling.*;
 	-- */
 	// </HAXE>
 	// <AS3>
@@ -319,7 +320,9 @@ package x.xmap {
 				__alloc, __spill,
 				
 				function (x:*):void {
-					XBitmap (x).cleanup ();
+					var __bitmap:XBitmap = x as XBitmap;
+					
+					__bitmap.cleanup ();
 				}
 			);
 		}

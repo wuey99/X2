@@ -35,6 +35,7 @@ package x.world.sprite {
 	
 // <HAXE>
 /* --
+	import x.texture.starling.*;
 -- */
 // </HAXE>
 // <AS3>
@@ -57,12 +58,20 @@ package x.world.sprite {
 			__bold:Boolean=false,
 			__embedFonts:Boolean = true
 		) {
+			super ();
+			
 			setup ();
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_text = new TextField (__width, __height, __text, __fontName, __fontSize, __color, __bold);
 			}
 			else
+			// </AS3>
 			{
 				m_text = new TextField ();		
 				m_textFormat = new TextFormat ();
@@ -89,9 +98,15 @@ package x.world.sprite {
 		public override function cleanup ():void {
 			super.cleanup ();
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_text.dispose ();
 			}
+			// </AS3>
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -102,14 +117,26 @@ package x.world.sprite {
 //------------------------------------------------------------------------------------------
 		/* @:get, set text String */
 		
+		public function get text ():String {
+			return "";
+		}
+		
 		public function set text (__text:String): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_text.text = __text;
 			}
 			else
+			// </AS3>
 			{
 				m_text.htmlText = __text; __format ();
 			}
+			
+			/* @:set_return ""; */
 		}
 
 //------------------------------------------------------------------------------------------
@@ -167,10 +194,16 @@ package x.world.sprite {
 		}
 		
 		public function set color (__color:uint): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_text.color = __color;
 			}
 			else
+			// </AS3>
 			{
 				m_text.textColor = __color; __format ();
 			}
@@ -187,10 +220,16 @@ package x.world.sprite {
 		}
 		
 		public function set bold (__value:Boolean): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_text.bold = __value;
 			}
 			else
+			// </AS3>
 			{
 				m_textFormat.bold = __value; __format ();
 			}
@@ -207,10 +246,16 @@ package x.world.sprite {
 		}
 		
 		public function set font (__value:String): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_text.fontName = __value;
 			}
 			else
+			// </AS3>
 			{
 				m_textFormat.font = __value; __format ();
 			}
@@ -227,10 +272,16 @@ package x.world.sprite {
 		}
 		
 		public function set size (__value:Number): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_text.fontSize = __value;
 			}
 			else
+			// </AS3>
 			{
 				m_textFormat.size = __value; __format ();
 			}
@@ -261,6 +312,11 @@ package x.world.sprite {
 		}
 		
 		public function set hAlign (__value:String): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				switch (__value) {
 					case "left":
@@ -275,6 +331,7 @@ package x.world.sprite {
 				}
 			}
 			else
+			// </AS3>
 			{
 				switch (__value) {
 					case "left":
@@ -303,6 +360,11 @@ package x.world.sprite {
 		}
 		
 		public function set vAlign (__value:String): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				switch (__value) {
 					case "top":
@@ -317,6 +379,7 @@ package x.world.sprite {
 				}
 			}
 			else
+			// </AS3>
 			{
 			}
 			
@@ -356,16 +419,22 @@ package x.world.sprite {
 		/* @:get, set textWidth Float */
 		
 		public function get textWidth ():Number {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				return m_text.textBounds.width;
 			}
 			else
+			// </AS3>
 			{
 				return m_text.textWidth;
 			}
 		}
 		
-		public function setTextWidth (__value:Number):/* @:set_type */ void {
+		public function set_textWidth (__value:Number):/* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -374,16 +443,22 @@ package x.world.sprite {
 		/* @:get, set textHeight Float */
 		
 		public function get textHeight ():Number {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				return m_text.textBounds.height;
 			}
 			else
+			// </AS3>
 			{
 				return m_text.textHeight;
 			}
 		}
 		
-		public function setTextHeigt (__value:Number):/* @:set_type */ void {
+		public function set_textHeight (__value:Number):/* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -412,9 +487,15 @@ package x.world.sprite {
 		}
 		
 		public function set letterSpacing (__value:Number): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 			}
 			else
+			// </AS3>
 			{
 				m_textFormat.letterSpacing = __value; __format ();
 			}
@@ -431,9 +512,15 @@ package x.world.sprite {
 		}
 		
 		public function set leading (__value:Number): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 			}
 			else
+			// </AS3>
 			{
 				m_textFormat.leading = __value; __format ();
 			}
@@ -450,9 +537,15 @@ package x.world.sprite {
 		}
 		
 		public function set selectable (__value:Boolean): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 			}
 			else
+			// </AS3>
 			{
 				m_text.selectable = __value;
 			}
@@ -469,9 +562,15 @@ package x.world.sprite {
 		}
 		
 		public function set multiline (__value:Boolean): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {	
 			}
 			else
+			// </AS3>
 			{
 				m_text.multiline = __value; __format ();
 			}
@@ -488,9 +587,15 @@ package x.world.sprite {
 		}
 		
 		public function set wordWrap (__value:Boolean): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 			}
 			else
+			// </AS3>
 			{
 				m_text.wordWrap = __value; __format ();
 			}
@@ -543,9 +648,15 @@ package x.world.sprite {
 		}
 		
 		public function set embedFonts (__value:Boolean): /* @:set_type */ void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 			}
 			else
+			// </AS3>
 			{
 				m_text.embedFonts = __value; __format ();
 			}

@@ -41,6 +41,7 @@ package x.texture {
 	
 	// <HAXE>
 	/* --
+	import x.texture.starling.*;
 	-- */
 	// </HAXE>
 	// <AS3>
