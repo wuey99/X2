@@ -532,7 +532,7 @@ package x {
 			
 			i = 0;
 			
-			m_XApp.getXSignalManager ().getXSignals ().forEach (
+			m_XApp.getXSignalManager ().getXSignals ().forEach ( /* @:castkey */
 				function (x:XSignal):void {
 //					trace (": signal: ", i, ": ", x,  ", parent: ", x.getParent ());
 				}
@@ -556,7 +556,7 @@ package x {
 				
 			i = 0;
 				
-			xxx.getXTaskManager ().getTasks ().forEach (
+			xxx.getXTaskManager ().getTasks ().forEach ( /* @:castkey */
 				function (x:XSignal):void {
 //					trace (": task: ",  i,  ": ",  x,  ", parent: ",  x.getParent ());
 					
@@ -567,7 +567,7 @@ package x {
 			trace ("------------------------------");
 			trace ("active tasks XApp: ");
 												
-			m_XApp.getXTaskManager ().getTasks ().forEach (
+			m_XApp.getXTaskManager ().getTasks ().forEach ( /* @:castkey */
 				function (x:XSignal):void {
 //					trace (": task: ",  i, ": ",  x,  ", parent: ", x.getParent ());
 				}

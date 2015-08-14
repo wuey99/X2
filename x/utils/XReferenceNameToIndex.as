@@ -34,14 +34,14 @@ package x.utils {
 	//------------------------------------------------------------------------------------------
 	public class XReferenceNameToIndex  {
 		private var m_referenceNamesStrings:Array; // <String>
-		private var m_referenceNamesCounts:Array; // <Float>
-		private var m_freeReferenceNameIndexes:Array; // <Float>
+		private var m_referenceNamesCounts:Array; // <Int>
+		private var m_freeReferenceNameIndexes:Array; // <Int>
 		
 		//------------------------------------------------------------------------------------------	
 		public function XReferenceNameToIndex () {
 			m_referenceNamesStrings = new Array (); // <String>
-			m_referenceNamesCounts = new Array (); // <Float>
-			m_freeReferenceNameIndexes = new Array (); // <Float>
+			m_referenceNamesCounts = new Array (); // <Int>
+			m_freeReferenceNameIndexes = new Array (); // <Int>
 		}	
 		
 		//------------------------------------------------------------------------------------------
@@ -156,9 +156,9 @@ package x.utils {
 		
 		//------------------------------------------------------------------------------------------
 		public function deserialize (__xml:XSimpleXMLNode):void {
-			m_referenceNamesStrings = new Array ();
-			m_referenceNamesCounts = new Array ();
-			m_freeReferenceNameIndexes = new Array ();
+			m_referenceNamesStrings = new Array (); // <String>
+			m_referenceNamesCounts = new Array (); // <Int>
+			m_freeReferenceNameIndexes = new Array (); // <Int>
 			
 			trace (": XReferenceNameIndex: deserialize: ");
 			

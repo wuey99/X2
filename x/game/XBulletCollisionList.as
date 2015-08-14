@@ -105,7 +105,9 @@ package x.game {
 			
 			m_rects[__layer].forEach (
 				function (x:*):void {
-					if (XRect (m_rects[__layer].get (x)).intersects (__rect)) {
+					var __dstRect:XRect = /* @:cast */ m_rects[__layer].get (x);
+					
+					if (__dstRect.intersects (__rect)) {
 						__logicObject = x as XLogicObject;
 					}
 				}

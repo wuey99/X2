@@ -335,6 +335,12 @@ package x.world {
 //			trace (": kill: ", x, x.m_GUID, x.xxx, xxx);
 				
 			if (xxx.contains (x)) {
+				// <HAXE>
+				/* --
+					xxx.removeChild (x);
+				-- */
+				// </HAXE>
+				// <AS3>
 				if (CONFIG::starling) {
 					xxx.removeChild (x, true);
 				}
@@ -342,6 +348,7 @@ package x.world {
 				{
 					xxx.removeChild (x);
 				}
+				// </AS3>
 			}
 		}
 		
