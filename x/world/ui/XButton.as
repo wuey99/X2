@@ -51,18 +51,19 @@ package x.world.ui {
 		protected var m_keyboardDownSignal:XSignal;
 		protected var m_keyboardUpSignal:XSignal;
 
-		public var NORMAL_STATE:Number = 1;
-		public var OVER_STATE:Number = 2;
-		public var DOWN_STATE:Number = 3;
-		public var SELECTED_STATE:Number = 4;
-		public var DISABLED_STATE:Number = 5;
+		public var NORMAL_STATE:int = 1;
+		public var OVER_STATE:int = 2;
+		public var DOWN_STATE:int = 3;
+		public var SELECTED_STATE:int = 4;
+		public var DISABLED_STATE:int = 5;
 				
-		public var m_label:Number;
-		public var m_currState:Number;
+		public var m_label:int;
+		public var m_currState:int;
 		protected var m_disabledFlag:Boolean;
 				
 //------------------------------------------------------------------------------------------
 		public function XButton () {
+			super ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -253,7 +254,7 @@ package x.world.ui {
 		}
 
 //------------------------------------------------------------------------------------------
-		protected function getNormalState ():Number {
+		protected function getNormalState ():int {
 			return NORMAL_STATE;
 		}
 		
@@ -297,12 +298,12 @@ package x.world.ui {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function gotoState (__label:Number):void {
+		public function gotoState (__label:int):void {
 			m_label = __label;
 		}
 		
 //------------------------------------------------------------------------------------------
-		private function __gotoState (__label:Number):void {
+		private function __gotoState (__label:int):void {
 			m_label = __label;
 		}
 

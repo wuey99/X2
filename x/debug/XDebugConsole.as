@@ -122,7 +122,7 @@ package x.debug  {
 //------------------------------------------------------------------------------------------
 		public function addText (__text:String):void {
 // !STARLING!
-			if (!m_disableOutput > 0) {
+			if (m_disableOutput <= 0) {
 				if (CONFIG::flash) {
 //					m_textArea.v.appendText (__text + "\n");
 //					m_textArea.v.setTextFormat (m_textFormat);
