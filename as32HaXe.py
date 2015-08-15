@@ -1159,6 +1159,7 @@ class Update(object):
 		line = self.convertXML(line)
 		line = self.convertIncludes(line, dst)
 		line = self.convertRemoveAllKeys(line)
+		line = line.replace("starling.display.MovieClip", "openfl.display.MovieClip")
 
 		if not self._skipLine:	
 			dst.write(line)
