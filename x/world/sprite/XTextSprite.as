@@ -146,13 +146,13 @@ package x.world.sprite {
 // </HAXE>
 // <AS3>
 		if (CONFIG::starling) {
-			/* @:get, set filters Array */
+			/* @:get, set filters Array<BitmapFilter? */
 				
-			public function get filters ():Array {
+			public function get filters ():Array /* <BitmapFilter> */ {
 				null
 			}
 			
-			public function set filters (__value:Array): /* @:set_type */ void {
+			public function set filters (__value:Array /* <BitmapFilter> */): /* @:set_type */ void {
 				/* @:set_return null; */			
 			}
 			/* @:end */
@@ -166,13 +166,13 @@ package x.world.sprite {
 // <AS3>
 		if (CONFIG::flash) {
 // </AS3>
-			/* @:override get, set filters Array<Dynamic> */
+			/* @:override get, set filters Array<BitmapFilter> */
 			
-			public override function get filters ():Array /* <Dynamic> */ {
+			public override function get filters ():Array /* <BitmapFilter> */ {
 				return null;
 			}
 			
-			public override function set filters (__value:Array /* <Dynamic> */): /* @:set_type */ void {
+			public override function set filters (__value:Array /* <BitmapFilter> */): /* @:set_type */ void {
 				m_text.filters = __value;
 				
 				/* @:set_return null; */			

@@ -1,5 +1,6 @@
-package x.texture
-{
+package x.texture {
+	import x.type.*;
+	
 	import flash.geom.Rectangle;
 	
 	/*
@@ -61,13 +62,15 @@ package x.texture
 		}
 		
 		[Inline]
-		final protected function quickFindPositionForNewNodeBestAreaFit(width:Number, height:Number):Rectangle {
-			var score:int = int.MAX_VALUE;
+		protected function quickFindPositionForNewNodeBestAreaFit(width:Number, height:Number):Rectangle {
+			var score:Number = XType.Number_MAX_VALUE ();
 			var areaFit:Number;
 			var r:Rectangle;
 			var bestNode:Rectangle = new Rectangle();
 			
-			for(var i:int = 0, l:int = freeRectangles.length; i < l; i++) {
+			var l:int = freeRectangles.length;
+				
+			for (var i:int = 0; i < l; i++) {
 				r = freeRectangles[i];
 				// Try to place the rectangle in upright (non-flipped) orientation.
 				if (r.width >= width && r.height >= height) {
@@ -157,7 +160,7 @@ package x.texture
 		}
 		
 		[Inline]
-		final protected function isContainedIn(a:Rectangle, b:Rectangle):Boolean {
+		protected function isContainedIn(a:Rectangle, b:Rectangle):Boolean {
 			return a.x >= b.x && a.y >= b.y	&& a.x + a.width <= b.x + b.width && a.y + a.height <= b.y + b.height;
 		}
 	}
