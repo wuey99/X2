@@ -1055,7 +1055,7 @@ class Update(object):
 
 	#-----------------------------------------------------------------------------
 	def convertXML(self, line):
-		if not (self._src_folder.startswith("x\\resource") or self._src_fileName == "XApp.as"):
+		if not (self._src_folder.startswith("x\\resource") or self._src_fileName == "XApp.as" or self._src_fileName == "TextureAtlas.as" or self._src_fileName == "XStaticSubTextureManager.as"):
 			return line
 			
 		line = line.replace(":XMLList", ":Array<XSimpleXMLNode>")
