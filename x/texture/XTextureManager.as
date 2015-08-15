@@ -70,7 +70,7 @@ package x.texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function createSubManager (__name:String, __width:Number=2048, __height:Number=2048):XSubTextureManager {
+		public function createSubManager (__name:String, __width:int=2048, __height:int=2048):XSubTextureManager {
 			var __subManager:XSubTextureManager = new XStaticSubTextureManager (m_XApp, __width, __height);
 			m_subManagers.set (__name, __subManager);
 			
@@ -78,7 +78,7 @@ package x.texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createDynamicSubManager (__name:String, __width:Number=2048, __height:Number=2048):XSubTextureManager {
+		public function createDynamicSubManager (__name:String, __width:int=2048, __height:int=2048):XSubTextureManager {
 			var __subManager:XSubTextureManager = new XDynamicSubTextureManager (m_XApp, __width, __height);
 			m_subManagers.set (__name, __subManager);
 			
@@ -86,7 +86,7 @@ package x.texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createStaticSubManager (__name:String, __width:Number=2048, __height:Number=2048):XSubTextureManager {
+		public function createStaticSubManager (__name:String, __width:int=2048, __height:int=2048):XSubTextureManager {
 			var __subManager:XSubTextureManager = new XStaticSubTextureManager (m_XApp, __width, __height);
 			m_subManagers.set (__name, __subManager);
 			

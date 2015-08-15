@@ -61,15 +61,15 @@ package x.texture {
 		
 		protected var m_packer:MaxRectPacker;
 		
-		protected var TEXTURE_WIDTH:Number = 2048;
-		protected var TEXTURE_HEIGHT:Number = 2048;
+		protected var TEXTURE_WIDTH:int = 2048;
+		protected var TEXTURE_HEIGHT:int = 2048;
 			
 		protected var m_queue:XDict; // <String, Int>
 		
 		protected var m_count:int;
 		
 		//------------------------------------------------------------------------------------------
-		public function XSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
+		public function XSubTextureManager (__XApp:XApp, __width:int=2048, __height:int=2048) {
 			m_XApp = __XApp;
 			
 			TEXTURE_WIDTH = __width;
@@ -166,7 +166,7 @@ package x.texture {
 				return null;
 			}
 			
-			var __movieClipMetadata:Array /* <Rectangle> */ = m_movieClips.get (__className);
+			var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
 			
 			if (__movieClipMetadata.length == 0) {
 				return null;
@@ -185,7 +185,14 @@ package x.texture {
 				__textures = __textures.concat (__atlas.getTextures (__className));
 			}
 
+			// <HAXE>
+			/* --
+			var __movieClip:MovieClip = new MovieClip ();
+			-- */
+			// </HAXE>
+			// <AS3>
 			var __movieClip:MovieClip = new MovieClip (__textures);
+			// </AS3>
 			
 			__movieClip.pivotX = -__rect.x;
 			__movieClip.pivotY = -__rect.y;
@@ -231,6 +238,7 @@ package x.texture {
 			var _margin:Number = 2.0;
 			
 			var realBounds:Rectangle = new Rectangle(0, 0, bounds.width + _margin * 2, bounds.height + _margin * 2);
+			var tmpBData:BitmapData;
 			
 			// Checking filters in case we need to expand the outer bounds
 			if (clip.filters.length > 0)
@@ -240,23 +248,22 @@ package x.texture {
 				//var clipFilters:Array /* <Dynamic> */ = clipChild.filters.concat();
 				var clipFilters:Array /* <Dynamic> */ = clip.filters;
 				var clipFiltersLength:int = clipFilters.length;
-				var tmpBData:BitmapData;
 				var filterRect:Rectangle;
 				
-				tmpBData = new BitmapData(realBounds.width, realBounds.height, false);
+				tmpBData = new BitmapData (int (realBounds.width), int (realBounds.height), false);
 				filterRect = tmpBData.generateFilterRect(tmpBData.rect, clipFilters[j]);
 				tmpBData.dispose();
 				
 				while (++j < clipFiltersLength)
 				{
-					tmpBData = new BitmapData(filterRect.width, filterRect.height, true, 0);
+					tmpBData = new BitmapData (int (filterRect.width), int (filterRect.height), true, 0);
 					filterRect = tmpBData.generateFilterRect(tmpBData.rect, clipFilters[j]);
 					realBounds = realBounds.union(filterRect);
 					tmpBData.dispose();
 				}
 			}
 			
-			realBounds.offset(bounds.x, bounds.y);
+			realBounds.offset (bounds.x, bounds.y);
 			realBounds.width = Math.max(realBounds.width, 1);
 			realBounds.height = Math.max(realBounds.height, 1);
 			

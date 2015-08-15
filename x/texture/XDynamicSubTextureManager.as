@@ -57,7 +57,7 @@ package x.texture {
 		protected var m_currentTexture:RenderTexture;
 		
 		//------------------------------------------------------------------------------------------
-		public function XDynamicSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
+		public function XDynamicSubTextureManager (__XApp:XApp, __width:int=2048, __height:int=2048) {
 			super (__XApp, __width, __height);
 		}
 		
@@ -76,7 +76,7 @@ package x.texture {
 		public override function start ():void {
 			reset ();
 			
-			m_movieClips = new XDict ();  // <String, Array>
+			m_movieClips = new XDict ();  // <String, Array<Dynamic>>
 			m_textures = new Array (); // <RenderTexture>
 			m_atlases = new Array (); // <TextureAtlas>
 			
@@ -151,7 +151,7 @@ package x.texture {
 				__matrix.scale (__scaleX, __scaleY);
 				__matrix.translate (-__realBounds.x*__scaleX, -__realBounds.y*__scaleY);
 				
-				var __bitmapData:BitmapData = new BitmapData (__rect.width, __rect.height);
+				var __bitmapData:BitmapData = new BitmapData (int (__rect.width), int (__rect.height));
 				var __fillRect:Rectangle = new Rectangle (0, 0, __rect.width, __rect.height);
 				__bitmapData.fillRect (
 					__fillRect, 0x00000000
@@ -180,7 +180,7 @@ package x.texture {
 				
 				var __textures:Vector.<Texture> = __atlas.getTextures (__className);
 				
-				if (__textures.length) {
+				if (__textures.length > 0) {
 					__movieClipMetadata.push (__atlas);
 				}
 			}

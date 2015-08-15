@@ -43,6 +43,11 @@ package x.texture.starling {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public static function fromBitmap (bitmap:Bitmap, generateMipMaps:Boolean = true, scale:Number = 1):Image {
+			return null;
+		}
+		
+		//------------------------------------------------------------------------------------------
 		/* @:get, set texture Texture */
 		
 		public function get texture ():Texture {

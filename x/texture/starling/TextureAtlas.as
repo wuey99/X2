@@ -36,7 +36,7 @@ package x.texture.starling {
 	public class TextureAtlas extends Object {
 		
 		//------------------------------------------------------------------------------------------
-		public function TextureAtlas (texture:Texture, atlasXML:XML):void {
+		public function TextureAtlas (texture:Texture, atlasXML:XML = null):void {
 		}
 
 		//------------------------------------------------------------------------------------------
@@ -45,6 +45,16 @@ package x.texture.starling {
 		
 		//------------------------------------------------------------------------------------------
 		public function addRegion (name:String, region:Rectangle, frame:Rectangle = null, rotated:Boolean = false):void {	
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getTexture(name:String):Texture {
+			return null;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getTextures (prefix:String, result:Vector.<Texture> = null):Vector.<Texture> {
+			return null;
 		}
 		
 	//------------------------------------------------------------------------------------------

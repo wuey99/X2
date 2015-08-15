@@ -57,7 +57,7 @@ package x.texture {
 		protected var m_currentAtlasText:String;
 		
 		//------------------------------------------------------------------------------------------
-		public function XStaticSubTextureManager (__XApp:XApp, __width:Number=2048, __height:Number=2048) {
+		public function XStaticSubTextureManager (__XApp:XApp, __width:int=2048, __height:int=2048) {
 			super (__XApp, __width, __height);
 		}
 		
@@ -81,7 +81,7 @@ package x.texture {
 		public override function start ():void {
 			reset ();
 			
-			m_movieClips = new XDict ();  // <String, Array>
+			m_movieClips = new XDict ();  // <String, Array<Dynamic>>
 			m_atlases = new Array (); // <TextureAtlas>
 			
 			__begin ();
@@ -95,14 +95,14 @@ package x.texture {
 				function (x:*):void {
 					var __className:String = x as String;
 					
-					var __movieClipMetadata:Array /* <Dynanmic> */ = m_movieClips.get (__className);
+					var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
 					
 					for (var i:int = 0; i < m_atlases.length; i++) {
 						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
 						
 						var __textures:Vector.<Texture> = __atlas.getTextures (__className);
 						
-						if (__textures.length) {
+						if (__textures.length > 0) {
 							__movieClipMetadata.push (__atlas);
 						}
 					}

@@ -63,6 +63,11 @@ package x.world.sprite {
 		public override function cleanup ():void {
 			super.cleanup ();
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				if (m_movieClip != null) {
 					m_movieClip.removeFromParent (true);
@@ -72,16 +77,23 @@ package x.world.sprite {
 					m_movieClip = null;
 				}
 			}
+			// </AS3>
 		}
 
 		//------------------------------------------------------------------------------------------
 		public function initWithMovieClip (__movieClip:MovieClip):void {
 			m_movieClip = __movieClip;
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				m_movieClip.touchable = true;
 			}
 			else
+			// </AS3>
 			{
 				m_movieClip.mouseEnabled = false;
 			}
@@ -98,6 +110,11 @@ package x.world.sprite {
 			var __taskManager:XTaskManager =
 				__xxx != null ? __xxx.getXTaskManager () : __XApp.getXTaskManager ();
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				var __textureManager:XTextureManager =
 					__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
@@ -112,7 +129,7 @@ package x.world.sprite {
 							XTask.FLAGS, function (__task:XTask):void {
 								__movieClip = __textureManager.createMovieClip (__className);
 								
-								__task.ifTrue (__movieClip);
+								__task.ifTrue (__movieClip != null);
 							}, XTask.BNE, "loop",
 							
 							function ():void {
@@ -128,6 +145,7 @@ package x.world.sprite {
 				}
 			}
 			else
+			// </AS3>
 			{
 				var __class:Class /* <Dynamic> */ = __xxx.getClass (__className);
 				
@@ -186,6 +204,11 @@ package x.world.sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndPlay (__frame:int):void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				if (m_movieClip != null) {
 					if (__frame > m_movieClip.numFrames) {
@@ -197,6 +220,7 @@ package x.world.sprite {
 				}
 			}
 			else
+			// </AS3>
 			{
 				if (m_movieClip != null) {
 					m_movieClip.gotoAndPlay (__frame);
@@ -206,9 +230,15 @@ package x.world.sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStopAtLabel (__label:String) {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {	
 			}
 			else
+			// </AS3>
 			{
 				m_movieClip.gotoAndStop (__label);
 			}
@@ -216,6 +246,11 @@ package x.world.sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public function gotoAndStop (__frame:int):void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				if (m_movieClip != null) {
 					if (__frame > m_movieClip.numFrames) {
@@ -227,6 +262,7 @@ package x.world.sprite {
 				}
 			}
 			else
+			// </AS3>
 			{
 				if (m_movieClip != null) {
 					m_movieClip.gotoAndStop (__frame);
@@ -256,26 +292,38 @@ package x.world.sprite {
 				return 0.0;
 			}
 			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
 				return m_movieClip.rotation * 180/Math.PI;
 			}
 			else
+			// </AS3>
 			{
 				return m_movieClip.rotation;
 			}
 		}
 		
 		public override function set rotation (__value:Number): /* @:set_type */ void {
-			if (m_movieClip == null) {
-				return;
-			}
-			
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			if (CONFIG::starling) {
-				m_movieClip.rotation = __value * Math.PI/180;
+				if (m_movieClip != null) {
+					m_movieClip.rotation = __value * Math.PI/180;
+				}
 			}
 			else
+			// </AS3>
 			{
-				m_movieClip.rotation = __value;
+				if (m_movieClip != null) {
+					m_movieClip.rotation = __value;
+				}
 			}
 			
 			/* @:set_return 0; */			
@@ -286,7 +334,7 @@ package x.world.sprite {
 		/* @:override get, set alpha Float */
 		
 		public override function get alpha ():Number {
-			if (!m_movieClip) {
+			if (m_movieClip == null) {
 				return 1.0;
 			}
 			
@@ -294,11 +342,9 @@ package x.world.sprite {
 		}
 		
 		public override function set alpha (__value:Number): /* @:set_type */ void {
-			if (m_movieClip == null) {
-				return;
+			if (m_movieClip != null) {
+				m_movieClip.alpha = __value;
 			}
-			
-			m_movieClip.alpha = __value;
 			
 			/* @:set_return 0; */			
 		}
@@ -377,11 +423,9 @@ package x.world.sprite {
 		}
 		
 		public override function set scaleX (__value:Number): /* @:set_type */ void {
-			if (m_movieClip == null) {
-				return;
+			if (m_movieClip != null) {
+				m_movieClip.scaleX = __value;
 			}
-			
-			m_movieClip.scaleX = __value;
 			
 			/* @:set_return 0; */			
 		}
@@ -399,11 +443,9 @@ package x.world.sprite {
 		}		
 		
 		public override function set scaleY (__value:Number): /* @:set_type */ void {
-			if (m_movieClip == null) {
-				return;
+			if (m_movieClip != null) {
+				m_movieClip.scaleY = __value;
 			}
-			
-			m_movieClip.scaleY = __value;
 			
 			/* @:set_return 0; */			
 		}
