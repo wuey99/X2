@@ -115,7 +115,7 @@ class Update(object):
 		
 # XDict (); // <key, type>
 #    --> Map<key, type> ();
-		converted = self.convertArrayOrMap (line, "__X$Dict__ ()", "__M$ap__", " ()");
+		converted = self.convertArrayOrMap (line, "__X$Dict__ ()", "__M$ap1__", " ()");
 			
 		line = converted
 		
@@ -123,7 +123,7 @@ class Update(object):
 #    --> Map<key, type>;			
 # XDict /* <key, type> */
 #    --> Map<key, type>
-		converted = self.convertArrayOrMap (line, "XDict", "Map");
+		converted = self.convertArrayOrMap (line, "XDict", "__M$ap2__");
 		
 		line = converted
 			
@@ -149,7 +149,15 @@ class Update(object):
 		
 		line = converted
 			
-		line = line.replace("__M$ap__", "Map")
+		line = line.replace("__M$ap1__", "__MAP__")
+		line = line.replace("__M$ap2__", "__MAP__")
+		
+		if line.find("__MAP__") >= 0:
+			if line.find("<Dynamic,") >= 0:
+				line = line.replace("__MAP__", "ObjectMap")
+			else:
+				line = line.replace("__MAP__", "Map")
+				
 		line = line.replace("__A$rray__", "Array")
 		
 		return line
