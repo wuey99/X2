@@ -77,7 +77,7 @@ package x.bitmap {
 		public function initWithScalingXY (__XApp:XApp, __movieClip:MovieClip, __scaleX:Number, __scaleY:Number):void {
 			var i:Number;
 			var __width:Number, __height:Number;
-			var __rect:Rectangle;
+			var __rect:Rectangle = null;
 			
 			__width = 0;
 			__height = 0;
