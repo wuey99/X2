@@ -29,6 +29,14 @@ package x.pool {
 	
 	import x.collections.*;
 	
+	// <HAXE>
+	/* --
+	import haxe.ds.ObjectMap;
+	-- */
+	// </HAXE>
+	// <AS3>
+	// </AS3>
+	
 //------------------------------------------------------------------------------------------	
 	public class XSubObjectPoolManager extends Object {
 		private var m_manager:XObjectPoolManager;

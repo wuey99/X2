@@ -29,6 +29,14 @@ package x.pool {
 	
 	import x.collections.*;
 	
+	// <HAXE>
+	/* --
+	import haxe.ds.ObjectMap;
+	-- */
+	// </HAXE>
+	// <AS3>
+	// </AS3>
+	
 //------------------------------------------------------------------------------------------	
 	public class XObjectPoolManager extends Object {
 		public var m_freeObjects:Array; // <Dynamic>

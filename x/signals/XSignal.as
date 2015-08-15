@@ -29,6 +29,14 @@ package x.signals {
 
 	import x.collections.*;
 
+	// <HAXE>
+	/* --
+	import haxe.ds.ObjectMap;
+	-- */
+	// </HAXE>
+	// <AS3>
+	// </AS3>
+	
 //------------------------------------------------------------------------------------------
 	public class XSignal extends Object {
 		private var m_listeners:XDict; // <Dynamic, Int>
