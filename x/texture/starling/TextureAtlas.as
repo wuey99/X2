@@ -27,6 +27,8 @@
 //------------------------------------------------------------------------------------------
 package x.texture.starling {
 	
+	import x.xml.*;
+	
 	import flash.display.*;
 	import flash.geom.*;
 	

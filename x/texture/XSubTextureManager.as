@@ -40,6 +40,7 @@ package x.texture {
 	// <HAXE>
 	/* --
 	import x.texture.starling.*;
+	import flash.display.*;
 	-- */
 	// </HAXE>
 	// <AS3>

@@ -74,7 +74,7 @@ package x.texture {
 		public function isQueued (__className:String):Boolean {
 			var __movieClip:XMovieClip = m_movieClips.get (__className);
 			
-			if (!__movieClip.getMovieClip ()) {
+			if (__movieClip.getMovieClip () == null) {
 				return true;
 			}
 			else

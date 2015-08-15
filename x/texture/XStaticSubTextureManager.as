@@ -34,6 +34,7 @@ package x.texture {
 	import x.world.sprite.*;
 	import x.XApp;
 	import x.texture.MaxRectPacker;
+	import x.xml.*;
 	
 	import flash.display.BitmapData;
 	import flash.geom.*;
@@ -175,7 +176,7 @@ package x.texture {
 				
 				var __matrix:Matrix = new Matrix ();
 				__matrix.scale (__scaleX, __scaleY);
-				__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y)
+				__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y);
 				m_currentBitmap.draw (__movieClip, __matrix);
 				
 				var __subText:String = '<SubTexture name="'+__className+'_' + __generateIndex (i) + '" ' +
@@ -192,7 +193,7 @@ package x.texture {
 		}	
 		
 		//------------------------------------------------------------------------------------------
-		protected override  function __begin ():void {
+		protected override function __begin ():void {
 			var __rect:Rectangle = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			m_currentBitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
 			m_currentBitmap.fillRect (__rect, 0x00000000);
