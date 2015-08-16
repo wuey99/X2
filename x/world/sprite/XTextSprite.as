@@ -53,7 +53,7 @@ package x.world.sprite {
 			__height:Number=32,
 			__text:String="",
 			__fontName:String="Aller",
-			__fontSize:Number=12,
+			__fontSize:int=12,
 			__color:int=0x000000,
 			__bold:Boolean=false,
 			__embedFonts:Boolean = true
@@ -265,13 +265,13 @@ package x.world.sprite {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set size Float */
+		/* @:get, set size Int */
 		
-		public function get size ():Number {
+		public function get size ():int {
 			return 0;
 		}
 		
-		public function set size (__val:Number): /* @:set_type */ void {
+		public function set size (__val:int): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -505,13 +505,13 @@ package x.world.sprite {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set leading Float */
+		/* @:get, set leading Int */
 		
-		public function get leading ():Number {
+		public function get leading ():int {
 			return 0;
 		}
 		
-		public function set leading (__val:Number): /* @:set_type */ void {
+		public function set leading (__val:int): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */

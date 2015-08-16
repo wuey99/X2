@@ -92,7 +92,7 @@ package x.text {
 			__height:Number=32,
 			__text:String="",
 			__fontName:String="Aller",
-			__fontSize:Number=12,
+			__fontSize:int=12,
 			__color:int=0x000000,
 			__bold:Boolean=false
 		):void {
