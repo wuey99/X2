@@ -141,7 +141,14 @@ package x.resource.types {
 						__loaderContext = new LoaderContext();
 					}
 
+					// <HAXE>
+					/* --
+					m_loader.loadBytes(m_urlLoader.data);
+					-- */
+					// </HAXE>
+					// <AS3>
 					m_loader.loadBytes(m_urlLoader.data, __loaderContext);
+					// </AS3>
  				}
  				catch (e:Error) {
 					throw (XType.createError ("Load resource error: " + e));

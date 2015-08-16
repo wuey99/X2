@@ -96,7 +96,14 @@ package x.resource.types {
 
 					__loaderContext.allowCodeImport = true;
 					
+					// <HAXE>
+					/* --
+					m_loader.loadBytes (XType.createInstance (m_resourceManager.findEmbeddedResource (m_resourcePath)));
+					-- */
+					// </HAXE>
+					// <AS3>
 					m_loader.loadBytes (XType.createInstance (m_resourceManager.findEmbeddedResource (m_resourcePath)), __loaderContext);
+					// </AS3>
  				}
  				catch (e:Error) {
 					throw (XType.createError ("Load resource error: " + e));
