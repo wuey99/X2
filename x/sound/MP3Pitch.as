@@ -156,7 +156,19 @@ package x.sound {
 			var need:int = Math.ceil( scaledBlockSize ) + 2;
 			
 			//-- EXTRACT SAMPLES
+			
+			// <HAXE>
+			/* --
+			#if windows
+			var read:Int = 0;
+			#else
+			var read:Int = Std.int (m_mp3.extract( _target, need, positionInt ));
+			#end
+			-- */
+			// </HAXE>
+			// <AS3>
 			var read:int = int (m_mp3.extract( _target, need, positionInt ));
+			// </AS3>
 			
 			var n:uint;
 			
