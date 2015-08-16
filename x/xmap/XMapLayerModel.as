@@ -702,7 +702,7 @@ package x.xmap {
 
 			tiles = new Array (); // <Int>
 			for (var i:int = 0; i< cols * rows; i++) {
-				tiles.push (null);
+				tiles.push (0);
 			}
 			
 			for (var row:int=r1; row <= r2; row++) {

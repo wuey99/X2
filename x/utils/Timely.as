@@ -71,7 +71,7 @@ package x.utils {
 			// Now that we are very close to the beginning of the millisecond we
 			// are in a position to count the number of iterations we can
 			// achieve in each subsequent millisecond.
-			var iterationCount:int;
+			var iterationCount:int = 0;
 			targetMS = getTimer() + msToCalibrate;
 			do
 			{
@@ -128,7 +128,7 @@ package x.utils {
 			// during calibration until the millisecond ends in order to
 			// determine the amount of the millisecond that occurred before the
 			// call to this function.
-			var iterationCount:int;
+			var iterationCount:int = 0;
 			var targetMS:int = getTimer() + 1;
 			do
 			{

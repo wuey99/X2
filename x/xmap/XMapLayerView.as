@@ -34,6 +34,7 @@ package x.xmap {
 	import x.world.logic.*;
 	import x.world.sprite.*;
 	import x.xmap.*;
+	import x.type.*;
 	
 	import flash.geom.*;
 	import flash.text.*;
@@ -160,7 +161,7 @@ package x.xmap {
 			
 			var __object:* = m_logicClassNameToClass (__item.logicClassName);
 				
-			if (__object is Function) {
+			if (XType.isFunction (__object)) {
 				// <HAXE>
 				/* --
 				__logicObject = cast (__object ());

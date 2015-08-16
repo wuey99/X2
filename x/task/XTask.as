@@ -311,7 +311,7 @@ package x.task {
 			while (i < m_taskList.length) {
 				var value:* = m_taskList[i++];
 				
-				if (value is Function) {
+				if (XType.isFunction (value)) {
 				}
 				else
 				{
@@ -416,7 +416,7 @@ package x.task {
 			var value:* = m_taskList[m_taskIndex++];
 			
 			//------------------------------------------------------------------------------------------
-			if (value is Function) {
+			if (XType.isFunction (value)) {
 				value ();
 				
 				return true;

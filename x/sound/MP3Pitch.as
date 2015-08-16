@@ -195,10 +195,10 @@ package x.sound {
 		private function writeData(data:ByteArray, alpha:Number, n:uint, positionTargetNum:Number):void {
 			var positionTargetInt:int = -1;
 			
-			var l0:Number;
-			var r0:Number;
-			var l1:Number;
-			var r1:Number;
+			var l0:Number = 0;
+			var r0:Number = 0;
+			var l1:Number = 0;
+			var r1:Number = 0;
 			
 			for (var i:int = 0; i < n; ++i )
 			{

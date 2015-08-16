@@ -108,7 +108,7 @@ package x.world.sprite {
 			
 			m_sprite.visible = __visible;
 			
-			/* @:set_return null; */			
+			/* @:set_return true; */			
 		}
 		/* @:end */
 		
