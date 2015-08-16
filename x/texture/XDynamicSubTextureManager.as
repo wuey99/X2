@@ -114,8 +114,8 @@ package x.texture {
 			var __scaleX:Number = 1.0;
 			var __scaleY:Number = 1.0;
 			var __padding:Number = 2.0;
-			var __rect:Rectangle;
-			var __realBounds:Rectangle;
+			var __rect:Rectangle = null;
+			var __realBounds:Rectangle = null;
 
 			var i:int;
 			
