@@ -786,6 +786,7 @@ class Update(object):
 	#-----------------------------------------------------------------------------
 	def convertGettersAndSetters(self, line):
 	
+		#-----------------------------------------------------------------------------
 		def getterSetterDefinition(pos, line):	
 			self._getterSetterMode = True
 			self._getterSetterOverride2 = False
@@ -804,7 +805,8 @@ class Update(object):
 			)
 			
 			return line
-			
+	
+		#-----------------------------------------------------------------------------		
 		def overrideGetterSetterDefinition(pos, line):	
 			self._getterSetterMode = True
 			self._getterSetterOverride2 = False
@@ -826,7 +828,8 @@ class Update(object):
 			'''
 			
 			return line
-			
+	
+		#-----------------------------------------------------------------------------		
 		def override2GetterSetterDefinition(pos, line):	
 			self._getterSetterMode = True
 			self._getterSetterOverride2 = True
@@ -848,7 +851,40 @@ class Update(object):
 			'''
 			
 			return line
+	
+		#-----------------------------------------------------------------------------
+		# @:override2: leave things along
+		#
+		# @:override:
+		#    flash: remove override
+		#    windows: keep override
+		#-----------------------------------------------------------------------------
+		def cleanupOverride2A(line):
+#			line = line.replace("public override", "public")
+			line = line.replace("// void {", "")
 			
+			return line
+			
+		def cleanupOverride2B(line):
+			beg = line.find("public")
+			end = line.find("{")
+			
+			if beg < 0 or end < 0:
+				return line
+				
+			windows = line[beg:end+1]
+			flash = line[beg:end+1]
+			flash = flash.replace("public override", "public")
+			
+			final = line.replace(windows, "#if windows " + windows + " #else " + flash + " #end")
+			
+			print ": =================================>: ", windows
+			print ": =================================>: ", flash
+			print ": ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>: ", final
+			 
+			return final		
+			
+		#-----------------------------------------------------------------------------		
 		pos = line.find("/* @:get, set")
 		if pos >= 0:
 			return getterSetterDefinition(pos, line)
@@ -867,8 +903,9 @@ class Update(object):
 		line = line.replace("function get " + self._getterSetterLabel, "function get_" + self._getterSetterLabel)
 		line = line.replace("function set " + self._getterSetterLabel, "function set_" + self._getterSetterLabel)
 		line = line.replace("/* @:set_type */", self._getterSetterType + " { //")
+		
 		if not self._getterSetterOverride2:
-			line = line.replace("public override", "public")
+			line = cleanupOverride2A(line)
 			
 		pos = line.find("/* @:set_return")
 		if pos >= 0:
@@ -880,10 +917,16 @@ class Update(object):
 			
 			line = line.replace("/* @:set_return " + returnValue + "; */", "return " + returnValue + ";")
 			
+			if not self._getterSetterOverride2:
+				line = cleanupOverride2B(line)
+			
 			return line
 			
 		if line.find("/* @:end */") >= 0:
 			self._getterSetterMode = False
+			
+		if not self._getterSetterOverride2:
+			line = cleanupOverride2B(line)
 			
 		return line
 	
