@@ -153,7 +153,9 @@ class Update(object):
 		line = line.replace("__M$ap2__", "__MAP__")
 		
 		if line.find("__MAP__") >= 0:
-			if line.find("<Dynamic,") >= 0:
+			if line.find("<Class<Dynamic>,") >= 0:
+				line = line.replace("__MAP__", "ClassMap")			
+			elif line.find("<Dynamic,") >= 0:
 				line = line.replace("__MAP__", "ObjectMap")
 			else:
 				line = line.replace("__MAP__", "Map")
