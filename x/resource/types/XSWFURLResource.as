@@ -74,86 +74,6 @@ package x.resource.types {
 		}
 
 //------------------------------------------------------------------------------------------
-/*
-		public override function loadAsync ():void {		
-			m_loader = new Loader();
-
-			var __loaderContext:LoaderContext = new LoaderContext ();
-        	__loaderContext.applicationDomain = new ApplicationDomain (ApplicationDomain.currentDomain);
-       
-       		trace (":--------------------------------------------");
-       		trace (": ", m_resourcePath);
-       		trace (":============================================");
-       		
-			var __urlReq:URLRequest = new URLRequest (m_resourcePath);
-
-			__configureListeners (m_loader.contentLoaderInfo);
-			
-			m_loader.load (__urlReq, __loaderContext);
-						
-			m_parent.addChild (m_loader);
-			m_loader.visible = false;
-
-	//------------------------------------------------------------------------------------------
-			function __configureListeners(dispatcher:IEventDispatcher):void {
-				dispatcher.addEventListener (Event.COMPLETE, __completeHandler);
-				dispatcher.addEventListener (HTTPStatusEvent.HTTP_STATUS, __httpStatusHandler);
-				dispatcher.addEventListener (Event.INIT, __initHandler);
-				dispatcher.addEventListener (IOErrorEvent.IO_ERROR, __ioErrorHandler);
-				dispatcher.addEventListener (Event.OPEN, __openHandler);
-				dispatcher.addEventListener (ProgressEvent.PROGRESS, __progressHandler);
-				dispatcher.addEventListener (Event.UNLOAD, __unLoadHandler);
-			}
-		
-	//------------------------------------------------------------------------------------------											
-     	   function __completeHandler(event:Event):void {
-        	    trace("completeHandler: " + event);
-            
-				trace ("xxx url: ", m_loader.contentLoaderInfo.url);
-				trace ("xxx actionScriptVersion: ", m_loader.contentLoaderInfo.actionScriptVersion);		
-				
-				m_loader.contentLoaderInfo.removeEventListener (Event.COMPLETE, __completeHandler);
-				
-				m_loadComplete = true;
-        	}
-
-	//------------------------------------------------------------------------------------------
-        	function __httpStatusHandler(event:HTTPStatusEvent):void {
-            	trace("httpStatusHandler: " + event);
-        	}
-
-	//------------------------------------------------------------------------------------------
-        	function __initHandler(event:Event):void {
-            	trace("initHandler: " + event);
-        	}
-
-	//------------------------------------------------------------------------------------------
-        	function __ioErrorHandler(event:IOErrorEvent):void {
-            	trace("ioErrorHandler: " + event);
-        	}
-
-	//------------------------------------------------------------------------------------------
-        	function __openHandler(event:Event):void {
-            	trace("openHandler: " + event);
-        	}
-
-	//------------------------------------------------------------------------------------------
-        	function __progressHandler(event:ProgressEvent):void {
-            	trace("progressHandler: bytesLoaded=" + event.bytesLoaded + " bytesTotal=" + event.bytesTotal);
-        	}
-
-	//------------------------------------------------------------------------------------------
-        	function __unLoadHandler(event:Event):void {
-            	trace("unLoadHandler: " + event);
-        	}
-        	
-//------------------------------------------------------------------------------------------
-// loadASync
-//------------------------------------------------------------------------------------------
-		}
-*/
-
-//------------------------------------------------------------------------------------------
 		public function __fixPath (__path:String):String {
 			var __newPath:String = "";
 			var __previous:Boolean = false;
@@ -255,7 +175,7 @@ package x.resource.types {
         	    trace("completeHandler: " + event);
             
 				trace ("xxx url: ", m_loader.contentLoaderInfo.url);
-				trace ("xxx actionScriptVersion: ", m_loader.contentLoaderInfo.actionScriptVersion);		
+//				trace ("xxx actionScriptVersion: ", m_loader.contentLoaderInfo.actionScriptVersion);		
 						
 				__removeListeners (m_loader.contentLoaderInfo);
 				

@@ -130,7 +130,7 @@ package x.resource.types {
         	    trace("completeHandler: " + event);
             
 				trace ("xxx url: ", m_loader.contentLoaderInfo.url);
-				trace ("xxx actionScriptVersion: ", m_loader.contentLoaderInfo.actionScriptVersion);		
+//				trace ("xxx actionScriptVersion: ", m_loader.contentLoaderInfo.actionScriptVersion);		
 						
 				__removeListeners (m_loader.contentLoaderInfo);
 				
