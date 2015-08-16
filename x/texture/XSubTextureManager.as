@@ -192,10 +192,9 @@ package x.texture {
 			// </HAXE>
 			// <AS3>
 			var __movieClip:MovieClip = new MovieClip (__textures);
-			// </AS3>
-			
 			__movieClip.pivotX = -__rect.x;
 			__movieClip.pivotY = -__rect.y;
+			// </AS3>
 			
 			return __movieClip;
 		}
