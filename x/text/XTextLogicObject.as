@@ -144,7 +144,7 @@ package x.text {
 			return m_text;
 		}
 		
-		public function set text (__value:XTextSprite): /* @:set_type */ void {
+		public function set text (__val:XTextSprite): /* @:set_type */ void {
 			/* @:set_return null; */			
 		}
 		/* @:end */

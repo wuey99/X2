@@ -70,7 +70,7 @@ package x.world.sprite {
 			return this;
 		}
 		
-		public function set childList (__value:Sprite): /* @:set_type */ void {
+		public function set childList (__val:Sprite): /* @:set_type */ void {
 			
 			/* @:set_return null; */			
 		}
@@ -91,8 +91,8 @@ package x.world.sprite {
 				return super.rotation * 180/Math.PI;
 			}
 			
-			public override function set rotation (__value:Number): /* @:set_type */ void {
-				super.rotation = __value * Math.PI/180;
+			public override function set rotation (__val:Number): /* @:set_type */ void {
+				super.rotation = __val * Math.PI/180;
 				
 				/* @:set_return 0; */			
 			}
@@ -105,7 +105,7 @@ package x.world.sprite {
 				return 0;
 			}
 			
-			public function set mouseX (__value:Number): /* @:set_type */ void {
+			public function set mouseX (__val:Number): /* @:set_type */ void {
 				/* @:set_return 0; */			
 			}
 			/* @:end */
@@ -117,7 +117,7 @@ package x.world.sprite {
 				return 0;
 			}
 			
-			public function set mouseY (__value:Number): /* @:set_type */ void {
+			public function set mouseY (__val:Number): /* @:set_type */ void {
 				/* @:set_return 0; */			
 			}
 			/* @:end */
@@ -129,7 +129,7 @@ package x.world.sprite {
 				return true;
 			}
 			
-			public function set mouseEnabled (__value:Boolean): /* @:set_type */ void {
+			public function set mouseEnabled (__val:Boolean): /* @:set_type */ void {
 				/* @:set_return true; */			
 			}
 			/* @:end */
@@ -141,7 +141,7 @@ package x.world.sprite {
 				return true;
 			}
 			
-			public function set mouseChildren (__value:Boolean): /* @:set_type */ void {
+			public function set mouseChildren (__val:Boolean): /* @:set_type */ void {
 				/* @:set_return true; */			
 			}
 			/* @:end */

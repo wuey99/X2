@@ -125,7 +125,7 @@ package x.xmap {
 			return m_useArrayItems;
 		}
 		
-		public function set useArrayItems (__value:Boolean): /* @:set_type */ void {
+		public function set useArrayItems (__val:Boolean): /* @:set_type */ void {
 			/* @:set_return true; */			
 		}
 		/* @:end */

@@ -245,7 +245,7 @@ package x.world.sprite {
 					}
 				}
 				
-				public function set dx (__value:Number): /* @:set_type */ void {
+				public function set dx (__val:Number): /* @:set_type */ void {
 					/* @:set_return 0; */			
 				}
 				/* @:end */
@@ -263,7 +263,7 @@ package x.world.sprite {
 					}
 				}
 				
-				public function set dy (__value:Number): /* @:set_type */ void {
+				public function set dy (__val:Number): /* @:set_type */ void {
 					/* @:set_return 0; */			
 				}
 				/* @:end */
@@ -389,7 +389,7 @@ package x.world.sprite {
 					return null;
 				}
 				
-				public function set bitmapData (__value:BitmapData): /* @:set_type */ void {
+				public function set bitmapData (__val:BitmapData): /* @:set_type */ void {
 				}
 				
 				//------------------------------------------------------------------------------------------

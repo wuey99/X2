@@ -72,8 +72,8 @@ package x.resource {
 			return m_count;
 		}
 		
-		public function set count (__value:int): /* @:set_type */ void {
-			m_count = __value;
+		public function set count (__val:int): /* @:set_type */ void {
+			m_count = __val;
 			
 			/* @:set_return 0; */			
 		}

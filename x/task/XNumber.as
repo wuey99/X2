@@ -32,8 +32,8 @@ package x.task {
 		private var m_number:Number;
 		
 //------------------------------------------------------------------------------------------
-		public function XNumber (__value:Number) {
-			m_number = __value;
+		public function XNumber (__val:Number) {
+			m_number = __val;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -43,8 +43,8 @@ package x.task {
 			return  m_number;
 		}
 		
-		public function set value (__value:Number): /* @:set_type */ void {
-			m_number = __value;
+		public function set value (__val:Number): /* @:set_type */ void {
+			m_number = __val;
 			
 			/* @:set_return 0; */			
 		}

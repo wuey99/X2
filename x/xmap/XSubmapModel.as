@@ -120,7 +120,7 @@ package x.xmap {
 			return m_XMapLayer.getXMapModel ().useArrayItems;
 		}
 	
-		public function set useArrayItems (__value:Boolean): /* @:set_type */ void {
+		public function set useArrayItems (__val:Boolean): /* @:set_type */ void {
 			/* @:set_return true; */			
 		}
 		/* @:end */
@@ -132,7 +132,7 @@ package x.xmap {
 			return m_cmap;
 		}
 		
-		public function set cmap (__value:Vector.<int>): /* @:set_type */ void {
+		public function set cmap (__val:Vector.<int>): /* @:set_type */ void {
 			/* @:set_return null; */			
 		}
 		/* @:end */
@@ -183,7 +183,7 @@ package x.xmap {
 			return m_cols;
 		}
 		
-		public function set cols (__value:int): /* @:set_type */ void {
+		public function set cols (__val:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -195,7 +195,7 @@ package x.xmap {
 			return m_rows;
 		}
 		
-		public function set rows (__value:int): /* @:set_type */ void {
+		public function set rows (__val:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -207,8 +207,8 @@ package x.xmap {
 			return m_boundingRect;
 		}
 		
-		public function set boundingRect (__value:XRect): /* @:set_type */ void {
-			m_boundingRect = __value;
+		public function set boundingRect (__val:XRect): /* @:set_type */ void {
+			m_boundingRect = __val;
 			
 			/* @:set_return null; */			
 		}
@@ -221,7 +221,7 @@ package x.xmap {
 			return m_col * m_submapWidth;
 		}		
 		
-		public function set x (__value:Number): /* @:set_type */ void {
+		public function set x (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -233,7 +233,7 @@ package x.xmap {
 			return m_row * m_submapHeight;
 		}
 
-		public function set y (__value:Number): /* @:set_type */ void {
+		public function set y (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -245,7 +245,7 @@ package x.xmap {
 			return m_submapWidth;
 		}
 		
-		public function set width (__value:int): /* @:set_type */ void {
+		public function set width (__val:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -257,7 +257,7 @@ package x.xmap {
 			return  m_submapHeight;
 		}
 		
-		public function set height (__value:int): /* @:set_type */ void {
+		public function set height (__val:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */

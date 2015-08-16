@@ -226,16 +226,16 @@ package x.xml {
 			return m_tag;
 		}
 		
-		public function set tag (__value:String): /* @:set_type */ void {
-			m_tag = __value;
+		public function set tag (__val:String): /* @:set_type */ void {
+			m_tag = __val;
 			
 			/* @:set_return ""; */			
 		}
 		/* @:end */
 			
 //------------------------------------------------------------------------------------------
-		public function addAttribute (__name:String, __value:*):void {
-			m_attribsMap.set (__name, __value);
+		public function addAttribute (__name:String, __val:*):void {
+			m_attribsMap.set (__name, __val);
 		}	
 		
 //------------------------------------------------------------------------------------------

@@ -284,8 +284,8 @@ package x {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setFrameRateScale (__value:Number):void {
-			m_frameRateScale = __value;
+		public function setFrameRateScale (__val:Number):void {
+			m_frameRateScale = __val;
 		}
 		
 //------------------------------------------------------------------------------------------

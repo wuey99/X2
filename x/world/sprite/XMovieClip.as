@@ -195,8 +195,8 @@ package x.world.sprite {
 			return m_movieClip;
 		}
 		
-		public function set movieclip (__value:MovieClip): /* @:set_type */ void {
-			m_movieClip = __value;
+		public function set movieclip (__val:MovieClip): /* @:set_type */ void {
+			m_movieClip = __val;
 			
 			/* @:set_return null; */			
 		}
@@ -307,7 +307,7 @@ package x.world.sprite {
 			}
 		}
 		
-		public override function set rotation (__value:Number): /* @:set_type */ void {
+		public override function set rotation (__val:Number): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -315,14 +315,14 @@ package x.world.sprite {
 			// <AS3>
 			if (CONFIG::starling) {
 				if (m_movieClip != null) {
-					m_movieClip.rotation = __value * Math.PI/180;
+					m_movieClip.rotation = __val * Math.PI/180;
 				}
 			}
 			else
 			// </AS3>
 			{
 				if (m_movieClip != null) {
-					m_movieClip.rotation = __value;
+					m_movieClip.rotation = __val;
 				}
 			}
 			
@@ -341,9 +341,9 @@ package x.world.sprite {
 			return m_movieClip.alpha;
 		}
 		
-		public override function set alpha (__value:Number): /* @:set_type */ void {
+		public override function set alpha (__val:Number): /* @:set_type */ void {
 			if (m_movieClip != null) {
-				m_movieClip.alpha = __value;
+				m_movieClip.alpha = __val;
 			}
 			
 			/* @:set_return 0; */			
@@ -374,7 +374,7 @@ package x.world.sprite {
 				return m_movieClip.graphics;
 			}
 			
-			public function set graphics (__value:Graphics): /* @:set_type */ void {
+			public function set graphics (__val:Graphics): /* @:set_type */ void {
 				
 				/* @:set_return null; */			
 			}
@@ -394,7 +394,7 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set dx (__value:Number): /* @:set_type */ void {
+		public function set dx (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -406,7 +406,7 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set dy (__value): /* @:set_type */ void {
+		public function set dy (__val): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -422,9 +422,9 @@ package x.world.sprite {
 			return m_movieClip.scaleX;
 		}
 		
-		public override function set scaleX (__value:Number): /* @:set_type */ void {
+		public override function set scaleX (__val:Number): /* @:set_type */ void {
 			if (m_movieClip != null) {
-				m_movieClip.scaleX = __value;
+				m_movieClip.scaleX = __val;
 			}
 			
 			/* @:set_return 0; */			
@@ -442,9 +442,9 @@ package x.world.sprite {
 			return m_movieClip.scaleY;
 		}		
 		
-		public override function set scaleY (__value:Number): /* @:set_type */ void {
+		public override function set scaleY (__val:Number): /* @:set_type */ void {
 			if (m_movieClip != null) {
-				m_movieClip.scaleY = __value;
+				m_movieClip.scaleY = __val;
 			}
 			
 			/* @:set_return 0; */			

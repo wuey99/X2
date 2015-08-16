@@ -152,7 +152,7 @@ package x.world.sprite {
 				null
 			}
 			
-			public function set filters (__value:Array /* <BitmapFilter> */): /* @:set_type */ void {
+			public function set filters (__val:Array /* <BitmapFilter> */): /* @:set_type */ void {
 				/* @:set_return null; */			
 			}
 			/* @:end */
@@ -172,8 +172,8 @@ package x.world.sprite {
 				return null;
 			}
 			
-			public override function set filters (__value:Array /* <BitmapFilter> */): /* @:set_type */ void {
-				m_text.filters = __value;
+			public override function set filters (__val:Array /* <BitmapFilter> */): /* @:set_type */ void {
+				m_text.filters = __val;
 				
 				/* @:set_return null; */			
 			}
@@ -219,19 +219,19 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set bold (__value:Boolean): /* @:set_type */ void {
+		public function set bold (__val:Boolean): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
 			// </HAXE>
 			// <AS3>
 			if (CONFIG::starling) {
-				m_text.bold = __value;
+				m_text.bold = __val;
 			}
 			else
 			// </AS3>
 			{
-				m_textFormat.bold = __value; __format ();
+				m_textFormat.bold = __val; __format ();
 			}
 			
 			/* @:set_return true; */			
@@ -245,19 +245,19 @@ package x.world.sprite {
 			return "";
 		}
 		
-		public function set font (__value:String): /* @:set_type */ void {
+		public function set font (__val:String): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
 			// </HAXE>
 			// <AS3>
 			if (CONFIG::starling) {
-				m_text.fontName = __value;
+				m_text.fontName = __val;
 			}
 			else
 			// </AS3>
 			{
-				m_textFormat.font = __value; __format ();
+				m_textFormat.font = __val; __format ();
 			}
 			
 			/* @:set_return ""; */			
@@ -271,19 +271,19 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set size (__value:Number): /* @:set_type */ void {
+		public function set size (__val:Number): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
 			// </HAXE>
 			// <AS3>
 			if (CONFIG::starling) {
-				m_text.fontSize = __value;
+				m_text.fontSize = __val;
 			}
 			else
 			// </AS3>
 			{
-				m_textFormat.size = __value; __format ();
+				m_textFormat.size = __val; __format ();
 			}
 			
 			/* @:set_return 0; */			
@@ -297,8 +297,8 @@ package x.world.sprite {
 			return "";
 		}
 		
-		public function set align (__value:String): /* @:set_type */ void {
-			this.hAlign = __value;
+		public function set align (__val:String): /* @:set_type */ void {
+			this.hAlign = __val;
 			
 			/* @:set_return ""; */			
 		}
@@ -311,14 +311,14 @@ package x.world.sprite {
 			return "";
 		}
 		
-		public function set hAlign (__value:String): /* @:set_type */ void {
+		public function set hAlign (__val:String): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
 			// </HAXE>
 			// <AS3>
 			if (CONFIG::starling) {
-				switch (__value) {
+				switch (__val) {
 					case "left":
 						m_text.hAlign = HAlign.CENTER;
 						break;
@@ -333,7 +333,7 @@ package x.world.sprite {
 			else
 			// </AS3>
 			{
-				switch (__value) {
+				switch (__val) {
 					case "left":
 						m_textFormat.align = TextFormatAlign.LEFT;
 						break;
@@ -359,14 +359,14 @@ package x.world.sprite {
 			return "";
 		}
 		
-		public function set vAlign (__value:String): /* @:set_type */ void {
+		public function set vAlign (__val:String): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
 			// </HAXE>
 			// <AS3>
 			if (CONFIG::starling) {
-				switch (__value) {
+				switch (__val) {
 					case "top":
 						m_text.vAlign = VAlign.TOP;
 						break;
@@ -394,8 +394,8 @@ package x.world.sprite {
 			return m_text.width;
 		}
 		
-		public override function set width (__value:Number): /* @:set_type */ void {
-			m_text.width = __value;
+		public override function set width (__val:Number): /* @:set_type */ void {
+			m_text.width = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -408,8 +408,8 @@ package x.world.sprite {
 			return m_text.height;
 		}
 		
-		public override function set height (__value:Number): /* @:set_type */ void {
-			m_text.height = __value;
+		public override function set height (__val:Number): /* @:set_type */ void {
+			m_text.height = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -434,7 +434,7 @@ package x.world.sprite {
 			}
 		}
 		
-		public function set_textWidth (__value:Number):/* @:set_type */ void {
+		public function set_textWidth (__val:Number):/* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -458,7 +458,7 @@ package x.world.sprite {
 			}
 		}
 		
-		public function set_textHeight (__value:Number):/* @:set_type */ void {
+		public function set_textHeight (__val:Number):/* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -486,7 +486,7 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set letterSpacing (__value:Number): /* @:set_type */ void {
+		public function set letterSpacing (__val:Number): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -497,7 +497,7 @@ package x.world.sprite {
 			else
 			// </AS3>
 			{
-				m_textFormat.letterSpacing = __value; __format ();
+				m_textFormat.letterSpacing = __val; __format ();
 			}
 			
 			/* @:set_return 0; */			
@@ -511,7 +511,7 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set leading (__value:Number): /* @:set_type */ void {
+		public function set leading (__val:Number): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -522,7 +522,7 @@ package x.world.sprite {
 			else
 			// </AS3>
 			{
-				m_textFormat.leading = __value; __format ();
+				m_textFormat.leading = __val; __format ();
 			}
 			
 			/* @:set_return 0; */			
@@ -536,7 +536,7 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set selectable (__value:Boolean): /* @:set_type */ void {
+		public function set selectable (__val:Boolean): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -547,7 +547,7 @@ package x.world.sprite {
 			else
 			// </AS3>
 			{
-				m_text.selectable = __value;
+				m_text.selectable = __val;
 			}
 			
 			/* @:set_return true; */			
@@ -561,7 +561,7 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set multiline (__value:Boolean): /* @:set_type */ void {
+		public function set multiline (__val:Boolean): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -572,7 +572,7 @@ package x.world.sprite {
 			else
 			// </AS3>
 			{
-				m_text.multiline = __value; __format ();
+				m_text.multiline = __val; __format ();
 			}
 			
 			/* @:set_return true; */			
@@ -586,7 +586,7 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set wordWrap (__value:Boolean): /* @:set_type */ void {
+		public function set wordWrap (__val:Boolean): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -597,7 +597,7 @@ package x.world.sprite {
 			else
 			// </AS3>
 			{
-				m_text.wordWrap = __value; __format ();
+				m_text.wordWrap = __val; __format ();
 			}
 			
 			/* @:set_return true; */			
@@ -611,7 +611,7 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set italic (__value:Boolean): /* @:set_type */ void {
+		public function set italic (__val:Boolean): /* @:set_type */ void {
 			/* @:set_return true; */			
 		}
 		/* @:end */
@@ -623,7 +623,7 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set kerning (__value:Boolean): /* @:set_type */ void {
+		public function set kerning (__val:Boolean): /* @:set_type */ void {
 			/* @:set_return true; */			
 		}
 		/* @:end */
@@ -635,7 +635,7 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set underline (__value:Boolean): /* @:set_type */ void {
+		public function set underline (__val:Boolean): /* @:set_type */ void {
 			/* @:set_return true; */			
 		}
 		/* @:end */
@@ -647,7 +647,7 @@ package x.world.sprite {
 			return true;
 		}
 		
-		public function set embedFonts (__value:Boolean): /* @:set_type */ void {
+		public function set embedFonts (__val:Boolean): /* @:set_type */ void {
 			// <HAXE>
 			/* --
 			-- */
@@ -658,7 +658,7 @@ package x.world.sprite {
 			else
 			// </AS3>
 			{
-				m_text.embedFonts = __value; __format ();
+				m_text.embedFonts = __val; __format ();
 			}
 			
 			/* @:set_return true; */			

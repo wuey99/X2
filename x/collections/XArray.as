@@ -47,8 +47,8 @@ package x.collections {
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function push (__value:*):void {
-			m_array.push (__value);
+		public function push (__val:*):void {
+			m_array.push (__val);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -62,8 +62,8 @@ package x.collections {
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function put (__key:int, __value:*):void {
-			m_array[__key] = __value;
+		public function put (__key:int, __val:*):void {
+			m_array[__key] = __val;
 		}	
 		
 //------------------------------------------------------------------------------------------
@@ -76,8 +76,8 @@ package x.collections {
 		}
 			
 //------------------------------------------------------------------------------------------
-		public function indexOf (__value:*):int {
-			return m_array.indexOf (__value);
+		public function indexOf (__val:*):int {
+			return m_array.indexOf (__val);
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -112,8 +112,8 @@ package x.world.sprite {
 			return m_id;
 		}
 
-		public function set id (__value:int): /* @:set_type */ void {
-			m_id = __value;
+		public function set id (__val:int): /* @:set_type */ void {
+			m_id = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -132,7 +132,7 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set mouseX (__value:Number): /* @:set_type */ void {
+		public function set mouseX (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -144,7 +144,7 @@ package x.world.sprite {
 			return 0;
 		}
 
-		public function set mouseY (__value:Number): /* @:set_type */ void {
+		public function set mouseY (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -158,7 +158,7 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set dx (__value:Number): /* @:set_type */ void {
+		public function set dx (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -170,7 +170,7 @@ package x.world.sprite {
 			return 0;
 		}
 		
-		public function set dy (__value:Number): /* @:set_type */ void {
+		public function set dy (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */

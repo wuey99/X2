@@ -68,7 +68,7 @@ package x.geom {
 			return m_a * m_d - m_b * m_c;
 		}
 
-		public function set determinant (__value:Number): /* @:set_type */ void {
+		public function set determinant (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -80,7 +80,7 @@ package x.geom {
 			return m_a;
 		}
 
-		public function set a (__value:Number): /* @:set_type */ void {
+		public function set a (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -92,7 +92,7 @@ package x.geom {
 			return m_b;
 		}
 		
-		public function set b (__value:Number): /* @:set_type */ void {
+		public function set b (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -104,7 +104,7 @@ package x.geom {
 			return m_c;
 		}
 						
-		public function set c (__value:Number): /* @:set_type */ void {
+		public function set c (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -116,7 +116,7 @@ package x.geom {
 			return m_d;
 		}
 		
-		public function set d (__value:Number): /* @:set_type */ void {
+		public function set d (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -128,7 +128,7 @@ package x.geom {
 			return m_tx;
 		}
 
-		public function set tx (__value:Number): /* @:set_type */ void {
+		public function set tx (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -140,7 +140,7 @@ package x.geom {
 			return m_ty;
 		}
 				
-		public function set ty (__value:Number): /* @:set_type */ void {
+		public function set ty (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */

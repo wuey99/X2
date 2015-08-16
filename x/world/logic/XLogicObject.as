@@ -935,8 +935,8 @@ package x.world.logic {
 			return m_autoCulling;
 		}
 		
-		public function set autoCulling (__value:Boolean): /* @:set_type */ void {
-			m_autoCulling = __value;
+		public function set autoCulling (__val:Boolean): /* @:set_type */ void {
+			m_autoCulling = __val;
 			
 			if (autoCulling) {
 				boundingRect = new XRect (-32, -32, +64, +64);
@@ -967,7 +967,7 @@ package x.world.logic {
 			return m_item;
 		}
 		
-		public function set item (__value:XMapItemModel): /* @:set_type */ void {
+		public function set item (__val:XMapItemModel): /* @:set_type */ void {
 			/* @:set_return null; */	
 		}
 		/* @:end */
@@ -1037,7 +1037,7 @@ package x.world.logic {
 			return /* @:cast */ this as Object;
 		}	
 	
-		public function set o (__value:*): /* @:set_type */ void {
+		public function set o (__val:*): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -1049,8 +1049,8 @@ package x.world.logic {
 			return m_isDead;
 		}
 		
-		public function set isDead (__value:Boolean): /* @:set_type */ void {
-			m_isDead = __value;
+		public function set isDead (__val:Boolean): /* @:set_type */ void {
+			m_isDead = __val;
 			
 			/* @:set_return true; */			
 		}
@@ -1067,8 +1067,8 @@ package x.world.logic {
 			return m_XLogicManager;
 		}
 		
-		public function set oXLogicManager (__value:XLogicManager): /* @:set_type */ void {
-			m_XLogicManager = __value;
+		public function set oXLogicManager (__val:XLogicManager): /* @:set_type */ void {
+			m_XLogicManager = __val;
 			
 			/* @:set_return null; */	
 		}
@@ -1088,8 +1088,8 @@ package x.world.logic {
 		}
 		
 		[Inline]
-		public function set boundingRect (__value:XRect): /* @:set_type */ void {
-			m_boundingRect = __value;
+		public function set boundingRect (__val:XRect): /* @:set_type */ void {
+			m_boundingRect = __val;
 			
 			/* @:set_return null; */			
 		}
@@ -1120,8 +1120,8 @@ package x.world.logic {
 		}
 
 		[Inline]
-		public function set oX (__value:Number): /* @:set_type */ void {
-			m_pos.x = __value;
+		public function set oX (__val:Number): /* @:set_type */ void {
+			m_pos.x = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1136,8 +1136,8 @@ package x.world.logic {
 		}		
 
 		[Inline]
-		public function set oY (__value:Number): /* @:set_type */ void {
-			m_pos.y = __value;
+		public function set oY (__val:Number): /* @:set_type */ void {
+			m_pos.y = __val;
 
 			/* @:set_return 0; */	
 		}
@@ -1198,8 +1198,8 @@ package x.world.logic {
 			return m_visible;
 		}
 		
-		public function set oVisible (__value:Boolean): /* @:set_type */ void {
-			m_visible = __value;
+		public function set oVisible (__val:Boolean): /* @:set_type */ void {
+			m_visible = __val;
 			
 			/* @:set_return true; */	
 		}
@@ -1210,8 +1210,8 @@ package x.world.logic {
 			return m_visible;
 		}
 
-		public function setVisible (__value:Boolean):void {
-			m_visible = __value;
+		public function setVisible (__val:Boolean):void {
+			m_visible = __val;
 		}
 		
 //------------------------------------------------------------------------------------------		
@@ -1233,8 +1233,8 @@ package x.world.logic {
 		}
 		
 		[Inline]
-		public function set oRotation (__value:Number): /* @:set_type */ void {
-			m_rotation = __value % 360;
+		public function set oRotation (__val:Number): /* @:set_type */ void {
+			m_rotation = __val % 360;
 			
 			/* @:set_return 0; */	
 		}
@@ -1270,8 +1270,8 @@ package x.world.logic {
 		}
 
 		[Inline]
-		public function set oScale (__value:Number): /* @:set_type */ void {
-			m_scaleX  = m_scaleY = __value;
+		public function set oScale (__val:Number): /* @:set_type */ void {
+			m_scaleX  = m_scaleY = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1297,8 +1297,8 @@ package x.world.logic {
 		}
 		
 		[Inline]
-		public function set oScaleX (__value:Number): /* @:set_type */ void {
-			m_scaleX = __value;
+		public function set oScaleX (__val:Number): /* @:set_type */ void {
+			m_scaleX = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1324,8 +1324,8 @@ package x.world.logic {
 		}
 		
 		[Inline]
-		public function set oScaleY (__value:Number): /* @:set_type */ void {
-			m_scaleY = __value;
+		public function set oScaleY (__val:Number): /* @:set_type */ void {
+			m_scaleY = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1796,8 +1796,8 @@ package x.world.logic {
 			return m_iX;
 		}
 		
-		public function set iX (__value:Number): /* @:set_type */ void {
-			m_iX = __value;
+		public function set iX (__val:Number): /* @:set_type */ void {
+			m_iX = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1810,8 +1810,8 @@ package x.world.logic {
 			return m_iY;
 		}
 		
-		public function set iY (__value:Number): /* @:set_type */ void {
-			m_iY = __value;
+		public function set iY (__val:Number): /* @:set_type */ void {
+			m_iY = __val;
 			
 			/* @:set_return 0; */	
 		}	
@@ -1824,8 +1824,8 @@ package x.world.logic {
 			return m_iScale;
 		}
 		
-		public function set iScale (__value:Number): /* @:set_type */ void {
-			m_iScale = __value;
+		public function set iScale (__val:Number): /* @:set_type */ void {
+			m_iScale = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1838,8 +1838,8 @@ package x.world.logic {
 			return m_iRotation;
 		}
 		
-		public function set iRotation (__value:Number): /* @:set_type */ void {
-			m_iRotation = __value;
+		public function set iRotation (__val:Number): /* @:set_type */ void {
+			m_iRotation = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1852,8 +1852,8 @@ package x.world.logic {
 			return m_iItem;
 		}
 		
-		public function set iItem (__value:XMapItemModel): /* @:set_type */ void {
-			m_iItem = __value;
+		public function set iItem (__val:XMapItemModel): /* @:set_type */ void {
+			m_iItem = __val;
 			
 			/* @:set_return null; */	
 		}
@@ -1866,8 +1866,8 @@ package x.world.logic {
 			return m_iLayer;
 		}
 		
-		public function set iLayer (__value:int): /* @:set_type */ void {
-			m_iLayer = __value;
+		public function set iLayer (__val:int): /* @:set_type */ void {
+			m_iLayer = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1880,8 +1880,8 @@ package x.world.logic {
 			return m_iDepth;
 		}
 
-		public function set iDepth (__value:Number): /* @:set_type */ void {
-			m_iDepth = __value;
+		public function set iDepth (__val:Number): /* @:set_type */ void {
+			m_iDepth = __val;
 			
 			/* @:set_return 0; */	
 		}
@@ -1894,8 +1894,8 @@ package x.world.logic {
 			return m_iRelativeDepth;
 		}
 
-		public function set iRelativeDepth (__value:Boolean): /* @:set_type */ void {
-			m_iRelativeDepth = __value;
+		public function set iRelativeDepth (__val:Boolean): /* @:set_type */ void {
+			m_iRelativeDepth = __val;
 			
 			/* @:set_return true; */	
 		}
@@ -1908,8 +1908,8 @@ package x.world.logic {
 			return m_iClassName;
 		}
 				
-		public function set iClassName (__value:String): /* @:set_type */ void {
-			m_iClassName = __value;
+		public function set iClassName (__val:String): /* @:set_type */ void {
+			m_iClassName = __val;
 			
 			/* @:set_return ""; */	
 		}

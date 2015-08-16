@@ -101,7 +101,7 @@ package x.pool {
 			return m_freeObjects;
 		}
 
-		public function set freeObjects (__value:*): /* @:set_type */ void {
+		public function set freeObjects (__val:*): /* @:set_type */ void {
 			/* @:set_return null; */			
 		}
 		/* @:end */

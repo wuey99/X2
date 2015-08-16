@@ -151,7 +151,7 @@ package x.xmap {
 			return m_XMap.useArrayItems;
 		}
 		
-		public function set useArrayItems (__value:Boolean): /* @:set_type */ void {
+		public function set useArrayItems (__val:Boolean): /* @:set_type */ void {
 			/* @:set_return true; */			
 		}
 		/* @:end */
@@ -168,8 +168,8 @@ package x.xmap {
 			return m_viewPort;
 		}
 		
-		public function set viewPort (__value:XRect): /* @:set_type */ void {
-			m_viewPort = __value;
+		public function set viewPort (__val:XRect): /* @:set_type */ void {
+			m_viewPort = __val;
 			
 			/* @:set_return null; */			
 		}
@@ -182,8 +182,8 @@ package x.xmap {
 			return m_visible;
 		}
 
-		public function set visible (__value:Boolean): /* @:set_type */ void {
-			m_visible = __value;
+		public function set visible (__val:Boolean): /* @:set_type */ void {
+			m_visible = __val;
 			
 			/* @:set_return true; */			
 		}
@@ -196,8 +196,8 @@ package x.xmap {
 			return m_name;
 		}
 
-		public function set name (__value:String): /* @:set_type */ void {
-			m_name = __value;
+		public function set name (__val:String): /* @:set_type */ void {
+			m_name = __val;
 			
 			/* @:set_return ""; */			
 		}
@@ -210,8 +210,8 @@ package x.xmap {
 			return m_grid;
 		}
 
-		public function set grid (__value:Boolean): /* @:set_type */ void {
-			m_grid = __value;
+		public function set grid (__val:Boolean): /* @:set_type */ void {
+			m_grid = __val;
 			
 			/* @:set_return true; */			
 		}

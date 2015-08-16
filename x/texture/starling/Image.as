@@ -54,7 +54,7 @@ package x.texture.starling {
 			return null;
 		}
 		
-		public function set texture (__value:Texture): /* @:set_type */ void {
+		public function set texture (__val:Texture): /* @:set_type */ void {
 			/* @:set_return null; */	
 		}
 		/* @:end */

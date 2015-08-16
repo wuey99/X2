@@ -156,7 +156,7 @@ package x.bitmap {
 			return m_dx;
 		}
 		
-		public function set dx (value:Number): /* @:set_type */ void {
+		public function set dx (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */	
 		}
 		/* @:end */
@@ -168,7 +168,7 @@ package x.bitmap {
 			return m_dy;
 		}
 
-		public function set dy (__value:Number): /* @:set_type */ void {
+		public function set dy (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */	
 		}
 		/* @:end */

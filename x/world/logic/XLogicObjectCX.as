@@ -176,9 +176,9 @@ package x.world.logic {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function initItemStorage (__value:*):void {
+		public function initItemStorage (__val:*):void {
 			if (!hasItemStorage ()) {
-				m_XMapLayerModel.getPersistentStorage ().set (item.id, __value);
+				m_XMapLayerModel.getPersistentStorage ().set (item.id, __val);
 			}
 		}
 		
@@ -259,8 +259,8 @@ package x.world.logic {
 		}
 
 		[Inline]
-		public function set oDX (__value:Number): /* @:set_type */ void {
-			m_vel.x = __value;
+		public function set oDX (__val:Number): /* @:set_type */ void {
+			m_vel.x = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -275,8 +275,8 @@ package x.world.logic {
 		}
 		
 		[Inline]
-		public function set oDY (__value:Number): /* @:set_type */ void {
-			m_vel.y = __value;
+		public function set oDY (__val:Number): /* @:set_type */ void {
+			m_vel.y = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -298,8 +298,8 @@ package x.world.logic {
 			return m_oldPos.x;
 		}
 
-		public function set oldX (__value:Number): /* @:set_type */ void {
-			m_oldPos.x = __value;
+		public function set oldX (__val:Number): /* @:set_type */ void {
+			m_oldPos.x = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -312,8 +312,8 @@ package x.world.logic {
 			return m_oldPos.y;
 		}
 
-		public function set oldY (__value:Number): /* @:set_type */ void {
-			m_oldPos.y = __value;
+		public function set oldY (__val:Number): /* @:set_type */ void {
+			m_oldPos.y = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -333,8 +333,8 @@ package x.world.logic {
 			return m_CX_Collide_Flag;
 		}
 
-		public function set CX_Collide_Flag (__value:int): /* @:set_type */ void {
-			m_CX_Collide_Flag = __value;
+		public function set CX_Collide_Flag (__val:int): /* @:set_type */ void {
+			m_CX_Collide_Flag = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -355,7 +355,7 @@ package x.world.logic {
 			return true;
 		}
 
-		public function set allowLFCollisions (__value:Boolean): /* @:set_type */ void {
+		public function set allowLFCollisions (__val:Boolean): /* @:set_type */ void {
 			
 			/* @:set_return true; */			
 		}
@@ -368,7 +368,7 @@ package x.world.logic {
 			return true;
 		}
 		
-		public function set allowRTCollisions (__value:Boolean): /* @:set_type */ void {
+		public function set allowRTCollisions (__val:Boolean): /* @:set_type */ void {
 			
 			/* @:set_return true; */			
 		}
@@ -381,7 +381,7 @@ package x.world.logic {
 			return true;
 		}
 	
-		public function set allowUPCollisions (__value:Boolean): /* @:set_type */ void {
+		public function set allowUPCollisions (__val:Boolean): /* @:set_type */ void {
 			
 			/* @:set_return true; */			
 		}
@@ -394,7 +394,7 @@ package x.world.logic {
 			return true;
 		}
 		
-		public function set allowDNCollisions (__value:Boolean): /* @:set_type */ void {
+		public function set allowDNCollisions (__val:Boolean): /* @:set_type */ void {
 			
 			/* @:set_return true; */			
 		}

@@ -447,8 +447,8 @@ package x.world {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setFPS (__value:Number):void {
-			m_FPS = __value;
+		public function setFPS (__val:Number):void {
+			m_FPS = __val;
 			
 			m_frameCount = 0;
 		}
@@ -459,8 +459,8 @@ package x.world {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function setMinimumFPS (__value:Number):void {
-			m_minimumFPS = __value;	
+		public function setMinimumFPS (__val:Number):void {
+			m_minimumFPS = __val;	
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -469,8 +469,8 @@ package x.world {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function setIdealFPS (__value:Number):void {
-			m_idealFPS = __value;	
+		public function setIdealFPS (__val:Number):void {
+			m_idealFPS = __val;	
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -853,7 +853,7 @@ package x.world {
 			}
 		}
 		
-		public  function set mouseX (__value:Number): /* @:set_type */ void {
+		public  function set mouseX (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -871,7 +871,7 @@ package x.world {
 			}
 		}
 		
-		public function set mouseY (__value:Number): /* @:set_type */ void {
+		public function set mouseY (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -1113,7 +1113,7 @@ package x.world {
 				return TouchPhase.BEGAN;	
 			}
 			
-			public function set MOUSE_DOWN (__value:String): /* @:set_type */ void {
+			public function set MOUSE_DOWN (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1123,7 +1123,7 @@ package x.world {
 				return TouchPhase.BEGAN;	
 			}
 			
-			public function set MOUSE_UP (__value:String): /* @:set_type */ void {
+			public function set MOUSE_UP (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1133,7 +1133,7 @@ package x.world {
 				return TouchPhase.ENDED;	
 			}
 			
-			public function set MOUSE_MOVE (__value:String): /* @:set_type */ void {
+			public function set MOUSE_MOVE (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1143,7 +1143,7 @@ package x.world {
 				return TouchPhase.HOVER;	
 			}
 			
-			public function set MOUSE_OVER (__value:String): /* @:set_type */ void {
+			public function set MOUSE_OVER (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1153,7 +1153,7 @@ package x.world {
 				return TouchPhase.ENDED;	
 			}
 			
-			public function set MOUSE_OUT (__value:String): /* @:set_type */ void {
+			public function set MOUSE_OUT (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1166,7 +1166,7 @@ package x.world {
 				return MouseEvent.MOUSE_DOWN;	
 			}
 			
-			public function set MOUSE_DOWN (__value:String): /* @:set_type */ void {
+			public function set MOUSE_DOWN (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1176,7 +1176,7 @@ package x.world {
 				return MouseEvent.MOUSE_UP;	
 			}
 			
-			public function set MOUSE_UP (__value:String): /* @:set_type */ void {
+			public function set MOUSE_UP (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1186,7 +1186,7 @@ package x.world {
 				return MouseEvent.MOUSE_MOVE;	
 			}
 			
-			public function set MOUSE_MOVE (__value:String): /* @:set_type */ void {
+			public function set MOUSE_MOVE (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1196,7 +1196,7 @@ package x.world {
 				return MouseEvent.MOUSE_OVER;	
 			}
 			
-			public function set MOUSE_OVER (__value:String): /* @:set_type */ void {
+			public function set MOUSE_OVER (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
@@ -1206,7 +1206,7 @@ package x.world {
 				return MouseEvent.MOUSE_OUT;	
 			}
 			
-			public function set MOUSE_OUT (__value:String): /* @:set_type */ void {
+			public function set MOUSE_OUT (__val:String): /* @:set_type */ void {
 				/* @:set_return ""; */			
 			}
 			/* @:end */

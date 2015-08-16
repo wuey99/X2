@@ -80,7 +80,7 @@ package x.resource {
 			return m_manifestName;
 		}
 		
-		public function set manifestName (__value:String): /* @:set_type */ void {
+		public function set manifestName (__val:String): /* @:set_type */ void {
 			/* @:set_return ""; */			
 		}
 		/* @:end */
@@ -92,7 +92,7 @@ package x.resource {
 			return m_resourceName;
 		}
 		
-		public function set resourceName (__value:String): /* @:set_type */ void {
+		public function set resourceName (__val:String): /* @:set_type */ void {
 			/* @:set_return ""; */			
 		}
 		/* @:end */
@@ -104,7 +104,7 @@ package x.resource {
 			return m_className;
 		}
 		
-		public function set className (__value:String): /* @:set_type */ void {
+		public function set className (__val:String): /* @:set_type */ void {
 			/* @:set_return ""; */			
 		}
 		/* @:end */

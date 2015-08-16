@@ -233,8 +233,8 @@ package x.xmap {
 			return m_logicClassIndex;
 		}
 		
-		public function set logicClassIndex (__value:int): /* @:set_type */ void {
-			m_logicClassIndex = __value;
+		public function set logicClassIndex (__val:int): /* @:set_type */ void {
+			m_logicClassIndex = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -247,7 +247,7 @@ package x.xmap {
 			return m_layerModel.getClassNameFromIndex (logicClassIndex);
 		}
 
-		public function set logicClassName (__value:String): /* @:set_type */ void {
+		public function set logicClassName (__val:String): /* @:set_type */ void {
 			/* @:set_return ""; */			
 		}
 		/* @:end */
@@ -259,8 +259,8 @@ package x.xmap {
 			return m_hasLogic;
 		}
 		
-		public function set hasLogic (__value:Boolean): /* @:set_type */ void {
-			m_hasLogic = __value;
+		public function set hasLogic (__val:Boolean): /* @:set_type */ void {
+			m_hasLogic = __val;
 			
 			/* @:set_return true; */			
 		}
@@ -273,8 +273,8 @@ package x.xmap {
 			return m_XMapItem;
 		}
 		
-		public function set XMapItem (__value:String): /* @:set_type */ void {
-			m_XMapItem = __value;
+		public function set XMapItem (__val:String): /* @:set_type */ void {
+			m_XMapItem = __val;
 			
 			/* @:set_return ""; */			
 		}
@@ -287,8 +287,8 @@ package x.xmap {
 			return m_imageClassIndex;
 		}
 
-		public function set imageClassIndex (__value:int): /* @:set_type */ void {
-			m_imageClassIndex = __value;
+		public function set imageClassIndex (__val:int): /* @:set_type */ void {
+			m_imageClassIndex = __val;
 			
 			/* @:set_return 0; */			
 		}
@@ -301,7 +301,7 @@ package x.xmap {
 			return m_layerModel.getClassNameFromIndex (imageClassIndex);
 		}
 
-		public function set imageClassName (__value:String): /* @:set_type */ void {
+		public function set imageClassName (__val:String): /* @:set_type */ void {
 			/* @:set_return ""; */			
 		}
 		/* @:end */
