@@ -71,7 +71,7 @@ package kx.world {
 	
 	// <HAXE>
 	/* --
-	import x.texture.starling.*;
+	import kx.texture.starling.*;
 	-- */
 	// </HAXE>
 	// <AS3>

@@ -37,7 +37,7 @@ package kx.world.sprite {
 	
 	// <HAXE>
 	/* --
-	import x.texture.starling.*;
+	import kx.texture.starling.*;
 	-- */
 	// </HAXE>
 	// <AS3>

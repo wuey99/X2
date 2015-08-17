@@ -41,7 +41,7 @@ package kx.texture {
 	
 	// <HAXE>
 	/* --
-	import x.texture.starling.*;
+	import kx.texture.starling.*;
 	-- */
 	// </HAXE>
 	// <AS3>

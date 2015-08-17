@@ -27,7 +27,7 @@
 //------------------------------------------------------------------------------------------
 package X.World.Sprite {
 
-	import x.world.*;
+	import kx.world.*;
 	
 	import flash.display.Sprite;
 	

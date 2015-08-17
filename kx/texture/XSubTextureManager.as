@@ -39,8 +39,8 @@ package kx.texture {
 	
 	// <HAXE>
 	/* --
-	import x.texture.starling.*;
-	import flash.display.*;
+	import kx.texture.starling.*;
+	import openfl.display.*;
 	-- */
 	// </HAXE>
 	// <AS3>

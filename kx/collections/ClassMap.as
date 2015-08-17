@@ -1,6 +1,6 @@
 // <HAXE>
 /* --
-package x.collections;
+package kx.collections;
 	
 	class ClassMap<K:Class<Dynamic>, V> implements Map.IMap<K, V>
 	{
