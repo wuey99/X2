@@ -1108,7 +1108,7 @@ class Update(object):
 
 	#-----------------------------------------------------------------------------
 	def convertXML(self, line):
-		if not (self._src_folder.startswith("x\\resource") or self._src_fileName == "XApp.as" or self._src_fileName == "TextureAtlas.as" or self._src_fileName == "XStaticSubTextureManager.as"):
+		if not (self._src_folder.startswith("kx\\resource") or self._src_fileName == "XApp.as" or self._src_fileName == "TextureAtlas.as" or self._src_fileName == "XStaticSubTextureManager.as"):
 			return line
 			
 		line = line.replace(":XMLList", ":Array<XSimpleXMLNode>")
@@ -1290,9 +1290,9 @@ class Update(object):
 					self.processDirectory(targetDir, dirnames)
 
 #-----------------------------------------------------------------------------
-targetDir = "_x"
+targetDir = "_kx"
 if os.path.exists(targetDir):
 	shutil.rmtree(targetDir)
 o = Update()
-o.processDirectory(targetDir, ["x"])
+o.processDirectory(targetDir, ["kx"])
 
