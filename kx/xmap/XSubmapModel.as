@@ -347,7 +347,7 @@ package kx.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function iterateAllItems (__callback:Function):void {
+		public function iterateAllItems (__iterationCallback:Function):void {
 			if (useArrayItems) {
 				var __items:Vector.<XMapItemModel>;
 				var __length:int;
@@ -357,14 +357,14 @@ package kx.xmap {
 				__length = __items.length;
 				
 				for (var i:int = 0; i<__length; i++) {
-					__callback (__items[i]);
+					__iterationCallback (__items[i]);
 				}
 			}
 			else
 			{
 				items ().forEach (
 					function (x:*):void {
-						__callback (x);
+						__iterationCallback (x);
 					}
 				);		
 			}

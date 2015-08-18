@@ -2471,7 +2471,7 @@ package kx.world.logic {
 			
 			var __collided:Boolean = false;
 			
-			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
+			function __collisionCallback (__logicObject:XLogicObjectCX, __rect:XRect):void {
 				if (__logicObject.allowLFCollisions) {
 					oX = __rect.right - m_cx.left + 1;
 					
@@ -2489,7 +2489,7 @@ package kx.world.logic {
 						return true;
 					}
 					
-					__callback (__logicObject, __rect);
+					__collisionCallback (__logicObject, __rect);
 					
 					__collided = true;
 					
@@ -2511,7 +2511,7 @@ package kx.world.logic {
 			
 			var __collided:Boolean = false;
 			
-			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
+			function __collisionCallback (__logicObject:XLogicObjectCX, __rect:XRect):void {
 				if (__logicObject.allowRTCollisions) {
 					oX = __rect.left - m_cx.right - 1;
 					
@@ -2529,7 +2529,7 @@ package kx.world.logic {
 						return true;
 					}
 					
-					__callback (__logicObject, __rect);
+					__collisionCallback (__logicObject, __rect);
 					
 					__collided = true;
 					
@@ -2551,7 +2551,7 @@ package kx.world.logic {
 			
 			var __collided:Boolean = false;
 
-			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
+			function __collisionCallback (__logicObject:XLogicObjectCX, __rect:XRect):void {
 				if (__logicObject.allowUPCollisions) {
 					oY = __rect.bottom - m_cx.top + 1;
 					
@@ -2569,7 +2569,7 @@ package kx.world.logic {
 						return true;
 					}
 					
-					__callback (__logicObject, __rect);
+					__collisionCallback (__logicObject, __rect);
 					
 					__collided = true;
 					
@@ -2591,7 +2591,7 @@ package kx.world.logic {
 			
 			var __collided:Boolean = false;
 			
-			function __callback (__logicObject:XLogicObjectCX, __rect:XRect):void {
+			function __collisionCallback (__logicObject:XLogicObjectCX, __rect:XRect):void {
 				if (__logicObject.allowDNCollisions) {
 					oY = __rect.top - m_cx.bottom - 1;
 					
@@ -2609,7 +2609,7 @@ package kx.world.logic {
 						return true;
 					}
 					
-					__callback (__logicObject, __rect);
+					__collisionCallback (__logicObject, __rect);
 					
 					__collided = true;
 					

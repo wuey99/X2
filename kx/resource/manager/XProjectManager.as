@@ -55,7 +55,7 @@ package kx.resource.manager {
 		private var m_projectXML:XML;
 		private var m_loaderContextFactory:Function;
 		private var m_subResourceManagers:Array; // <XSubResourceManager>
-		private var m_callback:Function;
+		private var m_completionCallback:Function;
 		private var m_embeddedResources:XDict; // <String, Class<Dynamic>>
 				
 //------------------------------------------------------------------------------------------		
@@ -95,7 +95,7 @@ package kx.resource.manager {
 			__parent:Sprite,
 			__rootPath:String,
 			__projectName:String,
-			__callback:Function,
+			__completionCallback:Function,
 			__loaderContextFactory:Function
 			):void {
 				
@@ -103,7 +103,7 @@ package kx.resource.manager {
 			m_subResourceManagers = new Array (); // <XSubResourceManager>
 			setBothPaths (__rootPath, __projectName);
 			m_loaderContextFactory = __loaderContextFactory;
-			loadProjectFromURL (__rootPath, __projectName, __callback);
+			loadProjectFromURL (__rootPath, __projectName, __completionCallback);
 		}
 
 //------------------------------------------------------------------------------------------	
@@ -120,7 +120,7 @@ package kx.resource.manager {
 		public function loadProjectFromURL (
 			__rootPath:String,
 			__projectName:String,
-			__callback:Function):Boolean {
+			__completionCallback:Function):Boolean {
 										
 //------------------------------------------------------------------------------------------					
      	   function __completeHandler(event:Event):void {
@@ -165,7 +165,7 @@ package kx.resource.manager {
 				__loader.addEventListener (Event.COMPLETE, __completeHandler);
 			}
 			
-			m_callback = __callback;
+			m_completionCallback = __completionCallback;
 			
 			return true;
 		}
@@ -191,14 +191,14 @@ package kx.resource.manager {
 			__parent:Sprite,
 			__rootPath:String,
 			__xml:XML,
-			__callback:Function,
+			__completionCallback:Function,
 			__loaderContextFactory:Function
 			):void {
 				
 			m_parent = __parent;
 			m_subResourceManagers = new Array (); // <XSubResourceManager>
 			m_loaderContextFactory = __loaderContextFactory;
-			loadProjectFromXML (__rootPath, __xml, __callback);
+			loadProjectFromXML (__rootPath, __xml, __completionCallback);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -206,28 +206,28 @@ package kx.resource.manager {
 			__parent:Sprite,
 			__rootPath:String,
 			__xmlString:String,
-			__callback:Function,
+			__completionCallback:Function,
 			__loaderContextFactory:Function
 		):void {
 			
 			m_parent = __parent;
 			m_subResourceManagers = new Array (); // <XSubResourceManager>
 			m_loaderContextFactory = __loaderContextFactory;
-			loadProjectFromXML (__rootPath, new XML (__xmlString), __callback);
+			loadProjectFromXML (__rootPath, new XML (__xmlString), __completionCallback);
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function loadProjectFromXML (
 			__rootPath:String,
 			__xml:XML,
-			__callback:Function):Boolean {
+			__completionCallback:Function):Boolean {
 				
 			reset ();
 			
 			m_loadComplete = false;
 			
 			m_rootPath = __rootPath;	
-			m_callback = __callback;
+			m_completionCallback = __completionCallback;
 			m_projectXML = __xml;
 			
 			__importManifests ();
@@ -288,8 +288,8 @@ package kx.resource.manager {
 						XTask.BNE, "__wait",
 					
 					function ():void {
-						if (m_callback != null) {
-							m_callback ();
+						if (m_completionCallback != null) {
+							m_completionCallback ();
 						}
 					},
 					

@@ -105,7 +105,7 @@ package kx.resource.manager {
 			__parent:Sprite,
 			__rootPath:String,
 			__manifestName:String,
-			__callback:Function,
+			__completionCallback:Function,
 			__loaderContextFactory:Function
 		):void {
 			
@@ -114,7 +114,7 @@ package kx.resource.manager {
 			setBothPaths (__rootPath, __manifestName);
 			m_loaderContextFactory = __loaderContextFactory;
 			
-			loadManifestFromURL (__rootPath, __manifestName, __callback);
+			loadManifestFromURL (__rootPath, __manifestName, __completionCallback);
 		}
 		
 		//------------------------------------------------------------------------------------------	
@@ -131,7 +131,7 @@ package kx.resource.manager {
 		public function loadManifestFromURL (
 			__rootPath:String,
 			__manifestName:String,
-			__callback:Function):Boolean {
+			__completionCallback:Function):Boolean {
 				
 			//-----------------------------------------------------------------------------------------
 			var __loader:URLLoader;
@@ -176,8 +176,8 @@ package kx.resource.manager {
 				__loader.addEventListener (Event.COMPLETE, __completeHandler);
 			}
 			
-			if (__callback != null) {
-				__loader.addEventListener (Event.COMPLETE, __callback);
+			if (__completionCallback != null) {
+				__loader.addEventListener (Event.COMPLETE, __completionCallback);
 			}
 			
 			return true;
@@ -189,7 +189,7 @@ package kx.resource.manager {
 			__parent:Sprite,
 			__rootPath:String,
 			__xml:XML,
-			__callback:Function,
+			__completionCallback:Function,
 			__loaderContextFactory:Function
 		):void {
 			
@@ -198,14 +198,14 @@ package kx.resource.manager {
 			setBothPaths (__rootPath, "");
 			m_loaderContextFactory = __loaderContextFactory;
 			
-			loadManifestFromXML (__rootPath, __xml, __callback);
+			loadManifestFromXML (__rootPath, __xml, __completionCallback);
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public function loadManifestFromXML (
 			__rootPath:String,
 			__xml:XML,
-			__callback:Function):Boolean {
+			__completionCallback:Function):Boolean {
 			
 			m_loadComplete = false;
 			
@@ -213,8 +213,8 @@ package kx.resource.manager {
 			
 			setManifest (__xml);
 			
-			if (__callback != null) {
-				__callback ();
+			if (__completionCallback != null) {
+				__completionCallback ();
 			}
 			
 			m_loadComplete = true;
@@ -404,7 +404,7 @@ package kx.resource.manager {
 		public function iterateAllNodes (
 			__match:XML,
 			__xmlList:XMLList,
-			__callback:Function
+			__completionCallback:Function
 		):XML {
 			
 			var i:int;
@@ -414,7 +414,7 @@ package kx.resource.manager {
 					var nuMatch:XML = iterateAllNodes (
 						__match,
 						__xmlList[i].child ("*"),
-						__callback
+						__completionCallback
 					);
 					
 					if (nuMatch != null) {
@@ -423,7 +423,7 @@ package kx.resource.manager {
 				}
 				else
 				{	
-					var __results:Array /* <Dynamic> */ = __callback (__xmlList[i]);
+					var __results:Array /* <Dynamic> */ = __completionCallback (__xmlList[i]);
 					
 					if (__results[0]) {
 						__match = __results[1];

@@ -893,12 +893,12 @@ package kx.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function iterateAllSubmaps (__callback:Function):void {
+		public function iterateAllSubmaps (__iterationCallback:Function):void {
 			var __row:Number, __col:Number;
 			
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
-					__callback (m_XSubmaps[__row][__col], __row, __col);
+					__iterationCallback (m_XSubmaps[__row][__col], __row, __col);
 				}
 			}				
 		}
@@ -983,7 +983,7 @@ package kx.xmap {
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
 					m_XSubmaps[__row][__col].items ().forEach (
-						function (__item:*):void {
+						function (__item:XMapItemModel):void {
 							__imageClassNames.set (__item.imageClassName, 0);
 						}
 					);
@@ -1022,7 +1022,7 @@ package kx.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function deserialize (__xml:XSimpleXMLNode, __readonly:Boolean=false):void {
+		public function deserialize (__xml:XSimpleXMLNode, __readOnly:Boolean=false):void {
 			trace (": [XMapLayer]: deserialize: ");
 			
 			m_viewPort = new XRect (
@@ -1079,7 +1079,7 @@ package kx.xmap {
 			deserializeImageClassNames (__xml);
 			m_classNames.deserialize (__xml);
 			deserializeItems (__xml);
-			deserializeSubmaps (__xml, __readonly);
+			deserializeSubmaps (__xml, __readOnly);
 		}
 	
 //------------------------------------------------------------------------------------------
@@ -1087,7 +1087,7 @@ package kx.xmap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function deserializeSubmaps (__xml:XSimpleXMLNode, __readonly:Boolean):void {
+		public function deserializeSubmaps (__xml:XSimpleXMLNode, __readOnly:Boolean):void {
 			trace (": [XMapLayer]: deserializeSubmaps: ");
 			
 //------------------------------------------------------------------------------------------
@@ -1096,7 +1096,7 @@ package kx.xmap {
 			var __row:int;
 			var __col:int;
 			
-			if (__readonly) {
+			if (__readOnly) {
 				var __empty:XSubmapModel = new XSubmapModel (this, 0, 0, m_submapWidth, m_submapHeight);
 
 				for (__row=0; __row < m_submapRows; __row++) {
@@ -1132,7 +1132,7 @@ package kx.xmap {
 				__row = __submapXML.getAttribute ("row");
 				__col = __submapXML.getAttribute ("col");
 					
-				if (__readonly) {
+				if (__readOnly) {
 					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
 				}
 				
@@ -1218,7 +1218,7 @@ package kx.xmap {
 					);
 							
 					m_XSubmaps[__row][__col].items ().forEach (
-						function (__item:*):void {			
+						function (__item:XMapItemModel):void {			
 							var __itemRect:XRect = __item.boundingRect.cloneX ();
 							__itemRect.offset (__item.x, __item.y);
 							

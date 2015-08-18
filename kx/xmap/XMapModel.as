@@ -282,7 +282,7 @@ package kx.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
-		private function deserialize (__xml:XSimpleXMLNode, __readonly:Boolean=false, __useArrayItems:Boolean=false):void {
+		private function deserialize (__xml:XSimpleXMLNode, __readOnly:Boolean=false, __useArrayItems:Boolean=false):void {
 			trace (": [XMap] deserialize: ");
 			
 			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("XLayers")[0].child ("XLayer");
@@ -301,7 +301,7 @@ package kx.xmap {
 			for (i=0; i<__xmlList.length; i++) {
 				m_layers[i] = new XMapLayerModel ();
 				m_layers[i].setParent (this);
-				m_layers[i].deserialize (__xmlList[i], __readonly);
+				m_layers[i].deserialize (__xmlList[i], __readOnly);
 			}
 		}
 		
