@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="X.as" projectUUID="493ac010-aae0-4610-9387-ddc7ccb9b08f" version="10">
+<actionScriptProperties analytics="false" mainApplicationPath="kx.as" projectUUID="493ac010-aae0-4610-9387-ddc7ccb9b08f" version="10">
   <compiler additionalCompilerArguments="-define=CONFIG::starling,false -define+=CONFIG::flash,true" autoRSLOrdering="true" copyDependentFiles="false" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin" removeUnusedRSL="true" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="1">
@@ -9,10 +9,10 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="X.as"/>
+    <application path="kx.as"/>
   </applications>
   <modules>
-    <module application="X.as" destPath="X/UI/XResizeGripImage.swf" optimize="true" sourcePath="X/UI/XResizeGripImage.mxml"/>
+    <module application="kx.as" destPath="kx/ui/XResizeGripImage.swf" optimize="true" sourcePath="kx/ui/XResizeGripImage.mxml"/>
   </modules>
   <buildCSSFiles/>
   <flashCatalyst validateFlashCatalystCompatibility="false"/>
