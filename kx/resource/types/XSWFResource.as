@@ -27,11 +27,6 @@
 //------------------------------------------------------------------------------------------
 package kx.resource.types {
 
-	import kx.resource.*;
-	import kx.resource.manager.*;
-	import kx.type.*;
-	import kx.xml.*;
-	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.net.URLLoader;
@@ -39,6 +34,11 @@ package kx.resource.types {
 	import flash.net.URLRequest;
 	import flash.system.*;
 	import flash.utils.*;
+	
+	import kx.resource.*;
+	import kx.resource.manager.*;
+	import kx.type.*;
+	import kx.xml.*;
 	
 //------------------------------------------------------------------------------------------		
 	public class XSWFResource extends XResource {
@@ -68,11 +68,16 @@ package kx.resource.types {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function getDefinition (__className:String):Class {
+			return null;
+		}
+		
+//------------------------------------------------------------------------------------------
 		private function __getClassByName (__className:String, __resourceName:String=""):Class /* <Dynamic> */ {
 			var c:Class; // <Dynamic>
 			
 			try {
-				c = m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class;
+				c = /* @:cast */ getDefinition (__className);
 				
 //				trace (": oooooooo: ", getQualifiedClassName (c));
 			}

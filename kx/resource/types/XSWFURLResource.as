@@ -98,6 +98,11 @@ package kx.resource.types {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public override function getDefinition (__className:String):Class /* <Dynamic> */ {
+			return /* @:cast */ m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class; 
+		}
+		
+//------------------------------------------------------------------------------------------
 		public override function loadResource ():void {		
 			m_loader = new Loader();
 

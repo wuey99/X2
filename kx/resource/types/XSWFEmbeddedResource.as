@@ -27,16 +27,15 @@
 //------------------------------------------------------------------------------------------
 package kx.resource.types {
 
-	import kx.type.*;
-	import kx.resource.*;
-	import kx.resource.manager.*;
-	import kx.type.*;
-	import kx.xml.*;
-	
 	import flash.display.*;
 	import flash.events.*;
 	import flash.system.*;
 	import flash.utils.*;
+	
+	import kx.resource.*;
+	import kx.resource.manager.*;
+	import kx.type.*;
+	import kx.xml.*;
 	
 //------------------------------------------------------------------------------------------		
 	public class XSWFEmbeddedResource extends XSWFResource {
@@ -67,13 +66,31 @@ package kx.resource.types {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public override function loadResource ():void {		
+		public override function getDefinition (__className:String):Class /* <Dynamic> */ {
+			// <HAXE>
+			/* --
+			return m_resourceManager.findEmbeddedResource (m_resourcePath);
+			-- */
+			// </HAXE>
+			// <AS3>
+			return /* @:cast */ m_loader.contentLoaderInfo.applicationDomain.getDefinition (__className) as Class; 
+			// </AS3>
+		}
+		
+//------------------------------------------------------------------------------------------
+		public override function loadResource ():void {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			m_loader = new Loader();	
 			
 			__onBytesLoaded ();
 			
 			m_parent.addChild (m_loader);
 			m_loader.visible = false;	
+			// </AS3>
 		}
 		
 	//------------------------------------------------------------------------------------------

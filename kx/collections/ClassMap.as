@@ -1,7 +1,8 @@
+package kx.collections {
+	
 // <HAXE>
 /* --
-package kx.collections;
-	
+
 	class ClassMap<K:Class<Dynamic>, V> implements Map.IMap<K, V>
 	{
 		var h:haxe.ds.StringMap<V>;
@@ -53,4 +54,8 @@ package kx.collections;
 -- */
 // </HAXE>
 // <AS3>
+	public class ClassMap {
+		
+	}
 // </AS3>
+}
