@@ -69,12 +69,6 @@ package kx.world {
 	import kx.xmap.*;
 	import kx.xml.*;
 	
-	// <HAXE>
-	/* --
-	import kx.texture.starling.*;
-	-- */
-	// </HAXE>
-	// <AS3>
 	import starling.events.EnterFrameEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -568,6 +562,11 @@ package kx.world {
 			getSoundManager ().resume ();
 		}
 
+//------------------------------------------------------------------------------------------
+		public function isPaused ():Boolean {
+			return m_paused;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function addBeforeFrameListener (__listener:Function):void {
 			m_beforeFrameSignal.addListener (__listener);
