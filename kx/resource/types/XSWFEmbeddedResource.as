@@ -81,6 +81,7 @@ package kx.resource.types {
 		public override function loadResource ():void {
 			// <HAXE>
 			/* --
+			m_loadComplete = true;
 			-- */
 			// </HAXE>
 			// <AS3>

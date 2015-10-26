@@ -27,6 +27,11 @@
 //------------------------------------------------------------------------------------------
 package kx {
 	
+	import flash.display.*;
+	import flash.events.*;
+	import flash.system.*;
+	import flash.utils.*;
+	
 	import kx.bitmap.*;
 	import kx.collections.*;
 	import kx.debug.XDebug;
@@ -37,17 +42,12 @@ package kx {
 	import kx.signals.*;
 	import kx.sound.*;
 	import kx.task.*;
-	import kx.type.*;
 	import kx.texture.*;
+	import kx.type.*;
 	import kx.world.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
 	import kx.xml.*;
-	
-	import flash.display.*;
-	import flash.events.*;
-	import flash.system.*;
-	import flash.utils.Timer;
 	
 //------------------------------------------------------------------------------------------
 	public class XApp extends Object {
@@ -398,6 +398,36 @@ package kx {
 			return getProjectManager ().unloadClassByName (__className);
 		}
 
+//------------------------------------------------------------------------------------------
+		public function createInstance (__class:Class /* <Dynamic> */):* {
+			return XType.createInstance (__class);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function createInstanceFromClassName (__className:String):* {
+			return XType.createInstance (getClassByName (__className));
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function createLevelXML (__className:String):XSimpleXMLNode {
+			var __xml:XSimpleXMLNode;
+			
+			__xml = new XSimpleXMLNode ();
+			
+			// <HAXE>
+			/* --
+			var __bytes:ByteArray = cast createInstanceFromClassName (__className);
+			__xml.setupWithXMLString (__bytes.toString ());
+			-- */
+			// </HAXE>
+			// <AS3>
+			var __level:* = createInstanceFromClassName (__className);
+			__xml.setupWithXML (__level.getXML ());
+			// </AS3>
+			
+			return __xml;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function cacheAllClasses (__project:XML):Boolean {			
 

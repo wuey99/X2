@@ -69,6 +69,11 @@ package kx.world {
 	import kx.xmap.*;
 	import kx.xml.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
 	import starling.events.EnterFrameEvent;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;

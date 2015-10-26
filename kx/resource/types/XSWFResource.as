@@ -68,7 +68,7 @@ package kx.resource.types {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function getDefinition (__className:String):Class {
+		public function getDefinition (__className:String):Class /* <Dynamic> */ {
 			return null;
 		}
 		
