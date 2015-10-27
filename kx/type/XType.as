@@ -108,6 +108,15 @@ package kx.type {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public static function initArray (__array:Array /* <Dynamic> */, __length:int, __value:*):void {
+			var i:int;
+			
+			for (i=0; i < __length; i++) {
+				__array.push (__value);
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public static function getNowDate ():Date {
 			// <HAXE>
 			/* --
@@ -177,6 +186,18 @@ package kx.type {
 			// <AS3>
 			return int (__val);
 			// </AS3>;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public static function hasField (__map:*, __key:String):Boolean {
+			// <HAXE>
+			/* --
+			return Reflect.hasField (__map, __key);
+			-- */
+			// </HAXE>
+			// <AS3>
+			return __key in __map;
+			// </AS3>
 		}
 		
 		//------------------------------------------------------------------------------------------
