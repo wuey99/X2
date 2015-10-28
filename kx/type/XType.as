@@ -108,11 +108,11 @@ package kx.type {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public static function initArray (__array:Array /* <Dynamic> */, __length:int, __value:*):void {
+		public static function initArray (__array:Array /* <Dynamic> */, __length:int, __val:*):void {
 			var i:int;
 			
 			for (i=0; i < __length; i++) {
-				__array.push (__value);
+				__array.push (__val);
 			}
 		}
 		
