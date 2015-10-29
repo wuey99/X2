@@ -6,6 +6,7 @@ from os import remove, close
 import os
 import re
 import shutil
+import sys
 
 #-----------------------------------------------------------------------------
 class Update(object):
@@ -79,7 +80,7 @@ class Update(object):
 		type = line[j+begin:j+end+1]
 		
 		line = line[0:i] + dst + type + ext + line[i + len(src):]
-			
+
 		return line
 		
 	#-----------------------------------------------------------------------------
@@ -1135,7 +1136,7 @@ class Update(object):
 				break;
 		
 		end = line[i:].find(".")
-		label = line[i:end+i]	
+		label = line[i:end+i]
 			
 		line = line[:i] + "for (__key__ in " + label + ".keys ()) { " + label + ".remove (__key__); } // removeAllKeys\n"
 					
@@ -1174,24 +1175,36 @@ class Update(object):
 	def convertPlusSigns(self, line):
 		if self.isComment(line):
 			return line
-			
+
 		if line.find("= ++") >= 0:
 			return line
-			
+
 		line = line.replace("= +", "= ")
 		line = line.replace(", +", ", ")
-		
+
 		return line
-			
+
+	#-----------------------------------------------------------------------------
+        # override function setup (__xxx:XWorld, args:Array)
+	#-----------------------------------------------------------------------------
+	def convertXLogicObjectSetup(self, line):
+		if self.isComment(line):
+			return line
+
+		line = line.replace("override function setup (__xxx:XWorld, args:Array)", "override function setup (__xxx:XWorld, args:Array /* <Dynamic> */>")
+
+		return line
+
 	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
 		self._skipLine = False
-		
+
 		line = self.convertImports(line)
 		line = self.convertErrors(line)
 		line = self.convertPlusSigns(line)
 		line = self.convertExtendsObject(line)
+		line = self.convertXLogicObjectSetup(line)
 		line = self.convertArraysAndMaps(line)
 		line = self.convertArraysAndMaps(line)
 		line = self.convertBreaks(line)
@@ -1214,7 +1227,7 @@ class Update(object):
 		line = self.convertRemoveAllKeys(line)
 		line = line.replace("starling.display.MovieClip", "openfl.display.MovieClip")
 
-		if not self._skipLine:	
+		if not self._skipLine:
 			dst.write(line)
 
 	#-----------------------------------------------------------------------------
@@ -1290,9 +1303,15 @@ class Update(object):
 					self.processDirectory(targetDir, dirnames)
 
 #-----------------------------------------------------------------------------
-targetDir = "_kx"
+if len(sys.argv) < 2:
+	print "usage: python as32HaXe.py <path>"
+	exit(0)
+
+sourceDir = sys.argv[1]
+targetDir = "_" + sourceDir
+
 if os.path.exists(targetDir):
 	shutil.rmtree(targetDir)
 o = Update()
-o.processDirectory(targetDir, ["kx"])
+o.processDirectory(targetDir, [sourceDir])
 
