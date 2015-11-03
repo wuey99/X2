@@ -480,6 +480,13 @@ package kx.world.logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+						// function ():void {
+						m_CX_Collide_Flag |= CX_COLLIDE_UP;
+						
+						oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
+						
+						collided = true;
+						break; // },
 					case CX_SOLIDX001:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
@@ -598,7 +605,21 @@ package kx.world.logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+						// function ():void {
+						m_CX_Collide_Flag |= CX_COLLIDE_DN;
+						
+						oY = (y2 - (m_cx.bottom) - 1);
+						
+						collided = true;
+						break; // },
 					case CX_SOLIDX001:
+						// function ():void {
+						m_CX_Collide_Flag |= CX_COLLIDE_DN;
+						
+						oY = (y2 - (m_cx.bottom) - 1);
+						
+						collided = true;
+						break; // },
 					case CX_JUMP_THRU:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_DN;
@@ -717,6 +738,13 @@ package kx.world.logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+						// function ():void {
+						m_CX_Collide_Flag |= CX_COLLIDE_LF;
+						
+						oX = (x1 + CX_TILE_WIDTH - m_cx.left);
+						
+						collided = true;
+						break; // },
 					case CX_SOLIDX001:
 							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
@@ -835,6 +863,13 @@ package kx.world.logic {
 					case CX_EMPTY:
 						break;
 					case CX_SOLID:
+						// function ():void {
+						m_CX_Collide_Flag |= CX_COLLIDE_RT;
+						
+						oX = (x2 - (m_cx.right) - 1);
+						
+						collided = true;
+						break; // },
 					case CX_SOLIDX001:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
@@ -955,6 +990,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
@@ -1133,6 +1170,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
@@ -1326,6 +1365,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
@@ -1503,6 +1544,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
@@ -1694,6 +1737,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
@@ -1878,6 +1923,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
@@ -1891,7 +1938,6 @@ package kx.world.logic {
 					case CX_JUMP_THRU:
 						looking = false;
 						break;
-					
 					case CX_UL45:
 						// function ():void {				
 						var __y_UL45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
@@ -2076,6 +2122,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
@@ -2259,6 +2307,8 @@ package kx.world.logic {
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
 					case CX_EMPTY:
+						looking = false;
+						break;
 					case CX_SOLIDX001:
 						looking = false;
 						break;
