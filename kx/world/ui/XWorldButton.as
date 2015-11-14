@@ -100,7 +100,7 @@ package kx.world.ui {
 		
 		//------------------------------------------------------------------------------------------
 		public override function __onMouseMove ():void {
-			if (m_currState == DOWN_STATE) {
+			if (m_currState == XButton.DOWN_STATE) {
 				return;
 			}
 			
@@ -201,7 +201,7 @@ package kx.world.ui {
 			x_sprite = addSpriteAt (m_sprite, 0, 0);
 			x_sprite.setDepth (getDepth ());
 		
-			gotoState (NORMAL_STATE);
+			gotoState (XButton.NORMAL_STATE);
 			
 			m_currState = getNormalState ();
 			

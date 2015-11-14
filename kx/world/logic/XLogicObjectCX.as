@@ -131,8 +131,8 @@ package kx.world.logic {
 			m_submapWidthMask = m_submapWidth - 1;
 			m_submapHeightMask = m_submapHeight - 1;
 			
-			m_cols = int (m_submapWidth/CX_TILE_WIDTH);
-			m_rows = int (m_submapHeight/CX_TILE_HEIGHT);
+			m_cols = int (m_submapWidth/XLogicObjectCX.CX_TILE_WIDTH);
+			m_rows = int (m_submapHeight/XLogicObjectCX.CX_TILE_HEIGHT);
 
 			/*			
 			trace (": --------------------------------:");
@@ -142,12 +142,12 @@ package kx.world.logic {
 			trace (": submapHeightMask: ", m_submapHeightMask);
 			trace (": m_cols: ", m_cols);
 			trace (": m_rows: ", m_rows);
-			trace (": tileWidth: ", CX_TILE_WIDTH);
-			trace (": tileWidthMask: ", CX_TILE_WIDTH_MASK);
-			trace (": tileWidthUnmask: ", CX_TILE_WIDTH_UNMASK);
-			trace (": tileHeight: ", CX_TILE_HEIGHT);
-			trace (": tileHeightMask: ", CX_TILE_HEIGHT_MASK);
-			trace (": tileHeightUnMask: ", CX_TILE_HEIGHT_UNMASK);
+			trace (": tileWidth: ", XLogicObjectCX.CX_TILE_WIDTH);
+			trace (": tileWidthMask: ", XLogicObjectCX.CX_TILE_WIDTH_MASK);
+			trace (": tileWidthUnmask: ", XLogicObjectCX.CX_TILE_WIDTH_UNMASK);
+			trace (": tileHeight: ", XLogicObjectCX.CX_TILE_HEIGHT);
+			trace (": tileHeightMask: ", XLogicObjectCX.CX_TILE_HEIGHT_MASK);
+			trace (": tileHeightUnMask: ", XLogicObjectCX.CX_TILE_HEIGHT_UNMASK);
 			*/
 		}
 
@@ -461,103 +461,103 @@ package kx.world.logic {
 			y1 = int (oY + m_cx.top);
 			y2 = int (oY + m_cx.bottom);
 						
-			y1 &= CX_TILE_HEIGHT_UNMASK;
+			y1 &= XLogicObjectCX.CX_TILE_HEIGHT_UNMASK;
 			r = y1 >> 9;
 			submapRow = ((y1 & 496) << 1);
 			
 			collided = false;
 			
-			__x = (x1 & CX_TILE_WIDTH_UNMASK);
-//			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
-			while (__x <= (x2 & CX_TILE_WIDTH_UNMASK)) {
+			__x = (x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK);
+//			for (__x = (x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK); __x <= (x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK); __x += XLogicObjectCX.CX_TILE_WIDTH) {
+			while (__x <= (x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK)) {
 //				c = __x/m_submapWidth;
 //				r = y1/m_submapHeight;
-//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+//				i = (int ((y1 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 //				switch (m_XSubmaps[r][c].cmap[i]) {
 					
 				switch (m_XSubmaps[r][__x >> 9].cmap[submapRow + ((__x & 511) >> 4)]) {
 				// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_UP;
 						
-						oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
+						oY = (y1 + XLogicObjectCX.CX_TILE_HEIGHT - m_cx.top);
 						
 						collided = true;
 						break; // },
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				
-							oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
+							oY = (y1 + XLogicObjectCX.CX_TILE_HEIGHT - m_cx.top);
 			
 							collided = true;
 						break; // },
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						break;
-					case CX_JUMP_THRU:
-						break;
-						
-					case CX_UL45:
-						break;
-					case CX_UR45:
-						break;
-					case CX_LL45:
-						break;
-					case CX_LR45:
-						break;
-					
-					case CX_UL225A:
-						break;
-					case CX_UL225B:
-						break;
-					case CX_UR225A:
-						break;
-					case CX_UR225B:
-						break;
-					case CX_LL225A:
-						break;
-					case CX_LL225B:
-						break;
-					case CX_LR225A:
-						break;
-					case CX_LR225B:
-						break;
-					
-					case CX_UL675A:
-						break;
-					case CX_UL675B:
-						break;
-					case CX_UR675A:
-						break;
-					case CX_UR675B:
-						break;
-					case CX_LL675A:
-						break;
-					case CX_LL675B:
-						break;
-					case CX_LR675A:
-						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						break;
 						
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_UL45:
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_UR45:
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_LL45:
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_LR45:
+						break;
+					
+					case XLogicObjectCX.CX_UL225A:
+						break;
+					case XLogicObjectCX.CX_UL225B:
+						break;
+					case XLogicObjectCX.CX_UR225A:
+						break;
+					case XLogicObjectCX.CX_UR225B:
+						break;
+					case XLogicObjectCX.CX_LL225A:
+						break;
+					case XLogicObjectCX.CX_LL225B:
+						break;
+					case XLogicObjectCX.CX_LR225A:
+						break;
+					case XLogicObjectCX.CX_LR225B:
+						break;
+					
+					case XLogicObjectCX.CX_UL675A:
+						break;
+					case XLogicObjectCX.CX_UL675B:
+						break;
+					case XLogicObjectCX.CX_UR675A:
+						break;
+					case XLogicObjectCX.CX_UR675B:
+						break;
+					case XLogicObjectCX.CX_LL675A:
+						break;
+					case XLogicObjectCX.CX_LL675B:
+						break;
+					case XLogicObjectCX.CX_LR675A:
+						break;
+					case XLogicObjectCX.CX_LR675B:
+						break;
+						
+					case XLogicObjectCX.CX_SOFTLF:
+						break;
+					case XLogicObjectCX.CX_SOFTRT:
+						break;
+					case XLogicObjectCX.CX_SOFTUP:
+						break;
+					case XLogicObjectCX.CX_SOFTDN:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_UP;
 				
-							oY = (y1 + CX_TILE_HEIGHT - m_cx.top);
+							oY = (y1 + XLogicObjectCX.CX_TILE_HEIGHT - m_cx.top);
 			
 							collided = true;
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						break;
 					default:
 						break;
@@ -567,7 +567,7 @@ package kx.world.logic {
 					return true;
 				}
 				
-				__x += CX_TILE_WIDTH;
+				__x += XLogicObjectCX.CX_TILE_WIDTH;
 			}
 			
 			return false;
@@ -586,25 +586,25 @@ package kx.world.logic {
 			y1 = int (oY + m_cx.top);
 			y2 = int (oY + m_cx.bottom);
 							
-			y2 &= CX_TILE_HEIGHT_UNMASK;
+			y2 &= XLogicObjectCX.CX_TILE_HEIGHT_UNMASK;
 			r = y2 >> 9;
 			submapRow = ((y2 & 496) << 1);
 			
 			collided = false;
 			
-			__x = (x1 & CX_TILE_WIDTH_UNMASK);
-//			for (__x = (x1 & CX_TILE_WIDTH_UNMASK); __x <= (x2 & CX_TILE_WIDTH_UNMASK); __x += CX_TILE_WIDTH) {
-			while (__x <= (x2 & CX_TILE_WIDTH_UNMASK)) {
+			__x = (x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK);
+//			for (__x = (x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK); __x <= (x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK); __x += XLogicObjectCX.CX_TILE_WIDTH) {
+			while (__x <= (x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK)) {
 //				c = __x/m_submapWidth;
 //				r = y2/m_submapHeight;
-//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/CX_TILE_WIDTH);
+//				i = (int ((y2 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((__x & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 //				switch (m_XSubmaps[r][c].cmap[i]) {
 					
 				switch (m_XSubmaps[r][__x >> 9].cmap[submapRow + ((__x & 511) >> 4)]) {
 				// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_DN;
 						
@@ -612,7 +612,7 @@ package kx.world.logic {
 						
 						collided = true;
 						break; // },
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_DN;
 						
@@ -620,7 +620,7 @@ package kx.world.logic {
 						
 						collided = true;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				
@@ -628,59 +628,59 @@ package kx.world.logic {
 										
 							collided = true;
 						break; // },
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						break;
-//					case CX_JUMP_THRU:
+//					case XLogicObjectCX.CX_JUMP_THRU:
 //						break;
 						
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						break;
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						break;
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						break;
-					case CX_LR45:
-						break;
-					
-					case CX_UL225A:
-						break;
-					case CX_UL225B:
-						break;
-					case CX_UR225A:
-						break;
-					case CX_UR225B:
-						break;
-					case CX_LL225A:
-						break;
-					case CX_LL225B:
-						break;
-					case CX_LR225A:
-						break;
-					case CX_LR225B:
+					case XLogicObjectCX.CX_LR45:
 						break;
 					
-					case CX_UL675A:
+					case XLogicObjectCX.CX_UL225A:
 						break;
-					case CX_UL675B:
+					case XLogicObjectCX.CX_UL225B:
 						break;
-					case CX_UR675A:
+					case XLogicObjectCX.CX_UR225A:
 						break;
-					case CX_UR675B:
+					case XLogicObjectCX.CX_UR225B:
 						break;
-					case CX_LL675A:
+					case XLogicObjectCX.CX_LL225A:
 						break;
-					case CX_LL675B:
+					case XLogicObjectCX.CX_LL225B:
 						break;
-					case CX_LR675A:
+					case XLogicObjectCX.CX_LR225A:
 						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_LR225B:
+						break;
+					
+					case XLogicObjectCX.CX_UL675A:
+						break;
+					case XLogicObjectCX.CX_UL675B:
+						break;
+					case XLogicObjectCX.CX_UR675A:
+						break;
+					case XLogicObjectCX.CX_UR675B:
+						break;
+					case XLogicObjectCX.CX_LL675A:
+						break;
+					case XLogicObjectCX.CX_LL675B:
+						break;
+					case XLogicObjectCX.CX_LR675A:
+						break;
+					case XLogicObjectCX.CX_LR675B:
 						break;
 						
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_DN;
 				
@@ -688,9 +688,9 @@ package kx.world.logic {
 										
 							collided = true;
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						break;
 					default:
 						break;
@@ -700,7 +700,7 @@ package kx.world.logic {
 					return true;
 				}
 				
-				__x += CX_TILE_WIDTH;
+				__x += XLogicObjectCX.CX_TILE_WIDTH;
 			}
 			
 			return false;
@@ -719,103 +719,103 @@ package kx.world.logic {
 			y1 = int (oY + m_cx.top);
 			y2 = int (oY + m_cx.bottom);
 	
-			x1 &= CX_TILE_WIDTH_UNMASK;
+			x1 &= XLogicObjectCX.CX_TILE_WIDTH_UNMASK;
 			c = x1 >> 9;
 			submapCol = (x1 & 511) >> 4;
 			
 			collided = false;
 			
-			__y = (y1 & CX_TILE_HEIGHT_UNMASK);
-//			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
-			while (__y <= (y2 & CX_TILE_HEIGHT_UNMASK)) {
+			__y = (y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK);
+//			for (__y = (y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK); __y <= (y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK); __y += XLogicObjectCX.CX_TILE_HEIGHT) {
+			while (__y <= (y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK)) {
 //				c = x1/m_submapWidth;
 //				r = __y/m_submapHeight;
-//				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+//				i = (int ((__y & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 //				switch (m_XSubmaps[r][c].cmap[i]) {
 					
 				switch (m_XSubmaps[__y >> 9][c].cmap[((__y & 496) << 1) + submapCol]) {
 				// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_LF;
 						
-						oX = (x1 + CX_TILE_WIDTH - m_cx.left);
+						oX = (x1 + XLogicObjectCX.CX_TILE_WIDTH - m_cx.left);
 						
 						collided = true;
 						break; // },
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
-								oX = (x1 + CX_TILE_WIDTH - m_cx.left);
+								oX = (x1 + XLogicObjectCX.CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
 							break; // },
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						break;
-					case CX_JUMP_THRU:
-						break;
-						
-					case CX_UL45:
-						break;
-					case CX_UR45:
-						break;
-					case CX_LL45:
-						break;
-					case CX_LR45:
-						break;
-					
-					case CX_UL225A:
-						break;
-					case CX_UL225B:
-						break;
-					case CX_UR225A:
-						break;
-					case CX_UR225B:
-						break;
-					case CX_LL225A:
-						break;
-					case CX_LL225B:
-						break;
-					case CX_LR225A:
-						break;
-					case CX_LR225B:
-						break;
-					
-					case CX_UL675A:
-						break;
-					case CX_UL675B:
-						break;
-					case CX_UR675A:
-						break;
-					case CX_UR675B:
-						break;
-					case CX_LL675A:
-						break;
-					case CX_LL675B:
-						break;
-					case CX_LR675A:
-						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						break;
 						
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_UL45:
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_UR45:
+						break;
+					case XLogicObjectCX.CX_LL45:
+						break;
+					case XLogicObjectCX.CX_LR45:
+						break;
+					
+					case XLogicObjectCX.CX_UL225A:
+						break;
+					case XLogicObjectCX.CX_UL225B:
+						break;
+					case XLogicObjectCX.CX_UR225A:
+						break;
+					case XLogicObjectCX.CX_UR225B:
+						break;
+					case XLogicObjectCX.CX_LL225A:
+						break;
+					case XLogicObjectCX.CX_LL225B:
+						break;
+					case XLogicObjectCX.CX_LR225A:
+						break;
+					case XLogicObjectCX.CX_LR225B:
+						break;
+					
+					case XLogicObjectCX.CX_UL675A:
+						break;
+					case XLogicObjectCX.CX_UL675B:
+						break;
+					case XLogicObjectCX.CX_UR675A:
+						break;
+					case XLogicObjectCX.CX_UR675B:
+						break;
+					case XLogicObjectCX.CX_LL675A:
+						break;
+					case XLogicObjectCX.CX_LL675B:
+						break;
+					case XLogicObjectCX.CX_LR675A:
+						break;
+					case XLogicObjectCX.CX_LR675B:
+						break;
+						
+					case XLogicObjectCX.CX_SOFTLF:
+						break;
+					case XLogicObjectCX.CX_SOFTRT:
 							// function ():void {
 								m_CX_Collide_Flag |= CX_COLLIDE_LF;
 			
-								oX = (x1 + CX_TILE_WIDTH - m_cx.left);
+								oX = (x1 + XLogicObjectCX.CX_TILE_WIDTH - m_cx.left);
 				
 								collided = true;
 							break; 
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						break;
 					default:
 						break;
@@ -825,7 +825,7 @@ package kx.world.logic {
 					return true;
 				}
 				
-				__y += CX_TILE_HEIGHT;
+				__y += XLogicObjectCX.CX_TILE_HEIGHT;
 			}
 			
 			return false;
@@ -844,25 +844,25 @@ package kx.world.logic {
 			y1 = int (oY + m_cx.top);
 			y2 = int (oY + m_cx.bottom);
 						
-			x2 &= CX_TILE_WIDTH_UNMASK;
+			x2 &= XLogicObjectCX.CX_TILE_WIDTH_UNMASK;
 			c = x2 >> 9;
 			submapCol = (x2 & 511) >> 4;
 			
 			collided = false;
 			
-			__y = (y1 & CX_TILE_HEIGHT_UNMASK);
-//			for (__y = (y1 & CX_TILE_HEIGHT_UNMASK); __y <= (y2 & CX_TILE_HEIGHT_UNMASK); __y += CX_TILE_HEIGHT) {
-			while (__y <= (y2 & CX_TILE_HEIGHT_UNMASK)) {
+			__y = (y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK);
+//			for (__y = (y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK); __y <= (y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK); __y += XLogicObjectCX.CX_TILE_HEIGHT) {
+			while (__y <= (y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK)) {
 //				c = x2/m_submapWidth;
 //				r = __y/m_submapHeight;
-//				i = (int ((__y & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & 511)/CX_TILE_WIDTH);
+//				i = (int ((__y & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x2 & 511)/XLogicObjectCX.CX_TILE_WIDTH);
 //				switch (m_XSubmaps[r][c].cmap[i]) {
 					
 				switch (m_XSubmaps[__y >> 9][c].cmap[((__y & 496) << 1) + submapCol]) {
 				// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_RT;
 						
@@ -870,7 +870,7 @@ package kx.world.logic {
 						
 						collided = true;
 						break; // },
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
@@ -878,55 +878,55 @@ package kx.world.logic {
 			
 							collided = true;
 						break; // },
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						break;
-					case CX_JUMP_THRU:
-						break;
-						
-					case CX_UL45:
-						break;
-					case CX_UR45:
-						break;
-					case CX_LL45:
-						break;
-					case CX_LR45:
-						break;
-					
-					case CX_UL225A:
-						break;
-					case CX_UL225B:
-						break;
-					case CX_UR225A:
-						break;
-					case CX_UR225B:
-						break;
-					case CX_LL225A:
-						break;
-					case CX_LL225B:
-						break;
-					case CX_LR225A:
-						break;
-					case CX_LR225B:
-						break;
-					
-					case CX_UL675A:
-						break;
-					case CX_UL675B:
-						break;
-					case CX_UR675A:
-						break;
-					case CX_UR675B:
-						break;
-					case CX_LL675A:
-						break;
-					case CX_LL675B:
-						break;
-					case CX_LR675A:
-						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						break;
 						
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_UL45:
+						break;
+					case XLogicObjectCX.CX_UR45:
+						break;
+					case XLogicObjectCX.CX_LL45:
+						break;
+					case XLogicObjectCX.CX_LR45:
+						break;
+					
+					case XLogicObjectCX.CX_UL225A:
+						break;
+					case XLogicObjectCX.CX_UL225B:
+						break;
+					case XLogicObjectCX.CX_UR225A:
+						break;
+					case XLogicObjectCX.CX_UR225B:
+						break;
+					case XLogicObjectCX.CX_LL225A:
+						break;
+					case XLogicObjectCX.CX_LL225B:
+						break;
+					case XLogicObjectCX.CX_LR225A:
+						break;
+					case XLogicObjectCX.CX_LR225B:
+						break;
+					
+					case XLogicObjectCX.CX_UL675A:
+						break;
+					case XLogicObjectCX.CX_UL675B:
+						break;
+					case XLogicObjectCX.CX_UR675A:
+						break;
+					case XLogicObjectCX.CX_UR675B:
+						break;
+					case XLogicObjectCX.CX_LL675A:
+						break;
+					case XLogicObjectCX.CX_LL675B:
+						break;
+					case XLogicObjectCX.CX_LR675A:
+						break;
+					case XLogicObjectCX.CX_LR675B:
+						break;
+						
+					case XLogicObjectCX.CX_SOFTLF:
 						// function ():void {
 							m_CX_Collide_Flag |= CX_COLLIDE_RT;
 		
@@ -934,13 +934,13 @@ package kx.world.logic {
 			
 							collided = true;
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						break;
 					default:
 						break;
@@ -950,7 +950,7 @@ package kx.world.logic {
 					return true;
 				}
 				
-				__y += CX_TILE_HEIGHT;
+				__y += XLogicObjectCX.CX_TILE_HEIGHT;
 			}
 			
 			return false;
@@ -981,7 +981,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x2/m_submapWidth;
 				//				r = y1/m_submapHeight;
-				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y1 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x2 >> 9;
 				r = y1 >> 9;
@@ -989,156 +989,156 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
+						y1 = (y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + XLogicObjectCX.CX_TILE_HEIGHT;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
 					
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						looking = false;
 						break;
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						looking = false;
 						break;
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						// function ():void {	
 						var __x_LL45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __x_LL45[x15]) {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL45[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_LL45[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						looking = false;
 						break;
 					
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						looking = false;
 						break;
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						looking = false;
 						break;
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						looking = false;
 						break;
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						looking = false;
 						break;
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						// function ():void {	
 						var __x_LL225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __x_LL225A[x15]) {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225A[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_LL225A[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						// function ():void {	
 						var __x_LL225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __x_LL225B[x15]) {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LL225B[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_LL225B[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						looking = false;
 						break;
-					case CX_LR225B:
+					case XLogicObjectCX.CX_LR225B:
 						looking = false;
 						break;
 					
-					case CX_UL675A:
+					case XLogicObjectCX.CX_UL675A:
 						looking = false;
 						break;
-					case CX_UL675B:
+					case XLogicObjectCX.CX_UL675B:
 						looking = false;
 						break;
-					case CX_UR675A:
+					case XLogicObjectCX.CX_UR675A:
 						looking = false;
 						break;
-					case CX_UR675B:
+					case XLogicObjectCX.CX_UR675B:
 						looking = false;
 						break;
-					case CX_LL675A: // new
+					case XLogicObjectCX.CX_LL675A: // new
 						// function ():void {								
 						var __x_LL675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						var __y_LL675A:Array /* <Int> */ = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_LL675A[y15]) {
-							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LL675A[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LL675A[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						
 						break;
-					case CX_LL675B: // new
+					case XLogicObjectCX.CX_LL675B: // new
 						// function ():void {							
 						var __x_LL675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						var __y_LL675B:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 14];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_LL675B[y15]) {
-							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LL675B[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LL675B[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						
 						break;	
-					case CX_LR675A:
+					case XLogicObjectCX.CX_LR675A:
 						looking = false;
 						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_LR675B:
 						looking = false;
 						break;
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						looking = false;
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						looking = false;
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						looking = false;
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						// function ():void {
-						oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
+						oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + XLogicObjectCX.CX_TILE_HEIGHT - m_cx.top);
 						
 						looking = false;
 						break; // },
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();
@@ -1161,7 +1161,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x2/m_submapWidth;
 				//				r = y2/m_submapHeight;
-				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y2 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x2 >> 9;
 				r = y2 >> 9;
@@ -1169,156 +1169,156 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
+						y2 = (y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) - 1;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
 					
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						// function ():void {	
 						var __x_UL45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __x_UL45[x15]) {
-							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL45[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_UL45[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },			
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						looking = false;
 						break;
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						looking = false;
 						break;
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						looking = false;
 						break;
 					
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						// function ():void {	
 						var __x_UL225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __x_UL225A[x15]) {
-							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225A[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_UL225A[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },	
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						// function ():void {	
 						var __x_UL225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __x_UL225B[x15]) {
-							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UL225B[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_UL225B[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },	
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						looking = false;
 						break;
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						looking = false;
 						break;
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						looking = false;
 						break;
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						looking = false;
 						break;
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						looking = false;
 						break;
-					case CX_LR225B:
+					case XLogicObjectCX.CX_LR225B:
 						looking = false;
 						break;
 					
-					case CX_UL675A: // new
+					case XLogicObjectCX.CX_UL675A: // new
 						// function ():void {								
 						var __x_UL675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						var __y_UL675A:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 14, 12, 10, 8, 6, 4, 2, 0];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_UL675A[y15]) {
-							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UL675A[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UL675A[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						
 						break;
-					case CX_UL675B: // new
+					case XLogicObjectCX.CX_UL675B: // new
 						// function ():void {							
 						var __x_UL675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						var __y_UL675B:Array /* <Int> */ = [14, 12, 10, 8, 6, 4, 2, 0, -2, -4, -6, -8, -10, -12, -14, -16];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_UL675B[y15]) {
-							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UL675B[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UL675B[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						
 						break;	
-					case CX_UR675A:
+					case XLogicObjectCX.CX_UR675A:
 						looking = false;
 						break;
-					case CX_UR675B:
+					case XLogicObjectCX.CX_UR675B:
 						looking = false;
 						break;
-					case CX_LL675A:
+					case XLogicObjectCX.CX_LL675A:
 						looking = false;
 						break;
-					case CX_LL675B:
+					case XLogicObjectCX.CX_LL675B:
 						looking = false;
 						break;
-					case CX_LR675A:
+					case XLogicObjectCX.CX_LR675A:
 						looking = false;
 						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_LR675B:
 						looking = false;
 						break;
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						looking = false;
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						looking = false;
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						// function ():void {
-						oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
+						oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 						
 						looking = false;								
 						break; // },
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						looking = false;
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();
@@ -1356,7 +1356,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x1/m_submapWidth;
 				//				r = y1/m_submapHeight;
-				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y1 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x1 >> 9;
 				r = y1 >> 9;
@@ -1364,155 +1364,155 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						y1 = (y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT;
+						y1 = (y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + XLogicObjectCX.CX_TILE_HEIGHT;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
 					
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						looking = false;
 						break;
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						looking = false;
 						break;
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						looking = false;
 						break;
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						// function ():void {	
 						var __x_LR45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __x_LR45[x15]) {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR45[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_LR45[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						break; // },			
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						looking = false;
 						break;
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						looking = false;
 						break;
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						looking = false;
 						break;
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						looking = false;
 						break;
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						looking = false;
 						break;
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						looking = false;
 						break;
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						// function ():void {	
 						var __x_LR225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __x_LR225A[x15]) {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225A[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_LR225A[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						break; // },		
-					case CX_LR225B:
+					case XLogicObjectCX.CX_LR225B:
 						// function ():void {	
 						var __x_LR225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __x_LR225B[x15]) {
-							oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + __x_LR225B[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_LR225B[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						break; // },		
 					
-					case CX_UL675A:
+					case XLogicObjectCX.CX_UL675A:
 						looking = false;
 						break;
-					case CX_UL675B:
+					case XLogicObjectCX.CX_UL675B:
 						looking = false;
 						break;
-					case CX_UR675A:
+					case XLogicObjectCX.CX_UR675A:
 						looking = false;
 						break;
-					case CX_UR675B:
+					case XLogicObjectCX.CX_UR675B:
 						looking = false;
 						break;
-					case CX_LL675A:
+					case XLogicObjectCX.CX_LL675A:
 						looking = false;
 						break;
-					case CX_LL675B:
+					case XLogicObjectCX.CX_LL675B:
 						looking = false;
 						break;
-					case CX_LR675A: // new
+					case XLogicObjectCX.CX_LR675A: // new
 						// function ():void {								
 						var __x_LR675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						var __y_LR675A:Array /* <Int> */ = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_LR675A[y15]) {
-							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LR675A[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LR675A[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						
 						break;
-					case CX_LR675B: // new
+					case XLogicObjectCX.CX_LR675B: // new
 						// function ():void {							
 						var __x_LR675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						var __y_LR675B:Array /* <Int> */ = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_LR675B[y15]) {
-							oY = ((y1 & CX_TILE_WIDTH_UNMASK) + __y_LR675B[x15] - m_cx.top);
+							oY = ((y1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LR675B[x15] - m_cx.top);
 						}
 						
 						looking = false;
 						
 						break;	
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						looking = false;
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						looking = false;
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						looking = false;
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						// function ():void {
-						oY = ((y1 & CX_TILE_HEIGHT_UNMASK) + CX_TILE_HEIGHT - m_cx.top);
+						oY = ((y1 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + XLogicObjectCX.CX_TILE_HEIGHT - m_cx.top);
 						
 						looking = false;
 						break; // },
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();
@@ -1535,7 +1535,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x1/m_submapWidth;
 				//				r = y2/m_submapHeight;
-				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y2 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x1 >> 9;
 				r = y2 >> 9;
@@ -1543,154 +1543,154 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						y2 = (y2 & CX_TILE_HEIGHT_UNMASK) - 1;
+						y2 = (y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) - 1;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
 					
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						looking = false;
 						break;
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						// function ():void {	
 						var __x_UR45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __x_UR45[x15]) {
-							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR45[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_UR45[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						looking = false;
 						break;
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						looking = false;
 						break;
 					
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						looking = false;
 						break;
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						looking = false;
 						break;
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						// function ():void {	
 						var __x_UR225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __x_UR225A[x15]) {
-							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225A[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_UR225A[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						// function ():void {	
 						var __x_UR225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __x_UR225B[x15]) {
-							oY = ((y2 & CX_TILE_HEIGHT_UNMASK) + __x_UR225B[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) + __x_UR225B[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						looking = false;
 						break;
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						looking = false;
 						break;
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						looking = false;
 						break;
-					case CX_LR225B:
+					case XLogicObjectCX.CX_LR225B:
 						looking = false;
 						break;
 					
-					case CX_UL675A:
+					case XLogicObjectCX.CX_UL675A:
 						looking = false;
 						break;
-					case CX_UL675B:
+					case XLogicObjectCX.CX_UL675B:
 						looking = false;
 						break;
-					case CX_UR675A: //new
+					case XLogicObjectCX.CX_UR675A: //new
 						// function ():void {				
 						var __x_UR675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						var __y_UR675A:Array /* <Int> */ = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_UR675A[y15]) {
-							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UR675A[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UR675A[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_UR675B: // new
+					case XLogicObjectCX.CX_UR675B: // new
 						// function ():void {				
 						var __x_UR675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						var __y_UR675B:Array /* <Int> */ = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_UR675B[y15]) {
-							oY = ((y2 & CX_TILE_WIDTH_UNMASK) + __y_UR675B[x15] - m_cx.bottom - 1);
+							oY = ((y2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UR675B[x15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LL675A:
+					case XLogicObjectCX.CX_LL675A:
 						looking = false;
 						break;
-					case CX_LL675B:
+					case XLogicObjectCX.CX_LL675B:
 						looking = false;
 						break;
-					case CX_LR675A:
+					case XLogicObjectCX.CX_LR675A:
 						looking = false;
 						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_LR675B:
 						looking = false;
 						break;
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						looking = false;
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						looking = false;
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						// function ():void {
-						oY = ((y2 & CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
+						oY = ((y2 & XLogicObjectCX.CX_TILE_HEIGHT_UNMASK) - (m_cx.bottom) - 1);
 						
 						looking = false;								
 						break; // },
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						looking = false;
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();
@@ -1728,7 +1728,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x1/m_submapWidth;
 				//				r = y2/m_submapHeight;
-				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y2 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x1 >> 9;
 				r = y2 >> 9;
@@ -1736,162 +1736,162 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
+						x1 = (x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + XLogicObjectCX.CX_TILE_WIDTH;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
 					
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						looking = false;
 						break;
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						// function ():void {				
 						var __y_UR45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __y_UR45[y15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR45[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UR45[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						looking = false;
 						break;
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						looking = false;
 						break;
 					
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						looking = false;
 						break;
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						looking = false;
 						break;
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						// function ():void {				
 						var __y_UR225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						var __x_UR225A:Array /* <Int> */ = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __y_UR225A[x15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225A[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_UR225A[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						// function ():void {				
 						var __y_UR225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						var __x_UR225B:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 10, 12, 14, 16];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __y_UR225B[x15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_UR225B[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_UR225B[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						looking = false;
 						break;
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						looking = false;
 						break;
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						looking = false;
 						break;
-					case CX_LR225B:
-						looking = false;
-						break;
-					
-					case CX_UL675A:
-						looking = false;
-						break;
-					case CX_UL675B:
+					case XLogicObjectCX.CX_LR225B:
 						looking = false;
 						break;
 					
-					case CX_UR675A: // new
+					case XLogicObjectCX.CX_UL675A:
+						looking = false;
+						break;
+					case XLogicObjectCX.CX_UL675B:
+						looking = false;
+						break;
+					
+					case XLogicObjectCX.CX_UR675A: // new
 						// function ():void {								
 						var __x_UR675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						var __y_UR675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_UR675A[y15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR675A[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UR675A[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						
 						break;
-					case CX_UR675B: // new
+					case XLogicObjectCX.CX_UR675B: // new
 						// function ():void {							
 						var __x_UR675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						var __y_UR675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_UR675B[y15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_UR675B[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UR675B[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						
 						break;	
 					
-					case CX_LL675A:
+					case XLogicObjectCX.CX_LL675A:
 						looking = false;
 						break;
-					case CX_LL675B:
+					case XLogicObjectCX.CX_LL675B:
 						looking = false;
 						break;
-					case CX_LR675A:
+					case XLogicObjectCX.CX_LR675A:
 						looking = false;
 						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_LR675B:
 						looking = false;
 						break;
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						looking = false;
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_LF;
 						
-						oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
+						oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + XLogicObjectCX.CX_TILE_WIDTH - m_cx.left);
 						
 						collided = true;
 						break; // },
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						looking = false;
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						looking = false;
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();
@@ -1914,7 +1914,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x2/m_submapWidth;
 				//				r = y2/m_submapHeight;
-				//				i = (int ((y2 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y2 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x2 >> 9;
 				r = y2 >> 9;
@@ -1922,160 +1922,160 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
+						x2 = (x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) - 1;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						// function ():void {				
 						var __y_UL45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __y_UL45[y15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL45[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UL45[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						looking = false;
 						break;
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						looking = false;
 						break;
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						looking = false;
 						break;
 					
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						// function ():void {				
 						var __y_UL225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						var __x_UL225A:Array /* <Int> */ = [0, 0, 0, 0, 0, 0, 0, 0, 13, 11, 9, 7, 5, 3, 1, -1];   
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __y_UL225A[x15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225A[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_UL225A[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						// function ():void {				
 						var __y_UL225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						var __x_UL225B:Array /* <Int> */ = [13, 11, 9, 7, 5, 3, 1, -1, -3, -5, -7, -9, -11, -13, -15, -17];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 >= __y_UL225B[x15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_UL225B[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_UL225B[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						looking = false;
 						break;
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						looking = false;
 						break;
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						looking = false;
 						break;
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						looking = false;
 						break;
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						looking = false;
 						break;
-					case CX_LR225B:
+					case XLogicObjectCX.CX_LR225B:
 						looking = false;
 						break;
 					
-					case CX_UL675A: // new
+					case XLogicObjectCX.CX_UL675A: // new
 						// function ():void {								
 						var __x_UL675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						var __y_UL675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_UL675A[y15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL675A[y15] - m_cx.bottom - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UL675A[y15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						
 						break;
-					case CX_UL675B: // new
+					case XLogicObjectCX.CX_UL675B: // new
 						// function ():void {							
 						var __x_UL675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						var __y_UL675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y2 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y2 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_UL675B[y15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_UL675B[y15] - m_cx.bottom - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_UL675B[y15] - m_cx.bottom - 1);
 						}
 						
 						looking = false;
 						
 						break;
 					
-					case CX_UR675A:
+					case XLogicObjectCX.CX_UR675A:
 						looking = false;
 						break;
-					case CX_UR675B:
+					case XLogicObjectCX.CX_UR675B:
 						looking = false;
 						break;
-					case CX_LL675A:
+					case XLogicObjectCX.CX_LL675A:
 						looking = false;
 						break;
-					case CX_LL675B:
+					case XLogicObjectCX.CX_LL675B:
 						looking = false;
 						break;
-					case CX_LR675A:
+					case XLogicObjectCX.CX_LR675A:
 						looking = false;
 						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_LR675B:
 						looking = false;
 						break;
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_RT;
 						
-						oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
+						oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 						
 						collided = true;
 						break; // },
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						looking = false;
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						looking = false;
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						looking = false;
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();
@@ -2113,7 +2113,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x1/m_submapWidth;
 				//				r = y1/m_submapHeight;
-				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y1 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x1 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x1 >> 9;
 				r = y1 >> 9;
@@ -2121,161 +2121,161 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						x1 = (x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH;
+						x1 = (x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + XLogicObjectCX.CX_TILE_WIDTH;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
 					
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						looking = false;
 						break;
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						looking = false;
 						break;
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						looking = false;
 						break;
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						// function ():void {				
 						var __y_LR45:Array /* <Int> */ = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __y_LR45[y15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR45[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LR45[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						break; // },
 					
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						looking = false;
 						break;
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						looking = false;
 						break;
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						looking = false;
 						break;
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						looking = false;
 						break;
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						looking = false;
 						break;
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						looking = false;
 						break;
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						// function ():void {								
 						var __y_LR225A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						var __x_LR225A:Array /* <Int> */ = [32, 30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __y_LR225A[x15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225A[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_LR225A[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LR225B:
+					case XLogicObjectCX.CX_LR225B:
 						// function ():void {							
 						var __y_LR225B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						var __x_LR225B:Array /* <Int> */ = [16, 14, 12, 10, 8, 6, 4, 2, 0, 0, 0, 0, 0, 0, 0, 0];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __y_LR225B[x15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __x_LR225B[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_LR225B[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						break; // },
 					
-					case CX_UL675A:
+					case XLogicObjectCX.CX_UL675A:
 						looking = false;
 						break;
-					case CX_UL675B:
+					case XLogicObjectCX.CX_UL675B:
 						looking = false;
 						break;
-					case CX_UR675A:
+					case XLogicObjectCX.CX_UR675A:
 						looking = false;
 						break;
-					case CX_UR675B:
+					case XLogicObjectCX.CX_UR675B:
 						looking = false;
 						break;
-					case CX_LL675A:
+					case XLogicObjectCX.CX_LL675A:
 						looking = false;
 						break;
-					case CX_LL675B:
+					case XLogicObjectCX.CX_LL675B:
 						looking = false;
 						break;
 					
-					case CX_LR675A: // new
+					case XLogicObjectCX.CX_LR675A: // new
 						// function ():void {								
 						var __x_LR675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						var __y_LR675A:Array /* <Int> */ = [15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_LR675A[y15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR675A[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LR675A[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						
 						break;
-					case CX_LR675B: // new
+					case XLogicObjectCX.CX_LR675B: // new
 						// function ():void {							
 						var __x_LR675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						var __y_LR675B:Array /* <Int> */ = [7, 7, 6, 6, 5, 5, 4, 4, 3, 3, 2, 2, 1, 1, 0, 0];
 						
-						x15 = x1 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x1 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 <= __x_LR675B[y15]) {
-							oX = ((x1 & CX_TILE_WIDTH_UNMASK) + __y_LR675B[y15] - m_cx.left);
+							oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LR675B[y15] - m_cx.left);
 						}
 						
 						looking = false;
 						
 						break;	
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						looking = false;
 						break;
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_LF;
 						
-						oX = ((x1 & CX_TILE_WIDTH_UNMASK) + CX_TILE_WIDTH - m_cx.left);
+						oX = ((x1 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + XLogicObjectCX.CX_TILE_WIDTH - m_cx.left);
 						
 						collided = true;
 						break; // },
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						looking = false;
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						looking = false;
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();
@@ -2298,7 +2298,7 @@ package kx.world.logic {
 			while (looking) {
 				//				c = x2/m_submapWidth;
 				//				r = y1/m_submapHeight;
-				//				i = (int ((y1 & m_submapHeightMask)/CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/CX_TILE_WIDTH);
+				//				i = (int ((y1 & m_submapHeightMask)/XLogicObjectCX.CX_TILE_HEIGHT) * m_cols) + int ((x2 & m_submapWidthMask)/XLogicObjectCX.CX_TILE_WIDTH);
 				
 				c = x2 >> 9;
 				r = y1 >> 9;
@@ -2306,162 +2306,162 @@ package kx.world.logic {
 				
 				switch (m_XSubmaps[r][c].cmap[i]) {
 					// ([
-					case CX_EMPTY:
+					case XLogicObjectCX.CX_EMPTY:
 						looking = false;
 						break;
-					case CX_SOLIDX001:
+					case XLogicObjectCX.CX_SOLIDX001:
 						looking = false;
 						break;
-					case CX_SOLID:
+					case XLogicObjectCX.CX_SOLID:
 						looking = false;
 						break;
-					case CX_SOFT:
+					case XLogicObjectCX.CX_SOFT:
 						// function ():void {
-						x2 = (x2 & CX_TILE_WIDTH_UNMASK) - 1;
+						x2 = (x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) - 1;
 						break; // },
-					case CX_JUMP_THRU:
+					case XLogicObjectCX.CX_JUMP_THRU:
 						looking = false;
 						break;
 					
-					case CX_UL45:
+					case XLogicObjectCX.CX_UL45:
 						looking = false;
 						break;
-					case CX_UR45:
+					case XLogicObjectCX.CX_UR45:
 						looking = false;
 						break;
-					case CX_LL45:
+					case XLogicObjectCX.CX_LL45:
 						// function ():void {				
 						var __y_LL45:Array /* <Int> */ = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __y_LL45[y15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL45[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LL45[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LR45:
+					case XLogicObjectCX.CX_LR45:
 						looking = false;
 						break;
 					
-					case CX_UL225A:
+					case XLogicObjectCX.CX_UL225A:
 						looking = false;
 						break;
-					case CX_UL225B:
+					case XLogicObjectCX.CX_UL225B:
 						looking = false;
 						break;
-					case CX_UR225A:
+					case XLogicObjectCX.CX_UR225A:
 						looking = false;
 						break;
-					case CX_UR225B:
+					case XLogicObjectCX.CX_UR225B:
 						looking = false;
 						break;
-					case CX_LL225A:
+					case XLogicObjectCX.CX_LL225A:
 						// function ():void {					
 						var __y_LL225A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						var __x_LL225A:Array /* <Int> */ = [0, 2, 4, 6, 8, 10, 12, 14, 0, 0, 0, 0, 0, 0, 0, 0];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __y_LL225A[x15]) {		
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225A[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_LL225A[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LL225B:
+					case XLogicObjectCX.CX_LL225B:
 						// function ():void {				
 						var __y_LL225B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						var __x_LL225B:Array /* <Int> */ = [-16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (y15 <= __y_LL225B[x15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __x_LL225B[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __x_LL225B[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						break; // },
-					case CX_LR225A:
+					case XLogicObjectCX.CX_LR225A:
 						looking = false;
 						break;
-					case CX_LR225B:
-						looking = false;
-						break;
-					
-					case CX_UL675A:
-						looking = false;
-						break;
-					case CX_UL675B:
-						looking = false;
-						break;
-					case CX_UR675A:
-						looking = false;
-						break;
-					case CX_UR675B:
+					case XLogicObjectCX.CX_LR225B:
 						looking = false;
 						break;
 					
-					case CX_LL675A: // new
+					case XLogicObjectCX.CX_UL675A:
+						looking = false;
+						break;
+					case XLogicObjectCX.CX_UL675B:
+						looking = false;
+						break;
+					case XLogicObjectCX.CX_UR675A:
+						looking = false;
+						break;
+					case XLogicObjectCX.CX_UR675B:
+						looking = false;
+						break;
+					
+					case XLogicObjectCX.CX_LL675A: // new
 						// function ():void {								
 						var __x_LL675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						var __y_LL675A:Array /* <Int> */ = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_LL675A[y15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL675A[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LL675A[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						
 						break;
-					case CX_LL675B: // new
+					case XLogicObjectCX.CX_LL675B: // new
 						// function ():void {							
 						var __x_LL675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						var __y_LL675B:Array /* <Int> */ = [8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15];
 						
-						x15 = x2 & CX_TILE_WIDTH_MASK;
-						y15 = y1 & CX_TILE_HEIGHT_MASK;
+						x15 = x2 & XLogicObjectCX.CX_TILE_WIDTH_MASK;
+						y15 = y1 & XLogicObjectCX.CX_TILE_HEIGHT_MASK;
 						
 						if (x15 >= __x_LL675B[y15]) {
-							oX = ((x2 & CX_TILE_WIDTH_UNMASK) + __y_LL675B[y15] - m_cx.right - 1);
+							oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) + __y_LL675B[y15] - m_cx.right - 1);
 						}
 						
 						looking = false;
 						
 						break;	
 					
-					case CX_LR675A:
+					case XLogicObjectCX.CX_LR675A:
 						looking = false;
 						break;
-					case CX_LR675B:
+					case XLogicObjectCX.CX_LR675B:
 						looking = false;
 						break;
 					
-					case CX_SOFTLF:
+					case XLogicObjectCX.CX_SOFTLF:
 						// function ():void {
 						m_CX_Collide_Flag |= CX_COLLIDE_RT;
 						
-						oX = ((x2 & CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
+						oX = ((x2 & XLogicObjectCX.CX_TILE_WIDTH_UNMASK) - (m_cx.right) - 1);
 						
 						collided = true;
 						break; // },
-					case CX_SOFTRT:
+					case XLogicObjectCX.CX_SOFTRT:
 						looking = false;
 						break;
-					case CX_SOFTUP:
+					case XLogicObjectCX.CX_SOFTUP:
 						looking = false;
 						break;
-					case CX_SOFTDN:
+					case XLogicObjectCX.CX_SOFTDN:
 						looking = false;
 						break;
-					case CX_DEATH:
+					case XLogicObjectCX.CX_DEATH:
 						looking = false;
 						break;
 				} // ])[cx] ();

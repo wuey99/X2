@@ -51,11 +51,11 @@ package kx.world.ui {
 		protected var m_keyboardDownSignal:XSignal;
 		protected var m_keyboardUpSignal:XSignal;
 
-		public var NORMAL_STATE:int = 1;
-		public var OVER_STATE:int = 2;
-		public var DOWN_STATE:int = 3;
-		public var SELECTED_STATE:int = 4;
-		public var DISABLED_STATE:int = 5;
+		public static var NORMAL_STATE:int = 1;
+		public static var OVER_STATE:int = 2;
+		public static var DOWN_STATE:int = 3;
+		public static var SELECTED_STATE:int = 4;
+		public static var DISABLED_STATE:int = 5;
 				
 		public var m_label:int;
 		public var m_currState:int;

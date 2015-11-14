@@ -26,6 +26,7 @@
 // <$end$/>
 //------------------------------------------------------------------------------------------
 package kx.type {
+	import kx.collections.XDict;
 
 	//------------------------------------------------------------------------------------------	
 	public class XType extends Object {
@@ -198,6 +199,33 @@ package kx.type {
 			// <AS3>
 			return __key in __map;
 			// </AS3>
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public static function replace (__string:String, __from:String, __to:String):String {
+			// <HAXE>
+			/* --
+			return StringTools.replace (__string, __from, __to);
+			-- */
+			// </HAXE>
+			// <AS3>
+			return __string.replace (__from, __to);
+			// </AS3>			
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public static function array2XDict (__array:Array /* <Dynamic> */):XDict /* <String, Dynamic> */ {
+			var __dict:XDict = new XDict (); // <String, Dynamic>
+			
+			var i:int = 0;
+			
+			while (i < __array.length) {
+				__dict.set (__array[i+0], __array[i+1]);
+				
+				i += 2;
+			}		
+			
+			return __dict;
 		}
 		
 		//------------------------------------------------------------------------------------------
