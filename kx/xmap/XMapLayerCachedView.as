@@ -42,11 +42,12 @@ package kx.xmap {
 	import flash.utils.*;
 
 //------------------------------------------------------------------------------------------
-	public class XMapLayerCachedView extends XLogicObject {
+	public class XMapLayerCachedView extends XMapLayerView {
+//		private var m_XMapView:XMapView;
+//		private var m_XMapModel:XMapModel;
+//		private var m_currLayer:int;
+		
 		private var m_XSubmapToXLogicObject:XDict; // <XSubmapModel, XLogicObject>
-		private var m_XMapView:XMapView;
-		private var m_XMapModel:XMapModel;
-		private var m_currLayer:int;
 		private var m_delay:int;
 				
 //------------------------------------------------------------------------------------------
@@ -77,7 +78,7 @@ package kx.xmap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function updateFromXMapModel ():void {		
+		public override function updateFromXMapModel ():void {		
 			var __view:XRect = xxx.getXWorldLayer (m_currLayer).viewPort (
 				xxx.getViewRect ().width, xxx.getViewRect ().height
 			);
@@ -86,7 +87,7 @@ package kx.xmap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function updateFromXMapModelAtRect (__view:XRect):void {
+		public override function updateFromXMapModelAtRect (__view:XRect):void {
 			if (!m_XMapView.areImageClassNamesCached ()) {
 				return;
 			}

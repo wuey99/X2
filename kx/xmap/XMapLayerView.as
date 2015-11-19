@@ -52,11 +52,12 @@ package kx.xmap {
 // removed from the XMapModel.
 //------------------------------------------------------------------------------------------
 	public class XMapLayerView extends XLogicObject {
+		protected var m_XMapView:XMapView;
+		protected var m_XMapModel:XMapModel;
+		protected var m_currLayer:int;
+		
 		private var m_XMapItemToXLogicObject:XDict; // <XMapItemModel, XLogicObject>
-		private var m_XMapView:XMapView;
-		private var m_XMapModel:XMapModel;
 		private var m_XMapLayerModel:XMapLayerModel;
-		private var m_currLayer:int;
 		private var m_logicClassNameToClass:Function;
 		
 //------------------------------------------------------------------------------------------
