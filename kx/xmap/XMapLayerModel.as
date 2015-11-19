@@ -869,32 +869,32 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 		public function lookForItem (__itemName:String, __list:XDict=null):XDict /* <Int, XMapItemModel> */ {
-			var __row:Number, __col:Number;
+			var __row:int, __col:int;
 			
 			if (__list == null) {
-				var __list:XDict = new XDict (); // <Int, XMapItemModel>
+				__list = new XDict (); // <Int, XMapItemModel>
 			}
 		
-				for (__row=0; __row<m_submapRows; __row++) {
-					for (__col=0; __col<m_submapCols; __col++) {
-						m_XSubmaps[__row][__col].iterateAllItems (
-							function (x:*):void {
-								var __item:XMapItemModel = x as XMapItemModel;
+			for (__row=0; __row<m_submapRows; __row++) {
+				for (__col=0; __col<m_submapCols; __col++) {
+					m_XSubmaps[__row][__col].iterateAllItems (
+						function (x:*):void {
+							var __item:XMapItemModel = x as XMapItemModel;
 								
-								if (__item.XMapItem == __itemName) {
-									__list.set (__item.id, __item);
-								}
+							if (__item.XMapItem == __itemName) {
+								__list.set (__item.id, __item);
 							}
-						);
-					}
+						}
+					);
 				}
+			}
 			
 			return __list;	
 		}
 
 //------------------------------------------------------------------------------------------
 		public function iterateAllSubmaps (__iterationCallback:Function):void {
-			var __row:Number, __col:Number;
+			var __row:int, __col:int;
 			
 			for (__row=0; __row<m_submapRows; __row++) {
 				for (__col=0; __col<m_submapCols; __col++) {
