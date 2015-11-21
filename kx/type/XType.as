@@ -28,6 +28,15 @@
 package kx.type {
 	import kx.collections.XDict;
 
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
+	import mx.utils.*;
+	// </AS3>
+	
+	
 	//------------------------------------------------------------------------------------------	
 	public class XType extends Object {
 
@@ -226,6 +235,18 @@ package kx.type {
 			}		
 			
 			return __dict;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public static function trim (__string:String):String {
+				// <HAXE>
+				/* --
+				return StringTools.trim (__string);
+				-- */
+				// </HAXE>
+				// <AS3>
+				return StringUtil.trim (__string);
+				// </AS3>						
 		}
 		
 		//------------------------------------------------------------------------------------------

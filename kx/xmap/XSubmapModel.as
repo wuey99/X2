@@ -31,12 +31,13 @@ package kx.xmap {
 	import kx.collections.*;
 	import kx.geom.*;
 	import kx.mvc.*;
+	import kx.type.*;
 	import kx.pool.XSubObjectPoolManager;
 	import kx.utils.XReferenceNameToIndex;
 	import kx.xml.*;
 	
 	import flash.events.*;
-	
+
 //------------------------------------------------------------------------------------------	
 	public class XSubmapModel extends XModelBase {
 		private var m_XMapLayer:XMapLayerModel;
@@ -439,7 +440,7 @@ package kx.xmap {
 
 			if (useArrayItems) {
 				m_arrayItems = new Vector.<XMapItemModel> (/* __xmlList.length */);	
-				for (var i:int = 0; i < __xmlList.length; i++) {
+				for (i = 0; i < __xmlList.length; i++) {
 					m_arrayItems.push (null);
 				}
 			}
@@ -516,10 +517,12 @@ package kx.xmap {
 		public function deserializeCXTiles (__cx:XSimpleXMLNode):void {
 			var __xmlList:Array /* <XSimpleXMLNode> */ = __cx.child ("row");
 			var __row:int, __col:int;
+			var __xml:XSimpleXMLNode;
+			var __rowString:String;
 			
 			for (__row=0; __row<__xmlList.length; __row++) {
-				var __xml:XSimpleXMLNode = __xmlList[__row];
-				var __rowString:String = __xml.getText ();
+				__xml = __xmlList[__row];
+				__rowString = XType.trim (__xml.getText ());
 				
 				for (__col=0; __col<__rowString.length; __col++) {
 					m_cmap[__row * m_cols + __col] = CXToChar.indexOf (__rowString.charAt (__col));
