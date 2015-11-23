@@ -146,7 +146,7 @@ package kx.world.sprite {
 // </HAXE>
 // <AS3>
 		if (CONFIG::starling) {
-			/* @:get, set filters Array<BitmapFilter? */
+			/* @:get, set filters Array<BitmapFilter> */
 				
 			public function get filters ():Array /* <BitmapFilter> */ {
 				null
