@@ -208,9 +208,7 @@ package kx.xmap {
 		
 			
 //------------------------------------------------------------------------------------------
-		public function removeXSubmap (...args):void {
-			var __submap:XSubmapModel = args[0] as XSubmapModel;
-			
+		public function removeXSubmap (__submap:XSubmapModel):void {
 			if (m_XSubmapToXLogicObject.exists (__submap)) {		
 				m_XSubmapToXLogicObject.remove (__submap);
 			}
