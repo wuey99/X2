@@ -11,9 +11,24 @@ import sys
 #-----------------------------------------------------------------------------
 class Update(object):
 
-	def __init__(self):
+	def __init__(self, skipAssets):
 		self._src_folder = ""
 		self._src_fileName = ""
+		self._skipAssets = skipAssets
+
+	#-----------------------------------------------------------------------------
+	def mkdir(self, folder):
+		paths = folder.split("\\")
+
+		for i in xrange (0, len(paths)):
+			path = ""
+			for j in xrange (0, i + 1):
+				path += paths[j] + "\\"
+
+				try:
+					os.mkdir(path)
+				except Exception:
+					pass
 
 	#-----------------------------------------------------------------------------
 	def splitFolderAndFilename(self, fullPath):
@@ -67,7 +82,7 @@ class Update(object):
 			j = line[i:].find("/*")
 		if j == -1:
 			return line
-			
+
 		j += i
 		
 		begin = line[j:].find("<")
@@ -147,7 +162,7 @@ class Update(object):
 # Class /* <type> */
 #    --> Class<type>
 		converted = self.convertArrayOrMap (line, "Class", "Class");
-		
+
 		line = converted
 			
 		line = line.replace("__M$ap1__", "__MAP__")
@@ -155,7 +170,7 @@ class Update(object):
 		
 		if line.find("__MAP__") >= 0:
 			if line.find("<Class<Dynamic>,") >= 0:
-				line = line.replace("__MAP__", "ClassMap")			
+				line = line.replace("__MAP__", "ClassMap")
 			elif line.find("<Dynamic,") >= 0:
 				line = line.replace("__MAP__", "ObjectMap")
 			else:
@@ -230,7 +245,7 @@ class Update(object):
 			
 		line = line.replace("function " + self._className + " (", "function new (")
 		line = line.replace("function " + self._className + "(", "function new (")
-		
+
 		return line
 	
 	#-----------------------------------------------------------------------------
@@ -313,7 +328,7 @@ class Update(object):
 			
 		if self.isIsOrAs(line, "Function"):
 			line = line.replace(" Function", " Dynamic /* Function */")
-			
+
 		return line
 	
 	#-----------------------------------------------------------------------------
@@ -399,7 +414,7 @@ class Update(object):
 	def convertNumber(self, line):
 		if self.isType(line, "Number"):
 			line = line.replace(":Number", ":Float")
-		
+
 		if self.isNewOrExtends(line, "Number"):
 			line = line.replace(" Number", " Float")
 		
@@ -480,7 +495,7 @@ class Update(object):
 		if line.find("include \"") >= 0:
 			begin = line.find("\"") + 1
 			end = line[begin:].find("\"") + begin
-			
+
 			includeFile = line[begin:end]
 			includePath = os.path.join(self._src_folder, includeFile)
 			includePath = os.path.normpath(includePath)
@@ -489,7 +504,7 @@ class Update(object):
 
 			dst.write(line.replace("include", "// begin include"))
 			
-			o = Update()
+			o = Update(self._skipAssets)
 			o.processFile2(includePath, dst)
 			dst.write("\n")
 			
@@ -569,91 +584,101 @@ class Update(object):
 	def convertCasts(self, line):
 		if self.isComment(line):
 			return line
-			
+
 		def commentAs(line, as_token):
 			for i in xrange (as_token + 4, len(line)):
 				if line[i] == ")" or line[i] == ";" or line[i] == " " or line[i] == ",":
 					line = line.replace(line[as_token:i], " /*" + line[as_token:i] + " */")
-					
+
 					return line
-					
+
 			return line
-				
+
 		def findLabel(line, cast):
 			i = line[cast + 3:].find(" as ")
-			
+
 			return line[cast + 3: cast + 3 + i]
-			
-# look /* @:cast */		
+
+# look /* @:cast */
 		if line.find("/* @:cast */") > 0:
 			line = line.replace ("/* @:cast */", "cast")
-			
+
 			as_token = line.find(" as ")
 			if as_token < 0:
 				return line
-			
+
 			line = commentAs(line, as_token)
-			
+
 			return line
-			
+
 # look for /* @safe_cast */
 		i = line.find("/* @:safe_cast")
-		
+
 		if i > 0:
 			def extract_type(i):
 				begin = line[i:].find(" as ") + i
 				for i in xrange (begin+4, len(line)):
 					if line[i] == ")" or line[i] == "," or line[i] == ";":
 						return line[begin+4:i]
-				
+
 				return ""
 
 			j = line[i:].find ("*/ ") + i
-		
+
 			label = findLabel(line, j)
 			type = extract_type(i)
-									
+
 			print ": ----------->: ", label, type, line
-			
+
 			cast = "cast(" + label + ", " + type + ")"
-			line = line.replace ("/* @:safe_cast */", cast)			
-			
+			line = line.replace ("/* @:safe_cast */", cast)
+
 			remove = label + " as " + type
-			line = line.replace(remove, "") 
-			
+			line = line.replace(remove, "")
+
 			return line
-			
+
+		if line.find("__logicObject.xxx.getXLogicManager ().initXLogicObject") >= 0:
+			line = line.replace("__logicObject.xxx.getXLogicManager ().initXLogicObject", "cast __logicObject.xxx.getXLogicManager ().initXLogicObject")
+
+			return line
+
 		if line.find("xxx.getXLogicManager ().initXLogicObject") >= 0:
 			line = line.replace("xxx.getXLogicManager ().initXLogicObject", "cast xxx.getXLogicManager ().initXLogicObject")
-			
+
 			return line
-	
+
 		if line.find("xxx.XLogicManager ().createXLogicObject") >= 0:
 			line = line.replace("xxx.getXLogicManager ().createXLogicObject", "cast xxx.getXLogicManager ().createXLogicObject")
-			
+
 			return line
-					
+
 # look for " as "
 		as_token = line.find(" as ")
 		if as_token < 0:
 			return line
-			
-# = <value> as <type>;			
+
+# = <value> as <type>;
 		equals_token = line.find(" = ")
 		if equals_token >= 0 and equals_token < as_token:
 			line = line[:equals_token + 3] + "cast " + line[equals_token + 3:as_token] + "; /*" + line[as_token:-2] + " */\n"
-			
+
 			return line
-	
+
 # ) as <type>;
+		line = line.rstrip() + "\n"
+		print ": OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: "
+		print ": ", line, len(line)
 		right_paren = line.find(")")
 		if right_paren >0 and right_paren < as_token:
-			line = line[:right_paren + 1] + "; /* " + line[as_token:-2] + " */\n"
-			
+			line = line[:right_paren + 1] + " /*" + line[as_token:-2] + " */" + line[-2:]
+
+        		print ": ", line
+
 			return line
-			 
+
 		return line
-	
+
 	#-----------------------------------------------------------------------------
 	#
 	#-----------------------------------------------------------------------------
@@ -736,7 +761,7 @@ class Update(object):
 			return line
 			
 		label = getLabel(i+1)
-		
+
 		i = line.find("<")
 		if i < 0:
 			return line
@@ -788,38 +813,40 @@ class Update(object):
 	def convertGettersAndSetters(self, line):
 	
 		#-----------------------------------------------------------------------------
-		def getterSetterDefinition(pos, line):	
+		def getterSetterDefinition(pos, line):
 			self._getterSetterMode = True
+			self._getterSetterOverride = False
 			self._getterSetterOverride2 = False
-						
-			pos += len("/* @:get, set") + 1	
+
+			pos += len("/* @:get, set") + 1
 			i = line[pos:].find(" ") + pos
 			self._getterSetterLabel = label = line[pos:i]
-			
+
 			pos = i+1
 			i = line[pos:].find(" ") + pos
-			self._getterSetterType = type = line[pos:i]	
+			self._getterSetterType = type = line[pos:i]
 
 			line = line.replace ( \
 				"/* @:get, set " + label + " " + type + " */", \
 				"public var " + label + " (get, set):" + type + ";" \
 			)
-			
+
 			return line
-	
-		#-----------------------------------------------------------------------------		
-		def overrideGetterSetterDefinition(pos, line):	
+
+		#-----------------------------------------------------------------------------
+		def overrideGetterSetterDefinition(pos, line):
 			self._getterSetterMode = True
+			self._getterSetterOverride = True
 			self._getterSetterOverride2 = False
-						
-			pos += len("/* @:override get, set") + 1	
+
+			pos += len("/* @:override get, set") + 1
 			i = line[pos:].find(" ") + pos
 			self._getterSetterLabel = label = line[pos:i]
-			
+
 			pos = i+1
 			i = line[pos:].find(" ") + pos
 			self._getterSetterType = type = line[pos:i]	
-			
+
 # is this needed?!?!
 			'''
 			line = line.replace ( \
@@ -827,22 +854,23 @@ class Update(object):
 				"public var " + label + " (get, set):" + type + ";" \
 			)
 			'''
-			
+
 			return line
-	
-		#-----------------------------------------------------------------------------		
-		def override2GetterSetterDefinition(pos, line):	
+
+		#-----------------------------------------------------------------------------
+		def override2GetterSetterDefinition(pos, line):
 			self._getterSetterMode = True
+			self._getterSetterOverride = False
 			self._getterSetterOverride2 = True
-						
-			pos += len("/* @:override2 get, set") + 1	
+
+			pos += len("/* @:override2 get, set") + 1
 			i = line[pos:].find(" ") + pos
 			self._getterSetterLabel = label = line[pos:i]
-			
+
 			pos = i+1
 			i = line[pos:].find(" ") + pos
-			self._getterSetterType = type = line[pos:i]	
-			
+			self._getterSetterType = type = line[pos:i]
+
 # is this needed?!?!
 			'''
 			line = line.replace ( \
@@ -850,9 +878,9 @@ class Update(object):
 				"public var " + label + " (get, set):" + type + ";" \
 			)
 			'''
-			
+
 			return line
-	
+
 		#-----------------------------------------------------------------------------
 		# @:override2: leave things along
 		#
@@ -863,61 +891,72 @@ class Update(object):
 		def cleanupOverride2A(line):
 #			line = line.replace("public override", "public")
 			line = line.replace("// void {", "")
-			
+
 			return line
-			
+
 		def cleanupOverride2B(line):
 			beg = line.find("public")
 			end = line.find("{")
-			
+
 			if beg < 0 or end < 0:
 				return line
-				
+
 			windows = line[beg:end+1]
 			flash = line[beg:end+1]
-			flash = flash.replace("public override", "public")
-			
+			flash = flash.replace("public override", "@:$etter($label) public")
+			flash = flash.replace("$label", self._getterSetterLabel)
+			if line.find("function get") >= 0:
+				flash = flash.replace("$etter", "getter")
+			if line.find("function set") >= 0:
+				flash = flash.replace("$etter", "setter")
+				if self._getterSetterOverride:
+					flash = flash.replace(self._getterSetterType + " {", "Void {")
+
 			final = line.replace(windows, "#if windows " + windows + " #else " + flash + " #end")
-			
+
 			print ": =================================>: ", windows
 			print ": =================================>: ", flash
 			print ": ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>: ", final
-			 
-			return final		
-			
-		#-----------------------------------------------------------------------------		
+
+			return final
+
+		#-----------------------------------------------------------------------------
 		pos = line.find("/* @:get, set")
 		if pos >= 0:
 			return getterSetterDefinition(pos, line)
-			
+
 		pos = line.find("/* @:override get, set")
 		if pos >= 0:
 			return overrideGetterSetterDefinition(pos, line)
-			
+
 		pos = line.find("/* @:override2 get, set")
 		if pos >= 0:
 			return override2GetterSetterDefinition(pos, line)
-			
+
 		if not self._getterSetterMode:
 			return line
-			
+
 		line = line.replace("function get " + self._getterSetterLabel, "function get_" + self._getterSetterLabel)
 		line = line.replace("function set " + self._getterSetterLabel, "function set_" + self._getterSetterLabel)
+
 		line = line.replace("/* @:set_type */", self._getterSetterType + " { //")
-		
+
 		if not self._getterSetterOverride2:
 			line = cleanupOverride2A(line)
-			
+
 		pos = line.find("/* @:set_return")
 		if pos >= 0:
 			pos += len("/* @:set_return") + 1
-			
+
 			i = line[pos:].find(";") + pos
-			
+
 			returnValue = line[pos:i]
-			
-			line = line.replace("/* @:set_return " + returnValue + "; */", "return " + returnValue + ";")
-			
+
+			if not self._getterSetterOverride:
+				line = line.replace("/* @:set_return " + returnValue + "; */", "return " + returnValue + ";")
+			else:
+				line = line.replace("/* @:set_return " + returnValue + "; */", "#if windows return " + returnValue + "; #end")
+
 			if not self._getterSetterOverride2:
 				line = cleanupOverride2B(line)
 			
@@ -980,7 +1019,7 @@ class Update(object):
 		line = line.replace ("protected var", "private var")
 		line = line.replace ("protected static var", "private static var")
 		line = line.replace ("protected function", "private function")
-		line = line.replace ("protected override function", "private override function")	
+		line = line.replace ("protected override function", "private override function")
 		return line
 	
 	#-----------------------------------------------------------------------------
@@ -1068,7 +1107,7 @@ class Update(object):
 			end = line[i:].find(".forEach")
 			if end < 0:
 				end = line[i:].find(".doWhile")
-			label = line[i:end+i]	
+			label = line[i:end+i]
 	
 			line = line[:i] + "for (__key__ in " + label + ".keys ()) {\n"
 		
@@ -1151,7 +1190,7 @@ class Update(object):
 			return line
 			
 		line = line.replace("import flash.", "import openfl.")
-		
+
 		return line
 
 	#-----------------------------------------------------------------------------	
@@ -1191,7 +1230,7 @@ class Update(object):
 		if self.isComment(line):
 			return line
 
-		line = line.replace("override function setup (__xxx:XWorld, args:Array)", "override function setup (__xxx:XWorld, args:Array /* <Dynamic> */>")
+		line = line.replace("override function setup (__xxx:XWorld, args:Array)", "override function setup (__xxx:XWorld, args:Array /* <Dynamic> */)")
 
 		return line
 
@@ -1235,7 +1274,7 @@ class Update(object):
 		dst_file_path = targetDir + src_file_path[src_file_path.find(os.path.sep):]
 
 		dst_file_path = dst_file_path.replace(".as", ".hx")
-		
+
 		print ": src: ", src_file_path
 		print ": dst: ", dst_file_path
 
@@ -1243,15 +1282,15 @@ class Update(object):
 		folder, fileName = self.splitFolderAndFilename(dst_file_path)
 
 		print ": src folder, name: ", self._src_folder, self._src_fileName
-		print ": dst folder, name: ", folder, fileName, os.getcwd()
+		print ": dst folder, name: ", folder, fileName, os.getcwd(), os.path.exists(folder)
 
 		if not os.path.exists(folder):
-			os.mkdir(folder)
+			self.mkdir(folder)
 
 		dst = open(dst_file_path, "w")
 
 		self.processFile2(src_file_path, dst)
-		
+
 		dst.close()
 
 	#-----------------------------------------------------------------------------
@@ -1272,7 +1311,7 @@ class Update(object):
 		self._doWhile = False
 		self._loopLevel = 0
 		self._loopCast = False
-						
+
 		self._lineNumber = 0
 		for line in src:
 			self.processLine(line, dst)
@@ -1294,7 +1333,8 @@ class Update(object):
 					if filenames[j].endswith(".as") or filenames[j].endswith(".h"):
 						file_path = path + os.path.sep + filenames[j]
 
-						self.processNewFile (targetDir, file_path)
+						if self._skipAssets == "use" or (self._skipAssets == "skip" and path.find("\\assets") < 0):
+							self.processNewFile (targetDir, file_path)
 
 				for j in xrange(len(dirnames)):
 					dirnames[j] = path + os.path.sep + dirnames[j]
@@ -1303,15 +1343,22 @@ class Update(object):
 					self.processDirectory(targetDir, dirnames)
 
 #-----------------------------------------------------------------------------
-if len(sys.argv) < 2:
-	print "usage: python as32HaXe.py <path>"
+if len(sys.argv) < 3:
+	print "usage: python as32HaXe.py <path> <skipAssets>"
 	exit(0)
 
+ 
+skipAssets = sys.argv[2]
 sourceDir = sys.argv[1]
 targetDir = "_" + sourceDir
 
+print ": sourceDir: ", sourceDir
+print ": skipAssets: ", skipAssets
+
 if os.path.exists(targetDir):
 	shutil.rmtree(targetDir)
-o = Update()
+
+o = Update(skipAssets)
 o.processDirectory(targetDir, [sourceDir])
+
 
