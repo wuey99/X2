@@ -173,7 +173,7 @@ package kx.xmap {
 		public function set inuse (__inuse:int): /* @:set_type */ void {
 			m_inuse = __inuse;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __inuse; */			
 		}
 		/* @:end */
 
@@ -211,7 +211,7 @@ package kx.xmap {
 		public function set boundingRect (__val:XRect): /* @:set_type */ void {
 			m_boundingRect = __val;
 			
-			/* @:set_return null; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 			

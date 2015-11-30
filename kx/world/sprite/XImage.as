@@ -115,7 +115,7 @@ package kx.world.sprite {
 		public function set id (__val:int): /* @:set_type */ void {
 			m_id = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		

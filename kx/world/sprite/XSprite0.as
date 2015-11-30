@@ -59,7 +59,7 @@ package kx.world.sprite {
 		public function set xxx (__XWorld:XWorld): /* @:set_type */ void {
 			m_xxx = __XWorld;
 			
-			/* @:set_return null; */			
+			/* @:set_return m_xxx; */			
 		}
 		/* @:end */
 		

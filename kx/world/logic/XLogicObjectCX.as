@@ -262,7 +262,7 @@ package kx.world.logic {
 		public function set oDX (__val:Number): /* @:set_type */ void {
 			m_vel.x = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -278,7 +278,7 @@ package kx.world.logic {
 		public function set oDY (__val:Number): /* @:set_type */ void {
 			m_vel.y = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -301,7 +301,7 @@ package kx.world.logic {
 		public function set oldX (__val:Number): /* @:set_type */ void {
 			m_oldPos.x = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -315,7 +315,7 @@ package kx.world.logic {
 		public function set oldY (__val:Number): /* @:set_type */ void {
 			m_oldPos.y = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -336,7 +336,7 @@ package kx.world.logic {
 		public function set CX_Collide_Flag (__val:int): /* @:set_type */ void {
 			m_CX_Collide_Flag = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		

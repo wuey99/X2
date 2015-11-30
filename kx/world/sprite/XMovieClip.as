@@ -198,7 +198,7 @@ package kx.world.sprite {
 		public function set movieclip (__val:MovieClip): /* @:set_type */ void {
 			m_movieClip = __val;
 			
-			/* @:set_return null; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		

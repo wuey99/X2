@@ -79,7 +79,7 @@ package kx.document {
 		public function set model (__model:XModelBase): /* @:set_type */ void {
 			m_model = __model;
 			
-			/* @:set_return null; */			
+			/* @:set_return __model; */			
 		}
 		/* @:end */
 		
@@ -93,7 +93,7 @@ package kx.document {
 		public function set xml (__xml:XSimpleXMLNode): /* @:set_type */ void {
 			m_xml = __xml;
 			
-			/* @:set_return null; */			
+			/* @:set_return __xml; */			
 		}
 		/* @:end */
 				

@@ -46,7 +46,7 @@ package kx.task {
 		public function set value (__val:Number): /* @:set_type */ void {
 			m_number = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		

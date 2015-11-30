@@ -180,7 +180,7 @@ package kx.xmap {
 		public function set layerModel (__layerModel:XMapLayerModel): /* @:set_type */ void {
 			m_layerModel = __layerModel;
 			
-			/* @:set_return null; */			
+			/* @:set_return __layerModel; */			
 		}
 		/* @:end */
 		
@@ -194,7 +194,7 @@ package kx.xmap {
 		public function set inuse (__inuse:int): /* @:set_type */ void {
 			m_layerModel.setItemInuse (id, __inuse);
 			
-			/* @:set_return 0; */			
+			/* @:set_return __inuse; */			
 		}
 		/* @:end */
 		
@@ -208,7 +208,7 @@ package kx.xmap {
 		public function set id (__id:int): /* @:set_type */ void {
 			m_id = __id;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __id; */			
 		}
 		/* @:end */
 
@@ -222,7 +222,7 @@ package kx.xmap {
 		public function set name (__name:String): /* @:set_type */ void {
 			m_name = __name;
 			
-			/* @:set_return ""; */			
+			/* @:set_return __name; */			
 		}
 		/* @:end */
 				
@@ -236,7 +236,7 @@ package kx.xmap {
 		public function set logicClassIndex (__val:int): /* @:set_type */ void {
 			m_logicClassIndex = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -262,7 +262,7 @@ package kx.xmap {
 		public function set hasLogic (__val:Boolean): /* @:set_type */ void {
 			m_hasLogic = __val;
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -276,7 +276,7 @@ package kx.xmap {
 		public function set XMapItem (__val:String): /* @:set_type */ void {
 			m_XMapItem = __val;
 			
-			/* @:set_return ""; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -290,7 +290,7 @@ package kx.xmap {
 		public function set imageClassIndex (__val:int): /* @:set_type */ void {
 			m_imageClassIndex = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -316,7 +316,7 @@ package kx.xmap {
 		public function set frame (__frame:int): /* @:set_type */ void {
 			m_frame = __frame;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __frame; */			
 		}
 		/* @:end */
 								
@@ -330,7 +330,7 @@ package kx.xmap {
 		public function set x (__x:Number): /* @:set_type */ void {
 			m_x = __x;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __x; */			
 		}
 		/* @:end */
 				
@@ -344,7 +344,7 @@ package kx.xmap {
 		public function set y (__y:Number): /* @:set_type */ void {
 			m_y = __y;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __y; */			
 		}
 		/* @:end */
 
@@ -358,7 +358,7 @@ package kx.xmap {
 		public function set rotation (__rotation:Number): /* @:set_type */ void {
 			m_rotation = __rotation;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __rotation; */			
 		}
 		/* @:end */
 			
@@ -372,7 +372,7 @@ package kx.xmap {
 		public function set scale (__scale:Number): /* @:set_type */ void {
 			m_scale = __scale;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __scale; */			
 		}
 		/* @:end */
 		
@@ -386,7 +386,7 @@ package kx.xmap {
 		public function set depth (__depth:Number): /* @:set_type */ void {
 			m_depth = __depth;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __depth; */			
 		}
 		/* @:end */
 		
@@ -400,7 +400,7 @@ package kx.xmap {
 		public function set boundingRect (__rect:XRect): /* @:set_type */ void {
 			m_boundingRect = __rect;
 			
-			/* @:set_return null; */			
+			/* @:set_return __rect; */			
 		}
 		/* @:end */
 		
@@ -414,7 +414,7 @@ package kx.xmap {
 		public function set collisionRect (__rect:XRect): /* @:set_type */ void {
 			m_collisionRect = __rect;
 			
-			/* @:set_return null; */			
+			/* @:set_return __rect; */			
 		}
 		/* @:end */
 
@@ -428,7 +428,7 @@ package kx.xmap {
 		public function set params (__params:String): /* @:set_type */ void {
 			m_params = __params;
 			
-			/* @:set_return ""; */			
+			/* @:set_return __params; */			
 		}
 		/* @:end */
 

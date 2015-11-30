@@ -136,7 +136,7 @@ package kx.world.sprite {
 				m_text.htmlText = __text; __format ();
 			}
 			
-			/* @:set_return ""; */
+			/* @:set_return __text; */
 		}
 
 //------------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ package kx.world.sprite {
 			}
 			
 			public function set filters (__val:Array /* <BitmapFilter> */): /* @:set_type */ void {
-				/* @:set_return null; */			
+				/* @:set_return __val; */			
 			}
 			/* @:end */
 		}
@@ -208,7 +208,7 @@ package kx.world.sprite {
 				m_text.textColor = __color; __format ();
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return __color; */			
 		}
 		/* @:end */
 		
@@ -234,7 +234,7 @@ package kx.world.sprite {
 				m_textFormat.bold = __val; __format ();
 			}
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 			
@@ -260,7 +260,7 @@ package kx.world.sprite {
 				m_textFormat.font = __val; __format ();
 			}
 			
-			/* @:set_return ""; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -286,7 +286,7 @@ package kx.world.sprite {
 				m_textFormat.size = __val; __format ();
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 
@@ -500,7 +500,7 @@ package kx.world.sprite {
 				m_textFormat.letterSpacing = __val; __format ();
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -525,7 +525,7 @@ package kx.world.sprite {
 				m_textFormat.leading = __val; __format ();
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 
@@ -550,7 +550,7 @@ package kx.world.sprite {
 				m_text.selectable = __val;
 			}
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -575,7 +575,7 @@ package kx.world.sprite {
 				m_text.multiline = __val; __format ();
 			}
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -600,7 +600,7 @@ package kx.world.sprite {
 				m_text.wordWrap = __val; __format ();
 			}
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 
@@ -661,7 +661,7 @@ package kx.world.sprite {
 				m_text.embedFonts = __val; __format ();
 			}
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 				

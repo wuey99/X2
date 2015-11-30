@@ -171,7 +171,7 @@ package kx.xmap {
 		public function set viewPort (__val:XRect): /* @:set_type */ void {
 			m_viewPort = __val;
 			
-			/* @:set_return null; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 
@@ -185,7 +185,7 @@ package kx.xmap {
 		public function set visible (__val:Boolean): /* @:set_type */ void {
 			m_visible = __val;
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 	
@@ -199,7 +199,7 @@ package kx.xmap {
 		public function set name (__val:String): /* @:set_type */ void {
 			m_name = __val;
 			
-			/* @:set_return ""; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 	
@@ -213,7 +213,7 @@ package kx.xmap {
 		public function set grid (__val:Boolean): /* @:set_type */ void {
 			m_grid = __val;
 			
-			/* @:set_return true; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 

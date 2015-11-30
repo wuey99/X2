@@ -942,7 +942,7 @@ package kx.world.logic {
 				boundingRect = new XRect (-32, -32, +64, +64);
 			}
 			
-			/* @:set_return true; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1070,7 +1070,7 @@ package kx.world.logic {
 		public function set oXLogicManager (__val:XLogicManager): /* @:set_type */ void {
 			m_XLogicManager = __val;
 			
-			/* @:set_return null; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1091,7 +1091,7 @@ package kx.world.logic {
 		public function set boundingRect (__val:XRect): /* @:set_type */ void {
 			m_boundingRect = __val;
 			
-			/* @:set_return null; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -1107,7 +1107,7 @@ package kx.world.logic {
 		public function set pos (__pos:XPoint): /* @:set_type */ void {
 			m_pos = __pos;
 			
-			/* @:set_return null; */	
+			/* @:set_return __pos; */	
 		}
 		/* @:end */
 		
@@ -1123,7 +1123,7 @@ package kx.world.logic {
 		public function set oX (__val:Number): /* @:set_type */ void {
 			m_pos.x = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1139,7 +1139,7 @@ package kx.world.logic {
 		public function set oY (__val:Number): /* @:set_type */ void {
 			m_pos.y = __val;
 
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1166,7 +1166,7 @@ package kx.world.logic {
 		public function set oAlpha (__alpha:Number): /* @:set_type */ void {
 			m_alpha = __alpha;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __alpha; */	
 		}
 		/* @:end */
 		
@@ -1201,7 +1201,7 @@ package kx.world.logic {
 		public function set oVisible (__val:Boolean): /* @:set_type */ void {
 			m_visible = __val;
 			
-			/* @:set_return true; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1236,7 +1236,7 @@ package kx.world.logic {
 		public function set oRotation (__val:Number): /* @:set_type */ void {
 			m_rotation = __val % 360;
 			
-			/* @:set_return 0; */	
+			/* @:set_return m_rotation; */	
 		}
 		/* @:end */
 		
@@ -1271,9 +1271,9 @@ package kx.world.logic {
 
 		[Inline]
 		public function set oScale (__val:Number): /* @:set_type */ void {
-			m_scaleX  = m_scaleY = __val;
+			m_scaleX = m_scaleY = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1285,7 +1285,7 @@ package kx.world.logic {
 		
 		[Inline]
 		public function setScale (__scale:Number):void {
-			m_scaleX  = m_scaleY = __scale;
+			m_scaleX = m_scaleY = __scale;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -1300,7 +1300,7 @@ package kx.world.logic {
 		public function set oScaleX (__val:Number): /* @:set_type */ void {
 			m_scaleX = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1327,7 +1327,7 @@ package kx.world.logic {
 		public function set oScaleY (__val:Number): /* @:set_type */ void {
 			m_scaleY = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1799,7 +1799,7 @@ package kx.world.logic {
 		public function set iX (__val:Number): /* @:set_type */ void {
 			m_iX = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1813,7 +1813,7 @@ package kx.world.logic {
 		public function set iY (__val:Number): /* @:set_type */ void {
 			m_iY = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}	
 		/* @:end */
 		
@@ -1827,7 +1827,7 @@ package kx.world.logic {
 		public function set iScale (__val:Number): /* @:set_type */ void {
 			m_iScale = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1841,7 +1841,7 @@ package kx.world.logic {
 		public function set iRotation (__val:Number): /* @:set_type */ void {
 			m_iRotation = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1855,7 +1855,7 @@ package kx.world.logic {
 		public function set iItem (__val:XMapItemModel): /* @:set_type */ void {
 			m_iItem = __val;
 			
-			/* @:set_return null; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1869,7 +1869,7 @@ package kx.world.logic {
 		public function set iLayer (__val:int): /* @:set_type */ void {
 			m_iLayer = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1883,7 +1883,7 @@ package kx.world.logic {
 		public function set iDepth (__val:Number): /* @:set_type */ void {
 			m_iDepth = __val;
 			
-			/* @:set_return 0; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1897,7 +1897,7 @@ package kx.world.logic {
 		public function set iRelativeDepth (__val:Boolean): /* @:set_type */ void {
 			m_iRelativeDepth = __val;
 			
-			/* @:set_return true; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		
@@ -1911,7 +1911,7 @@ package kx.world.logic {
 		public function set iClassName (__val:String): /* @:set_type */ void {
 			m_iClassName = __val;
 			
-			/* @:set_return ""; */	
+			/* @:set_return __val; */	
 		}
 		/* @:end */
 		

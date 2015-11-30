@@ -229,7 +229,7 @@ package kx.xml {
 		public function set tag (__val:String): /* @:set_type */ void {
 			m_tag = __val;
 			
-			/* @:set_return ""; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 			

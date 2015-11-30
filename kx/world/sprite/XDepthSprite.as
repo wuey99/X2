@@ -108,7 +108,7 @@ package kx.world.sprite {
 			
 			m_sprite.visible = __visible;
 			
-			/* @:set_return true; */			
+			/* @:set_return __visible; */			
 		}
 		/* @:end */
 		
@@ -134,7 +134,7 @@ package kx.world.sprite {
 			m_depth = __depth;
 			depth2 = __depth;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __depth; */			
 		}
 		/* @:end */
 
@@ -158,7 +158,7 @@ package kx.world.sprite {
 		public function set relativeDepthFlag (__relative:Boolean): /* @:set_type */ void {
 			m_relativeDepthFlag = __relative;
 			
-			/* @:set_return true; */			
+			/* @:set_return __relative; */			
 		}
 		/* @:end */
 
@@ -175,7 +175,7 @@ package kx.world.sprite {
 				x_layer.forceSort = true;
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return m_depth2; */			
 		}
 		/* @:end */
 		

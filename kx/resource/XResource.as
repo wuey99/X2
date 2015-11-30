@@ -75,7 +75,7 @@ package kx.resource {
 		public function set count (__val:int): /* @:set_type */ void {
 			m_count = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		

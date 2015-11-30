@@ -315,7 +315,7 @@ package kx.world.sprite {
 				public function set visible2 (__visible:Boolean): /* @:set_type */ void {
 					m_visible = __visible;
 					
-					/* @:set_return true; */	
+					/* @:set_return __visible; */	
 				}
 				
 				//------------------------------------------------------------------------------------------	
