@@ -94,7 +94,7 @@ package kx.world.sprite {
 			public override function set rotation (__val:Number): /* @:set_type */ void {
 				super.rotation = __val * Math.PI/180;
 				
-				/* @:set_return 0; */			
+				/* @:set_return __val; */			
 			}
 			/* @:end */
 			

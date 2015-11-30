@@ -175,7 +175,7 @@ package kx.world.sprite {
 			public override function set filters (__val:Array /* <BitmapFilter> */): /* @:set_type */ void {
 				m_text.filters = __val;
 				
-				/* @:set_return null; */			
+				/* @:set_return __val; */			
 			}
 			/* @:end */
 // <HAXE>
@@ -397,7 +397,7 @@ package kx.world.sprite {
 		public override function set width (__val:Number): /* @:set_type */ void {
 			m_text.width = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 		
@@ -411,7 +411,7 @@ package kx.world.sprite {
 		public override function set height (__val:Number): /* @:set_type */ void {
 			m_text.height = __val;
 			
-			/* @:set_return 0; */			
+			/* @:set_return __val; */			
 		}
 		/* @:end */
 
