@@ -326,7 +326,7 @@ package kx.world.sprite {
 				}
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return m_movieClip.rotation; */			
 		}
 		/* @:end */
 
@@ -346,7 +346,7 @@ package kx.world.sprite {
 				m_movieClip.alpha = __val;
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return m_movieClip.alpha; */			
 		}
 		/* @:end */
 
@@ -427,7 +427,7 @@ package kx.world.sprite {
 				m_movieClip.scaleX = __val;
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return m_movieClip.scaleX; */			
 		}
 		/* @:end */
 		
@@ -447,7 +447,7 @@ package kx.world.sprite {
 				m_movieClip.scaleY = __val;
 			}
 			
-			/* @:set_return 0; */			
+			/* @:set_return m_movieClip.scaleY; */			
 		}
 		/* @:end */
 		
