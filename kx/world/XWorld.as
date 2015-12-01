@@ -692,7 +692,7 @@ package kx.world {
 					XTask.WAIT, 0x0100,
 	
 					XTask.FLAGS, function (__task:XTask):void {
-						__task.ifTrue (getFlashStage () && getFlashStage ().stage);			
+						__task.ifTrue (getFlashStage () != null && getFlashStage ().stage != null);			
 					}, XTask.BNE, "wait",
 					
 				function ():void {
@@ -708,7 +708,7 @@ package kx.world {
 				XTask.LABEL, "loop",
 					XTask.WAIT, 0x0100,
 						function ():void {
-							if (getFlashStage () && (__oldX != mouseX || __oldY != mouseY)) {
+							if (getFlashStage () != null && (__oldX != mouseX || __oldY != mouseY)) {
 								__point.x = mouseX;
 								__point.y = mouseY;
 								
