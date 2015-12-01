@@ -222,29 +222,29 @@ package kx.world.ui {
 		}
 		
 //------------------------------------------------------------------------------------------
-			public function onMouseOver (e:MouseEvent):void {
-				__onMouseOver ();
-			}			
+		public function onMouseOver (e:MouseEvent):void {
+			__onMouseOver ();
+		}			
 
 //------------------------------------------------------------------------------------------
-			public function onMouseDown (e:MouseEvent):void {
-				__onMouseDown ();
-			}			
+		public function onMouseDown (e:MouseEvent):void {
+			__onMouseDown ();
+		}			
 
 //------------------------------------------------------------------------------------------
-			public function onMouseUp (e:MouseEvent):void {
-				__onMouseUp ();
-			}			
+		public function onMouseUp (e:MouseEvent):void {
+			__onMouseUp ();
+		}			
 
 //------------------------------------------------------------------------------------------
-			public function onMouseMove (e:MouseEvent):void {	
-				__onMouseMove ();
-			}			
+		public function onMouseMove (e:MouseEvent):void {	
+			__onMouseMove ();
+		}			
 		
 //------------------------------------------------------------------------------------------	
-			public function onMouseOut (e:MouseEvent):void {
-				__onMouseOut ();
-			}			
+		public function onMouseOut (e:MouseEvent):void {
+			__onMouseOut ();
+		}			
 
 //------------------------------------------------------------------------------------------
 		public function setNormalState ():void {
