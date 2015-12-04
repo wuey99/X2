@@ -490,14 +490,14 @@ package kx {
 			var i:int;
 			
 			i = 0;
-			
-			m_allClassNames.forEach (
-				function (x:*):void {
-					var __fullName:String = x as String;
-					
-					trace (": fullName: ", i++, __fullName);
-				}
-			);
+//			
+//			if (false) m_allClassNames.forEach (
+//				function (x:*):void {
+//					var __fullName:String = x as String;
+//					
+//					trace (": fullName: ", i++, __fullName);
+//				}
+//			);
 			
 			return (ready);
 			
@@ -552,48 +552,48 @@ package kx {
 			
 			i = 0;
 			
-			getXSignalManager ().getXSignals ().forEach (
-				function (x:XSignal):void {
-//					trace (": signal: " , i, ": ", x,  ", parent: ", x.getParent ());
-				}
-			);
+//			if (false) getXSignalManager ().getXSignals ().forEach (
+//				function (x:XSignal):void {
+////					trace (": signal: " , i, ": ", x,  ", parent: ", x.getParent ());
+//				}
+//			);
 			
 			trace ("------------------------------");
 			trace ("active XSignals XApp");
 			
 			i = 0;
 			
-			m_XApp.getXSignalManager ().getXSignals ().forEach ( /* @:castkey */
-				function (x:XSignal):void {
-//					trace (": signal: ", i, ": ", x,  ", parent: ", x.getParent ());
-				}
-			);
+//			if (false) m_XApp.getXSignalManager ().getXSignals ().forEach ( /* @:castkey */
+//				function (x:XSignal):void {
+////					trace (": signal: ", i, ": ", x,  ", parent: ", x.getParent ());
+//				}
+//			);
 									
 			trace ("------------------------------");
 			trace ("active XLogicObjects");
 
 			i = 0;
 				
-			xxx.getXLogicManager ().getXLogicObjects ().forEach (
-				function (x:*):void {
-					trace (": XLogicObject: ", i,  ": ",  x);
-						
-					i++;
-				}
-			);
+//			if (false) xxx.getXLogicManager ().getXLogicObjects ().forEach (
+//				function (x:*):void {
+//					trace (": XLogicObject: ", i,  ": ",  x);
+//						
+//					i++;
+//				}
+//			);
 							
 			trace ("------------------------------");
 			trace ("active tasks xxx: ");
 				
 			i = 0;
 				
-			xxx.getXTaskManager ().getTasks ().forEach ( /* @:castkey */
-				function (x:XSignal):void {
-//					trace (": task: ",  i,  ": ",  x,  ", parent: ",  x.getParent ());
-					
-					i++;
-				}	
-			);
+//			if (false) xxx.getXTaskManager ().getTasks ().forEach ( /* @:castkey */
+//				function (x:XSignal):void {
+////					trace (": task: ",  i,  ": ",  x,  ", parent: ",  x.getParent ());
+//					
+//					i++;
+//				}	
+//			);
 
 			trace ("------------------------------");
 			trace ("active tasks XApp: ");
