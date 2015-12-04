@@ -253,8 +253,8 @@ package kx.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function removeXMapItem (__item:XMapItemModel):void {
-			if (m_XMapItemToXLogicObject.exists (item)) {		
-				m_XMapItemToXLogicObject.remove (item);
+			if (m_XMapItemToXLogicObject.exists (__item)) {		
+				m_XMapItemToXLogicObject.remove (__item);
 			}
 		}
 

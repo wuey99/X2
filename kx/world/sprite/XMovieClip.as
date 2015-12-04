@@ -287,48 +287,48 @@ package kx.world.sprite {
 		//------------------------------------------------------------------------------------------
 		/* @:override get, set rotation Float */
 		
-		public override function get rotation ():Number {
-			if (m_movieClip == null) {
-				return 0.0;
-			}
-			
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				return m_movieClip.rotation * 180/Math.PI;
-			}
-			else
-			// </AS3>
-			{
-				return m_movieClip.rotation;
-			}
-		}
-		
-		public override function set rotation (__val:Number): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				if (m_movieClip != null) {
-					m_movieClip.rotation = __val * Math.PI/180;
-				}
-			}
-			else
-			// </AS3>
-			{
-				if (m_movieClip != null) {
-					m_movieClip.rotation = __val;
-				}
-			}
-			
-			/* @:set_return m_movieClip.rotation; */			
-		}
-		/* @:end */
+//		public override function get rotation ():Number {
+//			if (m_movieClip == null) {
+//				return 0.0;
+//			}
+//			
+//			// <HAXE>
+//			/* --
+//			-- */
+//			// </HAXE>
+//			// <AS3>
+//			if (CONFIG::starling) {
+//				return m_movieClip.rotation * 180/Math.PI;
+//			}
+//			else
+//			// </AS3>
+//			{
+//				return m_movieClip.rotation;
+//			}
+//		}
+//		
+//		public override function set rotation (__val:Number): /* @:set_type */ void {
+//			// <HAXE>
+//			/* --
+//			-- */
+//			// </HAXE>
+//			// <AS3>
+//			if (CONFIG::starling) {
+//				if (m_movieClip != null) {
+//					m_movieClip.rotation = __val * Math.PI/180;
+//				}
+//			}
+//			else
+//			// </AS3>
+//			{
+//				if (m_movieClip != null) {
+//					m_movieClip.rotation = __val;
+//				}
+//			}
+//			
+//			/* @:set_return m_movieClip.rotation; */			
+//		}
+//		/* @:end */
 
 		//------------------------------------------------------------------------------------------
 		/* @:override get, set alpha Float */
