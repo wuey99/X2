@@ -104,6 +104,7 @@ package kx.world.logic {
 		public var m_XTaskSubManager:XTaskSubManager;
 		public var m_XTaskSubManagerCX:XTaskSubManager;
 		public var m_isDead:Boolean;
+		public var m_cleanedUp:Boolean;
 		public var m_autoCulling:Boolean;
 		public var m_poolClass:Class; // <Dynamic>
 		public var __XTask:XTask_CONSTANTS;
@@ -140,6 +141,7 @@ package kx.world.logic {
 			m_delayed = 1;
 			m_layer = -1;
 			m_isDead = false;
+			m_cleanedUp = false;
 			m_autoCulling = false;
 		
 			m_GUID = g_GUID++;
@@ -183,6 +185,7 @@ package kx.world.logic {
 			m_masterAlpha = 1.0;
 		
 			m_isDead = false;
+			m_cleanedUp = false;
 			
 			m_poolClass = null;
 			
@@ -289,6 +292,7 @@ package kx.world.logic {
 			}
 			
 			isDead = true;
+			cleanedUp = true;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -898,7 +902,9 @@ package kx.world.logic {
 			if (m_XLogicObjects.exists (__XLogicObject)) {
 				m_XLogicObjects.remove (__XLogicObject);
 				
-				__XLogicObject.cleanup ();
+				if (!__XLogicObject.cleanedUp) {
+					__XLogicObject.cleanup ();
+				}
 			}
 		}
 		
@@ -1051,6 +1057,20 @@ package kx.world.logic {
 		
 		public function set isDead (__val:Boolean): /* @:set_type */ void {
 			m_isDead = __val;
+			
+			/* @:set_return true; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set cleanedUp Bool */
+		
+		public function get cleanedUp ():Boolean {
+			return m_cleanedUp;
+		}
+		
+		public function set cleanedUp (__val:Boolean): /* @:set_type */ void {
+			m_cleanedUp = __val;
 			
 			/* @:set_return true; */			
 		}

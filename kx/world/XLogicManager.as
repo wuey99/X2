@@ -313,7 +313,9 @@ package kx.world {
 				function (x:*):void {
 					var __logicObject:XLogicObject = x as XLogicObject;
 					
-					__logicObject.cleanup ();
+					if (!__logicObject.cleanedUp) {
+						__logicObject.cleanup ();
+					}
 					
 					removeXLogicObject (__logicObject);
 					
