@@ -259,7 +259,7 @@ package kx.task {
 		public function run ():void {
 			function __retn ():Boolean {
 				if (m_stackPtr < 0) {
-					if (m_parent && m_parent != m_manager) {
+					if (m_parent != null && m_parent != m_manager) {
 						m_parent.removeTask (self);
 					}
 					else
