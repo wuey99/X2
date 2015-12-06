@@ -2,6 +2,14 @@ package kx.utils {
 	
 	import flash.utils.*;
 	
+	// <HAXE>
+	/* --
+	import openfl.Lib.*;
+	-- */
+	// </HAXE>
+	// <AS3>
+	// </AS3>
+	
 	/**
 	 * A timer that gives sub-millisecond estimates that are more accurate than the
 	 * whole-millisecond values provided by raw usage of flash.utils.getTimer.
@@ -150,15 +158,5 @@ package kx.utils {
 			// was not used.
 			return targetMS - this.beginTime - portionNotUsed;
 		}
-		
-		// <HAXE>
-		/* --
-			public function getTimer():Int {
-				return 0;
-			}	
-		-- */
-		// </HAXE>
-		// <AS3>
-		// </AS3>
 	}
 }
