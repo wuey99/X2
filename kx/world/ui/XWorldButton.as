@@ -46,6 +46,10 @@ package kx.world.ui {
 	public class XWorldButton extends XButton {
 		public var m_width:Number;
 		public var m_height:Number;
+		public var m_mouseDownListenerID:int;
+		public var m_mouseMoveListenerID:int;
+		public var m_mouseUpListenerID:int;
+		public var m_mouseOutListenerID:int;
 		
 		//------------------------------------------------------------------------------------------
 		public function XWorldButton () {
@@ -130,10 +134,10 @@ package kx.world.ui {
 					xxx.getParent ().stage.addEventListener (MouseEvent.MOUSE_OUT, onMouseOut);
 					*/
 					
-					xxx.addMouseDownListener (onMouseDown);
-					xxx.addPolledMouseMoveListener (onPolledMouseMove);
-					xxx.addMouseUpListener (onMouseUp);
-					xxx.addMouseOutListener (onMouseOut);
+					m_mouseDownListenerID = xxx.addMouseDownListener (onMouseDown);
+					m_mouseMoveListenerID = xxx.addPolledMouseMoveListener (onPolledMouseMove);
+					m_mouseUpListenerID = xxx.addMouseUpListener (onMouseUp);
+					m_mouseOutListenerID = xxx.addMouseOutListener (onMouseOut);
 					xxx.getFlashStage ().addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);	
 				},
 				
@@ -143,10 +147,10 @@ package kx.world.ui {
 
 		//------------------------------------------------------------------------------------------
 		public override function cleanupListeners ():void {
-			xxx.removeMouseDownListener (onMouseDown);
-			xxx.removeMouseMoveListener (onMouseMove);
-			xxx.removeMouseUpListener (onMouseUp);
-			xxx.removeMouseOutListener (onMouseOut);
+			xxx.removeMouseDownListener (m_mouseDownListenerID);
+			xxx.removeMouseMoveListener (m_mouseMoveListenerID);
+			xxx.removeMouseUpListener (m_mouseUpListenerID);
+			xxx.removeMouseOutListener (m_mouseOutListenerID);
 			xxx.getFlashStage ().removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);	
 		}
 		

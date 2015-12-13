@@ -285,19 +285,19 @@ package kx.xmap {
 		private function deserialize (__xml:XSimpleXMLNode, __readOnly:Boolean=false, __useArrayItems:Boolean=false):void {
 			trace (": [XMap] deserialize: ");
 			
+			var i:int;
+			
 			var __xmlList:Array /* <XSimpleXMLNode> */ = __xml.child ("XLayers")[0].child ("XLayer");
 			
 			m_numLayers = __xmlList.length;
 			m_layers = new Array (); // <XMapLayerModel>
-			for (var i:int = 0; i< m_numLayers; i++) {
+			for (i = 0; i< m_numLayers; i++) {
 				m_layers.push (null);
 			}
 			m_useArrayItems = __useArrayItems;
 			m_XSubXMapItemModelPoolManager = new XSubObjectPoolManager (m_XApp.getXMapItemModelPoolManager ());
 			m_XSubXRectPoolManager = new XSubObjectPoolManager (m_XApp.getXRectPoolManager ());
-			
-			var i:int;
-			
+				
 			for (i=0; i<__xmlList.length; i++) {
 				m_layers[i] = new XMapLayerModel ();
 				m_layers[i].setParent (this);

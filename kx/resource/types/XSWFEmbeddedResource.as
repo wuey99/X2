@@ -178,17 +178,17 @@ package kx.resource.types {
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __openHandler(event:Event):void {
+        	private function __openHandler(event:Event):void {
             	trace("openHandler: " + event);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __progressHandler(event:ProgressEvent):void {
+        	private function __progressHandler(event:ProgressEvent):void {
             	trace("progressHandler: bytesLoaded=" + event.bytesLoaded + " bytesTotal=" + event.bytesTotal);
         	}
 
 	//------------------------------------------------------------------------------------------
-        	function __unLoadHandler(event:Event):void {
+        	private function __unLoadHandler(event:Event):void {
             	trace("unLoadHandler: " + event);
         	}
         			

@@ -44,6 +44,7 @@ package kx.keyboard {
 		private var m_text:TextField;
 		private var m_keyCodes:XDict; // <Int, Int>
 		private var m_parent:Sprite;
+		private var m_mouseDownListenerID:int;
 		
 //------------------------------------------------------------------------------------------
 		public function XKeyboardManager (__xxx:XWorld) {
@@ -80,7 +81,7 @@ package kx.keyboard {
 			if (m_focus == null) {
 				m_parent.stage.addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
 				m_parent.stage.addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
-				xxx.addMouseDownListener (onMouseDown);
+				m_mouseDownListenerID = xxx.addMouseDownListener (onMouseDown);
 //				xxx.addPolledMouseMoveListener (onMouseMove);
 				
 				takeStageFocus ();
@@ -124,7 +125,7 @@ package kx.keyboard {
 				
 				m_parent.stage.removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
 				m_parent.stage.removeEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
-				xxx.removeMouseDownListener (onMouseDown);
+				xxx.removeMouseDownListener (m_mouseDownListenerID);
 //				xxx.removePolledMouseMoveListener (onMouseMove);
 				
 				m_focus = null;

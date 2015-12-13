@@ -28,16 +28,16 @@
 package kx.xmap {
 
 // X classes
+	import flash.events.*;
+	
 	import kx.collections.*;
 	import kx.geom.*;
 	import kx.mvc.*;
+	import kx.type.*;
 	import kx.utils.*;
 	import kx.world.collision.*;
-	import kx.type.*;
-	import kx.xml.*;
 	import kx.xmap.*;
-	
-	import flash.events.*;
+	import kx.xml.*;
 			
 //------------------------------------------------------------------------------------------	
 	public class XMapLayerModel extends XModelBase {
@@ -87,6 +87,8 @@ package kx.xmap {
 			__submapWidth:int, __submapHeight:int
 			):void {
 
+			var i:int;
+			
 			var __row:int;
 			var __col:int;
 
@@ -100,7 +102,7 @@ package kx.xmap {
 			m_ids = new XDict ();  // <Int, XMapItemModel>
 			m_layer = __layer;
 			m_XSubmaps = new Vector.<Vector.<XSubmapModel>> ();
-			for (var i:int = 0; i < __submapRows; i++) {
+			for (i = 0; i < __submapRows; i++) {
 				m_XSubmaps.push (null);
 			}
 			m_visible = true;
@@ -111,7 +113,7 @@ package kx.xmap {
 	
 			for (__row=0; __row<__submapRows; __row++) {
 				m_XSubmaps[__row] = new Vector.<XSubmapModel> ();
-				for (var i:int = 0; i < __submapCols; i++) {
+				for (i = 0; i < __submapCols; i++) {
 					m_XSubmaps[__row].push (null);
 				}
 				

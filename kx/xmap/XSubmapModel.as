@@ -79,6 +79,8 @@ package kx.xmap {
 				
 			super ();
 			
+			var i:int;
+			
 			m_XMapLayer = __XMapLayer;
 				
 			m_submapWidth = __width;
@@ -93,13 +95,13 @@ package kx.xmap {
 			m_boundingRect = new XRect (0, 0, m_submapWidth, m_submapHeight);
 			
 			m_cmap = new Vector.<int> ();
-			for (var i:int = 0; i < m_cols * m_rows; i++) {
+			for (i = 0; i < m_cols * m_rows; i++) {
 				m_cmap.push (0);
 			}
 			
 			m_inuse = 0;
 			
-			for (var i:int = 0; i < m_cmap.length; i++) {
+			for (i = 0; i < m_cmap.length; i++) {
 				m_cmap[i] = CX_EMPTY;
 			}
 

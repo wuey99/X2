@@ -231,8 +231,8 @@ package kx.world.logic {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addKillListener (__listener:Function):void {
-			m_killSignal.addListener (__listener);
+		public function addKillListener (__listener:Function):int {
+			return m_killSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -241,8 +241,8 @@ package kx.world.logic {
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function addKillListenerWithLogic (__listener:Function):void {
-			m_killSignalWithLogic.addListener (__listener);
+		public function addKillListenerWithLogic (__listener:Function):int {
+			return m_killSignalWithLogic.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -44,8 +44,8 @@ package kx.mvc {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addChangedListener (__listener:Function):void {
-			m_changedSignal.addListener (__listener);
+		public function addChangedListener (__listener:Function):int {
+			return m_changedSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------

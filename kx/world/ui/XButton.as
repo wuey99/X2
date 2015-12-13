@@ -28,6 +28,10 @@
 package kx.world.ui {
 
 // X classes
+	import flash.events.*;
+	import flash.text.*;
+	import flash.utils.*;
+	
 	import kx.*;
 	import kx.signals.*;
 	import kx.task.*;
@@ -35,10 +39,6 @@ package kx.world.ui {
 	import kx.world.collision.*;
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
-	
-	import flash.events.*;
-	import flash.text.*;
-	import flash.utils.*;
 
 //------------------------------------------------------------------------------------------
 	public class XButton extends XLogicObject {
@@ -60,7 +60,8 @@ package kx.world.ui {
 		public var m_label:int;
 		public var m_currState:int;
 		protected var m_disabledFlag:Boolean;
-				
+		protected var m_keyboardDownListener:int;
+		
 //------------------------------------------------------------------------------------------
 		public function XButton () {
 			super ();
@@ -111,7 +112,7 @@ package kx.world.ui {
 					m_sprite.addEventListener (xxx.MOUSE_MOVE, onMouseMove);
 					m_sprite.addEventListener (xxx.MOUSE_UP, onMouseUp);
 					m_sprite.addEventListener (xxx.MOUSE_OUT, onMouseOut);
-					xxx.addKeyboardDownListener (onKeyboardDown);	
+					m_keyboardDownListener = xxx.addKeyboardDownListener (onKeyboardDown);	
 				},
 				
 				XTask.RETN,
@@ -125,7 +126,7 @@ package kx.world.ui {
 			m_sprite.removeEventListener (xxx.MOUSE_MOVE, onMouseMove);
 			m_sprite.removeEventListener (xxx.MOUSE_UP, onMouseUp);
 			m_sprite.removeEventListener (xxx.MOUSE_OUT, onMouseOut);
-			xxx.removeKeyboardDownListener (onKeyboardDown);	
+			xxx.removeKeyboardDownListener (m_keyboardDownListener);	
 		}
 
 //------------------------------------------------------------------------------------------
@@ -139,13 +140,13 @@ package kx.world.ui {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addKeyboardDownListener (__listener:Function):void {
-			m_keyboardDownSignal.addListener (__listener);
+		public function addKeyboardDownListener (__listener:Function):int {
+			return m_keyboardDownSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addKeyboardUpListener (__listener:Function):void {
-			m_keyboardUpSignal.addListener (__listener);
+		public function addKeyboardUpListener (__listener:Function):int {
+			return m_keyboardUpSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -308,8 +309,8 @@ package kx.world.ui {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addMouseDownListener (__listener:Function):void {
-			m_mouseDownSignal.addListener (__listener);
+		public function addMouseDownListener (__listener:Function):int {
+			return m_mouseDownSignal.addListener (__listener);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -318,8 +319,8 @@ package kx.world.ui {
 		}
 						
 //------------------------------------------------------------------------------------------
-		public function addMouseUpListener (__listener:Function):void {
-			m_mouseUpSignal.addListener (__listener);
+		public function addMouseUpListener (__listener:Function):int {
+			return m_mouseUpSignal.addListener (__listener);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -328,8 +329,8 @@ package kx.world.ui {
 		}
 
 //------------------------------------------------------------------------------------------
-		public function addMouseOutListener (__listener:Function):void {
-			m_mouseOutSignal.addListener (__listener);
+		public function addMouseOutListener (__listener:Function):int {
+			return m_mouseOutSignal.addListener (__listener);
 		}
 
 //------------------------------------------------------------------------------------------

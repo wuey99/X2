@@ -39,8 +39,9 @@ package kx.signals {
 	
 //------------------------------------------------------------------------------------------
 	public class XSignal extends Object {
-		private var m_listeners:XDict; // <Dynamic, Int>
+		private var m_listeners:XDict; // <Int, Dynamic>
 		private var m_parent:*;
+		private var m_id:int;
 // <HAXE>
 /* --
 		public var fireSignal:Function;
@@ -51,7 +52,8 @@ package kx.signals {
 		
 //------------------------------------------------------------------------------------------
 		public function XSignal () {
-			m_listeners = new XDict (); // <Dynamic, Int>
+			m_listeners = new XDict (); // <Int, Dynamic>
+			m_id = 0;
 			
 // <HAXE>
 /* --
@@ -73,37 +75,52 @@ package kx.signals {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addListener (__listener:Function):void {
-			m_listeners.set (__listener, 0);
+		public function addListener (__listener:Function):int {
+			m_listeners.set (++m_id, __listener);
+			
+			return m_id;
 		}
 
 //------------------------------------------------------------------------------------------
 // <HAXE>
 /* --
 		public function __fireSignal (args:Array<Dynamic>):Void {
+			var __listener:Function;
+			var __id:Int;
+		
 			switch (args.length) {
 				case 0:
-					for (__listener in m_listeners.keys ()) {
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+		
 						__listener ();
 					}
 		
 				case 1:
-					for (__listener in m_listeners.keys ()) {
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+		
 						__listener (args[0]);
 					}
 		
 				case 2:
-					for (__listener in m_listeners.keys ()) {
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+		
 						__listener (args[0], args[1]);
 					}
 		
 				case 3:
-					for (__listener in m_listeners.keys ()) {
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+		
 						__listener (args[0], args[1], args[2]);
 					}
 		
 				case 4:
-					for (__listener in m_listeners.keys ()) {
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+		
 						__listener (args[0], args[1], args[2], args[3]);
 					}
 			}
@@ -112,10 +129,14 @@ package kx.signals {
 // <AS3>
 //------------------------------------------------------------------------------------------
 		public function fireSignal (...args):void {	
+			var __listener:Function;
+			
 			switch (args.length) {
 				case 0:
 					m_listeners.forEach (
-						function (__listener:*):void {
+						function (__id:int):void {
+							__listener = m_listeners.get (__id);
+							
 							__listener ();
 						}
 					);
@@ -124,7 +145,9 @@ package kx.signals {
 					
 				case 1:
 					m_listeners.forEach (
-						function (__listener:*):void {
+						function (__id:int):void {
+							__listener = m_listeners.get (__id);
+							
 							__listener (args[0]);
 						}
 					);
@@ -133,7 +156,9 @@ package kx.signals {
 					
 				default:
 					m_listeners.forEach (
-						function (__listener:*):void {
+						function (__id:int):void {
+							__listener = m_listeners.get (__id);
+							
 							__listener.apply (null, args);
 						}
 					);
@@ -144,17 +169,17 @@ package kx.signals {
 // </AS3>
 		
 //------------------------------------------------------------------------------------------
-		public function removeListener (__listener:Function):void {
-			if (m_listeners.exists (__listener)) {
-				m_listeners.remove (__listener);
+		public function removeListener (__id:int):void {
+			if (m_listeners.exists (__id)) {
+				m_listeners.remove (__id);
 			}
 		}
 
 //------------------------------------------------------------------------------------------
 		public function removeAllListeners ():void {
 			m_listeners.forEach (
-				function (__listener:*):void {
-					m_listeners.remove (__listener);
+				function (__id:int):void {
+					m_listeners.remove (__id);
 				}
 			);
 		}

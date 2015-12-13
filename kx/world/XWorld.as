@@ -478,13 +478,13 @@ package kx.world {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addTimer1000Listener (__listener:Function):void {
-			m_timer1000Signal.addListener (__listener);
+		public function addTimer1000Listener (__listener:Function):int {
+			return m_timer1000Signal.addListener (__listener);
 		}
 
 //------------------------------------------------------------------------------------------
-		public function removeTimer1000Listener (__listener:Function):void {
-			m_timer1000Signal.removeListener (__listener);
+		public function removeTimer1000Listener (__id:int):void {
+			m_timer1000Signal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -573,23 +573,23 @@ package kx.world {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addBeforeFrameListener (__listener:Function):void {
-			m_beforeFrameSignal.addListener (__listener);
+		public function addBeforeFrameListener (__listener:Function):int {
+			return m_beforeFrameSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function removeBeforeFrameListener (__listener:Function):void {
-			m_beforeFrameSignal.removeListener (__listener);
+		public function removeBeforeFrameListener (__id:int):void {
+			m_beforeFrameSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function addAfterFrameListener (__listener:Function):void {
-			m_afterFrameSignal.addListener (__listener);
+		public function addAfterFrameListener (__listener:Function):int {
+			return m_afterFrameSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function removeAfterFrameListener (__listener:Function):void {
-			m_afterFrameSignal.removeListener (__listener);
+		public function removeAfterFrameListener (__id:int):void {
+			m_afterFrameSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -753,21 +753,21 @@ package kx.world {
 		}
 		
 //------------------------------------------------------------------------------------------		
-		public function addKeyboardDownListener (__listener:Function):void {
-			m_keyboardDownSignal.addListener (__listener);
+		public function addKeyboardDownListener (__listener:Function):int {
+			return m_keyboardDownSignal.addListener (__listener);
 		}
 		
-		public function removeKeyboardDownListener (__listener:Function):void {
-			m_keyboardDownSignal.removeListener (__listener);
+		public function removeKeyboardDownListener (__id:int):void {
+			m_keyboardDownSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------		
-		public function addKeyboardUpListener (__listener:Function):void {
-			m_keyboardUpSignal.addListener (__listener);
+		public function addKeyboardUpListener (__listener:Function):int {
+			return m_keyboardUpSignal.addListener (__listener);
 		}
 		
-		public function removeKeyboardUpListener (__listener:Function):void {
-			m_keyboardUpSignal.removeListener (__listener);
+		public function removeKeyboardUpListener (__id:int):void {
+			m_keyboardUpSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -775,12 +775,12 @@ package kx.world {
 			m_mouseOverSignal.fireSignal (e);
 		}
 		
-		public function addMouseOverListener (__listener:Function):void {
-			m_mouseOverSignal.addListener (__listener);
+		public function addMouseOverListener (__listener:Function):int {
+			return m_mouseOverSignal.addListener (__listener);
 		}
 
-		public function removeMouseOverListener (__listener:Function):void {
-			m_mouseOverSignal.removeListener (__listener);
+		public function removeMouseOverListener (__id:int):void {
+			m_mouseOverSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -788,12 +788,12 @@ package kx.world {
 			m_mouseDownSignal.fireSignal (e);
 		}
 		
-		public function addMouseDownListener (__listener:Function):void {
-			m_mouseDownSignal.addListener (__listener);
+		public function addMouseDownListener (__listener:Function):int {
+			return m_mouseDownSignal.addListener (__listener);
 		}
 
-		public function removeMouseDownListener (__listener:Function):void {
-			m_mouseDownSignal.removeListener (__listener);
+		public function removeMouseDownListener (__id:int):void {
+			m_mouseDownSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -801,21 +801,21 @@ package kx.world {
 			m_mouseMoveSignal.fireSignal (e);
 		}
 		
-		public function addMouseMoveListener (__listener:Function):void {
-			m_mouseMoveSignal.addListener (__listener);
+		public function addMouseMoveListener (__listener:Function):int {
+			return m_mouseMoveSignal.addListener (__listener);
 		}
 
-		public function removeMouseMoveListener (__listener:Function):void {
-			m_mouseMoveSignal.removeListener (__listener);
+		public function removeMouseMoveListener (__id:int):void {
+			m_mouseMoveSignal.removeListener (__id);
 		}
 
 //------------------------------------------------------------------------------------------		
-		public function addPolledMouseMoveListener (__listener:Function):void {
-			m_polledMouseMoveSignal.addListener (__listener);
+		public function addPolledMouseMoveListener (__listener:Function):int {
+			return m_polledMouseMoveSignal.addListener (__listener);
 		}
 		
-		public function removePolledMouseMoveListener (__listener:Function):void {
-			m_polledMouseMoveSignal.removeListener (__listener);
+		public function removePolledMouseMoveListener (__id:int):void {
+			m_polledMouseMoveSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -823,12 +823,12 @@ package kx.world {
 			m_mouseUpSignal.fireSignal (e);
 		}
 		
-		public function addMouseUpListener (__listener:Function):void {
-			m_mouseUpSignal.addListener (__listener);
+		public function addMouseUpListener (__listener:Function):int {
+			return m_mouseUpSignal.addListener (__listener);
 		}
 
-		public function removeMouseUpListener (__listener:Function):void {
-			m_mouseUpSignal.removeListener (__listener);
+		public function removeMouseUpListener (__id:int):void {
+			m_mouseUpSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -836,12 +836,12 @@ package kx.world {
 			m_mouseOutSignal.fireSignal (e);
 		}
 		
-		public function addMouseOutListener (__listener:Function):void {
-			m_mouseOutSignal.addListener (__listener);
+		public function addMouseOutListener (__listener:Function):int {
+			return m_mouseOutSignal.addListener (__listener);
 		}
 
-		public function removeMouseOutListener (__listener:Function):void {
-			m_mouseOutSignal.removeListener (__listener);
+		public function removeMouseOutListener (__id:int):void {
+			m_mouseOutSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -890,13 +890,13 @@ package kx.world {
 		}
 	
 //------------------------------------------------------------------------------------------		
-		public function addFocusInListener (__listener:Function):void {
-			m_focusInSignal.addListener (__listener);
+		public function addFocusInListener (__listener:Function):int {
+			return m_focusInSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function removeFocusInListener (__listener:Function):void {
-			m_focusInSignal.removeListener (__listener);
+		public function removeFocusInListener (__id:int):void {
+			m_focusInSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -905,13 +905,13 @@ package kx.world {
 		}
 		
 //------------------------------------------------------------------------------------------		
-		public function addFocusOutListener (__listener:Function):void {
-			m_focusOutSignal.addListener (__listener);
+		public function addFocusOutListener (__listener:Function):int {
+			return m_focusOutSignal.addListener (__listener);
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function removeFocusOutListener (__listener:Function):void {
-			m_focusOutSignal.removeListener (__listener);
+		public function removeFocusOutListener (__id:int):void {
+			m_focusOutSignal.removeListener (__id);
 		}
 		
 //------------------------------------------------------------------------------------------

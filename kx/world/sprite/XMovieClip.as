@@ -229,7 +229,7 @@ package kx.world.sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function gotoAndStopAtLabel (__label:String) {
+		public function gotoAndStopAtLabel (__label:String):void {
 			// <HAXE>
 			/* --
 			-- */
@@ -406,7 +406,7 @@ package kx.world.sprite {
 			return 0;
 		}
 		
-		public function set dy (__val): /* @:set_type */ void {
+		public function set dy (__val:Number): /* @:set_type */ void {
 			/* @:set_return 0; */			
 		}
 		/* @:end */
