@@ -724,7 +724,7 @@ package kx.world.logic {
 					{
 						__xmovieClip.cleanup ();
 						
-						xxx.unloadClass (/* @:cast */ __name as String);
+//						xxx.unloadClass (/* @:cast */ __name as String);
 					}
 				}
 			);

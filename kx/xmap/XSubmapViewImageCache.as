@@ -185,7 +185,7 @@ package kx.xmap {
 		
 							trace (": imageClassName: ", __item.imageClassName, __movieClip, xxx.getMovieClipCacheManager ().isQueued (__item.imageClassName), __movieClip.getMovieClip (), __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 							
-							trace (": movieClip: numFrames: ", __movieClip.getMovieClip ().numFrames);
+//							trace (": movieClip: numFrames: ", __movieClip.getMovieClip ().numFrames);
 							
 							if (CONFIG::starling) {
 								if (__movieClip != null) {
@@ -251,7 +251,7 @@ package kx.xmap {
 							
 							trace (": imageClassName: ", __item.imageClassName, __movieClip, xxx.getMovieClipCacheManager ().isQueued (__item.imageClassName), __movieClip.getMovieClip (), __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 							
-							trace (": movieClip: numFrames: ", __movieClip.getMovieClip ().numFrames);
+//							trace (": movieClip: numFrames: ", __movieClip.getMovieClip ().numFrames);
 							
 							if (CONFIG::starling) {
 								if (__movieClip != null) {
