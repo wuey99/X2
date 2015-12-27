@@ -34,7 +34,8 @@ package kx {
 	
 	import kx.bitmap.*;
 	import kx.collections.*;
-	import kx.debug.XDebug;
+	import kx.debug.*;
+	import kx.gamepad.*;
 	import kx.geom.*;
 	import kx.mvc.*;
 	import kx.pool.*;
@@ -72,6 +73,7 @@ package kx {
 		private var m_XClassPoolManager:XClassPoolManager;
 		private var m_allClassNames:XDict; // <String, Int>
 		private var m_frameRateScale:Number;
+		private var m_gamePad:XGamepad;
 		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
@@ -87,6 +89,7 @@ package kx {
 			m_XTextureManager = new XTextureManager (this);
 			m_XMovieClipCacheManager = new XMovieClipCacheManager (this);
 			m_XClassPoolManager = new XClassPoolManager ();
+			m_gamePad = new XGamepad (); m_gamePad.setup ();
 			
 			XBitmap.setXApp (this);
 			XImage.setXApp (this);

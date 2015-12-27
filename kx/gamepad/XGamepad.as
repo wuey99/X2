@@ -49,32 +49,32 @@ package kx.gamepad {
 		
 		private var m_disconnectSignal:XSignal;
 	
-		private var m_mapGameInput:XDict; // <String, String>
+		private var m_mapIDs:XDict; // <String, String>
 		
 		//------------------------------------------------------------------------------------------
 		// controls
 		//------------------------------------------------------------------------------------------
-		public static const AXIS_LEFT_X = "AXIS_LEFT_X";
-		public static const AXIS_LEFT_Y = "AXIS_LEFT_Y";
-		public static const AXIS_RIGHT_X = "AXIS_RIGHT_X";
-		public static const AXIS_RIGHT_Y = "AXIS_RIGHT_Y";
-		public static const AXIS_TRIGGER_LEFT = "AXIS_TRIGGER_LEFT";
-		public static const AXIS_TRIGGER_RIGHT = "AXIS_TRIGGER_RIGHT";
-		public static const BUTTON_A = "BUTTON_A";
-		public static const BUTTON_B = "BUTTON_B";
-		public static const BUTTON_BACK = "BUTTON_BACK";
-		public static const BUTTON_DPAD_DOWN = "BUTTON_DPAD_DOWN";
-		public static const BUTTON_DPAD_LEFT = "BUTTON_DPAD_LEFT";
-		public static const BUTTON_DPAD_RIGHT = "BUTTON_DPAD_RIGHT";
-		public static const BUTTON_DPAD_UP = "BUTTON_DPAD_UP";
-		public static const BUTTON_GUIDE = "BUTTON_GUIDE";
-		public static const BUTTON_LEFT_SHOULDER = "BUTTON_LEFT_SHOULDER";
-		public static const BUTTON_LEFT_STICK = "BUTTON_LEFT_STICK";
-		public static const BUTTON_RIGHT_SHOULDER = "BUTTON_RIGHT_SHOULDER";
-		public static const BUTTON_RIGHT_STICK = "BUTTON_RIGHT_STICK";
-		public static const BUTTON_START = "BUTTON_START";
-		public static const BUTTON_X = "BUTTON_X";
-		public static const BUTTON_Y = "BUTTON_Y";
+		public static const AXIS_LEFT_X:String = "AXIS_LEFT_X";
+		public static const AXIS_LEFT_Y:String = "AXIS_LEFT_Y";
+		public static const AXIS_RIGHT_X:String = "AXIS_RIGHT_X";
+		public static const AXIS_RIGHT_Y:String = "AXIS_RIGHT_Y";
+		public static const AXIS_TRIGGER_LEFT:String = "AXIS_TRIGGER_LEFT";
+		public static const AXIS_TRIGGER_RIGHT:String = "AXIS_TRIGGER_RIGHT";
+		public static const BUTTON_A:String = "BUTTON_A";
+		public static const BUTTON_B:String = "BUTTON_B";
+		public static const BUTTON_BACK:String = "BUTTON_BACK";
+		public static const BUTTON_DPAD_DOWN:String = "BUTTON_DPAD_DOWN";
+		public static const BUTTON_DPAD_LEFT:String = "BUTTON_DPAD_LEFT";
+		public static const BUTTON_DPAD_RIGHT:String = "BUTTON_DPAD_RIGHT";
+		public static const BUTTON_DPAD_UP:String = "BUTTON_DPAD_UP";
+		public static const BUTTON_GUIDE:String = "BUTTON_GUIDE";
+		public static const BUTTON_LEFT_SHOULDER:String = "BUTTON_LEFT_SHOULDER";
+		public static const BUTTON_LEFT_STICK:String = "BUTTON_LEFT_STICK";
+		public static const BUTTON_RIGHT_SHOULDER:String = "BUTTON_RIGHT_SHOULDER";
+		public static const BUTTON_RIGHT_STICK:String = "BUTTON_RIGHT_STICK";
+		public static const BUTTON_START:String = "BUTTON_START";
+		public static const BUTTON_X:String = "BUTTON_X";
+		public static const BUTTON_Y:String = "BUTTON_Y";
 
 		//------------------------------------------------------------------------------------------
 		public function XGamepad () {
@@ -88,38 +88,38 @@ package kx.gamepad {
 			
 			m_disconnectSignal = new XSignal ();
 			
-			m_mapGameInput = new XDict (); // <String, String>
+			m_mapIDs = new XDict (); // <String, String>
 						
 			// <HAXE>
 			/* --
 			#if windows
-			m_mapGameInput.set ("LEFT_X", XGamepad.AXIS_LEFT_X);
-			m_mapGameInput.set ("LEFT_Y", XGamepad.AXIS_LEFT_Y);				
-			m_mapGameInput.set ("RIGHT_X", XGamepad.AXIS_RIGHT_X);			
-			m_mapGameInput.set ("RIGHT_Y", XGamepad.AXIS_RIGHT_Y);			
-			m_mapGameInput.set ("TRIGGER_LEFT", XGamepad.AXIS_TRIGGER_LEFT);		
-			m_mapGameInput.set ("TRIGGER_RIGHT", XGamepad.AXIS_TRIGGER_RIGHT);		
-			m_mapGameInput.set ("A", XGamepad.BUTTON_A);
-			m_mapGameInput.set ("B", XGamepad.BUTTON_B);
-			m_mapGameInput.set ("BACK", XGamepad.BUTTON_BACK);
-			m_mapGameInput.set ("DPAD_DOWN", XGamepad.BUTTON_DPAD_DOWN);
-			m_mapGameInput.set ("DPAD_LEFT", XGamepad.BUTTON_DPAD_LEFT);
-			m_mapGameInput.set ("DPAD_RIGHT", XGamepad.BUTTON_DPAD_RIGHT);
-			m_mapGameInput.set ("DPAD_UP", XGamepad.BUTTON_DPAD_UP);
-			m_mapGameInput.set ("GUIDE", XGamepad.BUTTON_GUIDE);
-			m_mapGameInput.set ("LEFT_SHOULDER", XGamepad.BUTTON_LEFT_SHOULDER);
-			m_mapGameInput.set ("LEFT_STICK", XGamepad.BUTTON_LEFT_STICK);
-			m_mapGameInput.set ("RIGHT_SHOULDER", XGamepad.BUTTON_RIGHT_SHOULDER);
-			m_mapGameInput.set ("RIGHT_STICK", XGamepad.BUTTON_RIGHT_STICK);
-			m_mapGameInput.set ("START", XGamepad.BUTTON_START);
-			m_mapGameInput.set ("X", XGamepad.BUTTON_X);
-			m_mapGameInput.set ("Y", XGamepad.BUTTON_Y);
+			m_mapIDs.set ("LEFT_X", XGamepad.AXIS_LEFT_X);
+			m_mapIDs.set ("LEFT_Y", XGamepad.AXIS_LEFT_Y);				
+			m_mapIDs.set ("RIGHT_X", XGamepad.AXIS_RIGHT_X);			
+			m_mapIDs.set ("RIGHT_Y", XGamepad.AXIS_RIGHT_Y);			
+			m_mapIDs.set ("TRIGGER_LEFT", XGamepad.AXIS_TRIGGER_LEFT);		
+			m_mapIDs.set ("TRIGGER_RIGHT", XGamepad.AXIS_TRIGGER_RIGHT);		
+			m_mapIDs.set ("A", XGamepad.BUTTON_A);
+			m_mapIDs.set ("B", XGamepad.BUTTON_B);
+			m_mapIDs.set ("BACK", XGamepad.BUTTON_BACK);
+			m_mapIDs.set ("DPAD_DOWN", XGamepad.BUTTON_DPAD_DOWN);
+			m_mapIDs.set ("DPAD_LEFT", XGamepad.BUTTON_DPAD_LEFT);
+			m_mapIDs.set ("DPAD_RIGHT", XGamepad.BUTTON_DPAD_RIGHT);
+			m_mapIDs.set ("DPAD_UP", XGamepad.BUTTON_DPAD_UP);
+			m_mapIDs.set ("GUIDE", XGamepad.BUTTON_GUIDE);
+			m_mapIDs.set ("LEFT_SHOULDER", XGamepad.BUTTON_LEFT_SHOULDER);
+			m_mapIDs.set ("LEFT_STICK", XGamepad.BUTTON_LEFT_STICK);
+			m_mapIDs.set ("RIGHT_SHOULDER", XGamepad.BUTTON_RIGHT_SHOULDER);
+			m_mapIDs.set ("RIGHT_STICK", XGamepad.BUTTON_RIGHT_STICK);
+			m_mapIDs.set ("START", XGamepad.BUTTON_START);
+			m_mapIDs.set ("X", XGamepad.BUTTON_X);
+			m_mapIDs.set ("Y", XGamepad.BUTTON_Y);
 			
 			Gamepad.onConnect.add (function (__gamepad:Gamepad):Void {
 				trace ("Connected Gamepad: " + __gamepad.name);
 				
 				__gamepad.onAxisMove.add (function (__axis:GamepadAxis, __val:Float):Void {
-					var __id:String = m_mapGameInput.get (__axis.toString ());
+					var __id:String = m_mapIDs.get (__axis.toString ());
 			
 					trace ("Moved Axis " + __id + ": " + __val);
 			
@@ -127,7 +127,7 @@ package kx.gamepad {
 				});
 				
 				__gamepad.onButtonDown.add (function (__button:GamepadButton):Void {
-					var __id:String = m_mapGameInput.get (__button.toString ());
+					var __id:String = m_mapIDs.get (__button.toString ());
 			
 					trace ("Pressed Button: " + __id);
 			
@@ -135,7 +135,7 @@ package kx.gamepad {
 				});
 				
 				__gamepad.onButtonUp.add (function (__button:GamepadButton):Void {
-					var __id:String = m_mapGameInput.get (__button.toString ());
+					var __id:String = m_mapIDs.get (__button.toString ());
 			
 					trace ("Released Button: " + __id);
 			
@@ -149,27 +149,27 @@ package kx.gamepad {
 				});
 			});
 			#else
-			m_mapGameInput.set ("AXIS_0", XGamepad.AXIS_LEFT_X);
-			m_mapGameInput.set ("AXIS_1", XGamepad.AXIS_LEFT_Y);				
-			m_mapGameInput.set ("AXIS_2", XGamepad.AXIS_RIGHT_X);			
-			m_mapGameInput.set ("AXIS_3", XGamepad.AXIS_RIGHT_Y);			
-			m_mapGameInput.set ("AXIS_4", XGamepad.AXIS_TRIGGER_LEFT);		
-			m_mapGameInput.set ("AXIS_5", XGamepad.AXIS_TRIGGER_RIGHT);		
-			m_mapGameInput.set ("BUTTON_0", XGamepad.BUTTON_A);
-			m_mapGameInput.set ("BUTTON_1", XGamepad.BUTTON_B);
-			m_mapGameInput.set ("BUTTON_4", XGamepad.BUTTON_BACK);
-			m_mapGameInput.set ("BUTTON_12", XGamepad.BUTTON_DPAD_DOWN);
-			m_mapGameInput.set ("BUTTON_13", XGamepad.BUTTON_DPAD_LEFT);
-			m_mapGameInput.set ("BUTTON_14", XGamepad.BUTTON_DPAD_RIGHT);
-			m_mapGameInput.set ("BUTTON_11", XGamepad.BUTTON_DPAD_UP);
-			m_mapGameInput.set ("BUTTON_5", XGamepad.BUTTON_GUIDE);
-			m_mapGameInput.set ("BUTTON_9", XGamepad.BUTTON_LEFT_SHOULDER);
-			m_mapGameInput.set ("BUTTON_7", XGamepad.BUTTON_LEFT_STICK);
-			m_mapGameInput.set ("BUTTON_10", XGamepad.BUTTON_RIGHT_SHOULDER);
-			m_mapGameInput.set ("BUTTON_8", XGamepad.BUTTON_RIGHT_STICK);
-			m_mapGameInput.set ("BUTTON_6", XGamepad.BUTTON_START);
-			m_mapGameInput.set ("BUTTON_2", XGamepad.BUTTON_X);
-			m_mapGameInput.set ("BUTTON_3", XGamepad.BUTTON_Y);
+			m_mapIDs.set ("AXIS_0", XGamepad.AXIS_LEFT_X);
+			m_mapIDs.set ("AXIS_1", XGamepad.AXIS_LEFT_Y);				
+			m_mapIDs.set ("AXIS_2", XGamepad.AXIS_RIGHT_X);			
+			m_mapIDs.set ("AXIS_3", XGamepad.AXIS_RIGHT_Y);			
+			m_mapIDs.set ("AXIS_4", XGamepad.AXIS_TRIGGER_LEFT);		
+			m_mapIDs.set ("AXIS_5", XGamepad.AXIS_TRIGGER_RIGHT);		
+			m_mapIDs.set ("BUTTON_0", XGamepad.BUTTON_A);
+			m_mapIDs.set ("BUTTON_1", XGamepad.BUTTON_B);
+			m_mapIDs.set ("BUTTON_4", XGamepad.BUTTON_BACK);
+			m_mapIDs.set ("BUTTON_12", XGamepad.BUTTON_DPAD_DOWN);
+			m_mapIDs.set ("BUTTON_13", XGamepad.BUTTON_DPAD_LEFT);
+			m_mapIDs.set ("BUTTON_14", XGamepad.BUTTON_DPAD_RIGHT);
+			m_mapIDs.set ("BUTTON_11", XGamepad.BUTTON_DPAD_UP);
+			m_mapIDs.set ("BUTTON_5", XGamepad.BUTTON_GUIDE);
+			m_mapIDs.set ("BUTTON_9", XGamepad.BUTTON_LEFT_SHOULDER);
+			m_mapIDs.set ("BUTTON_7", XGamepad.BUTTON_LEFT_STICK);
+			m_mapIDs.set ("BUTTON_10", XGamepad.BUTTON_RIGHT_SHOULDER);
+			m_mapIDs.set ("BUTTON_8", XGamepad.BUTTON_RIGHT_STICK);
+			m_mapIDs.set ("BUTTON_6", XGamepad.BUTTON_START);
+			m_mapIDs.set ("BUTTON_2", XGamepad.BUTTON_X);
+			m_mapIDs.set ("BUTTON_3", XGamepad.BUTTON_Y);
 			
 			new GameInput ().addEventListener (GameInputEvent.DEVICE_ADDED, function (event):Void {
 				trace ("Connected Device: " + event.device.name);
@@ -178,7 +178,7 @@ package kx.gamepad {
 					var control = event.device.getControlAt (i);
 					
 					control.addEventListener (Event.CHANGE, function (event):Void {			
-						var __id:String = m_mapGameInput.get (control.id);
+						var __id:String = m_mapIDs.get (control.id);
 			
 						if (control.id.substr (0, 4) == "AXIS") {
 							trace ("Moved Axis " + __id + ": " + control.value);
@@ -258,8 +258,8 @@ package kx.gamepad {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function removeAxisMoveListener (__axis:String, __listener:Function):void {	
-			getAxisSignal (__axis).removeListener (__listener);
+		public function removeAxisMoveListener (__axis:String, __id:int):void {	
+			getAxisSignal (__axis).removeListener (__id);
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -281,8 +281,8 @@ package kx.gamepad {
 		}
 	
 		//------------------------------------------------------------------------------------------
-		public function removeButtonUpListener (__button:String, __listener:Function):void {	
-			getButtonDownSignal (__button).removeListener (__listener);
+		public function removeButtonUpListener (__button:String, __id:int):void {	
+			getButtonDownSignal (__button).removeListener (__id);
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -304,8 +304,8 @@ package kx.gamepad {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function removeButtonDownListener (__button:String, __listener:Function):void {
-			getButtonDownSignal (__button).removeListener (__listener);
+		public function removeButtonDownListener (__button:String, __id:int):void {
+			getButtonDownSignal (__button).removeListener (__id);
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -318,8 +318,8 @@ package kx.gamepad {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function removeDisconnectListener (__listener:Function):void {
-			m_disconnectSignal.removeListener (__listener);
+		public function removeDisconnectListener (__id:int):void {
+			m_disconnectSignal.removeListener (__id);
 		}
 		
 	//------------------------------------------------------------------------------------------
