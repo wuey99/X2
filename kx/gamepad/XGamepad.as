@@ -253,8 +253,8 @@ package kx.gamepad {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function addAxisMoveListener (__axis:String, __listener:Function):void {
-			 getAxisSignal (__axis).addListener (__listener);
+		public function addAxisMoveListener (__axis:String, __listener:Function):int {
+			 return getAxisSignal (__axis).addListener (__listener);
 		}
 
 		//------------------------------------------------------------------------------------------
@@ -276,8 +276,8 @@ package kx.gamepad {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function addButtonUpListener (__button:String, __listener:Function):void {
-			getButtonUpSignal (__button).addListener (__listener);
+		public function addButtonUpListener (__button:String, __listener:Function):int {
+			return getButtonUpSignal (__button).addListener (__listener);
 		}
 	
 		//------------------------------------------------------------------------------------------
@@ -299,8 +299,8 @@ package kx.gamepad {
 		}
 				
 		//------------------------------------------------------------------------------------------
-		public function addButtonDownListener (__button:String, __listener:Function):void {
-			getButtonDownSignal (__button).addListener (__listener);
+		public function addButtonDownListener (__button:String, __listener:Function):int {
+			return getButtonDownSignal (__button).addListener (__listener);
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -313,8 +313,8 @@ package kx.gamepad {
 		//------------------------------------------------------------------------------------------
 		
 		//------------------------------------------------------------------------------------------
-		public function addDisconnectListener (__listener:Function):void {
-			m_disconnectSignal.addListener (__listener);
+		public function addDisconnectListener (__listener:Function):int {
+			return m_disconnectSignal.addListener (__listener);
 		}
 		
 		//------------------------------------------------------------------------------------------
