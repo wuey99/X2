@@ -42,7 +42,7 @@ package kx.gamepad {
 	import flash.events.*;
 	
 	//------------------------------------------------------------------------------------------	
-	public class XGamepad extends Object {
+	public class XGamepadManager extends Object {
 		private var m_axisMoveSignals:XDict; // <String, XSignal>
 		private var m_buttonUpSignals:XDict; // <String, XSignal>
 		private var m_buttonDownSignals:XDict; // <String, XSignal>
@@ -77,7 +77,7 @@ package kx.gamepad {
 		public static const BUTTON_Y:String = "BUTTON_Y";
 
 		//------------------------------------------------------------------------------------------
-		public function XGamepad () {
+		public function XGamepadManager () {
 		}
 
 		//------------------------------------------------------------------------------------------
