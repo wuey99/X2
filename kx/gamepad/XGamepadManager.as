@@ -52,31 +52,6 @@ package kx.gamepad {
 		private var m_mapIDs:XDict; // <String, String>
 		
 		//------------------------------------------------------------------------------------------
-		// controls
-		//------------------------------------------------------------------------------------------
-		public static const AXIS_LEFT_X:String = "AXIS_LEFT_X";
-		public static const AXIS_LEFT_Y:String = "AXIS_LEFT_Y";
-		public static const AXIS_RIGHT_X:String = "AXIS_RIGHT_X";
-		public static const AXIS_RIGHT_Y:String = "AXIS_RIGHT_Y";
-		public static const AXIS_TRIGGER_LEFT:String = "AXIS_TRIGGER_LEFT";
-		public static const AXIS_TRIGGER_RIGHT:String = "AXIS_TRIGGER_RIGHT";
-		public static const BUTTON_A:String = "BUTTON_A";
-		public static const BUTTON_B:String = "BUTTON_B";
-		public static const BUTTON_BACK:String = "BUTTON_BACK";
-		public static const BUTTON_DPAD_DOWN:String = "BUTTON_DPAD_DOWN";
-		public static const BUTTON_DPAD_LEFT:String = "BUTTON_DPAD_LEFT";
-		public static const BUTTON_DPAD_RIGHT:String = "BUTTON_DPAD_RIGHT";
-		public static const BUTTON_DPAD_UP:String = "BUTTON_DPAD_UP";
-		public static const BUTTON_GUIDE:String = "BUTTON_GUIDE";
-		public static const BUTTON_LEFT_SHOULDER:String = "BUTTON_LEFT_SHOULDER";
-		public static const BUTTON_LEFT_STICK:String = "BUTTON_LEFT_STICK";
-		public static const BUTTON_RIGHT_SHOULDER:String = "BUTTON_RIGHT_SHOULDER";
-		public static const BUTTON_RIGHT_STICK:String = "BUTTON_RIGHT_STICK";
-		public static const BUTTON_START:String = "BUTTON_START";
-		public static const BUTTON_X:String = "BUTTON_X";
-		public static const BUTTON_Y:String = "BUTTON_Y";
-
-		//------------------------------------------------------------------------------------------
 		public function XGamepadManager () {
 		}
 

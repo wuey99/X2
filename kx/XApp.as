@@ -73,7 +73,7 @@ package kx {
 		private var m_XClassPoolManager:XClassPoolManager;
 		private var m_allClassNames:XDict; // <String, Int>
 		private var m_frameRateScale:Number;
-		private var m_gamePad:XGamepad;
+		private var m_XGamepadManager:XGamepadManager;
 		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
@@ -89,7 +89,7 @@ package kx {
 			m_XTextureManager = new XTextureManager (this);
 			m_XMovieClipCacheManager = new XMovieClipCacheManager (this);
 			m_XClassPoolManager = new XClassPoolManager ();
-			m_gamePad = new XGamepad (); m_gamePad.setup ();
+			m_XGamepadManager = new XGamepadManager (); m_XGamepadManager.setup ();
 			
 			XBitmap.setXApp (this);
 			XImage.setXApp (this);
@@ -289,6 +289,11 @@ package kx {
 //------------------------------------------------------------------------------------------
 		public function setFrameRateScale (__val:Number):void {
 			m_frameRateScale = __val;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXGamepadManager ():XGamepadManager {
+			return m_XGamepadManager;
 		}
 		
 //------------------------------------------------------------------------------------------
