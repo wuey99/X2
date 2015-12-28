@@ -60,12 +60,12 @@ package kx.gamepad {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function addAnalogChangedListener (__axis:String, __listener:Function):int {
+		public function addAnalogChangedListener (__analog:String, __listener:Function):int {
 			var __id:int;
 			
-			__id = m_manager.addAnalogChangedListener (__axis, __listener);
+			__id = m_manager.addAnalogChangedListener (__analog, __listener);
 			
-			m_analogChangedSignalIDs.set (__id, __axis);
+			m_analogChangedSignalIDs.set (__id, __analog);
 			
 			return __id;
 		}
