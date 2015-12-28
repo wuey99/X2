@@ -33,12 +33,12 @@ package kx.gamepad {
 		//------------------------------------------------------------------------------------------
 		// controls
 		//------------------------------------------------------------------------------------------
-		public static const AXIS_LEFT_X:String = "AXIS_LEFT_X";
-		public static const AXIS_LEFT_Y:String = "AXIS_LEFT_Y";
-		public static const AXIS_RIGHT_X:String = "AXIS_RIGHT_X";
-		public static const AXIS_RIGHT_Y:String = "AXIS_RIGHT_Y";
-		public static const AXIS_TRIGGER_LEFT:String = "AXIS_TRIGGER_LEFT";
-		public static const AXIS_TRIGGER_RIGHT:String = "AXIS_TRIGGER_RIGHT";
+		public static const ANALOG_LEFT_X:String = "ANALOG_LEFT_X";
+		public static const ANALOG_LEFT_Y:String = "ANALOG_LEFT_Y";
+		public static const ANALOG_RIGHT_X:String = "ANALOG_RIGHT_X";
+		public static const ANALOG_RIGHT_Y:String = "ANALOG_RIGHT_Y";
+		public static const ANALOG_TRIGGER_LEFT:String = "ANALOG_TRIGGER_LEFT";
+		public static const ANALOG_TRIGGER_RIGHT:String = "ANALOG_TRIGGER_RIGHT"; 
 		public static const BUTTON_A:String = "BUTTON_A";
 		public static const BUTTON_B:String = "BUTTON_B";
 		public static const BUTTON_BACK:String = "BUTTON_BACK";

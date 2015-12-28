@@ -25,7 +25,7 @@
 // SOFTWARE.
 // <$end$/>
 //------------------------------------------------------------------------------------------
-package kx.task {
+package kx.gamepad {
 	
 	import kx.*;
 	import kx.collections.*;
@@ -35,7 +35,7 @@ package kx.task {
 	public class XGamepadSubManager extends Object {
 		public var m_manager:XGamepadManager;
 		
-		private var m_axisSignalIDs:XDict;  // <Int, String>
+		private var m_analogChangedSignalIDs:XDict;  // <Int, String>
 		private var m_buttonUpSignalIDs:XDict; // <Int, String>
 		private var m_buttonDownSignalIDs:XDict; // <Int, String>
 		
@@ -45,7 +45,7 @@ package kx.task {
 			
 			m_manager = __manager;
 			
-			m_axisSignalIDs = new XDict ();  // <Int, String>
+			m_analogChangedSignalIDs = new XDict ();  // <Int, String>
 			m_buttonUpSignalIDs = new XDict ();  // <Int, String>
 			m_buttonDownSignalIDs = new XDict ();  // <Int, String>
 		}
@@ -60,12 +60,12 @@ package kx.task {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function addAxisMoveListener (__axis:String, __listener:Function):int {
+		public function addAnalogChangedListener (__axis:String, __listener:Function):int {
 			var __id:int;
 			
-			__id = m_manager.addAxisMoveListener (__axis, __listener);
+			__id = m_manager.addAnalogChangedListener (__axis, __listener);
 			
-			m_axisSignalIDs.set (__id, __axis);
+			m_analogChangedSignalIDs.set (__id, __axis);
 			
 			return __id;
 		}
@@ -94,9 +94,9 @@ package kx.task {
 		
 		//------------------------------------------------------------------------------------------
 		public function removeAllListeners ():void {	
-			m_axisSignalIDs.forEach (
+			m_analogChangedSignalIDs.forEach (
 				function (__id:int):void {
-					m_manager.removeAxisMoveListener (m_axisSignalIDs.get (__id), __id);	
+					m_manager.removeAnalogChangedListener (m_analogChangedSignalIDs.get (__id), __id);	
 				}
 			);
 			
