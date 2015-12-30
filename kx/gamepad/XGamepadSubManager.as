@@ -58,6 +58,11 @@ package kx.gamepad {
 		public function cleanup ():void {
 			removeAllListeners ();
 		}
+
+		//------------------------------------------------------------------------------------------
+		public function connected ():Boolean {
+			return m_manager.connected ();
+		}
 		
 		//------------------------------------------------------------------------------------------
 		public function addAnalogChangedListener (__analog:String, __listener:Function):int {

@@ -27,9 +27,9 @@
 //------------------------------------------------------------------------------------------
 package kx.gamepad {
 	
-	import kx.collections.*;
-	import kx.signals.*;
-
+	import flash.events.*;
+	import flash.ui.*;
+	
 	// <HAXE>
 	/* --
 	import lime.ui.*;
@@ -38,8 +38,8 @@ package kx.gamepad {
 	// <AS3>
 	// </AS3>
 	
-	import flash.ui.*;
-	import flash.events.*;
+	import kx.collections.*;
+	import kx.signals.*;
 	
 	//------------------------------------------------------------------------------------------	
 	public class XGamepadManager extends Object {
@@ -47,6 +47,7 @@ package kx.gamepad {
 		private var m_buttonUpSignals:XDict; // <String, XSignal>
 		private var m_buttonDownSignals:XDict; // <String, XSignal>
 		
+		private var m_connected:Boolean;
 		private var m_disconnectSignal:XSignal;
 	
 		private var m_mapIDs:XDict; // <String, String>
@@ -61,6 +62,7 @@ package kx.gamepad {
 			m_buttonUpSignals = new XDict (); // <String, XSignal>
 			m_buttonDownSignals = new XDict (); // <String, XSignal>
 			
+			m_connected = false;
 			m_disconnectSignal = new XSignal ();
 			
 			m_mapIDs = new XDict (); // <String, String>
@@ -93,6 +95,8 @@ package kx.gamepad {
 			Gamepad.onConnect.add (function (__gamepad:Gamepad):Void {
 				trace ("Connected Gamepad: " + __gamepad.name);
 				
+				m_connected = true;
+			
 				__gamepad.onAxisMove.add (function (__analog:GamepadAxis, __val:Float):Void {
 					var __id:String = m_mapIDs.get (__analog.toString ());
 			
@@ -106,7 +110,7 @@ package kx.gamepad {
 			
 					// trace ("Pressed Button: " + __id);
 			
-					getButtonUpSignal (__id).fireSignal ();
+					getButtonDownSignal (__id).fireSignal ();
 				});
 				
 				__gamepad.onButtonUp.add (function (__button:GamepadButton):Void {
@@ -114,16 +118,21 @@ package kx.gamepad {
 			
 					// trace ("Released Button: " + __id);
 			
-					getButtonDownSignal (__id).fireSignal ();
+					getButtonUpSignal (__id).fireSignal ();
 				});
 				
 				__gamepad.onDisconnect.add (function ():Void {
 					// trace ("Disconnected Gamepad");
 			
+					m_connected = false;
+			
 					m_disconnectSignal.fireSignal ();
 				});
 			});
 			#else
+			
+			return;
+			
 			m_mapIDs.set ("AXIS_0", XGamepad.ANALOG_LEFT_X);
 			m_mapIDs.set ("AXIS_1", XGamepad.ANALOG_LEFT_Y);				
 			m_mapIDs.set ("AXIS_2", XGamepad.ANALOG_RIGHT_X);			
@@ -148,7 +157,9 @@ package kx.gamepad {
 			
 			new GameInput ().addEventListener (GameInputEvent.DEVICE_ADDED, function (event):Void {
 				trace ("Connected Device: " + event.device.name);
-				
+			
+				m_connected = true;
+			
 				for (i in 0...event.device.numControls) {
 					var control = event.device.getControlAt (i);
 					
@@ -212,6 +223,11 @@ package kx.gamepad {
 			);
 
 			m_disconnectSignal.removeAllListeners ();
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function connected ():Boolean {
+			return m_connected;
 		}
 		
 		//------------------------------------------------------------------------------------------

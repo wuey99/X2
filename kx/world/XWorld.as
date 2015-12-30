@@ -49,8 +49,11 @@ package kx.world {
 	import kx.debug.*;
 	import kx.document.*;
 	import kx.game.*;
+	import kx.gamepad.XGamepad;
+	import kx.gamepad.XGamepadSubManager;
 	import kx.geom.*;
 	import kx.keyboard.*;
+	import kx.gamepad.*;
 	import kx.mvc.*;
 	import kx.pool.*;
 	import kx.resource.*;
@@ -173,6 +176,8 @@ package kx.world {
 		public var m_GUID:GUID;
 		public var m_Domain:Domain;
 		public var m_timely:Timely;
+		public var m_gamepad:XGamepad;
+		public var m_gamepadSubManager:XGamepadSubManager;
 		
 //------------------------------------------------------------------------------------------
 		public function XWorld (__parent:*, __XApp:XApp, __layers:int=8, __timerInterval:Number=32){
@@ -917,6 +922,11 @@ package kx.world {
 //------------------------------------------------------------------------------------------
 		public function fireFocusOutSignal ():void {
 			m_focusOutSignal.fireSignal ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXGamepadManager ():XGamepadManager {
+			return m_XApp.getXGamepadManager ();
 		}
 		
 //------------------------------------------------------------------------------------------
