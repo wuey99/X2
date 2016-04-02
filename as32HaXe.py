@@ -164,7 +164,7 @@ class Update(object):
 		converted = self.convertArrayOrMap (line, "Class", "Class");
 
 		line = converted
-			
+
 		line = line.replace("__M$ap1__", "__MAP__")
 		line = line.replace("__M$ap2__", "__MAP__")
 		
@@ -247,7 +247,7 @@ class Update(object):
 		line = line.replace("function " + self._className + "(", "function new (")
 
 		return line
-	
+
 	#-----------------------------------------------------------------------------
 	# // <HAXE>
 	# /* --
@@ -330,7 +330,7 @@ class Update(object):
 			line = line.replace(" Function", " Dynamic /* Function */")
 
 		return line
-	
+
 	#-----------------------------------------------------------------------------
 	# :Boolean
 	#    --> :Bool
@@ -1235,12 +1235,25 @@ class Update(object):
 		return line
 
 	#-----------------------------------------------------------------------------
+	# trace
+	#    --> // trace
+	#-----------------------------------------------------------------------------
+	def convertTraces(self, line):
+		if self.isComment(line):
+			return line
+
+		line = line.replace("trace (\"", "// trace (\"")
+
+		return line
+
+	#-----------------------------------------------------------------------------
 	def processLine(self, line, dst):
 		self._lineNumber += 1
 		self._skipLine = False
 
 		line = self.convertImports(line)
 		line = self.convertErrors(line)
+		line = self.convertTraces(line)
 		line = self.convertPlusSigns(line)
 		line = self.convertExtendsObject(line)
 		line = self.convertXLogicObjectSetup(line)
