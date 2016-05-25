@@ -159,7 +159,7 @@ package kx.sound {
 			
 			// <HAXE>
 			/* --
-			#if windows
+			#if (windows || html5)
 			var read:Int = 0;
 			#else
 			var read:Int = Std.int (m_mp3.extract( _target, need, positionInt ));

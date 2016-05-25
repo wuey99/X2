@@ -42,6 +42,7 @@ package kx.world {
 	import flash.geom.Point;
 	import flash.system.*;
 	import flash.utils.Timer;
+	import flash.display.Stage;
 	
 	import kx.*;
 	import kx.bitmap.*;
@@ -648,14 +649,8 @@ package kx.world {
 //------------------------------------------------------------------------------------------
 // returns the flash stage
 //------------------------------------------------------------------------------------------
-		public function getFlashStage ():* {
-			if (CONFIG::starling) {
-				return getParent ().stage;
-			}
-			else
-			{
-				return getParent ().stage;
-			}
+		public function getFlashStage ():Stage {
+			return stage;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -697,7 +692,7 @@ package kx.world {
 					XTask.WAIT, 0x0100,
 	
 					XTask.FLAGS, function (__task:XTask):void {
-						__task.ifTrue (getFlashStage () != null && getFlashStage ().stage != null);			
+						__task.ifTrue (getFlashStage () != null);			
 					}, XTask.BNE, "wait",
 					
 				function ():void {
@@ -858,7 +853,7 @@ package kx.world {
 			}
 			else
 			{
-				return getFlashStage ().stage.mouseX;
+				return getFlashStage ().mouseX;
 			}
 		}
 		
@@ -876,7 +871,7 @@ package kx.world {
 			}
 			else
 			{
-				return getFlashStage ().stage.mouseY;
+				return getFlashStage ().mouseY;
 			}
 		}
 		

@@ -69,7 +69,7 @@ package kx.gamepad {
 						
 			// <HAXE>
 			/* --
-			#if windows
+			#if (windows || html5)
 			m_mapIDs.set ("LEFT_X", XGamepad.ANALOG_LEFT_X);
 			m_mapIDs.set ("LEFT_Y", XGamepad.ANALOG_LEFT_Y);				
 			m_mapIDs.set ("RIGHT_X", XGamepad.ANALOG_RIGHT_X);			
