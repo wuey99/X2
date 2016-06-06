@@ -1028,34 +1028,34 @@ package kx.xmap {
 			trace (": [XMapLayer]: deserialize: ");
 			
 			m_viewPort = new XRect (
-				__xml.getAttribute ("vx"),
-				__xml.getAttribute ("vy"),
-				__xml.getAttribute ("vw"),
-				__xml.getAttribute ("vh")
+				__xml.getAttributeFloat ("vx"),
+				__xml.getAttributeFloat ("vy"),
+				__xml.getAttributeFloat ("vw"),
+				__xml.getAttributeFloat ("vh")
 			);
 			
-			m_layer = __xml.getAttribute ("layer");
-			m_submapRows = __xml.getAttribute ("submapRows");
-			m_submapCols = __xml.getAttribute ("submapCols");
-			m_submapWidth = __xml.getAttribute ("submapWidth");
-			m_submapHeight = __xml.getAttribute ("submapHeight");
+			m_layer = __xml.getAttributeInt ("layer");
+			m_submapRows = __xml.getAttributeInt ("submapRows");
+			m_submapCols = __xml.getAttributeInt ("submapCols");
+			m_submapWidth = __xml.getAttributeInt ("submapWidth");
+			m_submapHeight = __xml.getAttributeInt ("submapHeight");
 			m_currID = __xml.getAttribute ("currID");
 			if (__xml.hasAttribute ("visible")) {
-				m_visible = __xml.getAttribute ("visible");
+				m_visible = __xml.getAttributeBoolean ("visible");
 			}
 			else
 			{
 				m_visible = true;
 			}
 			if (__xml.hasAttribute ("name")) {
-				m_name = __xml.getAttribute ("name");
+				m_name = __xml.getAttributeString ("name");
 			}
 			else
 			{
 				m_name = "";
 			}
 			if (__xml.hasAttribute ("grid")) {
-				m_grid = __xml.getAttribute ("grid");
+				m_grid = __xml.getAttributeBoolean ("grid");
 			}
 			else
 			{
@@ -1131,8 +1131,8 @@ package kx.xmap {
 			for (i=0; i<__xmlList.length; i++) {
 				var __submapXML:XSimpleXMLNode = __xmlList[i];
 				
-				__row = __submapXML.getAttribute ("row");
-				__col = __submapXML.getAttribute ("col");
+				__row = __submapXML.getAttributeInt ("row");
+				__col = __submapXML.getAttributeInt ("col");
 					
 				if (__readOnly) {
 					m_XSubmaps[__row][__col] = new XSubmapModel (this, __col,__row, m_submapWidth, m_submapHeight);
@@ -1198,7 +1198,7 @@ package kx.xmap {
 			var i:Number;
 		
 			for (i=0; i<__xmlList.length; i++) {
-				__name = __xmlList[i].getAttribute ("name");
+				__name = __xmlList[i].getAttributeString ("name");
 				
 				trace (": deserializeImageClassName: ", __name);
 				

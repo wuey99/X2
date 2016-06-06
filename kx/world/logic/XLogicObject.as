@@ -1006,6 +1006,34 @@ package kx.world.logic {
 		public function itemGetAttribute (__attr:String):* {
 			return m_xml.getAttribute (__attr);
 		}
+
+//------------------------------------------------------------------------------------------
+		public function itemGetAttributeString (__attr:String):String {
+			return /* @:cast */ m_xml.getAttribute (__attr);
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function itemGetAttributeFloat (__attr:String):Number {
+			return /* @:cast */ m_xml.getAttribute (__attr);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function itemGetAttributeInt (__attr:String):int {
+			return /* @:cast */ m_xml.getAttribute (__attr);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function itemGetAttributeBoolean (__attr:String):Boolean {
+			var __boolean:String = /* @:cast */ m_xml.getAttribute (__attr);	
+		
+			if (__boolean == "true" || __boolean == "1") {
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function setLayer (__layer:int):void {

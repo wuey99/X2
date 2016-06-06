@@ -452,7 +452,7 @@ package kx.xmap {
 				
 //				trace (": deserializeRowCol: ", m_col, m_row);
 
-				var __id:int = __xml.getAttribute ("id");
+				var __id:int = __xml.getAttributeInt ("id");
 				var __item:XMapItemModel = m_XMapLayer.ids ().get (__id);
 				
 				if (__item != null) {
@@ -465,8 +465,8 @@ package kx.xmap {
 
 				var __classNameToIndex:XReferenceNameToIndex = m_XMapLayer.getClassNames ();
 				
-				var __logicClassIndex:int = __xml.getAttribute ("logicClassIndex");
-				var __imageClassIndex:int = __xml.getAttribute ("imageClassIndex");
+				var __logicClassIndex:int = __xml.getAttributeInt ("logicClassIndex");
+				var __imageClassIndex:int = __xml.getAttributeInt ("imageClassIndex");
 				
 //				trace (": logicClassName: ", m_XMapLayer.getClassNameFromIndex (__logicClassIndex), __classNameToIndex.getReferenceNameCount (__logicClassIndex));
 //				trace (": imageClassName: ", m_XMapLayer.getClassNameFromIndex (__imageClassIndex),  __classNameToIndex.getReferenceNameCount (__imageClassIndex));
@@ -495,15 +495,15 @@ package kx.xmap {
 // __hasLogic
 					__xml.hasAttribute ("hasLogic") && __xml.getAttribute ("hasLogic") == "true" ? true : false,
 // __name, __id
-					__xml.getAttribute ("name"), __id,
+					__xml.getAttributeString ("name"), __id,
 // __imageClassName, __frame
-					m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __xml.getAttribute ("frame"),
+					m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __xml.getAttributeInt ("frame"),
 // XMapItem
 					__xml.hasAttribute ("XMapItem") ? __xml.getAttribute ("XMapItem") : "",
 // __x, __y,
-					__xml.getAttribute ("x"), __xml.getAttribute ("y"),
+					__xml.getAttributeFloat ("x"), __xml.getAttributeFloat ("y"),
 // __scale, __rotation, __depth
-					__xml.getAttribute ("scale"), __xml.getAttribute ("rotation"), __xml.getAttribute ("depth"),
+					__xml.getAttributeFloat ("scale"), __xml.getAttributeFloat ("rotation"), __xml.getAttributeFloat ("depth"),
 // __collisionRect,
 					__collisionRect,
 // __boundingRect,

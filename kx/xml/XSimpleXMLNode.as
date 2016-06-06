@@ -260,19 +260,32 @@ package kx.xml {
 		}
 		
 //-----------------------------------------------------------------------------------------
-		public function getAttributeFloat (__name:String):Number /* <Float> */ {
+		public function getAttributeFloat (__name:String):Number {
 			return /* @:cast */ XType.parseFloat_ (m_attribsMap.get (__name));
 		}
 
 //-----------------------------------------------------------------------------------------
-		public function getAttributeInt (__name:String):int /* <Int> */ {
+		public function getAttributeInt (__name:String):int {
 			return /* @:cast */ XType.parseInt (m_attribsMap.get (__name));
 		}
 		
 //-----------------------------------------------------------------------------------------
-		public function getAttributeString (__name:String):int /* <String> */ {
+		public function getAttributeString (__name:String):String {
 			return /* @:cast */ m_attribsMap.get (__name);
 		}
+		
+//-----------------------------------------------------------------------------------------
+		public function getAttributeBoolean (__name:String):Boolean {
+			var __boolean:String = getAttributeString (__name);
+			
+			if (__boolean == "true" || __boolean == "1") {
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}		
 		
 //------------------------------------------------------------------------------------------
 		public function getText ():String {

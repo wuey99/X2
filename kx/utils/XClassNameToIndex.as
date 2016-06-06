@@ -169,8 +169,8 @@ package kx.utils {
 			var __count:int;
 			
 			for (i=0; i<__xmlList.length; i++) {
-				__name = __xmlList[i].getAttribute ("name");
-				__count = __xmlList[i].getAttribute ("count");
+				__name = __xmlList[i].getAttributeString ("name");
+				__count = __xmlList[i].getAttributeInt ("count");
 				
 				trace (": XClassNameToIndex: deserialize: ", __name, __count);
 				

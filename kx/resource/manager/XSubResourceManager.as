@@ -593,7 +593,7 @@ package kx.resource.manager {
 					var __classList:XMLList = __xmlList[i].child ("classX");
 					
 					for (j=0; j<__classList.length (); j++) {						
-						m_cachedClassName.set (__classList[j].getAttribute ("name"), __xmlList[i]);
+						m_cachedClassName.set (__classList[j].getAttributeString ("name"), __xmlList[i]);
 					}	
 				}
 			}
