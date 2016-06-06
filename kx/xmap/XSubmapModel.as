@@ -474,8 +474,19 @@ package kx.xmap {
 				var __collisionRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
 				var __boundingRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
 				
-				__collisionRect.setRect (__xml.getAttribute ("cx"), __xml.getAttribute ("cy"), __xml.getAttribute ("cw"), __xml.getAttribute ("ch"));
-				__boundingRect.setRect (__xml.getAttribute ("bx"), __xml.getAttribute ("by"), __xml.getAttribute ("bw"), __xml.getAttribute ("bh"));
+				__collisionRect.setRect (
+					__xml.getAttributeFloat ("cx"),
+					__xml.getAttributeFloat ("cy"),
+					__xml.getAttributeFloat ("cw"),
+					__xml.getAttributeFloat ("ch")
+				);
+				
+				__boundingRect.setRect (
+					__xml.getAttributeFloat ("bx"),
+					__xml.getAttributeFloat ("by"),
+					__xml.getAttributeFloat ("bw"),
+					__xml.getAttributeFloat ("bh")
+				);
 					
 				__item.setup (
 					m_XMapLayer,

@@ -199,6 +199,18 @@ package kx.type {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public static function parseFloat_ (__val:String):Number {
+			// <HAXE>
+			/* --
+			return Std.parseFloat (__val);
+			-- */
+			// </HAXE>
+			// <AS3>
+			return parseFloat (__val);
+			// </AS3>;
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public static function hasField (__map:*, __key:String):Boolean {
 			// <HAXE>
 			/* --

@@ -28,6 +28,7 @@
 package kx.xml {
 
 	import kx.collections.*;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------
 // http://try.haxe.org/#37419
@@ -256,6 +257,21 @@ package kx.xml {
 //-----------------------------------------------------------------------------------------
 		public function getAttribute (__name:String):* {
 			return m_attribsMap.get (__name);
+		}
+		
+//-----------------------------------------------------------------------------------------
+		public function getAttributeFloat (__name:String):Number /* <Float> */ {
+			return /* @:cast */ XType.parseFloat_ (m_attribsMap.get (__name));
+		}
+
+//-----------------------------------------------------------------------------------------
+		public function getAttributeInt (__name:String):int /* <Int> */ {
+			return /* @:cast */ XType.parseInt (m_attribsMap.get (__name));
+		}
+		
+//-----------------------------------------------------------------------------------------
+		public function getAttributeString (__name:String):int /* <String> */ {
+			return /* @:cast */ m_attribsMap.get (__name);
 		}
 		
 //------------------------------------------------------------------------------------------
