@@ -81,6 +81,8 @@ package kx.geom {
 		}
 
 		public function set a (__val:Number): /* @:set_type */ void {
+			m_a = __val;
+			
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -93,6 +95,8 @@ package kx.geom {
 		}
 		
 		public function set b (__val:Number): /* @:set_type */ void {
+			m_b = __val;
+			
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -105,6 +109,8 @@ package kx.geom {
 		}
 						
 		public function set c (__val:Number): /* @:set_type */ void {
+			m_c = __val;
+			
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -117,6 +123,8 @@ package kx.geom {
 		}
 		
 		public function set d (__val:Number): /* @:set_type */ void {
+			m_d = __val;
+			
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -129,6 +137,8 @@ package kx.geom {
 		}
 
 		public function set tx (__val:Number): /* @:set_type */ void {
+			m_tx = __val;
+			
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -141,6 +151,8 @@ package kx.geom {
 		}
 				
 		public function set ty (__val:Number): /* @:set_type */ void {
+			m_ty = __val;
+			
 			/* @:set_return 0; */			
 		}
 		/* @:end */
@@ -195,6 +207,26 @@ package kx.geom {
 			return this;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function append (__m:XMatrix):XMatrix {
+			var __a:Number = m_a;
+			var __b:Number = m_b;
+			var __c:Number = m_c;
+			var __d:Number = m_d;
+			var __tx:Number = m_tx;
+			var __ty:Number = m_ty;
+			
+			m_a = __m.a * __a + __m.b * __c;
+			m_b = __m.a * __b + __m.b * __d;
+			m_c = __m.c * __a + __m.d * __c;
+			m_d = __m.c * __b + __m.d * __d;
+			
+			m_tx = __m.tx * __a + __m.ty * __c + m_tx;
+			m_ty = __m.tx * __b + __m.ty * __d + m_ty;
+			
+			return this;			
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function invert ():void {
 			var __a:Number = m_a;
