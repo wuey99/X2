@@ -48,7 +48,7 @@ package kx.texture.starling {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getTexture(name:String):Texture {
+		public function getTexture (name:String):Texture {
 			return null;
 		}
 		
