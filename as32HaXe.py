@@ -912,7 +912,7 @@ class Update(object):
 				if self._getterSetterOverride:
 					flash = flash.replace(self._getterSetterType + " {", "Void {")
 
-			final = line.replace(windows, "#if windows " + windows + " #else " + flash + " #end")
+			final = line.replace(windows, "#if (windows || html5) " + windows + " #else " + flash + " #end")
 
 			print ": =================================>: ", windows
 			print ": =================================>: ", flash
@@ -955,7 +955,7 @@ class Update(object):
 			if not self._getterSetterOverride:
 				line = line.replace("/* @:set_return " + returnValue + "; */", "return " + returnValue + ";")
 			else:
-				line = line.replace("/* @:set_return " + returnValue + "; */", "#if windows return " + returnValue + "; #end")
+				line = line.replace("/* @:set_return " + returnValue + "; */", "#if (windows || html5) return " + returnValue + "; #end")
 
 			if not self._getterSetterOverride2:
 				line = cleanupOverride2B(line)
@@ -1253,7 +1253,7 @@ class Update(object):
 
 		line = self.convertImports(line)
 		line = self.convertErrors(line)
-		line = self.convertTraces(line)
+#		line = self.convertTraces(line)
 		line = self.convertPlusSigns(line)
 		line = self.convertExtendsObject(line)
 		line = self.convertXLogicObjectSetup(line)
