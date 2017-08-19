@@ -199,44 +199,7 @@ package kx.world {
 				mouseEnabled = true;
 				mouseChildren = true;
 			}
-			
-			if (CONFIG::flash) {
-				addEventListener (Event.ENTER_FRAME, onFPSCounter);
-			}
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			else
-			{
-				addEventListener (EnterFrameEvent.ENTER_FRAME, onFPSCounterStarling);
-			}
-			// </AS3>
-			
-			if (__timerInterval > 0) {
-				// Add event for main loop
-				m_timer = new Timer (__timerInterval, 0);
-				m_timer.start ();
-				m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
-			}
-			else
-			{
-				if (CONFIG::flash) {
-					addEventListener (Event.ENTER_FRAME, onEnterFrame);		
-				}
-				// <HAXE>
-				/* --
-				-- */
-				// </HAXE>
-				// <AS3>
-				else
-				{
-					addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrame);
-				}
-				// </AS3>
-			}
-			
+						
 			m_inuse_ENTER_FRAME = 0;
 			m_frameCount = 0;
 			m_FPS = 0;
@@ -342,6 +305,43 @@ package kx.world {
 			// </AS3>
 			
 //			setupDebug ();
+			
+			if (CONFIG::flash) {
+				addEventListener (Event.ENTER_FRAME, onFPSCounter);
+			}
+				// <HAXE>
+				/* --
+				-- */
+				// </HAXE>
+				// <AS3>
+			else
+			{
+				addEventListener (EnterFrameEvent.ENTER_FRAME, onFPSCounterStarling);
+			}
+			// </AS3>
+			
+			if (__timerInterval > 0) {
+				// Add event for main loop
+				m_timer = new Timer (__timerInterval, 0);
+				m_timer.start ();
+				m_timer.addEventListener (TimerEvent.TIMER, onEnterFrame);
+			}
+			else
+			{
+				if (CONFIG::flash) {
+					addEventListener (Event.ENTER_FRAME, onEnterFrame);		
+				}
+					// <HAXE>
+					/* --
+					-- */
+					// </HAXE>
+					// <AS3>
+				else
+				{
+					addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrame);
+				}
+				// </AS3>
+			}
 		}
 
 //------------------------------------------------------------------------------------------
@@ -681,19 +681,19 @@ package kx.world {
 			getXTaskManager ().addTask ([
 				XTask.WAIT, 0x0100,
 				
-				function ():void {
-					getFlashStage ().addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
-					getFlashStage ().addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
-					getFlashStage ().addEventListener (Event.ACTIVATE, onFocusInEvent);
-					getFlashStage ().addEventListener (Event.DEACTIVATE, onFocusOutEvent);
-				},
-				
 				XTask.LABEL, "wait",
 					XTask.WAIT, 0x0100,
 	
 					XTask.FLAGS, function (__task:XTask):void {
 						__task.ifTrue (getFlashStage () != null);			
 					}, XTask.BNE, "wait",
+	
+				function ():void {
+					getFlashStage ().addEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
+					getFlashStage ().addEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
+					getFlashStage ().addEventListener (Event.ACTIVATE, onFocusInEvent);
+					getFlashStage ().addEventListener (Event.DEACTIVATE, onFocusOutEvent);
+				},
 					
 				function ():void {
 					// xxx.getParent ().stage.addEventListener (xxx.MOUSE_OVER, onMouseOver);
