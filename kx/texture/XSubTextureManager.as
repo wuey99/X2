@@ -55,9 +55,6 @@ package kx.texture {
 		protected var m_XApp:XApp;
 		
 		protected var m_movieClips:XDict; // <String, Array<Dynamic>>
-		 
-		protected var m_atlases:Array; // <TextureAtlas>
-		protected var m_currentAtlas:TextureAtlas;
 		
 		protected var m_packer:MaxRectPacker;
 		
@@ -139,21 +136,7 @@ package kx.texture {
 		
 		//------------------------------------------------------------------------------------------
 		public function movieClipExists (__className:String):Boolean {
-			if (m_movieClips.exists (__className)) {
-				var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
-				
-				if (__movieClipMetadata.length == 0) {
-					return false;
-				}		
-				else
-				{
-					return true;
-				}
-			}
-			else
-			{
-				return false;
-			}
+			return false;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -161,42 +144,8 @@ package kx.texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createMovieClip (__className:String):starling.display.MovieClip {
-			if (!isQueued (__className)) {
-				return null;
-			}
-			
-			var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
-			
-			if (__movieClipMetadata.length == 0) {
-				return null;
-			}
-			
-			var __rect:Rectangle = __movieClipMetadata[0] as Rectangle;
-			var __pivotX:Number = __rect.x; 
-			var __pivotY:Number = __rect.y;
-			
-			var __textures:Vector.<Texture> = new Vector.<Texture> ();
-			var __atlas:TextureAtlas;
-			
-			for (var i:int=1; i<=__movieClipMetadata.length-1; i++) {
-				__atlas = __movieClipMetadata[i] as TextureAtlas;
-				 
-				__textures = __textures.concat (__atlas.getTextures (__className));
-			}
-
-			// <HAXE>
-			/* --
-			var __movieClip:MovieClip = new MovieClip ();
-			-- */
-			// </HAXE>
-			// <AS3>
-			var __movieClip:MovieClip = new MovieClip (__textures);
-			__movieClip.pivotX = -__rect.x;
-			__movieClip.pivotY = -__rect.y;
-			// </AS3>
-			
-			return __movieClip;
+		public function createMovieClip (__className:String):* /* <Dynamic> */ {
+			return null;
 		}
 
 		//------------------------------------------------------------------------------------------

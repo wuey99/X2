@@ -52,7 +52,7 @@ package kx.texture {
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
-	public class XDynamicSubTextureManager extends XSubTextureManager {
+	public class XDynamicSubTextureManager extends XStarlingSubTextureManager {
 		protected var m_textures:Array; // <RenderTexture>
 		protected var m_currentTexture:RenderTexture;
 		
