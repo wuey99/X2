@@ -1,7 +1,7 @@
 package kx.texture {
-	import kx.type.*;
-	
 	import flash.geom.Rectangle;
+	
+	import kx.type.*;
 	
 	/*
 	Implements different bin packer algorithms that use the MAXRECTS data structure.
@@ -37,6 +37,14 @@ package kx.texture {
 //			freeRectangles = new <Rectangle>[];
 			freeRectangles = new Vector.<Rectangle> ();
 			freeRectangles.push(new Rectangle(0, 0, width, height));
+		}
+		
+		public function copyFrom(fromFreeRectangles:Vector.<Rectangle>):void {
+			freeRectangles = new Vector.<Rectangle> ();
+			
+			for (var i:int = 0; i < fromFreeRectangles.length; i++) {
+				freeRectangles.push(fromFreeRectangles[i]);
+			}
 		}
 		
 		public function quickInsert(width:Number, height:Number):Rectangle {

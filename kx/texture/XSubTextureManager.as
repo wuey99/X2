@@ -56,8 +56,6 @@ package kx.texture {
 		
 		protected var m_movieClips:XDict; // <String, Array<Dynamic>>
 		
-		protected var m_packer:MaxRectPacker;
-		
 		protected var TEXTURE_WIDTH:int = 2048;
 		protected var TEXTURE_HEIGHT:int = 2048;
 			

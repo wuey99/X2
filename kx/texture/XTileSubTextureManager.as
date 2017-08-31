@@ -28,20 +28,21 @@
 package kx.texture {
 	
 	// X classes
-	import kx.collections.*;
-	import kx.task.*;
-	import kx.type.*;
-	import kx.world.sprite.*;
-	import kx.XApp;
-	import kx.texture.MaxRectPacker;
-	import kx.xml.*;
-	
 	import flash.display.BitmapData;
 	import flash.geom.*;
-
+	
+	import kx.XApp;
+	import kx.collections.*;
+	import kx.task.*;
+	import kx.texture.MaxRectPacker;
+	import kx.type.*;
+	import kx.world.sprite.*;
+	import kx.xml.*;
+	
 	// <HAXE>
 	/* --
 	import kx.texture.starling.*;
+	import openfl.display.*;
 	-- */
 	// </HAXE>
 	// <AS3>
@@ -49,12 +50,19 @@ package kx.texture {
 	import starling.textures.*;
 	// </AS3>
 	
+	
 	//------------------------------------------------------------------------------------------
 	// this class takes one or more flash.display.MovieClip's and dynamically creates HaXe/OpenFl texture/atlases
 	//------------------------------------------------------------------------------------------
 	public class XTileSubTextureManager extends XSubTextureManager {
+		protected var m_testers:Array; // <MaxRectPacker>
+		protected var m_packers:Array; // <MaxRectPacker>
+		protected var m_tilesets:Array; // <Tileset>
+		
+		protected var m_currentTester:MaxRectPacker;
+		protected var m_currentPacker:MaxRectPacker;
 		protected var m_currentBitmap:BitmapData;
-		protected var m_currentAtlasText:String;
+		protected var m_currentIndex:int;
 		
 		//------------------------------------------------------------------------------------------
 		public function XTileSubTextureManager (__XApp:XApp, __width:int=2048, __height:int=2048) {
@@ -63,18 +71,6 @@ package kx.texture {
 		
 		//------------------------------------------------------------------------------------------
 		public override function reset ():void {
-			var i:int;
-			
-			if (m_currentBitmap != null) {
-				m_currentBitmap.dispose ();	
-				m_currentBitmap = null;
-			}
-			
-			if (m_atlases != null) {				
-				for (i=0; i<m_atlases.length; i++) {
-					m_atlases[i].dispose ();
-				}
-			}
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -82,7 +78,9 @@ package kx.texture {
 			reset ();
 			
 			m_movieClips = new XDict ();  // <String, Array<Dynamic>>
-			m_atlases = new Array (); // <TextureAtlas>
+			m_testers = new Array (); // <MaxRectPacker>
+			m_packers = new Array (); // <MaxRectPacker>
+			m_tilesets = new Array (); // <Tileset>
 			
 			__begin ();
 		}
@@ -96,16 +94,6 @@ package kx.texture {
 					var __className:String = x as String;
 					
 					var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
-					
-					for (var i:int = 0; i < m_atlases.length; i++) {
-						var __atlas:TextureAtlas = m_atlases[i] as TextureAtlas;
-						
-						var __textures:Vector.<Texture> = __atlas.getTextures (__className);
-						
-						if (__textures.length > 0) {
-							__movieClipMetadata.push (__atlas);
-						}
-					}
 				}
 			);	
 		}
@@ -135,16 +123,7 @@ package kx.texture {
 		//------------------------------------------------------------------------------------------
 		public override function movieClipExists (__className:String):Boolean {
 			if (m_movieClips.exists (__className)) {
-				var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
-				
-				if (__movieClipMetadata.length == 0) {
-					return false;
-				}		
-				else
-				{
-					return true;
-				}
-			}
+				return true;
 			else
 			{
 				return false;
@@ -189,6 +168,56 @@ package kx.texture {
 			
 			return __movieClip;
 		}
+
+		//------------------------------------------------------------------------------------------
+		protected function findFreeTexture (__movieClip:flash.display.MovieClip):int {
+			var __scaleX:Number = 1.0;
+			var __scaleY:Number = 1.0;
+			var __padding:Number = 2.0;
+			var __rect:Rectangle = null;
+			var __realBounds:Rectangle = null;
+			
+			var __found:Boolean;
+			
+			var t:int;
+			
+			for (t=0; t < m_count; t++) {
+				var __tester:MaxRectPacker = m_testers[t] as MaxRectPacker;
+				var __packer:MaxRectPacker = m_packers[t] as MaxRectPacker;
+				
+				__tester.copyFrom(__packer.freeRectangles);
+			
+				__free = true;
+				
+				var i:int;
+				
+				for (i=0; i<__movieClip.totalFrames; i++) {
+					__movieClip.gotoAndStop (i+1);
+					
+					__realBounds = __getRealBounds (__movieClip);
+					
+					__rect = __tester.quickInsert (
+						(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
+					);
+					
+					if (__rect == null) {
+						__free = false;
+						
+						break;
+					}
+				}
+				
+				if (__free) {
+					return t;
+					
+					return;
+				}
+			}
+			
+			__end (); __begin ();
+			
+			return m_count;
+		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function createTexture (__className:String, __class:Class /* <Dynamic> */):void {	
@@ -202,7 +231,15 @@ package kx.texture {
 
 			var i:int;
 			
-			trace (": XStaticSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
+			trace (": XTileSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
+			
+			var __index = findFreeTexture (__movieClip);
+			
+			m_currentPacker = m_packers[__index] as MaxRectPacker;
+			
+			var __movieClipMetadata:Array /* <Dynamic> */ = new Array (); // <Dynamic>
+			__movieClipMetadata.push(__index)
+			__movieClipMetadata.push (null /* __realBounds */);
 			
 			for (i=0; i<__movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
@@ -211,20 +248,10 @@ package kx.texture {
 				
 				__realBounds = __getRealBounds (__movieClip);
 				
-				__rect = m_packer.quickInsert (
+				__rect = m_currentPacker.quickInsert (
 					(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
 				);
 				
-				if (__rect == null) {
-					trace (": split @: ", m_count, __className, i);
-					
-					__end (); __begin ();
-					
-					__rect = m_packer.quickInsert (
-						(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
-					);
-				}
-
 				__rect.x += __padding;
 				__rect.y += __padding;
 				__rect.width -= __padding * 2;
@@ -232,55 +259,27 @@ package kx.texture {
 				
 				trace (": rect: ", __rect);
 				
-				var __matrix:Matrix = new Matrix ();
-				__matrix.scale (__scaleX, __scaleY);
-				__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y);
-				m_currentBitmap.draw (__movieClip, __matrix);
-				
-				var __subText:String = '<SubTexture name="'+__className+'_' + __generateIndex (i) + '" ' +
-					'x="'+__rect.x+'" y="'+__rect.y+'" width="'+__rect.width+'" height="'+__rect.height+'" frameX="0" frameY="0" ' +
-					'frameWidth="'+__rect.width+'" frameHeight="'+__rect.height+'"/>';
-				
-				m_currentAtlasText = m_currentAtlasText + __subText;
+				__movieClipMetadata.push (__rect);
 			}
-
-			var __movieClipMetadata:Array /* <Rectangle> */ = new Array (); // <Rectangle>
-			__movieClipMetadata.push (__realBounds);
 			
 			m_movieClips.set (__className, __movieClipMetadata);
 		}	
 		
 		//------------------------------------------------------------------------------------------
 		protected override function __begin ():void {
-			var __rect:Rectangle = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			m_currentBitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			m_currentBitmap.fillRect (__rect, 0x00000000);
-			
-			m_packer = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);
-			
-			m_currentAtlasText = "";
+			var __tester:MaxRectPacker = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);			
+			var __packer:MaxRectPacker = new MaxRectPacker (TEXTURE_WIDTH, TEXTURE_HEIGHT);
+
+			m_testers[m_count] = __tester;
+			m_packers[m_count] = __packer;
 			
 			m_count++;
 			
-			trace (": XStaticSubTextureManager: count: ", m_count);
+			trace (": XTileSubTextureManager: count: ", m_count);
 		}
 		
 		//------------------------------------------------------------------------------------------
-		protected override function __end ():void {
-			if (m_currentBitmap != null) {
-				m_currentAtlasText = '<TextureAtlas imagePath="atlas.png">' + m_currentAtlasText + "</TextureAtlas>";
-				var __atlasXML:XML = new XML (m_currentAtlasText);
-				
-				trace (": atlasXML: ", m_currentAtlasText);
-				
-				var __texture:Texture = Texture.fromBitmapData (m_currentBitmap, false);
-				var __atlas:TextureAtlas = new TextureAtlas (__texture, __atlasXML);
-
-				m_atlases.push (__atlas);
-				
-				m_currentBitmap.dispose ();
-				m_currentBitmap = null;
-			}			
+		protected override function __end ():void {	
 		}
 		
 	//------------------------------------------------------------------------------------------
