@@ -38,7 +38,6 @@ package kx.texture {
 	
 	// <HAXE>
 	/* --
-	import kx.texture.starling.*;
 	-- */
 	// </HAXE>
 	// <AS3>
@@ -71,7 +70,7 @@ package kx.texture {
 
 		//------------------------------------------------------------------------------------------
 		public function createSubManager (__name:String, __width:int=2048, __height:int=2048):XSubTextureManager {
-			var __subManager:XSubTextureManager = new XStaticSubTextureManager (m_XApp, __width, __height);
+			var __subManager:XSubTextureManager = new XTileSubTextureManager (m_XApp, __width, __height);
 			m_subManagers.set (__name, __subManager);
 			
 			return __subManager;
@@ -113,10 +112,18 @@ package kx.texture {
 		// to create the MovieClip to.  Currently, it'll always use the first one.  It might
 		// make sense to only support one dynamic texture manager?
 		//------------------------------------------------------------------------------------------
+		// <HAXE>
+		/* --
+		public function createMovieClip (__className:String):Tilemap {
+			return null;
+		}
+		-- */
+		// </HAXE>
+		// <AS3>
 		public function createMovieClip (__className:String):starling.display.MovieClip {
 			var __movieClip:starling.display.MovieClip = null;
 			
-			var __dynamicSubManagers:Array /* <XSubTextureManager> */ = new Array ();
+			var __dynamicSubManagers:Array /* <XSubTextureManager> */ = new Array (); /* <XSubTextureManager> */
 			
 // look for texture in static managers first
 			m_subManagers.forEach (
@@ -158,6 +165,7 @@ package kx.texture {
 			
 			return __movieClip;
 		}
+		// </AS3>
 		
 	//------------------------------------------------------------------------------------------
 	}
