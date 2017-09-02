@@ -32,7 +32,6 @@ package kx.texture {
 	import flash.display.BitmapData;
 	import flash.geom.*;
 	
-	// X classes	
 	import kx.XApp;
 	import kx.collections.*;
 	import kx.task.*;
@@ -40,7 +39,7 @@ package kx.texture {
 	import kx.type.*;
 	import kx.world.sprite.*;
 	import kx.xml.*;
-	
+
 	// <HAXE>
 	/* --
 	-- */
@@ -118,7 +117,7 @@ package kx.texture {
 						if (__index == m_currentBitmapIndex) {
 							for (i=0; i<__movieClip.totalFrames; i++) {
 								__movieClip.gotoAndStop (i+1);
-								__rect = __movieClipMetadata[5 + i] as Rectangle;
+								__rect = __movieClipMetadata[5 + i * 2 + 1] as Rectangle;
 								var __matrix:Matrix = new Matrix ();
 								__matrix.scale (__scaleX, __scaleY);
 								__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y);
@@ -132,12 +131,15 @@ package kx.texture {
 				var __tileset:Tileset = new Tileset (m_currentBitmap);
 				var __tileId:int;
 				
-				m_tilesets.push(__tileset);
+				m_tilesets.push (__tileset);
 				
 				//------------------------------------------------------------------------------------------
 				m_movieClips.forEach (
 					function (x:*):void {
 						var __className:String = x as String;
+						
+						trace (": ===================================================: ");
+						trace (": finishing: ", __className);
 						
 						var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
 						
@@ -146,18 +148,27 @@ package kx.texture {
 						__movieClip = __movieClipMetadata[2] as flash.display.MovieClip;
 						__realBounds = __movieClipMetadata[4] as Rectangle;
 						
+						trace (": index: ", __index);
+						trace (": tileset: ", __tileset);
+						trace (": movieClip: ", __movieClip);
+						trace (": realBounds: ", __realBounds);
+						
 						if (__index == m_currentBitmapIndex) {
 							for (i = 0; i < __movieClip.totalFrames; i++) {
-								__rect = __movieClipMetadata[5 + i] as Rectangle;
+								__rect = __movieClipMetadata[5 + i * 2 + 1] as Rectangle;
 								__tileId = __tileset.addRect (__rect);
-								__movieClipMetadata[5 + i] = __tileId;
+								__movieClipMetadata[5 + i * 2 + 0] = __tileId;
+								
+								trace (":    frame: ", i);
+								trace (":    tileId: ", __tileId);
+								trace (":    rect: ", __rect);
 							}
 						}
 					}
 				);	
 				
 				//------------------------------------------------------------------------------------------
-				m_currentBitmap.dispose ();
+//				m_currentBitmap.dispose ();
 			}
 		}
 		
@@ -202,24 +213,31 @@ package kx.texture {
 			
 			var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
 			
-			var __tileset:Tileset =__movieClipMetadata[1] as Tileset;
+			var __tileset:Tileset = __movieClipMetadata[1] as Tileset;
 			var __frames:int = __movieClipMetadata[3] as int;
 			var __realBounds:Rectangle = __movieClipMetadata[4] as Rectangle;
 			
-			var __movieClip:Tilemap = new Tilemap (__realBounds.width, __realBounds.height, __tileset);
+			var __tileMap:Tilemap = new Tilemap (int (__realBounds.width), int (__realBounds.height), __tileset);
 			
 			var i:int;
 			
 			var __tileId:int;
 			var __tile:Tile;
+			var __rect:Rectangle;
 			
 			for (i = 0; i < __frames; i++) {
-				__tileId = __movieClipMetadata[5 + i] as int;
+				__rect = __movieClipMetadata[5 + i * 2 + 1] as Rectangle;
+				__tileId = __movieClipMetadata[5 + i * 2 + 0] as int;
 				
 				__tile = new Tile (__tileId, 0, 0, 1.0, 1.0, 0.0);
 				
-				__movieClip.addTileAt (__tile, i);
+				__tileMap.addTileAt (__tile, i);
 			}
+			
+			var __movieClip:MovieClip = new MovieClip ();
+			__tileMap.x = __realBounds.x;
+			__tileMap.y = __realBounds.y;
+			__movieClip.addChild (__tileMap);
 			
 			return __movieClip;
 		}
@@ -240,7 +258,7 @@ package kx.texture {
 				var __tester:MaxRectPacker = m_testers[__index] as MaxRectPacker;
 				var __packer:MaxRectPacker = m_packers[__index] as MaxRectPacker;
 				
-				__tester.copyFrom(__packer.freeRectangles);
+				__tester.copyFrom (__packer.freeRectangles);
 			
 				__free = true;
 				
@@ -264,8 +282,6 @@ package kx.texture {
 				
 				if (__free) {
 					return __index;
-					
-					return;
 				}
 			}
 			
@@ -288,7 +304,7 @@ package kx.texture {
 			
 			trace (": XTileSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
 			
-			var __index = findFreeTexture (__movieClip);
+			var __index:int = findFreeTexture (__movieClip);
 			
 			m_currentPacker = m_packers[__index] as MaxRectPacker;
 			
@@ -317,8 +333,11 @@ package kx.texture {
 				
 				trace (": rect: ", __rect);
 				
+				__movieClipMetadata.push (0);
 				__movieClipMetadata.push (__rect);
 			}
+			
+			__movieClipMetadata[4] = __realBounds;
 			
 			m_movieClips.set (__className, __movieClipMetadata);
 		}	
