@@ -27,24 +27,196 @@
 //------------------------------------------------------------------------------------------
 package kx.world.sprite {
 	
+	// X classes
+	import kx.*;
+	import kx.collections.*;
+	import kx.bitmap.*;
+	import kx.geom.*;
+	import kx.task.*;
+	import kx.world.*;
+	import kx.world.logic.*;
+	import kx.texture.*;
+	
 	// flash classes
 	import flash.display.*;
 	import flash.geom.*;
 	
-	//------------------------------------------------------------------------------------------	
-	public class XTilemap extends Sprite {
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
+	import kx.texture.openfl.*;
+	// </AS3>
 	
+	//------------------------------------------------------------------------------------------	
+	public class XTilemap extends Sprite implements XRegistration {
+		public var m_className:String;
+		public var m_frame:int;
+		public var m_scale:Number;
+		public var m_visible:Boolean;
+		public var m_pos:XPoint;
+		public var m_rect:XRect;
+		public var theParent:*;
+		public var rp:XPoint;
+		public static var g_XApp:XApp;
+		
+		//------------------------------------------------------------------------------------------
+		include "..\\Sprite\\XRegistration_impl.h";
+				
 		//------------------------------------------------------------------------------------------
 		public function XTilemap () {
 			super ();
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function gotoAndPlay (_frameNumber:int):void {
+		public function setup ():void {
+			m_pos = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
+			m_rect = g_XApp.getXRectPoolManager ().borrowObject () as XRect;
+			rp = g_XApp.getXPointPoolManager ().borrowObject () as XPoint;
+			
+			setRegistration ();
+			
+			m_scale = 1.0;
+			m_visible = true;
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function gotoAndStop (_frameNumber:int):void {
+		public function cleanup ():void {
+			g_XApp.getXPointPoolManager ().returnObject (m_pos);
+			g_XApp.getXPointPoolManager ().returnObject (m_rect);
+			g_XApp.getXPointPoolManager ().returnObject (rp);	
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public static function setXApp (__XApp:XApp):void {
+			g_XApp = __XApp;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
+			var __movieClip:Sprite;
+			
+			m_className = __className;
+			
+			var __taskManager:XTaskManager =
+				__xxx != null ? __xxx.getXTaskManager () : __XApp.getXTaskManager ();
+			
+			var __textureManager:XTextureManager =
+				__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
+				
+			__movieClip = __textureManager.createMovieClip (__className) as Sprite;
+				
+			if (__movieClip == null) {
+				__taskManager.addTask ([
+					XTask.LABEL, "loop",
+						XTask.WAIT, 0x0100,
+							
+						XTask.FLAGS, function (__task:XTask):void {
+							__movieClip = __textureManager.createMovieClip (__className) as Sprite;
+								
+							__task.ifTrue (__movieClip != null);
+						}, XTask.BNE, "loop",
+							
+						function ():void {
+//							initWithMovieClip (__movieClip);
+								
+							gotoAndStop (1);
+						},
+						
+					XTask.RETN,
+				]);
+					
+				return;
+			}
+			
+//			initWithMovieClip (__movieClip);
+			
+			gotoAndStop (1);	
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function gotoAndStop (__frame:int):void {
+			__goto (__frame);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		private function __goto (__frame:int):void {
+			m_frame = __frame-1;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		/* @:get, set dx Float */
+		
+		public function get dx ():Number {
+			return 0;
+		}
+		
+		public function set dx (__val:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+		//------------------------------------------------------------------------------------------
+		/* @:get, set dy Float */
+		
+		public function get dy ():Number {
+			return 0;
+		}
+		
+		public function set dy (__val:Number): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+		//------------------------------------------------------------------------------------------
+		public function viewPort (__canvasWidth:Number, __canvasHeight:Number):XRect {
+			m_rect.x = -x/m_scale;
+			m_rect.y = -y/m_scale;
+			m_rect.width = __canvasWidth/m_scale;
+			m_rect.height = __canvasHeight/m_scale;
+			
+			return m_rect;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getPos ():XPoint {
+			m_pos.x = x2;
+			m_pos.y = y2;
+			
+			return m_pos;
+		}
+		
+		//------------------------------------------------------------------------------------------		
+		public function setPos (__p:XPoint):void {
+			x2 = __p.x;
+			y2 = __p.y;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function setScale (__scale:Number):void {
+			m_scale = __scale;
+			
+			scaleX2 = __scale;
+			scaleY2 = __scale;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getScale ():Number {
+			return m_scale;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		/* @:get, set visible2 Bool */
+		
+		public function get visible2 ():Boolean {
+			return m_visible;
+		}
+		
+		public function set visible2 (__visible:Boolean): /* @:set_type */ void {
+			m_visible = __visible;
+			
+			/* @:set_return __visible; */	
 		}
 	
 	//------------------------------------------------------------------------------------------	

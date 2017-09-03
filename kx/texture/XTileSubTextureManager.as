@@ -233,7 +233,7 @@ package kx.texture {
 				__tileMap.addTileAt (__tile, i);
 			}
 			
-			var __movieClip:XTilemap = new XTilemap ();
+			var __movieClip:Sprite = new Sprite ();
 			__tileMap.x = __realBounds.x;
 			__tileMap.y = __realBounds.y;
 			__movieClip.addChild (__tileMap);
