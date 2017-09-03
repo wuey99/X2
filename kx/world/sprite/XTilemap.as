@@ -51,8 +51,6 @@ package kx.world.sprite {
 	//------------------------------------------------------------------------------------------	
 	public class XTilemap extends Sprite implements XRegistration {
 		public var m_className:String;
-		public var m_tilemap:Tilemap;
-		public var m_tileArray:TileArray;
 		public var m_frame:int;
 		public var m_scale:Number;
 		public var m_visible:Boolean;
@@ -60,7 +58,11 @@ package kx.world.sprite {
 		public var m_rect:XRect;
 		public var theParent:*;
 		public var rp:XPoint;
+		
 		public static var g_XApp:XApp;
+		
+		public var m_tilemap:Tilemap;
+		public var m_tileArray:TileArray;
 		
 		//------------------------------------------------------------------------------------------
 		include "..\\Sprite\\XRegistration_impl.h";
