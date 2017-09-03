@@ -29,7 +29,6 @@ package kx.texture {
 	
 	// flash classes
 	import flash.display.*;
-	import flash.display.BitmapData;
 	import flash.geom.*;
 	
 	import kx.XApp;
@@ -234,7 +233,7 @@ package kx.texture {
 				__tileMap.addTileAt (__tile, i);
 			}
 			
-			var __movieClip:MovieClip = new MovieClip ();
+			var __movieClip:XTilemap = new XTilemap ();
 			__tileMap.x = __realBounds.x;
 			__tileMap.y = __realBounds.y;
 			__movieClip.addChild (__tileMap);

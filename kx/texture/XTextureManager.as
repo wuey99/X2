@@ -114,7 +114,7 @@ package kx.texture {
 		//------------------------------------------------------------------------------------------
 		// <HAXE>
 		/* --
-		public function createMovieClip (__className:String):Tilemap {
+		public function createMovieClip (__className:String):XTilemap {
 			return null;
 		}
 		-- */
