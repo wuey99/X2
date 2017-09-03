@@ -142,7 +142,7 @@ package kx.bitmap {
 			__XBitmap.setup ();
 			__XBitmap.initWithClassName (null, m_XApp, __className);
 		
-			trace (": adding bitmap: ", __movieClip, __XBitmap, __XBitmap.bitmapData);
+			trace (": adding bitmap: ", __movieClip, __XBitmap, __XBitmap.bitmap.bitmapData);
 	
 			m_bitmaps.set (__className, __XBitmap);
 			

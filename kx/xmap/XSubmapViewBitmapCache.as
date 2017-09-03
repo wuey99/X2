@@ -142,14 +142,14 @@ package kx.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function dictRefresh ():void {
-			m_bitmap.bitmapData.lock ();
+			m_bitmap.bitmap.bitmapData.lock ();
 	
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 
-			m_bitmap.bitmapData.fillRect (
+			m_bitmap.bitmap.bitmapData.fillRect (
 				tempRect, 0x00000000
 			);
 			
@@ -175,7 +175,7 @@ package kx.xmap {
 
 					__bitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
 
-					trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+					trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 					
 					if (__bitmap != null) {
 						if (__item.frame != 0) {
@@ -188,20 +188,20 @@ package kx.xmap {
 						tempRect.width = __item.boundingRect.width;
 						tempRect.height = __item.boundingRect.height;
 						
-						m_bitmap.bitmapData.copyPixels (
-							__bitmap.bitmapData, tempRect, tempPoint, null, null, true
+						m_bitmap.bitmap.bitmapData.copyPixels (
+							__bitmap.bitmap.bitmapData, tempRect, tempPoint, null, null, true
 						);
 					}
 				}
 			);
 							
-			m_bitmap.bitmapData.unlock ();
+			m_bitmap.bitmap.bitmapData.unlock ();
 			
 			function __vline (x:int):void {
 				var y:int;
 				
 				for (y=0; y<m_submapModel.height; y++) {
-					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
+					m_bitmap.bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
 				}
 			}
 			
@@ -209,21 +209,21 @@ package kx.xmap {
 				var x:int;
 				
 				for (x=0; x<m_submapModel.width; x++) {
-					m_bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
+					m_bitmap.bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
 				}
 			}
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function arrayRefresh ():void {
-			m_bitmap.bitmapData.lock ();
+			m_bitmap.bitmap.bitmapData.lock ();
 			
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 
-			m_bitmap.bitmapData.fillRect (
+			m_bitmap.bitmap.bitmapData.fillRect (
 				tempRect, 0x00000000
 			);
 			
@@ -239,14 +239,14 @@ package kx.xmap {
 			
 			var i:int, __length:int = __items.length;
 			
-			__dstBitmapData = m_bitmap.bitmapData;
+			__dstBitmapData = m_bitmap.bitmap.bitmapData;
 			
 			for (i=0; i<__length; i++) {
 				__item = __items[i];
 					
 				__srcBitmap = m_bitmapCacheManager.get (__item.imageClassName);
 					
-//				trace (": imageClassName: ", __item.imageClassName, __srcBitmap, __srcBitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+//				trace (": imageClassName: ", __item.imageClassName, __srcBitmap, __srcBitmap.bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
 					
 				if (__srcBitmap != null) {
 					if (__item.frame != 0) {
@@ -257,12 +257,12 @@ package kx.xmap {
 					tempPoint.y = __item.y - __submapY;
 
 					__dstBitmapData.copyPixels (
-						__srcBitmap.bitmapData, __item.boundingRect, tempPoint, null, null, true
+						__srcBitmap.bitmap.bitmapData, __item.boundingRect, tempPoint, null, null, true
 					);
 				}
 			}
 			
-			m_bitmap.bitmapData.unlock ();
+			m_bitmap.bitmap.bitmapData.unlock ();
 		}
 		
 //------------------------------------------------------------------------------------------

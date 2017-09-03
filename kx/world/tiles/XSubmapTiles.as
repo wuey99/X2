@@ -135,8 +135,8 @@ package kx.world.tiles {
 						tempPoint.x = __col << 4;
 						tempPoint.y = __row << 4;
 						
-						m_bitmap.bitmapData.copyPixels (
-							cx_bitmap.bitmapData, tempRect, tempPoint, null, null, true
+						m_bitmap.bitmap.bitmapData.copyPixels (
+							cx_bitmap.bitmap.bitmapData, tempRect, tempPoint, null, null, true
 						);
 					}
 				}
@@ -146,7 +146,7 @@ package kx.world.tiles {
 				var __y:int;
 				
 				for (__y=0; __y<__height; __y++) {
-					m_bitmap.bitmapData.setPixel32 (__x, __y, 0xffff00ff);
+					m_bitmap.bitmap.bitmapData.setPixel32 (__x, __y, 0xffff00ff);
 				}
 			}
 			
@@ -154,18 +154,18 @@ package kx.world.tiles {
 				var __x:int;
 				
 				for (x=0; __x<__width; __x++) {
-					m_bitmap.bitmapData.setPixel32 (__x, __y, 0xffff00ff);
+					m_bitmap.bitmap.bitmapData.setPixel32 (__x, __y, 0xffff00ff);
 				}
 			}
 			
-			m_bitmap.bitmapData.lock ();
+			m_bitmap.bitmap.bitmapData.lock ();
 			
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 			
-			m_bitmap.bitmapData.fillRect (
+			m_bitmap.bitmap.bitmapData.fillRect (
 				//				new XRect (0, 0, m_submapModel.width, m_submapModel.height), 0x00000000
 				tempRect, 0x00000000
 			);
@@ -177,7 +177,7 @@ package kx.world.tiles {
 			
 			__tiles ();
 			
-			m_bitmap.bitmapData.unlock ();
+			m_bitmap.bitmap.bitmapData.unlock ();
 		}
 		
 //------------------------------------------------------------------------------------------

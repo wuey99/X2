@@ -33,8 +33,8 @@ package kx.world.sprite {
 	
 	import kx.*;
 	import kx.bitmap.*;
-	import kx.pool.*;
 	import kx.geom.*;
+	import kx.pool.*;
 	import kx.task.*;
 	import kx.texture.*;
 	import kx.type.*;
@@ -43,7 +43,7 @@ package kx.world.sprite {
 	
 	//------------------------------------------------------------------------------------------	
 	public class XMovieClip extends XSprite {
-		public var m_bitmap:XBitmap;
+		public var m_bitmap:XSplat;
 		public var m_XApp:XApp;
 		
 		//------------------------------------------------------------------------------------------
@@ -55,7 +55,9 @@ package kx.world.sprite {
 		public override function setup ():void {
 			super.setup ();
 			
-			m_bitmap = new XBitmap ();
+			var __bitmap:XBitmap = new XBitmap ();
+			
+			m_bitmap = __bitmap as XSplat;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -86,17 +88,17 @@ package kx.world.sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getMovieClip ():XBitmap {
+		public function getMovieClip ():XSplat {
 			return m_bitmap;
 		}
 			
-		/* @:get, set movieclip XBitmap */
+		/* @:get, set movieclip XSplat */
 		
-		public function get movieclip ():XBitmap {
+		public function get movieclip ():XSplat {
 			return m_bitmap;
 		}
 		
-		public function set movieclip (__val:XBitmap): /* @:set_type */ void {
+		public function set movieclip (__val:XSplat): /* @:set_type */ void {
 			m_bitmap = __val;
 			
 			/* @:set_return __val; */			

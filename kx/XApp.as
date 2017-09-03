@@ -97,6 +97,7 @@ package kx {
 			XMapModel.setXApp (this);
 			XTask.setXApp (this);
 			XTilemap.setXApp (this);
+			XSplat.setXApp (this);
 			
 			m_frameRateScale = 1.0;
 			
