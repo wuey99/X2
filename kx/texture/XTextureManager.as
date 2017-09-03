@@ -114,22 +114,22 @@ package kx.texture {
 		//------------------------------------------------------------------------------------------
 		// <HAXE>
 		/* --
-		public function createMovieClip (__className:String):Sprite {
-			var __movieClip:Sprite = null;
+		public function createMovieClip (__className:String):* {
+			var __tilemap:Tilemap = null;
 		
 			var __dynamicSubManagers:Array<XSubTextureManager> = new Array<XSubTextureManager> ();
 			
 			for (__key__ in m_subManagers.keys ()) {
 				function (x:Dynamic):Void {
-					if (__movieClip == null) {
+					if (__tilemap == null) {
 						var __subManager:XSubTextureManager = m_subManagers.get (cast x);
 						
-						__movieClip = __subManager.createMovieClip (__className);
+						__tilemap = cast __subManager.createMovieClip (__className);
 					}
 				} (__key__);
 			}
 		
-			return __movieClip;
+			return __tilemap;
 		}
 		-- */
 		// </HAXE>

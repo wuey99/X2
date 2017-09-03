@@ -81,11 +81,6 @@ package kx.world.sprite {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function getXBitmapPoolManager ():XObjectPoolManager {
-			return xxx != null ? xxx.getXBitmapPoolManager () : m_XApp.getXBitmapPoolManager ();			
-		}
-		
-		//------------------------------------------------------------------------------------------
 		public function getXTaskManager ():XTaskManager {
 			return xxx != null ? xxx.getXTaskManager () : m_XApp.getXTaskManager ();			
 		}

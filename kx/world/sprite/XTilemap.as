@@ -28,18 +28,17 @@
 package kx.world.sprite {
 	
 	// X classes
-	import kx.*;
-	import kx.collections.*;
-	import kx.bitmap.*;
-	import kx.geom.*;
-	import kx.task.*;
-	import kx.world.*;
-	import kx.world.logic.*;
-	import kx.texture.*;
-	
-	// flash classes
 	import flash.display.*;
 	import flash.geom.*;
+	
+	import kx.*;
+	import kx.bitmap.*;
+	import kx.collections.*;
+	import kx.geom.*;
+	import kx.task.*;
+	import kx.texture.*;
+	import kx.world.*;
+	import kx.world.logic.*;
 	
 	// <HAXE>
 	/* --
@@ -52,6 +51,8 @@ package kx.world.sprite {
 	//------------------------------------------------------------------------------------------	
 	public class XTilemap extends Sprite implements XRegistration {
 		public var m_className:String;
+		public var m_tilemap:Tilemap;
+		public var m_tileArray:TileArray;
 		public var m_frame:int;
 		public var m_scale:Number;
 		public var m_visible:Boolean;
@@ -77,6 +78,7 @@ package kx.world.sprite {
 			
 			setRegistration ();
 			
+			m_frame = -1;
 			m_scale = 1.0;
 			m_visible = true;
 		}
@@ -94,9 +96,7 @@ package kx.world.sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
-			var __movieClip:Sprite;
-			
+		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {		
 			m_className = __className;
 			
 			var __taskManager:XTaskManager =
@@ -105,23 +105,38 @@ package kx.world.sprite {
 			var __textureManager:XTextureManager =
 				__xxx != null ? __xxx.getTextureManager () : __XApp.getTextureManager ();
 				
-			__movieClip = __textureManager.createMovieClip (__className) as Sprite;
+			m_tilemap = __textureManager.createMovieClip (__className) as Tilemap;
 				
-			if (__movieClip == null) {
+			function __init ():void {
+				addChild (m_tilemap);
+				
+				var __tileArray:TileArray = m_tilemap.getTiles ();
+				
+				var i:int;
+				
+				for (i = 0; i < __tileArray.length; i++) {
+					__tileArray.position = i;
+					__tileArray.visible = false;
+				}
+				
+				m_tilemap.setTiles (__tileArray);
+				
+				gotoAndStop (1);
+			}
+			
+			if (m_tilemap == null) {
 				__taskManager.addTask ([
 					XTask.LABEL, "loop",
 						XTask.WAIT, 0x0100,
 							
 						XTask.FLAGS, function (__task:XTask):void {
-							__movieClip = __textureManager.createMovieClip (__className) as Sprite;
+							m_tilemap = __textureManager.createMovieClip (__className) as Tilemap;
 								
-							__task.ifTrue (__movieClip != null);
+							__task.ifTrue (m_tilemap != null);
 						}, XTask.BNE, "loop",
 							
 						function ():void {
-//							initWithMovieClip (__movieClip);
-								
-							gotoAndStop (1);
+							__init ();
 						},
 						
 					XTask.RETN,
@@ -130,9 +145,7 @@ package kx.world.sprite {
 				return;
 			}
 			
-//			initWithMovieClip (__movieClip);
-			
-			gotoAndStop (1);	
+			__init ();	
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -141,8 +154,24 @@ package kx.world.sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public function gotoX (__name:String):void {
+		}
+		
+		//------------------------------------------------------------------------------------------
 		private function __goto (__frame:int):void {
-			m_frame = __frame-1;
+			var __tileArray:TileArray = m_tilemap.getTiles ();
+			
+			if (m_frame >= 0) {
+				__tileArray.position = m_frame;
+				__tileArray.visible = false;
+			}
+			
+			m_frame = __frame - 1;
+			
+			__tileArray.position = m_frame;
+			__tileArray.visible = true;
+			
+			m_tilemap.setTiles (__tileArray);
 		}
 		
 		//------------------------------------------------------------------------------------------

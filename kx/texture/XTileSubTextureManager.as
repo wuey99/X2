@@ -216,7 +216,7 @@ package kx.texture {
 			var __frames:int = __movieClipMetadata[3] as int;
 			var __realBounds:Rectangle = __movieClipMetadata[4] as Rectangle;
 			
-			var __tileMap:Tilemap = new Tilemap (int (__realBounds.width), int (__realBounds.height), __tileset);
+			var __tilemap:Tilemap = new Tilemap (int (__realBounds.width), int (__realBounds.height), __tileset);
 			
 			var i:int;
 			
@@ -230,15 +230,13 @@ package kx.texture {
 				
 				__tile = new Tile (__tileId, 0, 0, 1.0, 1.0, 0.0);
 				
-				__tileMap.addTileAt (__tile, i);
+				__tilemap.addTileAt (__tile, i);
 			}
 			
-			var __movieClip:Sprite = new Sprite ();
-			__tileMap.x = __realBounds.x;
-			__tileMap.y = __realBounds.y;
-			__movieClip.addChild (__tileMap);
+			__tilemap.x = __realBounds.x;
+			__tilemap.y = __realBounds.y;
 			
-			return __movieClip;
+			return __tilemap;
 		}
 
 		//------------------------------------------------------------------------------------------

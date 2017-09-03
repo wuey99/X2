@@ -32,6 +32,9 @@ package kx.texture.openfl {
 	
 	//------------------------------------------------------------------------------------------
 	public class TileArray  {
+		public var length:int;
+		public var position:int;
+		public var visible:Boolean;
 		
 		//------------------------------------------------------------------------------------------
 		public function TileArray (length:int = 0) {
