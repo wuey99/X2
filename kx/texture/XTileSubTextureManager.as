@@ -143,7 +143,6 @@ package kx.texture {
 						var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
 						
 						__index = __movieClipMetadata[0] as int;
-						__movieClipMetadata[1] = __tileset;
 						__movieClip = __movieClipMetadata[2] as flash.display.MovieClip;
 						__realBounds = __movieClipMetadata[4] as Rectangle;
 						
@@ -153,6 +152,8 @@ package kx.texture {
 						trace (": realBounds: ", __realBounds);
 						
 						if (__index == m_currentBitmapIndex) {
+							__movieClipMetadata[1] = __tileset;
+							
 							for (i = 0; i < __movieClip.totalFrames; i++) {
 								__rect = __movieClipMetadata[5 + i * 2 + 1] as Rectangle;
 								__tileId = __tileset.addRect (__rect);
@@ -259,9 +260,9 @@ package kx.texture {
 			
 				__free = true;
 				
-				var i:int;
+				var i:int = 0;
 				
-				for (i=0; i<__movieClip.totalFrames; i++) {
+				while (i < __movieClip.totalFrames && __free) {
 					__movieClip.gotoAndStop (i+1);
 					
 					__realBounds = __getRealBounds (__movieClip);
@@ -272,9 +273,9 @@ package kx.texture {
 					
 					if (__rect == null) {
 						__free = false;
-						
-						break;
 					}
+					
+					i++;
 				}
 				
 				if (__free) {
@@ -284,7 +285,7 @@ package kx.texture {
 			
 			__end (); __begin ();
 			
-			return m_count;
+			return m_count - 1;
 		}
 		
 		//------------------------------------------------------------------------------------------
