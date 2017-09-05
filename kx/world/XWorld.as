@@ -1044,6 +1044,16 @@ package kx.world {
 		public function getXBitmapPoolManager ():XObjectPoolManager {
 			return m_XApp.getXBitmapPoolManager ();
 		}
+
+//------------------------------------------------------------------------------------------
+		public function getXMovieClipPoolManager ():XObjectPoolManager {
+			return m_XApp.getXMovieClipPoolManager ();
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function getXTilemapPoolManager ():XObjectPoolManager {
+			return m_XApp.getXTilemapPoolManager ();
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function getXMapItemModelPoolManager ():XObjectPoolManager {

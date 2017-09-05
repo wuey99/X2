@@ -59,16 +59,18 @@ package kx.world.sprite {
 		public override function setup ():void {
 			super.setup ();
 			
-			var __bitmap:XBitmap = new XBitmap ();
+			m_poolManager = g_XApp.getXBitmapPoolManager ();
 			
-			m_bitmap = __bitmap as XSplat;
+			m_bitmap = m_poolManager.borrowObject () as XSplat;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup ();
 			
-			m_bitmap.cleanup ();		
+			m_bitmap.cleanup ();	
+			
+			m_poolManager.returnObject (m_bitmap);
 		}
 
 		//------------------------------------------------------------------------------------------

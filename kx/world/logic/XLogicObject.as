@@ -657,11 +657,12 @@ package kx.world.logic {
 
 //------------------------------------------------------------------------------------------
 		public function createXMovieClip (__name:String):XMovieClip {
-			var __xmovieClip:XMovieClip = new XMovieClip ();
-			
+			var __xmovieClip:XMovieClip = xxx.getXMovieClipPoolManager ().borrowObject () as XMovieClip;
 			__xmovieClip.setup ();
-			
 			__xmovieClip.initWithClassName (xxx, null, __name);
+			__xmovieClip.alpha = 1.0;
+			__xmovieClip.scaleX = __xmovieClip.scaleY = 1.0;
+			__xmovieClip.rotation = 0.0;
 			
 			m_movieClips.set (__name, __xmovieClip);
 			
@@ -726,6 +727,8 @@ package kx.world.logic {
 						
 //						xxx.unloadClass (/* @:cast */ __name as String);
 					}
+					
+					xxx.getXMovieClipPoolManager ().returnObject (__xmovieClip);
 				}
 			);
 			
