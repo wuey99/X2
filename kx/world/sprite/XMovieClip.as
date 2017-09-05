@@ -27,7 +27,7 @@
 //------------------------------------------------------------------------------------------
 package kx.world.sprite {
 	
-	import flash.display.Graphics;
+	import flash.display.*;
 	import flash.geom.*;
 	import flash.utils.*;
 	
@@ -43,8 +43,12 @@ package kx.world.sprite {
 	
 	//------------------------------------------------------------------------------------------	
 	public class XMovieClip extends XSprite {
+		public static var g_XApp:XApp;
+		
 		public var m_bitmap:XSplat;
 		public var m_XApp:XApp;
+		
+		public var m_poolManager:XObjectPoolManager;
 		
 		//------------------------------------------------------------------------------------------
 		public function XMovieClip () {
@@ -67,6 +71,11 @@ package kx.world.sprite {
 			m_bitmap.cleanup ();		
 		}
 
+		//------------------------------------------------------------------------------------------
+		public static function setXApp (__XApp:XApp):void {
+			g_XApp = __XApp;
+		}
+		
 		//------------------------------------------------------------------------------------------
 		public function initWithClassName (__xxx:XWorld, __XApp:XApp, __className:String):void {
 			xxx = __xxx;

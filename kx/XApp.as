@@ -67,6 +67,8 @@ package kx {
 		private var m_XPointPoolManager:XObjectPoolManager;
 		private var m_XDepthSpritePoolManager:XObjectPoolManager;
 		private var m_XBitmapPoolManager:XObjectPoolManager;
+		private var m_XMovieClipPoolManager:XObjectPoolManager;
+		private var m_XTilemapPoolManager:XObjectPoolManager;
 		private var m_XMapItemModelPoolManager:XObjectPoolManager;
 		private var m_XTextureManager:XTextureManager;
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
@@ -97,6 +99,7 @@ package kx {
 			XMapModel.setXApp (this);
 			XTask.setXApp (this);
 			XTilemap.setXApp (this);
+			XMovieClip.setXApp (this);
 			XSplat.setXApp (this);
 			
 			m_frameRateScale = 1.0;
@@ -124,6 +127,8 @@ package kx {
 				XPoint: {init: 25000, overflow: 1000},
 				XDepthSprite: {init: 4000, overflow: 1000},
 				XBitmap: {init: 4000, overflow: 1000},
+				XMovieClip: {init: 4000, overflow: 1000},
+				XTilemap: {init: 4000, overflow: 1000},
 				XMapItemModel: {init: 12288, overflow: 2048}
 			};
 		}
@@ -136,6 +141,8 @@ package kx {
 				XPoint: {init: 2500, overflow: 1000},
 				XDepthSprite: {init: 2000, overflow: 1000},
 				XBitmap: {init: 2000, overflow: 1000},
+				XMovieClip: {init: 4000, overflow: 1000},
+				XTilemap: {init: 4000, overflow: 1000},
 				XMapItemModel: {init: 12288, overflow: 2048}
 			};
 		}
@@ -222,7 +229,7 @@ package kx {
 			);
 			
 //------------------------------------------------------------------------------------------
-// XDepthSprite
+// XBItmap
 //------------------------------------------------------------------------------------------
 			m_XBitmapPoolManager = new XObjectPoolManager (
 				function ():* {
@@ -236,6 +243,40 @@ package kx {
 				},
 				
 				__poolSettings.XBitmap.init, __poolSettings.XBitmap.overflow
+			);
+			
+//------------------------------------------------------------------------------------------
+// XMovieClip
+//------------------------------------------------------------------------------------------
+			m_XMovieClipPoolManager = new XObjectPoolManager (
+				function ():* {
+					var __bitmap:XMovieClip = new XMovieClip ();
+					
+					return __bitmap;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__poolSettings.XMovieClip.init, __poolSettings.XMovieClip.overflow
+			);
+			
+//------------------------------------------------------------------------------------------
+// XTilemap
+//------------------------------------------------------------------------------------------
+			m_XTilemapPoolManager = new XObjectPoolManager (
+				function ():* {
+					var __bitmap:XTilemap = new XTilemap ();
+					
+					return __bitmap;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__poolSettings.XTilemap.init, __poolSettings.XTilemap.overflow
 			);
 			
 //------------------------------------------------------------------------------------------
@@ -326,6 +367,16 @@ package kx {
 //------------------------------------------------------------------------------------------
 		public function getXBitmapPoolManager ():XObjectPoolManager {
 			return m_XBitmapPoolManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXMovieClipPoolManager ():XObjectPoolManager {
+			return m_XMovieClipPoolManager;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getXTilemapPoolManager ():XObjectPoolManager {
+			return m_XTilemapPoolManager;
 		}
 		
 //------------------------------------------------------------------------------------------

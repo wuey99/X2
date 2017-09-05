@@ -63,11 +63,19 @@ package kx.world.sprite {
 		//------------------------------------------------------------------------------------------
 		public override function setup ():void {
 			super.setup ();
+			
+			m_tilemap = null;
 		}
 		
 		//------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
-			super.cleanup ();	
+			super.cleanup ();
+			
+			if (m_tilemap != null) {
+				m_tilemap.removeTiles ();
+				
+				removeChild (m_tilemap);
+			}
 		}
 		
 		//------------------------------------------------------------------------------------------
