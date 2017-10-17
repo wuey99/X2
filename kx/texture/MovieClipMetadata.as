@@ -39,6 +39,14 @@ package kx.texture {
 	import kx.world.sprite.*;
 	import kx.xml.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
+	import kx.texture.openfl.*;
+	// </AS3>
+	
 	//------------------------------------------------------------------------------------------
 	// MovieClipMetadata
 	//------------------------------------------------------------------------------------------
@@ -50,8 +58,9 @@ package kx.texture {
 		public var m_totalFrames:int;
 		public var m_realBounds:Rectangle;
 		
-		public var m_tileIds:Array; // <int>
+		public var m_tileIds:Array; // <Int>
 		public var m_tilesets:Array; // <Tileset>
+		public var m_tilesetIndexes:Array; // <Int>
 		public var m_rects:Array; // <Rectangle>
 
 		public var m_tileIndex:int;
@@ -76,6 +85,7 @@ package kx.texture {
 			
 			m_tileIds = new Array (); // <Int>
 			m_tilesets = new Array (); // <Tileset>
+			m_tilesetIndexes = new Array (); // <Int>
 			m_rects = new Array (); // <Rectangle>
 			
 			m_tileIndex = 0;
@@ -106,7 +116,7 @@ package kx.texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getTilesetIndex ():int {
+		public function getMasterTilesetIndex ():int {
 			return m_tilesetIndex;
 		}
 		
@@ -121,9 +131,9 @@ package kx.texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function addTile (__tileId:int, __tileset:Tileset, __rect:Rectangle):void {	
+		public function addTile (__tileId:int, __tilesetIndex:int, __rect:Rectangle):void {	
 			m_tileIds[m_tileIndex] = __tileId;
-			m_tilesets[m_tileIndex] = __tileset;
+			m_tilesetIndexes[m_tileIndex] = __tilesetIndex;
 			m_rects[m_tileIndex] = __rect;
 			
 			m_tileIndex++;
@@ -138,7 +148,7 @@ package kx.texture {
 		public function getTileId (__tileIndex:int):int {
 			return m_tileIds[__tileIndex];	
 		}
-		
+	
 		//------------------------------------------------------------------------------------------
 		public function setTileset (__tileIndex:int, __tileset:Tileset):void {
 			m_tilesets[__tileIndex] = __tileset;	
@@ -147,6 +157,16 @@ package kx.texture {
 		//------------------------------------------------------------------------------------------
 		public function getTileset (__tileIndex:int):Tileset {
 			return m_tilesets[__tileIndex];	
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function setTilesetIndex (__tileIndex:int, __tilesetIndex:int):void {
+			m_tilesetIndexes[__tileIndex] = __tilesetIndex;	
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getTilesetIndex (__tileIndex:int):int {
+			return m_tilesetIndexes[__tileIndex];	
 		}
 		
 		//------------------------------------------------------------------------------------------

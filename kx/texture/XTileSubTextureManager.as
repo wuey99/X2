@@ -63,9 +63,13 @@ package kx.texture {
 		protected var m_currentBitmap:BitmapData;
 		protected var m_currentBitmapIndex:int;
 		
+		protected var wrapFlag:Boolean;
+		
 		//------------------------------------------------------------------------------------------
 		public function XTileSubTextureManager (__XApp:XApp, __width:int=2048, __height:int=2048) {
 			super (__XApp, __width, __height);
+			
+			wrapFlag = false;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -86,6 +90,17 @@ package kx.texture {
 		 
 		//------------------------------------------------------------------------------------------
 		public override function finish ():void {
+			if (!wrapFlag) {
+				__finishFit ();
+			}
+			else
+			{
+				__finishWrap ();
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
+		private function __finishFit ():void {
 			__end ();
 			
 			var i:int;
@@ -112,7 +127,7 @@ package kx.texture {
 						
 						var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
 						
-						__index = __movieClipMetadata.getTilesetIndex ();
+						__index = __movieClipMetadata.getMasterTilesetIndex ();
 						__movieClip = __movieClipMetadata.getMovieClip ();
 						__realBounds = __movieClipMetadata.getRealBounds ();
 						
@@ -145,7 +160,7 @@ package kx.texture {
 						
 						var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
 						
-						__index = __movieClipMetadata.getTilesetIndex ();
+						__index = __movieClipMetadata.getMasterTilesetIndex ();
 						__movieClip = __movieClipMetadata.getMovieClip ();
 						__realBounds = __movieClipMetadata.getRealBounds ();
 						
@@ -161,6 +176,7 @@ package kx.texture {
 								__rect = __movieClipMetadata.getRect (i);
 								__tileId = __tileset.addRect (__rect);
 								__movieClipMetadata.setTileId (i, __tileId);
+								__movieClipMetadata.setTileset (i, __tileset);
 								
 								trace (":    frame: ", i);
 								trace (":    tileId: ", __tileId);
@@ -172,6 +188,100 @@ package kx.texture {
 				
 				//------------------------------------------------------------------------------------------
 //				m_currentBitmap.dispose ();
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
+		private function __finishWrap ():void {
+			__end ();
+			
+			var i:int;
+			
+			var __scaleX:Number = 1.0;
+			var __scaleY:Number = 1.0;
+			var __padding:Number = 2.0;
+			var __rect:Rectangle = null;
+			var __realBounds:Rectangle;
+			
+			var __index:int;
+			var __movieClip:flash.display.MovieClip;
+			
+			//------------------------------------------------------------------------------------------
+			for (m_currentBitmapIndex = 0; m_currentBitmapIndex < m_count; m_currentBitmapIndex++) {
+				__rect = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+				m_currentBitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
+				m_currentBitmap.fillRect (__rect, 0x00000000);
+				
+				//------------------------------------------------------------------------------------------
+				m_movieClips.forEach (
+					function (x:*):void {
+						var __className:String = x as String;
+						
+						var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
+						
+						__index = __movieClipMetadata.getMasterTilesetIndex ();
+						__movieClip = __movieClipMetadata.getMovieClip ();
+						__realBounds = __movieClipMetadata.getRealBounds ();
+						
+						for (i=0; i<__movieClip.totalFrames; i++) {
+							__index = __movieClipMetadata.getTilesetIndex (i);
+							
+							if (__index == m_currentBitmapIndex) {
+								__movieClip.gotoAndStop (i+1);
+								__rect = __movieClipMetadata.getRect (i);
+								var __matrix:Matrix = new Matrix ();
+								__matrix.scale (__scaleX, __scaleY);
+								__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y);
+								m_currentBitmap.draw (__movieClip, __matrix);
+							}
+						}
+					}
+				);	
+				
+				//------------------------------------------------------------------------------------------
+				var __tileset:Tileset = new Tileset (m_currentBitmap);
+				var __tileId:int;
+				
+				m_tilesets.push (__tileset);
+				
+				//------------------------------------------------------------------------------------------
+				m_movieClips.forEach (
+					function (x:*):void {
+						var __className:String = x as String;
+						
+						trace (": ===================================================: ");
+						trace (": finishing: ", __className);
+						
+						var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
+						
+						__index = __movieClipMetadata.getMasterTilesetIndex ();
+						__movieClip = __movieClipMetadata.getMovieClip ();
+						__realBounds = __movieClipMetadata.getRealBounds ();
+						
+						trace (": index: ", __index);
+						trace (": tileset: ", __tileset);
+						trace (": movieClip: ", __movieClip);
+						trace (": realBounds: ", __realBounds);
+						
+						for (i = 0; i < __movieClip.totalFrames; i++) {
+							__index = __movieClipMetadata.getTilesetIndex (i);
+							
+							if (__index == m_currentBitmapIndex) {
+								__rect = __movieClipMetadata.getRect (i);
+								__tileId = __tileset.addRect (__rect);
+								__movieClipMetadata.setTileId (i, __tileId);
+								__movieClipMetadata.setTileset (i, __tileset);
+									
+								trace (":    frame: ", i);
+								trace (":    tileId: ", __tileId);
+								trace (":    rect: ", __rect);
+							}
+						}
+					}
+				);	
+				
+				//------------------------------------------------------------------------------------------
+				// m_currentBitmap.dispose ();
 			}
 		}
 		
@@ -234,10 +344,15 @@ package kx.texture {
 			var __rect:Rectangle;
 			
 			for (i = 0; i < __frames; i++) {
+				__tileset = __movieClipMetadata.getTileset (i);
 				__rect = __movieClipMetadata.getRect (i);
 				__tileId = __movieClipMetadata.getTileId (i);
 				
 				__tile = new Tile (__tileId, 0, 0, 1.0, 1.0, 0.0);
+				
+				if (wrapFlag) {
+					__tile.tileset = __tileset;
+				}
 				
 				__tilemap.addTileAt (__tile, i);
 			}
@@ -298,6 +413,17 @@ package kx.texture {
 		
 		//------------------------------------------------------------------------------------------
 		public override function createTexture (__className:String, __class:Class /* <Dynamic> */):void {	
+			if (!wrapFlag) {
+				__createTextureFit (__className, __class);	
+			}
+			else
+			{
+				__createTextureWrap (__className, __class);
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
+		private function __createTextureFit (__className:String, __class:Class /* <Dynamic> */):void {	
 			var __movieClip:flash.display.MovieClip = XType.createInstance (__class);
 			
 			var __scaleX:Number = 1.0;
@@ -341,7 +467,74 @@ package kx.texture {
 				
 				trace (": rect: ", __rect);
 				
-				__movieClipMetadata.addTile (0, null, __rect);
+				__movieClipMetadata.addTile (0, __index, __rect);
+			}
+			
+			__movieClipMetadata.setRealBounds (__realBounds);
+			
+			m_movieClips.set (__className, __movieClipMetadata);
+		}	
+		
+		//------------------------------------------------------------------------------------------
+		private function __createTextureWrap (__className:String, __class:Class /* <Dynamic> */):void {	
+			var __movieClip:flash.display.MovieClip = XType.createInstance (__class);
+			
+			var __scaleX:Number = 1.0;
+			var __scaleY:Number = 1.0;
+			var __padding:Number = 2.0;
+			var __rect:Rectangle = null;
+			var __realBounds:Rectangle = null;
+			
+			var i:int;
+			
+			trace (": XTileSubTextureManager: totalFrames: ", __className, __movieClip.totalFrames);
+			
+			var __index:int = m_count - 1;
+			
+			m_currentPacker = m_packers[__index] as MaxRectPacker;
+			
+			var __movieClipMetadata:MovieClipMetadata = new MovieClipMetadata ();
+			__movieClipMetadata.setup (
+				__index,					// TilesetIndex
+				null,						// Tileset
+				__movieClip,				// MovieClip
+				__movieClip.totalFrames,	// totalFrames
+				__realBounds				// realBounds
+			);
+			
+			for (i=0; i<__movieClip.totalFrames; i++) {
+				__movieClip.gotoAndStop (i+1);
+				
+				trace (": getBounds: ", __className, __getRealBounds (__movieClip));
+				
+				__realBounds = __getRealBounds (__movieClip);
+				
+				__rect = m_currentPacker.quickInsert (
+					(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
+				);
+				
+				if (__rect == null) {
+					trace (": split @: ", m_count, __className, i);
+					
+					__end (); __begin ();
+					
+					__index = m_count - 1;
+					
+					m_currentPacker = m_packers[__index] as MaxRectPacker;
+					
+					__rect = m_currentPacker.quickInsert (
+						(__realBounds.width * __scaleX) + __padding * 2, (__realBounds.height * __scaleY) + __padding * 2
+					);
+				}
+				
+				__rect.x += __padding;
+				__rect.y += __padding;
+				__rect.width -= __padding * 2;
+				__rect.height -= __padding * 2;
+				
+				trace (": rect: ", __rect);
+				
+				__movieClipMetadata.addTile (0, __index, __rect);
 			}
 			
 			__movieClipMetadata.setRealBounds (__realBounds);
