@@ -155,7 +155,7 @@ package kx.texture {
 						trace (": realBounds: ", __realBounds);
 						
 						if (__index == m_currentBitmapIndex) {
-							__movieClipMetadata.setTileset (__tileset);
+							__movieClipMetadata.setMasterTileset (__tileset);
 							
 							for (i = 0; i < __movieClip.totalFrames; i++) {
 								__rect = __movieClipMetadata.getRect (i);
@@ -221,7 +221,7 @@ package kx.texture {
 			
 			var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
 			
-			var __tileset:Tileset = __movieClipMetadata.getTileset ();
+			var __tileset:Tileset = __movieClipMetadata.getMasterTileset ();
 			var __frames:int = __movieClipMetadata.getTotalFrames ();
 			var __realBounds:Rectangle = __movieClipMetadata.getRealBounds ();
 			
@@ -341,7 +341,7 @@ package kx.texture {
 				
 				trace (": rect: ", __rect);
 				
-				__movieClipMetadata.addTile (0, __rect);
+				__movieClipMetadata.addTile (0, null, __rect);
 			}
 			
 			__movieClipMetadata.setRealBounds (__realBounds);

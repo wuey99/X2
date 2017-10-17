@@ -39,14 +39,6 @@ package kx.texture {
 	import kx.world.sprite.*;
 	import kx.xml.*;
 	
-	// <HAXE>
-	/* --
-	-- */
-	// </HAXE>
-	// <AS3>
-	import kx.texture.openfl.*;
-	// </AS3>
-	
 	//------------------------------------------------------------------------------------------
 	// MovieClipMetadata
 	//------------------------------------------------------------------------------------------
@@ -59,17 +51,10 @@ package kx.texture {
 		public var m_realBounds:Rectangle;
 		
 		public var m_tileIds:Array; // <int>
+		public var m_tilesets:Array; // <Tileset>
 		public var m_rects:Array; // <Rectangle>
 
 		public var m_tileIndex:int;
-		
-		/*
-		__movieClipMetadata.push (__index);
-		__movieClipMetadata.push (null); // Tileset
-		__movieClipMetadata.push (__movieClip);
-		__movieClipMetadata.push (__movieClip.totalFrames);
-		__movieClipMetadata.push (__realBounds);
-		*/
 		
 		//------------------------------------------------------------------------------------------
 		public function MovieClipMetadata () {
@@ -90,6 +75,7 @@ package kx.texture {
 			m_realBounds = __realBounds;
 			
 			m_tileIds = new Array (); // <Int>
+			m_tilesets = new Array (); // <Tileset>
 			m_rects = new Array (); // <Rectangle>
 			
 			m_tileIndex = 0;
@@ -100,7 +86,12 @@ package kx.texture {
 		}
 
 		//------------------------------------------------------------------------------------------
-		public function setTileset (__tileset:Tileset):void {
+		public function getMasterTileset ():Tileset {
+			return m_tileset;
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function setMasterTileset (__tileset:Tileset):void {
 			m_tileset = __tileset;
 		}
 
@@ -118,11 +109,6 @@ package kx.texture {
 		public function getTilesetIndex ():int {
 			return m_tilesetIndex;
 		}
-
-		//------------------------------------------------------------------------------------------
-		public function getTileset ():Tileset {
-			return m_tileset;
-		}
 		
 		//------------------------------------------------------------------------------------------
 		public function getMovieClip ():flash.display.MovieClip {
@@ -135,8 +121,9 @@ package kx.texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function addTile (__tileId:int, __rect:Rectangle):void {	
+		public function addTile (__tileId:int, __tileset:Tileset, __rect:Rectangle):void {	
 			m_tileIds[m_tileIndex] = __tileId;
+			m_tilesets[m_tileIndex] = __tileset;
 			m_rects[m_tileIndex] = __rect;
 			
 			m_tileIndex++;
@@ -150,6 +137,16 @@ package kx.texture {
 		//------------------------------------------------------------------------------------------
 		public function getTileId (__tileIndex:int):int {
 			return m_tileIds[__tileIndex];	
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function setTileset (__tileIndex:int, __tileset:Tileset):void {
+			m_tilesets[__tileIndex] = __tileset;	
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function getTileset (__tileIndex:int):Tileset {
+			return m_tilesets[__tileIndex];	
 		}
 		
 		//------------------------------------------------------------------------------------------

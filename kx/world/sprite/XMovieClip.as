@@ -59,7 +59,14 @@ package kx.world.sprite {
 		public override function setup ():void {
 			super.setup ();
 			
+			// <HAXE>
+			/* --
+			m_poolManager = g_XApp.getXTilemapPoolManager ();
+			-- */
+			// </HAXE>
+			// <AS3>
 			m_poolManager = g_XApp.getXBitmapPoolManager ();
+			// </AS3>
 			
 			m_bitmap = m_poolManager.borrowObject () as XSplat;
 		}
