@@ -52,6 +52,8 @@ package kx.texture {
 	// this class takes one or more flash.display.MovieClip's and dynamically creates texture/atlases
 	//------------------------------------------------------------------------------------------
 	public class XStarlingSubTextureManager extends XSubTextureManager {
+		protected var m_movieClips:XDict; // <String, Array<Dynamic>>
+		
 		protected var m_packer:MaxRectPacker;
 		
 		protected var m_atlases:Array; // <TextureAtlas>
@@ -60,6 +62,11 @@ package kx.texture {
 		//------------------------------------------------------------------------------------------
 		public function XStarlingSubTextureManager (__XApp:XApp, __width:int=2048, __height:int=2048) {
 			super (__XApp, __width, __height);
+		}
+		
+		//------------------------------------------------------------------------------------------		
+		public override function isQueued (__className:String):Boolean {
+			return m_movieClips.exists (__className);
 		}
 		
 		//------------------------------------------------------------------------------------------

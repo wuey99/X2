@@ -35,6 +35,7 @@ package kx.texture {
 	import kx.collections.*;
 	import kx.task.*;
 	import kx.texture.MaxRectPacker;
+	import kx.texture.MovieClipMetadata;
 	import kx.type.*;
 	import kx.world.sprite.*;
 	import kx.xml.*;
@@ -51,6 +52,8 @@ package kx.texture {
 	// this class takes one or more flash.display.MovieClip's and dynamically creates HaXe/OpenFl texture/atlases
 	//------------------------------------------------------------------------------------------
 	public class XTileSubTextureManager extends XSubTextureManager {
+		protected var m_movieClips:XDict; // <String, MovieClipMetadata>
+		
 		protected var m_testers:Array; // <MaxRectPacker>
 		protected var m_packers:Array; // <MaxRectPacker>
 		protected var m_tilesets:Array; // <Tileset>
@@ -73,7 +76,7 @@ package kx.texture {
 		public override function start ():void {
 			reset ();
 			
-			m_movieClips = new XDict ();  // <String, Array<Dynamic>>
+			m_movieClips = new XDict ();  // <String, MovieClipMetadata>
 			m_testers = new Array (); // <MaxRectPacker>
 			m_packers = new Array (); // <MaxRectPacker>
 			m_tilesets = new Array (); // <Tileset>
@@ -98,7 +101,7 @@ package kx.texture {
 			
 			//------------------------------------------------------------------------------------------
 			for (m_currentBitmapIndex = 0; m_currentBitmapIndex < m_count; m_currentBitmapIndex++) {
-				var __rect:Rectangle = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+				__rect = new Rectangle (0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 				m_currentBitmap = new BitmapData (TEXTURE_WIDTH, TEXTURE_HEIGHT);
 				m_currentBitmap.fillRect (__rect, 0x00000000);
 				
@@ -107,16 +110,16 @@ package kx.texture {
 					function (x:*):void {
 						var __className:String = x as String;
 						
-						var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
+						var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
 						
-						__index = __movieClipMetadata[0] as int;
-						__movieClip = __movieClipMetadata[2] as flash.display.MovieClip;
-						__realBounds = __movieClipMetadata[4] as Rectangle;
+						__index = __movieClipMetadata.getTilesetIndex ();
+						__movieClip = __movieClipMetadata.getMovieClip ();
+						__realBounds = __movieClipMetadata.getRealBounds ();
 						
 						if (__index == m_currentBitmapIndex) {
 							for (i=0; i<__movieClip.totalFrames; i++) {
 								__movieClip.gotoAndStop (i+1);
-								__rect = __movieClipMetadata[5 + i * 2 + 1] as Rectangle;
+								__rect = __movieClipMetadata.getRect (i);
 								var __matrix:Matrix = new Matrix ();
 								__matrix.scale (__scaleX, __scaleY);
 								__matrix.translate (__rect.x - __realBounds.x, __rect.y - __realBounds.y);
@@ -140,11 +143,11 @@ package kx.texture {
 						trace (": ===================================================: ");
 						trace (": finishing: ", __className);
 						
-						var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
+						var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
 						
-						__index = __movieClipMetadata[0] as int;
-						__movieClip = __movieClipMetadata[2] as flash.display.MovieClip;
-						__realBounds = __movieClipMetadata[4] as Rectangle;
+						__index = __movieClipMetadata.getTilesetIndex ();
+						__movieClip = __movieClipMetadata.getMovieClip ();
+						__realBounds = __movieClipMetadata.getRealBounds ();
 						
 						trace (": index: ", __index);
 						trace (": tileset: ", __tileset);
@@ -152,12 +155,12 @@ package kx.texture {
 						trace (": realBounds: ", __realBounds);
 						
 						if (__index == m_currentBitmapIndex) {
-							__movieClipMetadata[1] = __tileset;
+							__movieClipMetadata.setTileset (__tileset);
 							
 							for (i = 0; i < __movieClip.totalFrames; i++) {
-								__rect = __movieClipMetadata[5 + i * 2 + 1] as Rectangle;
+								__rect = __movieClipMetadata.getRect (i);
 								__tileId = __tileset.addRect (__rect);
-								__movieClipMetadata[5 + i * 2 + 0] = __tileId;
+								__movieClipMetadata.setTileId (i, __tileId);
 								
 								trace (":    frame: ", i);
 								trace (":    tileId: ", __tileId);
@@ -181,7 +184,7 @@ package kx.texture {
 		public override function add (__className:String):void {
 			var __class:Class /* <Dynamic> */ = m_XApp.getClass (__className);
 			
-			m_movieClips.set (__className, []);
+			m_movieClips.set (__className, null);
 			
 			if (__class != null) {
 				createTexture (__className, __class);
@@ -192,6 +195,11 @@ package kx.texture {
 			{
 				m_queue.set (__className, 0);
 			}
+		}
+		
+		//------------------------------------------------------------------------------------------		
+		public override function isQueued (__className:String):Boolean {
+			return m_movieClips.exists (__className);
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -211,11 +219,11 @@ package kx.texture {
 				return null;
 			}
 			
-			var __movieClipMetadata:Array /* <Dynamic> */ = m_movieClips.get (__className);
+			var __movieClipMetadata:MovieClipMetadata = m_movieClips.get (__className);
 			
-			var __tileset:Tileset = __movieClipMetadata[1] as Tileset;
-			var __frames:int = __movieClipMetadata[3] as int;
-			var __realBounds:Rectangle = __movieClipMetadata[4] as Rectangle;
+			var __tileset:Tileset = __movieClipMetadata.getTileset ();
+			var __frames:int = __movieClipMetadata.getTotalFrames ();
+			var __realBounds:Rectangle = __movieClipMetadata.getRealBounds ();
 			
 			var __tilemap:Tilemap = new Tilemap (int (__realBounds.width), int (__realBounds.height), __tileset);
 			
@@ -226,8 +234,8 @@ package kx.texture {
 			var __rect:Rectangle;
 			
 			for (i = 0; i < __frames; i++) {
-				__rect = __movieClipMetadata[5 + i * 2 + 1] as Rectangle;
-				__tileId = __movieClipMetadata[5 + i * 2 + 0] as int;
+				__rect = __movieClipMetadata.getRect (i);
+				__tileId = __movieClipMetadata.getTileId (i);
 				
 				__tile = new Tile (__tileId, 0, 0, 1.0, 1.0, 0.0);
 				
@@ -306,12 +314,14 @@ package kx.texture {
 			
 			m_currentPacker = m_packers[__index] as MaxRectPacker;
 			
-			var __movieClipMetadata:Array /* <Dynamic> */ = new Array (); // <Dynamic>
-			__movieClipMetadata.push (__index);
-			__movieClipMetadata.push (null); // Tileset
-			__movieClipMetadata.push (__movieClip);
-			__movieClipMetadata.push (__movieClip.totalFrames);
-			__movieClipMetadata.push (__realBounds);
+			var __movieClipMetadata:MovieClipMetadata = new MovieClipMetadata ();
+			__movieClipMetadata.setup (
+				__index,					// TilesetIndex
+				null,						// Tileset
+				__movieClip,				// MovieClip
+				__movieClip.totalFrames,	// totalFrames
+				__realBounds				// realBounds
+				);
 			
 			for (i=0; i<__movieClip.totalFrames; i++) {
 				__movieClip.gotoAndStop (i+1);
@@ -331,11 +341,10 @@ package kx.texture {
 				
 				trace (": rect: ", __rect);
 				
-				__movieClipMetadata.push (0);
-				__movieClipMetadata.push (__rect);
+				__movieClipMetadata.addTile (0, __rect);
 			}
 			
-			__movieClipMetadata[4] = __realBounds;
+			__movieClipMetadata.setRealBounds (__realBounds);
 			
 			m_movieClips.set (__className, __movieClipMetadata);
 		}	

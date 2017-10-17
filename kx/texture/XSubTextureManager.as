@@ -52,8 +52,6 @@ package kx.texture {
 	public class XSubTextureManager extends Object {
 		protected var m_XApp:XApp;
 		
-		protected var m_movieClips:XDict; // <String, Array<Dynamic>>
-		
 		protected var TEXTURE_WIDTH:int = 2048;
 		protected var TEXTURE_HEIGHT:int = 2048;
 			
@@ -127,7 +125,7 @@ package kx.texture {
 
 		//------------------------------------------------------------------------------------------
 		public function isQueued (__className:String):Boolean {
-			return m_movieClips.exists (__className);
+			return false;
 		}
 		
 		//------------------------------------------------------------------------------------------
