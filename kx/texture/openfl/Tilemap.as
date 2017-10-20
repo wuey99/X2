@@ -32,6 +32,7 @@ package kx.texture.openfl {
 
 	//------------------------------------------------------------------------------------------
 	public class Tilemap extends DisplayObject {
+		public var numTiles:int;
 		
 		//------------------------------------------------------------------------------------------
 		public function Tilemap (width:int, height:int, tileset:Tileset) {
@@ -45,6 +46,11 @@ package kx.texture.openfl {
 		
 		//------------------------------------------------------------------------------------------
 		public function getTiles ():TileArray {
+			return null;
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function getTileAt (i:int):Tile {
 			return null;
 		}
 		

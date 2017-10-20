@@ -50,6 +50,14 @@ package kx {
 	import kx.xmap.*;
 	import kx.xml.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
+	import kx.texture.openfl.*;
+	// </AS3>
+	
 //------------------------------------------------------------------------------------------
 	public class XApp extends Object {
 		private var m_parent:Sprite;
@@ -69,6 +77,7 @@ package kx {
 		private var m_XBitmapPoolManager:XObjectPoolManager;
 		private var m_XMovieClipPoolManager:XObjectPoolManager;
 		private var m_XTilemapPoolManager:XObjectPoolManager;
+		private var m_TilePoolManager:XObjectPoolManager;
 		private var m_XMapItemModelPoolManager:XObjectPoolManager;
 		private var m_XTextureManager:XTextureManager;
 		private var m_XMovieClipCacheManager:XMovieClipCacheManager;
@@ -129,6 +138,7 @@ package kx {
 				XBitmap: {init: 4000, overflow: 1000},
 				XMovieClip: {init: 4000, overflow: 1000},
 				XTilemap: {init: 4000, overflow: 1000},
+				Tile: {init: 4000, overflow: 1000},
 				XMapItemModel: {init: 12288, overflow: 2048}
 			};
 		}
@@ -143,6 +153,7 @@ package kx {
 				XBitmap: {init: 2000, overflow: 1000},
 				XMovieClip: {init: 4000, overflow: 1000},
 				XTilemap: {init: 4000, overflow: 1000},
+				Tile: {init: 4000, overflow: 1000},
 				XMapItemModel: {init: 12288, overflow: 2048}
 			};
 		}
@@ -280,6 +291,23 @@ package kx {
 			);
 			
 //------------------------------------------------------------------------------------------
+// Tile
+//------------------------------------------------------------------------------------------
+			m_TilePoolManager = new XObjectPoolManager (
+				function ():* {
+					var __tile:Tile = new Tile (0, 0, 0, 1.0, 1.0, 0.0);
+					
+					return __tile;
+				},
+				
+				function (__src:*, __dst:*):* {
+					return null;
+				},
+				
+				__poolSettings.Tile.init, __poolSettings.Tile.overflow
+			);
+			
+//------------------------------------------------------------------------------------------
 // XMapItemModel
 //------------------------------------------------------------------------------------------
 			m_XMapItemModelPoolManager = new XObjectPoolManager (
@@ -377,6 +405,11 @@ package kx {
 //------------------------------------------------------------------------------------------
 		public function getXTilemapPoolManager ():XObjectPoolManager {
 			return m_XTilemapPoolManager;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function getTilePoolManager ():XObjectPoolManager {
+			return m_TilePoolManager;
 		}
 		
 //------------------------------------------------------------------------------------------

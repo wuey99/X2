@@ -72,6 +72,16 @@ package kx.world.sprite {
 			super.cleanup ();
 			
 			if (m_tilemap != null) {
+				var __tile:Tile;
+				
+				var i:int;
+				
+				for (i = 0; i < m_tilemap.numTiles; i++) {
+					__tile = m_tilemap.getTileAt (i);
+					
+					g_XApp.getTilePoolManager ().returnObject (__tile);
+				}
+				
 				m_tilemap.removeTiles ();
 				
 				removeChild (m_tilemap);

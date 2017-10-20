@@ -348,7 +348,10 @@ package kx.texture {
 				__rect = __movieClipMetadata.getRect (i);
 				__tileId = __movieClipMetadata.getTileId (i);
 				
-				__tile = new Tile (__tileId, 0, 0, 1.0, 1.0, 0.0);
+//				__tile = new Tile (0, 0, 0, 1.0, 1.0, 0.0);
+				
+				__tile = m_XApp.getTilePoolManager ().borrowObject () as Tile;
+				__tile.id = __tileId;
 				
 				if (wrapFlag) {
 					__tile.tileset = __tileset;
