@@ -67,13 +67,7 @@ package kx.keyboard {
 			m_text.x = 9999;
 			m_text.y = 9999;
 			
-			if (CONFIG::starling) {
-				m_parent.addChild (m_text);
-			}
-			else
-			{
-				xxx.addChild (m_text);
-			}
+			xxx.addChild (m_text);
 		}
 		
 		//------------------------------------------------------------------------------------------

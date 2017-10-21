@@ -41,12 +41,7 @@ package kx.world.sprite {
 		public function XSprite0 () {
 			super ();
 			
-			if (CONFIG::starling) {
-			}
-			else
-			{
-				mouseEnabled = false;
-			}
+			mouseEnabled = false;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -75,79 +70,7 @@ package kx.world.sprite {
 			/* @:set_return null; */			
 		}
 		/* @:end */
-		
-//------------------------------------------------------------------------------------------
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		if (CONFIG::starling) {
-
-			//------------------------------------------------------------------------------------------
-			/* @:override get, set rotation Float */
-			
-			public override function get rotation ():Number {
-				return super.rotation * 180/Math.PI;
-			}
-			
-			public override function set rotation (__val:Number): /* @:set_type */ void {
-				super.rotation = __val * Math.PI/180;
 				
-				/* @:set_return __val; */			
-			}
-			/* @:end */
-			
-			//------------------------------------------------------------------------------------------
-			/* @:get, set mouseX Float */
-			
-			public function get mouseX ():Number {
-				return 0;
-			}
-			
-			public function set mouseX (__val:Number): /* @:set_type */ void {
-				/* @:set_return 0; */			
-			}
-			/* @:end */
-			
-			//------------------------------------------------------------------------------------------
-			/* @:get, set mouseY Float */
-			
-			public function get mouseY ():Number {
-				return 0;
-			}
-			
-			public function set mouseY (__val:Number): /* @:set_type */ void {
-				/* @:set_return 0; */			
-			}
-			/* @:end */
-			
-			//------------------------------------------------------------------------------------------
-			/* @:get, set mouseEnabled Bool */
-			
-			public function get mouseEnabled ():Boolean {
-				return true;
-			}
-			
-			public function set mouseEnabled (__val:Boolean): /* @:set_type */ void {
-				/* @:set_return true; */			
-			}
-			/* @:end */
-		
-			//------------------------------------------------------------------------------------------
-			/* @:get, set mouseChildren Bool */
-			
-			public function get mouseChildren ():Boolean {
-				return true;
-			}
-			
-			public function set mouseChildren (__val:Boolean): /* @:set_type */ void {
-				/* @:set_return true; */			
-			}
-			/* @:end */
-		}
-// </AS3>
-		
 //------------------------------------------------------------------------------------------
 	}
 

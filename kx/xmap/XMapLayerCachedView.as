@@ -141,33 +141,6 @@ package kx.xmap {
 		public function addXSubmap (__submap:XSubmapModel, __depth:Number):void {
 //			trace (": addXSubmap: ", __submap.x, __submap.y);
 			
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				var __logicObject:XSubmapViewImageCache =
-					xxx.getXLogicManager ().initXLogicObjectFromPool (
-						// parent
-						m_XMapView,
-						// class
-						XSubmapViewImageCache,
-						// item, layer, depth
-						null, m_currLayer, __depth,
-						// x, y, z
-						__submap.x, __submap.y, 0,
-						// scale, rotation
-						1.0, 0,
-						// XMapView
-						[
-							m_XMapView
-						]
-					) as XSubmapViewImageCache;
-			}
-			else
-			{
-			// </AS3>
 				var __logicObject:XSubmapViewBitmapCache =
 					xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent
@@ -185,13 +158,6 @@ package kx.xmap {
 							m_XMapView
 						]
 					) as XSubmapViewBitmapCache;
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>				
-			}
-			// </AS3>
 			
 			__submap.inuse++;
 			

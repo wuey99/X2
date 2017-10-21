@@ -192,9 +192,6 @@ package kx.world {
 			
 			MAX_LAYERS = __layers;
 			
-			if (CONFIG::starling) {
-			}
-			else
 			{
 				mouseEnabled = true;
 				mouseChildren = true;
@@ -294,31 +291,9 @@ package kx.world {
 					
 			m_mouseX = m_mouseY = 0;
 			
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				addEventListener (TouchEvent.TOUCH, onTouchEvent);
-			}
-			// </AS3>
-			
 //			setupDebug ();
 			
-			if (CONFIG::flash) {
-				addEventListener (Event.ENTER_FRAME, onFPSCounter);
-			}
-				// <HAXE>
-				/* --
-				-- */
-				// </HAXE>
-				// <AS3>
-			else
-			{
-				addEventListener (EnterFrameEvent.ENTER_FRAME, onFPSCounterStarling);
-			}
-			// </AS3>
+			addEventListener (Event.ENTER_FRAME, onFPSCounter);
 			
 			if (__timerInterval > 0) {
 				// Add event for main loop
@@ -328,19 +303,8 @@ package kx.world {
 			}
 			else
 			{
-				if (CONFIG::flash) {
-					addEventListener (Event.ENTER_FRAME, onEnterFrame);		
-				}
-					// <HAXE>
-					/* --
-					-- */
-					// </HAXE>
-					// <AS3>
-				else
-				{
-					addEventListener (EnterFrameEvent.ENTER_FRAME, onEnterFrame);
-				}
-				// </AS3>
+	
+				addEventListener (Event.ENTER_FRAME, onEnterFrame);		
 			}
 		}
 
@@ -360,22 +324,9 @@ package kx.world {
 			m_renderManager.removeAllTasks ();
 			m_XSignalManager.removeAllXSignals ();
 			m_XBulletCollisionManager.cleanup ();
-			
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				removeEventListener (TouchEvent.TOUCH, onTouchEvent);
-			}
-			// </AS3>
-			
-			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
-			
-			if (CONFIG::flash) {
-				removeEventListener(Event.RENDER, onRenderFrame);
-			}
+				
+			removeEventListener(Event.ENTER_FRAME, onEnterFrame);	
+			removeEventListener(Event.RENDER, onRenderFrame);
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -612,39 +563,6 @@ package kx.world {
 			
 			m_inuse_RENDER_FRAME--;		
 		}	
-
-//------------------------------------------------------------------------------------------
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		if (CONFIG::starling) {
-			private function onTouchEvent (e:TouchEvent):void {
-				var __touches:Vector.<Touch> = e.getTouches(this);
-				
-				var __touch:Touch;
-				
-				var i:int;
-				
-//				for each (var __touch:Touch in __touches)
-				for (i=0; i<__touches.length; i++)
-				{
-					__touch = __touches[i] as Touch;
-					
-					if (__touch.phase == TouchPhase.HOVER )
-					{
-						var __location:Point = __touch.getLocation (this);
-						
-						m_mouseX = __location.x;
-						m_mouseY = __location.y;
-						
-						trace (": XWorld (mouseX, mouseY): ", m_mouseX, m_mouseY);
-					}
-				}
-			}
-		}
-// </AS3>
 		
 //------------------------------------------------------------------------------------------
 // returns the flash stage
@@ -848,13 +766,7 @@ package kx.world {
 		/* @:override get, set mouseX Float */
 		
 		public override function get mouseX ():Number {
-			if (CONFIG::starling) {
-				return m_mouseX;
-			}
-			else
-			{
-				return getFlashStage ().mouseX;
-			}
+			return getFlashStage ().mouseX;
 		}
 		
 		public  function set mouseX (__val:Number): /* @:set_type */ void {
@@ -866,13 +778,7 @@ package kx.world {
 		/* @:override get, set mouseY Float */
 		
 		public override function get mouseY ():Number {
-			if (CONFIG::starling) {
-				return m_mouseY;
-			}
-			else
-			{
-				return getFlashStage ().mouseY;
-			}
+			return getFlashStage ().mouseY;
 		}
 		
 		public function set mouseY (__val:Number): /* @:set_type */ void {
@@ -1121,65 +1027,6 @@ package kx.world {
 		}	
 		
 //------------------------------------------------------------------------------------------
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		if (CONFIG::starling) {
-			/* @:get, set MOUSE_DOWN String */		
-			public function get MOUSE_DOWN ():String {
-				return TouchPhase.BEGAN;	
-			}
-			
-			public function set MOUSE_DOWN (__val:String): /* @:set_type */ void {
-				/* @:set_return ""; */			
-			}
-			/* @:end */
-			
-			/* @:get, set MOUSE_UP String */	
-			public function get MOUSE_UP ():String {
-				return TouchPhase.BEGAN;	
-			}
-			
-			public function set MOUSE_UP (__val:String): /* @:set_type */ void {
-				/* @:set_return ""; */			
-			}
-			/* @:end */
-			
-			/* @:get, set MOUSE_MOVE String */	
-			public function get MOUSE_MOVE ():String {
-				return TouchPhase.ENDED;	
-			}
-			
-			public function set MOUSE_MOVE (__val:String): /* @:set_type */ void {
-				/* @:set_return ""; */			
-			}
-			/* @:end */
-			
-			/* @:get, set MOUSE_OVER String */	
-			public function get MOUSE_OVER ():String {
-				return TouchPhase.HOVER;	
-			}
-			
-			public function set MOUSE_OVER (__val:String): /* @:set_type */ void {
-				/* @:set_return ""; */			
-			}
-			/* @:end */
-			
-			/* @:get, set MOUSE_OUT String */	
-			public function get MOUSE_OUT ():String {
-				return TouchPhase.ENDED;	
-			}
-			
-			public function set MOUSE_OUT (__val:String): /* @:set_type */ void {
-				/* @:set_return ""; */			
-			}
-			/* @:end */
-		}
-		else
-		{
-// </AS3>
 			/* @:get, set MOUSE_DOWN String */	
 			public function get MOUSE_DOWN ():String {
 				return MouseEvent.MOUSE_DOWN;	
@@ -1229,14 +1076,7 @@ package kx.world {
 				/* @:set_return ""; */			
 			}
 			/* @:end */
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		}
-// </AS3>
-		
+
 //------------------------------------------------------------------------------------------
 // http://www.flipcode.com/archives/Fast_Approximate_Distance_Functions.shtml
 //------------------------------------------------------------------------------------------

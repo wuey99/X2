@@ -85,21 +85,15 @@ package kx.texture {
 
 //------------------------------------------------------------------------------------------
 		private function __createXMovieClip (__className:String):XMovieClip {
-			if (CONFIG::starling) {
-				var __xmovieClip:XMovieClip = new XMovieClip ();
+			var __xmovieClip:XMovieClip = new XMovieClip ();
 				
-				__xmovieClip.setup ();
+			__xmovieClip.setup ();
 				
-				__xmovieClip.initWithClassName (null, m_XApp, __className);
+			__xmovieClip.initWithClassName (null, m_XApp, __className);
 				
-				m_movieClips.set (__className, __xmovieClip);
+			m_movieClips.set (__className, __xmovieClip);
 								
-				return __xmovieClip;
-			}
-			else
-			{
-				return null;
-			}
+			return __xmovieClip;
 		}
 		
 //------------------------------------------------------------------------------------------

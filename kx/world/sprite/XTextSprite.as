@@ -62,16 +62,6 @@ package kx.world.sprite {
 			
 			setup ();
 			
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				m_text = new TextField (__width, __height, __text, __fontName, __fontSize, __color, __bold);
-			}
-			else
-			// </AS3>
 			{
 				m_text = new TextField ();		
 				m_textFormat = new TextFormat ();
@@ -97,16 +87,6 @@ package kx.world.sprite {
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup ();
-			
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				m_text.dispose ();
-			}
-			// </AS3>
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -122,50 +102,15 @@ package kx.world.sprite {
 		}
 		
 		public function set text (__text:String): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				m_text.text = __text;
-			}
-			else
-			// </AS3>
 			{
 				m_text.htmlText = __text; __format ();
 			}
 			
 			/* @:set_return __text; */
 		}
-
-//------------------------------------------------------------------------------------------
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		if (CONFIG::starling) {
-			/* @:get, set filters Array<BitmapFilter> */
-				
-			public function get filters ():Array /* <BitmapFilter> */ {
-				null
-			}
-			
-			public function set filters (__val:Array /* <BitmapFilter> */): /* @:set_type */ void {
-				/* @:set_return __val; */			
-			}
-			/* @:end */
-		}
-// </AS3>
+		/* @:end */
 		
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		if (CONFIG::flash) {
-// </AS3>
+//------------------------------------------------------------------------------------------
 			/* @:override get, set filters Array<BitmapFilter> */
 			
 			public override function get filters ():Array /* <BitmapFilter> */ {
@@ -178,14 +123,7 @@ package kx.world.sprite {
 				/* @:set_return __val; */			
 			}
 			/* @:end */
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		}
-// </AS3>
-		
+
 //------------------------------------------------------------------------------------------
 		/* @:get, set color Int */
 		
@@ -194,16 +132,6 @@ package kx.world.sprite {
 		}
 		
 		public function set color (__color:uint): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				m_text.color = __color;
-			}
-			else
-			// </AS3>
 			{
 				m_text.textColor = __color; __format ();
 			}
@@ -220,16 +148,6 @@ package kx.world.sprite {
 		}
 		
 		public function set bold (__val:Boolean): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				m_text.bold = __val;
-			}
-			else
-			// </AS3>
 			{
 				m_textFormat.bold = __val; __format ();
 			}
@@ -246,16 +164,6 @@ package kx.world.sprite {
 		}
 		
 		public function set font (__val:String): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				m_text.fontName = __val;
-			}
-			else
-			// </AS3>
 			{
 				m_textFormat.font = __val; __format ();
 			}
@@ -272,16 +180,6 @@ package kx.world.sprite {
 		}
 		
 		public function set size (__val:int): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				m_text.fontSize = __val;
-			}
-			else
-			// </AS3>
 			{
 				m_textFormat.size = __val; __format ();
 			}
@@ -312,26 +210,6 @@ package kx.world.sprite {
 		}
 		
 		public function set hAlign (__val:String): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				switch (__val) {
-					case "left":
-						m_text.hAlign = HAlign.CENTER;
-						break;
-					case "right":
-						m_text.hAlign = HAlign.RIGHT;
-						break;
-					case "center":
-						m_text.hAlign = HAlign.CENTER;
-						break;
-				}
-			}
-			else
-			// </AS3>
 			{
 				switch (__val) {
 					case "left":
@@ -360,28 +238,7 @@ package kx.world.sprite {
 		}
 		
 		public function set vAlign (__val:String): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				switch (__val) {
-					case "top":
-						m_text.vAlign = VAlign.TOP;
-						break;
-					case "bottom":
-						m_text.vAlign = VAlign.BOTTOM;
-						break;
-					case "center":
-						m_text.vAlign = VAlign.CENTER;
-						break;
-				}
-			}
-			else
-			// </AS3>
-			{
-			}
+
 			
 			/* @:set_return ""; */			
 		}
@@ -419,16 +276,6 @@ package kx.world.sprite {
 		/* @:get, set textWidth Float */
 		
 		public function get textWidth ():Number {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				return m_text.textBounds.width;
-			}
-			else
-			// </AS3>
 			{
 				return m_text.textWidth;
 			}
@@ -443,16 +290,6 @@ package kx.world.sprite {
 		/* @:get, set textHeight Float */
 		
 		public function get textHeight ():Number {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				return m_text.textBounds.height;
-			}
-			else
-			// </AS3>
 			{
 				return m_text.textHeight;
 			}
@@ -487,15 +324,6 @@ package kx.world.sprite {
 		}
 		
 		public function set letterSpacing (__val:Number): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-			}
-			else
-			// </AS3>
 			{
 				m_textFormat.letterSpacing = __val; __format ();
 			}
@@ -512,15 +340,6 @@ package kx.world.sprite {
 		}
 		
 		public function set leading (__val:int): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-			}
-			else
-			// </AS3>
 			{
 				m_textFormat.leading = __val; __format ();
 			}
@@ -537,15 +356,6 @@ package kx.world.sprite {
 		}
 		
 		public function set selectable (__val:Boolean): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-			}
-			else
-			// </AS3>
 			{
 				m_text.selectable = __val;
 			}
@@ -562,15 +372,6 @@ package kx.world.sprite {
 		}
 		
 		public function set multiline (__val:Boolean): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {	
-			}
-			else
-			// </AS3>
 			{
 				m_text.multiline = __val; __format ();
 			}
@@ -587,15 +388,6 @@ package kx.world.sprite {
 		}
 		
 		public function set wordWrap (__val:Boolean): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-			}
-			else
-			// </AS3>
 			{
 				m_text.wordWrap = __val; __format ();
 			}
@@ -648,15 +440,6 @@ package kx.world.sprite {
 		}
 		
 		public function set embedFonts (__val:Boolean): /* @:set_type */ void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-			}
-			else
-			// </AS3>
 			{
 				m_text.embedFonts = __val; __format ();
 			}
@@ -667,9 +450,7 @@ package kx.world.sprite {
 				
 //------------------------------------------------------------------------------------------
 		private function __format ():void {
-			if (CONFIG::flash) {
-				m_text.setTextFormat (m_textFormat);
-			}
+			m_text.setTextFormat (m_textFormat);
 		}
 		
 //------------------------------------------------------------------------------------------

@@ -252,16 +252,6 @@ package kx.world.logic {
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
-			// <HAXE>
-			/* --
-			-- */
-			// </HAXE>
-			// <AS3>
-			if (CONFIG::starling) {
-				dispose ();
-			}
-			// </AS3>
-				
 			xxx.getXPointPoolManager ().returnObject (m_pos);
 			xxx.getXPointPoolManager ().returnObject (rp);
 			
@@ -718,10 +708,6 @@ package kx.world.logic {
 				function (__name:*):void {
 					var __xmovieClip:XMovieClip = m_movieClips.get (__name) as XMovieClip;
 					
-					if (CONFIG::starling) {
-						__xmovieClip.cleanup ();
-					}
-					else
 					{
 						__xmovieClip.cleanup ();
 						

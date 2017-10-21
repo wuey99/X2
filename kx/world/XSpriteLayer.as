@@ -99,20 +99,7 @@ package kx.world {
 			if (m_XDepthSpriteMap.exists (__depthSprite)) {
 				__depthSprite.cleanup ();
 				
-				// <HAXE>
-				/* --
-					removeChild (__depthSprite);
-				-- */
-				// </HAXE>
-				// <AS3>
-				if (CONFIG::starling) {
-					removeChild (__depthSprite, true);
-				}
-				else
-				{
-					removeChild (__depthSprite);
-				}
-				// </AS3>
+				removeChild (__depthSprite);
 				
 				xxx.getXDepthSpritePoolManager ().returnObject (__depthSprite);
 							

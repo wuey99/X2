@@ -51,20 +51,7 @@ package kx.world.sprite {
 //------------------------------------------------------------------------------------------
 		public function clear ():void {
 			while (numChildren > 0) {
-				// <HAXE>
-				/* --
-					removeChildAt (0);
-				-- */
-				// </HAXE>
-				// <AS3>
-				if (CONFIG::starling) {
-					removeChildAt (0, true);
-				}
-				else
-				{
-					removeChildAt (0);
-				}
-				// </AS3>
+				removeChildAt (0);
 			}
 		}
 			

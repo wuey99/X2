@@ -299,11 +299,9 @@ package kx.xmap {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			if (CONFIG::flash) {
-				m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapBitmap;
-				x_sprite = addSpriteAt (m_bitmap, 0, 0);
-				x_sprite.setDepth (getDepth ());
-			}
+			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapBitmap;
+			x_sprite = addSpriteAt (m_bitmap, 0, 0);
+			x_sprite.setDepth (getDepth ());
 			
 			show ();
 		}
