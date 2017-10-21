@@ -77,22 +77,6 @@ package kx.texture {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function createDynamicSubManager (__name:String, __width:int=2048, __height:int=2048):XSubTextureManager {
-			var __subManager:XSubTextureManager = new XDynamicSubTextureManager (m_XApp, __width, __height);
-			m_subManagers.set (__name, __subManager);
-			
-			return __subManager;
-		}
-		
-		//------------------------------------------------------------------------------------------
-		public function createStaticSubManager (__name:String, __width:int=2048, __height:int=2048):XSubTextureManager {
-			var __subManager:XSubTextureManager = new XStaticSubTextureManager (m_XApp, __width, __height);
-			m_subManagers.set (__name, __subManager);
-			
-			return __subManager;
-		}		
-		
-		//------------------------------------------------------------------------------------------
 		public function removeSubManager (__name:String):void {	
 			if (m_subManagers.exists (__name)) {
 				var __subManager:XSubTextureManager = m_subManagers.get (__name);

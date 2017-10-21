@@ -49,15 +49,9 @@
     <classEntry path="kx.task.XTask_CONSTANTS"/>
     <classEntry path="kx.text.XTextLogicObject"/>
     <classEntry path="kx.texture.MaxRectPacker"/>
-    <classEntry path="kx.texture.XDynamicSubTextureManager"/>
     <classEntry path="kx.texture.XMovieClipCacheManager"/>
-    <classEntry path="kx.texture.XStaticSubTextureManager"/>
     <classEntry path="kx.texture.XSubTextureManager"/>
     <classEntry path="kx.texture.XTextureManager"/>
-    <classEntry path="kx.texture.starling.Image"/>
-    <classEntry path="kx.texture.starling.RenderTexture"/>
-    <classEntry path="kx.texture.starling.Texture"/>
-    <classEntry path="kx.texture.starling.TextureAtlas"/>
     <classEntry path="kx.type.XType"/>
     <classEntry path="kx.utils.Domain"/>
     <classEntry path="kx.utils.GUID"/>
@@ -74,7 +68,6 @@
     <classEntry path="kx.world.logic.XLogicObjectCX"/>
     <classEntry path="kx.world.sprite.XBitmap"/>
     <classEntry path="kx.world.sprite.XDepthSprite"/>
-    <classEntry path="kx.world.sprite.XImage"/>
     <classEntry path="kx.world.sprite.XMovieClip"/>
     <classEntry path="kx.world.sprite.XRegistration"/>
     <classEntry path="kx.world.sprite.XSprite"/>
@@ -95,10 +88,8 @@
     <classEntry path="kx.xmap.XMapModel"/>
     <classEntry path="kx.xmap.XMapView"/>
     <classEntry path="kx.xmap.XSubmapBitmap"/>
-    <classEntry path="kx.xmap.XSubmapImage"/>
     <classEntry path="kx.xmap.XSubmapModel"/>
     <classEntry path="kx.xmap.XSubmapViewBitmapCache"/>
-    <classEntry path="kx.xmap.XSubmapViewImageCache"/>
     <classEntry path="kx.xml.XSimpleXMLDocument"/>
     <classEntry path="kx.xml.XSimpleXMLNode"/>
   </includeClasses>

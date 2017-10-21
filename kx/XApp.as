@@ -103,7 +103,6 @@ package kx {
 			m_XGamepadManager = new XGamepadManager (); m_XGamepadManager.setup ();
 			
 			XBitmap.setXApp (this);
-			XImage.setXApp (this);
 			XSprite.setXApp (this);
 			XMapModel.setXApp (this);
 			XTask.setXApp (this);

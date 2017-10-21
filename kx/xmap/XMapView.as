@@ -44,15 +44,6 @@ package kx.xmap {
 	import flash.text.*;
 	import flash.utils.*;
 	
-	// <HAXE>
-	/* --
-	import kx.texture.starling.*;
-	-- */
-	// </HAXE>
-	// <AS3>
-	import starling.textures.*;
-	// </AS3>
-	
 //------------------------------------------------------------------------------------------	
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;
@@ -170,63 +161,10 @@ package kx.xmap {
 		}
 
 //------------------------------------------------------------------------------------------
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		if (CONFIG::starling) {
-			public function cacheImageClassNames ():void {
-				var __layer:XMapLayerModel;
+		public function cacheImageClassNames ():void {
+			var i:int;
 				
-				var i:int;
-				
-				/*
-				m_subTextureManager.start ();
-				
-				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
-					__layer = m_XMapModel.getLayers ()[i] as XMapLayerModel;
-		
-					__layer.getImageClassNames ().forEach (
-						function (__name:*):void {
-							trace (": cacheImageClassName: (textures): ", __name);
-							
-							if (__name == "ErrorImages:undefinedClass") {
-								return;
-							}
-							
-							m_subTextureManager.add (__name as String);
-						}
-					);
-				}
-				
-				m_subTextureManager.finish ();
-				*/
-				
-				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
-					__layer = m_XMapModel.getLayers ()[i] as XMapLayerModel;
-					
-					__layer.getImageClassNames ().forEach (
-						function (__name:*):void {
-							trace (": cacheImageClassName: (movieClips): ", __name);
-							
-							if (__name == "ErrorImages:undefinedClass") {
-								return;
-							}
-							
-							xxx.getMovieClipCacheManager ().add (/* @:cast */__name as String);
-						}
-					);
-				}	
-			}
-		}
-		else
-		{
-// </AS3>
-			public function cacheImageClassNames ():void {
-				var i:int;
-				
-				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
+			for (i=0; i<m_XMapModel.getLayers ().length; i++) {
 					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
 					
 					__layer.getImageClassNames ().forEach (
@@ -236,33 +174,13 @@ package kx.xmap {
 							xxx.getBitmapCacheManager ().add (/* @:cast */ __name as String);
 						}
 					);
-				}			
-			}	
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		}
-// </AS3>
+			}			
+		}	
 		
 //------------------------------------------------------------------------------------------
 		public function uncacheImageClassNames ():void {
 			var i:int;
 			
-			if (CONFIG::starling) {
-				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
-					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
-					
-					__layer.getImageClassNames ().forEach (
-						function (__name:*):void {
-							xxx.getMovieClipCacheManager ().remove (__name as String);
-						}
-					);
-				}
-			}
-			else
-			{
 				for (i=0; i<m_XMapModel.getLayers ().length; i++) {
 					var __layer:XMapLayerModel = m_XMapModel.getLayers ()[i] as XMapLayerModel;
 		
@@ -272,7 +190,6 @@ package kx.xmap {
 						}
 					);
 				}
-			}
 		}
 
 //------------------------------------------------------------------------------------------
@@ -282,20 +199,7 @@ package kx.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function initSubmapPoolManager ():void {
-// <HAXE>
-/* --
 			initSubmapBitmapPoolManager (512, 512);
--- */
-// </HAXE>
-// <AS3>
-			if (CONFIG::starling) {
-				initSubmapImagePoolManager (512, 512);
-			}
-			else
-			{
-				initSubmapBitmapPoolManager (512, 512);
-			}
-// </AS3>
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -332,46 +236,6 @@ package kx.xmap {
 			return m_submapBitmapPoolManager;
 		}
 	
-//------------------------------------------------------------------------------------------		
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-//------------------------------------------------------------------------------------------
-		public function initSubmapImagePoolManager (
-			__width:int=512, __height:int=512,
-			__alloc:int=8, __spill:int=1
-			):void {
-			
-			m_submapImagePoolManager = new XObjectPoolManager (
-				function ():* {
-					var __texture:RenderTexture = new RenderTexture (__width, __height, false);
-					
-					var __image:XSubmapImage = new XSubmapImage (__texture);
-					
-					return __image;
-				},
-				
-				function (__src:*, __dst:*):* {
-					return null;
-				},
-				
-				__alloc, __spill,
-				
-				function (x:*):void {
-					XImage (x).cleanup ();
-				}
-			);
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function getSubmapImagePoolManager ():XObjectPoolManager {
-			return m_submapImagePoolManager;
-		}
-		
-//------------------------------------------------------------------------------------------		
-// </AS3>
 		
 //------------------------------------------------------------------------------------------
 		public function createModelFromXML (__xml:XSimpleXMLNode, __useArrayItems:Boolean=false):void {
