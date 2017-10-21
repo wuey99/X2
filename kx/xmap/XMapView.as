@@ -48,7 +48,6 @@ package kx.xmap {
 	public class XMapView extends XLogicObject {
 		protected var m_XMapModel:XMapModel;
 		protected var m_submapBitmapPoolManager:XObjectPoolManager;
-		protected var m_submapImagePoolManager:XObjectPoolManager;
 		protected var m_subTextureManager:XSubTextureManager;
 		protected var m_textureManagerName:String;
 		protected var m_imageNamesCached:Boolean;
@@ -83,10 +82,6 @@ package kx.xmap {
 			
 			if (m_submapBitmapPoolManager != null) {
 				m_submapBitmapPoolManager.cleanup ();
-			}
-			
-			if (m_submapImagePoolManager != null) {
-				m_submapImagePoolManager.cleanup ();
 			}
 		}
 		
@@ -235,7 +230,6 @@ package kx.xmap {
 		public function getSubmapBitmapPoolManager ():XObjectPoolManager {
 			return m_submapBitmapPoolManager;
 		}
-	
 		
 //------------------------------------------------------------------------------------------
 		public function createModelFromXML (__xml:XSimpleXMLNode, __useArrayItems:Boolean=false):void {
