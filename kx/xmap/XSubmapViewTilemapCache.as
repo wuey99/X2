@@ -28,7 +28,7 @@
 package kx.xmap {
 
 	import kx.*;
-	import kx.bitmap.XBitmapCacheManager;
+	import kx.texture.*;
 	import kx.collections.*;
 	import kx.geom.*;
 	import kx.world.*;
@@ -42,10 +42,18 @@ package kx.xmap {
 	import flash.text.*;
 	import flash.utils.*;
 	
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
+	import kx.texture.openfl.*;
+	// </AS3>
+	
 //------------------------------------------------------------------------------------------
 	public class XSubmapViewTilemapCache extends XSubmapViewCache {
-		private var m_bitmap:XBitmap;
-		private var m_bitmapCacheManager:XBitmapCacheManager;
+		private var m_tilemap:Tilemap;
+		private var m_movieClipCacheManager:XMovieClipCacheManager;
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewTilemapCache () {
@@ -56,38 +64,34 @@ package kx.xmap {
 		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
 	
-			m_bitmapCacheManager = xxx.getBitmapCacheManager ();
+			m_movieClipCacheManager = xxx.getMovieClipCacheManager ();
 		}
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup();
 			
-			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_bitmap);
+			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_tilemap);
 		}
 
 //------------------------------------------------------------------------------------------
 		public override function dictRefresh ():void {
-			m_bitmap.bitmap.bitmapData.lock ();
+//			m_tilemap.bitmap.bitmapData.lock ();
 	
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 
-			m_bitmap.bitmap.bitmapData.fillRect (
+			/*
+			m_tilemap.bitmap.bitmapData.fillRect (
 				tempRect, 0x00000000
 			);
-			
-// used only for debugging.  commented out to improve performance
-//			__vline (0);
-//			__vline (m_submapModel.width-1);
-//			__hline (0);
-//			__hline (m_submapModel.height-1);
+			*/
 			
 			var __items:XDict /* <XMapItemModel, Int> */ = m_submapModel.items ();
 			var __item:XMapItemModel;
-			var __bitmap:XBitmap;
+			var __bitmap:XMovieClip;
 //			var __p:XPoint = new XPoint ();
 			
 			tempRect.x = 0;
@@ -99,10 +103,11 @@ package kx.xmap {
 				function (x:*):void {
 					__item = x as XMapItemModel;
 
-					__bitmap = xxx.getBitmapCacheManager ().get (__item.imageClassName);
+					__bitmap = xxx.getMovieClipCacheManager ().get (__item.imageClassName);
 
-					trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
-					
+//					trace (": imageClassName: ", __item.imageClassName, __bitmap, __bitmap.bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
+				
+					/*
 					if (__bitmap != null) {
 						if (__item.frame != 0) {
 							__bitmap.gotoAndStop (__item.frame);
@@ -114,48 +119,35 @@ package kx.xmap {
 						tempRect.width = __item.boundingRect.width;
 						tempRect.height = __item.boundingRect.height;
 						
-						m_bitmap.bitmap.bitmapData.copyPixels (
+						m_tilemap.bitmap.bitmapData.copyPixels (
 							__bitmap.bitmap.bitmapData, tempRect, tempPoint, null, null, true
 						);
 					}
+					*/
 				}
 			);
-							
-			m_bitmap.bitmap.bitmapData.unlock ();
 			
-			function __vline (x:int):void {
-				var y:int;
-				
-				for (y=0; y<m_submapModel.height; y++) {
-					m_bitmap.bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
-				}
-			}
-			
-			function __hline (y:int):void {
-				var x:int;
-				
-				for (x=0; x<m_submapModel.width; x++) {
-					m_bitmap.bitmap.bitmapData.setPixel32 (x, y, 0xffff00ff);
-				}
-			}
+//			m_tilemap.bitmap.bitmapData.unlock ();
 		}
 		
 //------------------------------------------------------------------------------------------
 		public override function arrayRefresh ():void {
-			m_bitmap.bitmap.bitmapData.lock ();
+//			m_tilemap.bitmap.bitmapData.lock ();
 			
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 
-			m_bitmap.bitmap.bitmapData.fillRect (
+			/*
+			m_tilemap.bitmap.bitmapData.fillRect (
 				tempRect, 0x00000000
 			);
+			*/
 			
 			var __items:Vector.<XMapItemModel> = m_submapModel.arrayItems ();
 			var __item:XMapItemModel;
-			var __srcBitmap:XBitmap;
+			var __srcBitmap:XMovieClip;
 			var __dstBitmapData:BitmapData;
 			var __submapX:Number = m_submapModel.x;
 			var __submapY:Number = m_submapModel.y;
@@ -165,15 +157,16 @@ package kx.xmap {
 			
 			var i:int, __length:int = __items.length;
 			
-			__dstBitmapData = m_bitmap.bitmap.bitmapData;
+//			__dstBitmapData = m_tilemap.bitmap.bitmapData;
 			
 			for (i=0; i<__length; i++) {
 				__item = __items[i];
 					
-				__srcBitmap = m_bitmapCacheManager.get (__item.imageClassName);
+				__srcBitmap = m_movieClipCacheManager.get (__item.imageClassName);
 					
 //				trace (": imageClassName: ", __item.imageClassName, __srcBitmap, __srcBitmap.bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
-					
+			
+				/*
 				if (__srcBitmap != null) {
 					if (__item.frame != 0) {
 						__srcBitmap.gotoAndStop (__item.frame);
@@ -186,17 +179,18 @@ package kx.xmap {
 						__srcBitmap.bitmap.bitmapData, __item.boundingRect, tempPoint, null, null, true
 					);
 				}
+				*/
 			}
 			
-			m_bitmap.bitmap.bitmapData.unlock ();
+//			m_tilemap.bitmap.bitmapData.unlock ();
 		}
 		
 //------------------------------------------------------------------------------------------
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapBitmap;
-			x_sprite = addSpriteAt (m_bitmap, 0, 0);
+			m_tilemap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapTilemap;
+			x_sprite = addSpriteAt (m_tilemap, 0, 0);
 			x_sprite.setDepth (getDepth ());
 			
 			show ();

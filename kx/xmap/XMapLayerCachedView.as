@@ -149,7 +149,7 @@ package kx.xmap {
 						// parent
 						m_XMapView,
 						// class
-						XSubmapViewTilemapCache,
+						XSubmapViewBitmapCache,
 						// item, layer, depth
 						null, m_currLayer, __depth,
 						// x, y, z
