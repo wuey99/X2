@@ -35,6 +35,7 @@ package kx.world {
 	import Box2D.Dynamics.*;
 	*/
 	
+	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
@@ -42,7 +43,6 @@ package kx.world {
 	import flash.geom.Point;
 	import flash.system.*;
 	import flash.utils.Timer;
-	import flash.display.Stage;
 	
 	import kx.*;
 	import kx.bitmap.*;
@@ -50,11 +50,11 @@ package kx.world {
 	import kx.debug.*;
 	import kx.document.*;
 	import kx.game.*;
+	import kx.gamepad.*;
 	import kx.gamepad.XGamepad;
 	import kx.gamepad.XGamepadSubManager;
 	import kx.geom.*;
 	import kx.keyboard.*;
-	import kx.gamepad.*;
 	import kx.mvc.*;
 	import kx.pool.*;
 	import kx.resource.*;
@@ -72,17 +72,6 @@ package kx.world {
 	import kx.world.ui.*;
 	import kx.xmap.*;
 	import kx.xml.*;
-	
-	// <HAXE>
-	/* --
-	-- */
-	// </HAXE>
-	// <AS3>
-	import starling.events.EnterFrameEvent;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
-	// </AS3>
 	
 //------------------------------------------------------------------------------------------
 	public class XWorld extends XSprite {
@@ -377,17 +366,6 @@ package kx.world {
 			m_frameCount++;
 		}
 
-//------------------------------------------------------------------------------------------
-// <HAXE>
-/* --
--- */
-// </HAXE>
-// <AS3>
-		public function onFPSCounterStarling (e:EnterFrameEvent):void {
-			m_frameCount++;
-		}
-// </AS3>
-	
 //------------------------------------------------------------------------------------------
 		public function onEnterFrame (e:Event):void {
 			__onEnterFrame ();
@@ -984,6 +962,11 @@ package kx.world {
 //------------------------------------------------------------------------------------------
 		public function getTextureManager ():XTextureManager {
 			return m_XApp.getTextureManager ();
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function useTilemaps ():Boolean {
+			return m_XApp.useTilemaps ();
 		}
 		
 //------------------------------------------------------------------------------------------

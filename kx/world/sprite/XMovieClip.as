@@ -61,7 +61,13 @@ package kx.world.sprite {
 			
 			// <HAXE>
 			/* --
-			m_poolManager = g_XApp.getXTilemapPoolManager ();
+			if (g_XApp.useTilemaps ()) {
+				m_poolManager = g_XApp.getXTilemapPoolManager ();
+			}
+			else
+			{
+				m_poolManager = g_XApp.getXBitmapPoolManager ();
+			}
 			-- */
 			// </HAXE>
 			// <AS3>

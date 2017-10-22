@@ -65,6 +65,7 @@ package kx {
 		private var m_timer:Timer;
 		private var m_inuse_TIMER_FRAME:int;
 		private var m_XDebug:XDebug;
+		private var m_useTilemaps:Boolean;
 		private var m_projectManager:XProjectManager;
 		private var m_XSignalManager:XSignalManager;
 		private var m_XSoundManager:XSoundManager;
@@ -92,6 +93,15 @@ package kx {
 
 //------------------------------------------------------------------------------------------
 		public function setup (__poolSettings:Object):void {
+			// <HAXE>
+			/* --
+			m_useTilemaps = true;
+			-- */
+			// </HAXE>
+			// <AS3>
+			m_useTilemaps = false;
+			// </AS3>
+
 			m_XTaskManager = new XTaskManager (this);
 			m_XSignalManager = new XSignalManager (this);
 			m_XSoundManager = new XSoundManager (this);
@@ -351,6 +361,11 @@ package kx {
 			return __date.getTime ();
 		}
 
+//------------------------------------------------------------------------------------------		\
+		public function useTilemaps ():Boolean {
+			return m_useTilemaps;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function getFrameRateScale ():Number {
 			return m_frameRateScale;

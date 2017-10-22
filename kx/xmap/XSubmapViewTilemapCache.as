@@ -43,12 +43,12 @@ package kx.xmap {
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------
-	public class XSubmapViewBitmapCache extends XSubmapViewCache {
+	public class XSubmapViewTilemapCache extends XSubmapViewCache {
 		private var m_bitmap:XBitmap;
 		private var m_bitmapCacheManager:XBitmapCacheManager;
 		
 //------------------------------------------------------------------------------------------	
-		public function XSubmapViewBitmapCache () {
+		public function XSubmapViewTilemapCache () {
 			super ();
 		}
 

@@ -124,11 +124,11 @@ package kx.xmap {
 				__layer.getImageClassNames ().forEach (
 					function (__name:*):void {
 						if (__name == "ErrorImages:undefinedClass") {
-							return;
+							return;	
 						}
 
-						if (CONFIG::starling) {
-							if (xxx.getMovieClipCacheManager ().isQueued (/* @:cast */ __name as String)) {
+						if (xxx.useTilemaps ()) {
+							if (xxx.getBitmapCacheManager ().isQueued (/* @:cast */ __name as String)) {
 								trace (": not cached: ", __name);
 								
 								__flags = false;
@@ -165,8 +165,14 @@ package kx.xmap {
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
 							trace (": cacheImageClassName: ", __name);
-							
-							xxx.getBitmapCacheManager ().add (/* @:cast */ __name as String);
+			
+							if (xxx.useTilemaps ()) {
+								xxx.getBitmapCacheManager ().add (/* @:cast */ __name as String);
+							}
+							else
+							{
+								xxx.getBitmapCacheManager ().add (/* @:cast */ __name as String);
+							}
 						}
 					);
 			}			
@@ -181,7 +187,13 @@ package kx.xmap {
 		
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
-							xxx.getBitmapCacheManager ().remove (__name as String);
+							if (xxx.useTilemaps ()) {
+								xxx.getBitmapCacheManager ().remove (__name as String);								
+							}
+							else
+							{
+								xxx.getBitmapCacheManager ().remove (__name as String);
+							}
 						}
 					);
 				}
@@ -203,27 +215,53 @@ package kx.xmap {
 			__alloc:int=64, __spill:int=16
 			):void {
 				
-			m_submapBitmapPoolManager = new XObjectPoolManager (
-				function ():* {
-					var __bitmap:XSubmapBitmap = new XSubmapBitmap ();
-					__bitmap.setup ();					
-					__bitmap.createBitmap ("tiles", __width, __height);
-				
-					return __bitmap;
-				},
-				
-				function (__src:*, __dst:*):* {
-					return null;
-				},
-				
-				__alloc, __spill,
-				
-				function (x:*):void {
-					var __bitmap:XBitmap = x as XBitmap;
+			if (xxx.useTilemaps ()) {
+				m_submapBitmapPoolManager = new XObjectPoolManager (
+					function ():* {
+						var __bitmap:XSubmapBitmap = new XSubmapBitmap ();
+						__bitmap.setup ();					
+						__bitmap.createBitmap ("tiles", __width, __height);
+						
+						return __bitmap;
+					},
 					
-					__bitmap.cleanup ();
-				}
-			);
+					function (__src:*, __dst:*):* {
+						return null;
+					},
+					
+					__alloc, __spill,
+					
+					function (x:*):void {
+						var __bitmap:XBitmap = x as XBitmap;
+						
+						__bitmap.cleanup ();
+					}
+				);				
+			}
+			else
+			{
+				m_submapBitmapPoolManager = new XObjectPoolManager (
+					function ():* {
+						var __bitmap:XSubmapBitmap = new XSubmapBitmap ();
+						__bitmap.setup ();					
+						__bitmap.createBitmap ("tiles", __width, __height);
+					
+						return __bitmap;
+					},
+					
+					function (__src:*, __dst:*):* {
+						return null;
+					},
+					
+					__alloc, __spill,
+					
+					function (x:*):void {
+						var __bitmap:XBitmap = x as XBitmap;
+						
+						__bitmap.cleanup ();
+					}
+				);
+			}
 		}
 		
 //------------------------------------------------------------------------------------------
