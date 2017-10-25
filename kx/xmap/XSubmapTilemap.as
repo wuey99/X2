@@ -27,11 +27,12 @@
 //------------------------------------------------------------------------------------------
 package kx.xmap {
 
+	import flash.display.*;
 	import flash.geom.*;
 	import flash.utils.*;
 	
+	import kx.*;
 	import kx.geom.*;
-	import kx.texture.openfl.*;
 	import kx.world.*;
 	import kx.world.sprite.*;
 	
@@ -45,7 +46,8 @@ package kx.xmap {
 	
 //------------------------------------------------------------------------------------------	
 	public class XSubmapTilemap extends Tilemap {
-
+		public static var g_XApp:XApp;
+		
 //------------------------------------------------------------------------------------------
 		public function XSubmapTilemap (__width:int, __height:int, __tileset:Tileset) {
 			super (__width, __height, __tileset);
@@ -56,9 +58,27 @@ package kx.xmap {
 		}
 		
 //------------------------------------------------------------------------------------------
-		public function cleanup ():void {	
+		public function cleanup ():void {
+			/*
+			var __tile:Tile;
+			
+			var i:int;
+			
+			for (i = 0; i < numTiles; i++) {
+				__tile = getTileAt (i);
+				
+				g_XApp.getTilePoolManager ().returnObject (__tile);
+			}
+			*/
+			
+			removeTiles ();
 		}
-
+		
+		//------------------------------------------------------------------------------------------
+		public static function setXApp (__XApp:XApp):void {
+			g_XApp = __XApp;
+		}
+		
 //------------------------------------------------------------------------------------------
 	}
 	

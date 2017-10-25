@@ -335,7 +335,8 @@ package kx.texture {
 			var __frames:int = __movieClipMetadata.getTotalFrames ();
 			var __realBounds:Rectangle = __movieClipMetadata.getRealBounds ();
 			
-			var __tilemap:Tilemap = new Tilemap (int (__realBounds.width), int (__realBounds.height), __tileset);
+			var __tilemap:Tilemap = new Tilemap (int (__realBounds.width), int (__realBounds.height));
+			__tilemap.tileset = __tileset;
 			
 			var i:int;
 			
@@ -352,6 +353,9 @@ package kx.texture {
 				
 				__tile = m_XApp.getTilePoolManager ().borrowObject () as Tile;
 				__tile.id = __tileId;
+				
+				__tile.x = 0;
+				__tile.y = 0;
 				
 				if (wrapFlag) {
 					__tile.tileset = __tileset;

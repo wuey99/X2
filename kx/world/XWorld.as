@@ -940,6 +940,11 @@ package kx.world {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function getTilePoolManager ():XObjectPoolManager {
+			return m_XApp.getTilePoolManager ();
+		}
+				
+//------------------------------------------------------------------------------------------
 		public function getXMapItemModelPoolManager ():XObjectPoolManager {
 			return m_XApp.getXMapItemModelPoolManager ();
 		}

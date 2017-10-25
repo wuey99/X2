@@ -128,7 +128,7 @@ package kx.xmap {
 						}
 
 						if (xxx.useTilemaps ()) {
-							if (xxx.getBitmapCacheManager ().isQueued (/* @:cast */ __name as String)) {
+							if (xxx.getMovieClipCacheManager ().isQueued (/* @:cast */ __name as String)) {
 								trace (": not cached: ", __name);
 								
 								__flags = false;
@@ -167,7 +167,7 @@ package kx.xmap {
 							trace (": cacheImageClassName: ", __name);
 			
 							if (xxx.useTilemaps ()) {
-								xxx.getBitmapCacheManager ().add (/* @:cast */ __name as String);
+								xxx.getMovieClipCacheManager ().add (/* @:cast */ __name as String);
 							}
 							else
 							{
@@ -188,7 +188,7 @@ package kx.xmap {
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
 							if (xxx.useTilemaps ()) {
-								xxx.getBitmapCacheManager ().remove (__name as String);								
+								xxx.getMovieClipCacheManager ().remove (__name as String);								
 							}
 							else
 							{
@@ -218,11 +218,10 @@ package kx.xmap {
 			if (xxx.useTilemaps ()) {
 				m_submapBitmapPoolManager = new XObjectPoolManager (
 					function ():* {
-						var __bitmap:XSubmapBitmap = new XSubmapBitmap ();
-						__bitmap.setup ();					
-						__bitmap.createBitmap ("tiles", __width, __height);
+						var __tilemap:XSubmapTilemap = new XSubmapTilemap (512, 512, null);
+						__tilemap.setup ();					
 						
-						return __bitmap;
+						return __tilemap;
 					},
 					
 					function (__src:*, __dst:*):* {
@@ -232,9 +231,9 @@ package kx.xmap {
 					__alloc, __spill,
 					
 					function (x:*):void {
-						var __bitmap:XBitmap = x as XBitmap;
+						var __tilemap:XSubmapTilemap = x as XSubmapTilemap;
 						
-						__bitmap.cleanup ();
+						__tilemap.cleanup ();
 					}
 				);				
 			}

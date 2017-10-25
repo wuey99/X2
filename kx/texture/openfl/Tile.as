@@ -34,6 +34,8 @@ package kx.texture.openfl {
 	public class Tile  {
 		public var id:int;
 		public var tileset:Tileset;
+		public var x:Number;
+		public var y:Number;
 		
 		//------------------------------------------------------------------------------------------
 		public function Tile (id:int = 0, x:Number = 0, y:Number = 0, scaleX:Number = 1, scaleY:Number = 1, rotation:Number = 0) {

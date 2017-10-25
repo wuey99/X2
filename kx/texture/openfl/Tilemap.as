@@ -33,10 +33,16 @@ package kx.texture.openfl {
 	//------------------------------------------------------------------------------------------
 	public class Tilemap extends DisplayObject {
 		public var numTiles:int;
+		public var tileset:Tileset;
 		
 		//------------------------------------------------------------------------------------------
-		public function Tilemap (width:int, height:int, tileset:Tileset) {
+		public function Tilemap (width:int, height:int, ...args) {
 			super ();
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function addTile (tile:Tile):Tile {
+			return null;
 		}
 		
 		//------------------------------------------------------------------------------------------

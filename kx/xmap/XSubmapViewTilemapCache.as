@@ -52,7 +52,7 @@ package kx.xmap {
 	
 //------------------------------------------------------------------------------------------
 	public class XSubmapViewTilemapCache extends XSubmapViewCache {
-		private var m_tilemap:Tilemap;
+		private var m_tilemap:XSubmapTilemap;
 		private var m_movieClipCacheManager:XMovieClipCacheManager;
 		
 //------------------------------------------------------------------------------------------	
@@ -70,6 +70,8 @@ package kx.xmap {
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup();
+						
+			m_tilemap.cleanup ();
 			
 			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_tilemap);
 		}
@@ -132,23 +134,17 @@ package kx.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public override function arrayRefresh ():void {
-//			m_tilemap.bitmap.bitmapData.lock ();
-			
 			tempRect.x = 0;
 			tempRect.y = 0;
 			tempRect.width = m_submapModel.width;
 			tempRect.height = m_submapModel.height;
 
-			/*
-			m_tilemap.bitmap.bitmapData.fillRect (
-				tempRect, 0x00000000
-			);
-			*/
+			m_tilemap.removeTiles ();
 			
 			var __items:Vector.<XMapItemModel> = m_submapModel.arrayItems ();
 			var __item:XMapItemModel;
-			var __srcBitmap:XMovieClip;
-			var __dstBitmapData:BitmapData;
+			var __movieClip:XMovieClip;
+			var __srcTilemap:XTilemap;
 			var __submapX:Number = m_submapModel.x;
 			var __submapY:Number = m_submapModel.y;
 			
@@ -157,32 +153,35 @@ package kx.xmap {
 			
 			var i:int, __length:int = __items.length;
 			
-//			__dstBitmapData = m_tilemap.bitmap.bitmapData;
-			
 			for (i=0; i<__length; i++) {
 				__item = __items[i];
 					
-				__srcBitmap = m_movieClipCacheManager.get (__item.imageClassName);
+				__movieClip = m_movieClipCacheManager.get (__item.imageClassName);
 					
-//				trace (": imageClassName: ", __item.imageClassName, __srcBitmap, __srcBitmap.bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
-			
-				/*
-				if (__srcBitmap != null) {
+				__srcTilemap = __movieClip.getMovieClip () as XTilemap;
+				
+				if (__movieClip != null) {
+					var __srcTile:Tile = null;
+					var __dstTile:Tile = null;
+					
 					if (__item.frame != 0) {
-						__srcBitmap.gotoAndStop (__item.frame);
-					}
+						__srcTile = __srcTilemap.m_tilemap.getTileAt (__item.frame - 1);
 						
-					tempPoint.x = __item.x - __submapX;
-					tempPoint.y = __item.y - __submapY;
-
-					__dstBitmapData.copyPixels (
-						__srcBitmap.bitmap.bitmapData, __item.boundingRect, tempPoint, null, null, true
-					);
+						tempPoint.x = __item.x - __submapX;
+						tempPoint.y = __item.y - __submapY;
+						
+						__dstTile = new Tile (0, 0, 0, 1.0, 1.0, 0.0);
+						__dstTile.id = __srcTile.id;
+						__dstTile.tileset = __srcTile.tileset;
+						__dstTile.x = tempPoint.x;
+						__dstTile.y = tempPoint.y;
+						
+						m_tilemap.tileset = __srcTilemap.m_tilemap.tileset;
+						
+						m_tilemap.addTile (__dstTile);
+					}
 				}
-				*/
 			}
-			
-//			m_tilemap.bitmap.bitmapData.unlock ();
 		}
 		
 //------------------------------------------------------------------------------------------

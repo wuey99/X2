@@ -97,7 +97,7 @@ package kx.world.sprite {
 			m_XApp = __XApp;
 		
 			m_bitmap.setup ();
-			m_bitmap.initWithClassName (__xxx, null, __className);
+			(xxx != null ? m_bitmap.initWithClassName (__xxx, null, __className) : m_bitmap.initWithClassName (null, g_XApp, __className));
 			m_bitmap.alpha = 1.0;
 			m_bitmap.scaleX = m_bitmap.scaleY = 1.0;
 			m_bitmap.x = -m_bitmap.dx;
