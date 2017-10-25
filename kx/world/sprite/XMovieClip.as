@@ -61,7 +61,7 @@ package kx.world.sprite {
 			
 			// <HAXE>
 			/* --
-			if (g_XApp.useTilemaps ()) {
+			if (g_XApp.useBGTilemaps ()) {
 				m_poolManager = g_XApp.getXTilemapPoolManager ();
 			}
 			else

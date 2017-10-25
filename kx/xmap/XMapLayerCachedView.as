@@ -143,7 +143,7 @@ package kx.xmap {
 			
 			var __logicObject:XSubmapViewCache;
 			
-			if (xxx.useTilemaps ()) {
+			if (xxx.useBGTilemaps ()) {
 				__logicObject =
 					xxx.getXLogicManager ().initXLogicObjectFromPool (
 						// parent

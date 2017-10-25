@@ -44,18 +44,12 @@ package kx {
 	import kx.sound.*;
 	import kx.task.*;
 	import kx.texture.*;
+	import kx.texture.openfl.*;
 	import kx.type.*;
 	import kx.world.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
 	import kx.xml.*;
-	
-	// <HAXE>
-	/* --
-	-- */
-	// </HAXE>
-	// <AS3>
-	import kx.texture.openfl.*;
 	// </AS3>
 	
 //------------------------------------------------------------------------------------------
@@ -66,6 +60,7 @@ package kx {
 		private var m_inuse_TIMER_FRAME:int;
 		private var m_XDebug:XDebug;
 		private var m_useTilemaps:Boolean;
+		private var m_useBGTilemaps:Boolean;
 		private var m_projectManager:XProjectManager;
 		private var m_XSignalManager:XSignalManager;
 		private var m_XSoundManager:XSoundManager;
@@ -96,10 +91,12 @@ package kx {
 			// <HAXE>
 			/* --
 			m_useTilemaps = true;
+			m_useBGTilemaps = true;
 			-- */
 			// </HAXE>
 			// <AS3>
 			m_useTilemaps = false;
+			m_useBGTilemaps = false;
 			// </AS3>
 
 			m_XTaskManager = new XTaskManager (this);
@@ -365,6 +362,11 @@ package kx {
 //------------------------------------------------------------------------------------------		\
 		public function useTilemaps ():Boolean {
 			return m_useTilemaps;
+		}
+		
+//------------------------------------------------------------------------------------------		\
+		public function useBGTilemaps ():Boolean {
+			return m_useBGTilemaps;
 		}
 		
 //------------------------------------------------------------------------------------------

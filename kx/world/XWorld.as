@@ -975,6 +975,11 @@ package kx.world {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function useBGTilemaps ():Boolean {
+			return m_XApp.useBGTilemaps ();
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function grabFocus ():void {
 			m_XKeyboardManager.grabFocus ();
 		}

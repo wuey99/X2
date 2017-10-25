@@ -127,7 +127,7 @@ package kx.xmap {
 							return;	
 						}
 
-						if (xxx.useTilemaps ()) {
+						if (xxx.useBGTilemaps ()) {
 							if (xxx.getMovieClipCacheManager ().isQueued (/* @:cast */ __name as String)) {
 								trace (": not cached: ", __name);
 								
@@ -166,7 +166,7 @@ package kx.xmap {
 						function (__name:*):void {
 							trace (": cacheImageClassName: ", __name);
 			
-							if (xxx.useTilemaps ()) {
+							if (xxx.useBGTilemaps ()) {
 								xxx.getMovieClipCacheManager ().add (/* @:cast */ __name as String);
 							}
 							else
@@ -187,7 +187,7 @@ package kx.xmap {
 		
 					__layer.getImageClassNames ().forEach (
 						function (__name:*):void {
-							if (xxx.useTilemaps ()) {
+							if (xxx.useBGTilemaps ()) {
 								xxx.getMovieClipCacheManager ().remove (__name as String);								
 							}
 							else
@@ -215,7 +215,7 @@ package kx.xmap {
 			__alloc:int=64, __spill:int=16
 			):void {
 				
-			if (xxx.useTilemaps ()) {
+			if (xxx.useBGTilemaps ()) {
 				m_submapBitmapPoolManager = new XObjectPoolManager (
 					function ():* {
 						var __tilemap:XSubmapTilemap = new XSubmapTilemap (512, 512, null);
