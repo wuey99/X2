@@ -91,7 +91,7 @@ package kx {
 			// <HAXE>
 			/* --
 			m_useTilemaps = true;
-			m_useBGTilemaps = true;
+			m_useBGTilemaps = false;
 			-- */
 			// </HAXE>
 			// <AS3>
