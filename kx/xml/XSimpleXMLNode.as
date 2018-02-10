@@ -380,6 +380,44 @@ package kx.xml {
 			return __string ;
 		}
 		
+		//------------------------------------------------------------------------------------------
+		public function toXMLStringBlob (__indent:int = 0):String {
+			var i:int;
+			
+			var __string:String = "";
+			
+			__string += "<" + m_tag;
+			
+			m_attribsMap.forEach (
+				function (x:*):void {
+					var __key:String = x as String;
+					__string += " " + __key + "=" + "\\\"" + m_attribsMap.get (__key) + "\\\"";	
+				}
+			);
+			
+			if (m_text != "" || m_children.length != 0) {
+				__string += ">";
+				
+				if (m_text != "") {
+					__string + m_text;
+				}
+				
+				if (m_children.length != 0) {	
+					for (i=0; i<m_children.length; i++) {
+						__string += m_children[i].toXMLStringBlob(__indent+1);
+					}
+				}
+				
+				__string += "</" + m_tag + ">";
+			}
+			else
+			{
+				__string += "/>";
+			}
+			
+			return __string ;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function parent ():XSimpleXMLNode {
 			return m_parent;
