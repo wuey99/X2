@@ -44,12 +44,18 @@ package kx {
 	import kx.sound.*;
 	import kx.task.*;
 	import kx.texture.*;
-	import kx.texture.openfl.*;
 	import kx.type.*;
 	import kx.world.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
 	import kx.xml.*;
+
+	// <HAXE>
+	/* --
+	-- */
+	// </HAXE>
+	// <AS3>
+	import kx.texture.openfl.*;
 	// </AS3>
 	
 //------------------------------------------------------------------------------------------

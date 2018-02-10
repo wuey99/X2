@@ -912,7 +912,9 @@ class Update(object):
 				if self._getterSetterOverride:
 					flash = flash.replace(self._getterSetterType + " {", "Void {")
 
-			final = line.replace(windows, "#if (windows || html5) " + windows + " #else " + flash + " #end")
+# it looks like the latest version of HaXe actually has consistent getter/setters
+#			final = line.replace(windows, "#if (windows || html5) " + windows + " #else " + flash + " #end")
+			final = "		" + windows + "\n"
 
 			print ": =================================>: ", windows
 			print ": =================================>: ", flash
@@ -955,11 +957,12 @@ class Update(object):
 			if not self._getterSetterOverride:
 				line = line.replace("/* @:set_return " + returnValue + "; */", "return " + returnValue + ";")
 			else:
-				line = line.replace("/* @:set_return " + returnValue + "; */", "#if (windows || html5) return " + returnValue + "; #end")
+#				line = line.replace("/* @:set_return " + returnValue + "; */", "#if (windows || html5) return " + returnValue + "; #end")
+				line = line.replace("/* @:set_return " + returnValue + "; */", "return " + returnValue + ";\n")
 
 			if not self._getterSetterOverride2:
 				line = cleanupOverride2B(line)
-			
+
 			return line
 			
 		if line.find("/* @:end */") >= 0:
@@ -1042,7 +1045,7 @@ class Update(object):
 		line = line.replace("private const", "private static inline var")
 		
 		return line
-	
+
 	#-----------------------------------------------------------------------------
 	# forEach
 	#
@@ -1125,7 +1128,7 @@ class Update(object):
 		if self._loopLevel == 0 and line.count("}") > 0:
 			if self._forEach:
 				if self._loopCast:
-					line = line[:-1] + " (cast __key__);\n"				
+					line = line[:-1] + " (cast __key__);\n"
 				else:
 					line = line[:-1] + " (__key__);\n"
 			else:
