@@ -33,15 +33,6 @@ package kx.world.sprite {
 	import flash.filters.*;
 	import flash.text.TextFormat;
 	
-// <HAXE>
-/* --
-	import kx.texture.starling.*;
--- */
-// </HAXE>
-// <AS3>
-	import starling.utils.*;
-// </AS3>
-	
 //------------------------------------------------------------------------------------------
 	public class XTextSprite extends XSprite {
 		private var m_text:TextField;
