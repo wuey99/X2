@@ -28,15 +28,15 @@
 package kx.xmap {
 
 // X classes
+	import flash.events.*;
+	
 	import kx.collections.*;
 	import kx.geom.*;
 	import kx.mvc.*;
-	import kx.type.*;
 	import kx.pool.XSubObjectPoolManager;
+	import kx.type.*;
 	import kx.utils.XReferenceNameToIndex;
 	import kx.xml.*;
-	
-	import flash.events.*;
 
 //------------------------------------------------------------------------------------------	
 	public class XSubmapModel extends XModelBase {
@@ -53,6 +53,21 @@ package kx.xmap {
 		
 		private var m_cmap:Vector.<int>;
 		private var m_inuse:int;
+		
+		private var m_tileCols:int;
+		private var m_tileRows:int;
+		
+		private var m_submapWidthMask:int;
+		private var m_submapHeightMask:int;
+		
+		// <HAXE>
+		/* --
+		private var m_tmap:Vector.<Array<Dynamic>>;
+		-- */
+		// </HAXE>
+		// <AS3>
+		private var m_tmap:Vector.<Array>;
+		// </AS3>
 		
 		private var m_boundingRect:XRect;
 		
@@ -86,6 +101,9 @@ package kx.xmap {
 			m_submapWidth = __width;
 			m_submapHeight = __height;
 		
+			m_submapWidthMask = m_submapWidth - 1;
+			m_submapHeightMask = m_submapHeight - 1;
+			
 			m_col = __col;
 			m_row = __row;
 		
@@ -99,11 +117,27 @@ package kx.xmap {
 				m_cmap.push (0);
 			}
 			
-			m_inuse = 0;
-			
 			for (i = 0; i < m_cmap.length; i++) {
 				m_cmap[i] = CX_EMPTY;
 			}
+		
+			m_tileCols = int (m_submapWidth/TX_TILE_WIDTH);
+			m_tileRows = int (m_submapHeight/TX_TILE_HEIGHT);
+			
+			// <HAXE>
+			/* --
+			m_tmap = new Vector.<Array<Dynamic>> (); 
+			-- */
+			// </HAXE>
+			// <AS3>
+			m_tmap = new Vector.<Array> (); 
+			// </AS3>
+			
+			for (i = 0; i < m_tileCols * m_tileRows; i++) {
+				m_tmap.push(["", 0]);
+			}
+			
+			m_inuse = 0;
 
 			m_items = new XDict (); // <XMapItemModel, Int>
 			m_arrayItems = new Vector.<XMapItemModel> ();
@@ -424,9 +458,48 @@ package kx.xmap {
 
 			return __xmlCX;
 		}
-		
+	
 //------------------------------------------------------------------------------------------
 		public function deserializeRowCol (__xml:XSimpleXMLNode):void {
+// default (original)
+			deserializeRowCol_XMapItemXML_To_Items (__xml);
+// XMapItemXML to TileArray
+			deserializeRowCol_XMapItemXML_To_TileArray (__xml);
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function deserializeRowCol_XMapItemXML_To_TileArray (__xml:XSimpleXMLNode):void {
+			var __xmlList:Array; // <XSimpleXMLNode>
+			var i:int;
+			
+			//------------------------------------------------------------------------------------------
+			__xmlList = __xml.child ("CX");
+			
+			if (__xmlList.length > 0) {
+				deserializeCXTiles (__xmlList[0]);
+			}
+			
+			//------------------------------------------------------------------------------------------
+			__xmlList = __xml.child ("XMapItem");
+			
+			for (i=0; i<__xmlList.length; i++) {
+				var __xml:XSimpleXMLNode = __xmlList[i];
+				
+				var __imageClassIndex:int = __xml.getAttributeInt ("imageClassIndex");
+				var __imageClassName:String = m_XMapLayer.getClassNameFromIndex (__imageClassIndex);
+				var __frame:int = __xml.getAttributeInt ("frame");
+				var __x:int = int (__xml.getAttributeFloat ("x"));
+				var __y:int = int (__xml.getAttributeFloat ("y"));
+				
+				var __row:int = int ((__x & m_submapWidthMask) / TX_TILE_HEIGHT);
+				var __col:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
+				
+				m_tmap[__row * m_tileCols + __col] = [__imageClassName, __frame];
+			}			
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function deserializeRowCol_XMapItemXML_To_Items (__xml:XSimpleXMLNode):void {
 			var __xmlList:Array; // <XSimpleXMLNode>
 			var i:int;
 
