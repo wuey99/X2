@@ -513,8 +513,8 @@ package kx.xmap {
 				var __x:int = int (__xml.getAttributeFloat ("x"));
 				var __y:int = int (__xml.getAttributeFloat ("y"));
 				
-				var __row:int = int ((__x & m_submapWidthMask) / TX_TILE_HEIGHT);
-				var __col:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
+				var __col:int = int ((__x & m_submapWidthMask) / TX_TILE_HEIGHT);
+				var __row:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
 				
 				m_tmap[__row * m_tileCols + __col] = [__imageClassName, __frame];
 			}			

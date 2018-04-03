@@ -41,11 +41,13 @@ package kx.xmap {
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
+	import kx.pool.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XSubmapViewBitmapCache extends XSubmapViewCache {
 		private var m_bitmap:XBitmap;
 		private var m_bitmapCacheManager:XBitmapCacheManager;
+		private var m_XRectPoolManager:XObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewBitmapCache () {
@@ -57,6 +59,7 @@ package kx.xmap {
 			super.setup (__xxx, args);
 	
 			m_bitmapCacheManager = xxx.getBitmapCacheManager ();
+			m_XRectPoolManager = xxx.getXRectPoolManager ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -212,7 +215,7 @@ package kx.xmap {
 			var __tileCols:int = m_submapModel.tileCols;
 			var __tileRows:int = m_submapModel.tileRows;
 			
-			var __boundingRect:XRect =  m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XRect;
+			var __boundingRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
 			
 			__boundingRect.x = 0;
 			__boundingRect.y = 0;
@@ -242,7 +245,7 @@ package kx.xmap {
 				}
 			}
 			
-			m_XMapView.getSubmapBitmapPoolManager ().returnObject (__boundingRect);
+			m_XRectPoolManager.returnObject (__boundingRect);
 			
 			m_bitmap.bitmap.bitmapData.unlock ();
 		}

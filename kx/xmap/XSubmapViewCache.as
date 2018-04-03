@@ -124,6 +124,10 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
+			tileRefresh();
+			
+			return;
+			
 			if (m_submapModel.useArrayItems) {
 				arrayRefresh ();
 			}
