@@ -27,6 +27,11 @@
 //------------------------------------------------------------------------------------------
 package kx.xmap {
 
+	import flash.display.*;
+	import flash.geom.*;
+	import flash.text.*;
+	import flash.utils.*;
+	
 	import kx.*;
 	import kx.bitmap.XBitmapCacheManager;
 	import kx.collections.*;
@@ -36,11 +41,6 @@ package kx.xmap {
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
-	
-	import flash.display.*;
-	import flash.geom.*;
-	import flash.text.*;
-	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XSubmapViewBitmapCache extends XSubmapViewCache {
@@ -187,6 +187,62 @@ package kx.xmap {
 					);
 				}
 			}
+			
+			m_bitmap.bitmap.bitmapData.unlock ();
+		}
+
+//------------------------------------------------------------------------------------------
+		public override function tileRefresh ():void {
+			m_bitmap.bitmap.bitmapData.lock ();
+			
+			tempRect.x = 0;
+			tempRect.y = 0;
+			tempRect.width = m_submapModel.width;
+			tempRect.height = m_submapModel.height;
+			
+			m_bitmap.bitmap.bitmapData.fillRect (
+				tempRect, 0x00000000
+			);
+			
+			var __srcBitmap:XBitmap;
+			var __dstBitmapData:BitmapData;
+			var __submapX:Number = m_submapModel.x;
+			var __submapY:Number = m_submapModel.y;
+			var __tmap:Vector.<Array> = m_submapModel.tmap;
+			var __tileCols:int = m_submapModel.tileCols;
+			var __tileRows:int = m_submapModel.tileRows;
+			
+			var __boundingRect:XRect =  m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XRect;
+			
+			__boundingRect.x = 0;
+			__boundingRect.y = 0;
+			__boundingRect.width = XSubmapModel.TX_TILE_WIDTH;
+			__boundingRect.height = XSubmapModel.TX_TILE_HEIGHT;
+			
+			__dstBitmapData = m_bitmap.bitmap.bitmapData;
+			
+			for (var __row:int = 0; __row < __tileRows; __row++) {
+				for (var __col:int = 0; __col < __tileRows; __col++) {
+					var __tile:Array /* <Dynamic> */  = __tmap[__row * __tileCols + __col];
+					
+					__srcBitmap = m_bitmapCacheManager.get (__tile[0]);
+					
+					if (__srcBitmap != null) {
+						if (__tile[1] != 0) {
+							__srcBitmap.gotoAndStop (__tile[1]);
+						}
+						
+						tempPoint.x = __col * XSubmapModel.TX_TILE_WIDTH;
+						tempPoint.y = __row * XSubmapModel.TX_TILE_HEIGHT;
+						
+						__dstBitmapData.copyPixels (
+							__srcBitmap.bitmap.bitmapData, __boundingRect, tempPoint, null, null, true
+						);
+					}
+				}
+			}
+			
+			m_XMapView.getSubmapBitmapPoolManager ().returnObject (__boundingRect);
 			
 			m_bitmap.bitmap.bitmapData.unlock ();
 		}

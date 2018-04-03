@@ -60,14 +60,7 @@ package kx.xmap {
 		private var m_submapWidthMask:int;
 		private var m_submapHeightMask:int;
 		
-		// <HAXE>
-		/* --
-		private var m_tmap:Vector.<Array<Dynamic>>;
-		-- */
-		// </HAXE>
-		// <AS3>
 		private var m_tmap:Vector.<Array>;
-		// </AS3>
 		
 		private var m_boundingRect:XRect;
 		
@@ -124,14 +117,7 @@ package kx.xmap {
 			m_tileCols = int (m_submapWidth/TX_TILE_WIDTH);
 			m_tileRows = int (m_submapHeight/TX_TILE_HEIGHT);
 			
-			// <HAXE>
-			/* --
-			m_tmap = new Vector.<Array<Dynamic>> (); 
-			-- */
-			// </HAXE>
-			// <AS3>
 			m_tmap = new Vector.<Array> (); 
-			// </AS3>
 			
 			for (i = 0; i < m_tileCols * m_tileRows; i++) {
 				m_tmap.push(["", 0]);
@@ -174,6 +160,18 @@ package kx.xmap {
 		}
 		/* @:end */
 			
+//------------------------------------------------------------------------------------------
+		/* @:get, set tmap Array<Array<Dynamic>> */
+		
+		public function get tmap ():Vector.<Array> {
+			return m_tmap;
+		}
+		
+		public function set tmap (__val:Vector.<Array>): /* @:set_type */ void {
+			/* @:set_return null; */			
+		}
+		/* @:end */
+		
 //------------------------------------------------------------------------------------------
 		public function setCXTile (__type:int, __col:int, __row:int):void {
 			m_cmap[__row * m_cols + __col] = __type;
@@ -237,6 +235,30 @@ package kx.xmap {
 		}
 		/* @:end */
 			
+//------------------------------------------------------------------------------------------
+		/* @:get, set tileCols Int */
+		
+		public function get tileCols ():int {
+			return m_tileCols;
+		}
+		
+		public function set tileCols (__val:int): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set tileRows Int */
+		
+		public function get tileRows ():int {
+			return m_tileRows;
+		}
+		
+		public function set tileRows (__val:int): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+				
 //------------------------------------------------------------------------------------------
 		/* @:get, set boundingRect XRect */
 		

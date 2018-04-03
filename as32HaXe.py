@@ -341,7 +341,7 @@ class Update(object):
 
 		if self.isNewOrExtends(line, "Boolean"):
 			line = line.replace(" Boolean", " Bool")
-					
+
 		return line
 
 	#-----------------------------------------------------------------------------
@@ -469,15 +469,22 @@ class Update(object):
 	#    --> new Array
 	#-----------------------------------------------------------------------------
 	def convertVector(self, line):
+		if line.find(":Vector.<Array>") >= 0:
+			line = line.replace(":Vector.<Array>", ":Array<Array<Dynamic>>")
+
+		if line.find("new Vector.<Array>") >= 0:
+			line = line.replace("new Vector.<Array>", "new Array<Array<Dynamic>>")
+
+		#-----------------------------------------------------------------------------
 		if line.find(":Vector.") >= 0:
 			line = line.replace(":Vector.", ":Array")
-			
+
 		if line.find("<Vector.") >= 0:
 			line = line.replace("<Vector.", "<Array")
-			
+
 		if line.find("new Vector.") >= 0:
 			line = line.replace("new Vector.", "new Array")
-			
+
 		return line
 		
 	#-----------------------------------------------------------------------------
@@ -546,9 +553,9 @@ class Update(object):
 		line = self.convertVector(line)
 		line = self.convertFunction(line)
 		line = self.convertRestParameters(line)
-		
+
 		return line
-	
+
 	#-----------------------------------------------------------------------------
 	# package <packageName> {
 	#    --> package <packageName;
