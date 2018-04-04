@@ -124,12 +124,11 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 		public function refresh ():void {
-			tileRefresh();
-			
-			return;
-			
 			if (m_submapModel.useArrayItems) {
-				arrayRefresh ();
+// for now only support tileRefresh.  In the future, we might support optional array or tile refresh
+//				arrayRefresh ();
+				
+				tileRefresh ();
 			}
 			else
 			{

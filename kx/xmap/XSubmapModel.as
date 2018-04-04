@@ -428,7 +428,7 @@ package kx.xmap {
 				);		
 			}
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function serializeRowCol (__row:int, __col:int):XSimpleXMLNode {	
 			var xml:XSimpleXMLNode = new XSimpleXMLNode ();
@@ -439,11 +439,18 @@ package kx.xmap {
 			];
 			
 			xml.setupWithParams ("XSubmap", "", __attribs);
-
+			
 			if (hasCXTiles ()) {
 				xml.addChildWithXMLNode (serializeCXTiles ());
 			}
-					
+			
+			xml = serializeRowCol_XMapItem (xml);
+			
+			return xml;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function serializeRowCol_XMapItem (xml:XSimpleXMLNode):XSimpleXMLNode {						
 			var item:XMapItemModel;
 	
 			items ().forEach (
@@ -455,8 +462,30 @@ package kx.xmap {
 			);
 			
 			return xml;
-	}
+		}
 
+		//------------------------------------------------------------------------------------------
+		public function serializeRowCol_TileArray (xml:XSimpleXMLNode):XSimpleXMLNode {	
+			var __item:XMapItemModel;
+			
+			var __submapX:int = int (x);
+			var __submapY:int = int (y);
+			var __tileCol:int, __tileRow:int;
+			
+			items ().forEach (
+				function (x:*):void {
+					__item = x as XMapItemModel;
+					
+					__tileCol = int ((int (__item.x) - __submapX) / TX_TILE_WIDTH);
+					__tileRow = int ((int (__item.y) - __submapY) / TX_TILE_HEIGHT);
+					
+					m_tmap[__tileRow][__tileCol] = [__item.imageClassName, __item.frame];
+				}
+			);
+			
+			return xml;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function serializeCXTiles ():XSimpleXMLNode {
 			var __xmlCX:XSimpleXMLNode = new XSimpleXMLNode ();			
