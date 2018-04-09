@@ -444,6 +444,10 @@ package kx.xmap {
 				xml.addChildWithXMLNode (serializeCXTiles ());
 			}
 			
+			if (m_XMapLayer.grid) {
+				xml = serializeRowCol_TileArray (xml);
+			}
+			
 			xml = serializeRowCol_XMapItem (xml);
 			
 			return xml;
@@ -471,6 +475,12 @@ package kx.xmap {
 			var __submapX:int = int (x);
 			var __submapY:int = int (y);
 			var __tileCol:int, __tileRow:int;
+						
+			var __tmap:Vector.<Array> = new Vector.<Array> (); 
+			
+			for (var i:int = 0; i < m_tileCols * m_tileRows; i++) {
+				__tmap.push([0, 0]);
+			}
 			
 			items ().forEach (
 				function (x:*):void {
@@ -478,12 +488,47 @@ package kx.xmap {
 					
 					__tileCol = int ((int (__item.x) - __submapX) / TX_TILE_WIDTH);
 					__tileRow = int ((int (__item.y) - __submapY) / TX_TILE_HEIGHT);
+				
+					trace(": imageClassIndex, frame: ", formatImageClassIndex (__item.imageClassIndex) + formatFrame (__item.frame));
 					
-					m_tmap[__tileRow][__tileCol] = [__item.imageClassName, __item.frame];
+					__tmap[__tileRow * m_tileCols + __tileCol] = [__item.imageClassIndex, __item.frame];
 				}
 			);
 			
+			var __tmapString:String = "";
+			
+			for (var __row:int = 0; __row < m_tileRows; __row++) {
+				for (var __col:int = 0; __col < m_tileCols; __col++) {
+					var __tile:* = __tmap[__row * m_tileCols + __col];
+					
+					if (__tile[0] == 0 && __tile[1] == 0) {
+						__tmapString += "xxx";	
+					} else {
+						__tmapString += formatImageClassIndex (__tile[0]) + formatFrame (__tile[1]);			
+					}
+				}
+			}
+
+			var __xmlTiles:XSimpleXMLNode = new XSimpleXMLNode ();			
+			__xmlTiles.setupWithParams ("Tiles", __tmapString, []);
+			
+			xml.addChildWithXMLNode (__xmlTiles);
+			
 			return xml;
+		}
+
+//------------------------------------------------------------------------------------------
+		private function formatImageClassIndex(__imageClassIndex:int):String {
+			return CXToChar.charAt(__imageClassIndex);
+		}
+		
+//------------------------------------------------------------------------------------------
+		private function formatFrame(__frame:int):String {
+			var digit100:int = int ((__frame%1000) / 100);
+			var digit10:int = int ((__frame%100) / 10);
+			var digit1:int = int ((__frame%10) / 1);
+			
+			return "" + digit100 + digit10 + digit1;
 		}
 		
 //------------------------------------------------------------------------------------------
