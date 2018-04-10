@@ -502,7 +502,7 @@ package kx.xmap {
 					var __tile:* = __tmap[__row * m_tileCols + __col];
 					
 					if (__tile[0] == 0 && __tile[1] == 0) {
-						__tmapString += "xxx";	
+						__tmapString += "XXXX";	
 					} else {
 						__tmapString += formatImageClassIndex (__tile[0]) + formatFrame (__tile[1]);			
 					}
@@ -557,18 +557,7 @@ package kx.xmap {
 	
 //------------------------------------------------------------------------------------------
 		public function deserializeRowCol (__xml:XSimpleXMLNode):void {
-// default (original)
-			deserializeRowCol_XMapItemXML_To_Items (__xml);
-// XMapItemXML to TileArray
-			deserializeRowCol_XMapItemXML_To_TileArray (__xml);
-		}
-		
-//------------------------------------------------------------------------------------------
-		public function deserializeRowCol_XMapItemXML_To_TileArray (__xml:XSimpleXMLNode):void {
 			var __xmlList:Array; // <XSimpleXMLNode>
-			var i:int;
-			
-			//------------------------------------------------------------------------------------------
 			__xmlList = __xml.child ("CX");
 			
 			if (__xmlList.length > 0) {
@@ -576,7 +565,43 @@ package kx.xmap {
 			}
 			
 			//------------------------------------------------------------------------------------------
+			// default (original)
+			//------------------------------------------------------------------------------------------
+			deserializeRowCol_XMapItemXML_To_Items (__xml);
+			
+			//------------------------------------------------------------------------------------------
+			// XMapItemXML to TileArray
+			//------------------------------------------------------------------------------------------
+			deserializeRowCol_XMapItemXML_To_TileArray (__xml);
+			
+			//------------------------------------------------------------------------------------------
+			// TilesXML to TileArray
+			//------------------------------------------------------------------------------------------
+			deserializeRowCol_TilesXML_To_TileArray (__xml);
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function deserializeRowCol_TilesXML_To_TileArray (__xml:XSimpleXMLNode):void {
+			var __xmlList:Array; // <XSimpleXMLNode>
+			__xmlList = __xml.child ("Tiles");
+			
+			if (__xmlList.length > 0) {
+				var __xml:XSimpleXMLNode = __xmlList[0];
+			
+				trace (": <Tiles/>: ", __xml.getText());
+			}
+		}
+	
+//------------------------------------------------------------------------------------------
+		public function deserializeRowCol_TilesXML_To_Items (__xml:XSimpleXMLNode):void {	
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function deserializeRowCol_XMapItemXML_To_TileArray (__xml:XSimpleXMLNode):void {
+			var __xmlList:Array; // <XSimpleXMLNode>
 			__xmlList = __xml.child ("XMapItem");
+			
+			var i:int;
 			
 			for (i=0; i<__xmlList.length; i++) {
 				var __xml:XSimpleXMLNode = __xmlList[i];
@@ -597,18 +622,10 @@ package kx.xmap {
 //------------------------------------------------------------------------------------------
 		public function deserializeRowCol_XMapItemXML_To_Items (__xml:XSimpleXMLNode):void {
 			var __xmlList:Array; // <XSimpleXMLNode>
-			var i:int;
-
-//------------------------------------------------------------------------------------------			
-			__xmlList = __xml.child ("CX");
-			
-			if (__xmlList.length > 0) {
-				deserializeCXTiles (__xmlList[0]);
-			}
-			
-//------------------------------------------------------------------------------------------
 			__xmlList = __xml.child ("XMapItem");
 
+			var i:int;
+			
 			if (useArrayItems) {
 				m_arrayItems = new Vector.<XMapItemModel> (/* __xmlList.length */);	
 				for (i = 0; i < __xmlList.length; i++) {
