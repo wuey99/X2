@@ -293,6 +293,11 @@ package kx.xml {
 		}
 			
 //------------------------------------------------------------------------------------------
+		public function getTextTrim ():String {
+			return XType.trim (m_text);
+		}
+		
+//------------------------------------------------------------------------------------------
 		protected function __tab (__indent:int):String {
 			var i:int;
 			var tabs:String = "";

@@ -565,39 +565,84 @@ package kx.xmap {
 			}
 			
 			//------------------------------------------------------------------------------------------
-			// default (original)
+			var __xmlList:Array; // <XSimpleXMLNode>
+			__xmlList = __xml.child ("Tiles");
+			
+			var __hasTiles:Boolean = __xmlList.length > 0;
+			
 			//------------------------------------------------------------------------------------------
-			deserializeRowCol_XMapItemXML_To_Items (__xml);
+			// default (original)
+			//
+			// even layers numbers or useArrayItems == false (TikiEdit)
+			//------------------------------------------------------------------------------------------
+			if (!m_XMapLayer.grid || useArrayItems == false) {
+				deserializeRowCol_XMapItemXML_To_Items (__xml);
+			}
 			
 			//------------------------------------------------------------------------------------------
 			// XMapItemXML to TileArray
 			//------------------------------------------------------------------------------------------
-			deserializeRowCol_XMapItemXML_To_TileArray (__xml);
+			else if (!__hasTiles) {
+				deserializeRowCol_XMapItemXML_To_TileArray (__xml);
+			}
 			
 			//------------------------------------------------------------------------------------------
 			// TilesXML to TileArray
 			//------------------------------------------------------------------------------------------
-			deserializeRowCol_TilesXML_To_TileArray (__xml);
+			else {
+				deserializeRowCol_TilesXML_To_TileArray (__xml);
+			}
 		}
 	
 //------------------------------------------------------------------------------------------
 		public function deserializeRowCol_TilesXML_To_TileArray (__xml:XSimpleXMLNode):void {
+			trace (": TilesXML to TileArray: ");
+			
 			var __xmlList:Array; // <XSimpleXMLNode>
 			__xmlList = __xml.child ("Tiles");
 			
 			if (__xmlList.length > 0) {
 				var __xml:XSimpleXMLNode = __xmlList[0];
 			
-				trace (": <Tiles/>: ", __xml.getText());
+				var __tilesString:String = __xml.getTextTrim();
+				var __imageClassIndex:int;
+				var	__frame:int;
+				
+				trace (": <Tiles/>: ", __tilesString, __tilesString.length);
+			
+				var i:int;
+				
+				for (var __row:int = 0; __row < m_tileRows; __row++) {
+					for (var __col:int = 0; __col < m_tileCols; __col++) {
+						i = __row * m_tileCols + __col;
+						
+						__imageClassIndex = CXToChar.indexOf (__tilesString.charAt (i * 4));
+						__frame = XType.parseInt (__tilesString.substr (i * 4 + 1, 3));
+
+						m_tmap[__row * m_tileCols + __col] = [m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __frame];
+					}
+				}
 			}
 		}
 	
 //------------------------------------------------------------------------------------------
-		public function deserializeRowCol_TilesXML_To_Items (__xml:XSimpleXMLNode):void {	
+		public function deserializeRowCol_TilesXML_To_Items (__xml:XSimpleXMLNode):void {
+			trace (": TilesXML to Items: ");
+			
+			var __xmlList:Array; // <XSimpleXMLNode>
+			__xmlList = __xml.child ("Tiles");
+			
+			if (__xmlList.length > 0) {
+				var __xml:XSimpleXMLNode = __xmlList[0];
+				
+				trace (": <Tiles/>: ", __xml.getTextTrim(), __xml.getTextTrim().length);
+			}
 		}
-		
+
 //------------------------------------------------------------------------------------------
 		public function deserializeRowCol_XMapItemXML_To_TileArray (__xml:XSimpleXMLNode):void {
+			trace (": XMapItemXML to TileArray: ");
+			
 			var __xmlList:Array; // <XSimpleXMLNode>
 			__xmlList = __xml.child ("XMapItem");
 			
