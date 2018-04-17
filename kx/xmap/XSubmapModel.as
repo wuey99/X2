@@ -446,9 +446,9 @@ package kx.xmap {
 			
 			if (m_XMapLayer.grid) {
 				xml = serializeRowCol_TileArray (xml);
+			} else {				
+				xml = serializeRowCol_XMapItem (xml);
 			}
-			
-			xml = serializeRowCol_XMapItem (xml);
 			
 			return xml;
 		}
@@ -631,7 +631,7 @@ package kx.xmap {
 					for (var __col:int = 0; __col < m_tileCols; __col++) {
 						i = __row * m_tileCols + __col;
 						
-						if (__tilesString.substr (i * 4, 4) !== "XXXX") {
+						if (__tilesString.substr (i * 4, 4) != "XXXX") {
 							__imageClassIndex = CXToChar.indexOf (__tilesString.charAt (i * 4));
 							__frame = XType.parseInt (__tilesString.substr (i * 4 + 1, 3));
 	
