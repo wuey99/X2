@@ -571,26 +571,41 @@ package kx.xmap {
 			var __hasTiles:Boolean = __xmlList.length > 0;
 			
 			//------------------------------------------------------------------------------------------
-			// default (original)
-			//
-			// even layers numbers or useArrayItems == false (TikiEdit)
+			trace ("//------------------------------------------------------------------------------------------");
+			trace (": deserializeRowCol: ", m_XMapLayer.grid);
+			
 			//------------------------------------------------------------------------------------------
-			if (!m_XMapLayer.grid || useArrayItems == false) {
+			// even layers numbers are always encoded as XMapItems and decoded as XMapItems
+			//------------------------------------------------------------------------------------------
+			if (!m_XMapLayer.grid) {
+				trace (": 0: ");
 				deserializeRowCol_XMapItemXML_To_Items (__xml);
 			}
 			
 			//------------------------------------------------------------------------------------------
-			// XMapItemXML to TileArray
+			// encoded as XMapItemXML
 			//------------------------------------------------------------------------------------------
 			else if (!__hasTiles) {
-				deserializeRowCol_XMapItemXML_To_TileArray (__xml);
+				if (useArrayItems == false) { // TikiEdit
+					trace(": 1: ");
+					deserializeRowCol_XMapItemXML_To_Items (__xml); 				
+				} else {
+					trace(": 2: ");
+					deserializeRowCol_XMapItemXML_To_TileArray (__xml);
+				}
 			}
 			
 			//------------------------------------------------------------------------------------------
-			// TilesXML to TileArray
+			// encoded as TilesXML
 			//------------------------------------------------------------------------------------------
 			else {
-				deserializeRowCol_TilesXML_To_TileArray (__xml);
+				if (useArrayItems == false) { // TikiEdit
+					trace(": 3: ");
+					deserializeRowCol_TilesXML_To_Items (__xml);
+				} else {
+					trace(": 4: ");
+					deserializeRowCol_TilesXML_To_TileArray (__xml);
+				}
 			}
 		}
 	
@@ -616,10 +631,14 @@ package kx.xmap {
 					for (var __col:int = 0; __col < m_tileCols; __col++) {
 						i = __row * m_tileCols + __col;
 						
-						__imageClassIndex = CXToChar.indexOf (__tilesString.charAt (i * 4));
-						__frame = XType.parseInt (__tilesString.substr (i * 4 + 1, 3));
-
-						m_tmap[__row * m_tileCols + __col] = [m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __frame];
+						if (__tilesString.substr (i * 4, 4) !== "XXXX") {
+							__imageClassIndex = CXToChar.indexOf (__tilesString.charAt (i * 4));
+							__frame = XType.parseInt (__tilesString.substr (i * 4 + 1, 3));
+	
+							m_tmap[__row * m_tileCols + __col] = [m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __frame];
+						} else {
+							m_tmap[__row * m_tileCols + __col] = ["", 0];
+						}
 					}
 				}
 			}
@@ -635,7 +654,116 @@ package kx.xmap {
 			if (__xmlList.length > 0) {
 				var __xml:XSimpleXMLNode = __xmlList[0];
 				
-				trace (": <Tiles/>: ", __xml.getTextTrim(), __xml.getTextTrim().length);
+				var __tilesString:String = __xml.getTextTrim();
+				var __imageClassIndex:int;
+				var	__frame:int;
+				
+				trace (": <Tiles/>: ", __tilesString, __tilesString.length);
+				
+				var __item:XMapItemModel;
+				
+				var i:int;
+				
+				if (useArrayItems) {
+					m_arrayItems = new Vector.<XMapItemModel> (/* __xmlList.length */);	
+					for (i = 0; i < __xmlList.length; i++) {
+						m_arrayItems.push (null);
+					}
+				}
+				
+				var __collisionRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
+				var __boundingRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
+				
+				__collisionRect.setRect (
+					0,
+					0,
+					TX_TILE_WIDTH,
+					TX_TILE_HEIGHT
+				);
+				
+				__boundingRect.setRect (
+					0,
+					0,
+					TX_TILE_WIDTH,
+					TX_TILE_HEIGHT
+				);
+				
+				var __x:Number = m_col * m_submapWidth;
+				var __y:Number = m_row * m_submapHeight;
+				
+				for (var __row:int = 0; __row < m_tileRows; __row++) {
+					for (var __col:int = 0; __col < m_tileCols; __col++) {
+						i = __row * m_tileCols + __col;
+						
+						if (__tilesString.substr (i * 4, 4) != "XXXX") {
+							__imageClassIndex = CXToChar.indexOf (__tilesString.charAt (i * 4));
+							__frame = XType.parseInt (__tilesString.substr (i * 4 + 1, 3));
+							
+							/*
+							__layerModel:XMapLayerModel,
+							__logicClassName:String,
+							__hasLogic:Boolean,
+							__name:String, __id:int,
+							__imageClassName:String, __frame:int,
+							__XMapItem:String,
+							__x:Number, __y:Number,
+							__scale:Number, __rotation:Number, __depth:Number,
+							__collisionRect:XRect,
+							__boundingRect:XRect,
+							__params:String,
+							...args
+							*/
+						
+							__item = m_XMapItemModelPoolManager.borrowObject () as XMapItemModel;
+						
+							var __id:int = m_XMapLayer.generateID ();
+								
+							trace (":      --->: ", __tilesString.substr (i*4, 4), __imageClassIndex, m_XMapLayer.getClassNameFromIndex (__imageClassIndex));
+							
+							__item.setup (
+								m_XMapLayer,
+								// __logicClassName
+								"XLogicObjectXMap:XLogicObjectXMap",
+								// m_XMapLayer.getClassNameFromIndex (__logicClassIndex),
+								// __hasLogic
+								false,
+								// __xml.hasAttribute ("hasLogic") && __xml.getAttribute ("hasLogic") == "true" ? true : false,
+								// __name, __id
+								"", __id,
+								// __xml.getAttributeString ("name"), __id,
+								m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __frame,
+								// m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __xml.getAttributeInt ("frame"),
+								// XMapItem
+								"",
+								// __xml.hasAttribute ("XMapItem") ? __xml.getAttribute ("XMapItem") : "",
+								__x + __col * TX_TILE_WIDTH, __y + __row * TX_TILE_HEIGHT,
+								// __xml.getAttributeFloat ("x"), __xml.getAttributeFloat ("y"),
+								// __scale, __rotation, __depth
+								1.0, 0.0, 0.0,
+								// __xml.getAttributeFloat ("scale"), __xml.getAttributeFloat ("rotation"), __xml.getAttributeFloat ("depth"),
+								// __collisionRect,
+								__collisionRect,
+								// __boundingRect,
+								__boundingRect,
+								// __params
+								"<params/>",
+								// __xml.child ("params")[0].toXMLString (),
+								// args
+								[]
+							);
+							
+							if (useArrayItems) {
+								m_arrayItems[m_arrayItemIndex++] = __item;
+							}
+							else
+							{
+								addItem (__item);
+							}
+							
+							m_XMapLayer.trackItem (__item);
+						}
+					}
+				}
 			}
 		}
 
