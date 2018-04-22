@@ -120,7 +120,7 @@ package kx.xmap {
 			m_tmap = new Vector.<Array> (); 
 			
 			for (i = 0; i < m_tileCols * m_tileRows; i++) {
-				m_tmap.push(["", 0]);
+				m_tmap.push([-1, 0]);
 			}
 			
 			m_inuse = 0;
@@ -318,6 +318,20 @@ package kx.xmap {
 		
 		public function set height (__val:int): /* @:set_type */ void {
 			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set XMapLayer XMapLayerModel */
+		
+		public function get XMapLayer ():XMapLayerModel {
+			return  m_XMapLayer;
+		}
+		
+		public function set XMapLayer (__val:XMapLayerModel): /* @:set_type */ void {
+			m_XMapLayer = __val;
+			
+			/* @:set_return XMapLayer; */			
 		}
 		/* @:end */
 		
@@ -635,9 +649,9 @@ package kx.xmap {
 							__imageClassIndex = CXToChar.indexOf (__tilesString.charAt (i * 4));
 							__frame = XType.parseInt (__tilesString.substr (i * 4 + 1, 3));
 	
-							m_tmap[__row * m_tileCols + __col] = [m_XMapLayer.getClassNameFromIndex (__imageClassIndex), __frame];
+							m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame];
 						} else {
-							m_tmap[__row * m_tileCols + __col] = ["", 0];
+							m_tmap[__row * m_tileCols + __col] = [-1, 0];
 						}
 					}
 				}
@@ -788,7 +802,7 @@ package kx.xmap {
 				var __col:int = int ((__x & m_submapWidthMask) / TX_TILE_HEIGHT);
 				var __row:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
 				
-				m_tmap[__row * m_tileCols + __col] = [__imageClassName, __frame];
+				m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame];
 			}			
 		}
 		
