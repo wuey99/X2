@@ -68,7 +68,9 @@ package kx.world.sprite {
 			
 			setRegistration ();
 
-			m_scale = 1.0;
+			x = y = 0;
+			rotation = 0.0;
+			scaleX = scaleY = m_scale = 1.0;
 			m_visible = true;
 		}
 		
