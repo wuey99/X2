@@ -799,10 +799,12 @@ package kx.xmap {
 				var __x:int = int (__xml.getAttributeFloat ("x"));
 				var __y:int = int (__xml.getAttributeFloat ("y"));
 				
-				var __col:int = int ((__x & m_submapWidthMask) / TX_TILE_HEIGHT);
-				var __row:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
-				
-				m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame];
+				if (__y >= m_row * m_submapHeight && __y < m_row * m_submapHeight + 512) {
+					var __col:int = int ((__x & m_submapWidthMask) / TX_TILE_WIDTH);
+					var __row:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
+					
+					m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame];
+				}
 			}			
 		}
 		

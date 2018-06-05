@@ -225,7 +225,7 @@ package kx.xmap {
 			__dstBitmapData = m_bitmap.bitmap.bitmapData;
 			
 			for (var __row:int = 0; __row < __tileRows; __row++) {
-				for (var __col:int = 0; __col < __tileRows; __col++) {
+				for (var __col:int = 0; __col < __tileCols; __col++) {
 					var __tile:Array /* <Dynamic> */  = __tmap[__row * __tileCols + __col];
 					
 					__srcBitmap = m_bitmapCacheManager.get (m_submapModel.XMapLayer.getClassNameFromIndex (__tile[0]));
