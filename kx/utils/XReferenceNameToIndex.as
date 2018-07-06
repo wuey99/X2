@@ -101,13 +101,17 @@ package kx.utils {
 		// in the Array is made available for reuse.
 		//------------------------------------------------------------------------------------------
 		public function removeIndexFromReferenceNames (__index:int):void {
-			m_referenceNamesCounts[__index]--;
+			if (m_referenceNamesCounts[__index] > 0) {
+				m_referenceNamesCounts[__index]--;
+			}
 			
+			/*
 			if (m_referenceNamesCounts[__index] == 0) {
 				m_referenceNamesStrings[__index] = "";
 				
 				m_freeReferenceNameIndexes.push (__index);
 			}
+			*/
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -130,18 +134,41 @@ package kx.utils {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public function setReferenceNameCount (__index:int, __value:int):void {
+			m_referenceNamesCounts[__index] = __value;
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function clearReferenceNamesCounts ():void {
+			var i:int;
+			
+			for (i = 0; i < m_referenceNamesCounts.length; i++) {
+				m_referenceNamesCounts[i] = 0;
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public function serialize ():XSimpleXMLNode {
 			var __xml:XSimpleXMLNode = new XSimpleXMLNode ();
 			
 			__xml.setupWithParams ("classNames", "", []);
 			
 			var i:int;
+			var __name:String;
+			var __count:int;
 			
 			for (i=0; i<m_referenceNamesStrings.length; i++) {
+				__name = m_referenceNamesStrings[i];
+				__count = m_referenceNamesCounts[i];
+				
+				if (__count == 0) {
+					__name = "";
+				}
+				
 				var __attribs:Array /* <Dynamic> */ = [
 					"index",		i,
-					"name",			m_referenceNamesStrings[i],
-					"count",		m_referenceNamesCounts[i]					
+					"name",			__name,
+					"count",		__count					
 				];
 				
 				var __referenceName:XSimpleXMLNode = new XSimpleXMLNode ();
