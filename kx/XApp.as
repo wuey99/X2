@@ -716,7 +716,7 @@ package kx {
 			trace ("active tasks XApp: ");
 												
 			m_XApp.getXTaskManager ().getTasks ().forEach ( /* @:castkey */
-				function (x:XSignal):void {
+				function (x:XTask):void {
 //					trace (": task: ",  i, ": ",  x,  ", parent: ", x.getParent ());
 				}
 			);
