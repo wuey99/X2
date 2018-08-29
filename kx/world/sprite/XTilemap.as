@@ -53,7 +53,6 @@ package kx.world.sprite {
 		public static var g_XApp:XApp;
 		
 		public var m_tilemap:Tilemap;
-		public var m_tileArray:TileArray;
 
 		//------------------------------------------------------------------------------------------
 		public function XTilemap () {
@@ -65,6 +64,7 @@ package kx.world.sprite {
 			super.setup ();
 			
 			m_tilemap = null;
+			m_frame = -1;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -108,16 +108,12 @@ package kx.world.sprite {
 			function __init ():void {
 				addChild (m_tilemap);
 				
-				var __tileArray:TileArray = m_tilemap.getTiles ();
-				
 				var i:int;
 				
-				for (i = 0; i < __tileArray.length; i++) {
-					__tileArray.position = i;
-					__tileArray.visible = false;
+				for (i = 0; i < m_tilemap.numTiles; i++) {
+					var __tile:Tile = m_tilemap.getTileAt (i);
+					__tile.visible = false;
 				}
-				
-				m_tilemap.setTiles (__tileArray);
 				
 				gotoAndStop (1);
 			}
@@ -153,19 +149,21 @@ package kx.world.sprite {
 		
 		//------------------------------------------------------------------------------------------
 		public override function goto (__frame:int):void {
-			var __tileArray:TileArray = m_tilemap.getTiles ();
+			var __tile:Tile;
 			
 			if (m_frame >= 0) {
-				__tileArray.position = m_frame;
-				__tileArray.visible = false;
+				__tile = m_tilemap.getTileAt (m_frame);
+				if (__tile != null) {
+					__tile.visible = false;
+				}
 			}
 			
 			m_frame = __frame - 1;
 			
-			__tileArray.position = m_frame;
-			__tileArray.visible = true;
-			
-			m_tilemap.setTiles (__tileArray);
+			__tile = m_tilemap.getTileAt (m_frame);
+			if (__tile != null) {
+				__tile.visible = true;
+			}
 		}
 
 		//------------------------------------------------------------------------------------------
