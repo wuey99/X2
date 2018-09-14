@@ -71,6 +71,11 @@ package kx.world.sprite {
 		public override function cleanup ():void {
 			super.cleanup ();
 			
+			alpha = 1.0;
+			visible = true;
+			visible2 = true;
+			scaleX = scaleY = 1.0;
+			
 			if (m_tilemap != null) {
 				var __tile:Tile;
 				
