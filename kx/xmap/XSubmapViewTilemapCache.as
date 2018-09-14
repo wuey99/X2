@@ -36,6 +36,7 @@ package kx.xmap {
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
+	import kx.pool.*;
 	
 	import flash.display.*;
 	import flash.geom.*;
@@ -54,6 +55,7 @@ package kx.xmap {
 	public class XSubmapViewTilemapCache extends XSubmapViewCache {
 		private var m_tilemap:XSubmapTilemap;
 		private var m_movieClipCacheManager:XMovieClipCacheManager;
+		private var m_XRectPoolManager:XObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewTilemapCache () {
@@ -65,6 +67,7 @@ package kx.xmap {
 			super.setup (__xxx, args);
 	
 			m_movieClipCacheManager = xxx.getMovieClipCacheManager ();
+			m_XRectPoolManager = xxx.getXRectPoolManager ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -182,6 +185,63 @@ package kx.xmap {
 					}
 				}
 			}
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public override function tileRefresh ():void {
+			tempRect.x = 0;
+			tempRect.y = 0;
+			tempRect.width = m_submapModel.width;
+			tempRect.height = m_submapModel.height;
+			
+			m_tilemap.removeTiles ();
+			
+			var __movieClip:XMovieClip;
+			var __srcTilemap:XTilemap;
+			var __tmap:Vector.<Array> = m_submapModel.tmap;
+			var __tileCols:int = m_submapModel.tileCols;
+			var __tileRows:int = m_submapModel.tileRows;
+			
+			var __boundingRect:XRect = m_XRectPoolManager.borrowObject () as XRect;
+			
+			__boundingRect.x = 0;
+			__boundingRect.y = 0;
+			__boundingRect.width = XSubmapModel.TX_TILE_WIDTH;
+			__boundingRect.height = XSubmapModel.TX_TILE_HEIGHT;
+			
+			for (var __row:int = 0; __row < __tileRows; __row++) {
+				for (var __col:int = 0; __col < __tileCols; __col++) {
+					var __tile:Array /* <Dynamic> */  = __tmap[__row * __tileCols + __col];
+					
+					__movieClip = m_movieClipCacheManager.get (m_submapModel.XMapLayer.getClassNameFromIndex (__tile[0]));
+				
+					if (__movieClip != null) {
+						__srcTilemap = __movieClip.getMovieClip () as XTilemap;
+						
+						var __srcTile:Tile = null;
+						var __dstTile:Tile = null;
+						
+						if (__tile[1] != 0) {
+							__srcTile = __srcTilemap.m_tilemap.getTileAt (int (__tile[1]) - 1);
+						}
+						
+						tempPoint.x = __col * XSubmapModel.TX_TILE_WIDTH;
+						tempPoint.y = __row * XSubmapModel.TX_TILE_HEIGHT;
+						
+						__dstTile = new Tile (0, 0, 0, 1.0, 1.0, 0.0);
+						__dstTile.id = __srcTile.id;
+						__dstTile.tileset = __srcTile.tileset;
+						__dstTile.x = tempPoint.x;
+						__dstTile.y = tempPoint.y;
+						
+						m_tilemap.tileset = __srcTilemap.m_tilemap.tileset;
+						
+						m_tilemap.addTile (__dstTile);
+					}
+				}
+			}
+			
+			m_XRectPoolManager.returnObject (__boundingRect);
 		}
 		
 //------------------------------------------------------------------------------------------

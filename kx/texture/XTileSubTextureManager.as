@@ -69,7 +69,7 @@ package kx.texture {
 		public function XTileSubTextureManager (__XApp:XApp, __width:int=2048, __height:int=2048) {
 			super (__XApp, __width, __height);
 			
-			wrapFlag = false;
+			wrapFlag = true;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -336,7 +336,9 @@ package kx.texture {
 			var __realBounds:Rectangle = __movieClipMetadata.getRealBounds ();
 			
 			var __tilemap:Tilemap = new Tilemap (int (__realBounds.width), int (__realBounds.height));
-			__tilemap.tileset = __tileset;
+			if (!wrapFlag) {
+				__tilemap.tileset = __tileset;
+			}
 			
 			var i:int;
 			

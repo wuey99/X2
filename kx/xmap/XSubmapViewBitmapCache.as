@@ -209,8 +209,6 @@ package kx.xmap {
 			
 			var __srcBitmap:XBitmap;
 			var __dstBitmapData:BitmapData;
-			var __submapX:Number = m_submapModel.x;
-			var __submapY:Number = m_submapModel.y;
 			var __tmap:Vector.<Array> = m_submapModel.tmap;
 			var __tileCols:int = m_submapModel.tileCols;
 			var __tileRows:int = m_submapModel.tileRows;
