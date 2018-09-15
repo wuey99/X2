@@ -57,6 +57,8 @@ package kx.xmap {
 		private var m_movieClipCacheManager:XMovieClipCacheManager;
 		private var m_XRectPoolManager:XObjectPoolManager;
 		
+		private var m_tileScaleFactor:Number;
+		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewTilemapCache () {
 			super ();
@@ -66,6 +68,8 @@ package kx.xmap {
 		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
 	
+			m_tileScaleFactor = (XSubmapModel.TX_TILE_WIDTH + 2) / XSubmapModel.TX_TILE_WIDTH;
+			
 			m_movieClipCacheManager = xxx.getMovieClipCacheManager ();
 			m_XRectPoolManager = xxx.getXRectPoolManager ();
 		}
@@ -79,6 +83,14 @@ package kx.xmap {
 			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_tilemap);
 		}
 
+//------------------------------------------------------------------------------------------
+		public override function setModel (__model:XSubmapModel):void {
+			super.setModel (__model);
+			
+			m_tilemap.scaleX = (m_submapModel.width + 2) / m_submapModel.width;
+			m_tilemap.scaleY = (m_submapModel.height + 2) / m_submapModel.height;
+		}
+		
 //------------------------------------------------------------------------------------------
 		public override function dictRefresh ():void {
 //			m_tilemap.bitmap.bitmapData.lock ();
@@ -233,6 +245,8 @@ package kx.xmap {
 						__dstTile.tileset = __srcTile.tileset;
 						__dstTile.x = tempPoint.x;
 						__dstTile.y = tempPoint.y;
+						__dstTile.scaleX = m_tileScaleFactor;
+						__dstTile.scaleY = m_tileScaleFactor;
 						
 						m_tilemap.tileset = __srcTilemap.m_tilemap.tileset;
 						
