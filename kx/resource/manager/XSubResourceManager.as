@@ -356,7 +356,13 @@ package kx.resource.manager {
 		// returns true if when the resource is successfully unloaded.
 		//------------------------------------------------------------------------------------------
 		public function unloadClassByName (__className:String):Boolean {
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			return false;
+			// </AS3>
 			
 			if (!m_loadComplete) {
 				return false;
