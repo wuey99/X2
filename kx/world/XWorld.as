@@ -292,30 +292,45 @@ package kx.world {
 			}
 			else
 			{
-	
 				addEventListener (Event.ENTER_FRAME, onEnterFrame);		
 			}
 		}
 
-//------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup ();
 			
 			quitMouseScript ();
 			
+			if (m_timer != null) {
+				m_timer.removeEventListener (TimerEvent.TIMER, onEnterFrame);
+			} else {
+				removeEventListener(Event.ENTER_FRAME, onEnterFrame);					
+			}
+			
+			m_timer1000.removeEventListener (TimerEvent.TIMER, onUpdateTimer1000);
+			
 			m_XLogicManager.cleanup ();
 			m_XLogicManager2.cleanup ();
 			
-// deprecate this?
+			// deprecate this?
 			m_XTaskManager.removeAllTasks ();
 			m_XTaskManagerCX.removeAllTasks ();
 			
 			m_renderManager.removeAllTasks ();
 			m_XSignalManager.removeAllXSignals ();
 			m_XBulletCollisionManager.cleanup ();
-				
-			removeEventListener(Event.ENTER_FRAME, onEnterFrame);	
-			removeEventListener(Event.RENDER, onRenderFrame);
+			
+			removeEventListener (Event.RENDER, onRenderFrame);
+			removeEventListener (Event.ENTER_FRAME, onFPSCounter);
+			
+			for (var i:Number = 0; i<MAX_LAYERS; i++) {
+				m_XWorldLayers[i].cleanup ();
+				removeChild (m_XWorldLayers[i]);
+			}
+			
+			m_XHudLayer.cleanup();
+			removeChild (m_XHudLayer);
 		}
 		
 //------------------------------------------------------------------------------------------

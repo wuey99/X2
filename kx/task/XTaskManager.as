@@ -38,12 +38,7 @@ package kx.task {
 		protected var m_XTasks:XDict; // <XTask, Int>
 		protected var m_paused:int;
 		protected var m_XApp:XApp;
-		protected var m_pools:Array; // <XObjectPoolManager>
-		protected var m_currentPool:int;
-		protected var m_poolCycle:int;
-
-		public const NUM_POOLS:int = 8;
-		public const POOL_MASK:int = 7;
+		protected var m_poolManager:XObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------
 		public function XTaskManager (__XApp:XApp) {
@@ -53,14 +48,7 @@ package kx.task {
 			
 			m_paused = 0;
 			
-			m_pools = new Array (); // <XObjectPoolManager>
-			
-			for (var i:int=0; i<NUM_POOLS; i++) {
-				m_pools.push (null);
-			}
-			
-			for (var i:int=0; i<NUM_POOLS; i++) {
-				m_pools[i] = new XObjectPoolManager (
+				m_poolManager = new XObjectPoolManager (
 					function ():* {
 						return new XTask ();
 					},
@@ -69,15 +57,11 @@ package kx.task {
 						return null;
 					},
 					
-					2048, 256,
+					512, 256,
 					
 					function (x:*):void {
 					}
 				);
-			}
-			
-			m_currentPool = 0;
-			m_poolCycle = 0;
 		}
 
 //------------------------------------------------------------------------------------------
@@ -116,14 +100,12 @@ package kx.task {
 		
 //------------------------------------------------------------------------------------------
 		public function addTask (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = true):XTask {
-			var __pool:XObjectPoolManager = m_pools[m_currentPool];
-			
-			var __task:XTask = __pool.borrowObject () as XTask;
+			var __task:XTask = m_poolManager.borrowObject () as XTask;
+//			var __task:XTask = new XTask ();
 			__task.setup (__taskList, __findLabelsFlag);
 			
 			__task.setManager (this);
 			__task.setParent (this);
-			__task.setPool (__pool);
 			
 			m_XTasks.set (__task, 0);
 			
@@ -145,7 +127,7 @@ package kx.task {
 			if (m_XTasks.exists (__task)) {
 				__task.kill ();
 				
-				__task.getPool ().returnObjectTo (m_pools[(m_currentPool + POOL_MASK) & (POOL_MASK)], __task);
+				m_poolManager.returnObject (__task);
 				
 				m_XTasks.remove (__task);
 			}
@@ -156,13 +138,7 @@ package kx.task {
 			if (m_paused > 0) {
 				return;
 			}
-			
-			m_poolCycle++; m_poolCycle &= 63;
-			
-			if (m_poolCycle == 0) {
-				m_currentPool = (m_currentPool + 1) & (POOL_MASK);
-			}
-			
+
 			m_XTasks.forEach (
 				function (x:XTask):void {
 					var __task:XTask = x as XTask;

@@ -85,13 +85,11 @@ package kx.world.tiles {
 		public override function cleanup ():void {
 //			m_bitmap.cleanup ();
 			
-			removeAll ();
-			
 			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_bitmap);
 					
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			xxx.getXPointPoolManager ().returnObject (tempPoint);
-			
+
 			if (m_submapModel != null) {
 				fireKillSignal (m_submapModel);
 							
@@ -99,6 +97,9 @@ package kx.world.tiles {
 				
 				m_submapModel = null;
 			}
+			
+			removeAll ();
+			
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -208,8 +209,8 @@ package kx.world.tiles {
 			xxx.getXRectPoolManager ().returnObject (i);
 					
 // yep, kill it
-//			trace (": ---------------------------------------: ");
-//			trace (": cull: ", this);
+			trace (": ---------------------------------------: ");
+			trace (": cull: ", this);
 			
 			killLater ();
 		}

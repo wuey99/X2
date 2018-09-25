@@ -180,8 +180,10 @@ package kx.task {
 			m_taskList = __taskList;
 			m_taskIndex = 0;
 			m_labels.removeAllKeys ();
-//			m_stack = new Array (8);
-//			m_loop = new Array (8);
+			for (var i:int = 0; i < 8; i++) {
+				m_stack[i] = 0;
+				m_loop[i] = 0;
+			}
 			m_stackPtr = 0;
 			m_ticks = 0x0100 + 0x0080;
 			m_flags = ~_FLAGS_EQ;
