@@ -649,7 +649,7 @@ package kx.xmap {
 							__imageClassIndex = CXToChar.indexOf (__tilesString.charAt (i * 4));
 							__frame = XType.parseInt (__tilesString.substr (i * 4 + 1, 3));
 	
-							m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame];
+							m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame != 0 ? __frame : 1];
 						} else {
 							m_tmap[__row * m_tileCols + __col] = [-1, 0];
 						}
