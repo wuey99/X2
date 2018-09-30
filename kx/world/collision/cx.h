@@ -107,3 +107,13 @@
 		
 		public static const TX_TILE_WIDTH_UNMASK:int = 0xffffffc0;
 		public static const TX_TILE_HEIGHT_UNMASK:int = 0xffffffc0;
+		
+		// (tikiedit) tile width, height
+		public static const CX_BOTH_WIDTH:int = 64;
+		public static const CX_BOTH_HEIGHT:int = 64;
+		
+		public static const CX_BOTH_WIDTH_MASK:int = 63;
+		public static const CX_BOTH_HEIGHT_MASK:int = 63;
+		
+		public static const CX_BOTH_WIDTH_UNMASK:int = 0xffffffc0;
+		public static const CX_BOTH_HEIGHT_UNMASK:int = 0xffffffc0
