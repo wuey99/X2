@@ -446,6 +446,8 @@ package kx.world {
 						__logicObject.setMasterVisible (__logicObject.getVisible ());
 						__logicObject.setMasterScaleX (__logicObject.getScaleX ());
 						__logicObject.setMasterScaleY (__logicObject.getScaleY ());
+						__logicObject.setMasterFlipX (__logicObject.getFlipX ());
+						__logicObject.setMasterFlipY (__logicObject.getFlipY ());
 						__logicObject.setMasterRotation (__logicObject.getRotation ());
 								
 						__logicObject.updateDisplay ();

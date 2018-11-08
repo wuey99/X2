@@ -116,4 +116,4 @@
 		public static const CX_BOTH_HEIGHT_MASK:int = 63;
 		
 		public static const CX_BOTH_WIDTH_UNMASK:int = 0xffffffc0;
-		public static const CX_BOTH_HEIGHT_UNMASK:int = 0xffffffc0
+		public static const CX_BOTH_HEIGHT_UNMASK:int = 0xffffffc0;
