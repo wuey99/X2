@@ -39,7 +39,14 @@ package kx.pool {
 	
 //------------------------------------------------------------------------------------------	
 	public class XObjectPoolManager extends Object {
+		// <HAXE>
+		/* --
+		public var m_freeObjects:Array<Array<Dynamic>>;
+		-- */
+		// </HAXE>
+		// <AS3>
 		public var m_freeObjects:Array; // <Dynamic>
+		// </AS3>
 		public var m_numFreeObjects:int;
 		private var m_inuseObjects:XDict; // <Dynamic, Int>
 		private var m_newObject:Function;
@@ -47,6 +54,11 @@ package kx.pool {
 		private var m_overflow:int;
 		private var m_cleanup:Function;
 		private var m_numberOfBorrowedObjects:int;
+		private var m_sectionSize:int;
+		private var m_otherSize:int;
+		private var m_section:int;
+		private var m_otherSection:int;
+		private var m_sectionIndex:int;
 		
 //------------------------------------------------------------------------------------------
 		public function XObjectPoolManager (
@@ -57,12 +69,30 @@ package kx.pool {
 			__cleanup:Function = null
 		) {
 				
-			m_freeObjects = new Array (); // <Dynamic>
+			// <HAXE>
+			/* --
+			m_freeObjects = new Array<Array<Dynamic>> ();
+			-- */
+			// </HAXE>
+			// <AS3>
+			m_freeObjects = new Array ();
+			// </AS3>
 			m_inuseObjects = new XDict (); // <Dynamic, Int>
 			m_newObject = __newObject;
 			m_cloneObject = __cloneObject;
 			m_overflow = __overflow;
 			m_cleanup = __cleanup;
+			
+			m_freeObjects.push (new Array () /* <Dynamic> */);
+			m_freeObjects.push (new Array () /* <Dynamic> */);
+			
+			m_sectionSize = 0;
+			m_otherSize = 0;
+			
+			m_section = 0;
+			m_otherSection = 1;
+			
+			m_sectionIndex = 0;
 			
 			m_numFreeObjects = 0;
 			m_numberOfBorrowedObjects = 0;
@@ -80,8 +110,12 @@ package kx.pool {
 			
 			var i:int;
 			
-			for (i=0; i<m_freeObjects.length; i++) {
-				m_cleanup (m_freeObjects[i]);
+			for (i=0; i<m_sectionSize; i++) {
+				m_cleanup (m_freeObjects[m_section][i]);
+			}
+			
+			for (i=0; i<m_otherSize; i++) {
+				m_cleanup (m_freeObjects[m_otherSection][i]);
 			}
 		}
 		
@@ -90,15 +124,24 @@ package kx.pool {
 			var i:int;
 			
 			for (i=0; i<__numObjects; i++) {
-				m_freeObjects[m_numFreeObjects++] = (m_newObject ());
+				m_freeObjects[0].push (null);
+				m_freeObjects[1].push (null);
 			}
+			
+			for (i=0; i<__numObjects; i++) {
+				m_freeObjects[m_section][m_sectionSize + i] = m_newObject ();
+			}
+			
+			m_sectionSize += __numObjects;
+			
+			m_numFreeObjects += __numObjects;
 		}
 
 //------------------------------------------------------------------------------------------
 		/* @:get, set freeObjects Array<Dynamic> */
 		
 		public function get freeObjects ():Array /* <Dynamic> */ {
-			return m_freeObjects;
+			return m_freeObjects[m_section];
 		}
 
 		public function set freeObjects (__val:*): /* @:set_type */ void {
@@ -108,7 +151,7 @@ package kx.pool {
 		
 //------------------------------------------------------------------------------------------
 		public function totalNumberOfObjects ():int {
-			return m_freeObjects.length + m_numberOfBorrowedObjects;	
+			return m_sectionSize + m_otherSize + m_numberOfBorrowedObjects;	
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -145,7 +188,8 @@ package kx.pool {
 //------------------------------------------------------------------------------------------
 		public function returnObject (__object:Object):void {
 			if (m_inuseObjects.exists (__object)) {
-				m_freeObjects[m_numFreeObjects++] = (__object);
+				m_freeObjects[m_otherSection][m_otherSize++] = __object;
+				m_numFreeObjects++;
 				
 				m_inuseObjects.remove (__object);
 				
@@ -156,7 +200,8 @@ package kx.pool {
 //------------------------------------------------------------------------------------------
 		public function returnObjectTo (__pool:XObjectPoolManager, __object:Object):void {
 			if (m_inuseObjects.exists (__object)) {
-				__pool.m_freeObjects[__pool.m_numFreeObjects++] = (__object);
+				__pool.m_freeObjects[m_otherSection][m_otherSize++] = __object;
+				__pool.m_numFreeObjects++;
 				
 				m_inuseObjects.remove (__object);
 				
@@ -170,7 +215,16 @@ package kx.pool {
 				addMoreObjects (m_overflow);
 			}
 			
-			var __object:Object = m_freeObjects.pop (); m_numFreeObjects--;
+			if (m_sectionIndex == m_sectionSize) {
+				m_sectionSize = m_otherSize;
+				m_otherSection = m_section;
+				m_section = (m_section + 1) & 1;
+				m_sectionIndex = 0;
+				m_otherSize = 0;
+			}
+			
+			var __object:Object = m_freeObjects[m_section][m_sectionIndex++];
+			m_numFreeObjects--;
 				
 			m_inuseObjects.set (__object, 0);
 			
