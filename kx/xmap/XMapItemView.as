@@ -33,7 +33,7 @@ package kx.xmap {
 	import kx.world.*;
 	import kx.world.collision.*;
 	import kx.world.logic.*;
-	import kx.world.sprite.XDepthSprite;
+	import kx.world.sprite.*;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -42,7 +42,7 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 	public class XMapItemView extends XLogicObject {
-		protected var m_sprite:MovieClip;
+		protected var m_sprite:XBitmap;
 		protected var x_sprite:XDepthSprite;
 		protected var m_frame:int;
 		
@@ -63,12 +63,9 @@ package kx.xmap {
 //------------------------------------------------------------------------------------------
 // create sprite
 //------------------------------------------------------------------------------------------
-		protected function __createSprites (__spriteClassName:String):void {			
-			m_sprite = XType.createInstance (xxx.getClass (__spriteClassName));
-// !STARLING!
-			if (CONFIG::flash) {
-				x_sprite = addSprite (m_sprite);
-			}
+		protected function __createSprites (__spriteClassName:String):void {
+			m_sprite = createXBitmap (__spriteClassName);
+			x_sprite = addSpriteAt (m_sprite, m_sprite.dx, m_sprite.dy);
 			
 			if (m_frame != 0) {
 				gotoAndStop (m_frame);
@@ -81,12 +78,12 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 		public function getTotalFrames ():int {
-			return m_sprite.totalFrames;	
+			return m_sprite.getNumBitmaps ();	
 		}	
 		
 //------------------------------------------------------------------------------------------
 		public override function gotoAndPlay (__frame:int):void {
-			m_sprite.gotoAndPlay (__frame);
+			m_sprite.gotoAndStop (__frame);
 		}
 		
 //------------------------------------------------------------------------------------------

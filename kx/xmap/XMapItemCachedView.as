@@ -53,13 +53,9 @@ package kx.xmap {
 		//------------------------------------------------------------------------------------------
 		// create sprite
 		//------------------------------------------------------------------------------------------
-		protected override function __createSprites (__spriteClassName:String):void {			
-			m_sprite = XType.createInstance (xxx.getClass (__spriteClassName));
-			m_sprite.cacheAsBitmap = true;	
-// !STARLING!
-			if (CONFIG::flash) {
-				x_sprite = addSprite (m_sprite);
-			}
+		protected override function __createSprites (__spriteClassName:String):void {				
+			m_sprite = createXBitmap (__spriteClassName);
+			x_sprite = addSpriteAt (m_sprite, m_sprite.dx, m_sprite.dy);
 			
 			if (m_frame != 0) {
 				gotoAndStop (m_frame);

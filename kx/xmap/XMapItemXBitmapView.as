@@ -58,21 +58,14 @@ package kx.xmap {
 		//------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
 			super.cleanup ();
-			
-			m_bitmap.cleanup ();
 		}
 		
 		//------------------------------------------------------------------------------------------
 		// create sprite
 		//------------------------------------------------------------------------------------------
-		protected override function __createSprites (__spriteClassName:String):void {			
-			m_bitmap = new XBitmap ();
-			m_bitmap.setup ();
-			m_bitmap.initWithClassName (xxx, null, __spriteClassName);
-// !STARLING!
-			if (CONFIG::flash) {
-				x_sprite = addSpriteAt (m_bitmap, m_bitmap.dx, m_bitmap.dy);
-			}
+		protected override function __createSprites (__spriteClassName:String):void {		
+			m_sprite = createXBitmap (__spriteClassName);
+			x_sprite = addSpriteAt (m_bitmap, m_bitmap.dx, m_bitmap.dy);
 			
 			if (m_frame != 0) {
 				gotoAndStop (m_frame);
