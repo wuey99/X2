@@ -42,7 +42,7 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 	public class XMapItemView extends XLogicObject {
-		protected var m_sprite:XBitmap;
+		protected var m_sprite:XMovieClip;
 		protected var x_sprite:XDepthSprite;
 		protected var m_frame:int;
 		
@@ -64,8 +64,8 @@ package kx.xmap {
 // create sprite
 //------------------------------------------------------------------------------------------
 		protected function __createSprites (__spriteClassName:String):void {
-			m_sprite = createXBitmap (__spriteClassName);
-			x_sprite = addSpriteAt (m_sprite, m_sprite.dx, m_sprite.dy);
+			m_sprite = createXMovieClip (__spriteClassName);
+			x_sprite = addSprite (m_sprite);
 			
 			if (m_frame != 0) {
 				gotoAndStop (m_frame);
@@ -78,7 +78,7 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 		public function getTotalFrames ():int {
-			return m_sprite.getNumBitmaps ();	
+			return m_sprite.getTotalFrames ();	
 		}	
 		
 //------------------------------------------------------------------------------------------

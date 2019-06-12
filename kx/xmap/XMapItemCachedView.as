@@ -54,8 +54,8 @@ package kx.xmap {
 		// create sprite
 		//------------------------------------------------------------------------------------------
 		protected override function __createSprites (__spriteClassName:String):void {				
-			m_sprite = createXBitmap (__spriteClassName);
-			x_sprite = addSpriteAt (m_sprite, m_sprite.dx, m_sprite.dy);
+			m_sprite = createXMovieClip (__spriteClassName);
+			x_sprite = addSprite (m_sprite);
 			
 			if (m_frame != 0) {
 				gotoAndStop (m_frame);

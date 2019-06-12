@@ -153,6 +153,11 @@ package kx.world.sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public override function getTotalFrames ():int {
+			return getNumBitmaps ();
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public function getBitmapDataAnim ():XBitmapDataAnim {
 			return m_bitmapDataAnim;
 		}

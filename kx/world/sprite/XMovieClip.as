@@ -147,6 +147,11 @@ package kx.world.sprite {
 		}
 
 		//------------------------------------------------------------------------------------------
+		public function getTotalFrames ():int {
+			return m_bitmap.getTotalFrames ();	
+		}	
+		
+		//------------------------------------------------------------------------------------------
 		public function play ():void {
 		}
 		

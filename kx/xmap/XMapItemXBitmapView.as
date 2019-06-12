@@ -43,7 +43,7 @@ package kx.xmap {
 	
 	//------------------------------------------------------------------------------------------
 	public class XMapItemXBitmapView extends XMapItemView {
-		protected var m_bitmap:XBitmap;
+		protected var m_bitmap:XMovieClip;
 		
 		//------------------------------------------------------------------------------------------
 		public function XMapItemXBitmapView () {
@@ -64,7 +64,7 @@ package kx.xmap {
 		// create sprite
 		//------------------------------------------------------------------------------------------
 		protected override function __createSprites (__spriteClassName:String):void {		
-			m_sprite = createXBitmap (__spriteClassName);
+			m_sprite = createXMovieClip (__spriteClassName);
 			x_sprite = addSpriteAt (m_bitmap, m_bitmap.dx, m_bitmap.dy);
 			
 			if (m_frame != 0) {
@@ -78,7 +78,7 @@ package kx.xmap {
 		
 		//------------------------------------------------------------------------------------------
 		public override function getTotalFrames ():int {
-			return m_bitmap.getNumBitmaps ();	
+			return m_bitmap.getTotalFrames ();	
 		}	
 		
 		//------------------------------------------------------------------------------------------
