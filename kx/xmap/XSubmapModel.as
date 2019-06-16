@@ -173,6 +173,40 @@ package kx.xmap {
 		/* @:end */
 		
 //------------------------------------------------------------------------------------------
+		public function setTile (__tile:Array /* <Dynamic> */, __col:int, __row:int):void {
+			m_tmap[__row * m_tileCols + __col] = __tile;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getTile (__col:int, __row:int):Array { // <Dynamic>
+			return m_tmap[__row * m_tileCols + __col];
+		}
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set tileCols Int */
+		
+		public function get tileCols ():int {
+			return m_tileCols;
+		}
+		
+		public function set tileCols (__val:int): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
+		/* @:get, set tileRows Int */
+		
+		public function get tileRows ():int {
+			return m_tileRows;
+		}
+		
+		public function set tileRows (__val:int): /* @:set_type */ void {
+			/* @:set_return 0; */			
+		}
+		/* @:end */
+		
+//------------------------------------------------------------------------------------------
 		public function setCXTile (__type:int, __col:int, __row:int):void {
 			m_cmap[__row * m_cols + __col] = __type;
 		}
@@ -198,20 +232,6 @@ package kx.xmap {
 		}	
 		
 //------------------------------------------------------------------------------------------
-		/* @:get, set inuse Int */
-		
-		public function get inuse ():int {
-			return m_inuse;
-		}
-		
-		public function set inuse (__inuse:int): /* @:set_type */ void {
-			m_inuse = __inuse;
-			
-			/* @:set_return __inuse; */			
-		}
-		/* @:end */
-
-//------------------------------------------------------------------------------------------
 		/* @:get, set cols Int */
 		
 		public function get cols ():int {
@@ -235,30 +255,21 @@ package kx.xmap {
 		}
 		/* @:end */
 			
-//------------------------------------------------------------------------------------------
-		/* @:get, set tileCols Int */
-		
-		public function get tileCols ():int {
-			return m_tileCols;
-		}
-		
-		public function set tileCols (__val:int): /* @:set_type */ void {
-			/* @:set_return 0; */			
-		}
-		/* @:end */
-		
-//------------------------------------------------------------------------------------------
-		/* @:get, set tileRows Int */
-		
-		public function get tileRows ():int {
-			return m_tileRows;
-		}
-		
-		public function set tileRows (__val:int): /* @:set_type */ void {
-			/* @:set_return 0; */			
-		}
-		/* @:end */
 				
+//------------------------------------------------------------------------------------------
+		/* @:get, set inuse Int */
+		
+		public function get inuse ():int {
+			return m_inuse;
+		}
+		
+		public function set inuse (__inuse:int): /* @:set_type */ void {
+			m_inuse = __inuse;
+			
+			/* @:set_return __inuse; */			
+		}
+		/* @:end */
+
 //------------------------------------------------------------------------------------------
 		/* @:get, set boundingRect XRect */
 		
