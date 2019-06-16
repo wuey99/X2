@@ -775,7 +775,7 @@ package kx.xmap {
 			var rows:int = r2-r1+1;
 			
 			tiles = new Vector.<Array> ();
-			for (var i:int = 0; i< cols * rows; i++) {
+			for (var i:int = 0; i < cols * rows; i++) {
 				tiles.push (0);
 			}
 			
@@ -851,7 +851,7 @@ package kx.xmap {
 			var rows:int = r2-r1+1;
 
 			tiles = new Array (); // <Int>
-			for (var i:int = 0; i< cols * rows; i++) {
+			for (var i:int = 0; i < cols * rows; i++) {
 				tiles.push (0);
 			}
 			
