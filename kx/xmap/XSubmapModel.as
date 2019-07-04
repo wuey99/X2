@@ -613,7 +613,8 @@ package kx.xmap {
 			else if (!__hasTiles) {
 				if (useArrayItems == false) { // TikiEdit
 					trace(": 1: ");
-					deserializeRowCol_XMapItemXML_To_Items (__xml); 				
+					deserializeRowCol_XMapItemXML_To_Items (__xml); 
+					deserializeRowCol_XMapItemXML_To_TileArray (__xml);
 				} else {
 					trace(": 2: ");
 					deserializeRowCol_XMapItemXML_To_TileArray (__xml);
@@ -627,6 +628,7 @@ package kx.xmap {
 				if (useArrayItems == false) { // TikiEdit
 					trace(": 3: ");
 					deserializeRowCol_TilesXML_To_Items (__xml);
+					deserializeRowCol_TilesXML_To_TileArray (__xml);
 				} else {
 					trace(": 4: ");
 					deserializeRowCol_TilesXML_To_TileArray (__xml);

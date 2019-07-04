@@ -776,7 +776,7 @@ package kx.xmap {
 			
 			tiles = new Vector.<Array> ();
 			for (var i:int = 0; i < cols * rows; i++) {
-				tiles.push (0);
+				tiles.push ([-1, 0]);
 			}
 			
 			for (var row:int=r1; row <= r2; row++) {
@@ -825,6 +825,42 @@ package kx.xmap {
 						tiles[dstRow * cols + dstCol],
 						col & colMask, row & rowMask
 					);
+				}
+			}
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function eraseWithTiles (
+			tiles:Vector.<Array>,
+			c1:int, r1:int,
+			c2:int, r2:int
+		):void {
+			// col, row divisor
+			var row8:int = int (m_submapHeight/TX_TILE_HEIGHT);
+			var col8:int = int (m_submapWidth/TX_TILE_WIDTH);
+			
+			// col, row mask for the submap
+			var rowMask:int = int (row8-1);
+			var colMask:int = int (col8-1);
+			
+			// total columns wide, rows high
+			var cols:int = c2-c1+1;
+			var rows:int = r2-r1+1;
+			
+			for (var row:int=r1; row <= r2; row++) {
+				var submapRow:int = int (row/row8);
+				
+				for (var col:int=c1; col <= c2; col++) {
+					var dstCol:int = col-c1, dstRow:int = row-r1;
+					
+					var submapCol:int = int (col/col8);
+					
+					/* TODO *
+					m_XSubmaps[submapRow][submapCol].setTile (
+						CX_EMPTY,
+						col & colMask, row & rowMask
+					);
+					*/
 				}
 			}
 		}
