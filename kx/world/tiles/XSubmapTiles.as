@@ -33,7 +33,8 @@ package kx.world.tiles {
 	import kx.world.collision.*;
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
-	import kx.xmap.XSubmapModel;
+	import kx.xmap.*;
+	import kx.pool.*;
 	
 	import flash.display.*;
 	import flash.geom.*;
@@ -58,7 +59,7 @@ package kx.world.tiles {
 		private var tempRect:XRect;
 		private var tempPoint:XPoint;
 
-		private var m_XMapView:*;
+		protected var m_poolManager:XObjectPoolManager;
 
 //------------------------------------------------------------------------------------------	
 		public function XSubmapTiles () {
@@ -71,7 +72,7 @@ package kx.world.tiles {
 		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
 			
-			m_XMapView = getArg (args, 0);
+			m_poolManager = getArg (args, 0);
 			
 			createSprites ();
 			
@@ -82,10 +83,10 @@ package kx.world.tiles {
 		}
 
 //------------------------------------------------------------------------------------------
-		public override function cleanup ():void {
-//			m_bitmap.cleanup ();
+		public override function cleanup ():void {	
+			returnBorrowedObjects ();
 			
-			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_bitmap);
+			m_poolManager.returnObject (m_bitmap);
 					
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			xxx.getXPointPoolManager ().returnObject (tempPoint);
@@ -219,7 +220,7 @@ package kx.world.tiles {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XBitmap;
+			m_bitmap = m_poolManager.borrowObject () as XBitmap;
 // !STARLING!
 			if (CONFIG::flash) {
 				x_sprite = addSpriteAt (m_bitmap, 0, 0);

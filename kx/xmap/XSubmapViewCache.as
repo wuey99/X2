@@ -27,20 +27,21 @@
 //------------------------------------------------------------------------------------------
 package kx.xmap {
 
+	import flash.display.*;
+	import flash.geom.*;
+	import flash.text.*;
+	import flash.utils.*;
+	
 	import kx.*;
 	import kx.bitmap.XBitmapCacheManager;
 	import kx.collections.*;
 	import kx.geom.*;
+	import kx.pool.XObjectPoolManager;
 	import kx.world.*;
 	import kx.world.collision.*;
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
-	
-	import flash.display.*;
-	import flash.geom.*;
-	import flash.text.*;
-	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
 // instead of maintaining an XLogicObject for an XMapItemModel (for the view), maintain a 
@@ -61,7 +62,7 @@ package kx.xmap {
 // 3) possibly large set-up times (each Submap is 512 x 512 pixels by default)
 //------------------------------------------------------------------------------------------
 	public class XSubmapViewCache extends XLogicObject {
-		protected var m_XMapView:XMapView;
+		protected var m_poolManager:XObjectPoolManager;
 		protected var m_submapModel:XSubmapModel;
 		
 		protected var x_sprite:XDepthSprite;
@@ -82,8 +83,8 @@ package kx.xmap {
 		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
 			
-			m_XMapView = getArg (args, 0);
-			
+			m_poolManager = getArg (args, 0);
+	
 			createSprites ();
 			
 			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
@@ -94,8 +95,8 @@ package kx.xmap {
 
 //------------------------------------------------------------------------------------------
 		public override function cleanup ():void {
-			removeAll ();
-	
+			returnBorrowedObjects ();
+			
 			xxx.getXRectPoolManager ().returnObject (tempRect);
 			xxx.getXPointPoolManager ().returnObject (tempPoint);
 			
@@ -106,14 +107,11 @@ package kx.xmap {
 				
 				m_submapModel = null;
 			}
+			
+			removeAll ();
 		}
 
-//------------------------------------------------------------------------------------------
-		public function setXMapView (__XMapView:XMapView):void {
-			m_XMapView = __XMapView;
-		}		
-		
-//------------------------------------------------------------------------------------------
+//x------------------------------------------------------------------------------------------
 		public function setModel (__model:XSubmapModel):void {
 			m_submapModel = __model;
 			
@@ -157,7 +155,7 @@ package kx.xmap {
 				
 				return;
 			}
-			
+
 // determine whether this object is outside the current viewPort
 			var v:XRect = xxx.getViewRect ();
 						
@@ -174,7 +172,7 @@ package kx.xmap {
 // yep, kill it
 //			trace (": ---------------------------------------: ");
 //			trace (": cull: ", this);
-			
+	
 			killLater ();
 		}
 

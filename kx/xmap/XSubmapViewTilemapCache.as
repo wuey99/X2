@@ -80,7 +80,7 @@ package kx.xmap {
 						
 			m_tilemap.cleanup ();
 			
-			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_tilemap);
+			m_poolManager.returnObject (m_tilemap);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ package kx.xmap {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_tilemap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapTilemap;
+			m_tilemap = m_poolManager.borrowObject () as XSubmapTilemap;
 			x_sprite = addSpriteAt (m_tilemap, 0, 0);
 			x_sprite.setDepth (getDepth ());
 			

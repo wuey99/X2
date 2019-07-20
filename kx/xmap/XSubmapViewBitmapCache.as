@@ -66,7 +66,7 @@ package kx.xmap {
 		public override function cleanup ():void {
 			super.cleanup();
 			
-			m_XMapView.getSubmapBitmapPoolManager ().returnObject (m_bitmap);
+			m_poolManager.returnObject (m_bitmap);
 		}
 
 //------------------------------------------------------------------------------------------
@@ -252,7 +252,7 @@ package kx.xmap {
 // create sprites
 //------------------------------------------------------------------------------------------
 		public override function createSprites ():void {
-			m_bitmap = m_XMapView.getSubmapBitmapPoolManager ().borrowObject () as XSubmapBitmap;
+			m_bitmap = m_poolManager.borrowObject () as XSubmapBitmap;
 			x_sprite = addSpriteAt (m_bitmap, 0, 0);
 			x_sprite.setDepth (getDepth ());
 			

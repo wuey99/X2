@@ -260,13 +260,16 @@ package kx.world.logic {
 		
 //------------------------------------------------------------------------------------------
 		public function cleanup ():void {
+			/*
 			xxx.getXPointPoolManager ().returnObject (m_pos);
 			xxx.getXPointPoolManager ().returnObject (rp);
-			
 			xxx.getXRectPoolManager ().returnObject (m_viewPortRect);
 			xxx.getXRectPoolManager ().returnObject (m_selfRect);
 			xxx.getXRectPoolManager ().returnObject (m_itemRect);
 			xxx.getXPointPoolManager ().returnObject (m_itemPos);
+			*/
+			
+			returnBorrowedObjects ();
 			
 // if this item was spawned from a Level, decrement the item count and
 // broadcast a "kill" signal.  it's possible for outsiders to subscribe
@@ -293,6 +296,16 @@ package kx.world.logic {
 			cleanedUp = true;
 		}
 
+//------------------------------------------------------------------------------------------
+		public function returnBorrowedObjects ():void {
+			xxx.getXPointPoolManager ().returnObject (m_pos);
+			xxx.getXPointPoolManager ().returnObject (rp);		
+			xxx.getXRectPoolManager ().returnObject (m_viewPortRect);
+			xxx.getXRectPoolManager ().returnObject (m_selfRect);
+			xxx.getXRectPoolManager ().returnObject (m_itemRect);
+			xxx.getXPointPoolManager ().returnObject (m_itemPos);			
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function nukeLater ():void {
 			if (m_item != null) {
