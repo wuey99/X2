@@ -72,6 +72,8 @@ package kx.xmap {
 
 		protected var m_delay:int;
 		
+		protected var m_scaleFactor:Number;
+		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewCache () {
 			super ();
@@ -85,6 +87,8 @@ package kx.xmap {
 			
 			m_poolManager = getArg (args, 0);
 	
+			m_scaleFactor = getArg (args, 1);
+			
 			createSprites ();
 			
 			tempRect = xxx.getXRectPoolManager ().borrowObject () as XRect;
@@ -144,6 +148,10 @@ package kx.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function tileRefresh ():void {
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function tileRefreshScaled ():void {
 		}
 		
 //------------------------------------------------------------------------------------------

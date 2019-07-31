@@ -36,18 +36,18 @@ package kx.xmap {
 	import kx.bitmap.XBitmapCacheManager;
 	import kx.collections.*;
 	import kx.geom.*;
+	import kx.pool.*;
 	import kx.world.*;
 	import kx.world.collision.*;
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
-	import kx.pool.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XSubmapViewBitmapCache extends XSubmapViewCache {
-		private var m_bitmap:XBitmap;
-		private var m_bitmapCacheManager:XBitmapCacheManager;
-		private var m_XRectPoolManager:XObjectPoolManager;
+		protected var m_bitmap:XBitmap;
+		protected var m_bitmapCacheManager:XBitmapCacheManager;
+		protected var m_XRectPoolManager:XObjectPoolManager;
 		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapViewBitmapCache () {
@@ -57,7 +57,7 @@ package kx.xmap {
 //------------------------------------------------------------------------------------------			
 		public override function setup (__xxx:XWorld, args:Array /* <Dynamic> */):void {
 			super.setup (__xxx, args);
-	
+				
 			m_bitmapCacheManager = xxx.getBitmapCacheManager ();
 			m_XRectPoolManager = xxx.getXRectPoolManager ();
 		}
@@ -176,7 +176,6 @@ package kx.xmap {
 				__srcBitmap = m_bitmapCacheManager.get (__item.imageClassName);
 					
 //				trace (": imageClassName: ", __item.imageClassName, __srcBitmap, __srcBitmap.bitmap.bitmapData, __item.frame, __item.boundingRect.width, __item.boundingRect.height);
-					
 				if (__srcBitmap != null) {
 					if (__item.frame != 0) {
 						__srcBitmap.gotoAndStop (__item.frame);
@@ -247,7 +246,7 @@ package kx.xmap {
 			
 			m_bitmap.bitmap.bitmapData.unlock ();
 		}
-		
+			
 //------------------------------------------------------------------------------------------
 // create sprites
 //------------------------------------------------------------------------------------------

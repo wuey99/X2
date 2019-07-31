@@ -178,7 +178,7 @@ package kx.xmap {
 						1.0, 0,
 						[
 							// XMapView
-							m_XMapView.getSubmapBitmapPoolManager ()
+							m_XMapView.getSubmapBitmapPoolManager (), 1.0
 						]
 					) as XSubmapViewCache;
 			}
