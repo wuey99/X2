@@ -420,6 +420,23 @@ package kx.xmap {
 			}
 		}
 				
+		//------------------------------------------------------------------------------------------
+		public function addItemAsTile (
+			__item:XMapItemModel
+		):void {
+			var __imageClassIndex:int = __item.imageClassIndex;
+			var __frame:int = __item.frame;
+			var __x:int = __item.x;
+			var __y:int = __item.y;
+			
+			if (__y >= m_row * m_submapHeight && __y < m_row * m_submapHeight + 512) {
+				var __col:int = int ((__x & m_submapWidthMask) / TX_TILE_WIDTH);
+				var __row:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
+				
+				m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame];
+			}
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function items ():XDict /* <XMapItemModel, Int> */ {
 			return m_items;

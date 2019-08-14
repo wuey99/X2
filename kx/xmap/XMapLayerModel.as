@@ -524,6 +524,14 @@ package kx.xmap {
 		}
 				
 //------------------------------------------------------------------------------------------
+		public function addItemAsTile (__item:XMapItemModel):void {
+			var __c:int = int (__item.x / m_submapWidth);
+			var __r:int = int (__item.y / m_submapHeight);
+			
+			m_XSubmaps[__r][__c].addItemAsTile (__item);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getSubmapsAt (
 				__x1:Number, __y1:Number,
 				__x2:Number, __y2:Number

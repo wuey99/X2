@@ -190,6 +190,11 @@ package kx.xmap {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function addItemAsTile (__layer:int, __item:XMapItemModel):void {
+			m_layers[__layer].addItemAsTile (__item);
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function getSubmapsAt (
 			__layer:int,
 			__x1:Number, __y1:Number,
