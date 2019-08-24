@@ -652,10 +652,12 @@ package kx.world {
 			m_focusInSignal.removeAllListeners ();
 			m_focusOutSignal.removeAllListeners ();
 			
-			getFlashStage ().removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
-			getFlashStage ().removeEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
-			getFlashStage ().removeEventListener (Event.ACTIVATE, onFocusInEvent);
-			getFlashStage ().removeEventListener (Event.DEACTIVATE, onFocusOutEvent);
+			if (getFlashStage () != null) {
+				getFlashStage ().removeEventListener (KeyboardEvent.KEY_DOWN, onKeyboardDown);
+				getFlashStage ().removeEventListener (KeyboardEvent.KEY_UP, onKeyboardUp);
+				getFlashStage ().removeEventListener (Event.ACTIVATE, onFocusInEvent);
+				getFlashStage ().removeEventListener (Event.DEACTIVATE, onFocusOutEvent);
+			}
 		}
 		
 //------------------------------------------------------------------------------------------

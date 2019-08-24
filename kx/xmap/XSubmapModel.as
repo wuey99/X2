@@ -512,6 +512,7 @@ package kx.xmap {
 
 		//------------------------------------------------------------------------------------------
 		public function serializeRowCol_TileArray (xml:XSimpleXMLNode):XSimpleXMLNode {	
+			/*
 			var __item:XMapItemModel;
 			
 			var __submapX:int = int (x);
@@ -536,6 +537,9 @@ package kx.xmap {
 					__tmap[__tileRow * m_tileCols + __tileCol] = [__item.imageClassIndex, __item.frame];
 				}
 			);
+			*/
+			
+			var __tmap:Vector.<Array> = m_tmap;
 			
 			var __tmapString:String = "";
 			
@@ -630,7 +634,7 @@ package kx.xmap {
 			else if (!__hasTiles) {
 				if (useArrayItems == false) { // TikiEdit
 					trace(": 1: ");
-					deserializeRowCol_XMapItemXML_To_Items (__xml); 
+//					deserializeRowCol_XMapItemXML_To_Items (__xml); 
 					deserializeRowCol_XMapItemXML_To_TileArray (__xml);
 				} else {
 					trace(": 2: ");
@@ -644,7 +648,7 @@ package kx.xmap {
 			else {
 				if (useArrayItems == false) { // TikiEdit
 					trace(": 3: ");
-					deserializeRowCol_TilesXML_To_Items (__xml);
+//					deserializeRowCol_TilesXML_To_Items (__xml);
 					deserializeRowCol_TilesXML_To_TileArray (__xml);
 				} else {
 					trace(": 4: ");
