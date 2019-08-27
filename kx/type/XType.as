@@ -36,7 +36,6 @@ package kx.type {
 	import mx.utils.*;
 	// </AS3>
 	
-	
 	//------------------------------------------------------------------------------------------	
 	public class XType extends Object {
 
