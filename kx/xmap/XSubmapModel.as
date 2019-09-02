@@ -426,8 +426,8 @@ package kx.xmap {
 		):void {
 			var __imageClassIndex:int = __item.imageClassIndex;
 			var __frame:int = __item.frame;
-			var __x:int = __item.x;
-			var __y:int = __item.y;
+			var __x:int = int (__item.x);
+			var __y:int = int (__item.y);
 			
 			if (__y >= m_row * m_submapHeight && __y < m_row * m_submapHeight + 512) {
 				var __col:int = int ((__x & m_submapWidthMask) / TX_TILE_WIDTH);
@@ -512,6 +512,11 @@ package kx.xmap {
 
 		//------------------------------------------------------------------------------------------
 		public function serializeRowCol_TileArray (xml:XSimpleXMLNode):XSimpleXMLNode {	
+			// <HAXE>
+			/* --
+			-- */
+			// </HAXE>
+			// <AS3>
 			/*
 			var __item:XMapItemModel;
 			
@@ -538,6 +543,7 @@ package kx.xmap {
 				}
 			);
 			*/
+			// </AS3>
 			
 			var __tmap:Vector.<Array> = m_tmap;
 			
