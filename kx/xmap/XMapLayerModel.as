@@ -61,6 +61,7 @@ package kx.xmap {
 		private var m_imageClassNames:XDict; // <String, Int>
 		
 		private var m_viewPort:XRect;
+		private var m_startingViewPort:XRect;
 		
 		private var m_visible:Boolean;
 		private var m_scale:Number;
@@ -136,6 +137,7 @@ package kx.xmap {
 			m_itemInuse = new XDict ();  // <Int, Int>
 			
 			m_viewPort = new XRect ();
+			m_startingViewPort = new XRect ();
 		}
 
 //------------------------------------------------------------------------------------------
@@ -167,6 +169,11 @@ package kx.xmap {
 //------------------------------------------------------------------------------------------
 		public function setViewPort (__viewPort:XRect):void {
 			m_viewPort = __viewPort;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getStartingViewPort ():XRect {
+			return m_startingViewPort;
 		}
 		
 //------------------------------------------------------------------------------------------
@@ -1222,7 +1229,7 @@ package kx.xmap {
 		public function deserialize (__xml:XSimpleXMLNode, __readOnly:Boolean=false):void {
 			trace (": [XMapLayer]: deserialize: ");
 			
-			m_viewPort = new XRect (
+			m_viewPort = m_startingViewPort = new XRect (
 				__xml.getAttributeFloat ("vx"),
 				__xml.getAttributeFloat ("vy"),
 				__xml.getAttributeFloat ("vw"),
