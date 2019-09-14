@@ -30,6 +30,7 @@ package kx.gamepad {
 	import kx.*;
 	import kx.collections.*;
 	import kx.gamepad.*;
+	import kx.type.*;
 	
 	//------------------------------------------------------------------------------------------	
 	public class XGamepadSubManager extends Object {

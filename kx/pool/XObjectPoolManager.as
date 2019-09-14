@@ -28,6 +28,7 @@
 package kx.pool {
 	
 	import kx.collections.*;
+	import kx.type.*;
 	
 	// <HAXE>
 	/* --

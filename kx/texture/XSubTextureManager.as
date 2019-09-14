@@ -33,6 +33,7 @@ package kx.texture {
 	import kx.world.sprite.*;
 	import kx.XApp;
 	import kx.texture.*;
+	import kx.type.*;
 	
 	import flash.display.BitmapData;
 	import flash.geom.*;

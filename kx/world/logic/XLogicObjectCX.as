@@ -34,6 +34,7 @@ package kx.world.logic {
 	import kx.world.collision.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
+	import kx.type.*;
 	
 	import flash.geom.*;
 	import flash.text.*;

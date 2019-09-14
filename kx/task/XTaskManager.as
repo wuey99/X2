@@ -32,6 +32,7 @@ package kx.task {
 	import kx.pool.*;
 	import kx.task.*;
 	import kx.world.logic.*;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XTaskManager extends Object {

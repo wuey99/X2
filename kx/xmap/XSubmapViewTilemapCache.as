@@ -37,6 +37,7 @@ package kx.xmap {
 	import kx.world.sprite.*;
 	import kx.xmap.*;
 	import kx.pool.*;
+	import kx.type.*;
 	
 	import flash.display.*;
 	import flash.geom.*;

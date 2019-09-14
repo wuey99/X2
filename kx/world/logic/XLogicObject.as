@@ -40,6 +40,7 @@ package kx.world.logic {
 	import kx.world.sprite.*;
 	import kx.xmap.*;
 	import kx.xml.*;
+	import kx.type.*;
 
 	include "..\\..\\flash.h";
 	

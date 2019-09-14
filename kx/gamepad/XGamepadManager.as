@@ -40,6 +40,7 @@ package kx.gamepad {
 	
 	import kx.collections.*;
 	import kx.signals.*;
+	import kx.type.*;
 	
 	//------------------------------------------------------------------------------------------	
 	public class XGamepadManager extends Object {

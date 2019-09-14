@@ -34,6 +34,7 @@ package kx.world.sprite {
 	import kx.task.*;
 	import kx.world.*;
 	import kx.world.logic.XLogicObject;
+	import kx.type.*;
 	
 	import flash.display.*;
 	import flash.geom.*;

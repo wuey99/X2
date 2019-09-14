@@ -32,6 +32,7 @@ package kx.game {
 	import kx.pool.*;
 	import kx.world.XWorld;
 	import kx.xmap.*;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XBulletCollisionManager extends Object {

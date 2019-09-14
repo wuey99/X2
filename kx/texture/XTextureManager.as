@@ -104,13 +104,11 @@ package kx.texture {
 			var __dynamicSubManagers:Array<XSubTextureManager> = new Array<XSubTextureManager> ();
 			
 			for (__key__ in m_subManagers.keys ()) {
-				function (x:Dynamic):Void {
 					if (__tilemap == null) {
-						var __subManager:XSubTextureManager = m_subManagers.get (cast x);
+						var __subManager:XSubTextureManager = m_subManagers.get (cast __key__);
 						
 						__tilemap = cast __subManager.createMovieClip (__className);
 					}
-				} (__key__);
 			}
 		
 			return __tilemap;

@@ -30,6 +30,7 @@ package kx.sound {
 	import kx.*;
 	import kx.collections.*;
 	import kx.task.*;
+	import kx.type.*;
 	
 	import flash.media.*;
 	import flash.utils.*;

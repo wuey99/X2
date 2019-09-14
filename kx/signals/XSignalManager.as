@@ -29,6 +29,7 @@ package kx.signals {
 	
 	import kx.collections.*;
 	import kx.XApp;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XSignalManager extends Object {

@@ -30,6 +30,7 @@ package kx.task {
 	import kx.*;
 	import kx.collections.*;
 	import kx.world.logic.*;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XTaskSubManager extends Object {

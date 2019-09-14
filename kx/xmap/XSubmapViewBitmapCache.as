@@ -42,6 +42,7 @@ package kx.xmap {
 	import kx.world.logic.*;
 	import kx.world.sprite.*;
 	import kx.xmap.*;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XSubmapViewBitmapCache extends XSubmapViewCache {

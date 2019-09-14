@@ -33,6 +33,7 @@ package kx.game {
 	import kx.world.logic.*;
 	import kx.world.XWorld;
 	import kx.xmap.*;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XBulletCollisionList extends Object {

@@ -28,6 +28,7 @@
 package kx.signals {
 
 	import kx.collections.*;
+	import kx.type.*;
 
 	// <HAXE>
 	/* --
