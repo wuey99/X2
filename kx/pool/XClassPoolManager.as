@@ -32,6 +32,15 @@ package kx.pool {
 	import kx.type.*;
 	import kx.world.*;
 	
+	// <HAXE>
+	/* --
+	@:coreType abstract ClassKey from Class<Dynamic> to {} {}
+	-- */
+	// </HAXE>
+	// <AS3>
+	import mx.utils.*;
+	// </AS3>
+	
 //------------------------------------------------------------------------------------------	
 	public class XClassPoolManager extends Object {
 		private var m_pools:XDict; // <Class<Dynamic>, XObjectPoolManager>

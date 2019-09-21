@@ -1532,6 +1532,10 @@ package kx.world.logic {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function watch (__message:String):void {
+		}
+							   
+//------------------------------------------------------------------------------------------
 // the function updates all the children that live inside the XLogicObject container
 //
 // children in the XLogicObject sense aren't DisplayObject children.  This is done
