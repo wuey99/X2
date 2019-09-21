@@ -1530,11 +1530,7 @@ package kx.world.logic {
 		public function getRelativeDepthFlag ():Boolean {
 			return m_relativeDepthFlag;
 		}
-
-//------------------------------------------------------------------------------------------
-		public function watch (__message:String):void {
-		}
-							   
+					   
 //------------------------------------------------------------------------------------------
 // the function updates all the children that live inside the XLogicObject container
 //

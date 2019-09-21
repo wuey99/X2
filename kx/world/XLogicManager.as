@@ -432,19 +432,6 @@ package kx.world {
 				}
 			);
 		}
-
-//------------------------------------------------------------------------------------------
-		public function watchAll (__message:String):void {
-			m_XLogicObjects.forEach (
-				function (x:*):void {
-					var __logicObject:XLogicObject = x as XLogicObject;
-					
-					if (!__logicObject.isDead) {
-						__logicObject.watch (__message);
-					}
-				}
-			);			
-		}
 		
 //------------------------------------------------------------------------------------------
 		public function updateDisplay ():void {					

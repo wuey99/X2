@@ -113,6 +113,13 @@ package kx.xmap {
 			}
 			
 			removeAll ();
+			
+			if (m_poolClass != null) {
+				xxx.getXLogicObjectPoolManager ().returnObject (m_poolClass, this);
+			}
+			
+			isDead = true;
+			cleanedUp = true;
 		}
 
 //x------------------------------------------------------------------------------------------
