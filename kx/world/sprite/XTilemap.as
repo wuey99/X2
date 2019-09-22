@@ -49,7 +49,7 @@ package kx.world.sprite {
 	// </AS3>
 	
 	//------------------------------------------------------------------------------------------	
-	public class XTilemap extends XSplat {
+	public class XTilemap extends XImageMap {
 		public static var g_XApp:XApp;
 		
 		public var m_tilemap:Tilemap;

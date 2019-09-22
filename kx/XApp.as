@@ -121,7 +121,7 @@ package kx {
 			XTask.setXApp (this);
 			XTilemap.setXApp (this);
 			XMovieClip.setXApp (this);
-			XSplat.setXApp (this);
+			XImageMap.setXApp (this);
 			XSubmapTilemap.setXApp (this);
 			
 			m_frameRateScale = 1.0;

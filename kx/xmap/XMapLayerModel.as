@@ -77,8 +77,6 @@ package kx.xmap {
 		private var m_retrievedSubmaps:Array; // <XSubmapModel>
 		private var m_retrievedItems:Array; // <XMapItemModel>
 		
-		include "..\\World\\Collision\\cx.h";
-		
 //------------------------------------------------------------------------------------------	
 		public function XMapLayerModel () {
 			super ();
@@ -778,8 +776,8 @@ package kx.xmap {
 			var tiles:Vector.<Array>;
 			
 			// col, row divisor
-			var row8:int = int (m_submapHeight/TX_TILE_HEIGHT);
-			var col8:int = int (m_submapWidth/TX_TILE_WIDTH);
+			var row8:int = int (m_submapHeight/XSubmapModel.TX_TILE_HEIGHT);
+			var col8:int = int (m_submapWidth/XSubmapModel.TX_TILE_WIDTH);
 			
 			// col, row mask for the submap
 			var rowMask:int = int (row8-1);
@@ -817,8 +815,8 @@ package kx.xmap {
 			c2:int, r2:int
 		):void {
 			// col, row divisor
-			var row8:int = int (m_submapHeight/TX_TILE_HEIGHT);
-			var col8:int = int (m_submapWidth/TX_TILE_WIDTH);
+			var row8:int = int (m_submapHeight/XSubmapModel.TX_TILE_HEIGHT);
+			var col8:int = int (m_submapWidth/XSubmapModel.TX_TILE_WIDTH);
 			
 			// col, row mask for the submap
 			var rowMask:int = int (row8-1);
@@ -851,8 +849,8 @@ package kx.xmap {
 			c2:int, r2:int
 		):void {
 			// col, row divisor
-			var row8:int = int (m_submapHeight/TX_TILE_HEIGHT);
-			var col8:int = int (m_submapWidth/TX_TILE_WIDTH);
+			var row8:int = int (m_submapHeight/XSubmapModel.TX_TILE_HEIGHT);
+			var col8:int = int (m_submapWidth/XSubmapModel.TX_TILE_WIDTH);
 			
 			// col, row mask for the submap
 			var rowMask:int = int (row8-1);
@@ -890,8 +888,8 @@ package kx.xmap {
 			var tiles:Array; // <Int>
 
 // col, row divisor
-			var row32:int = int (m_submapHeight/CX_TILE_HEIGHT);
-			var col32:int = int (m_submapWidth/CX_TILE_WIDTH);
+			var row32:int = int (m_submapHeight/XSubmapModel.CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/XSubmapModel.CX_TILE_WIDTH);
 
 // col, row mask for the submap
 			var rowMask:int = int (row32-1);
@@ -929,8 +927,8 @@ package kx.xmap {
 			c2:int, r2:int
 		):void {
 // col, row divisor
-			var row32:int = int (m_submapHeight/CX_TILE_HEIGHT);
-			var col32:int = int (m_submapWidth/CX_TILE_WIDTH);
+			var row32:int = int (m_submapHeight/XSubmapModel.CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/XSubmapModel.CX_TILE_WIDTH);
 
 // col, row mask for the submap
 			var rowMask:int = int (row32-1);
@@ -963,8 +961,8 @@ package kx.xmap {
 			c2:int, r2:int
 		):void {
 // col, row divisor
-			var row32:int = int (m_submapHeight/CX_TILE_HEIGHT);
-			var col32:int = int (m_submapWidth/CX_TILE_WIDTH);
+			var row32:int = int (m_submapHeight/XSubmapModel.CX_TILE_HEIGHT);
+			var col32:int = int (m_submapWidth/XSubmapModel.CX_TILE_WIDTH);
 
 // col, row mask for the submap
 			var rowMask:int = int (row32-1);
@@ -983,7 +981,7 @@ package kx.xmap {
 					var submapCol:int = int (col/col32);
 								
 					m_XSubmaps[submapRow][submapCol].setCXTile (
-						CX_EMPTY,
+						XSubmapModel.CX_EMPTY,
 						col & colMask, row & rowMask
 					);
 				}

@@ -45,7 +45,7 @@ package kx.world.sprite {
 	public class XMovieClip extends XSprite {
 		public static var g_XApp:XApp;
 		
-		public var m_bitmap:XSplat;
+		public var m_bitmap:XImageMap;
 		public var m_XApp:XApp;
 		
 		public var m_poolManager:XObjectPoolManager;
@@ -74,7 +74,7 @@ package kx.world.sprite {
 			m_poolManager = g_XApp.getXBitmapPoolManager ();
 			// </AS3>
 			
-			m_bitmap = m_poolManager.borrowObject () as XSplat;
+			m_bitmap = m_poolManager.borrowObject () as XImageMap;
 		}
 		
 		//------------------------------------------------------------------------------------------
@@ -114,17 +114,17 @@ package kx.world.sprite {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public function getMovieClip ():XSplat {
+		public function getMovieClip ():XImageMap {
 			return m_bitmap;
 		}
 			
-		/* @:get, set movieclip XSplat */
+		/* @:get, set movieclip XImageMap */
 		
-		public function get movieclip ():XSplat {
+		public function get movieclip ():XImageMap {
 			return m_bitmap;
 		}
 		
-		public function set movieclip (__val:XSplat): /* @:set_type */ void {
+		public function set movieclip (__val:XImageMap): /* @:set_type */ void {
 			m_bitmap = __val;
 			
 			/* @:set_return __val; */			

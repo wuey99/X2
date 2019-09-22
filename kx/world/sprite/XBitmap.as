@@ -41,7 +41,7 @@ package kx.world.sprite {
 	import flash.utils.*;
 	
 	//------------------------------------------------------------------------------------------	
-	public class XBitmap extends XSplat {
+	public class XBitmap extends XImageMap {
 		public static var g_XApp:XApp;
 		
 		public var m_bitmapDataAnimManager:XBitmapDataAnimManager;

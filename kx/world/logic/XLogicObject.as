@@ -65,7 +65,7 @@ package kx.world.logic {
 //
 // XLogicObjects can hold either XSprites or child XLogicObjects.
 //------------------------------------------------------------------------------------------
-	public class XLogicObject extends XSprite0 implements XRegistration {
+	public class XLogicObject extends XSprite0 {
 //		public var xxx:XWorld;
 		public var m_XLogicManager:XLogicManager;
 		public var m_parent:XLogicObject;
@@ -112,7 +112,6 @@ package kx.world.logic {
 		public var m_cleanedUp:Boolean;
 		public var m_autoCulling:Boolean;
 		public var m_poolClass:Class; // <Dynamic>
-		public var __XTask:XTask_CONSTANTS;
 		public var m_viewPortRect:XRect;
 		public var m_selfRect:XRect;
 		public var m_itemRect:XRect;
@@ -129,11 +128,6 @@ package kx.world.logic {
 		public var m_iClassName:String;
 		
 		private static var g_GUID:int = 0;
-		
-		public var rp:XPoint;
-		
-//------------------------------------------------------------------------------------------
-		include "..\\Sprite\\XRegistration_impl.h";
 						
 //------------------------------------------------------------------------------------------
 		public function XLogicObject (__xxx:XWorld = null) {
@@ -160,9 +154,7 @@ package kx.world.logic {
 			iRelativeDepth = false;
 			iLayer = 0;
 			iClassName = "";
-		
-			__XTask = new XTask_CONSTANTS ();
-			
+				
 			if (__xxx != null) {
 				xxx = __xxx;
 				

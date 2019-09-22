@@ -40,7 +40,7 @@ package kx.world.sprite {
 	import flash.utils.*;
 	
 	//------------------------------------------------------------------------------------------	
-	public class XSplat extends Sprite implements XRegistration {
+	public class XImageMap extends XSprite0 {
 		public var m_className:String;
 		public var m_frame:int;
 		public var m_scale:Number;
@@ -48,15 +48,11 @@ package kx.world.sprite {
 		public var m_pos:XPoint;
 		public var m_rect:XRect;
 		public var theParent:*;
-		public var rp:XPoint;
 		
 		public static var g_XApp:XApp;
 		
 		//------------------------------------------------------------------------------------------
-		include "..\\Sprite\\XRegistration_impl.h";
-		
-		//------------------------------------------------------------------------------------------
-		public function XSplat () {
+		public function XImageMap () {
 			super ();
 		}
 		

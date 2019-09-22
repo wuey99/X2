@@ -36,16 +36,12 @@ package kx.world.sprite {
 	import flash.utils.*;
 	
 //------------------------------------------------------------------------------------------	
-	public class XSprite extends XSprite0 implements XRegistration {
+	public class XSprite extends XSprite0 {
 		public var m_scale:Number;
 		public var m_visible:Boolean;
 		public var m_pos:XPoint;
 		public var m_rect:XRect;
-		public var rp:XPoint;
 		public static var g_XApp:XApp;
-		
-//------------------------------------------------------------------------------------------
-		include "..\\Sprite\\XRegistration_impl.h";
 				
 //------------------------------------------------------------------------------------------
 		public function XSprite () {
