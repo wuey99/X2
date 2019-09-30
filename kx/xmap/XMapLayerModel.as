@@ -868,12 +868,10 @@ package kx.xmap {
 					
 					var submapCol:int = int (col/col8);
 					
-					/* TODO *
 					m_XSubmaps[submapRow][submapCol].setTile (
-						CX_EMPTY,
+						[-1, 0],
 						col & colMask, row & rowMask
 					);
-					*/
 				}
 			}
 		}

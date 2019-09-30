@@ -126,6 +126,18 @@ package kx.type {
 		}
 		
 		//------------------------------------------------------------------------------------------
+		public static function copyArray (__array:Array /* <Dynamic> */):Array /* <Dynamic */ {
+			// <HAXE>
+			/* --
+			return __array.copy();
+			-- */
+			// </HAXE>
+			// <AS3>
+			return [].concat(__array);
+			// </AS3>		
+		}
+		
+		//------------------------------------------------------------------------------------------
 		public static function getNowDate ():Date {
 			// <HAXE>
 			/* --
