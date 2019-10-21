@@ -1178,18 +1178,40 @@ package kx.xmap {
 		public function serializeImageClassNames ():XSimpleXMLNode {
 			var __imageClassNames:XDict /* <String, Int> */ = new XDict (); // <String, Int>
 			
-			var __row:Number, __col:Number;
+			var __submapRow:int, __submapCol:int;
 			
-			for (__row=0; __row<m_submapRows; __row++) {
-				for (__col=0; __col<m_submapCols; __col++) {
-					m_XSubmaps[__row][__col].items ().forEach (
-						function (__item:XMapItemModel):void {
-							__imageClassNames.set (__item.imageClassName, 0);
+			if (m_grid) {
+				for (__submapRow=0; __submapRow<m_submapRows; __submapRow++) {
+					for (__submapCol=0; __submapCol<m_submapCols; __submapCol++) {
+						var __XSubmapModel:XSubmapModel = m_XSubmaps[__submapRow][__submapCol];
+						
+						for (var __row:int = 0; __row < __XSubmapModel.tileRows; __row++) {
+							for (var __col:int = 0; __col < __XSubmapModel.tileCols; __col++) {
+								var __tile:Array /* <Dynamic> */ = __XSubmapModel.getTile (__col, __row);
+								
+								if (!(__tile[0] == -1 && __tile[1] == 0)) {
+									var __imageClassIndex:int = __tile[0];
+									var __imageClassName = getClassNameFromIndex (__imageClassIndex);
+									if (!__imageClassNames.exists (__imageClassName) && __imageClassName.substr (0, 1) != "$") {
+										__imageClassNames.set (__imageClassName, 0);
+									}
+								}
+							}
 						}
-					);
+					}
+				}				
+			} else {
+				for (__submapRow=0; __submapRow<m_submapRows; __submapRow++) {
+					for (__submapCol=0; __submapCol<m_submapCols; __submapCol++) {
+						m_XSubmaps[__submapRow][__submapCol].items ().forEach (
+							function (__item:XMapItemModel):void {
+								__imageClassNames.set (__item.imageClassName, 0);
+							}
+						);
+					}
 				}
 			}
-	
+			
 			var __xml:XSimpleXMLNode = new XSimpleXMLNode ();		
 			__xml.setupWithParams ("imageClassNames", "", []);
 					
@@ -1218,7 +1240,7 @@ package kx.xmap {
 				}
 			);
 			
-			return count > 0 || submap.hasCXTiles ();
+			return count > 0 || submap.hasTiles () || submap.hasCXTiles ();
 		}
 
 //------------------------------------------------------------------------------------------

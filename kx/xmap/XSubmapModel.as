@@ -267,6 +267,23 @@ package kx.xmap {
 		}
 		
 //------------------------------------------------------------------------------------------
+		public function hasTiles ():Boolean {
+			var __row:int, __col:int;
+			
+			for (__row = 0; __row < m_tileRows; __row++) {
+				for (__col = 0; __col < m_tileCols; __col++) {
+					var __tile:* = m_tmap[__row * m_tileCols + __col];
+					
+					if (!(__tile[0] == -1 && __tile[1] == 0)) {
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		}
+		
+//------------------------------------------------------------------------------------------
 		/* @:get, set tileCols Int */
 		
 		public function get tileCols ():int {
@@ -637,7 +654,7 @@ package kx.xmap {
 				for (var __col:int = 0; __col < m_tileCols; __col++) {
 					var __tile:* = __tmap[__row * m_tileCols + __col];
 					
-					if (__tile[0] == 0 && __tile[1] == 0) {
+					if (__tile[0] == -1 && __tile[1] == 0) {
 						__tmapString += "XXXX";	
 					} else {
 						__tmapString += formatImageClassIndex (__tile[0]) + formatFrame (__tile[1]);			
