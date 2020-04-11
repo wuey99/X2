@@ -124,6 +124,34 @@ package kx.signals {
 		
 						__listener (args[0], args[1], args[2], args[3]);
 					}
+		
+				case 5:
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+						
+						__listener (args[0], args[1], args[2], args[3], args[4]);
+					}
+			
+				case 6:
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+						
+						__listener (args[0], args[1], args[2], args[3], args[4], args[5]);
+					}
+	
+				case 7:
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+						
+						__listener (args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+					}
+		
+				case 8:
+					for (__id in m_listeners.keys ()) {
+						__listener = m_listeners.get (__id);
+						
+						__listener (args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+					}
 			}
 		}
 -- */	
