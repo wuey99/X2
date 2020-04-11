@@ -170,9 +170,9 @@ class Update(object):
 		
 		if line.find("__MAP__") >= 0:
 			if line.find("<Class<Dynamic>,") >= 0:
-				line = line.replace("__MAP__", "ClassMap")
+				line = line.replace("__MAP__<Class<Dynamic>", "Map<ClassKey")
 			elif line.find("<Dynamic,") >= 0:
-				line = line.replace("__MAP__", "ObjectMap")
+				line = line.replace("__MAP__<Dynamic", "Map<{}")
 			else:
 				line = line.replace("__MAP__", "Map")
 				
@@ -187,7 +187,7 @@ class Update(object):
 	def convertBreaks(self, line):
 		if self.isComment(line):
 			return line
-			
+
 		if line.find("/* loop */") < 0:
 			line = line.replace("break;", "// break;")
 		
@@ -1085,12 +1085,12 @@ class Update(object):
 	#	} (key) break;
 	# }
 	#-----------------------------------------------------------------------------
-	def convertForEach(self, line):
+	def convertForEach_OLD(self, line):
 		if self.isComment(line):
 			return line
-			
+
 		startLoop = False
-		
+
 		if line.find(".forEach (") >= 0:
 			self._forEach = True
 			self._doWhile = False
@@ -1099,39 +1099,39 @@ class Update(object):
 			if line.find("/* @:castkey */") >= 0:
 				self._loopCast = True
 			startLoop = True
-			
+
 		if line.find(".doWhile (") >= 0:
 			self._forEach = False
 			self._doWhile = True
 			self._loopLevel = 0
 			self._loopCast = False
 			if line.find("/* @:castkey */") >= 0:
-				self._loopCast = True			
+				self._loopCast = True
 			startLoop = True
-			
+
 		if startLoop:
 			for i in xrange(0, len(line)):
 				if line[i] != " " and line[i] != "\t":
 					break;
-		
+
 			end = line[i:].find(".forEach")
 			if end < 0:
 				end = line[i:].find(".doWhile")
 			label = line[i:end+i]
-	
+
 			line = line[:i] + "for (__key__ in " + label + ".keys ()) {\n"
-		
+
 			return line
-			
+
 		if not (self._forEach or self._doWhile):
 			return line
-			
+
 		self._loopLevel += line.count("{")
 		self._loopLevel -= line.count("}")
-		
+
 		if self._loopLevel and line.find("function (") >= 0 and self._doWhile:
 			line = line.replace ("function (", "if (!function (")
-			
+
 		if self._loopLevel == 0 and line.count("}") > 0:
 			if self._forEach:
 				if self._loopCast:
@@ -1141,19 +1141,77 @@ class Update(object):
 			else:
 				if self._loopCast:
 					line = line[:-1] + " (cast __key__)) break;\n"
-				else:			
+				else:
 					line = line[:-1] + " (__key__)) break;\n"
-				
+
 			return line
-			
+
 		if self._loopLevel == 0 and line.find(");"):
 			line = line.replace(");", "}")
-			
+
 			self._forEach = False
 			self._doWhile = False
 			self._loopCast = False
 			self._loopLevel = 0
-			
+
+		return line
+
+	#-----------------------------------------------------------------------------
+	# forEach
+	#
+	# <map>.forEach (
+	# 	function (key:*):void {
+	#	}
+	# );
+	#
+	#    -->:
+	#
+	# XType.forEach (map,
+	# 	function (key:*):Boolean {
+	#		return true;
+	#	}
+	# );
+	#
+	#-----------------------------------------------------------------------------
+	# doWhile
+	#
+	# <map>.doWhile (
+	#	function (key:*):Boolean {
+	#		return true;
+	#	}
+	# );
+	#
+	#    -->:
+	#
+	# XType.doWhile (map,
+	# 	function (key:*):Boolean {
+	#		return true;
+	#	}
+	# );
+	#
+	#-----------------------------------------------------------------------------
+	def convertForEach(self, line):
+		if self.isComment(line):
+			return line
+
+		def findName ():
+			for i in xrange(0, len(line)):
+				if line[i] != " " and line[i] != "\t":
+					break;
+
+			end = line[i:].find(".forEach")
+			if end < 0:
+				end = line[i:].find(".doWhile")
+			return line[i:end+i]
+
+		if line.find(".forEach (") >= 0:
+			name = findName ()
+			line = line.replace(name + ".forEach (", "XType.forEach (" + name + ", ")
+
+		if line.find(".doWhile (") >= 0:
+			name = findName ()
+			line = line.replace(name + ".doWhile (", "XType.doWhile (" + name + ", ")
+
 		return line
 
 	#-----------------------------------------------------------------------------
