@@ -46,7 +46,6 @@
     <classEntry path="kx.task.XTask"/>
     <classEntry path="kx.task.XTaskManager"/>
     <classEntry path="kx.task.XTaskSubManager"/>
-    <classEntry path="kx.task.XTask_CONSTANTS"/>
     <classEntry path="kx.text.XTextLogicObject"/>
     <classEntry path="kx.texture.MaxRectPacker"/>
     <classEntry path="kx.texture.XMovieClipCacheManager"/>
@@ -69,7 +68,6 @@
     <classEntry path="kx.world.sprite.XBitmap"/>
     <classEntry path="kx.world.sprite.XDepthSprite"/>
     <classEntry path="kx.world.sprite.XMovieClip"/>
-    <classEntry path="kx.world.sprite.XRegistration"/>
     <classEntry path="kx.world.sprite.XSprite"/>
     <classEntry path="kx.world.sprite.XSprite0"/>
     <classEntry path="kx.world.sprite.XTextSprite"/>
