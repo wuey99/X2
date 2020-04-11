@@ -126,13 +126,14 @@ package kx.type {
 		}
 		
 		//------------------------------------------------------------------------------------------
-		public static function copyArray (__array:Array /* <Dynamic> */):Array /* <Dynamic */ {
 			// <HAXE>
 			/* --
+		public static function copyArray (__array:Array<Dynamic>):Array<Dynamic> {
 			return __array.copy();
 			-- */
 			// </HAXE>
 			// <AS3>
+		public static function copyArray (__array:Array):Array {
 			return [].concat(__array);
 			// </AS3>		
 		}

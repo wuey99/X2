@@ -108,7 +108,7 @@ package kx.task {
 		public static var g_XApp:XApp;
 		public var m_XApp:XApp;
 		
-// static versions of op-codes (for external use.  TODO: look for a solution to speed-up static access i.e. XTask.LOOP)
+// all op-codes
 		public static const CALL:int = 0;
 		public static const RETN:int = 1;
 		public static const LOOP:int = 2;
@@ -125,24 +125,6 @@ package kx.task {
 		public static const UNTIL:int = 13;
 		public static const POP:int = 14;
 		public static const WAITX:int = 15;
-		
-// private versions of op-codes (for internal use)
-		public const _CALL:int = 0;
-		public const _RETN:int = 1;
-		public const _LOOP:int = 2;
-		public const _NEXT:int = 3;
-		public const _WAIT:int = 4;
-		public const _LABEL:int = 5;
-		public const _GOTO:int = 6;
-		public const _BEQ:int = 7;
-		public const _BNE:int = 8;
-		public const _FLAGS:int = 9;
-		public const _EXEC:int = 10;
-		public const _FUNC:int = 11;
-		public const _WAIT1000:int = 12; 
-		public const _UNTIL:int = 13;
-		public const _POP:int = 14;
-		public const _WAITX:int = 15;
 		
 		public const _FLAGS_EQ:int = 1;
 		
@@ -320,7 +302,7 @@ package kx.task {
 					x = value as int;
 					
 					switch (x) {
-						case _LABEL:
+						case LABEL:
 							var __label:String = m_taskList[i++] as String;	
 							
 //							trace (": new Label: ", __label);
@@ -335,73 +317,73 @@ package kx.task {
 							
 							break;	
 						
-						case _CALL:
+						case CALL:
 							i++;
 							
 							break;
 						
-						case _RETN:
+						case RETN:
 							break;
 						
-						case _LOOP:
+						case LOOP:
 							i++;
 							
 							break;
 						
-						case _NEXT:
+						case NEXT:
 							break;
 						
-						case _UNTIL:
+						case UNTIL:
 							i++;
 							
 							break;
 						
-						case _WAIT:
+						case WAIT:
 							i++;
 							
 							break;
 						
-						case _WAIT1000:
+						case WAIT1000:
 							i++;
 							
 							break;
 						
-						case _GOTO:
+						case GOTO:
 							i++;
 							
 							break;
 						
-						case _BEQ:
+						case BEQ:
 							i++;
 							
 							break;
 						
-						case _BNE:
+						case BNE:
 							i++;
 							
 							break;
 						
-						case _FLAGS:
+						case FLAGS:
 							i++;
 							
 							break;
 						
-						case _EXEC:
+						case EXEC:
 							i++;
 							
 							break;
 						
-						case _FUNC:
+						case FUNC:
 							i++;
 							
 							break;
 						
-						case _POP:
+						case POP:
 							i++;
 							
 							break;
 						
-						case _WAITX:
+						case WAITX:
 							i++;
 							
 							break;
@@ -429,7 +411,7 @@ package kx.task {
 				//------------------------------------------------------------------------------------------
 				
 				//------------------------------------------------------------------------------------------
-				case _LABEL:
+				case LABEL:
 				//------------------------------------------------------------------------------------------
 					var __label:String = m_taskList[m_taskIndex++] as String;
 					
@@ -440,7 +422,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case _WAIT:
+				case WAIT:
 				//------------------------------------------------------------------------------------------
 					var __ticks:Number = __evalNumber () * getXApp ().getFrameRateScale ();
 					
@@ -453,7 +435,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case _WAITX:
+				case WAITX:
 				//------------------------------------------------------------------------------------------
 					var __ticksX:Number = __evalNumber ();
 					
@@ -466,7 +448,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case _WAIT1000:
+				case WAIT1000:
 				//------------------------------------------------------------------------------------------
 					if (!m_WAIT1000) {
 						m_time = m_XTaskSubManager.getManager ().getXApp ().getTime ();
@@ -495,7 +477,7 @@ package kx.task {
 					return false;
 					
 				//------------------------------------------------------------------------------------------					
-				case _LOOP:
+				case LOOP:
 				//------------------------------------------------------------------------------------------
 					var __loopCount:int = int (__evalNumber ());
 					
@@ -505,7 +487,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case _NEXT:
+				case NEXT:
 				//------------------------------------------------------------------------------------------
 					//		trace (": ", m_loop[m_stackPtr-1]);
 					
@@ -522,7 +504,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case _UNTIL:
+				case UNTIL:
 				//------------------------------------------------------------------------------------------
 					var __funcUntil:Function =
 						/* @:cast */ m_taskList[m_taskIndex++] as Function;
@@ -540,7 +522,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case _GOTO:
+				case GOTO:
 				//------------------------------------------------------------------------------------------
 					var __gotoLabel:String = m_taskList[m_taskIndex] as String;
 					
@@ -553,7 +535,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case _CALL:
+				case CALL:
 				//------------------------------------------------------------------------------------------
 					var __callLabel:String = m_taskList[m_taskIndex++] as String;
 					
@@ -568,7 +550,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case _RETN:
+				case RETN:
 				//------------------------------------------------------------------------------------------					
 					m_stackPtr--;
 					
@@ -581,14 +563,14 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------					
-				case _POP:
+				case POP:
 				//------------------------------------------------------------------------------------------					
 					m_stackPtr--;
 
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case _BEQ:
+				case BEQ:
 				//------------------------------------------------------------------------------------------	
 					var __beqLabel:String = m_taskList[m_taskIndex++] as String;
 					
@@ -603,7 +585,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case _BNE:
+				case BNE:
 				//------------------------------------------------------------------------------------------
 					var __bneLabel:String = m_taskList[m_taskIndex++] as String;
 					
@@ -618,7 +600,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case _FLAGS:
+				case FLAGS:
 				//------------------------------------------------------------------------------------------
 					var __funcFlags:Function = 
 						/* @:cast */ m_taskList[m_taskIndex++] as Function;
@@ -628,7 +610,7 @@ package kx.task {
 					break;
 				
 				//------------------------------------------------------------------------------------------
-				case _FUNC:
+				case FUNC:
 				//------------------------------------------------------------------------------------------
 					var __funcTask:Function =
 						/* @:cast */ m_taskList[m_taskIndex++] as Function;
@@ -640,7 +622,7 @@ package kx.task {
 				//------------------------------------------------------------------------------------------
 				// launch a sub-task and wait for it to finish before proceeding
 				//------------------------------------------------------------------------------------------
-				case _EXEC:
+				case EXEC:
 					if (m_subTask == null) {
 						// get new XTask Array run it immediately
 						m_subTask = m_XTaskSubManager.addTask ((/* @:safe_cast */ m_taskList[m_taskIndex] as Array /* <Dynamic> */), true);
