@@ -126,6 +126,8 @@ package kx.task {
 		public static const POP:int = 14;
 		public static const WAITX:int = 15;
 		
+		public static const XTask_OPCODES:int = 16;
+		
 		public const _FLAGS_EQ:int = 1;
 		
 		protected var m_XTaskSubManager:XTaskSubManager;
