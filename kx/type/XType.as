@@ -33,6 +33,7 @@ package kx.type {
 	-- */
 	// </HAXE>
 	// <AS3>
+	import flash.utils.*;
 	import mx.utils.*;
 	// </AS3>
 	
@@ -61,6 +62,18 @@ package kx.type {
 			// </HAXE>
 			// <AS3>
 				return new (__class) ();
+			// </AS3>
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public static function createInstanceByName (__className:String):* {
+			// <HAXE>
+			/* --
+			return Type.createInstance (Type.resolveClass (__className), []);
+			-- */
+			// </HAXE>
+			// <AS3>
+			return new (getDefinitionByName (__className) ());
 			// </AS3>
 		}
 		

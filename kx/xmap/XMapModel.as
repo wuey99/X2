@@ -28,13 +28,13 @@
 package kx.xmap {
 
 // X classes	
+	import flash.events.*;
+	
+	import kx.XApp;
 	import kx.geom.*;
 	import kx.mvc.*;
 	import kx.pool.*;
-	import kx.XApp;
 	import kx.xml.*;
-	
-	import flash.events.*;
 				
 //------------------------------------------------------------------------------------------
 // XMapModel:
@@ -97,6 +97,8 @@ package kx.xmap {
 			
 			for (i=0; i<m_numLayers; i++) {
 				m_layers[i].cleanup ();
+				
+				m_layers[i] = null;
 			}
 			
 			m_XSubXMapItemModelPoolManager.returnAllObjects ();
@@ -304,10 +306,16 @@ package kx.xmap {
 			m_XSubXRectPoolManager = new XSubObjectPoolManager (m_XApp.getXRectPoolManager ());
 				
 			for (i=0; i<__xmlList.length; i++) {
-				m_layers[i] = new XMapLayerModel ();
+				m_layers[i] = createXMapLayerModel ();
 				m_layers[i].setParent (this);
 				m_layers[i].deserialize (__xmlList[i], __readOnly);
 			}
+		}
+		
+		
+//------------------------------------------------------------------------------------------
+		public function createXMapLayerModel ():XMapLayerModel {
+			return new XMapLayerModel ();	
 		}
 		
 //------------------------------------------------------------------------------------------	

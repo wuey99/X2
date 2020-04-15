@@ -221,6 +221,10 @@ package kx.xmap {
 		}	
 
 //------------------------------------------------------------------------------------------
+		public function cleanup ():void {
+		}
+		
+//------------------------------------------------------------------------------------------
 		/* @:get, set useArrayItems Bool */
 		
 		public function get useArrayItems ():Boolean {
