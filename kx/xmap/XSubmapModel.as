@@ -162,6 +162,9 @@ package kx.xmap {
 		
 		private static var CXToChar:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		
+		private static var g_empty_cmap:Vector.<int>;
+		private static var g_empty_tmap:Vector.<Array>;
+		
 //------------------------------------------------------------------------------------------	
 		public function XSubmapModel (
 			__XMapLayer:XMapLayerModel,
@@ -189,22 +192,30 @@ package kx.xmap {
 
 			m_boundingRect = new XRect (0, 0, m_submapWidth, m_submapHeight);
 			
-			m_cmap = new Vector.<int> ();
-			for (i = 0; i < m_cols * m_rows; i++) {
-				m_cmap.push (0);
-			}
-			
-			for (i = 0; i < m_cmap.length; i++) {
-				m_cmap[i] = CX_EMPTY;
-			}
-		
 			m_tileCols = int (m_submapWidth/TX_TILE_WIDTH);
 			m_tileRows = int (m_submapHeight/TX_TILE_HEIGHT);
+				
+			// create_cmap ();
+			// create_tmap ();
 			
-			m_tmap = new Vector.<Array> (); 
+			if (g_empty_cmap == null) {
+				g_empty_cmap = new Vector.<int> ();
+				
+				for (i = 0; i < m_cols * m_rows; i++) {
+					g_empty_cmap.push (0);
+				}
+				
+				for (i = 0; i < g_empty_cmap.length; i++) {
+					g_empty_cmap[i] = CX_EMPTY;
+				}
+			}
 			
-			for (i = 0; i < m_tileCols * m_tileRows; i++) {
-				m_tmap.push([-1, 0]);
+			if (g_empty_tmap == null) {
+				g_empty_tmap = new Vector.<Array> (); 
+				
+				for (i = 0; i < m_tileCols * m_tileRows; i++) {
+					g_empty_tmap.push([-1, 0]);
+				}
 			}
 			
 			m_inuse = 0;
@@ -235,11 +246,34 @@ package kx.xmap {
 			/* @:set_return true; */			
 		}
 		/* @:end */
+
+//------------------------------------------------------------------------------------------
+		private function create_cmap ():Vector.<int> {
+			var i:int;
 			
+			if (m_cmap == null) {
+				m_cmap = new Vector.<int> ();
+				
+				for (i = 0; i < m_cols * m_rows; i++) {
+					m_cmap.push (0);
+				}
+				
+				for (i = 0; i < m_cmap.length; i++) {
+					m_cmap[i] = CX_EMPTY;
+				}
+			}
+			
+			return m_cmap;
+		}
+		
 //------------------------------------------------------------------------------------------
 		/* @:get, set cmap Array<Int> */
 		
 		public function get cmap ():Vector.<int> {
+			if (m_cmap == null) {
+				return g_empty_cmap;
+			}
+			
 			return m_cmap;
 		}
 		
@@ -249,9 +283,28 @@ package kx.xmap {
 		/* @:end */
 			
 //------------------------------------------------------------------------------------------
+		private function create_tmap ():Vector.<Array> {
+			var i:int;
+				
+			if (m_tmap == null) {
+				m_tmap = new Vector.<Array> (); 
+				
+				for (i = 0; i < m_tileCols * m_tileRows; i++) {
+					m_tmap.push([-1, 0]);
+				}
+			}
+			
+			return m_tmap;
+		}
+		
+//------------------------------------------------------------------------------------------
 		/* @:get, set tmap Array<Array<Dynamic>> */
 		
 		public function get tmap ():Vector.<Array> {
+			if (m_tmap == null) {
+				return g_empty_tmap;
+			}
+			
 			return m_tmap;
 		}
 		
@@ -262,11 +315,17 @@ package kx.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function setTile (__tile:Array /* <Dynamic> */, __col:int, __row:int):void {
+			create_tmap ();
+			
 			m_tmap[__row * m_tileCols + __col] = __tile;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getTile (__col:int, __row:int):Array { // <Dynamic>
+			if (m_tmap == null) {
+				return [-1, 0];
+			}
+			
 			return m_tmap[__row * m_tileCols + __col];
 		}
 		
@@ -274,12 +333,14 @@ package kx.xmap {
 		public function hasTiles ():Boolean {
 			var __row:int, __col:int;
 			
-			for (__row = 0; __row < m_tileRows; __row++) {
-				for (__col = 0; __col < m_tileCols; __col++) {
-					var __tile:* = m_tmap[__row * m_tileCols + __col];
-					
-					if (!(__tile[0] == -1 && __tile[1] == 0)) {
-						return true;
+			if (m_tmap != null) {
+				for (__row = 0; __row < m_tileRows; __row++) {
+					for (__col = 0; __col < m_tileCols; __col++) {
+						var __tile:* = m_tmap[__row * m_tileCols + __col];
+						
+						if (!(__tile[0] == -1 && __tile[1] == 0)) {
+							return true;
+						}
 					}
 				}
 			}
@@ -313,11 +374,17 @@ package kx.xmap {
 		
 //------------------------------------------------------------------------------------------
 		public function setCXTile (__type:int, __col:int, __row:int):void {
+			create_cmap ();
+			
 			m_cmap[__row * m_cols + __col] = __type;
 		}
 		
 //------------------------------------------------------------------------------------------
 		public function getCXTile (__col:int, __row:int):int {
+			if (m_cmap == null) {
+				return CX_EMPTY;
+			}
+			
 			return m_cmap[__row * m_cols + __col];
 		}
 
@@ -325,10 +392,12 @@ package kx.xmap {
 		public function hasCXTiles ():Boolean {
 			var __row:int, __col:int;
 			
-			for (__row = 0; __row < m_rows; __row++) {
-				for (__col = 0; __col < m_cols; __col++) {
-					if (m_cmap[__row * m_cols + __col] != CX_EMPTY) {
-						return true;
+			if (m_cmap != null) {
+				for (__row = 0; __row < m_rows; __row++) {
+					for (__col = 0; __col < m_cols; __col++) {
+						if (m_cmap[__row * m_cols + __col] != CX_EMPTY) {
+							return true;
+						}
 					}
 				}
 			}
@@ -533,10 +602,12 @@ package kx.xmap {
 			var __frame:int = __item.frame;
 			var __x:int = int (__item.x);
 			var __y:int = int (__item.y);
-			
+		
 			if (__y >= m_row * m_submapHeight && __y < m_row * m_submapHeight + 512) {
 				var __col:int = int ((__x & m_submapWidthMask) / TX_TILE_WIDTH);
 				var __row:int = int ((__y & m_submapHeightMask) / TX_TILE_HEIGHT);
+		
+				create_tmap ();
 				
 				m_tmap[__row * m_tileCols + __col] = [__imageClassIndex, __frame];
 			}
@@ -592,7 +663,9 @@ package kx.xmap {
 			}
 			
 			if (m_XMapLayer.grid) {
-				xml = serializeRowCol_TileArray (xml);
+				if (hasTiles ()) {
+					xml = serializeRowCol_TileArray (xml);
+				}
 			} else {				
 				xml = serializeRowCol_XMapItem (xml);
 			}
@@ -786,6 +859,8 @@ package kx.xmap {
 			
 				var i:int;
 				
+				create_tmap ();
+				
 				for (var __row:int = 0; __row < m_tileRows; __row++) {
 					for (var __col:int = 0; __col < m_tileCols; __col++) {
 						i = __row * m_tileCols + __col;
@@ -935,6 +1010,8 @@ package kx.xmap {
 			
 			var i:int;
 			
+			create_tmap ();
+			
 			for (i=0; i<__xmlList.length; i++) {
 				var __xml:XSimpleXMLNode = __xmlList[i];
 				
@@ -1052,6 +1129,8 @@ package kx.xmap {
 			var __row:int, __col:int;
 			var __xml:XSimpleXMLNode;
 			var __rowString:String;
+			
+			create_cmap ();
 			
 			for (__row=0; __row<__xmlList.length; __row++) {
 				__xml = __xmlList[__row];
