@@ -391,7 +391,7 @@ package kx.task {
 							break;
 						
 						default:
-							i = findMoreLabels (i);
+							i = findMoreLabels (x, i);
 							
 							break;
 					}
@@ -404,7 +404,7 @@ package kx.task {
 		//
 		// find more labels 
 		//------------------------------------------------------------------------------------------
-		public function findMoreLabels (i:int):int {
+		public function findMoreLabels (x:int, i:int):int {
 			return i;
 		}
 		
