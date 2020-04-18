@@ -4,7 +4,6 @@
     <compilerSourcePath/>
     <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="4" path=""/>
-      <libraryPathEntry kind="1" linkType="1" path="C:/Users/wuey9/Desktop/PrimaryFeather-Starling-Framework-0ac3592/starling/bin"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
