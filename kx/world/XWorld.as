@@ -216,8 +216,8 @@ package kx.world {
 			
 			m_ticks = 0;
 			
-			m_XLogicManager = new XLogicManager (__XApp, this);
-			m_XLogicManager2 = new XLogicManager (__XApp, this);
+			m_XLogicManager = createXLogicManager (__XApp, this);
+			m_XLogicManager2 = createXLogicManager (__XApp, this);
 
 // deprecate this?
 			m_XTaskManager = new XTaskManager (__XApp);
@@ -380,7 +380,12 @@ package kx.world {
 				1.0, 0
 			) as XFPSCounter;
 		}
-
+		
+//------------------------------------------------------------------------------------------
+		public function createXLogicManager (__XApp:XApp, __xxx:XWorld):XLogicManager {
+			return new XLogicManager (__XApp, __xxx);	
+		}
+		
 //------------------------------------------------------------------------------------------
 		public function onFPSCounter (e:Event):void {
 			m_frameCount++;

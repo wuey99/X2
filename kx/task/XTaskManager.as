@@ -49,20 +49,32 @@ package kx.task {
 			
 			m_paused = 0;
 			
-				m_poolManager = new XObjectPoolManager (
-					function ():* {
-						return new XTask ();
-					},
+			m_poolManager = createPoolManager ();
+		}
+		
+//------------------------------------------------------------------------------------------	
+		public function cleanup ():void {
+			m_poolManager.returnAllObjects ();
+			
+			m_poolManager = null;
+		}
+		
+//------------------------------------------------------------------------------------------	
+		public function createPoolManager ():XObjectPoolManager {
+			return new XObjectPoolManager (
+				function ():* {
+					return new XTask ();
+				},
 					
-					function (__src:*, __dst:*):* {
-						return null;
-					},
+				function (__src:*, __dst:*):* {
+					return null;
+				},
 					
-					512, 256,
+				512, 256,
 					
-					function (x:*):void {
-					}
-				);
+				function (x:*):void {
+				}
+			);
 		}
 
 //------------------------------------------------------------------------------------------
