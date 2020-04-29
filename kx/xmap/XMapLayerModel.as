@@ -817,11 +817,13 @@ package kx.xmap {
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = int (row/row8);
 				
+				if (submapRow >=  0 && submapRow < 64) 
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
 					var submapCol:int = int (col/col8);
 					
+					if (submapCol >= 0 && submapCol < 64)
 					tiles[dstRow * cols + dstCol] =
 						m_XSubmaps[submapRow][submapCol].getTile (col & colMask, row & rowMask);
 				}
@@ -851,11 +853,13 @@ package kx.xmap {
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = int (row/row8);
 				
+				if (submapRow >=  0 && submapRow < 64) 
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
 					var submapCol:int = int (col/col8);
 					
+					if (submapCol >= 0 && submapCol < 64)
 					m_XSubmaps[submapRow][submapCol].setTile (
 						tiles[dstRow * cols + dstCol],
 						col & colMask, row & rowMask
@@ -885,11 +889,13 @@ package kx.xmap {
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = int (row/row8);
 				
+				if (submapRow >=  0 && submapRow < 64) 
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
 					var submapCol:int = int (col/col8);
 					
+					if (submapCol >= 0 && submapCol < 64)
 					m_XSubmaps[submapRow][submapCol].setTile (
 						[-1, 0],
 						col & colMask, row & rowMask
@@ -926,12 +932,14 @@ package kx.xmap {
 			
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = int (row/row32);
-				
+			
+				if (submapRow >=  0 && submapRow < 64) 
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
 					var submapCol:int = int (col/col32);
 				
+					if (submapCol >= 0 && submapCol < 64)
 					tiles[dstRow * cols + dstCol] =
 						m_XSubmaps[submapRow][submapCol].getCXTile (col & colMask, row & rowMask);
 				}
@@ -961,11 +969,13 @@ package kx.xmap {
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = int (row/row32);
 				
+				if (submapRow >=  0 && submapRow < 64) 
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
 					var submapCol:int = int (col/col32);
 								
+					if (submapCol >= 0 && submapCol < 64)				
 					m_XSubmaps[submapRow][submapCol].setCXTile (
 						tiles[dstRow * cols + dstCol],
 						col & colMask, row & rowMask
@@ -995,11 +1005,13 @@ package kx.xmap {
 			for (var row:int=r1; row <= r2; row++) {
 				var submapRow:int = int (row/row32);
 				
+				if (submapRow >=  0 && submapRow < 64) 
 				for (var col:int=c1; col <= c2; col++) {
 					var dstCol:int = col-c1, dstRow:int = row-r1;
 					
 					var submapCol:int = int (col/col32);
 								
+					if (submapCol >= 0 && submapCol < 64)				
 					m_XSubmaps[submapRow][submapCol].setCXTile (
 						XSubmapModel.CX_EMPTY,
 						col & colMask, row & rowMask
