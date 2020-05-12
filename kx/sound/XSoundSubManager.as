@@ -282,6 +282,8 @@ package kx.sound {
 //------------------------------------------------------------------------------------------
 		public function removeSound (__guid:int):void {
 			if (m_soundChannels.exists (__guid)) {
+				m_soundChannels.remove (__guid);
+				
 				m_soundManager.removeSound (__guid);
 			}
 		}

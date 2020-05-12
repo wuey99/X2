@@ -41,6 +41,7 @@ package kx.world {
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
+	import flash.media.Sound;
 	import flash.system.*;
 	import flash.utils.Timer;
 	
@@ -113,6 +114,9 @@ package kx.world {
 		public var m_XLogicObjectPoolManager:XClassPoolManager;
 		public var m_beforeFrameSignal:XSignal;
 		public var m_afterFrameSignal:XSignal;
+		public var m_soundTask:XSoundTask;
+		public var m_soundTaskManager:XSoundTaskManager;
+		public var m_soundTaskSubManager:XSoundTaskSubManager;
 		
 		public var m_mouseOverSignal:XSignal;
 		public var m_mouseDownSignal:XSignal;
