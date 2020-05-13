@@ -32,7 +32,6 @@
     <classEntry path="kx.resource.manager.IResourceManager"/>
     <classEntry path="kx.resource.manager.XProjectManager"/>
     <classEntry path="kx.resource.manager.XSubResourceManager"/>
-    <classEntry path="kx.resource.types.XSWFEmbeddedResource"/>
     <classEntry path="kx.resource.types.XSWFResource"/>
     <classEntry path="kx.resource.types.XSWFURLResource"/>
     <classEntry path="kx.signals.XSignal"/>
