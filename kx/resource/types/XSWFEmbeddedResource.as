@@ -70,7 +70,7 @@ package kx.resource.types {
 			// <HAXE>
 			/* --
 			if (m_resourceManager.findEmbeddedResource (__className) != null) {
-				return m_resourceManager.findEmbeddedResource (__className);
+				return Type.resolveClass (__className);
 			} else {
 				return m_resourceManager.findEmbeddedResource (m_resourcePath);
 			}
