@@ -33,6 +33,7 @@ package kx.world.collision {
 	import kx.world.logic.*;
 	import kx.world.XWorld;
 	import kx.xmap.*;
+	import kx.type.*;
 	
 //------------------------------------------------------------------------------------------
 	public class XObjectCollisionList extends Object {

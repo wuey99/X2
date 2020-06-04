@@ -1230,23 +1230,24 @@ class Update(object):
 	# expand XDict.removeAllKeys.
 	#
 	# HaXe Maps don't support a removeAllKeys method
-	#-----------------------------------------------------------------------------	
+	#-----------------------------------------------------------------------------
 	def convertRemoveAllKeys(self, line):
 #		if self.isComment(line):
 #			return line
-			
+
 		if line.find(".removeAllKeys") < 0:
 			return line
-			
+
 		for i in xrange(0, len(line)):
 			if line[i] != " " and line[i] != "\t":
 				break;
-		
+
 		end = line[i:].find(".")
 		label = line[i:end+i]
-			
-		line = line[:i] + "for (__key__ in " + label + ".keys ()) { " + label + ".remove (__key__); } // removeAllKeys\n"
-					
+
+		# line = line[:i] + "for (__key__ in " + label + ".keys ()) { " + label + ".remove (__key__); } // removeAllKeys\n"
+		line = line[:i] + "XType.removeAllKeys (" + label +");\n"
+
 		return line
 			
 	#-----------------------------------------------------------------------------	
