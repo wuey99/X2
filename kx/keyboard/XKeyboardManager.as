@@ -27,15 +27,16 @@
 //------------------------------------------------------------------------------------------
 package kx.keyboard {
 	
-	import kx.world.*;
-	import kx.geom.*;
-	import kx.task.*;
-	import kx.collections.*;
-	
 	import flash.display.*;
+	import flash.events.*;
 	import flash.text.*;
 	import flash.utils.*;
-	import flash.events.*;
+	
+	import kx.collections.*;
+	import kx.geom.*;
+	import kx.signals.*;
+	import kx.task.*;
+	import kx.world.*;
 	
 //------------------------------------------------------------------------------------------	
 	public class XKeyboardManager extends Object {
@@ -45,6 +46,8 @@ package kx.keyboard {
 		private var m_keyCodes:XDict; // <Int, Int>
 		private var m_parent:Sprite;
 		private var m_mouseDownListenerID:int;
+		private var m_keyDownSignal:XSignal;
+		private var m_keyUpSignal:XSignal;
 		
 //------------------------------------------------------------------------------------------
 		public function XKeyboardManager (__xxx:XWorld) {
@@ -56,6 +59,9 @@ package kx.keyboard {
 			m_keyCodes = new XDict (); // <Int, Int>
 			
 			createSprites ();
+			
+			m_keyDownSignal = new XSignal ();
+			m_keyUpSignal = new XSignal ();
 		}
 
 		//------------------------------------------------------------------------------------------
@@ -144,6 +150,36 @@ package kx.keyboard {
 			if (m_keyCodes.exists (__c)) {
 				m_keyCodes.set (__c, 0);
 			}
+		}
+
+		//------------------------------------------------------------------------------------------
+		public function addKeyDownListener (__listener:Function):int {
+			return m_keyDownSignal.addListener (__listener);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function removeKeyDownListener (__id:int):void {
+			m_keyDownSignal.removeListener (__id);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function removeAllKeyDownListeners ():void {
+			m_keyDownSignal.removeAllListeners ();
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function addKeyUpListener (__listener:Function):int {	
+			return m_keyUpSignal.addListener (__listener);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function removeKeyUpListener (__id:int):void {
+			m_keyUpSignal.removeListener (__id);
+		}
+		
+		//------------------------------------------------------------------------------------------
+		public function removeAllKeyUpnListeners ():void {
+			m_keyUpSignal.removeAllListeners ();
 		}
 		
 		//------------------------------------------------------------------------------------------
