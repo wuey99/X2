@@ -110,23 +110,27 @@ package kx.task {
 		
 // all op-codes
 		public static const CALL:int = 0;
-		public static const RETN:int = 1;
-		public static const LOOP:int = 2;
-		public static const NEXT:int = 3;
-		public static const WAIT:int = 4;
-		public static const LABEL:int = 5;
-		public static const GOTO:int = 6;
-		public static const BEQ:int = 7;
-		public static const BNE:int = 8;
-		public static const FLAGS:int = 9;
-		public static const EXEC:int = 10;
-		public static const FUNC:int = 11;
-		public static const WAIT1000:int = 12; 
-		public static const UNTIL:int = 13;
-		public static const POP:int = 14;
-		public static const WAITX:int = 15;
+		public static const CALL_EQ:int = 1;
+		public static const CALL_NE:int = 2;
+		public static const RETN:int = 3;
+		public static const LOOP:int = 4;
+		public static const NEXT:int = 5;
+		public static const WAIT:int = 6;
+		public static const LABEL:int = 7;
+		public static const GOTO:int = 8;
+		public static const BEQ:int = 9;
+		public static const BNE:int = 10;
+		public static const FLAGS:int = 11;
+		public static const EXEC:int = 12;
+		public static const EXEC_EQ:int = 13;
+		public static const EXEC_NE:int = 14;
+		public static const FUNC:int = 15;
+		public static const WAIT1000:int = 16; 
+		public static const UNTIL:int = 17;
+		public static const POP:int = 18;
+		public static const WAITX:int = 19;
 		
-		public static const XTask_OPCODES:int = 16;
+		public static const XTask_OPCODES:int = 20;
 		
 		public const _FLAGS_EQ:int = 1;
 		
@@ -324,6 +328,16 @@ package kx.task {
 							
 							break;
 						
+						case CALL_EQ:
+							i++;
+							
+							break;
+						
+						case CALL_NE:
+							i++;
+							
+							break;
+						
 						case RETN:
 							break;
 						
@@ -371,6 +385,16 @@ package kx.task {
 							break;
 						
 						case EXEC:
+							i++;
+							
+							break;
+						
+						case EXEC_EQ:
+							i++;
+							
+							break;
+						
+						case EXEC_NE:
 							i++;
 							
 							break;
@@ -553,15 +577,29 @@ package kx.task {
 				//------------------------------------------------------------------------------------------					
 				case CALL:
 				//------------------------------------------------------------------------------------------
-					var __callLabel:String = m_taskList[m_taskIndex++] as String;
+					callLabel ();
 					
-					m_stack[m_stackPtr++] = m_taskIndex;
-					
-					if (!(m_labels.exists(__callLabel))) {
-						throw (XType.createError ("call: unable to find label: " + __callLabel));
+					break;
+				
+				//------------------------------------------------------------------------------------------					
+				case CALL_EQ:
+				//------------------------------------------------------------------------------------------
+					if ((m_flags & _FLAGS_EQ) != 0) {
+						callLabel ();
+					} else {
+						m_taskIndex++;
 					}
 					
-					m_taskIndex = m_labels.get(__callLabel);
+					break;
+				
+				//------------------------------------------------------------------------------------------					
+				case CALL_NE:
+				//------------------------------------------------------------------------------------------
+					if ((m_flags & _FLAGS_EQ) == 0) {
+						callLabel ();
+					} else {
+						m_taskIndex++;
+					}
 					
 					break;
 				
@@ -639,26 +677,39 @@ package kx.task {
 				// launch a sub-task and wait for it to finish before proceeding
 				//------------------------------------------------------------------------------------------
 				case EXEC:
-					if (m_subTask == null) {
-						// get new XTask Array run it immediately
-						m_subTask = addTask ((/* @:safe_cast */ m_taskList[m_taskIndex] as Array /* <Dynamic> */), true);
-						m_subTask.tag = tag;
-						m_subTask.setManager (m_manager);
-						m_subTask.setParent (self);
-						m_subTask.run ();
-						m_taskIndex--;
-					}
-
-					// if the sub-task is still active, wait another tick and check again
-					else if (m_XTaskSubManager.isTask (m_subTask)) {
-						m_ticks += 0x0100;
-						m_taskIndex--;
+					if (!execTask ()) {
 						return false;
 					}
-					// move along
-					else
-					{
+						
+					break;
+				
+				//------------------------------------------------------------------------------------------
+				// launch a sub-task and wait for it to finish before proceeding
+				//------------------------------------------------------------------------------------------
+				case EXEC_EQ:
+					if ((m_flags & _FLAGS_EQ) != 0) {
+						if (!execTask ()) {
+							return false;
+						}
+					} else {
 						m_subTask = null;
+						
+						m_taskIndex++;
+					}
+					
+					break;
+				
+				//------------------------------------------------------------------------------------------
+				// launch a sub-task and wait for it to finish before proceeding
+				//------------------------------------------------------------------------------------------
+				case EXEC_NE:
+					if ((m_flags & _FLAGS_EQ) == 0) {
+						if (!execTask ()) {
+							return false;
+						}
+					} else {
+						m_subTask = null;
+						
 						m_taskIndex++;
 					}
 					
@@ -743,7 +794,48 @@ package kx.task {
 			
 			return 0;
 		}
+
+		//------------------------------------------------------------------------------------------
+		public function callLabel ():void {
+			var __callLabel:String = m_taskList[m_taskIndex++] as String;
+			
+			m_stack[m_stackPtr++] = m_taskIndex;
+			
+			if (!(m_labels.exists (__callLabel))) {
+				throw (XType.createError ("call: unable to find label: " + __callLabel));
+			}
+			
+			m_taskIndex = m_labels.get (__callLabel);			
+		}
 		
+		//------------------------------------------------------------------------------------------
+		public function execTask ():Boolean {
+			if (m_subTask == null) {
+				// get new XTask Array run it immediately
+				m_subTask = addTask ((/* @:safe_cast */ m_taskList[m_taskIndex] as Array /* <Dynamic> */), true);
+				m_subTask.tag = tag;
+				m_subTask.setManager (m_manager);
+				m_subTask.setParent (self);
+				m_subTask.run ();
+				m_taskIndex--;
+			}
+				
+			// if the sub-task is still active, wait another tick and check again
+			else if (m_XTaskSubManager.isTask (m_subTask)) {
+				m_ticks += 0x0100;
+				m_taskIndex--;
+				return false;
+			}
+				// move along
+			else
+			{
+				m_subTask = null;
+				m_taskIndex++;
+			}
+			
+			return true;
+		}
+								  
 		//------------------------------------------------------------------------------------------
 		public function gotoTask (__taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = false):void {
 			kill ();
