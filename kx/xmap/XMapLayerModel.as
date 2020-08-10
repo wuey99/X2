@@ -1226,7 +1226,6 @@ package kx.xmap {
 								if (!(__tile[0] == -1 && __tile[1] == 0)) {
 									var __imageClassIndex:int = __tile[0];
 									var __imageClassName = getClassNameFromIndex (__imageClassIndex);
-									trace (": serializeImageClassNames: ", __imageClassIndex, __imageClassName);
 									if (!__imageClassNames.exists (__imageClassName) && __imageClassName.substr (0, 1) != "$") {
 										__imageClassNames.set (__imageClassName, 0);
 									}

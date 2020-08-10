@@ -91,6 +91,7 @@ package kx.world.logic {
 		public var m_masterRotation:Number;
 		public var m_delayed:int;
 		public var m_XLogicObjects:XDict; // <XLogicObject, Int>
+		public var m_HudXLogicObjects:XDict; // <XLogicObject, Int>
 		public var m_worldSprites:XDict; // <XDepthSprite, Int>
 		public var m_hudSprites:XDict; // <XDepthSprite, Int>
 		public var m_childSprites:XDict; // <Sprite, Sprite>
@@ -161,6 +162,7 @@ package kx.world.logic {
 				xxx = __xxx;
 				
 				m_XLogicObjects = new XDict (); // <XLogicObject, Int>
+				m_HudXLogicObjects = new XDict (); // <XLogicObject, Int>
 				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
 				m_hudSprites = new XDict (); // <XDepthSprite, Int>
 				m_childSprites = new XDict (); // <Sprite, Sprite>
@@ -196,6 +198,7 @@ package kx.world.logic {
 				xxx = __xxx;
 		
 				m_XLogicObjects = new XDict (); // <XLogicObject, Int>
+				m_HudXLogicObjects = new XDict (); // <XLogicObject, Int>
 				m_worldSprites = new XDict ();  // <XDepthSprite, Int>
 				m_hudSprites = new XDict (); // <XDepthSprite, Int>
 				m_childSprites = new XDict (); // <Sprite, Sprite>
@@ -909,11 +912,27 @@ package kx.world.logic {
 			return __XLogicObject;
 		}
 		
+		public function addHudXLogicObject (__XLogicObject:XLogicObject):XLogicObject {
+			m_HudXLogicObjects.set (__XLogicObject, 0);
+			
+			return __XLogicObject;
+		}
+		
 //------------------------------------------------------------------------------------------
 // remove an XLogicObject from the World
 //------------------------------------------------------------------------------------------	
 		public function removeXLogicObject (__XLogicObject:XLogicObject):void {
 			if (m_XLogicObjects.exists (__XLogicObject)) {
+				m_XLogicObjects.remove (__XLogicObject);
+				
+				if (!__XLogicObject.cleanedUp) {
+					__XLogicObject.cleanup ();
+				}
+			}
+		}
+		
+		public function removeHudXLogicObject (__XLogicObject:XLogicObject):void {
+			if (m_HudXLogicObjects.exists (__XLogicObject)) {
 				m_XLogicObjects.remove (__XLogicObject);
 				
 				if (!__XLogicObject.cleanedUp) {
@@ -936,6 +955,12 @@ package kx.world.logic {
 			m_XLogicObjects.forEach (
 				function (x:*):void {
 					removeXLogicObject (x);
+				}
+			);
+			
+			m_HudXLogicObjects.forEach (
+				function (x:*):void {
+					removeHudXLogicObject (x);
 				}
 			);
 		}
