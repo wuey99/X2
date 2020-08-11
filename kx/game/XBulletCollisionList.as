@@ -145,6 +145,11 @@ package kx.game {
 			
 			return __logicObjects;
 		}
+
+//------------------------------------------------------------------------------------------
+		public function getRect (__layer:int, __logicObject:XLogicObject):XRect {
+			return m_rects[__layer].get (__logicObject);
+		}
 		
 //------------------------------------------------------------------------------------------
 		public function getRects (__layer:int):XDict /* <XLogicObject, XRect> */ {
