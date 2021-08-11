@@ -49,7 +49,6 @@ package kx {
 	import kx.world.sprite.*;
 	import kx.xmap.*;
 	import kx.xml.*;
-
 	// <HAXE>
 	/* --
 	-- */
@@ -67,6 +66,7 @@ package kx {
 		private var m_XDebug:XDebug;
 		private var m_useTilemaps:Boolean;
 		private var m_useBGTilemaps:Boolean;
+		
 		private var m_projectManager:XProjectManager;
 		private var m_XSignalManager:XSignalManager;
 		private var m_XSoundManager:XSoundManager;
@@ -87,6 +87,13 @@ package kx {
 		private var m_allClassNames:XDict; // <String, Int>
 		private var m_frameRateScale:Number;
 		private var m_XGamepadManager:XGamepadManager;
+		
+		private var m_deviceWidth:Number;
+		private var m_deviceHeight:Number;
+		private var m_screenWidth:Number;
+		private var m_screenHeight:Number;
+		private var m_scaleXRatio:Number;
+		private var m_scaleYRatio:Number;
 		
 //------------------------------------------------------------------------------------------
 		public function XApp () {
@@ -383,6 +390,47 @@ package kx {
 //------------------------------------------------------------------------------------------
 		public function setFrameRateScale (__val:Number):void {
 			m_frameRateScale = __val;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setDeviceSize (__width:Number, __height:Number):void {
+			m_deviceWidth = __width;
+			m_deviceHeight = __height;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getDeviceWidth ():Number {
+			return m_deviceWidth;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getDeviceHeight ():Number {
+			return m_deviceHeight;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setScreenSize (__width:Number, __height:Number):void {
+			m_screenWidth = __width;
+			m_screenHeight = __height;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getScreenWidth ():Number {
+			return m_screenWidth;
+		}
+		
+//------------------------------------------------------------------------------------------
+		public function getScreenHeight ():Number {
+			return m_screenHeight;
+		}
+
+//------------------------------------------------------------------------------------------
+		public function setupSize (__deviceWidth:Number, __deviceHeight:Number, __screenWidth:Number, __screenHeight:Number):void {
+			setDeviceSize (__deviceWidth, __deviceHeight);
+			setScreenSize (__screenWidth, __screenHeight);
+			
+			m_scaleXRatio = m_screenWidth / m_deviceWidth;
+			m_scaleYRatio = m_screenHeight / m_deviceHeight;
 		}
 		
 //------------------------------------------------------------------------------------------

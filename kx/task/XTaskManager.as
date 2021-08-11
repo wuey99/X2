@@ -126,6 +126,19 @@ package kx.task {
 		}
 
 //------------------------------------------------------------------------------------------
+		public function addTaskFromClass (__class:Class, __taskList:Array /* <Dynamic> */, __findLabelsFlag:Boolean = true):XTask {
+			var __task:XTask = XType.createInstance (__class) as XTask;
+			__task.setup (__taskList, __findLabelsFlag);
+			
+			__task.setManager (this);
+			__task.setParent (this);
+			
+			m_XTasks.set (__task, 0);
+			
+			return __task;
+		}
+		
+//------------------------------------------------------------------------------------------
 		public function addXTask (__task:XTask):XTask {
 			__task.setManager (this);
 			__task.setParent (this);
